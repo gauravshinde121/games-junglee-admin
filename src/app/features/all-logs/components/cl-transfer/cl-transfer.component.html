@@ -1,0 +1,45 @@
+<main id="main" class="main">
+  <section class="section gamedetails">
+  <div class="row">
+  <div class="col-md-12">
+  <h4 class="text-pink">PL Statement</h4>
+  <br>
+    <div class="row mt-4">
+
+    <div class="col-md-12 mt-3">
+      <div *ngIf="clTransfers.length==0" class="border text-center p-5">
+      <h4>No data found </h4>
+    </div>
+    <table class="table tableall" *ngIf="clTransfers.length>0">
+      <thead>
+        <tr>
+          <th scope="col" class="text-dark">#</th>
+          <th scope="col" class="text-dark">Creation Date</th>
+          <th scope="col" class="text-dark">From</th>
+          <th scope="col" class="text-dark">To</th>
+          <th scope="col" class="text-dark">Credit Limit</th>
+          <th scope="col" class="text-dark">Balance</th>
+          <th scope="col" class="text-dark">Old Balance</th>
+          <th scope="col" class="text-dark">IP</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let pl of clTransfers;let i=index">
+          <td>{{i+1}}</td>
+          <td>{{pl.createDateTime | date}}</td>
+          <td>{{pl.gameData.gameName}}</td>
+          <td>{{pl.gameData.subGame}}</td>
+          <td>{{pl.gameData.eventName}}</td>
+          <td>{{pl.playerData.name}}</td>
+          <td>{{pl.masterData.name}} </td>
+          <td>1</td>
+        </tr>
+      </tbody>
+      </table>
+
+    </div>
+    </div>
+  </div>
+  </div>
+  </section>
+  </main>

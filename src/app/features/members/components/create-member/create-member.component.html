@@ -1,0 +1,398 @@
+<!-- <main id="main" class="main">
+  <section class="section dashboard">
+    <div class="row">
+      <div class="col-md-11 col-11">
+        <form [formGroup]="memberForm" (ngSubmit)="onSubmitMemberForm()">
+          <div>
+          <div class="row pb-4 pt-3">
+            <div class="col-md-3">
+              <h3>Create Member</h3>
+            </div>
+            <div class="offset-md-4 col-md-5">
+              <div>
+                Status :
+                <input formControlName="status" type="radio"  [value]="1">Active
+                <input formControlName="status" type="radio"  [value]="0" > Inactive
+                <input formControlName="status" type="radio"  [value]="0" > Closed
+              </div>
+            </div>
+           </div>
+          <div class="row pb-4 pt-3">
+              <div class="col-md-4">
+                <input formControlName="username" type="text" class="form-control " placeholder="Username *" id="validationServer031"
+                      >
+              </div>
+                  <div class="col-md-4">
+                    <input   class="form-control ml-2" formControlName="displayName" placeholder="Display Name *">
+                  </div>
+                  <div class="col-md-4">
+                    <input   class="form-control" type="password" formControlName="password" placeholder="Password *">
+                  </div>
+          </div>
+          <div class="row pb-4 pt-3">
+            <div class="col-md-4">
+              <input formControlName="confirmPassword" type="text" class="form-control " placeholder="Confirm Password *" id="validationServer032"
+                    >
+            </div>
+                <div class="col-md-4">
+                  <input   class="form-control ml-2" type="number" formControlName="playerMaxCreditLimit" placeholder="Player Max Credit Limit *">
+                  <small>(Max: 20,00,000)</small>
+                </div>
+        </div>
+
+
+
+        <div class="row pb-4 pt-3">
+
+          <div class="col-md-12">
+            <textarea formControlName="comments" type="text" class="form-control is-invalid" placeholder="Comments" id="validationServer03"></textarea>
+          </div>
+      </div>
+    </div>
+    <div>
+      <div class="row pb-4 pt-3">
+        <div class="col-md-3">
+          <div class="form-check form-switch">
+            <input class="form-check-input" formControlName="casinoStatus" type="checkbox" id="flexSwitchCheckChecked1" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Casino </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-switch">
+            <input class="form-check-input" formControlName="cardGameStatus" type="checkbox" id="flexSwitchCheckChecked2" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Card Game </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-switch">
+            <input class="form-check-input" formControlName="liveGameStatus" type="checkbox" id="flexSwitchCheckChecked3" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Live Game </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-switch">
+            <input class="form-check-input" formControlName="sportsBookStatus" type="checkbox" id="flexSwitchCheckChecked4" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Sportsbook </label>
+          </div>
+        </div>
+       </div>
+      <div class="row pb-4 pt-3">
+        <div class="col-md-3">
+          <div class="form-check form-switch">
+            <input class="form-check-input" formControlName="premiumSportsBookStatus" type="checkbox" id="flexSwitchCheckChecked" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Premium Sportsbook </label>
+          </div>
+        </div>
+      </div>
+
+
+</div>
+<div class="row pb-4 pt-3">
+  <div class="row">
+    <div class="col">
+      <h3>Rate</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3>Sportsbook (INR)</h3>
+    </div>
+    <div class="col">
+      <h4>Max Rate (INR)</h4>
+      <small>My Rate:0</small>
+    </div>
+    <div class="col">
+      <input   class="form-control ml-2" type="number"  formControlName="sportsBookRate" placeholder="">
+      <small>(Min: 1) (Max: 1)</small>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3>Live Casino</h3>
+    </div>
+    <div class="col">
+      <h4>Max Rate </h4>
+      <small>My Rate:0</small>
+    </div>
+    <div class="col">
+      <input   class="form-control ml-2" type="number"  formControlName="liveCasinoRate" placeholder="">
+      <small>(Min: 100) (Max: 100)</small>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row pb-4 pt-3">
+  <div class="row">
+    <div class="col">
+      <h3>Min Bet</h3>
+      <label for="validationTooltip01">Member Min Bet</label>
+      <input formControlName="minBet" type="number" class="form-control" placeholder="">
+      <small>(Min: 500)</small>
+    </div>
+    <div class="col">
+      <h3>Max Bet</h3>
+      <label for="validationTooltip01">Member Max Bet</label>
+      <input formControlName="maxBet" type="number" class="form-control" placeholder="">
+      <small>(Min: 500)</small>
+      <small>(Max: 10000000 )</small>
+    </div>
+    <div class="col">
+      <h3>Max Exposure</h3>
+      <label for="validationTooltip01">Member Max Exposure Amt</label>
+      <input formControlName="maxExposure"  type="number" class="form-control" placeholder="">
+      <small>(Min: 500)</small>
+      <small>(Max: 10000000 )</small>
+    </div>
+  </div>
+</div>
+<div class="row pb-4 pt-3">
+  <div class="offset-md-3 col-md-3">
+     <button type="submit" [disabled]="memberForm.invalid || isLoading"  class="btn btn-light bg-pink border-0  mt-4 w-100 pt-3 pb-3"><i class="busy" *ngIf="isLoading"></i>SIGN IN</button>
+    <button type="submit"   class="btn btn-light bg-pink border-0  mt-4 w-100 pt-3 pb-3"><i class="busy" *ngIf="isLoading"></i>SAVE</button>
+  </div>
+  <div class="col-md-3">
+    <button type="button" class="btn btn-light bg-pink border-0  mt-4 w-100 pt-3 pb-3"><i class="busy" *ngIf="isLoading"></i>CANCEL</button>
+  </div>
+</div>
+        <div class="input-group">
+      </div>
+      </form>
+      </div>
+    </div>
+  </section>
+</main> -->
+
+<main id="main" class="main">
+  <form [formGroup]="memberForm" (ngSubmit)="onSubmitMemberForm()">
+    <section class="section gamedetails">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6 text-pink">
+              <h4>
+                <i class="fa fa-solid fa-user text-pink me-2"></i>
+                <i class="fa fa-bars text-pink me-2"></i> {{editMode?'Update Member':'Create Member'}}
+              </h4>
+            </div>
+            <div class="col-md-6 text-end mt-2">
+              <span class="text-pink me-3 pt-2">Status</span>{{this.memberForm.value.isActive}}
+              <a class="text-decoration-none text-white">
+                <input
+                  type="radio"
+                  id="1"
+                  formControlName="status"
+                  [checked]="this.memberForm.value.isActive != true"
+                  name="status"
+                  value="1"
+                /><span class="bg-success rounded-pill p-2 m-2">Active</span>
+              </a>
+              <a class="text-decoration-none text-white">
+                <input
+                  type="radio"
+                  id="2"
+                  formControlName="status"
+                  [checked]="this.memberForm.value.isActive == true"
+                  name="status"
+                  value="0"
+                /><span class="bg-warning rounded-pill p-2 m-2">Inactive</span>
+              </a>
+              <a class="text-decoration-none text-white">
+                <input
+                  type="radio"
+                  id="3"
+                  formControlName="status"
+                  ng-checked="this.memberForm.value.isActive == false"
+                  name="status"
+                  value="0"
+                /><span class="bg-danger rounded-pill p-2 m-2">Closed</span>
+              </a>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-4">
+              <label>Username</label>
+              <input
+              [readOnly]="editMode"
+                formControlName="username"
+                type="text"
+                class="form-control inputbb p-2 ps-0"
+                placeholder="Username*"
+              />
+            </div>
+            <div class="col-md-4">
+              <label>Display Name</label>
+              <input
+              autocomplete="disabled"
+                formControlName="displayName"
+                type="text"
+                class="form-control inputbb p-2 ps-0"
+                placeholder="Display Name*"
+              />
+            </div>
+            <div class="col-md-4">
+              <label>Password</label>
+              <input
+                type="password"
+                class="form-control inputbb p-2 ps-0"
+                formControlName="password"
+                placeholder="Password*"
+              />
+            </div>
+            <div class="col-md-4 pt-5">
+              <label>Confirm Password</label>
+              <input
+                type="text"
+                class="form-control inputbb p-2 ps-0"
+                formControlName="confirmPassword"
+                placeholder="Confirm Password*"
+              />
+            </div>
+            <div class="col-md-4 pt-5">
+              <label>Player Max Credit Limit</label>
+              <input
+                type="number"
+                class="form-control inputbb p-2 ps-0"
+                formControlName="playerMaxCreditLimit"
+                placeholder="Player Max Credit Limit*"
+              />
+
+
+              <p>(Max: 20,00,000)</p>
+            </div>
+            <div class="col-md-12">
+              <label>Comments</label>
+              <textarea
+                formControlName="comments"
+                name="comments"
+                id="Comments"
+                class="form-control inputbb pb-4 ps-0"
+                placeholder="Comments"
+                cols="30"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section gamedetails mt-3">
+      <div class="row">
+        <div class="col-md-12 text-pink">
+          <h4>Game Status</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 mt-3 d-flex" *ngFor="let game of gamesList">
+          <p class="me-2 flex-fill">{{game.name}}</p>
+          <div class="toggle-button-cover">
+            <div class="button1 r" id="button-2">
+              <input
+              (click)="setGameStatus(game.isActive,game.gameId)"
+                type="checkbox"
+                class="checkbox"
+                [checked]="!game.isActive"
+              />
+              <div class="knobs"></div>
+              <div class="layer"></div>
+            </div>
+          </div>
+          <!-- <div class="form-check form-switch">
+            <input (click)="setGameStatus(game.isActive,game.gameId)" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="game.isActive">
+          </div> -->
+        </div>
+      </div>
+    </section>
+    <section class="section gamedetails mt-3">
+      <div class="row">
+        <div class="col-md-12 text-pink">
+          <h4>Rate</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">Sportsbook (INR)</div>
+        <div class="col-md-2">Max Rate (INR) <br />My Share : 0</div>
+        <div class="col-md-8">
+          <input
+            formControlName="sportsBookRate"
+            name="sportsBookRate"
+            type="number"
+            id="sportsBookRate"
+            class="form-control inputbb pb-2"
+            placeholder="(Min : 1) (Max : 1)"
+          />
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-2">Live Casino</div>
+        <div class="col-md-2">Max Rate (INR) <br />My Share : 0</div>
+        <div class="col-md-8">
+          <input
+            formControlName="liveCasinoRate"
+            name="liveCasinoRate"
+            type="number"
+            id=""
+            class="form-control inputbb pb-2"
+            placeholder="(Min : 1) (Max : 1)"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section gamedetails mt-3">
+      <div class="row">
+        <div class="col-md-4">
+          <h4 class="text-pink">Min Bet</h4>
+          <label>Member Min Bet</label>
+          <input
+            formControlName="minBet"
+            type="number"
+            class="form-control inputbb p-2 ps-0"
+            placeholder="500"
+          />
+          <p>(Min: 500)</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="text-pink">Max Bet</h4>
+          <label> Member Max Bet Amt </label>
+          <input
+            formControlName="maxBet"
+            type="number"
+            class="form-control inputbb p-2 ps-0"
+            placeholder="100000"
+          />
+          <p>(Min: 1) (Max: 10000000</p>
+        </div>
+        <div class="col-md-4">
+          <h4 class="text-pink">Max Exposure</h4>
+          <label> Member Max Exposure Amt </label>
+          <input
+            formControlName="maxExposure"
+            type="number"
+            class="form-control inputbb p-2 ps-0"
+            placeholder="5000000"
+          />
+          <p>(Min: 1) (Max: 50000000 )</p>
+        </div>
+      </div>
+    </section>
+    <div class="row mt-3">
+      <div class="col-md-6 text-end">
+        <button
+          type="button"
+          class="btn btn-pink rounded-pill ps-5 pe-5 pt-3 pb-3"
+        >
+          Cancel
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button
+          type="submit"
+          class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+    <!--your code will come here end-->
+  </form>
+</main>

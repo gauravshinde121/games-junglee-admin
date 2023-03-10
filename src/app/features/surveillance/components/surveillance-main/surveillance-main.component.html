@@ -1,0 +1,110 @@
+<div class="container-fluid">
+  <app-header></app-header>
+</div>
+<app-left-navigation></app-left-navigation>
+
+<main id="main" class="main">
+  <section class="section gamedetails">
+  <div class="row" [formGroup]="filterForm">
+  <div class="col-md-12">
+  <h4 class="text-pink">Surveillance</h4>
+  <br>
+  <div class="row" >
+    <div class="col-md-11">
+      <input type="text" formControlName="member" name="member" class="form-control mt-2" id="" placeholder="Enter or select member name to search">
+    </div>
+  </div>
+  <br>
+  <div class="row" >
+    <div class="col-md-3">
+      <button class="btn btn-pink rounded-pill w-100 mt-4">
+        <i class="fa fa-user-cog"></i> Clear Members</button>
+    </div>
+    <div class="col-md-3">
+      <label>Select Sub Games</label>
+      <select name="subGame" id="ab" placeholder="Select Sub Game" class="form-select mt-2" formControlName="subGame">
+       <option value="All">All </option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label>Select Events</label>
+      <select name="event" id="ab" class="form-select mt-2" placeholder="Select or search a event" formControlName="event">
+       <option value="All">All </option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label>Select Market Type</label>
+      <select name="marketType" placeholder="Select or search a market" class="form-select mt-2" formControlName="marketType">
+       <option value="All">All </option>
+       <option value="Cricket">Live Casino</option>
+       <option value="Card Game">Card Game</option>
+       <option value="Sport Book">Sport Book</option>
+       <option value="Premium Sport Book">Premium Sport Book</option>
+       <option value="Racing">Racing</option>
+      </select>
+    </div>
+    </div>
+    <br>
+    <div class="row mt-3">
+      <div class="col-md-3">
+      <label>From Stake</label>
+      <input type="number" formControlName="fromStake" name="fromStake" class="form-control mt-2" id="" placeholder="From Stake">
+      </div>
+
+      <div class="col-md-3">
+      <label>To Stake</label>
+        <input type="number" formControlName="toStake" name="toStake"  class="form-control mt-2" id="" placeholder="To Stake">
+        </div>
+
+    <div class="col-md-3">
+      <label>Select Currency Types</label>
+      <select  formControlName="currencyType" name="currencyType" id="ab" class="form-select mt-2">
+       <option value="">All </option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getSurveillanceData()">Search</button>
+    </div>
+    </div>
+    <div class="row mt-4">
+
+    <div class="col-md-12 mt-3">
+      <div *ngIf="surveillanceData.length==0" class="border text-center p-5">
+      <h4>Please select the above filters to view the Surveillance Graph.</h4>
+    </div>
+    <table class="table tableall" *ngIf="surveillanceData.length>0">
+      <thead>
+        <tr>
+          <th scope="col" class="text-dark">#</th>
+          <th scope="col" class="text-dark">Date</th>
+          <th scope="col" class="text-dark">Game</th>
+          <th scope="col" class="text-dark">Sub Game</th>
+          <th scope="col" class="text-dark">Event</th>
+          <th scope="col" class="text-dark">Player</th>
+          <th scope="col" class="text-dark">Master</th>
+          <th scope="col" class="text-dark">Multiplier</th>
+          <th scope="col" class="text-dark">Detail</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let pl of surveillanceData;let i=index">
+          <td>{{i+1}}</td>
+          <td>{{pl.createDateTime | date}}</td>
+          <td>{{pl.gameData.gameName}}</td>
+          <td>{{pl.gameData.subGame}}</td>
+          <td>{{pl.gameData.eventName}}</td>
+          <td>{{pl.playerData.name}} <br></td>
+          <td>{{pl.masterData.name}} <br>0</td>
+          <td>1</td>
+          <td></td>
+        </tr>
+      </tbody>
+      </table>
+
+    </div>
+    </div>
+  </div>
+  </div>
+  </section>
+  </main>

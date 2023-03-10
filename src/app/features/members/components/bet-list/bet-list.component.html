@@ -1,0 +1,106 @@
+
+
+<div [formGroup]="filterForm" class="tab-pane fade show active" id="pills-batlist" role="tabpanel" aria-labelledby="pills-batlist-tab" tabindex="0">
+  <div class="row">
+  <div class="col-md-2">
+  <label>From Date</label>
+  <input formControlName="fromDate" type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" name="fromDate" class="form-control mt-2" id="">
+  </div>
+  <div class="col-md-2">
+  <label>To Date</label>
+  <input formControlName="toDate" type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"  name="toDate" class="form-control mt-2" id="" >
+  </div>
+  <div class="col-md-3">
+  <label>Enter Member Name</label>
+  <input type="text" name="" class="form-control mt-2" id="" placeholder="Select Names to Search">
+  </div>
+  <div class="col-md-2 p-2">
+  <button class="btn btn-pink rounded-pill w-100 mt-4">
+  <i class="fa fa-user-cog"></i> Clear Members</button>
+  </div>
+  <div class="col-md-3">
+  <label>Highlight Ip</label>
+  <input type="text" name="" class="form-control mt-2" id="" placeholder="Search for ip">
+  </div>
+  </div>
+  <div class="row mt-3">
+  <div class="col-md-4 mb-2">
+  <label>Select Sub Games</label>
+  <select name="" id="ab" class="form-select mt-2">
+   <option value="All">All </option>
+   <option value="Cricket">Cricket</option>
+   <option value="Games jungly">Games jungly</option>
+   <option value="Soccer">Soccer</option>
+  </select>
+  </div>
+  <div class="col-md-4 mb-2">
+  <label>Select Event</label>
+  <input type="text" name="" class="form-control mt-2" id="" placeholder="Select or search a event in the list...">
+  </div>
+  <div class="col-md-4 mb-2">
+  <label>Select Market Type</label>
+  <input type="text" name="" class="form-control mt-2" id="" placeholder="Select or search a market in the list...">
+  </div>
+
+  <div class="col-md-4 ">
+  <label>Stakes From</label>
+  <input type="number" name="" class="form-control mt-2" id="" placeholder="Stakes From Value">
+  </div>
+  <div class="col-md-4 mb-2">
+  <label>Stakes To </label>
+  <input type="number" name="" class="form-control mt-2" id="" placeholder="Stakes To Value">
+  </div>
+  <div class="col-md-4 pt-2">
+  <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getMemberBets()">Search</button>
+  </div>
+  </div>
+  <div class="row mt-4">
+    <nav class="nav ps-4 col-md-12">
+      <a class="nav-link active border-bottom text-pink" >Current</a>
+      <a class="nav-link" >Past</a>
+      <a class="nav-link border-bottom text-pink" >Matched</a>
+      <a class="nav-link" >Unmatched</a>
+    </nav>
+  <div class="col-md-12 mt-3">
+    <div *ngIf="betList.length==0" class="border text-center p-5">
+    <h4>No data found </h4>
+  </div>
+  <table class="table tableall" *ngIf="betList.length>0">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" class="text-dark">Member</th>
+        <th scope="col" class="text-dark">Placed</th>
+        <th scope="col" class="text-dark">Matched Date</th>
+        <th scope="col" class="text-dark">Event</th>
+        <th scope="col" class="text-dark">Market</th>
+        <th scope="col" class="text-dark">Selection</th>
+        <th scope="col" class="text-dark">Odds Placed</th>
+        <th scope="col" class="text-dark">Odds Matched</th>
+        <th scope="col" class="text-dark">Matched</th>
+        <th scope="col" class="text-dark">Unmatched</th>
+        <th scope="col" class="text-dark">Profit Liability</th>
+        <th scope="col" class="text-dark">IP</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let bet of betList;let i=index;">
+        <td>{{i+1}}</td>
+        <td>{{bet.username}}</td>
+        <td>{{bet.placedDate | date:'medium'}}</td>
+        <td>{{bet.createdAt | date:'medium'}}</td>
+        <td>{{bet.event}}</td>
+        <td>{{bet.betCategory}}</td>
+        <td>{{bet.selectionName}}</td>
+        <td>{{bet.betRate}}</td>
+        <td>{{bet.betRate}}</td>
+        <td>{{bet.stake}}</td>
+        <td>-</td>
+        <td [ngClass]="bet.type?'text-success':'text-danger'">{{bet.profitLiability}}</td>
+        <td>49.36.104.151</td>
+    </tbody>
+    </table>
+
+  </div>
+  </div>
+  </div>

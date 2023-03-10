@@ -1,0 +1,106 @@
+<main id="main" class="main">
+  <section class="section gamedetails">
+  <div class="row" [formGroup]="filterForm">
+  <div class="col-md-12">
+  <h4 class="text-pink">PL Statement</h4>
+  <br>
+  <div class="row" >
+    <div class="col-md-11">
+      <input type="text" name="" class="form-control mt-2" id="" placeholder="Enter or select member name to search">
+    </div>
+  </div>
+  <br>
+  <div class="row" >
+    <div class="col-md-3">
+      <button class="btn btn-pink rounded-pill w-100 mt-4">
+        <i class="fa fa-user-cog"></i> Clear Members</button>
+    </div>
+    <div class="col-md-3">
+    <label>From Date</label>
+    <input type="date" formControlName="fromDate" name="fromDate" class="form-control mt-2" placeholder="">
+    </div>
+    <div class="col-md-3">
+    <label>To Date</label>
+    <input type="date" formControlName="toDate" name="toDate" class="form-control mt-2" placeholder="">
+    </div>
+    </div>
+    <br>
+    <div class="row mt-3">
+      <div class="col-md-2">
+        <label>Select Games</label>
+        <select name="subGame" id="ab" class="form-select mt-2" formControlName="subGame">
+         <option value="All">All </option>
+         <option value="Cricket">Live Casino</option>
+         <option value="Card Game">Card Game</option>
+         <option value="Sport Book">Sport Book</option>
+         <option value="Premium Sport Book">Premium Sport Book</option>
+         <option value="Racing">Racing</option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <label>Select Sub Games</label>
+        <select name="game" id="ab" class="form-select mt-2" formControlName="game">
+         <option value="All">All </option>
+        </select>
+      </div>
+
+    <div class="col-md-2">
+      <label>Event</label>
+      <select name="tms" id="ab" class="form-select mt-2" formControlName="tms">
+       <option value="All">All </option>
+      </select>
+    </div>
+
+    <div class="col-md-2">
+      <label>Select Types</label>
+      <select formControlName="type" name="type" id="ab" class="form-select mt-2">
+       <option value="">All </option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getPlStatement()">Search</button>
+    </div>
+    </div>
+    <div class="row mt-4">
+
+    <div class="col-md-12 mt-3">
+      <div *ngIf="plStatement.length==0" class="border text-center p-5">
+      <h4>No data found </h4>
+    </div>
+    <table class="table tableall" *ngIf="plStatement.length>0">
+      <thead>
+        <tr>
+          <th scope="col" class="text-dark">#</th>
+          <th scope="col" class="text-dark">Date</th>
+          <th scope="col" class="text-dark">Game</th>
+          <th scope="col" class="text-dark">Sub Game</th>
+          <th scope="col" class="text-dark">Event</th>
+          <th scope="col" class="text-dark">Player</th>
+          <th scope="col" class="text-dark">Master</th>
+          <th scope="col" class="text-dark">Multiplier</th>
+          <th scope="col" class="text-dark">Detail</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let pl of plStatement;let i=index">
+          <td>{{i+1}}</td>
+          <td>{{pl.createDateTime | date}}</td>
+          <td>{{pl.gameData.gameName}}</td>
+          <td>{{pl.gameData.subGame}}</td>
+          <td>{{pl.gameData.eventName}}</td>
+          <td>{{pl.playerData.name}} <br><p [ngClass]="pl.gameData.netAmt>0?'text-success':'text-danger'">{{pl.gameData.netAmt | number}}</p></td>
+          <td>{{pl.masterData.name}} <br>0</td>
+          <td>1</td>
+          <td><a (click)="getOneAccount(pl)"><i class="fa-sharp fa-solid fa-eye text-pink"></i></a></td>
+        </tr>
+      </tbody>
+      </table>
+
+    </div>
+    </div>
+  </div>
+  </div>
+  </section>
+  </main>

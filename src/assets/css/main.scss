@@ -1,0 +1,472 @@
+/********** common property start ************/
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
+
+$color_1: #ffa7a3;
+$color_2: #fff;
+$color_3: #000;
+$color_4: #012970;
+$background-color_1: #202121;
+$background-color_2: #3a3a3a;
+$background-color_3: #ffa7a3;
+$background-color_4: #d98e94;
+$background-color_5: #00cc38;
+$background-color_6: #d9520a;
+$background-color_7: #fff;
+$background-color_8: #aab7cf;
+$background-color_9: #d9d9d9;
+$border-color_1: #ffa7a3;
+$border-color_2: #dc3545;
+
+$background-color_13: #6abefa;
+$background-color_14: #6abefa5e;
+$background-color_15: hsla(205.2, 29%, 58%, 0.86);
+$background-color_16: #ffb9b5;
+$background-color_17: #ffb9b560;
+$background-color_18: hsla(3.5, 21.3%, 52.2%, 0.78);
+$background-color_19: #d9d9d9;
+
+.browncolor {
+  background-color: $background-color_1;
+}
+.bg-pink {
+  background: #ffa7a3 !important;
+}
+.border-pink {
+  border: 1px solid #ffa7a3;
+}
+.btn {
+  font-size: 12px;
+}
+.btn-pink{
+  color:$color_1;
+}
+.btn-pink:hover{
+  background: $color_2;
+  color: $color_3;
+}
+.form-control {
+  font-size: 12px;
+}
+.w-30 {
+  width:30%;
+}
+.text-pink {
+  color: $color_1 !important;
+}
+.btn-pink {
+  color: $color_2;
+  background-color: $background-color_3;
+  border-color: $border-color_1;
+}
+.btn-outline-pink {
+  color: $color_1;
+  border-color: $border-color_1;
+  &:hover {
+    color: $color_3;
+    background-color: $background-color_3;
+    border-color: $border-color_1;
+  }
+}
+.radius-right-tb {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.radius-left-tb {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+.radius-all {
+  border-radius: 15px;
+}
+.inputbb {
+  background-color: #343535;
+  border: none;
+  border-bottom: 0.5px solid #A2A2A2;
+  color: #ffffff;border-radius: 0;
+}
+.radioselected {
+  accent-color: #FFA7A3;
+}
+/********** common property end ************/
+/********** Login start ************/
+.logins {
+  background: url(/images/bg.png) no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+.login {
+  border: 1px solid rgb(255, 167, 163);
+  padding: 10px;
+  background: rgba(18, 14, 17, 0.88);
+  margin-top: 30px;
+  a {
+    text-decoration: none;
+  }
+  .btn {
+    font-size: 14px;
+    padding: 12px 10px;
+  }
+  .form-control {
+    line-height: 2.5;
+  }
+  .form-control.is-invalid {
+    border-color: $border-color_2;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: none;
+  }
+  .was-validated {
+    .form-control {
+      &:invalid {
+        border-color: $border-color_2;
+        padding-right: calc(1.5em + 0.75rem);
+        background-image: none;
+      }
+    }
+  }
+}
+.form-signin .form-floating > .form-control,
+.form-floating > .form-select {
+  background: transparent;
+  color: #fff;
+  border-bottom: 1px solid #ffffff !important;
+  border: 0px;
+  border-radius: 0;
+  padding: 0;
+  outline: none !important;
+}
+.form-signin .form-floating > label {
+  border: 1px solid transparent;
+  transform-origin: 0 0;
+  transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  color: #fff;
+  padding: 0px 0px 0 6px;
+}
+.form-signin .form-floating span {
+  margin-top: -30px;
+  float: right;
+  text-align: right;
+  width: 100%;
+  margin-right: 13px;
+}
+.form-signin .form-floating input:focus {
+  border-bottom: 1px solid rgb(255, 167, 163) !important;
+  color: #ffa7a3;
+  box-shadow: none;
+}
+/********** Login end ************/
+/********** main start ************/
+#main {
+  margin-top: 130px;
+  padding: 20px 15px 20px 10px;
+  transition: all 0.3s;
+  color: $color_2;
+}
+/********** main end ************/
+/********** header start ************/
+.header {
+  transition: all 0.5s;
+  z-index: 997;
+  height: 60px;
+  box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+  padding: 10px;
+  .toggle-sidebar-btn {
+    font-size: 32px;
+    padding-left: 10px;
+    cursor: pointer;
+    color: $color_4;
+  }
+}
+.balance {
+  background-image: url(../images/balance.png);
+  width: 100%;
+  height: 158px;
+  background-color: $background-color_4;
+  border-radius: 10px;
+  color: $color_2;
+  p {
+    font-size: 20px;
+    color: $color_2;
+    padding: 45px 0px 0px 90px;
+  }
+  span {
+    font-size: 14px;
+    color: $color_2;
+  }
+}
+.balance-up {
+  background-color: $background-color_5;
+}
+.balance-down {
+  background-color: $background-color_6;
+}
+.user {
+  color: $color_2;
+}
+/********** header end ************/
+/********** Sidebar start ************/
+.sidebar {
+  position: fixed;
+  top: 180px;
+  left: 0;
+  bottom: 0;
+  width: 245px;
+  z-index: 996;
+  transition: all 0.3s;
+  padding: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #aab7cf transparent;
+  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  .nav-link {
+    color: $color_2;
+  }
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: $background-color_7;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $background-color_8;
+  }
+}
+/********** Sidebar end ************/
+/********** table pro start ************/
+.tableall {
+  border-radius: 15px;
+  color: $color_2;
+  th {
+    background-color: $background-color_3;
+    border: 0px;
+    font-weight: 500;
+  }
+  th.first {
+    border-top-left-radius: 15px;
+  }
+  th.last {
+    border-top-right-radius: 15px;
+  }
+  td {
+    vertical-align: middle;
+    border-bottom: 1px solid #3c3c3c;
+  }
+}
+/********** table pro end ************/
+/********** inner page pro start ************/
+.gamedetails {
+  border: 1px solid rgba(255, 167, 163, 0.3411764706);
+  border-radius: 15px;
+  padding: 15px;
+  background: rgba(60, 62, 62, 0.7215686275);
+}
+/********** inner page pro end ************/
+/********** Tooltip start ************/
+.tooltipnk {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltipnk .tooltiptext {
+  visibility: hidden;
+  width: 170px;
+  background-color: black;
+  color: #fff;
+  // text-align: center;
+  border-radius: 6px;
+  padding: 10px 0;
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+  background-image: radial-gradient(rgb(56, 56, 56), rgb(0, 0, 0));
+  border: 1px solid #a6a6a6;
+}
+.tooltipnk:hover .tooltiptext {
+  visibility: visible;
+}
+/********** Tooltip end ************/
+/********** Toggle yes no start ************/
+.button1 {
+  position: relative;
+  width: 60px;
+  height: 25px;
+  overflow: hidden;
+  background: #ffa7a3;
+}
+
+.button1.r,
+.button1.r .layer {
+  border-radius: 100px;
+}
+
+.button.b2 {
+  border-radius: 2px;
+}
+
+.checkbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.knobs {
+  z-index: 2;
+}
+
+.layer {
+  width: 100%;
+  background-color: #ebf7fc;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+
+/* Button 2 */
+#button-2 .knobs:before,
+#button-2 .knobs:after {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  width: 25px;
+  height: 23px;
+  font-size: 9px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 0;
+  padding: 11px 2px;
+  background-color: #f9f9f9;
+  color: #000;
+  border-radius: 50%;
+  transition: 0.3s ease all;
+}
+
+#button-2 .knobs:before {
+  content: "On";
+}
+
+#button-2 .knobs:after {
+  content: "Off";
+}
+
+#button-2 .knobs:after {
+  right: -28px;
+  left: auto;
+  background-color: #f9f9f9;
+  color: #000;
+}
+
+#button-2 .checkbox:checked + .knobs:before {
+  left: -28px;
+}
+
+#button-2 .checkbox:checked + .knobs:after {
+  right: 3px;
+}
+
+#button-2 .checkbox:checked ~ .layer {
+  background-color: #fcebeb;
+}
+/********** Toggle yes no end ************/
+.tablematchodds {
+  background-color: $background-color_2;
+  // border-radius: 15px;
+  vertical-align: middle;
+  margin-bottom: 25px;
+  td {
+    vertical-align: middle;
+    padding: 2px 5px;
+    text-align: center;border-top: 2px solid #fff;
+    font-size: 11px;
+    line-height: 13px;
+  }
+  a {
+    color: $color_3;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+    line-height: 13px;
+  }
+  span{
+    font-size: 10px;
+  }
+  th {
+    border-color: $border-color_1;
+    border-style: none;
+    border-width: 0; font-size: 11px;
+    height: 50px;
+    vertical-align: middle;
+  }
+  .heading{
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  thead {
+  border-color: $border-color_1;
+  border-style: none;
+  border-width: 0;
+  }
+  tr {
+  border-color: $background-color_9;
+  border-style: none;
+  border-width: 0;
+  }
+  .table {
+    .tfirstcol {
+      border-top-left-radius: 15px;
+      background: #ffa7a3;
+    }
+}
+.tlastcol {
+  border-top-right-radius: 15px;
+  background: #ffa7a3;
+  }
+  .coldark {
+  background: #272727 !important;
+  color: $color_1;
+  }
+  //color box start
+  .colblue {
+  background-color: $background-color_13 !important;
+  border-left: 1px solid #fff;
+  }
+  .colblue.light {
+  background-color: $background-color_14 !important;
+  }
+  .colblue.dis {
+  background-color: $background-color_15 !important;
+  }
+  .colpink {
+  background-color: $background-color_16 !important;
+  border-left: 1px solid #fff;
+  }
+  .colpink.light {
+  background-color: $background-color_17 !important;
+  }
+  .colpink.dis {
+  background-color: $background-color_18 !important;
+  font-size: 11px;
+  line-height: 13px;
+  }
+  .colgray {
+  background-color: $background-color_19 !important;
+  border-left: 1px solid #fff;
+  }
+  .colpink.last {
+  border-bottom-right-radius: 15px;
+  border-right: 0px;
+  }
+  .colblue, .colblue.light, .colblue.dis, .colpink, .colpink.light, .colpink.dis, .colgray, .colpink.last{min-width: 45px; height: 40px;}
+
+}
+.accordion p{
+font-size: 15px;
+}

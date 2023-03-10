@@ -1,0 +1,44 @@
+
+<div class="tab-pane fade show active" id="pills-transferstatements" role="tabpanel" aria-labelledby="pills-transferstatements-tab" tabindex="0">
+  <div class="row" [formGroup]="filterForm">
+   <div class="col-md-2">
+   <label>From Date</label>
+   <input type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"  formControlName="fromDate" name="fromDate" class="form-control mt-2" id="" placeholder="Month">
+   </div>
+   <div class="col-md-2">
+   <label>To Date</label>
+   <input type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"  formControlName="toDate" name="toDate" class="form-control mt-2" id="" placeholder="Month">
+   </div>
+   <div class="col-md-2 pt-2">
+   <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getTransferStatement()">Search</button>
+   </div>
+   <div class="col-md-6 text-end mt-4">
+   <label><p>Total Net Share <span class="text-success ps-2 pe-2"> 0 </span></label>
+   </div>
+  </div>
+  <div class="col-md-12 mt-3">
+    <div class="border text-center p-5" *ngIf="transferStatements.length ==0">
+    <h4>No data found </h4>
+  </div>
+
+  <div class="row">
+  <table class="table tableall" *ngIf="transferStatements.length>0">
+    <thead>
+      <tr>
+        <th scope="col" class="text-dark">Date</th>
+        <th scope="col" class="text-dark">Payer/Payee</th>
+        <th scope="col" class="text-dark">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let statements of transferStatements">
+        <td>{{ statements?.createdDate | date }}</td>
+        <td>{{ statements?.fromUsername }}  ({{ statements?.toUsername }})</td>
+        <td [ngClass]="statements?.amount>0?'text-success':'text-danger'">{{ statements?.amount }}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </div>
+  </div>

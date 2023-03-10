@@ -1,0 +1,60 @@
+<main id="main" class="main">
+  <section class="section gamedetails">
+  <div class="row" [formGroup]="filterForm">
+  <div class="col-md-12">
+  <h4 class="text-pink">Fancy & Bookmaker Commission</h4>
+  <br>
+
+  <div class="row" >
+    <div class="col-md-3">
+      <label>Select</label>
+      <select name="player" id="ab" class="form-select mt-2" formControlName="player">
+       <option value="All">All </option>
+      </select>
+    </div>
+    <div class="col-md-3">
+    <label>From Date</label>
+    <input type="date" formControlName="fromDate" name="fromDate" class="form-control mt-2" placeholder="">
+    </div>
+    <div class="col-md-3">
+    <label>To Date</label>
+    <input type="date" formControlName="toDate" name="toDate" class="form-control mt-2" placeholder="">
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="searchCommission()">Search</button>
+    </div>
+    </div>
+    <br>
+    <div class="row mt-4">
+        <h3 class="text-success">Fancy</h3>
+        <div class="row">
+          <div class="col-md-4">
+            <button class="btn btn-dark border-secondary w-100 mt-1 p-3"> <h4>Upline Commission</h4>0 </button>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-dark border-secondary w-100 mt-1 p-3"><h4>Downline Commission</h4> 0 </button>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-dark border-secondary w-100 mt-1 p-3"><h4>Profit Commission</h4> 0 </button>
+          </div>
+        </div>
+
+    </div>
+    <div class="row mt-4">
+      <h3 class="text-danger">Bookmaker</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <button class="btn btn-dark border-secondary w-100 mt-1 p-3"> <h4>Upline Commission</h4>0 </button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-dark border-secondary w-100 mt-1 p-3"><h4>Downline Commission</h4> 0 </button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-dark border-secondary w-100 mt-1 p-3"><h4>Profit Commission</h4> 0 </button>
+        </div>
+      </div>
+  </div>
+  </div>
+  </div>
+  </section>
+  </main>

@@ -475,4 +475,52 @@ body {
 
 .accordion p {
   font-size: 15px;
+}
+
+.ipdetail .dbg {
+  background: #000;
+}
+
+.ipdetail p {
+  margin: 0;
+  line-height: 25px;
+  font-size: 12px;
+}
+
+.imganalytics {
+  background-image: url(../images/blank.png);
+  width: 255px;
+  height: 90px;
+  background-repeat: no-repeat;
+}
+
+.google-playimg {
+  height: 35px;
+  width: auto;
+}
+
+.analyticsimg1 {
+  width: 255px;
+  height: 90px;
+  background-repeat: no-repeat;
+  background-image: url(../images/img1new.png);
+}
+
+.analyticsimg2 {
+  width: 255px;
+  height: 90px;
+  background-repeat: no-repeat;
+  background-image: url(../images/img1new.png);
+}
+
+.analyticsimg1 h3 {
+  margin-top: 0px;
+  font-size: 25px;
+  color: burlywood;
+}
+
+.analyticsimg2 h3 {
+  margin-top: 0px;
+  font-size: 25px;
+  color: burlywood;
 }/*# sourceMappingURL=main.css.map */

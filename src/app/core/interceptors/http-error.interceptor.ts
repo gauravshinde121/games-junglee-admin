@@ -30,6 +30,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       catchError((err: HttpErrorResponse)=>{
         console.log('hello',err);
         if(err['status'] === 401){
+          console.log("inside unauthorize")
           this._sharedService.removeJWTToken();
           // this._router.navigate(['/home'])
         }

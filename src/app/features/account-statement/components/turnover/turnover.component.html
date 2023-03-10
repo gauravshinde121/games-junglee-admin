@@ -1,40 +1,38 @@
 <main id="main" class="main">
   <section class="section gamedetails">
-  <div class="row" [formGroup]="filterForm">
-  <div class="col-md-12">
-  <h4 class="text-pink">Turn Over</h4>
-  <br>
-  <div class="row" >
-    <div class="col-md-3">
-    <label>From Date</label>
-    <input type="date" formControlName="fromDate" name="fromDate" class="form-control mt-2" placeholder="">
-    </div>
-    <div class="col-md-3">
-    <label>To Date</label>
-    <input type="date" formControlName="toDate" name="toDate" class="form-control mt-2" placeholder="">
-    </div>
-    </div>
-    <br>
-    <div class="row mt-3">
-      <div class="col-md-3">
-        <label>Select Games</label>
-        <select name="subGame" id="ab" class="form-select mt-2" formControlName="subGame">
-         <option value="All">All </option>
-         <option value="Cricket">Live Casino</option>
-         <option value="Card Game">Card Game</option>
-         <option value="Sport Book">Sport Book</option>
-         <option value="Premium Sport Book">Premium Sport Book</option>
-         <option value="Racing">Racing</option>
-        </select>
-      </div>
-    <div class="col-md-3">
-      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getTurnOver()">Search</button>
-    </div>
-    </div>
-  </div>
-  </div>
-  <div class="row mt-4">
+    <div class="row" [formGroup]="filterForm">
 
+        <h3 class="text-pink">Turn Over</h3>
+        <div class="col-md-4">
+            <p>From Date</p>
+            <input type="date" formControlName="fromDate" name="fromDate" class="form-control browncolor bg-light" id="" placeholder="Month">
+          </div>
+          <div class="col-md-4">
+            <p>To Date</p>
+            <input type="date" formControlName="toDate" name="toDate" class="form-control browncolor bg-light" id="" placeholder="Month">
+          </div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4 btnmargin">
+            <p>Sub Games</p>
+            <select formControlName="subGame" name="subGame" id="ab" class="form-select bg-dgrey">
+              <option value="All">All </option>
+              <option value="Cricket">Live Casino</option>
+              <option value="Card Game">Card Game</option>
+              <option value="Sport Book">Sport Book</option>
+              <option value="Premium Sport Book">Premium Sport Book</option>
+              <option value="Racing">Racing</option>
+            </select>
+          </div>
+          <div class="col-md-2 btnmarginauto pt-3">
+            <button type="button" class="btn btn-pink rounded-pill mt-4" (click)="getTurnOver()">
+           Search</button>
+
+          </div>
+        <!--your code will come here end-->
+
+    </div>
+  </section>
+  <div class="col-md-12 mt-3">
     <div class="col-md-12 mt-3">
       <div *ngIf="plStatement.length==0" class="border text-center p-5">
       <h4>No data found </h4>
@@ -53,14 +51,12 @@
         <tr *ngFor="let pl of plStatement;let i=index">
           <td>{{i+1}}</td>
           <td>{{pl.matchName}}</td>
-          <td>{{pl.createDateTime | date:'medium'}}</td>
+          <td>{{pl.matchTime | date:'medium'}}</td>
           <td><a (click)="getTOForMatch(pl.matchId)"><i class="fa-sharp fa-solid fa-eye text-pink"></i></a></td>
           <td><a (click)="getTOForMatch(pl.matchId)"><i class="fa-sharp fa-solid fa-eye text-pink"></i></a></td>
         </tr>
       </tbody>
       </table>
-
-    </div>
-    </div>
-  </section>
-  </main>
+  </div>
+  </div>
+</main>

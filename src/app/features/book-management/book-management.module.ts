@@ -6,12 +6,24 @@ import { BookManagementMainComponent } from './components/book-management-main/b
 import { NetExposureComponent } from './components/net-exposure/net-exposure.component';
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BetTickerFlagFinalComponent } from './components/bet-ticker-flag-final/bet-ticker-flag-final.component';
+import { BetTickerPreviousComponent } from './components/bet-ticker-previous/bet-ticker-previous.component';
+import { NetExposureRacingComponent } from './components/net-exposure-racing/net-exposure-racing.component';
+import { BetTickerComponent } from './components/bet-ticker/bet-ticker.component';
+import { PremiumSportsbookComponent } from './components/premium-sportsbook/premium-sportsbook.component';
+import { NetExposureViewTotalComponent } from './components/net-exposure/net-exposure-view-total/net-exposure-view-total.component';
 
 
 @NgModule({
   declarations: [
     BookManagementMainComponent,
-    NetExposureComponent
+    NetExposureComponent,
+    BetTickerFlagFinalComponent,
+    BetTickerPreviousComponent,
+    NetExposureRacingComponent,
+    BetTickerComponent,
+    PremiumSportsbookComponent,
+    NetExposureViewTotalComponent
   ],
   imports: [
     CommonModule,

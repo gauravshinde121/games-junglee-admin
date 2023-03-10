@@ -18,12 +18,11 @@
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
             <li><a routerLink="/book-management/net-exposure" class="nav-link small ps-5">Net Exposure</a></li>
-            <li><a  class="nav-link small ps-5">Net Exposure Racing</a></li>
-            <li><a  class="nav-link small ps-5">Bet Ticker</a></li>
-            <li><a  class="nav-link small ps-5">Annually</a></li>
-            <li><a  class="nav-link small ps-5">Bet Ticker Flag Final</a></li>
-            <li><a  class="nav-link small ps-5">Bet Ticker Previous</a></li>
-            <li><a  class="nav-link small ps-5">Premium Sportsbook</a></li>
+            <li><a routerLink="/book-management/net-exposure-racing" class="nav-link small ps-5">Net Exposure Racing</a></li>
+            <li><a routerLink="/book-management/bet-ticker"  class="nav-link small ps-5">Bet Ticker</a></li>
+            <li><a routerLink="/book-management/bet-ticker-flag-final" class="nav-link small ps-5">Bet Ticker Flag Final</a></li>
+            <li><a routerLink="/book-management/bet-ticker-previous"  class="nav-link small ps-5">Bet Ticker Previous</a></li>
+            <li><a routerLink="/book-management/premium-sportsbook"  class="nav-link small ps-5">Premium Sportsbook</a></li>
           </ul>
         </div>
       </li>
@@ -69,7 +68,7 @@
         <i class="fa-solid fa-lock text-pink me-2"></i> Change Password </a>
         </li>
         <li>
-          <a class="nav-link"><i class="fa-solid fa-key text-pink me-2"></i> Google Authentication</a>
+          <a routerLink="/google-authentication" class="nav-link"><i class="fa-solid fa-key text-pink me-2"></i> Google Authentication</a>
         </li>
         <li>
           <button class="btn text-white collapsed" (click)="onLogout()"

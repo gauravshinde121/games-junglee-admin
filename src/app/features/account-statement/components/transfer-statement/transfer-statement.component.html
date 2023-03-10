@@ -1,59 +1,97 @@
 <main id="main" class="main">
-  <section class="section dashboard">
+  <section class="section gamedetails">
     <div class="row">
-      <div class="col">
-        <!-- <label for="">From Date</label> -->
-        <input  type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" class="form-control" name="fromDate" id="">
-      </div>
-      <div class="col">
-        <!-- <label for="">To Date</label> -->
-        <input  type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" class="form-control" name="toDate" id="">
-      </div>
-      <div class="col">
-        <button class="btn btn-pink text-dark btn-lg" (click)="getTransferStatement()">Search</button>
-      </div>
-    </div>
-    <br>
-    <br>
-    <div class="row">
-      <h3>List of Transactions</h3>
-    </div>
-    <div class="row mt-5">
       <div class="col-md-12">
-        <table class="table tableall">
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">#Creation Date</th>
-              <th scope="col">From User</th>
-              <th scope="col">To User</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Transaction Type</th>
-              <th scope="col">Comments</th>
-              <th scope="col">IP</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- <h4 class="text-center" *ngIf="transferStatements.length==0 && !this.isLoading">No users Found</h4> -->
-            <tr *ngFor="let user of transferStatements;let i=index">
-              <td>{{i+1}}</td>
-              <td>{{user.createdDate | date:'medium'}}</td>
-              <td>{{user.fromUsername }}</td>
-              <td>{{user.toUsername }}</td>
-              <td [ngClass]="user.isGiven?'text-danger':'text-success'">{{user.amount | number }}</td>
-              <td>{{user.isGiven?'Given':'Taken'}}</td>
-              <td></td>
-              <td>145:123:33:65</td>
-            </tr>
-          </tbody>
-        </table>
-        <a href="" class="btn bg-dgrey rounded-pill text-white">First</a>
-        <a href="" class="btn btn-pink rounded-pill text-white">Previous</a>
-        <a href="" class="btn bg-dgrey rounded-pill text-white ps-4 pe-4">1</a>
-        <a href="" class="btn bg-dgrey rounded-pill text-white">Next</a>
-        <a href="" class="btn bg-dgrey rounded-pill text-white">Last</a>
+        <!--your code will come here start-->
 
+
+        <div class="col-md-12">
+            <div class="row">
+            <h4><img src="images/list_transfer.png" alt=""> List of Transaction</h4> <hr>
+        </div>
+          </div>
+
+
+          <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="text" class="cassino"> From Date</label><br>
+                    <input type="date" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"  name="fromDate"  class="mt-3 form-control">
+
+                </div>
+                <div class="col-md-4 responsivets">
+                    <label for="text" class="cassino">To Date</label><br>
+                    <input type="date"  class="mt-3  form-control" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"  name="toDate">
+
+                </div>
+                <div class="col-md-2 mt-auto TScenter">  <a (click)="getTransferStatement()" class="btn btn-pink radius-all responsivets">Search</a></div>
+            </div>
+          </div>
+
+
+        <!--your code will come here end-->
       </div>
     </div>
   </section>
+
+  <section class="section gamedetails mt-3">
+    <div *ngIf="transferStatements.length==0" class="border text-center p-5">
+      <h4>No data found </h4>
+    </div>
+
+    <table class="table text-white" *ngIf="transferStatements.length>0">
+        <tbody>
+
+            <tr>
+                <th class="thts"> <i class="fa-regular fa-calendar-days text-pink"></i>&nbsp; Creation Date</th>
+                <th class="thts"><i class="fa-solid fa-user text-pink"></i> &nbsp From User</th>
+                <th class="thts"><i class="fa-solid fa-user text-pink"></i> &nbsp To User</th>
+                <th class="thts"> <i class="fa-sharp fa-solid fa-indian-rupee-sign text-pink"></i> &nbsp Amount</th>
+                <th class="thts"> <i class="fa-solid fa-text-width text-pink"></i> &nbsp Transaction Type</th>
+                <th class="thts"><i class="fa-solid fa-comment text-pink"></i> &nbsp Comment</th>
+                <th class=""><i class="fa-solid fa-grip-vertical text-pink"></i> &nbsp IP</th>
+            </tr>
+
+            <tr *ngFor="let user of transferStatements;let i=index">
+                <td class="  tds tdts">
+                  {{i+1}}
+                </td>
+                <td class=" tds tdts">
+                  {{user.createdDate | date:'medium'}}
+                </td>
+                <td class="  tds tdts">
+                  {{user.fromUsername }}
+                </td>
+                <td class="  tds tdts">
+                  {{user.toUsername }}
+                </td>
+                <td [ngClass]="user.isGiven?'text-danger':'text-success'" class="amountt  tds tdts">
+                  {{user.amount | number }}
+                </td>
+                <td class=" tds tdts">
+                  {{user.isGiven?'Given':'Taken'}}
+                </td>
+                <td class=" tds tdts">
+                    <i class="fa-sharp fa-solid fa-info text-pink"></i> &nbsp; 192.616.162
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+  </section>
+  <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-5 mt-3">
+            <a  class="btn bg-dgrey rounded-pill text-white">First</a>
+            <a  class="btn bg-dgrey rounded-pill text-white">Previous</a>
+            <a  class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a>
+            <a  class="btn bg-dgrey rounded-pill text-white">Next</a>
+            <a  class="btn bg-dgrey rounded-pill text-white">Last</a>
+
+        </div>
+
+    </div>
+  </div>
+
+
 </main>

@@ -1,60 +1,102 @@
 <main id="main" class="main">
   <section class="section gamedetails">
-  <div class="row" [formGroup]="filterForm">
-  <div class="col-md-12">
-  <h4 class="text-pink">Fancy & Bookmaker Commission</h4>
-  <br>
+    <div class="row">
 
-  <div class="row" >
-    <div class="col-md-3">
-      <label>Select</label>
-      <select name="player" id="ab" class="form-select mt-2" formControlName="player">
-       <option value="All">All </option>
-      </select>
-    </div>
-    <div class="col-md-3">
-    <label>From Date</label>
-    <input type="date" formControlName="fromDate" name="fromDate" class="form-control mt-2" placeholder="">
-    </div>
-    <div class="col-md-3">
-    <label>To Date</label>
-    <input type="date" formControlName="toDate" name="toDate" class="form-control mt-2" placeholder="">
-    </div>
-    <div class="col-md-3">
-      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="searchCommission()">Search</button>
-    </div>
-    </div>
-    <br>
-    <div class="row mt-4">
-        <h3 class="text-success">Fancy</h3>
-        <div class="row">
-          <div class="col-md-4">
-            <button class="btn btn-dark border-secondary w-100 mt-1 p-3"> <h4>Upline Commission</h4>0 </button>
+        <!--your code will come here start-->
+        <h3 class="text-pink"><img src="../../../../../assets/images/fancy_commission.png" alt=""> Fancy & Bookmaker Commission </h3>
+        <div class="col-md-3 ">
+            <p>Select</p>
+            <select name="" id="ab" class="form-select bg-dgrey">
+              <option value="">All</option>
+              <option value="">05arpit</option>
+              <option value="">022sir</option>
+              <option value="">033hrdk</option>
+              <option value="">066ehl</option>
+              <option value="">012sunny</option>
+              <option value="">077shubham</option>
+              <option value="">026agarwal</option>
+              <option value="">066ehl</option>
+            </select>
           </div>
-          <div class="col-md-4">
-            <button class="btn btn-dark border-secondary w-100 mt-1 p-3"><h4>Downline Commission</h4> 0 </button>
+        <div class="col-md-3">
+            <p>From Date</p>
+            <input type="date" name="" class="form-control browncolor bg-light" id="" placeholder="Month">
           </div>
-          <div class="col-md-4">
-            <button class="btn btn-dark border-secondary w-100 mt-1 p-3"><h4>Profit Commission</h4> 0 </button>
+          <div class="col-md-3">
+            <p>To Date</p>
+            <input type="date" name="" class="form-control browncolor bg-light" id="" placeholder="Month">
           </div>
-        </div>
+          <div class="col-md-2 btnmarginauto p-3">
+            <button type="button" class="btn btn-pink rounded-pill mt-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+           Search</button>
+
+          </div>
+        <!--your code will come here end-->
 
     </div>
+  </section>
     <div class="row mt-4">
-      <h3 class="text-danger">Bookmaker</h3>
-      <div class="row">
-        <div class="col-md-4">
-          <button class="btn btn-dark border-secondary w-100 mt-1 p-3"> <h4>Upline Commission</h4>0 </button>
-        </div>
-        <div class="col-md-4">
-          <button class="btn btn-dark border-secondary w-100 mt-1 p-3"><h4>Downline Commission</h4> 0 </button>
-        </div>
-        <div class="col-md-4">
-          <button class="btn btn-dark border-secondary w-100 mt-1 p-3"><h4>Profit Commission</h4> 0 </button>
+      <h3 class="text-green">Fancy</h3>
+      <div class="col ">
+        <div class="gamedetails d-flex ">
+          <h3>Upline<br>Commission</h3>
+          <h3 class="text-green">
+            0
+          </h3>
+          <i class=" text-right fa fnt-70 text-success"><img src="../../../../../assets/images/f_upline.png" alt="" class="commission"></i>
         </div>
       </div>
-  </div>
-  </div>
-  </div>
-  </section>
-  </main>
+      <div class="col ">
+        <div class="gamedetails d-flex ">
+          <h4>Downline <br>Commission</h4>
+          <h3 class="text-danger">
+             0
+          </h3>
+          <i class=" text-right fa fnt-70 text-success"><img src="../../../../../assets/images/f_down.png" alt="" class="commission"></i>
+        </div>
+      </div>
+      <div class="col ">
+        <div class="gamedetails d-flex ">
+          <h4>Profit <br>Commission</h4>
+          <h3 class="text-danger">
+            0
+          </h3>
+          <i class=" text-right fa fnt-70 text-success"><img src="../../../../../assets/images/f_profit.png" alt="" class="commission"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row mt-4">
+      <h3 class="text-danger">Bookmeker</h3>
+        <div class="col ">
+          <div class="gamedetails d-flex ">
+            <h3>Upline<br>Commission</h3>
+            <h3 class="text-green">
+              0
+            </h3>
+           <img src="images/f_upline.png" alt="" class="commission">
+          </div>
+        </div>
+        <div class="col ">
+          <div class="gamedetails d-flex ">
+            <h4>Downline <br>Commission</h4>
+            <h3 class="text-danger">
+               0
+            </h3>
+            <i class=" text-right fa fnt-70 text-success"><img src="../../../../../assets/images/f_down.png" alt="" class="commission"></i>
+          </div>
+        </div>
+        <div class="col ">
+          <div class="gamedetails d-flex ">
+            <h4>Profit <br>Commission</h4>
+            <h3 class="text-danger">
+              0
+            </h3>
+            <i class=" text-right fa fnt-70 text-success"><img src="../../../../../assets/images/f_profit.png" alt="" class="commission"></i>
+          </div>
+        </div>
+
+      </div>
+
+</main>

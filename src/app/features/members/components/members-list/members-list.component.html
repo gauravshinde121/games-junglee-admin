@@ -22,7 +22,7 @@
       <div class="col-md-2">
         <button
           routerLink="/member/create-member"
-          class="btn btn-pink radius-all"
+          class="btn btn-pink radius-all text-dark"
         >
           <i class="fa fa-pen"></i> Create New
         </button>
@@ -44,23 +44,23 @@
         <table class="table tableall">
           <thead>
             <tr>
-              <th scope="col" class="first"><input type="checkbox" /></th>
-              <th scope="col">
+              <th scope="col" class="first"><input style="cursor:pointer" type="checkbox" /></th>
+              <th scope="col" class="text-dark">
                 <i class="fa-sharp fa-regular fa-address-card"></i>
               </th>
-              <th scope="col">#UserName</th>
-              <th scope="col">Credit Limit</th>
-              <th scope="col">Net Exposure</th>
-              <th scope="col">Take</th>
-              <th scope="col">Give</th>
-              <th scope="col">Available Credit</th>
-              <th scope="col">
+              <th scope="col" class="text-dark">#UserName</th>
+              <th scope="col" class="text-dark">Credit Limit</th>
+              <th scope="col" class="text-dark">Net Exposure</th>
+              <th scope="col" class="text-dark">Take</th>
+              <th scope="col" class="text-dark">Give</th>
+              <th scope="col" class="text-dark">Available Credit</th>
+              <th scope="col" class="text-dark">
                 <i class="fa-sharp fa-regular fa-square-check"></i> Status
               </th>
-              <th scope="col">Info</th>
-              <th scope="col">Details</th>
-              <th scope="col">Action</th>
-              <th scope="col" class="last">Lock</th>
+              <th scope="col" class="text-dark">Info</th>
+              <th scope="col" class="text-dark">Details</th>
+              <th scope="col" class="text-dark">Action</th>
+              <th scope="col" class="last text-dark">Lock</th>
             </tr>
           </thead>
           <tbody>
@@ -73,6 +73,7 @@
             <tr *ngFor="let user of userList; let i = index">
               <td>
                 <input
+                style="cursor:pointer"
                   type="checkbox"
                   (change)="checkUserForAdjustment(user.userId)"
                   *ngIf="user.take > 0 || user.give > 0"
@@ -109,7 +110,7 @@
               </td>
               <td>
                 <div class="tooltipnk">
-                  <i class="fa-sharp fa-solid fa-info text-pink" (click)="showContent(this, user.userId)"></i>
+                  <i style="cursor:pointer" class="fa-sharp fa-solid fa-info text-pink" (click)="showContent(this, user.userId)"></i>
                   <div class="tooltiptext row" *ngIf="selectedIndex == user.userId">
                     <div class="col-md-12 pb-2">Player-INR</div>
                     <div class="col-md-8 pb-2"><span>Live Casino </span></div>
@@ -122,8 +123,8 @@
                 </div>
 
               </td>
-              <td><a (click)="navigateToDownline(user)"><i class="fa-sharp fa-solid fa-eye text-pink"></i></a></td>
-              <td><a routerLink="/member/edit-member/{{user.userId}}"> <i class="fa-sharp fa-solid fa-pen text-pink"></i></a></td>
+              <td style="cursor:pointer"><a (click)="navigateToDownline(user)"><i class="fa-sharp fa-solid fa-eye text-pink"></i></a></td>
+              <td><a routerLink="/member/edit-member/{{user.userId}}"><i class="fa-sharp fa-solid fa-pen text-pink"></i></a></td>
               <td>
                 <a (click)="openModal(user.userId)"
                   ><i class="fa fa-lock text-pink"></i
@@ -132,11 +133,11 @@
             </tr>
           </tbody>
         </table>
-        <a href="" class="btn bg-dgrey rounded-pill text-white">First</a>
-        <a href="" class="btn btn-pink rounded-pill text-white">Previous</a>
-        <a href="" class="btn bg-dgrey rounded-pill text-white ps-4 pe-4">1</a>
-        <a href="" class="btn bg-dgrey rounded-pill text-white">Next</a>
-        <a href="" class="btn bg-dgrey rounded-pill text-white">Last</a>
+        <a  class="btn bg-dgrey rounded-pill text-white">First</a>
+        <a  class="btn bg-dgrey rounded-pill text-white">Previous</a>
+        <a  class="btn btn-pink rounded-pill text-dark ps-4 pe-4">1</a>
+        <a  class="btn bg-dgrey rounded-pill text-white">Next</a>
+        <a  class="btn bg-dgrey rounded-pill text-white">Last</a>
       </div>
     </div>
   </section>

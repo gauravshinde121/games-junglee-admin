@@ -42,6 +42,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./features/change-password/change-password.module').then((m) => m.ChangePasswordModule)
   },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./features/google-authentication/google-authentication.module').then((m) => m.GoogleAuthenticationModule)
+  },
 
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];

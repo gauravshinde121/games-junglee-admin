@@ -1,45 +1,49 @@
 <main id="main" class="main">
   <section class="section gamedetails">
-  <div class="row">
-  <div class="col-md-12">
-  <h4 class="text-pink">PL Statement</h4>
-  <br>
-    <div class="row mt-4">
-
-    <div class="col-md-12 mt-3">
-      <div *ngIf="clTransfers.length==0" class="border text-center p-5">
-      <h4>No data found </h4>
+    <div class="row">
+      <div class="col-md-12">
+        <!--your code will come here start-->
+        <h4 class="text-pink"> List of Credit Limit Transfers </h4>
+        <!--your code will come here end-->
+      </div>
     </div>
-    <table class="table tableall" *ngIf="clTransfers.length>0">
+  </section>
+  <div class="col-md-12 mt-3">
+    <table class="table tableall">
       <thead>
         <tr>
-          <th scope="col" class="text-dark">#</th>
-          <th scope="col" class="text-dark">Creation Date</th>
-          <th scope="col" class="text-dark">From</th>
-          <th scope="col" class="text-dark">To</th>
-          <th scope="col" class="text-dark">Credit Limit</th>
-          <th scope="col" class="text-dark">Balance</th>
-          <th scope="col" class="text-dark">Old Balance</th>
-          <th scope="col" class="text-dark">IP</th>
+          <th scope="col">#</th>
+          <th scope="col"> Creation Date</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col">From </th>
+          <th scope="col">To</th>
+          <th scope="col">Credit Limit</th>
+          <th scope="col">Balance</th>
+          <th scope="col">Old Balance</th>
+          <th scope="col">IP</th>
         </tr>
       </thead>
-      <tbody >
-        <tr *ngFor="let pl of clTransfers;let i=index">
-          <td>{{i+1}}</td>
-          <td>{{pl.createDateTime | date}}</td>
-          <td>{{pl.gameData.gameName}}</td>
-          <td>{{pl.gameData.subGame}}</td>
-          <td>{{pl.gameData.eventName}}</td>
-          <td>{{pl.playerData.name}}</td>
-          <td>{{pl.masterData.name}} </td>
+      <tbody>
+          <tr>
           <td>1</td>
+          <td>07/03/2023 03:10:50</td>
+          <td></td>
+          <td></td>
+          <td>vKm25</td>
+          <td>testjunglee</td>
+          <td>5,000</td>
+          <td>5,000</td>
+          <td>5,000</td>
+          <td>146:212:453:33</td>
         </tr>
       </tbody>
-      </table>
+    </table>
+    <a href="" class="btn bg-dgrey rounded-pill text-white">First</a>
+    <a href="" class="btn bg-dgrey rounded-pill text-white">Previous</a>
+    <a href="" class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a>
+    <a href="" class="btn bg-dgrey rounded-pill text-white">Next</a>
+    <a href="" class="btn bg-dgrey rounded-pill text-white">Last</a>
 
-    </div>
-    </div>
   </div>
-  </div>
-  </section>
-  </main>
+</main>

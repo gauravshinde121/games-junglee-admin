@@ -82,19 +82,19 @@ export class SharedService {
   }
 
   isLoggedIn(){
-    return localStorage.getItem('jwtToken') ? true: false;
+    return sessionStorage.getItem('GJA_jwtToken') ? true: false;
   }
 
   getJWTToken() {
-    return localStorage.getItem('jwtToken');
+    return sessionStorage.getItem('GJA_jwtToken');
   }
 
   setJWTToken(jwtToken:string){
-    localStorage.setItem('jwtToken',jwtToken);
+    sessionStorage.setItem('GJA_jwtToken',jwtToken)
   }
 
   removeJWTToken(){
-    localStorage.removeItem('jwtToken');
+    sessionStorage.removeItem('GJA_jwtToken');
   }
 
   rtnSingleObjFromArrObj(arrObjParams:any, obj:any) {
@@ -110,19 +110,19 @@ export class SharedService {
     return arr1.filter(obj => obj.key != data.key);
   }
   removeToken(){
-    localStorage.removeItem('jwtToken');
+    sessionStorage.removeItem('GJA_jwtToken');
   }
 
   getUserDetails() {
-    return JSON.parse(localStorage.getItem('adminDetails') || '{}');
+    return JSON.parse(sessionStorage.getItem('GJA_adminDetails') || '{}');
   }
 
   setUserDetails(adminDetails){
-    localStorage.setItem('adminDetails',JSON.stringify(adminDetails['admin']));
+    sessionStorage.setItem('GJA_adminDetails',JSON.stringify(adminDetails['admin']));
   }
 
   removeUserDetails(){
-    localStorage.removeItem('userDetails');
+    sessionStorage.removeItem('GJA_adminDetails');
   }
 
 

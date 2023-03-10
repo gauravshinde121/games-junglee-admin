@@ -1,96 +1,103 @@
 <main id="main" class="main">
   <section class="section gamedetails">
-  <div class="row" [formGroup]="filterForm">
-  <div class="col-md-12">
-  <!--your code will come here start-->
-  <h4 class="text-pink">Master Dashboard</h4>
-  <div class="row" >
-    <div class="col-md-3">
-    <label>From Date</label>
-    <input type="date" formControlName="fromDate" name="fromDate" class="form-control mt-2" placeholder="">
-    </div>
-    <div class="col-md-3">
-    <label>To Date</label>
-    <input type="date" formControlName="toDate" name="toDate" class="form-control mt-2" placeholder="">
-    </div>
-    <div class="col-md-3">
-      <label>Select Sub Games</label>
-      <select name="" id="ab" class="form-select mt-2" formControlName="subGame">
-       <option value="All">All </option>
-       <option value="Cricket">Cricket</option>
-       <option value="">Gemes jungly</option>
-       <option value="">Soccer</option>
-      </select>
-    </div>
-    <div class="col-md-3">
-      <label>Select Event Name</label>
-      <select name="" id="ab" class="form-select mt-2" formControlName="game">
-       <option value="All">All </option>
-       <option value="Cricket">Cricket</option>
-       <option value="">Gemes jungly</option>
-       <option value="">Soccer</option>
-      </select>
-    </div>
-    </div>
-    <div class="row mt-3">
-    <div class="col-md-3">
-      <label>Select Event Type</label>
-      <select name="" id="ab" class="form-select mt-2">
-       <option value="">All </option>
-      </select>
-    </div>
+    <div class="row" [formGroup]="filterForm">
+      <div class="col-md-12">
+        <!--your code will come here start-->
+        <i class="fa"></i>
+        <h4 class="text-pink"><img src="../../../../../assets/images/master_dashboard.png" alt=""> Master Dashboard</h4><hr>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>From Date</p>
+                    <input type="date" formControlName="fromDate" name="fromDate" class="form-control browncolor bg-light" id="" placeholder="Month">
+                  </div>
+                  <div class="col-md-3">
+                    <p>To Date</p>
+                    <input type="date " formControlName="toDate" name="toDate" class="form-control browncolor bg-light" id="" placeholder="Month">
+                  </div>
+              <div class="col-3">
+                <p>Sub Games</p>
+                <select formControlName="subGame" id="ab" class="form-select">
+                  <option value="All">All </option>
+                </select>
+              </div>
+              <div class="col-3">
+                <p>Select Event Name</p>
+                <select formControlName="game" id="ab" class="form-select">
+                  <option value="All">All </option>
+                  <option value="Cricket">Cricket</option>
+                  <option value="Tennis">Tennis</option>
+                  <option value="Soccer">Soccer</option>
+                </select>
+              </div>
+              <div class="col-3">
+                <p>Select Event Type</p>
+                <select name="" id="ab" class="form-select ">
+                  <option value="">All </option>
+                </select>
+              </div>
 
-    <div class="col-md-3">
-      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getPlStatement()">Search</button>
+              <div class="col-md-3 pt-3">
+                <button type="button" (click)="getPlStatement()" class="btn btn-pink rounded-pill mt-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+               Search</button>
+              </div>
+            </div>
+           </div>
+        <!--your code will come here end-->
+      </div>
     </div>
-    </div>
-    <div class="row mt-4">
-
-    <div class="col-md-12 mt-3">
-      <div *ngIf="plStatement.length==0" class="border text-center p-5">
-      <h4>No data found </h4>
-    </div>
-    <table class="table tableall" *ngIf="plStatement.length>0">
-      <thead>
-        <tr>
-          <th scope="col" class="text-dark">Date</th>
-          <th scope="col" class="text-dark">Game</th>
-          <th scope="col" class="text-dark">Sub Game</th>
-          <th scope="col" class="text-dark">Event</th>
-          <th scope="col" class="text-dark">Win</th>
-          <th scope="col" class="text-dark">Commission</th>
-          <th scope="col" class="text-dark">Net Amount</th>
-          <th scope="col" class="text-dark">U/L Commission</th>
-          <th scope="col" class="text-dark">D/L Commission</th>
-          <th scope="col" class="text-dark">User Count</th>
-          <th scope="col" class="text-dark">Bet Count</th>
-          <th scope="col" class="text-dark"></th>
-          <th scope="col" class="text-dark"></th>
-        </tr>
-      </thead>
-      <tbody >
-        <tr *ngFor="let pl of plStatement">
-          <td>{{pl.createdAt | date:'medium'}}</td>
-          <td>{{pl.gameName}}</td>
-          <td>{{pl.subGame}}</td>
-          <td>{{pl.eventName}}</td>
-          <td [ngClass]="pl.isWon?'text-success':'text-danger'">{{pl.winINR | number}}</td>
-          <td>{{pl.commission | number}}</td>
-          <td>{{pl.netAmount | number}}</td>
-          <td>0</td>
-          <td>0</td>
-          <td>{{pl.userCount}}</td>
-          <td>{{pl.userBetCount}}</td>
-          <td><button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getPlStatement()">Market</button></td>
-          <td><button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getPlStatement()">User</button></td>
-          <td [ngClass]="pl.type?'text-success':'text-danger'">{{pl.profitLiability}}</td>
-        </tr>
-      </tbody>
-      </table>
-
-    </div>
-    </div>
-  </div>
-  </div>
   </section>
-  </main>
+  <div class="row mt-5">
+
+    <div class="col-md-12 tablescroll ">
+      <div *ngIf="plStatement.length==0" class="border text-center p-5">
+        <h4>No data found </h4>
+      </div>
+      <table class="table tableall " *ngIf="plStatement.length>0">
+        <thead>
+          <tr>
+            <th scope="col" class="text-dark">Date</th>
+            <th scope="col" class="text-dark">Game</th>
+            <th scope="col" class="text-dark">Sub Game</th>
+            <th scope="col" class="text-dark">Event</th>
+            <th scope="col" class="text-dark">Win</th>
+            <th scope="col" class="text-dark">Commission</th>
+            <th scope="col" class="text-dark">Net Amount</th>
+            <th scope="col" class="text-dark">U/L Commission</th>
+            <th scope="col" class="text-dark">D/L Commission</th>
+            <th scope="col" class="text-dark">User Count</th>
+            <th scope="col" class="text-dark">Bet Count</th>
+            <th scope="col" class="text-dark"></th>
+            <th scope="col" class="text-dark"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pl of plStatement">
+            <td>{{pl.createdAt | date:'medium'}}</td>
+            <td>{{pl.gameName}}</td>
+            <td>{{pl.subGame}}</td>
+            <td>{{pl.eventName}}</td>
+            <td [ngClass]="pl.isWon?'text-success':'text-danger'">{{pl.winINR | number}}</td>
+            <td>{{pl.commission | number}}</td>
+            <td>{{pl.netAmount | number}}</td>
+            <td>0</td>
+            <td>0</td>
+            <td>{{pl.userCount}}</td>
+            <td>{{pl.userBetCount}}</td>
+            <td><button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getPlStatement()">Market</button></td>
+            <td><button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getPlStatement()">User</button></td>
+            <td [ngClass]="pl.type?'text-success':'text-danger'">{{pl.profitLiability}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> <hr>
+   <div class="col-md-12">
+      <a  class="btn bg-dgrey rounded-pill text-white">First</a>
+      <a  class="btn bg-dgrey rounded-pill text-white">Previous</a>
+      <a  class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a>
+      <a  class="btn bg-dgrey rounded-pill text-white">Next</a>
+      <a  class="btn bg-dgrey rounded-pill text-white">Last</a>
+
+    </div>
+  </div>
+</main>

@@ -13,10 +13,12 @@ import { LoginHistoryComponent } from './components/login-history/login-history.
 import { CommissionComponent } from './components/commission/commission.component';
 import { NetExposureComponent } from './components/net-exposure/net-exposure.component';
 import { UserAccessComponent } from './components/user-access/user-access.component';
+import { AuthGuard } from '@core/guards/auth.guard';
 
 const routes: Routes = [{
   path:'member',
   component:MembersMainComponent,
+  canActivate: [AuthGuard],
   children:[
     {path:'list', component:MembersListComponent},
     {path:'create-member', component:CreateMemberComponent},

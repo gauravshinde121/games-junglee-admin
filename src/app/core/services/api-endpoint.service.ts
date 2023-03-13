@@ -234,5 +234,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_EDIT_USER)
   }
 
+  public getRolesEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_ROLES)
+  }
+
 
 }

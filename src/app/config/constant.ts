@@ -34,6 +34,7 @@ export class Constants {
     public readonly API_URL_GET_MEMBER_BETS: string = 'api/junglee-admin/getMemberBets';
     public readonly API_URL_GET_DOWNLINE_ACCOUNTS_DATA: string = 'api/junglee-admin/getDownlineAccountsData';
     public readonly API_URL_GET_DOWNLINE_ACCOUNTS_DATA_FOR_MEMBERS: string = 'api/junglee-admin/getDownLineAccountsForMember';
+    public readonly API_URL_GET_ROLES: string = 'api/junglee-admin/getRoles';
 
 
     //book management

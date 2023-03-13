@@ -41,7 +41,7 @@
     </div>
     <div class="row mt-5">
       <div class="col-md-12">
-        <table class="table tableall">
+        <table class="table tableall"  *ngIf="userList.length >0 && !this.isLoading">
           <thead>
             <tr>
               <th scope="col" class="first"><input style="cursor:pointer" type="checkbox" /></th>
@@ -133,11 +133,13 @@
             </tr>
           </tbody>
         </table>
-        <a  class="btn bg-dgrey rounded-pill text-white">First</a>
-        <a  class="btn bg-dgrey rounded-pill text-white">Previous</a>
-        <a  class="btn btn-pink rounded-pill text-dark ps-4 pe-4">1</a>
-        <a  class="btn bg-dgrey rounded-pill text-white">Next</a>
-        <a  class="btn bg-dgrey rounded-pill text-white">Last</a>
+        <div *ngIf="userList.length >0 && !this.isLoading">
+          <a  class="btn bg-dgrey rounded-pill text-white">First</a>
+          <a  class="btn bg-dgrey rounded-pill text-white">Previous</a>
+          <a  class="btn btn-pink rounded-pill text-dark ps-4 pe-4">1</a>
+          <a  class="btn bg-dgrey rounded-pill text-white">Next</a>
+          <a  class="btn bg-dgrey rounded-pill text-white">Last</a>
+        </div>
       </div>
     </div>
   </section>

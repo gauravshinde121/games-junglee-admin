@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from '../../services/members.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-member',
@@ -17,6 +18,7 @@ export class CreateMemberComponent implements OnInit {
   memberData:any;
   editUserId:any;
   gamesList:any = [];
+  roles:any = [];
 
   constructor(
     private _fb: FormBuilder,
@@ -33,6 +35,7 @@ export class CreateMemberComponent implements OnInit {
 
   private _preConfig() {
     this._createMemberForm();
+    this._getRoles()
   }
 
   getGames(){
@@ -69,7 +72,8 @@ export class CreateMemberComponent implements OnInit {
           minimumBet: this.memberData.minimumBet,
           maxBet: this.memberData.maxBet,
           maxExposure: this.memberData.maxExposure,
-          isActive: this.memberData.isActive
+          isActive: this.memberData.isActive,
+          roleId:this.memberData.roleId
         });
         console.log('this.memberForm',this.memberForm);
         console.log('this.memberForm',this.gamesList);
@@ -88,10 +92,12 @@ _createMemberForm(){
     comments: ['', Validators.required],
     sportsBookRate: [1, Validators.required],
     liveCasinoRate: [100, Validators.required],
-    minBet: [500, Validators.required],
+    minBet: [100, Validators.required],
     maxBet: [1000000, Validators.required],
     maxExposure: [50000000, Validators.required],
-    status: [1, Validators.required]
+    status: [1, Validators.required],
+    roleId:[7,Validators.required],
+    partnerShipPercent:[0,Validators.required]
   })
 }
 
@@ -112,37 +118,45 @@ onSubmitMemberForm(){
     "maxBet": this.memberForm.value['maxBet'],
     "maxExposure": this.memberForm.value['maxExposure'],
     "isActive": this.memberForm.value['status'],
-    "gameStatus":this.gamesList
+    "gameStatus":this.gamesList,
+    "roleId":this.memberForm.value['roleId'],
+    "partnerShipPercent":this.memberForm.value['partnerShipPercent']
   }
 
   console.log(memberData)
 
+  let memberObs:Observable<any>;
+  let msg = "";
   if(!this.editMode){
-    this._memberService._getCreateNewUserApi(memberData).subscribe(
-      (res: any) => {
-        console.log(res)
-        this._sharedService.getToastPopup('User created Successfully', 'User', 'success');
-        this._router.navigate(['/member/list'])
-        this._sharedService.sharedSubject.next({
-          'updateAdminDetails':true
-        });
-      },
-      () => this.isLoading = false,
-      () => this.isLoading = false
-    )
+    msg = 'Created';
+    memberObs = this._memberService._getCreateNewUserApi(memberData)
   }else{
+    msg = 'Updated';
     memberData["userId"] = this.route.snapshot.params['id'];
-    this._memberService._getEditUserApi(memberData).subscribe(
-      (res: any) => {
-        console.log(res)
-        this._sharedService.getToastPopup('User updated Successfully', 'User', 'success');
-        this._router.navigate(['/member/list'])
-      },
-      () => this.isLoading = false,
-      () => this.isLoading = false
-    )
+    memberObs = this._memberService._getEditUserApi(memberData)
   }
 
+  memberObs.subscribe(
+    (res: any) => {
+      console.log(res)
+      this._sharedService.getToastPopup(`User ${msg} Successfully`, 'User', 'success');
+      this._router.navigate(['/member/list'])
+      this._sharedService.sharedSubject.next({
+        'updateAdminDetails':true
+      });
+    },
+    () => this.isLoading = false,
+    () => this.isLoading = false
+  )
+
+}
+
+
+_getRoles(){
+  this._memberService._getRolesApi().subscribe((roles:any)=>{
+    console.log(roles);
+    this.roles = roles.data;
+  })
 }
 
 }

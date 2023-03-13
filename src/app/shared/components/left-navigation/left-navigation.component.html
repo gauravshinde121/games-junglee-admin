@@ -57,12 +57,13 @@
           </ul>
         </div>
       </li>
-
-      <li>
-        <a routerLink="/surveillance" class="nav-link"><i class="fa-solid fa-magnifying-glass text-pink"></i> Surveillance</a>
-        </li>
+<br>
         <li>
+          <a routerLink="/surveillance" class="btn text-white collapsed" routerLink="/surveillance"
+        data-bs-toggle="collapse" data-bs-target="#surv-collapse" aria-expanded="false">
+        <i class="fa-solid fa-magnifying-glass text-pink me-2"></i> Surveillance </a></li>
 
+        <li>
         <a routerLink="/change-password" class="btn text-white collapsed"
         data-bs-toggle="collapse" data-bs-target="#pwd-collapse" aria-expanded="false">
         <i class="fa-solid fa-lock text-pink me-2"></i> Change Password </a>
@@ -70,6 +71,19 @@
         <li>
           <a routerLink="/google-authentication" class="nav-link"><i class="fa-solid fa-key text-pink me-2"></i> Google Authentication</a>
         </li>
+
+        <li>
+          <button class="btn text-white collapsed"
+          data-bs-toggle="collapse" data-bs-target="#settings-collapse" aria-expanded="false">
+          <i class="fa-solid fa-pen-to-square text-pink me-2"></i> Settings </button>
+          <div class="collapse" id="settings-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal">
+              <li><a routerLink="/all-logs/reports" class="nav-link small ps-5">Balance</a></li>
+              <li><a routerLink="/all-logs/analytics" class="nav-link small ps-5">Bet Settings</a></li>
+            </ul>
+          </div>
+        </li>
+
         <li>
           <button class="btn text-white collapsed" (click)="onLogout()"
         data-bs-toggle="collapse" data-bs-target="#pwd-collapse" aria-expanded="false">

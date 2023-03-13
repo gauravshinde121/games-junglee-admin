@@ -81,13 +81,14 @@ export class MembersListComponent implements OnInit {
 
 
   adjustWinnings(){
-    console.log(this.selectedUserForAdjustment)
+
     if(confirm("Do you want bulk transfer ?")){
       this._sharedService._adjustWinningsApi({userList:this.selectedUserForAdjustment}).subscribe((res:any)=>{
       this._sharedService.getToastPopup('Adjusted Successfully', 'User', 'success');
       this._sharedService.sharedSubject.next({
         'updateAdminDetails':true
       });
+      this.selectedUserForAdjustment = [];
       this._getAllUserInfo();
     })
     }
@@ -131,5 +132,8 @@ export class MembersListComponent implements OnInit {
     console.log(user)
     this._router.navigate([`/member/member-details/Player/${user.username}/${user.createdDate}/${user.userId}`])
   }
+
+
+
 
 }

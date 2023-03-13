@@ -52,4 +52,8 @@ export class MembersService {
       .post(this._apiEndpointsService.getEditUserEndpoint(),user);
   }
 
+  _getRolesApi(){
+    return this._apiHttpService.get(this._apiEndpointsService.getRolesEndpoint())
+  }
+
 }

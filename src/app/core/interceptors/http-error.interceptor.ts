@@ -29,10 +29,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse)=>{
         console.log('hello',err);
-        if(err['status'] === 401){
+        if(err['status'] === 401 || err['status'] === 503){
           console.log("inside unauthorize")
           this._sharedService.removeJWTToken();
-          // this._router.navigate(['/home'])
+          this._router.navigate(['/login'])
         }
         if(err['error'] !== null){
           this._sharedService.getToastPopup(err['error']['message'],err['statusText'],'error');

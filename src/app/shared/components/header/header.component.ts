@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
     this._sharedService._getAdminDetailsApi().subscribe((adminDetails:any)=>{
       console.log(adminDetails)
       if(adminDetails.admin){
-        this.adminDetails = adminDetails.admin[0];
+        this.adminDetails = adminDetails.admin;
       }
     })
   }

@@ -121,6 +121,11 @@ export class SharedService {
     sessionStorage.setItem('GJA_adminDetails',JSON.stringify(adminDetails['admin']));
   }
 
+  _addBalance(balanceData){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.addBalanceDataEndpoint(),balanceData);
+  }
+
   removeUserDetails(){
     sessionStorage.removeItem('GJA_adminDetails');
   }

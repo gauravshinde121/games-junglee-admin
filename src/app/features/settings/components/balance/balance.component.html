@@ -1,0 +1,48 @@
+<main id="main" class="main">
+  <section class="section dashboard">
+    <div class="row">
+      <form [formGroup]="balanceForm" (ngSubmit)="onSubmitBalanceForm()">
+        <section class="section gamedetails">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <h4 class="text-pink">Balance</h4>
+                  <label> Balance Amount </label>
+                  <input
+                    formControlName="balanceAmount"
+                    type="number"
+                    class="form-control inputbb p-2 ps-0"
+                    placeholder="100000"
+                  />
+                  <p>(Min: 1) (Max: 10000000</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="row mt-3">
+          <div class="col-md-6 text-end">
+            <button
+              type="button"
+              class="btn btn-pink rounded-pill ps-5 pe-5 pt-3 pb-3"
+            >
+              Cancel
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button
+              type="submit"
+              class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3"
+              [disabled]="!balanceForm.valid"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+        <!--your code will come here end-->
+      </form>
+    </div>
+  </section>
+</main>

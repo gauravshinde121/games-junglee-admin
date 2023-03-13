@@ -147,10 +147,13 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_LOGIN);
   }
 
+  public addBalanceDataEndpoint(): string {
+    return this.createUrl(this._constants.API_URL_ADD_BALANCE);
+  }
+
   public getAdminDetailEndpoint(): string {
     return this.createUrl(this._constants.API_URL_ADMIN_INFO);
   }
-
 
   public getAllUserEndpoint():string{
     return this.createUrl(this._constants.API_URL_ALL_USERS);

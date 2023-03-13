@@ -56,4 +56,7 @@ export class Constants {
     public readonly API_GET_EVENTS: string = 'api/junglee-admin/getEvents';
     public readonly API_GET_GAMES: string = 'api/junglee-admin/getGames';
 
+    //settings
+    public readonly API_URL_ADD_BALANCE: string = 'api/junglee-admin/addBalance';
+
 }

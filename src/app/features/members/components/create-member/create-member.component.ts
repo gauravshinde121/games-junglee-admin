@@ -95,7 +95,7 @@ _createMemberForm(){
     minBet: [100, Validators.required],
     maxBet: [1000000, Validators.required],
     maxExposure: [50000000, Validators.required],
-    status: [1, Validators.required],
+    status: ['Active', Validators.required],
     roleId:[7,Validators.required],
     partnerShipPercent:[0,Validators.required]
   })

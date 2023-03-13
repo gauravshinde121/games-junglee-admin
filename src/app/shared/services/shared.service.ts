@@ -14,6 +14,7 @@ export class SharedService {
 
   sharedSubject=new Subject();
   getUserBalance = new Subject();
+  private currentAdmin = null;
 
   sportsList:Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
@@ -35,9 +36,9 @@ export class SharedService {
       .get(this._apiEndpointsService.getAdminDetailEndpoint());
   }
 
-  _getAllUsersApi(){
+  _getAllUsersApi(roleId){
     return this._apiHttpService
-      .get(this._apiEndpointsService.getAllUserEndpoint());
+      .post(this._apiEndpointsService.getAllUserEndpoint(),{roleId:roleId});
   }
 
   _getSingleUsersApi(user){
@@ -128,6 +129,12 @@ export class SharedService {
 
   removeUserDetails(){
     sessionStorage.removeItem('GJA_adminDetails');
+  }
+
+
+  getMatchBySportId(sportId){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getMatchBySportIdEndpoint(),{sportId:sportId});
   }
 
 

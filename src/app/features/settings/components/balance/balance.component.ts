@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import { Observable } from 'rxjs';
+import { SettingsService } from '../services/settings.service';
 
 @Component({
   selector: 'app-balance',
@@ -15,7 +16,8 @@ export class BalanceComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _sharedService: SharedService
+    private _settingsService: SettingsService,
+    private _sharedService:SharedService
   ) { }
 
   ngOnInit(): void {
@@ -28,19 +30,22 @@ export class BalanceComponent implements OnInit {
 
   _createMemberForm() {
     this.balanceForm = this._fb.group({
-      balanceAmount: ['', Validators.required],
+      balanceAmount: [null, Validators.required],
     })
   }
 
   onSubmitBalanceForm() {
     this.isLoading = true;
-    let balanceData = {
-      "balanceAmount": this.balanceForm.value['balanceAmount'],
-    }
-    this._sharedService._addBalance(balanceData).subscribe((res: any) => {
+    this._settingsService._updateSuperAdminBalanceApi(this.balanceForm.value['balanceAmount']).subscribe((res: any) => {
       if (res) {
-        this._sharedService.getToastPopup(`Balance added Successfully.`, 'Balance', 'success');
+        this._sharedService.sharedSubject.next({
+          'updateAdminDetails':true
+        });
+        this._sharedService.getToastPopup(`Balance updated Successfully.`, 'Balance', 'success');
         this.isLoading = false;
+        this.balanceForm.patchValue({
+          balanceAmount:[null,Validators.required]
+        })
       }
     })
   }

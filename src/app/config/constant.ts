@@ -54,9 +54,11 @@ export class Constants {
 
     //misc
     public readonly API_GET_EVENTS: string = 'api/junglee-admin/getEvents';
+    public readonly API_GET_MATCHES_BY_SPORT_ID: string = 'api/getMatchBySportId';
     public readonly API_GET_GAMES: string = 'api/junglee-admin/getGames';
 
     //settings
-    public readonly API_URL_ADD_BALANCE: string = 'api/junglee-admin/addBalance';
+    public readonly API_URL_ADD_BALANCE: string = 'api/junglee-admin/addSuperAdminBalance';
+    public readonly API_URL_GET_CL_TRANSFERS: string = 'api/junglee-admin/getClTransferStatement';
 
 }

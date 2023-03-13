@@ -20,15 +20,23 @@ export class LeftNavigationComponent implements OnInit {
   tourId:any;
   matchId:any;
 
+  adminDetails:any = null;
+
   constructor(
     private _route: ActivatedRoute,
-    private _sharedService: SharedService,
+    public _sharedService: SharedService,
     private _router: Router
   ) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this._sharedService.isLoggedIn();
     this.userDetails = this._sharedService.getUserDetails();
+    this._sharedService.sharedSubject.subscribe((data:any)=>{
+      console.log(data)
+      if(data.adminDetails){
+        this.adminDetails = data.adminDetails
+      }
+    })
   }
 
 

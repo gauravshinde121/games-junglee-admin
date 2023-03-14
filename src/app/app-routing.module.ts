@@ -38,6 +38,11 @@ const routes: Routes = [
     loadChildren:()=>import('./features/surveillance/surveillance.module').then((m)=>m.SurveillanceModule)
   },
   {
+    path:'',
+    canActivate: [AuthGuard],
+    loadChildren:()=>import('./features/settings/settings.module').then((m)=>m.SettingsModule)
+  },
+  {
     path: '',
     canActivate: [AuthGuard],
     loadChildren: () => import('./features/change-password/change-password.module').then((m) => m.ChangePasswordModule)

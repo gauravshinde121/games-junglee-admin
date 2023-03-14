@@ -1,37 +1,4 @@
-<!-- <header id="header" class="header d-flex align-items-center row">
-    <div class="col-md-2 col-1">
-      <div  routerLink="/member/list" class="d-flex align-items-center justify-content-between"><i class="toggle-sidebar-btn pe-2"> <i class="fa fa-bars fa-1x text-white"></i> <img src="assets/images/logo.png" alt="" width="130"></i></div>
-  </div>
-  <div class="col-md-8 col-8">
-  <div class="row">
-    <div class="col-md-4 col-4">
-      <div class="balance">
-        <p>{{adminDetails?.availableCredit | number}} <br><span>BALANCE</span></p>
-      </div>
-    </div>
-    <div class="col-md-4 col-4">
-      <div class="balance balance-up">
-        <p>{{adminDetails?.balanceUp | number}}<br><span>BALANCE</span> <i class="fa-regular fa-circle-up"></i></p>
-      </div>
-    </div>
-    <div class="col-md-4 col-4">
-      <div class="balance balance-down">
-        <p>{{adminDetails?.balanceDown | number}}<br><span>BALANCE</span> <i class="fa-regular fa-circle-down"></i></p>
-      </div>
-    </div>
-  </div>
-  </div>
-    <div class="col-md-2 col-3">
-      <div class="user">
-        <p>{{adminDetails?.createdDate | date:'medium'}}</p>
-        <p>{{adminDetails?.username}}</p>
-        <a (click)="refreshPage()" class="btn btn-pink radius-all"><i class="fa fa-redo-alt disnone"></i> Refresh</a>
-      </div>
-    </div>
-  </header> -->
-
-
-
+<!--
   <div class="container-fluid">
     <header id="header" class="header d-flex align-items-center row">
     <div class="col-md-2 col-1">
@@ -64,4 +31,37 @@
     </div>
     </div>
     </header>
+    </div> -->
+
+
+    <header id="header" class="header d-flex align-items-center row">
+      <div class="col-md-2 col-1">
+        <div class="d-flex align-items-center justify-content-between"><i class="toggle-sidebar-btn pe-2"> <i class="fa fa-bars fa-1x text-white"></i> <img src="images/logo.png" alt="" width="130"></i></div>
     </div>
+    <div class="col-md-8 col-8">
+    <div class="row">
+      <div class="col-md-4 col-4">
+        <div class="balance">
+          <p>{{adminDetails?.availableCredit | number}}<br><span>BALANCE</span></p>
+        </div>
+      </div>
+      <div class="col-md-4 col-4">
+        <div class="balance balance-up">
+          <p>{{adminDetails?.balanceUp | number}} <br><span>BALANCE UP</span>&nbsp; <i class="fa-regular fa-circle-up"></i></p>
+        </div>
+      </div>
+      <div class="col-md-4 col-4">
+        <div class="balance balance-down">
+          <p>{{adminDetails?.balanceDown | number}} <br><span>BALANCE DOWN</span>&nbsp;<i class="fa-regular fa-circle-down"></i></p>
+        </div>
+      </div>
+    </div>
+    </div>
+      <div class="col-md-2 col-3">
+        <div class="user">
+          <p>{{adminDetails?.createdDate | date:'medium'}}</p>
+          <p>{{adminDetails?.username}},</p>
+          <a (click)="refreshPage()" class="btn btn-pink radius-all"><i class="fa fa-redo-alt disnone"></i> Refresh</a>
+        </div>
+      </div>
+    </header>

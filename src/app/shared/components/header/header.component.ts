@@ -51,7 +51,11 @@ export class HeaderComponent implements OnInit {
       console.log(adminDetails)
       if(adminDetails.admin){
         this.adminDetails = adminDetails.admin;
+        this._sharedService.sharedSubject.next({
+          "adminDetails":this.adminDetails
+        })
       }
     })
   }
+
 }

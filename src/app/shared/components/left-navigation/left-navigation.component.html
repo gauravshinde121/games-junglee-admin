@@ -36,7 +36,7 @@
             <li><a routerLink="/account-statement/player-pl" class="nav-link small ps-5">Player P/L</a></li>
             <li><a routerLink="/account-statement/transfer-statement" class="nav-link small ps-5">Transfer Statement</a></li>
             <li><a routerLink="/account-statement/turnover" class="nav-link small ps-5">Turn Over</a></li>
-            <li><a routerLink="/account-statement/commission" class="nav-link small ps-5">Commission</a></li>
+            <!-- <li><a routerLink="/account-statement/commission" class="nav-link small ps-5">Commission</a></li> -->
           </ul>
         </div>
       </li>
@@ -46,14 +46,14 @@
         <i class="fa-solid fa-pen-to-square text-pink me-2"></i> All Logs </button>
         <div class="collapse" id="allLog-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li><a routerLink="/all-logs/analytics" class="nav-link small ps-5">Analytics</a></li>
+            <!-- <li><a routerLink="/all-logs/analytics" class="nav-link small ps-5">Analytics</a></li> -->
             <li><a routerLink="/all-logs/reports" class="nav-link small ps-5">Reports</a></li>
             <li><a routerLink="/all-logs/cl-transfer" class="nav-link small ps-5">CL Transfers</a></li>
-            <li><a routerLink="/all-logs/betfair-rate-log" class="nav-link small ps-5">BetfairRates Log</a></li>
+            <!-- <li><a routerLink="/all-logs/betfair-rate-log" class="nav-link small ps-5">BetfairRates Log</a></li> -->
             <li><a routerLink="/all-logs/invalid-bet" class="nav-link small ps-5">Invalid Bets</a></li>
-            <li><a routerLink="/all-logs/multiple-ip" class="nav-link small ps-5">Multiple IP</a></li>
+            <!-- <li><a routerLink="/all-logs/multiple-ip" class="nav-link small ps-5">Multiple IP</a></li>
             <li><a routerLink="/all-logs/blocked-ip" class="nav-link small ps-5">Blocked IP</a></li>
-            <li><a routerLink="/all-logs/login-from-blocked-ip" class="nav-link small ps-5">Login From Blocked IP</a></li>
+            <li><a routerLink="/all-logs/login-from-blocked-ip" class="nav-link small ps-5">Login From Blocked IP</a></li> -->
           </ul>
         </div>
       </li>
@@ -72,14 +72,14 @@
           <a routerLink="/google-authentication" class="nav-link"><i class="fa-solid fa-key text-pink me-2"></i> Google Authentication</a>
         </li>
 
-        <li>
+        <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN'">
           <button class="btn text-white collapsed"
           data-bs-toggle="collapse" data-bs-target="#settings-collapse" aria-expanded="false">
           <i class="fa-solid fa-pen-to-square text-pink me-2"></i> Settings </button>
           <div class="collapse" id="settings-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal">
-              <li><a routerLink="/all-logs/reports" class="nav-link small ps-5">Balance</a></li>
-              <li><a routerLink="/all-logs/analytics" class="nav-link small ps-5">Bet Settings</a></li>
+              <li><a routerLink="/settings/balance" class="nav-link small ps-5">Balance</a></li>
+              <li><a routerLink="/settings/bet-settings" class="nav-link small ps-5">Bet Settings</a></li>
             </ul>
           </div>
         </li>

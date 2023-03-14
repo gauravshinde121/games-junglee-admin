@@ -1,9 +1,19 @@
 import { Injectable } from '@angular/core';
+import { ApiEndpointsService } from '@core/services/api-endpoint.service';
+import { ApiHttpService } from '@core/services/api-http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AllLogsService {
 
-  constructor() { }
+  constructor(
+    private _apiHttpService: ApiHttpService,
+    private _apiEndpointsService: ApiEndpointsService
+  ) { }
+
+
+  _getClTransferEndpoint(){
+    return this._apiHttpService.get(this._apiEndpointsService.getClTransferEndpoint())
+  }
 }

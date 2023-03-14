@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from '../../services/members.service';
@@ -86,8 +86,12 @@ _createMemberForm(){
   this.memberForm = this._fb.group({
     username: ['', Validators.required],
     displayName: ['', Validators.required],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
+    // password: ['', Validators.required],
+    // confirmPassword: ['', Validators.required],
+    password: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.pattern(
+      "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+          )]),
+    confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     playerMaxCreditLimit: ['', Validators.required],
     comments: ['', Validators.required],
     sportsBookRate: [1, Validators.required],
@@ -95,12 +99,17 @@ _createMemberForm(){
     minBet: [100, Validators.required],
     maxBet: [1000000, Validators.required],
     maxExposure: [50000000, Validators.required],
-    status: [1, Validators.required],
+    status: ['Active', Validators.required],
     roleId:[7,Validators.required],
     partnerShipPercent:[0,Validators.required]
+  },
+  {
+    validators: this.Mustmatch('password', 'confirmPassword')
   })
 }
-
+get f() {
+  return this.memberForm.controls;
+}
 
 onSubmitMemberForm(){
   this.isLoading = true;
@@ -157,6 +166,43 @@ _getRoles(){
     console.log(roles);
     this.roles = roles.data;
   })
+}
+
+ // Must Match Password
+
+ Mustmatch(password: any, confirmPassword: any) {
+  return (formGroup: FormGroup) => {
+    const passwordcontrol = formGroup.controls[password];
+    const confirmPasswordcontrol = formGroup.controls[confirmPassword];
+
+    if (confirmPasswordcontrol.errors && !confirmPasswordcontrol.errors['Mustmatch']) {
+      return;
+    }
+    if (passwordcontrol.value !== confirmPasswordcontrol.value) {
+      confirmPasswordcontrol.setErrors({ Mustmatch: true });
+    }
+    else {
+      confirmPasswordcontrol.setErrors(null);
+    }
+  }
+};
+
+// validation
+
+get passwordVail() {
+  return this.memberForm.get('password')
+}
+
+get confirmPasswordVail() {
+  return this.memberForm.get('confirmPassword')
+}
+
+get usernameVail() {
+  return this.memberForm.get('username')
+}
+
+get displaynameVail() {
+  return this.memberForm.get('displayName')
 }
 
 }

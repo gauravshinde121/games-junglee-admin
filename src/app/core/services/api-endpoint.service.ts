@@ -147,10 +147,13 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_LOGIN);
   }
 
+  public addBalanceDataEndpoint(): string {
+    return this.createUrl(this._constants.API_URL_ADD_BALANCE);
+  }
+
   public getAdminDetailEndpoint(): string {
     return this.createUrl(this._constants.API_URL_ADMIN_INFO);
   }
-
 
   public getAllUserEndpoint():string{
     return this.createUrl(this._constants.API_URL_ALL_USERS);
@@ -238,5 +241,16 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_ROLES)
   }
 
+  public getUpdateSuperAdminBalanceEndpoint(){
+    return this.createUrl(this._constants.API_URL_ADD_BALANCE)
+  }
+
+  public getClTransferEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_CL_TRANSFERS)
+  }
+
+  public getMatchBySportIdEndpoint(){
+    return this.createUrl(this._constants.API_GET_MATCHES_BY_SPORT_ID)
+  }
 
 }

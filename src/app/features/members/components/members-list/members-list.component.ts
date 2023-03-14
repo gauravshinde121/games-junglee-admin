@@ -23,7 +23,9 @@ export class MembersListComponent implements OnInit {
   clubCasino:any;
 
   eventStatus:any = [];
-  gameStatus:any = []
+  gameStatus:any = [];
+  roles:any = [];
+  selectedRoleId = 7;
 
 
   selectedIndex = -1;
@@ -50,13 +52,29 @@ export class MembersListComponent implements OnInit {
 
 
   _preConfig(){
-    this._getAllUserInfo();
+    this._getRoles()
+    this._getAllUserInfo(this.selectedRoleId);
   }
 
 
-  _getAllUserInfo(){
+  fetchListByCategory(category){
+    this.selectedRoleId = category.roleId;
+    this._getAllUserInfo(this.selectedRoleId);
+  }
+
+
+  _getRoles(){
+    this._memberService._getRolesApi().subscribe((roles:any)=>{
+      console.log(roles);
+      this.roles = roles.data;
+    })
+  }
+
+
+  _getAllUserInfo(roleId){
     this.isLoading = true;
-    this._sharedService._getAllUsersApi().subscribe((users:any)=>{
+    this.userList = [];
+    this._sharedService._getAllUsersApi(roleId).subscribe((users:any)=>{
       console.log(users);
       this.isLoading = false;
       this.userList = users.userList;
@@ -89,7 +107,7 @@ export class MembersListComponent implements OnInit {
         'updateAdminDetails':true
       });
       this.selectedUserForAdjustment = [];
-      this._getAllUserInfo();
+      this._getAllUserInfo(this.selectedRoleId);
     })
     }
   }
@@ -114,7 +132,7 @@ export class MembersListComponent implements OnInit {
       console.log(data)
       console.log('Updated.');
       this.closeModal();
-      this._getAllUserInfo();
+      this._getAllUserInfo(this.selectedRoleId);
     });
   }
 
@@ -124,7 +142,7 @@ export class MembersListComponent implements OnInit {
     this._memberService._updateSportsControlApi({refUserId:this.userId,eventsControlId:eventControlId,isActive:!status}).subscribe((data:any)=>{
       console.log('Updated.');
       this.closeModal();
-      this._getAllUserInfo();
+      this._getAllUserInfo(this.selectedRoleId);
     })
   }
 

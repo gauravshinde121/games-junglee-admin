@@ -11,12 +11,17 @@
   </div>
   </div>
   <div class="form-floating mt-4">
-  <input type="text" class="form-control" autocomplete="disabled" formControlName="password" id="floatingInput" placeholder="Password*">
+
+    <input [type]="show ? 'text' : 'password'" class="form-control" placeholder="Enter Password"
+    formControlName="password">
+
+  <!-- <input type="text" class="form-control" autocomplete="disabled" formControlName="password" id="floatingInput" placeholder="Password*">
+   -->
   <label for="floatingInput">Password</label>
-  <span class="fa fa-eye text-white"></span>
+  <span class="fa text-white" [ngClass]="show ? 'fa-eye' : 'fa-eye-low-vision'"></span>
   </div>
   <div class="input-group">
-  <button [disabled]="signInForm.invalid || isLoading" class="btn bg-pink w-100 rounded-pill mt-5">SIGN IN</button>
+  <button [disabled]="signInForm.invalid || isLoading" class="btn bg-pink w-100 rounded-pill mt-5">Sign In</button>
   </div>
   <div class="col mt-4 text-center text-white">
   <a href="forgotpassword.html" class="text-white mb-3">Forgot Password</a><br>

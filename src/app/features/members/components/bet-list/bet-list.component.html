@@ -62,14 +62,14 @@
   <div class="row mt-3">
 
 
-    <div class="col-md-3 mb-3">
+    <div class="col-md-4 mb-2">
       <label>Select Game</label>
       <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
         <option value="0">All</option>
         <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
       </select>
     </div>
-    <div class="col-md-3 mb-3">
+    <div class="col-md-4 mb-2">
       <label>Select Match</label>
       <select formControlName="matchId"  id="ab" class="form-select bg-dgrey">
         <option value="0">All</option>
@@ -80,13 +80,10 @@
 
     <div class="col-md-4 mb-2">
       <label>Select Market Type</label>
-      <input
-        type="text"
-        name=""
-        class="form-control mt-2"
-        id=""
-        placeholder="Select or search a market in the list..."
-      />
+      <select formControlName="marketId"  id="ab" class="form-select bg-dgrey">
+        <option value="0">All</option>
+        <option value="{{market.marketId}}" *ngFor="let market of marketList">{{market.marketName}}</option>
+      </select>
     </div>
 
     <div class="col-md-4">

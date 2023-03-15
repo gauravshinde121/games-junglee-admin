@@ -138,5 +138,10 @@ export class SharedService {
   }
 
 
+  getMarketsByMatchId(matchId){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getMarketsByMatchIdEndpoint(),{matchId:matchId});
+  }
+
 }
 

@@ -24,14 +24,14 @@ export class ActivityComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _memberService:MembersService,
-    private route:ActivatedRoute,
-    private _sharedService:SharedService
-    ) {
-    this.route.params.subscribe(params=>{
+    private _memberService: MembersService,
+    private route: ActivatedRoute,
+    private _sharedService: SharedService
+  ) {
+    this.route.params.subscribe(params => {
       this.userId = +params['id'];
     })
-   }
+  }
 
   ngOnInit(): void {
     this._preConfig();
@@ -40,7 +40,7 @@ export class ActivityComponent implements OnInit {
     this.searchActivityForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
-    });  
+    });
   }
 
 
@@ -77,6 +77,7 @@ export class ActivityComponent implements OnInit {
     this._getGames();
     this._initForm();
     this.searchActivity();
+    this._getGames();
   }
 
   _getGames(){
@@ -122,5 +123,7 @@ export class ActivityComponent implements OnInit {
       }
     }))
   }
+
+
 
 }

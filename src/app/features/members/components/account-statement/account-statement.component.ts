@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MembersService } from '../../services/members.service';
 import { ActivatedRoute } from '@angular/router';
+import { SharedService } from '@shared/services/shared.service';
 @Component({
   selector: 'app-account-statement',
   templateUrl: './account-statement.component.html',
@@ -17,8 +18,14 @@ export class AccountStatementComponent implements OnInit {
   userId:any = null;
   display = "";
   selectedAccount:any = null;
+  games:any;
+  matchList:any = [];
 
-  constructor( private _memberService:MembersService,private route:ActivatedRoute) { }
+  constructor(
+    private _memberService:MembersService,
+    private route:ActivatedRoute,
+    private _sharedService:SharedService
+    ) { }
 
   ngOnInit(): void {
 
@@ -27,6 +34,10 @@ export class AccountStatementComponent implements OnInit {
     })
 
     this._preConfig();
+    this.filterForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+      console.log('Selected value: ', selectedValue);
+      this._getMatchBySportId(selectedValue);
+    });
   }
 
 
@@ -34,6 +45,7 @@ export class AccountStatementComponent implements OnInit {
   _preConfig(){
     this._initForm();
     this.getAccountStatement();
+    this._getGames();
   }
 
 
@@ -41,10 +53,10 @@ export class AccountStatementComponent implements OnInit {
     this.filterForm = new FormGroup({
       fromDate:new FormControl(this.formatDate(new Date())),
       toDate:new FormControl(this.formatDate(new Date())),
-      game:new FormControl('All'),
+      gameId:new FormControl('All'),
       keyword:new FormControl('All'),
       page:new FormControl(1),
-      subGame:new FormControl('All'),
+      matchId:new FormControl('All'),
       tms:new FormControl('All'),
       type:new FormControl('All'),
       typeName:new FormControl('All'),
@@ -84,6 +96,28 @@ export class AccountStatementComponent implements OnInit {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
     return [day, month, year].join('/');
+  }
+
+
+  _getGames(){
+    this._sharedService._getEvents().subscribe((data:any)=>{
+      if(data.gamesList){
+        this.games = data.gamesList;
+      }
+    });
+  }
+
+  _getMatchBySportId(sportId){
+    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
+      if(data.matchList){
+        this.matchList = data.matchList;
+        //console.log('data.matchList',data.matchList);
+      }
+    });
+  }
+
+  onGameSelected(sportId){
+    this._getMatchBySportId(sportId);
   }
 
 }

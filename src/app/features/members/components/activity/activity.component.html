@@ -22,43 +22,28 @@
              <label for="1">Agent</label></span
           >
           <span
-            ><input formControlName="filter" type="radio" id="2" name="filter" /> 
+            ><input formControlName="filter" type="radio" id="2" name="filter" />
             <label for="2">All Members</label></span
           >
         </div>
-        <div class="col-md-2">
-          <label>Select Games</label>
-          <!-- <select formControlName="game" id="" class="form-select mt-2">
-            <option [selected]=true value="All">All</option>
-            <option *ngFor="let game of games" value="{{ game.gameId }}">
-              {{ game.name }}
-            </option>
-          </select> -->
 
-          <select formControlName="gameId" id="ab" class="form-select mt-2">
-            <!-- formControlName="game" -->
-            <option [selected]=true value="All">All</option>
-            <!-- <option *ngFor="let game of games" value="{{ game.gameId }}">
-              {{ game.name }}
-            </option> -->
+
+        <div class="col-md-3 mb-3">
+          <label>Select Game</label>
+          <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
+            <option value="0">All</option>
             <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
           </select>
-
         </div>
-        <div class="col-md-2">
-          <label>Select Sub Games</label>
-          <select formControlName="subGame" id="" class="form-select mt-2">
-            <option [selected]=true value="All">All</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <label>Select Type</label>
-          <select formControlName="matchId"  id="ab" class="form-select mt-2">
-             <!-- formControlName="type" -->
-            <option [selected]=true value="All">All</option>
+        <div class="col-md-3 mb-3">
+          <label>Select Match</label>
+          <select formControlName="matchId"  id="ab" class="form-select bg-dgrey">
+            <option value="0">All</option>
             <option value="match.matchId" *ngFor="let match of matchList">{{match.matchName}}</option>
           </select>
         </div>
+
+
         <div class="col-md-2">
           <label>From Date</label>
           <input

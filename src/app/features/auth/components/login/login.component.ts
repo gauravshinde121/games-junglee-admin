@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   signInForm: FormGroup;
   show: boolean = false;
   isLoading:boolean = false;
-  button = 'SIGN IN';
+  button = 'Sign In';
 
   constructor(
     private _fb: FormBuilder,
@@ -60,9 +60,9 @@ export class LoginComponent implements OnInit {
         // this._router.navigate(['/member/list'])
         // console.log("hello",res);
       },
-    
+
       )
-      
+
     }
   }
 

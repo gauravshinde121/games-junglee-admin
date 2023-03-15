@@ -4,63 +4,32 @@
       <div class="col-md-6 col-12 mb-3">
         <div class="row text-white">
           <div class="input-group flex-nowrap">
-            <span
-              class="input-group-text bg-dark text-white border-pink radius-left-tb"
-              id="addon-wrapping"
-              ><i class="fa fa-search"></i>
+            <span class="input-group-text bg-dark text-white border-pink radius-left-tb" id="addon-wrapping">
+              <i class="fa fa-search"></i>
             </span>
-            <input
-              type="text"
-              class="form-control bg-dark border-start-0 border-pink radius-right-tb"
-              placeholder="Search"
-              aria-label="Search"
-              aria-describedby="addon-wrapping"
-            />
+            <input type="text" class="form-control bg-dark border-start-0 border-pink radius-right-tb" placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping" />
           </div>
         </div>
       </div>
       <div class="col-md-2">
-        <button
-          routerLink="/member/create-member"
-          class="btn btn-pink radius-all text-dark"
-        >
-          <i class="fa fa-pen"></i> Create New
-        </button>
+        <button routerLink="/member/create-member" class="btn btn-pink radius-all text-dark">
+          <i class="fa fa-pen"></i> Create New </button>
       </div>
       <div class="col-md-2">
-        <button
-          *ngIf="selectedUserForAdjustment.length > 0"
-          (click)="adjustWinnings()"
-          type="button"
-          class="btn btn-pink radius-all"
-        >
-          <i class="fa fa-pen"></i> Bulk Transfer
-        </button>
+        <button *ngIf="selectedUserForAdjustment.length > 0" (click)="adjustWinnings()" type="button" class="btn btn-pink radius-all">
+          <i class="fa fa-pen"></i> Bulk Transfer </button>
       </div>
       <div class="col-md-1 text-end">(Total : {{ userList.length }})</div>
     </div>
     <div class="row">
       <!-- nav tab -->
-        <ul class="nav nav-pills mt-3 p-1" id="pills-tab" role="tablist">
-          <li class="nav-item btnheader mr-5" role="presentation" *ngFor="let role of roles">
-            <button
-            style="margin-right: 1rem;"
-              class="nav-link border"
-              [ngClass]="selectedRoleId == role.roleId?'active':''"
-              id="pills-activity-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#pills-activity"
-              type="button"
-              role="tab"
-              aria-controls="pills-activity"
-              (click)="fetchListByCategory(role)"
-              aria-selected="true"
-            >
-              {{role.userRoleName}}
-            </button>
-          </li>
-        </ul>
-
+      <ul class="nav nav-pills ps-3 mt-3 p-1 memberslist" id="pills-tab" role="tablist">
+        <li class="nav-item mr-5" role="presentation" *ngFor="let role of roles">
+          <button class="nav-link" [ngClass]="selectedRoleId == role.roleId?'active':''" id="pills-activity-tab" data-bs-toggle="pill" data-bs-target="#pills-activity" type="button" role="tab" aria-controls="pills-activity" (click)="fetchListByCategory(role)" aria-selected="true">
+            {{role.userRoleName}}
+          </button>
+        </li>
+      </ul>
     </div>
     <div class="row mt-3">
       <div class="col-md-12">
@@ -68,10 +37,12 @@
           <h4 *ngIf="userList.length==0 && !isLoading">No data found </h4>
           <h4 *ngIf="isLoading">Loading... </h4>
         </div>
-        <table class="table tableall"  *ngIf="userList.length >0 && !this.isLoading">
+        <table class="table tableall" *ngIf="userList.length >0 && !this.isLoading">
           <thead>
             <tr>
-              <th scope="col" class="first"><input style="cursor:pointer" type="checkbox" /></th>
+              <th scope="col" class="first">
+                <input type="checkbox" />
+              </th>
               <th scope="col" class="text-dark">
                 <i class="fa-sharp fa-regular fa-address-card"></i>
               </th>
@@ -91,20 +62,10 @@
             </tr>
           </thead>
           <tbody>
-            <h1
-              class="text-center"
-              *ngIf="userList.length == 0 && !this.isLoading"
-            >
-              No users Found
-            </h1>
+            <h1 class="text-center" *ngIf="userList.length == 0 && !this.isLoading"> No users Found </h1>
             <tr *ngFor="let user of userList; let i = index">
               <td>
-                <input
-                style="cursor:pointer"
-                  type="checkbox"
-                  (change)="checkUserForAdjustment(user.userId)"
-                  *ngIf="user.take > 0 || user.give > 0"
-                />
+                <input type="checkbox" (change)="checkUserForAdjustment(user.userId)" *ngIf="user.take > 0 || user.give > 0" />
               </td>
               <td>{{ i + 1 }}</td>
               <td>{{ user.username }}</td>
@@ -120,106 +81,91 @@
               </td>
               <td>{{ user.availableCredit | number }}</td>
               <td>
-                <button
-                  *ngIf="user.isActive"
-                  class="btn btn-success rounded-pill btn-sm ps-3 pe-3"
-                  type="button"
-                >
-                  Active
-                </button>
-                <button
-                  *ngIf="!user.isActive"
-                  class="btn btn-danger rounded-pill btn-sm ps-3 pe-3"
-                  type="button"
-                >
-                  InActive
-                </button>
+                <button *ngIf="user.isActive" class="btn btn-success rounded-pill btn-sm ps-3 pe-3" type="button"> Active </button>
+                <button *ngIf="!user.isActive" class="btn btn-danger rounded-pill btn-sm ps-3 pe-3" type="button"> InActive </button>
               </td>
               <td>
                 <div class="tooltipnk">
-                  <i style="cursor:pointer" class="fa-sharp fa-solid fa-info text-pink" (click)="showContent(this, user.userId)"></i>
+                  <i class="fa-sharp fa-solid fa-info text-pink" (click)="showContent(this, user.userId)"></i>
                   <div class="tooltiptext row" *ngIf="selectedIndex == user.userId">
                     <div class="col-md-12 pb-2">Player-INR</div>
-                    <div class="col-md-8 pb-2"><span>Live Casino </span></div>
-                    <div class="col-md-4 text-end"><span>{{liveCasinoRate}}</span></div>
-                    <div class="col-md-8 pb-2"><span>Sportsbook</span></div>
-                    <div class="col-md-4 text-end"><span>{{sportsBook}}</span></div>
-                    <div class="col-md-8 pb-2"><span>Club Casino</span></div>
-                    <div class="col-md-4 text-end"><span>{{clubCasino}}</span></div>
+                    <div class="col-md-8 pb-2">
+                      <span>Live Casino </span>
+                    </div>
+                    <div class="col-md-4 text-end">
+                      <span>{{liveCasinoRate}}</span>
+                    </div>
+                    <div class="col-md-8 pb-2">
+                      <span>Sportsbook</span>
+                    </div>
+                    <div class="col-md-4 text-end">
+                      <span>{{sportsBook}}</span>
+                    </div>
+                    <div class="col-md-8 pb-2">
+                      <span>Club Casino</span>
+                    </div>
+                    <div class="col-md-4 text-end">
+                      <span>{{clubCasino}}</span>
+                    </div>
                   </div>
                 </div>
-
               </td>
-              <td style="cursor:pointer"><a (click)="navigateToDownline(user)"><i class="fa-sharp fa-solid fa-eye text-pink"></i></a></td>
-              <td><a routerLink="/member/edit-member/{{user.userId}}"><i class="fa-sharp fa-solid fa-pen text-pink"></i></a></td>
               <td>
-                <a (click)="openModal(user.userId)"
-                  ><i class="fa fa-lock text-pink"></i
-                ></a>
+                <a (click)="navigateToDownline(user)">
+                  <i class="fa-sharp fa-solid fa-eye text-pink"></i>
+                </a>
+              </td>
+              <td>
+                <a routerLink="/member/edit-member/{{user.userId}}">
+                  <i class="fa-sharp fa-solid fa-pen text-pink"></i>
+                </a>
+              </td>
+              <td>
+                <a (click)="openModal(user.userId)">
+                  <i class="fa fa-lock text-pink"></i>
+                </a>
               </td>
             </tr>
           </tbody>
         </table>
         <div *ngIf="userList.length >0 && !this.isLoading">
-          <a  class="btn bg-dgrey rounded-pill text-white">First</a>
-          <a  class="btn bg-dgrey rounded-pill text-white">Previous</a>
-          <a  class="btn btn-pink rounded-pill text-dark ps-4 pe-4">1</a>
-          <a  class="btn bg-dgrey rounded-pill text-white">Next</a>
-          <a  class="btn bg-dgrey rounded-pill text-white">Last</a>
+          <a class="btn bg-dgrey rounded-pill text-white">First</a>
+          <a class="btn bg-dgrey rounded-pill text-white">Previous</a>
+          <a class="btn btn-pink rounded-pill text-dark ps-4 pe-4">1</a>
+          <a class="btn bg-dgrey rounded-pill text-white">Next</a>
+          <a class="btn bg-dgrey rounded-pill text-white">Last</a>
         </div>
       </div>
     </div>
   </section>
 </main>
-
 <!-- Modal start-->
-<div
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino" id="staticBackdropLabel">
-          Lock &nbsp; <i class="fa fa-lock text-pink"></i>
+        <h5 class="modal-title cassino" id="staticBackdropLabel"> Lock &nbsp; <i class="fa fa-lock text-pink"></i>
         </h5>
-        <button
-          type="button"
-          (click)="closeModal()"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body bg-dark text-white">
         <div class="row">
           <div class="col-md-3 d-flex" *ngFor="let game of gameStatus">
             <p class="me-2">{{game.name}}</p>
             <p class="me-2">
-              <a href=""><i class="fa fa-lock text-pink"></i></a>
+              <a href="">
+                <i class="fa fa-lock text-pink"></i>
+              </a>
             </p>
             <div class="toggle-button-cover">
               <div class="button1 r" id="button-2">
-                <input
-                  type="checkbox"
-                  class="checkbox"
-                  name="sportsBookStatus"
-                  (click)="updateGameControl(game.isActive,game.gameId)"
-                  [checked]="!game.isActive"
-                />
+                <input type="checkbox" class="checkbox" name="sportsBookStatus" (click)="updateGameControl(game.isActive,game.gameId)" [checked]="!game.isActive" />
                 <div class="knobs"></div>
                 <div class="layer"></div>
               </div>
             </div>
           </div>
         </div>
-
         <div class="row mt-3 ps-3">
           <h4>Sportswise</h4>
           <div class="col-md-4 mt-3 border-pink pt-3 radius-all" *ngFor="let event of eventStatus">
@@ -227,13 +173,13 @@
               <div class="col-md-12 d-flex">
                 <p class="me-2">{{event.sportName}}</p>
                 <p class="me-2me-2 flex-fill">
-                  <a href=""><i class="fa fa-lock text-pink"></i></a>
+                  <a href="">
+                    <i class="fa fa-lock text-pink"></i>
+                  </a>
                 </p>
                 <div class="toggle-button-cover">
                   <div class="button1 r" id="button-2">
-                    <input type="checkbox"
-                    (click)="updateGameControl(event.isActive,event.eventsControlId)"
-                    [checked]="!event.isActive" class="checkbox" />
+                    <input type="checkbox" (click)="updateGameControl(event.isActive,event.eventsControlId)" [checked]="!event.isActive" class="checkbox" />
                     <div class="knobs"></div>
                     <div class="layer"></div>
                   </div>

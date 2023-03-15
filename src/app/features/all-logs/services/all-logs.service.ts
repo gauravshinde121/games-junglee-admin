@@ -13,7 +13,7 @@ export class AllLogsService {
   ) { }
 
 
-  _getClTransferEndpoint(){
+  _getClTransferApi(){
     return this._apiHttpService.get(this._apiEndpointsService.getClTransferEndpoint())
   }
 }

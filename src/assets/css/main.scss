@@ -1,7 +1,6 @@
 /********** common property start ************/
 body {
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
 }
 
 $color_1: #ffa7a3;
@@ -37,9 +36,9 @@ $background-color_19: #d9d9d9;
 .border-pink {
   border: 1px solid #ffa7a3;
 }
-.btn {
-  font-size: 12px;
-}
+// .btn {
+//   font-size: 12px;
+// }
 .btn-pink{
   color:$color_1;
 }
@@ -47,9 +46,9 @@ $background-color_19: #d9d9d9;
   background: $color_2;
   color: $color_3;
 }
-.form-control {
-  font-size: 12px;
-}
+// .form-control {
+//   font-size: 12px;
+// }
 .w-30 {
   width:30%;
 }
@@ -106,8 +105,8 @@ $background-color_19: #d9d9d9;
     text-decoration: none;
   }
   .btn {
-    font-size: 14px;
-    padding: 12px 10px;
+    font-size: 20px;
+    padding: 10px 10px;
   }
   .form-control {
     line-height: 2.5;
@@ -231,6 +230,9 @@ $background-color_19: #d9d9d9;
   &::-webkit-scrollbar-thumb {
     background-color: $background-color_8;
   }
+  li{width: 100%;}
+  a{font-size: 14px;}
+  .btn{font-size: 14px;}
 }
 /********** Sidebar end ************/
 /********** table pro start ************/

@@ -1,7 +1,6 @@
 /********** common property start ************/
 body {
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
 }
 
 .browncolor {
@@ -16,10 +15,6 @@ body {
   border: 1px solid #ffa7a3;
 }
 
-.btn {
-  font-size: 12px;
-}
-
 .btn-pink {
   color: #ffa7a3;
 }
@@ -27,10 +22,6 @@ body {
 .btn-pink:hover {
   background: #fff;
   color: #000;
-}
-
-.form-control {
-  font-size: 12px;
 }
 
 .w-30 {
@@ -101,8 +92,8 @@ body {
   text-decoration: none;
 }
 .login .btn {
-  font-size: 14px;
-  padding: 12px 10px;
+  font-size: 20px;
+  padding: 10px 10px;
 }
 .login .form-control {
   line-height: 2.5;
@@ -232,6 +223,15 @@ body {
 }
 .sidebar::-webkit-scrollbar-thumb {
   background-color: #aab7cf;
+}
+.sidebar li {
+  width: 100%;
+}
+.sidebar a {
+  font-size: 14px;
+}
+.sidebar .btn {
+  font-size: 14px;
 }
 
 /********** Sidebar end ************/

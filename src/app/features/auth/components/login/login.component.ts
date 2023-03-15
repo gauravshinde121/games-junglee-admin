@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   signInForm: FormGroup;
   show: boolean = false;
   isLoading:boolean = false;
+  button = 'SIGN IN';
+
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
@@ -51,12 +53,17 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         this._sharedService.setJWTToken(res['token']);
         this._sharedService.setUserDetails(jwt_decode(res['token']));
-        this._router.navigate(['/member/list'])
+        setTimeout(() => {
+          this.isLoading = false;
+          this._router.navigate(['/member/list'])
+        }, 50)
+        // this._router.navigate(['/member/list'])
         // console.log("hello",res);
       },
-      () => this.isLoading=false,
-      () => this.isLoading=false
+    
       )
+      
+    }
   }
 
-}
+

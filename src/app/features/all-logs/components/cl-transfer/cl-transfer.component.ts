@@ -26,7 +26,7 @@ export class ClTransferComponent implements OnInit {
   getClTransfers(){
     this.isLoading = true;
     this.clTransfers = [];
-    this.allLogService._getClTransferEndpoint().subscribe((data:any)=>{
+    this.allLogService._getClTransferApi().subscribe((data:any)=>{
       console.log(data)
       this.isLoading = false;
       if(data.clTransferStatement){

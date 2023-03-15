@@ -40,25 +40,19 @@ $background-color_19: #d9d9d9;
 //   font-size: 12px;
 // }
 .btn-pink{
-  color:$color_1;
+  color:$color_3;
+  background-color: $background-color_3;
+  border-color: $border-color_1;
 }
 .btn-pink:hover{
   background: $color_2;
   color: $color_3;
 }
-// .form-control {
-//   font-size: 12px;
-// }
 .w-30 {
   width:30%;
 }
 .text-pink {
   color: $color_1 !important;
-}
-.btn-pink {
-  color: $color_2;
-  background-color: $background-color_3;
-  border-color: $border-color_1;
 }
 .btn-outline-pink {
   color: $color_1;
@@ -110,6 +104,7 @@ $background-color_19: #d9d9d9;
   }
   .form-control {
     line-height: 2.5;
+    height: 35px;
   }
   .form-control.is-invalid {
     border-color: $border-color_2;
@@ -133,7 +128,7 @@ $background-color_19: #d9d9d9;
   border-bottom: 1px solid #ffffff !important;
   border: 0px;
   border-radius: 0;
-  padding: 0;
+  padding: 24px 0px 15px 0px;
   outline: none !important;
 }
 .form-signin .form-floating > label {
@@ -141,7 +136,7 @@ $background-color_19: #d9d9d9;
   transform-origin: 0 0;
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
   color: #fff;
-  padding: 0px 0px 0 6px;
+  padding: 0px 0px 0 12px;
 }
 .form-signin .form-floating span {
   margin-top: -30px;
@@ -158,17 +153,17 @@ $background-color_19: #d9d9d9;
 /********** Login end ************/
 /********** main start ************/
 #main {
-  margin-top: 130px;
   padding: 20px 15px 20px 10px;
   transition: all 0.3s;
   color: $color_2;
+  margin-top: -700px;
 }
 /********** main end ************/
 /********** header start ************/
 .header {
   transition: all 0.5s;
   z-index: 997;
-  height: 60px;
+  height: 200px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
   padding: 10px;
   .toggle-sidebar-btn {
@@ -185,13 +180,17 @@ $background-color_19: #d9d9d9;
   background-color: $background-color_4;
   border-radius: 10px;
   color: $color_2;
+  display: flex;
+    align-items: center;
+    justify-content: center;
   p {
-    font-size: 20px;
+    font-size: 24px;
     color: $color_2;
-    padding: 45px 0px 0px 90px;
+    line-height: 26px;
+    letter-spacing: 1px;
   }
   span {
-    font-size: 14px;
+    font-size: 16px;
     color: $color_2;
   }
 }
@@ -207,18 +206,15 @@ $background-color_19: #d9d9d9;
 /********** header end ************/
 /********** Sidebar start ************/
 .sidebar {
-  position: fixed;
-  top: 180px;
   left: 0;
-  bottom: 0;
-  width: 245px;
+  width: 275px;
   z-index: 996;
   transition: all 0.3s;
-  padding: 20px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  letter-spacing: 1px;
   .nav-link {
     color: $color_2;
   }
@@ -231,9 +227,19 @@ $background-color_19: #d9d9d9;
     background-color: $background-color_8;
   }
   li{width: 100%;}
-  a{font-size: 14px;}
-  .btn{font-size: 14px;}
 }
+.fixed-sidebar {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  padding: 0 10px;
+  top: 0px;
+  bottom: auto;
+  height: 700px;
+}
+
 /********** Sidebar end ************/
 /********** table pro start ************/
 .tableall {
@@ -254,6 +260,9 @@ $background-color_19: #d9d9d9;
     vertical-align: middle;
     border-bottom: 1px solid #3c3c3c;
   }
+  input{
+    cursor: pointer;
+  }
 }
 /********** table pro end ************/
 /********** inner page pro start ************/
@@ -262,6 +271,12 @@ $background-color_19: #d9d9d9;
   border-radius: 15px;
   padding: 15px;
   background: rgba(60, 62, 62, 0.7215686275);
+  .form-select{
+    appearance: button;
+color: #fff;
+background-color: #fff0;
+  }
+  .form-control{background-color: #fff0;}
 }
 /********** inner page pro end ************/
 /********** Tooltip start ************/
@@ -510,3 +525,14 @@ font-size: 15px;
   color: burlywood;
 
 }
+.memberslist{
+  li{
+  border: 1px solid;
+  border-radius: 5px;
+  margin-right: 10px;
+  }
+  .nav-link.active{
+    color: $color_3;
+  }
+}
+

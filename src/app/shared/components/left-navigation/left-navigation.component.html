@@ -1,9 +1,9 @@
-<aside id="sidebar" class="sidebar flex-shrink-0">
+<aside id="sidebar" class="sidebar flex-shrink-0 fixed-sidebar">
     <ul class="nav">
       <li>
-        <button class="btn text-white collapsed"
+        <a class="btn text-white collapsed"
         data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-        <i class="fa-solid fa-user text-pink me-2"></i> Member</button>
+        <i class="fa-solid fa-user text-pink me-2"></i> Member</a>
         <div class="collapse" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
             <li><a routerLink="/member/list" class="nav-link small ps-5">Member List</a></li>
@@ -12,9 +12,9 @@
         </div>
       </li>
       <li>
-        <button class="btn text-white collapsed"
+        <a class="btn text-white collapsed"
         data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-        <i class="fa-solid fa-bookmark text-pink me-2"></i> Book Management</button>
+        <i class="fa-solid fa-bookmark text-pink me-2"></i> Book Management</a>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
             <li><a routerLink="/book-management/net-exposure" class="nav-link small ps-5">Net Exposure</a></li>
@@ -27,9 +27,9 @@
         </div>
       </li>
       <li>
-        <button class="btn text-white collapsed"
+        <a class="btn text-white collapsed"
         data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-        <i class="fa-solid fa-receipt text-pink me-2"></i> Account Statement</button>
+        <i class="fa-solid fa-receipt text-pink me-2"></i> Account Statement</a>
         <div class="collapse" id="orders-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
             <li><a routerLink="/account-statement/my-pl" class="nav-link small ps-5" >My P/L</a></li>
@@ -41,9 +41,9 @@
         </div>
       </li>
       <li>
-        <button class="btn text-white collapsed"
+        <a class="btn text-white collapsed"
         data-bs-toggle="collapse" data-bs-target="#allLog-collapse" aria-expanded="false">
-        <i class="fa-solid fa-pen-to-square text-pink me-2"></i> All Logs </button>
+        <i class="fa-solid fa-pen-to-square text-pink me-2"></i> All Logs </a>
         <div class="collapse" id="allLog-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
             <!-- <li><a routerLink="/all-logs/analytics" class="nav-link small ps-5">Analytics</a></li> -->
@@ -69,13 +69,13 @@
         <i class="fa-solid fa-lock text-pink me-2"></i> Change Password </a>
         </li>
         <li>
-          <a routerLink="/google-authentication" class="nav-link"><i class="fa-solid fa-key text-pink me-2"></i> Google Authentication</a>
+          <a routerLink="/google-authentication" class="nav-link"><i class="fa fa-key text-pink me-2"></i> Google Authentication</a>
         </li>
 
         <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN'">
-          <button class="btn text-white collapsed"
+          <a class="btn text-white collapsed"
           data-bs-toggle="collapse" data-bs-target="#settings-collapse" aria-expanded="false">
-          <i class="fa-solid fa-pen-to-square text-pink me-2"></i> Settings </button>
+          <i class="fa-solid fa-pen-to-square text-pink me-2"></i> Settings </a>
           <div class="collapse" id="settings-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal">
               <li><a routerLink="/settings/balance" class="nav-link small ps-5">Balance</a></li>
@@ -85,9 +85,9 @@
         </li>
 
         <li>
-          <button class="btn text-white collapsed" (click)="onLogout()"
+          <a class="btn text-white collapsed" (click)="onLogout()"
         data-bs-toggle="collapse" data-bs-target="#pwd-collapse" aria-expanded="false">
-        <i class="fa-solid fa-right-from-bracket text-pink me-2"></i> Logout </button>
+        <i class="fa-solid fa-right-from-bracket text-pink me-2"></i> Logout </a>
         </li>
     </ul>
 </aside>

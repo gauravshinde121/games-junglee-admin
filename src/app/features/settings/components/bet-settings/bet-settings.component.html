@@ -4,6 +4,7 @@
       <div class="col-md-3">
         <h3 class="text-pink">Bet Settings</h3>
       </div>
+      <hr>
       <!-- <div class="col-md-3">
         <button
           type="button"
@@ -24,19 +25,14 @@
           <i class="fa fa-location-dot"></i> Member IP
         </button>
       </div> -->
-     
     </div>
-    <form
-      [formGroup]="betSettingForm"
-      (ngSubmit)="onSubmitBetListForm()"
-    >
+    <form [formGroup]="betSettingForm" (ngSubmit)="onSubmitBetListForm()">
     <div class="row">
       <!-- <div class="col-md-3 mb-3">
         <button class="btn border-pink rounded-pill mt-4 w-100 text-white">
           <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
         </button>
       </div> -->
-
       <div class="col-md-3 mb-3">
         <label>Select Game</label>
         <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
@@ -51,13 +47,13 @@
           <option value="match.matchId" *ngFor="let match of matchList">{{match.matchName}}</option>
         </select>
       </div>
-     
+
       <div class="col-md-3 mb-3">
         <label>From Date</label>
         <input
         formControlName="fromDate"
           type="date"
-          class="form-control browncolor bg-light"
+          class="form-control"
           id=""
           placeholder="Month"
         />
@@ -67,12 +63,12 @@
         <input
           type="date"
           formControlName="toDate"
-          class="form-control browncolor bg-light"
+          class="form-control"
           id=""
           placeholder="Month"
         />
       </div>
-      <div class="col-md-3 mt-4">
+      <div class="col-md-3 mt-2 mb-4">
         <button
           type="submit"
           class="btn btn-pink rounded-pill w-100"
@@ -139,9 +135,7 @@
               <td>Feb 25, 2023 03:05:10</td>
               <td>Match Odds</td>
               <td>
-                <span
-                  class="border border-2 bg-primary text-primary border-primary me-2"
-                >
+                <span class="border border-2 bg-primary text-primary border-primary me-2">
                 </span
                 >England
               </td>

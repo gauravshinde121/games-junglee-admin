@@ -21,23 +21,32 @@
                 <input type="date" formControlName="toDate" name="toDate" class="form-control browncolor bg-light" id="" placeholder="Month">
               </div>
 
-              <div class="col-md-3 mt-2">
-                <p>Select Games</p>
-                <select formControlName="subGame" id="ab" class="form-select bg-dgrey">
-                  <option value="All">All </option>
-                  <option value="Cricket">Live Casino</option>
-                  <option value="Card Game">Card Game</option>
-                  <option value="Sport Book">Sport Book</option>
-                  <option value="Premium Sport Book">Premium Sport Book</option>
-                  <option value="Racing">Racing</option>
-                </select>
-              </div>
-              <div class="col-md-2 mt-2">
-                <p>Select Sub Games</p>
-                <select formControlName="game" name="game" id="ab" class="form-select bg-dgrey">
-                  <option value="All">All</option>
-                </select>
-              </div>
+
+
+        <div class="col-md-3 mb-3">
+          <label>Select Game</label>
+          <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
+            <option value="0">All</option>
+            <option *ngFor="let game of games" [value]="game.sportId">
+              {{ game.sportName }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label>Select Match</label>
+          <select
+            formControlName="matchId"
+            id="ab"
+            class="form-select bg-dgrey"
+          >
+            <option value="0">All</option>
+            <option value="{{ match.matchId }}" *ngFor="let match of matchList">
+              {{ match.matchName }}
+            </option>
+          </select>
+        </div>
+
+
               <div class="col-md-2 mt-2">
                 <p>Event</p>
                 <input type="text" name="" class="form-control browncolor bg-light" id="" placeholder="Select or Search event">

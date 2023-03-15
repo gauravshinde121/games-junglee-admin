@@ -29,11 +29,12 @@ export class MyPlComponent implements OnInit {
   }
 
   _preconfig(){
-    this._sharedService._getGames().subscribe((res:any)=>{
+    /*this._sharedService._getGames().subscribe((res:any)=>{
       this.games = res.gamesList;
       console.log('res.gamesList',res.gamesList);
-    });
-    this.__initForm()
+    });*/
+    this._getGames();
+    this.__initForm();
     this.getPlStatement();
   }
 

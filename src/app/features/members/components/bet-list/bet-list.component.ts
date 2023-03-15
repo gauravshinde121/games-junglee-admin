@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SharedService } from '@shared/services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 import { MembersService } from '../../services/members.service';
 
@@ -16,9 +17,14 @@ export class BetListComponent implements OnInit {
   userId:any = null;
   betList:any = []
   filterForm: FormGroup;
+  games:any;
+  matchList:any = [];
 
-
-  constructor(private _memberService:MembersService,private route:ActivatedRoute) { }
+  constructor(
+    private _memberService:MembersService,
+    private route:ActivatedRoute,
+    private _sharedService:SharedService
+    ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params=>{
@@ -26,21 +32,29 @@ export class BetListComponent implements OnInit {
     })
 
     this._preconfig();
+    this.filterForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+      console.log('Selected value: ', selectedValue);
+      this._getMatchBySportId(selectedValue);
+    });
   }
 
   _preconfig(){
+    /*this._sharedService._getGames().subscribe((res:any)=>{
+      this.games = res.gamesList;
+    });*/
     this._initForm();
-    this.getMemberBets()
+    this.getMemberBets();
+    this._getGames();
   }
 
   _initForm(){
     this.filterForm = new FormGroup({
       fromDate:new FormControl(this.formatDate(new Date())),
       toDate:new FormControl(this.formatDate(new Date())),
-      game:new FormControl('All'),
+      gameId:new FormControl('All'),
       keyword:new FormControl('All'),
       page:new FormControl(1),
-      subGame:new FormControl('All'),
+      matchId:new FormControl('All'),
       tms:new FormControl('All'),
       type:new FormControl('All'),
       typeName:new FormControl('All'),
@@ -69,5 +83,28 @@ export class BetListComponent implements OnInit {
     if (day.length < 2) day = '0' + day;
     return [day, month, year].join('/');
   }
+
+
+  _getGames(){
+    this._sharedService._getEvents().subscribe((data:any)=>{
+      if(data.gamesList){
+        this.games = data.gamesList;
+      }
+    });
+  }
+
+  _getMatchBySportId(sportId){
+    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
+      if(data.matchList){
+        this.matchList = data.matchList;
+        //console.log('data.matchList',data.matchList);
+      }
+    });
+  }
+
+  onGameSelected(sportId){
+    this._getMatchBySportId(sportId);
+  }
+
 
 }

@@ -19,20 +19,28 @@ export class ActivityComponent implements OnInit {
   userId:any = null;
   activityData:any = []
   games:any;
+  matchList:any = [];
+
 
   constructor(
     private _fb: FormBuilder,
-    private _memberService:MembersService,
-    private route:ActivatedRoute,
-    private _sharedService:SharedService
-    ) {
-    this.route.params.subscribe(params=>{
+    private _memberService: MembersService,
+    private route: ActivatedRoute,
+    private _sharedService: SharedService
+  ) {
+    this.route.params.subscribe(params => {
       this.userId = +params['id'];
     })
-   }
+  }
 
   ngOnInit(): void {
     this._preConfig();
+    // this._getGames();
+
+    this.searchActivityForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+      console.log('Selected value: ', selectedValue);
+      this._getMatchBySportId(selectedValue);
+    });
   }
 
 
@@ -48,24 +56,53 @@ export class ActivityComponent implements OnInit {
       type:new FormControl('All'),
       typeName:new FormControl('All'),
       filter:new FormControl("Agent"),
+      gameId:new FormControl(0),
+      matchId:new FormControl(0),
     });
   }
 
 
   onSubmitSearchActivityForm(){
     this._memberService._getMemberActivityApi({...this.searchActivityForm.value,refUserId:this.userId}).subscribe((res:any)=>{
-      console.log(res);
+      console.log('search',res);
       this.activityData = res.data;
     })
   }
 
   _preConfig(){
-    this._sharedService._getGames().subscribe((res:any)=>{
-      this.games = res.gamesList;
-      console.log('this.games',this.games);
-    });
+    // this._sharedService._getGames().subscribe((res:any)=>{
+    //   this.games = res.gamesList;
+    //   console.log('this.games',this.games);
+    // });
+    this._getGames();
     this._initForm();
     this.searchActivity();
+    this._getGames();
+  }
+
+  _getGames(){
+    this._sharedService._getEvents().subscribe((data:any)=>{
+      console.log(data)
+      if(data.gamesList){
+        this.games = data.gamesList;
+        console.log('this.games',this.games);
+      }
+    });
+  }
+
+  _getMatchBySportId(sportId){
+    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
+      console.log(data)
+      if(data.matchList){
+        this.matchList = data.matchList;
+        console.log('matchList',this.matchList)
+      }
+    });
+  }
+
+  onGameSelected(sportId){
+    console.log(sportId)
+    this._getMatchBySportId(sportId);
   }
 
   private formatDate(date) {
@@ -79,12 +116,14 @@ export class ActivityComponent implements OnInit {
   }
 
   searchActivity(){
-    this._memberService._getMemberActivityApi({refUserId:this.userId,fromDate:this.fromDate,toDate:this.toDate,filter:"Agent",subGame:"All"}).subscribe(((res:any)=>{
+    this._memberService._getMemberActivityApi({refUserId:this.userId,fromDate:this.fromDate,toDate:this.toDate,filter:"Agent",subGame:"All",gameId:this.games,matchId:this.matchList}).subscribe(((res:any)=>{
       console.log(res);
       if(res){
         this.activityData = res.data;
       }
     }))
   }
+
+
 
 }

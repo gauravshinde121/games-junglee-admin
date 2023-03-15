@@ -31,7 +31,7 @@ export class BetSettingsComponent implements OnInit {
   _preConfig(){
     this._initForm();
     this._getGames();
-    
+
   }
 
   _initForm(){
@@ -46,7 +46,7 @@ export class BetSettingsComponent implements OnInit {
 
   _getGames(){
     this._sharedService._getEvents().subscribe((data:any)=>{
-      console.log(data)
+      console.log('events',data.gamesList)
       if(data.gamesList){
         this.games = data.gamesList;
       }

@@ -165,7 +165,7 @@
         <div class="col-md-8">
           <input
             formControlName="sportsBookRate"
-            name="sportsBookRate" readonly
+            name="sportsBookRate" 
             type="number"
             id="sportsBookRate"
             class="form-control pb-2"
@@ -179,7 +179,7 @@
         <div class="col-md-8">
           <input
             formControlName="liveCasinoRate"
-            name="liveCasinoRate" readonly
+            name="liveCasinoRate" 
             type="number"
             id=""
             class="form-control pb-2"
@@ -238,6 +238,7 @@
           <div *ngIf="(memberForm.controls['maxBet'].touched || memberForm.controls['maxBet'].dirty)  && memberForm.controls['maxBet'].invalid">
             <div class="text-danger" *ngIf="memberForm.controls['maxBet'].errors?.required">Please enter valid Bet Amount</div>
             <div class="text-danger" *ngIf="memberForm.controls['maxBet'].errors?.['max']">Please enter valid Bet Amount</div>
+            <div class="text-danger" *ngIf="memberForm.controls['maxBet'].errors?.['min']">Please enter valid Bet Amount</div>
            </div>
         </div>
         <div class="col-md-4">
@@ -255,6 +256,7 @@
            <div *ngIf="(memberForm.controls['maxExposure'].touched || memberForm.controls['maxExposure'].dirty)  && memberForm.controls['maxExposure'].invalid">
             <div class="text-danger" *ngIf="memberForm.controls['maxExposure'].errors?.required">Please enter valid Bet Amount</div>
             <div class="text-danger" *ngIf="memberForm.controls['maxExposure'].errors?.['max']">Please enter valid Bet Amount</div>
+            <div class="text-danger" *ngIf="memberForm.controls['maxExposure'].errors?.['min']">Please enter valid Bet Amount</div>
            </div>
         </div>
       </div>

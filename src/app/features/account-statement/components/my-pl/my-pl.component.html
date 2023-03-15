@@ -15,27 +15,22 @@
                     <p>To Date</p>
                     <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month">
                   </div>
-              <div class="col-3">
-                <p>Sub Games</p>
-                <select formControlName="subGame" id="ab" class="form-select">
-                  <option value="All">All </option>
-                </select>
-              </div>
-              <div class="col-3">
-                <p>Select Event Name</p>
-                <select formControlName="game" id="ab" class="form-select">
-                  <option value="All">All </option>
-                  <option value="Cricket">Cricket</option>
-                  <option value="Tennis">Tennis</option>
-                  <option value="Soccer">Soccer</option>
-                </select>
-              </div>
-              <div class="col-3">
-                <p>Select Event Type</p>
-                <select name="" id="ab" class="form-select ">
-                  <option value="">All </option>
-                </select>
-              </div>
+
+                  <div class="col-md-3 mb-3">
+                    <label>Select Game</label>
+                    <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
+                      <option value="0">All</option>
+                      <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <label>Select Match</label>
+                    <select formControlName="matchId"  id="ab" class="form-select bg-dgrey">
+                      <option value="0">All</option>
+                      <option value="match.matchId" *ngFor="let match of matchList">{{match.matchName}}</option>
+                    </select>
+                  </div>
+
 
               <div class="col-md-3 pt-3">
                 <button type="button" (click)="getPlStatement()" class="btn btn-pink rounded-pill mt-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">

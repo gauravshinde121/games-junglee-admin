@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-bet-ticker',
@@ -7,9 +9,63 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BetTickerComponent implements OnInit {
 
-  constructor() { }
+  betTickerForm: FormGroup;
+  games:any;
+  matchList:any = [];
+
+  constructor(
+    private _sharedService:SharedService
+  ) { }
 
   ngOnInit(): void {
+    this._preConfig();
+    this.betTickerForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+      console.log('Selected value: ', selectedValue);
+      this._getMatchBySportId(selectedValue);
+    });
+  }
+
+  _preConfig(){
+    /*alert();console.log('rerrsrr');
+    this._sharedService._getGames().subscribe((res:any)=>{
+      this.games = res.gamesList;
+      console.log('this.games',this.games);
+    });*/
+    this._initForm();
+    this._getGames();
+  }
+
+  _initForm(){
+    this.betTickerForm = new FormGroup({
+      gameId:new FormControl('All'),
+      matchId:new FormControl('All'),
+      tms:new FormControl('All'),
+      type:new FormControl('All'),
+      typeName:new FormControl('All'),
+      betType:new FormControl("Matched"),
+      time:new FormControl("All")
+    });
+  }
+
+  _getGames(){
+    this._sharedService._getEvents().subscribe((data:any)=>{
+      if(data.gamesList){
+        this.games = data.gamesList;
+      }
+    });
+  }
+
+  _getMatchBySportId(sportId){
+    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
+      if(data.matchList){
+        this.matchList = data.matchList;
+        //console.log('data.matchList',data.matchList);
+      }
+    });
+  }
+
+  onGameSelected(sportId){
+    this._getMatchBySportId(sportId);
   }
 
 }

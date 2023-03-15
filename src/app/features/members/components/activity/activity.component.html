@@ -26,35 +26,24 @@
             Members</span
           >
         </div>
-        <div class="col-md-2">
-          <label>Select Games</label>
-          <!-- <select formControlName="game" id="" class="form-select mt-2">
-            <option [selected]=true value="All">All</option>
-            <option *ngFor="let game of games" value="{{ game.gameId }}">
-              {{ game.name }}
-            </option>
-          </select> -->
 
-          <select formControlName="game" class="form-select mt-2">
-            <option value="All">All</option>
-            <option *ngFor="let game of games" value="{{ game.gameId }}">
-              {{ game.name }}
-            </option>
-          </select>
 
-        </div>
-        <div class="col-md-2">
-          <label>Select Sub Games</label>
-          <select formControlName="subGame" id="" class="form-select mt-2">
-            <option [selected]=true value="All">All</option>
+        <div class="col-md-3 mb-3">
+          <label>Select Game</label>
+          <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
+            <option value="0">All</option>
+            <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
           </select>
         </div>
-        <div class="col-md-2">
-          <label>Select Type</label>
-          <select formControlName="type" id="" class="form-select mt-2">
-            <option [selected]=true value="All">All</option>
+        <div class="col-md-3 mb-3">
+          <label>Select Match</label>
+          <select formControlName="matchId"  id="ab" class="form-select bg-dgrey">
+            <option value="0">All</option>
+            <option value="match.matchId" *ngFor="let match of matchList">{{match.matchName}}</option>
           </select>
         </div>
+
+
         <div class="col-md-2">
           <label>From Date</label>
           <input

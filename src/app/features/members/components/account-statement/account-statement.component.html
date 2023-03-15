@@ -1,219 +1,270 @@
-
-
-
-
-
-<div class="tab-pane fade show active" id="pills-accountstatement" role="tabpanel" aria-labelledby="pills-accountstatement-tab" tabindex="0">
-  <div class="row" [formGroup]="filterForm">
-   <div class="col-md-3">
-   <label>Select Games</label>
-   <select formControlName="game" name="game" id="ab" class="form-select mt-2">
-   <option value="All">All </option>
-   <option value="Live Casino">Live Casino</option>
-   <option value="CardGame">CardGame</option>
-   <option value="Soccer">Soccer</option>
-   <option value="SportsBook">SportsBook</option>
-   </select>
-   </div>
-   <div class="col-md-3">
-   <label>Select Sub Games</label>
-   <select name="subGame" id="ab" class="form-select mt-2" formControlName="subGame">
-   <option value="All">All </option>
-   <option value="Cricket">Cricket</option>
-   <option value="Soccer">Soccer</option>
-   </select>
-   </div>
-   <div class="col-md-2">
-   <label>From Date</label>
-   <input formControlName="fromDate" type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" name="fromDate" class="form-control mt-2" id="">
-   </div>
-   <div class="col-md-2">
-   <label>To Date</label>
-   <input formControlName="toDate" type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"  name="toDate" class="form-control mt-2" id="">
-   </div>
-   <div class="col-2">
-   <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getAccountStatement()">Search</button>
-   </div>
-   <div class="col-md-3">
-   <button class="btn btn-pink w-100 mt-4"><img src="assets/images/ac_state_pl.png"> Player P&L Statement</button>
-   </div>
-   <div class="col-md-3">
-   <button class="btn btn-dark border-secondary w-100 mt-4"><img src="assets/images/ac_player_pl.png"> P&L Statement</button>
-   </div>
-   <div class="col-md-4 mt-4 pt-2 text-end">
-   Total Net Share : <span class=" colorgreen">0</span>
-  </div>
-   <div class="col-md-2">
-   <button class="btn btn-pink rounded-pill w-100 mt-4"><i class="fa fa-download"></i>  Download</button>
-   </div>
-  </div>
-   <div class="row">
-   <div class="col-2">
-  <button class="btn rounded-pill mt-4 text-white border-danger w-50">All</button>
-  </div>
-  <div class="col-md-12 mt-3">
-    <div class="border text-center p-5" *ngIf="accountStatement.length==0">
-    <h4>No data found </h4>
-  </div>
-
-  <table class="table tableall" *ngIf="accountStatement.length>0">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col" class="text-dark">Date</th>
-        <th scope="col" class="text-dark">Description</th>
-        <th scope="col" class="text-dark">P&L</th>
-        <th scope="col" class="text-dark">Net Amount</th>
-        <th scope="col" class="text-dark">Details</th>
-      </tr>
-    </thead>
-    <tbody >
-      <tr *ngFor="let acc of accountStatement;let i=index;">
-        <td>{{i+1}}</td>
-        <td>{{acc.settledDate  | date:'medium'}}</td>
-        <td>Betting P&L</td>
-        <td>{{acc.matchName}}</td>
-        <td [ngClass]="acc.netAmt>0?'text-success':'text-danger'">{{acc.netAmt | number}}</td>
-        <td><a (click)="openModal(acc)"><i class="fa-sharp fa-solid fa-eye text-pink"></i></a></td>
-    </tbody>
-    </table>
-  </div>
-  </div>
-  </div>
-
-
-
-
-  <!-- Modal start-->
 <div
-class="modal"
-[ngStyle]="{ display: display }"
-id="staticBackdrop"
-data-bs-backdrop="static"
-data-bs-keyboard="false"
-tabindex="-1"
-aria-labelledby="staticBackdropLabel"
-aria-hidden="true"
+  class="tab-pane fade show active"
+  id="pills-accountstatement"
+  role="tabpanel"
+  aria-labelledby="pills-accountstatement-tab"
+  tabindex="0"
 >
-<div class="modal-dialog modal-dialog modal-lg">
-  <div class="modal-content">
-    <div class="modal-header bg-pink">
-      <h5 class="modal-title cassino" id="staticBackdropLabel">
-        Game Detail &nbsp; <i class="fa fa-lock text-pink"></i>
-      </h5>
-      <button
-        type="button"
-        (click)="closeModal()"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
+  <div class="row" [formGroup]="filterForm">
+
+    <div class="col-md-3 mb-3">
+      <label>Select Game</label>
+      <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
+        <option value="0">All</option>
+        <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
+      </select>
     </div>
-    <div class="modal-body bg-dark text-white">
-      <div class="row">
-        <div class="col-md-6">
-          <table class="table tableall">
-            <thead>
-              <tr>
-                <th scope="col" class="text-dark">Game Info</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody >
-              <tr>
-                <td>Game Date :	</td>
-                <td>{{selectedAccount?.settledDate | date:'medium'}}</td>
-              </tr>
-              <tr>
-                <td>Player Name :	</td>
-                <td>testplayer</td>
-              </tr>
-              <tr>
-                <td>Game Type:</td>
-                <td>{{selectedAccount?.sportName}}</td>
-              </tr>
-              <tr>
-                <td>Win/Loss:	</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td>Win Amt:	</td>
-                <td [ngClass]="selectedAccount?.netAmt>0?'text-success':'text-danger'">{{selectedAccount?.netAmt}}</td>
-              </tr>
-              <tr>
-                <td>Commission Amt:	</td>
-                <td>{{selectedAccount?.commission}}</td>
-              </tr>
-              <tr>
-                <td>Win Amt:	</td>
-                <td [ngClass]="selectedAccount?.netAmt>0?'text-success':'text-danger'">{{selectedAccount?.netAmt}}</td>
-              </tr>
-              <tr>
-                <td>Round Id:	</td>
-                <td>{{selectedAccount?.marketId}}</td>
-              </tr>
-            </tbody>
-            </table>
-        </div>
-        <div class="col-md-6">
-
-          <table class="table tableall">
-            <thead>
-              <tr>
-                <th scope="col" class="text-dark">Winner</th>
-                <th scope="col" class="text-dark"></th>
-              </tr>
-            </thead>
-            <tbody >
-              <tr >
-                <td>Winner Name :	</td>
-                <td>{{selectedAccount?.winningHorseName}}</td>
-                </tr>
-                <tr >
-                  <td>Match :	</td>
-                  <td>{{selectedAccount?.matchName}}</td>
-                  </tr>
-            </tbody>
-            </table>
-        </div>
+    <div class="col-md-3 mb-3">
+      <label>Select Match</label>
+      <select formControlName="matchId"  id="ab" class="form-select bg-dgrey">
+        <option value="0">All</option>
+        <option value="{{match.matchId}}" *ngFor="let match of matchList">{{match.matchName}}</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label>From Date</label>
+      <input
+        formControlName="fromDate"
+        type="text"
+        placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
+        onfocus="(this.type='date')"
+        onblur="if(this.value==''){this.type='text'}"
+        name="fromDate"
+        class="form-control mt-2"
+        id=""
+      />
+    </div>
+    <div class="col-md-2">
+      <label>To Date</label>
+      <input
+        formControlName="toDate"
+        type="text"
+        placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
+        onfocus="(this.type='date')"
+        onblur="if(this.value==''){this.type='text'}"
+        name="toDate"
+        class="form-control mt-2"
+        id=""
+      />
+    </div>
+    <div class="col-2">
+      <button
+        class="btn btn-pink rounded-pill w-100 mt-4"
+        (click)="getAccountStatement()"
+      >
+        Search
+      </button>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-pink w-100 mt-4">
+        <img src="assets/images/ac_state_pl.png" /> Player P&L Statement
+      </button>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-dark border-secondary w-100 mt-4">
+        <img src="assets/images/ac_player_pl.png" /> P&L Statement
+      </button>
+    </div>
+    <div class="col-md-4 mt-4 pt-2 text-end">
+      Total Net Share : <span class="colorgreen">0</span>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-pink rounded-pill w-100 mt-4">
+        <i class="fa fa-download"></i> Download
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <button class="btn rounded-pill mt-4 text-white border-danger w-50">
+        All
+      </button>
+    </div>
+    <div class="col-md-12 mt-3">
+      <div class="border text-center p-5" *ngIf="accountStatement.length == 0">
+        <h4>No data found</h4>
       </div>
-      <div class="row">
-        <table class="table tableall" *ngIf="accountStatement.length>0">
-          <thead>
-            <tr>
-              <th scope="col" class="text-dark">Place Date	</th>
-              <th scope="col" class="text-dark">Matched Date	</th>
-              <th scope="col" class="text-dark">Type</th>
-              <th scope="col" class="text-dark">Status</th>
-              <th scope="col" class="text-dark">Horse Name</th>
-              <th scope="col" class="text-dark">Avg. Odds</th>
-              <th scope="col" class="text-dark">Odds</th>
-              <th scope="col" class="text-dark">Stake</th>
-              <th scope="col" class="text-dark">Matched Stake	</th>
-              <th scope="col" class="text-dark">Profit/Loss (In INR)</th>
-              <th scope="col" class="text-dark">IP</th>
-            </tr>
-          </thead>
-          <tbody >
-            <tr *ngFor="let bet of selectedAccount.bets">
-              <td>{{bet.createDateTime | date:'medium'}}</td>
-              <td>{{bet.createDateTime | date:'medium'}}</td>
-              <td>{{bet.type}}</td>
-              <td>{{bet.status}}</td>
-              <td>{{bet.selectionName}}</td>
-              <td>{{bet.odds | number}}</td>
-              <td>{{bet.odds}}</td>
-              <td>{{bet.stake}}</td>
-              <td>{{bet.stake}}</td>
-              <td [ngClass]="bet.netAmount>0?'text-success':'text-danger'">{{bet.netAmount | number}}</td>
-              <td>49.36.104.151</td>
-              </tr>
 
-          </tbody>
-          </table>
-      </div>
+      <table class="table tableall" *ngIf="accountStatement.length > 0">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" class="text-dark">Date</th>
+            <th scope="col" class="text-dark">Description</th>
+            <th scope="col" class="text-dark">P&L</th>
+            <th scope="col" class="text-dark">Net Amount</th>
+            <th scope="col" class="text-dark">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let acc of accountStatement; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ acc.settledDate | date : "medium" }}</td>
+            <td>Betting P&L</td>
+            <td>{{ acc.matchName }}</td>
+            <td [ngClass]="acc.netAmt > 0 ? 'text-success' : 'text-danger'">
+              {{ acc.netAmt | number }}
+            </td>
+            <td>
+              <a (click)="openModal(acc)"
+                ><i class="fa-sharp fa-solid fa-eye text-pink"></i
+              ></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
+
+<!-- Modal start-->
+<div
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          Game Detail &nbsp; <i class="fa fa-lock text-pink"></i>
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark text-white">
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table tableall">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-dark">Game Info</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Game Date :</td>
+                  <td>{{ selectedAccount?.settledDate | date : "medium" }}</td>
+                </tr>
+                <tr>
+                  <td>Player Name :</td>
+                  <td>testplayer</td>
+                </tr>
+                <tr>
+                  <td>Game Type:</td>
+                  <td>{{ selectedAccount?.sportName }}</td>
+                </tr>
+                <tr>
+                  <td>Win/Loss:</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>Win Amt:</td>
+                  <td
+                    [ngClass]="
+                      selectedAccount?.netAmt > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    "
+                  >
+                    {{ selectedAccount?.netAmt }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Commission Amt:</td>
+                  <td>{{ selectedAccount?.commission }}</td>
+                </tr>
+                <tr>
+                  <td>Win Amt:</td>
+                  <td
+                    [ngClass]="
+                      selectedAccount?.netAmt > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    "
+                  >
+                    {{ selectedAccount?.netAmt }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Round Id:</td>
+                  <td>{{ selectedAccount?.marketId }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <table class="table tableall">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-dark">Winner</th>
+                  <th scope="col" class="text-dark"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Winner Name :</td>
+                  <td>{{ selectedAccount?.winningHorseName }}</td>
+                </tr>
+                <tr>
+                  <td>Match :</td>
+                  <td>{{ selectedAccount?.matchName }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <table class="table tableall" *ngIf="accountStatement.length > 0">
+            <thead>
+              <tr>
+                <th scope="col" class="text-dark">Place Date</th>
+                <th scope="col" class="text-dark">Matched Date</th>
+                <th scope="col" class="text-dark">Type</th>
+                <th scope="col" class="text-dark">Status</th>
+                <th scope="col" class="text-dark">Horse Name</th>
+                <th scope="col" class="text-dark">Avg. Odds</th>
+                <th scope="col" class="text-dark">Odds</th>
+                <th scope="col" class="text-dark">Stake</th>
+                <th scope="col" class="text-dark">Matched Stake</th>
+                <th scope="col" class="text-dark">Profit/Loss (In INR)</th>
+                <th scope="col" class="text-dark">IP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bet of selectedAccount.bets">
+                <td>{{ bet.createDateTime | date : "medium" }}</td>
+                <td>{{ bet.createDateTime | date : "medium" }}</td>
+                <td>{{ bet.type }}</td>
+                <td>{{ bet.status }}</td>
+                <td>{{ bet.selectionName }}</td>
+                <td>{{ bet.odds | number }}</td>
+                <td>{{ bet.odds }}</td>
+                <td>{{ bet.stake }}</td>
+                <td>{{ bet.stake }}</td>
+                <td
+                  [ngClass]="bet.netAmount > 0 ? 'text-success' : 'text-danger'"
+                >
+                  {{ bet.netAmount | number }}
+                </td>
+                <td>49.36.104.151</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- Modal end -->

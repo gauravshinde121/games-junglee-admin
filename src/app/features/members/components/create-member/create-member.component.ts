@@ -94,16 +94,16 @@ _createMemberForm(){
     confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     playerMaxCreditLimit: ['', Validators.required],
     comments: ['', Validators.required],
-    sportsBookRate: [1, Validators.required],
-    liveCasinoRate: [100, Validators.required],
+    sportsBookRate: [1,[(c: AbstractControl) => Validators.required(c),Validators.max(1),Validators.min(1)]],
+    liveCasinoRate: [100, [(c: AbstractControl) => Validators.required(c),Validators.max(100),Validators.min(100)]],
     minBet: [500,[(c: AbstractControl) => Validators.required(c),Validators.min(500)]],
-    maxBet: [1000000, [(c: AbstractControl) => Validators.required(c),Validators.max(10000000)]],
-    maxExposure: [50000000,[(c: AbstractControl) => Validators.required(c),Validators.max(50000000)]],
+    maxBet: [1000000, [(c: AbstractControl) => Validators.required(c),Validators.max(10000000),Validators.min(1)]],
+    maxExposure: [50000000,[(c: AbstractControl) => Validators.required(c),Validators.max(50000000),Validators.min(1)]],
     // status: [1, Validators.required],
     // minBet: [100, Validators.required],
     // maxBet: [1000000, Validators.required],
     // maxExposure: [50000000, Validators.required],
-    status: ['Active', Validators.required],
+    // status: ['Active', Validators.required],
     roleId:[7,Validators.required],
     partnerShipPercent:[0,Validators.required]
   },
@@ -168,7 +168,7 @@ onSubmitMemberForm(){
 _getRoles(){
   this._memberService._getRolesApi().subscribe((roles:any)=>{
     console.log(roles);
-    this.roles = roles.data;
+    this.roles = roles.data;   
   })
 }
 

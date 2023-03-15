@@ -18,12 +18,12 @@
       <div class="row">
         <div class="col-md-12 mb-3">
           <span class="me-3"
-            ><input formControlName="filter" type="radio" id="1" />
-            Agent</span
+            ><input formControlName="filter" type="radio" id="1" name="filter" />
+             <label for="1">Agent</label></span
           >
           <span
-            ><input formControlName="filter" type="radio" id="1" /> All
-            Members</span
+            ><input formControlName="filter" type="radio" id="2" name="filter" /> 
+            <label for="2">All Members</label></span
           >
         </div>
         <div class="col-md-2">
@@ -35,11 +35,13 @@
             </option>
           </select> -->
 
-          <select formControlName="game" class="form-select mt-2">
-            <option value="All">All</option>
-            <option *ngFor="let game of games" value="{{ game.gameId }}">
+          <select formControlName="gameId" id="ab" class="form-select mt-2">
+            <!-- formControlName="game" -->
+            <option [selected]=true value="All">All</option>
+            <!-- <option *ngFor="let game of games" value="{{ game.gameId }}">
               {{ game.name }}
-            </option>
+            </option> -->
+            <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
           </select>
 
         </div>
@@ -51,8 +53,10 @@
         </div>
         <div class="col-md-2">
           <label>Select Type</label>
-          <select formControlName="type" id="" class="form-select mt-2">
+          <select formControlName="matchId"  id="ab" class="form-select mt-2">
+             <!-- formControlName="type" -->
             <option [selected]=true value="All">All</option>
+            <option value="match.matchId" *ngFor="let match of matchList">{{match.matchName}}</option>
           </select>
         </div>
         <div class="col-md-2">

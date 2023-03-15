@@ -116,9 +116,10 @@ export class MembersListComponent implements OnInit {
     this.userId = userId;
     this.display = 'block';
     this._sharedService._getSingleUsersApi({"userId":userId}).subscribe((users:any)=>{
-      console.log(users)
+      console.log('USER',users)
       this.gameStatus = users.gameStatus;
       this.eventStatus = users.eventStatus;
+      console.log('event',this.gameStatus)
     });
   }
 

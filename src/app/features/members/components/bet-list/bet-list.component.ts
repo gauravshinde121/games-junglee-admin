@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 import { MembersService } from '../../services/members.service';
-
+import {
+  nameValidator,
+  ntpOrIpValidator
+} from "src/app/shared/classes/validator";
 @Component({
   selector: 'app-bet-list',
   templateUrl: './bet-list.component.html',
@@ -24,7 +27,8 @@ export class BetListComponent implements OnInit {
   constructor(
     private _memberService:MembersService,
     private route:ActivatedRoute,
-    private _sharedService:SharedService
+    private _sharedService:SharedService,
+    private _fb: FormBuilder,
     ) { }
 
   ngOnInit(): void {
@@ -55,17 +59,29 @@ export class BetListComponent implements OnInit {
   }
 
   _initForm(){
-    this.filterForm = new FormGroup({
+    this.filterForm = this._fb.group({
       fromDate:new FormControl(this.formatDate(new Date())),
       toDate:new FormControl(this.formatDate(new Date())),
+      memberName: [
+        "",
+        {
+          validators: [nameValidator("Member Name", 0, 25)],
+          updateOn: "change",
+        },
+      ],
       gameId:new FormControl('All'),
-      keyword:new FormControl('All'),
-      page:new FormControl(1),
       matchId:new FormControl('All'),
       marketId:new FormControl('All'),
-      tms:new FormControl('All'),
-      type:new FormControl('All'),
-      typeName:new FormControl('All'),
+      highlightIp: [
+        "",
+        {
+          validators: [ntpOrIpValidator("Highlight IP", 8, 20)],
+          updateOn: "change",
+        },
+      ],
+      page:new FormControl(1),
+      stakesFrom:new FormControl('All'),
+      stakesTo:new FormControl('All'),
       betType:new FormControl("Matched"),
       time:new FormControl("All")
     });

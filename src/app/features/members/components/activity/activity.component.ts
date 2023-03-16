@@ -17,7 +17,7 @@ export class ActivityComponent implements OnInit {
   fromDate = new Date().toString();
   toDate = new Date().toString();
   userId:any = null;
-  activityData:any = []
+  activityData :any = []
   games:any;
   matchList:any = [];
 
@@ -66,6 +66,7 @@ export class ActivityComponent implements OnInit {
     this._memberService._getMemberActivityApi({...this.searchActivityForm.value,refUserId:this.userId}).subscribe((res:any)=>{
       console.log('search',res);
       this.activityData = res.data;
+      console.log('activity',this.activityData)
     })
   }
 
@@ -120,6 +121,7 @@ export class ActivityComponent implements OnInit {
       console.log(res);
       if(res){
         this.activityData = res.data;
+        console.log(res.winAmt)
       }
     }))
   }

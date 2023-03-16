@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 import { MembersService } from '../../services/members.service';
-
+import {
+  nameValidator,
+  ntpOrIpValidator
+} from "src/app/shared/classes/validator";
 @Component({
   selector: 'app-bet-list',
   templateUrl: './bet-list.component.html',
@@ -19,16 +22,26 @@ export class BetListComponent implements OnInit {
   filterForm: FormGroup;
   games:any;
   matchList:any = [];
+  marketList:any = [];
 
   constructor(
     private _memberService:MembersService,
     private route:ActivatedRoute,
-    private _sharedService:SharedService
+    private _sharedService:SharedService,
+    private _fb: FormBuilder,
     ) { }
+
+    get f(){
+      return this.filterForm.controls;
+    }
 
   ngOnInit(): void {
     this.route.params.subscribe(params=>{
       this.userId = +params['id'];
+
+      // this.filterForm = this._fb.group({
+      //   membername:new  FormControl('',[Validators.required]),
+      // })
     })
 
     this._preconfig();
@@ -36,6 +49,12 @@ export class BetListComponent implements OnInit {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
+
+    this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
+      console.log('Selected matchId: ', selectedValue);
+      this._getMarketsByMatchId(selectedValue);
+    });
+
   }
 
   _preconfig(){
@@ -48,18 +67,32 @@ export class BetListComponent implements OnInit {
   }
 
   _initForm(){
-    this.filterForm = new FormGroup({
+    this.filterForm = this._fb.group({
       fromDate:new FormControl(this.formatDate(new Date())),
       toDate:new FormControl(this.formatDate(new Date())),
+      memberName: [
+        "",
+        {
+          validators: [nameValidator("Member Name", 0, 25)],
+          updateOn: "change",
+        },
+      ],
       gameId:new FormControl('All'),
-      keyword:new FormControl('All'),
-      page:new FormControl(1),
       matchId:new FormControl('All'),
-      tms:new FormControl('All'),
-      type:new FormControl('All'),
-      typeName:new FormControl('All'),
+      marketId:new FormControl('All'),
+      highlightIp: [
+        "",
+        {
+          validators: [ntpOrIpValidator("Highlight IP", 8, 20)],
+          updateOn: "change",
+        },
+      ],
+      page:new FormControl(1),
+      stakesFrom:new FormControl('All'),
+      stakesTo:new FormControl('All'),
       betType:new FormControl("Matched"),
-      time:new FormControl("All")
+      time:new FormControl("All"),
+      membername: new FormControl('All')
     });
   }
 
@@ -102,9 +135,23 @@ export class BetListComponent implements OnInit {
     });
   }
 
+  _getMarketsByMatchId(matchId){
+    this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
+      console.log('match data',data);
+      if(data.marketList){
+        this.marketList = data.marketList;
+        //console.log('data.matchList',data.matchList);
+      }
+    });
+  }
+
   onGameSelected(sportId){
     this._getMatchBySportId(sportId);
   }
 
+
+  clearMembers(){
+    this.filterForm.controls['membername'].reset()
+  }
 
 }

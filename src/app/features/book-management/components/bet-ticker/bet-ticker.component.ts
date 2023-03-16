@@ -12,6 +12,7 @@ export class BetTickerComponent implements OnInit {
   betTickerForm: FormGroup;
   games:any;
   matchList:any = [];
+  marketList:any = [];
 
   constructor(
     private _sharedService:SharedService
@@ -23,6 +24,11 @@ export class BetTickerComponent implements OnInit {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
+
+    this.betTickerForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
+      console.log('Selected matchId: ', selectedValue);
+      this._getMarketsByMatchId(selectedValue);
+    });
   }
 
   _preConfig(){
@@ -33,6 +39,7 @@ export class BetTickerComponent implements OnInit {
     });*/
     this._initForm();
     this._getGames();
+
   }
 
   _initForm(){
@@ -59,6 +66,17 @@ export class BetTickerComponent implements OnInit {
     this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
       if(data.matchList){
         this.matchList = data.matchList;
+        //console.log('data.matchList',data.matchList);
+      }
+    });
+  }
+
+
+  _getMarketsByMatchId(matchId){
+    this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
+      console.log('match data',data);
+      if(data.marketList){
+        this.marketList = data.marketList;
         //console.log('data.matchList',data.matchList);
       }
     });

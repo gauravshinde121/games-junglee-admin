@@ -95,7 +95,7 @@ export function fdqnValidator(
   };
 }
 
-export function nameValidator(
+export function userNameValidator(
   controlName: string,
   minlength: number,
   maxlength: number
@@ -245,14 +245,14 @@ export function passswordValidator(
   };
 }
 
-export function userNameValidator(
+export function nameValidator(
   controlName: string,
   minlength: number,
   maxlength: number
 ) {
   return (control: AbstractControl): ValidationErrors | null => {
     //let pattern = '^[a-zA-Z0-9 ]{' + minlength + ',' + maxlength + '}$';
-    let pattern = '^[a-zA-ZÀ-ȕ0-9_ ]{' + minlength + ',' + maxlength + '}$';
+    let pattern = '^[a-zA-ZÀ-ȕ_ ]{' + minlength + ',' + maxlength + '}$';
     return !control.value.length
       ? { error: true, message: `${controlName} is required` }
       : !control.value.match(new RegExp(pattern))

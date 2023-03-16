@@ -73,17 +73,16 @@
             </option>
           </select>
         </div>
+<!--
 
         <div class="col-md-3 mb-3">
           <label>Select Market Type</label>
-          <select name="" id="ab" class="form-select bg-dgrey">
-            <option value="">Select or search a event in the list...</option>
-            <option value="">Gemes jungly</option>
-            <option value="">Gemes jungly</option>
-            <option value="">Gemes jungly</option>
-            <option value="">Gemes jungly</option>
+          <select formControlName="marketId"  id="ab" class="form-select bg-dgrey">
+            <option value="0">All</option>
+            <option value="{{market.marketId}}" *ngFor="let market of marketList">{{market.marketName}}</option>
           </select>
         </div>
+
         <div class="col-md-3 mb-3">
           <label>Currency Types</label>
           <select name="" id="ab" class="form-select bg-dgrey">
@@ -93,7 +92,7 @@
             <option value="">Gemes jungly</option>
             <option value="">Gemes jungly</option>
           </select>
-        </div>
+        </div>-->
         <div class="col-md-3 mb-3">
           <label>Market Types</label>
           <select name="" id="ab" class="form-select bg-dgrey">

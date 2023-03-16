@@ -253,4 +253,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_GET_MATCHES_BY_SPORT_ID)
   }
 
+  public getMarketsByMatchIdEndpoint(){
+    return this.createUrl(this._constants.API_GET_MARKETS_BY_MATCH_ID)
+  }
+
+
 }

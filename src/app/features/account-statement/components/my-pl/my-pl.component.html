@@ -18,14 +18,14 @@
 
                   <div class="col-md-3 mb-3">
                     <label>Select Game</label>
-                    <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
+                    <select formControlName="gameId" id="ab" class="form-select bg-dgrey mt-3">
                       <option value="0">All</option>
                       <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
                     </select>
                   </div>
                   <div class="col-md-3 mb-3">
                     <label>Select Match</label>
-                    <select formControlName="matchId"  id="ab" class="form-select bg-dgrey">
+                    <select formControlName="matchId"  id="ab" class="form-select bg-dgrey mt-3">
                       <option value="0">All</option>
                       <option value="match.matchId" *ngFor="let match of matchList">{{match.matchName}}</option>
                     </select>

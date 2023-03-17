@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AccountStatementService } from '../../services/account-statement.service';
 import { SharedService } from '@shared/services/shared.service';
+import { MembersService } from 'src/app/features/members/services/members.service';
+import { nameValidator } from '@shared/classes/validator';
 
 @Component({
   selector: 'app-player-pl',
@@ -16,8 +18,10 @@ export class PlayerPlComponent implements OnInit {
   matchList:any = [];
 
   constructor(
+    private _memberService:MembersService,
     private _accountStatementService:AccountStatementService,
-    private _sharedService:SharedService
+    private _sharedService:SharedService,
+    private _fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +38,9 @@ export class PlayerPlComponent implements OnInit {
     this.getPlStatement();
   }
 
+  get f(){
+    return this.filterForm.controls;
+  }
 
   _initForm(){
     this.filterForm = new FormGroup({
@@ -76,5 +83,10 @@ export class PlayerPlComponent implements OnInit {
       }
     });
   }
+
+  clearMembers(){
+    this.filterForm.controls['memberName'].reset()
+  }
+
 
 }

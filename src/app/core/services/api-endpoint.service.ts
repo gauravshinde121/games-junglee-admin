@@ -258,4 +258,18 @@ export class ApiEndpointsService {
   }
 
 
+  public getTransferStatementForUserEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_TRANSFER_STATEMENT_FOR_USER)
+  }
+
+
+  public getMemberLoginHistoryEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_MEMBER_LOGIN_HISTORY)
+  }
+
+  public getMemberBooksForBackendEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_MEMBER_BOOKS_FOR_BACKEND)
+  }
+
+
 }

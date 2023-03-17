@@ -22,7 +22,7 @@ export class NetExposureComponent implements OnInit {
 
   _preConfig(){
     this._initForm();
-    this.onFilterChange();
+    this.onFilterChange({selectedType:"MyPt",event:"All"});
   }
 
 
@@ -34,9 +34,15 @@ export class NetExposureComponent implements OnInit {
   }
 
 
-  onFilterChange(){
+  onFilterChange(filterObj){
+    let payload = {
+      selectedType:filterObj.selectedType,
+      event:"All"
+    }
+
+    console.log(payload)
     this.isLoading = true;
-    this._bookManagementService._getBookForBackendApi(this.filterForm.value).subscribe((res:any)=>{
+    this._bookManagementService._getBookForBackendApi(payload).subscribe((res:any)=>{
     this.isLoading = false;
     this.booksForBackend = res.booksForBackend
       console.log(res)

@@ -1,90 +1,21 @@
-<!-- <div class="row">
-  <div class="col">
-    <label for="">From Date</label>
-    <input
-      type="text"
-      onfocus="(this.type='date')"
-      onblur="if(this.value==''){this.type='text'}"
-      placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
-      class="form-control"
-      name="fromDate"
-      id=""
-    />
-  </div>
-  <div class="col">
-    <label for="">To Date</label>
-    <input
-      type="text"
-      onfocus="(this.type='date')"
-      onblur="if(this.value==''){this.type='text'}"
-      placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
-      class="form-control"
-      name="toDate"
-      id=""
-    />
-  </div>
-  <div class="col-md-2 ">
-    <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="searchActivity()">Search</button>
-    </div>
-</div>
-<br />
-<br />
-
-<div class="row">
-  <table class="table tableall">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th scope="col" class="text-dark">Name</th>
-        <th scope="col" class="text-dark">Date</th>
-        <th scope="col" class="text-dark">IP</th>
-        <th scope="col" class="text-dark">Device</th>
-        <th scope="col" class="text-dark">Browser</th>
-        <th scope="col" class="text-dark">OS</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>testjunglee</td>
-        <td>Mar 6, 2023 16:19:34</td>
-        <td>49.36.108.59</td>
-        <td>desktop</td>
-        <td>Chrome 110.0</td>
-        <td>Windows 10.0 x64</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>testjunglee</td>
-        <td>Mar 6, 2023 13:09:07</td>
-        <td>45.127.45.33</td>
-        <td>desktop</td>
-        <td>Chrome 110.0</td>
-        <td>Windows 10.0 x64</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
- -->
 
 
-
-<div class="tab-pane fade show active" id="pills-loginhistory" role="tabpanel" aria-labelledby="pills-loginhistory-tab" tabindex="0">
+<div [formGroup]="loginHistoryForm" class="tab-pane fade show active" id="pills-loginhistory" role="tabpanel" aria-labelledby="pills-loginhistory-tab" tabindex="0">
   <div class="row">
   <div class="col-md-2">
   <label>From Date</label>
-  <input type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"  name="" class="form-control mt-2" id="" placeholder="Month">
+  <input type="text" formControlName="fromDate" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"  name="fromDate" class="form-control mt-2" id="" placeholder="Month">
   </div>
   <div class="col-md-2">
   <label>To Date</label>
-  <input type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"  name="" class="form-control mt-2" id="" placeholder="Month">
+  <input type="text" formControlName="toDate" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}"  name="toDate" class="form-control mt-2" id="" placeholder="Month">
   </div>
   <div class="col-md-2 pt-2">
-  <button class="btn btn-pink rounded-pill w-100 mt-4">Search</button>
+  <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="searchLoginHistory()">Search</button>
   </div>
-  <div class="col-md-2 pt-2">
+  <!-- <div class="col-md-2 pt-2">
   <button class="btn btn-pink rounded-pill w-100 mt-4">IP Logs</button>
-  </div>
+  </div> -->
   </div>
   <div class="col-md-12 mt-3">
    <!-- <div class="border text-center p-5">
@@ -104,20 +35,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>1</td>
-      <td>testjunglee</td>
-      <td>Mar 6, 2023 16:19:34</td>
+    <tr *ngFor="let history of loginHistory;let i=index">
+      <td>{{i+1}}</td>
+      <td>{{history.username}}</td>
+      <td>{{history.createdDate | date}}</td>
       <td>49.36.108.59</td>
-      <td>desktop</td>
-      <td>Chrome 110.0</td>
-      <td>Windows 10.0 x64</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>testjunglee</td>
-      <td>Mar 6, 2023 13:09:07</td>
-      <td>45.127.45.33</td>
       <td>desktop</td>
       <td>Chrome 110.0</td>
       <td>Windows 10.0 x64</td>

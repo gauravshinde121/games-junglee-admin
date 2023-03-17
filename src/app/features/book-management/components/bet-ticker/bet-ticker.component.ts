@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { nameValidator } from '@shared/classes/validator';
 import { SharedService } from '@shared/services/shared.service';
+import { MembersService } from 'src/app/features/members/services/members.service';
 
 @Component({
   selector: 'app-bet-ticker',
@@ -15,8 +17,13 @@ export class BetTickerComponent implements OnInit {
   marketList:any = [];
 
   constructor(
-    private _sharedService:SharedService
+    private _sharedService:SharedService,
+    private _memberService:MembersService,
+    private _fb: FormBuilder,
   ) { }
+  get f(){
+    return this.betTickerForm.controls;
+  }
 
   ngOnInit(): void {
     this._preConfig();
@@ -43,14 +50,23 @@ export class BetTickerComponent implements OnInit {
   }
 
   _initForm(){
-    this.betTickerForm = new FormGroup({
+    this.betTickerForm =  this._fb.group({
+      memberName: [
+        "",
+        {
+          validators: [nameValidator("Member Name", 1, 25)],
+          updateOn: "change",
+        },
+      ],
       gameId:new FormControl('All'),
       matchId:new FormControl('All'),
       tms:new FormControl('All'),
       type:new FormControl('All'),
       typeName:new FormControl('All'),
       betType:new FormControl("Matched"),
-      time:new FormControl("All")
+      time:new FormControl("All"),
+      stakesFrom:new FormControl('All'),
+      stakesTo:new FormControl('All'),
     });
   }
 
@@ -84,6 +100,10 @@ export class BetTickerComponent implements OnInit {
 
   onGameSelected(sportId){
     this._getMatchBySportId(sportId);
+  }
+
+  clearMembers(){
+    this.betTickerForm.controls['memberName'].reset()
   }
 
 }

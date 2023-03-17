@@ -43,9 +43,16 @@ export class PlayerPlComponent implements OnInit {
   }
 
   _initForm(){
-    this.filterForm = new FormGroup({
+    this.filterForm = this._fb.group({
       fromDate:new FormControl(new Date()),
       toDate:new FormControl(new Date()),
+      memberName: [
+        "",
+        {
+          validators: [nameValidator("Member Name", 1, 25)],
+          updateOn: "change",
+        },
+      ],
       gameId:new FormControl("All"),
       matchId:new FormControl("All"),
       page:new FormControl(1),

@@ -38,10 +38,6 @@ export class BetListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params=>{
       this.userId = +params['id'];
-
-      // this.filterForm = this._fb.group({
-      //   membername:new  FormControl('',[Validators.required]),
-      // })
     })
 
     this._preconfig();

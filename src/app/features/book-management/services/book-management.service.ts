@@ -14,4 +14,8 @@ export class BookManagementService {
   _getBookForBackendApi(bookObj){
     return this._apiHttpService.post(this._apiEndpointsService.getBookForBackendEndpoint(),bookObj)
   }
+
+  _getAllUserBetsApi(filterObj){
+    return this._apiHttpService.post(this._apiEndpointsService.getAllUserBetsEndpoint(),filterObj)
+  }
 }

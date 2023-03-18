@@ -279,4 +279,8 @@ export class ApiEndpointsService {
   }
 
 
+public getAllUserBetsEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_ALL_USER_BETS)
+  }
+
 }

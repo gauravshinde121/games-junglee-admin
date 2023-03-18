@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
+import { BookManagementService } from '../../services/book-management.service';
 
 @Component({
   selector: 'app-bet-ticker',
@@ -15,7 +16,8 @@ export class BetTickerComponent implements OnInit {
   marketList:any = [];
 
   constructor(
-    private _sharedService:SharedService
+    private _sharedService:SharedService,
+    private bookManagementService:BookManagementService
   ) { }
 
   ngOnInit(): void {
@@ -85,6 +87,19 @@ export class BetTickerComponent implements OnInit {
 
   onGameSelected(sportId){
     this._getMatchBySportId(sportId);
+  }
+
+
+  getAllUserBets(){
+    let payload = {
+      gameId:null,
+      sportId:null,
+      matchId:null,
+      userId:null
+    }
+    this.bookManagementService._getBookForBackendApi(payload).subscribe((res:any)=>{
+      console.log(res)
+    })
   }
 
 }

@@ -38,6 +38,7 @@ export class Constants {
     public readonly API_URL_GET_TRANSFER_STATEMENT_FOR_USER: string = 'api/junglee-admin/getTransferStatementForUser';
     public readonly API_URL_GET_MEMBER_LOGIN_HISTORY: string = 'api/junglee-admin/getMemberLoginHistory';
     public readonly API_URL_GET_MEMBER_BOOKS_FOR_BACKEND: string = 'api/junglee-admin/getMemberBooksForBackend';
+    public readonly API_URL_ALL_MEMBERS:string = 'api/junglee-admin/getAllMembers';
 
 
     //book management
@@ -60,6 +61,7 @@ export class Constants {
     public readonly API_GET_MATCHES_BY_SPORT_ID: string = 'api/getMatchBySportId';
     public readonly API_GET_MARKETS_BY_MATCH_ID: string = 'api/getMarketByMatchId';
     public readonly API_GET_GAMES: string = 'api/junglee-admin/getGames';
+    public readonly API_GET_MARKET_ALL_TYPE: string = 'api/junglee-admin/getAllMarketType';
 
     //settings
     public readonly API_URL_ADD_BALANCE: string = 'api/junglee-admin/addSuperAdminBalance';

@@ -20,6 +20,7 @@ export class ActivityComponent implements OnInit {
   activityData :any = []
   games:any;
   matchList:any = [];
+  marketTypeList:any = [];
 
 
   constructor(
@@ -41,6 +42,7 @@ export class ActivityComponent implements OnInit {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
+    this._getAllMarketTypeList();
   }
 
 
@@ -57,7 +59,7 @@ export class ActivityComponent implements OnInit {
       typeName:new FormControl('All'),
       filter:new FormControl("Agent"),
       gameId:new FormControl(0),
-      matchId:new FormControl(0),
+      marketTypeListId:new FormControl(0),
     });
   }
 
@@ -100,6 +102,17 @@ export class ActivityComponent implements OnInit {
       }
     });
   }
+
+  _getAllMarketTypeList(){
+    this._sharedService.getAllMarketTypeList().subscribe((data:any)=>{
+      console.log('match data',data);
+      if(data.marketTypeList){
+        this.marketTypeList = data.marketTypeList;
+        //console.log('data.matchList',data.matchList);
+      }
+    });
+  }
+
 
   onGameSelected(sportId){
     console.log(sportId)

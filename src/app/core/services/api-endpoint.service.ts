@@ -241,6 +241,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_ROLES)
   }
 
+  public getAllMembersEndpoint(){
+    return this.createUrl(this._constants.API_URL_ALL_MEMBERS)
+  }
+
   public getUpdateSuperAdminBalanceEndpoint(){
     return this.createUrl(this._constants.API_URL_ADD_BALANCE)
   }
@@ -257,6 +261,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_GET_MARKETS_BY_MATCH_ID)
   }
 
+  public getAllMarketTypeEndpoint(){
+    return this.createUrl(this._constants.API_GET_MARKET_ALL_TYPE)
+  }
 
   public getTransferStatementForUserEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_TRANSFER_STATEMENT_FOR_USER)

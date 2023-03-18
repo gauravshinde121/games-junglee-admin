@@ -36,9 +36,9 @@ export class SharedService {
       .get(this._apiEndpointsService.getAdminDetailEndpoint());
   }
 
-  _getAllUsersApi(roleId){
+  _getAllUsersApi(body){
     return this._apiHttpService
-      .post(this._apiEndpointsService.getAllUserEndpoint(),{roleId:roleId});
+      .post(this._apiEndpointsService.getAllUserEndpoint(),body);
   }
 
   _getSingleUsersApi(user){
@@ -141,6 +141,11 @@ export class SharedService {
   getMarketsByMatchId(matchId){
     return this._apiHttpService
       .post(this._apiEndpointsService.getMarketsByMatchIdEndpoint(),{matchId:matchId});
+  }
+
+  getAllMarketTypeList(){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.getAllMarketTypeEndpoint(),{});
   }
 
 }

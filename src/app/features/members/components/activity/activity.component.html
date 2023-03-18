@@ -12,17 +12,17 @@
 
 
         <div class="col-md-3 mb-3">
-          <label>Select Game</label>
+          <label>Select Sports</label>
           <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
             <option value="0">All</option>
             <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
           </select>
         </div>
         <div class="col-md-3 mb-3">
-          <label>Select Match</label>
-          <select formControlName="matchId" id="ab" class="form-select bg-dgrey">
+          <label>Select Market Type</label>
+          <select formControlName="marketTypeListId" id="ab" class="form-select bg-dgrey">
             <option value="0">All</option>
-            <option value="match.matchId" *ngFor="let match of matchList">{{match.matchName}}</option>
+            <option value="match.marketTypeListId" *ngFor="let match of matchList">{{match.matchName}}</option>
           </select>
         </div>
 

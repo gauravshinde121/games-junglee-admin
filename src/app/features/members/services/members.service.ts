@@ -56,6 +56,10 @@ export class MembersService {
     return this._apiHttpService.get(this._apiEndpointsService.getRolesEndpoint())
   }
 
+  _getAllMembers(){
+    return this._apiHttpService.get(this._apiEndpointsService.getAllMembersEndpoint())
+  }
+
   _getTransferStatementForUserApi(paramObj){
     return this._apiHttpService
     .post(this._apiEndpointsService.getTransferStatementForUserEndpoint(),paramObj);

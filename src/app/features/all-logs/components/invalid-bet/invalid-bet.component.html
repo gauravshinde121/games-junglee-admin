@@ -9,14 +9,14 @@
             <input type="text" class="form-control mb-3" placeholder="Enter Member Name to Search">
         </div>
         <div class="col-md-12">
-            <div class="row">
+            <div class="row" [formGroup]="invalidBetForm">
             <div class="col-md-4">
                 <label>From Date</label>
-                <input type="date" name="" class="form-control" id="" placeholder="Month">
+                <input type="date" name="" class="form-control" id="" formControlName="fromDate">
               </div>
               <div class="col-md-4">
                 <label>To Date</label>
-                <input type="date" name="" class="form-control" id="" placeholder="Month">
+                <input type="date" name="" class="form-control" id=""  formControlName="toDate">
               </div>
               <div class="col-md-4 mb-3 mt-4">
                 <span class="me-3"><input type="radio" class="radioselected" name="1" id="1"> VarBET</span>

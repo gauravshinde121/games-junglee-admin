@@ -1,6 +1,8 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { SettingsService } from '../services/settings.service';
 
 @Component({
   selector: 'app-bet-settings',
@@ -15,8 +17,14 @@ export class BetSettingsComponent implements OnInit {
   events:any = [];
   matchList:any = [];
   betSettingForm:FormGroup;
+  dateFormat = "yyyy-MM-dd";
+  language = "en";
+  allBets: any;
+  gameId: any = null;
+  matchId: any = null;
+  marketTypeId: any = null;
 
-  constructor(private _sharedService:SharedService) { }
+  constructor(private _sharedService:SharedService,private _settingService:SettingsService) { }
 
   ngOnInit(): void {
     this._preConfig();
@@ -25,6 +33,8 @@ export class BetSettingsComponent implements OnInit {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
+
+    this.getAllUserBets();
   }
 
 
@@ -38,17 +48,21 @@ export class BetSettingsComponent implements OnInit {
     this.betSettingForm = new FormGroup({
       sportsId:new FormControl(0),
       matchId:new FormControl(0),
-      fromDate:new FormControl(this.formatDate(new Date())),
-      toDate:new FormControl(this.formatDate(new Date()))
+      fromDate:new FormControl(this.formatFormDate(new Date())),
+      toDate:new FormControl(this.formatFormDate(new Date()))
     })
+  }
+
+  formatFormDate(date: Date) {
+    return formatDate(date, this.dateFormat,this.language);
   }
 
 
   _getGames(){
     this._sharedService._getSports().subscribe((data:any)=>{
-      console.log('events',data.gamesList)
-      if(data.gamesList){
-        this.games = data.gamesList;
+      console.log('events',data)
+      if(data){
+        this.games = data;
       }
     });
   }
@@ -82,6 +96,45 @@ export class BetSettingsComponent implements OnInit {
 
   onSubmitBetListForm(){
     console.log(this.betSettingForm.value)
+  }
+
+  getAllUserBets(){
+    let payload = {
+      sportId: null,
+      matchId: null,
+      userId: null,
+      fromDate : null,
+      toDate : null
+
+    }
+    this._settingService._getAllUserBetsApi(payload).subscribe((res:any)=>{
+      console.log(res);
+
+      this.allBets = res.data;
+    },(err)=>{
+      console.log(err);
+      this._sharedService.getToastPopup("Internal server error","","error")
+    });
+
+  }
+
+  searchList() {
+    let payload = {
+      sportId: this.gameId,
+      matchId: this.matchId,
+      fromDate : this.betSettingForm.value.fromDate,
+      toDate : this.betSettingForm.value.toDate
+    }
+
+    this._settingService._getAllUserBetsApi(payload).subscribe((res:any)=>{
+      console.log(res);
+
+      this.allBets = res.data;
+
+    },(err)=>{
+      console.log(err);
+      this._sharedService.getToastPopup("Internal server error","","error")
+    });
   }
 
 }

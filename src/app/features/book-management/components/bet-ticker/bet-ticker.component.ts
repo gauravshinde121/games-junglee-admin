@@ -1,5 +1,6 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import { BookManagementService } from '../../services/book-management.service';
 
@@ -14,10 +15,17 @@ export class BetTickerComponent implements OnInit {
   games:any;
   matchList:any = [];
   marketList:any = [];
+  dateFormat = "yyyy-MM-dd";
+  language = "en";
+  allBets: any;
+  sportId: any = null;
+  matchId: any = null;
+  marketTypeId: any = null;
 
   constructor(
     private _sharedService:SharedService,
-    private bookManagementService:BookManagementService
+    private bookManagementService:BookManagementService,
+    private _fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +39,8 @@ export class BetTickerComponent implements OnInit {
       console.log('Selected matchId: ', selectedValue);
       this._getMarketsByMatchId(selectedValue);
     });
+
+    this.getAllUserBets();
   }
 
   _preConfig(){
@@ -44,23 +54,45 @@ export class BetTickerComponent implements OnInit {
 
   }
 
+  // _initForm(){
+  //   this.betTickerForm = new FormGroup({
+  //     sportsId:new FormControl('0'),
+  //     matchId:new FormControl('0'),
+  //     marketId:new FormControl('0'),
+  //     tms:new FormControl('All'),
+  //     type:new FormControl('All'),
+  //     typeName:new FormControl('All'),
+  //     betType:new FormControl("Matched"),
+  //     time:new FormControl("All")
+  //   });
+  // }
+
   _initForm(){
-    this.betTickerForm = new FormGroup({
-      sportsId:new FormControl('0'),
-      matchId:new FormControl('0'),
-      marketId:new FormControl('0'),
-      tms:new FormControl('All'),
-      type:new FormControl('All'),
-      typeName:new FormControl('All'),
-      betType:new FormControl("Matched"),
-      time:new FormControl("All")
+    this.betTickerForm = this._fb.group({
+      sportsId: ['0'],
+      matchId: ['0'],
+      marketId: ['0'],
+      tms: ['All'],
+      type: ['All'],
+      typeName:['All'],
+      betType:["Matched"],
+      time: ["All"],
+      fromDate : this.formatFormDate(new Date()),
+      toDate : this.formatFormDate(new Date()),
+      stakesFromValue : [null],
+      stakesToValue : [null]
     });
+  }
+
+  formatFormDate(date: Date) {
+    return formatDate(date, this.dateFormat,this.language);
   }
 
   _getGames(){
     this._sharedService._getSports().subscribe((data:any)=>{
-      if(data.gamesList){
-        this.games = data.gamesList;
+      console.log("Data",data);
+      if(data){
+        this.games = data;
       }
     });
   }
@@ -89,17 +121,64 @@ export class BetTickerComponent implements OnInit {
     this._getMatchBySportId(sportId);
   }
 
+  changeGame(evt) {
+    this.sportId = evt.target.value;
+  }
+
+  changeMatch(evt) {
+    this.matchId = evt.target.value;
+  }
+
+  changeMarketType(evt) {
+    this.marketTypeId = evt.target.value;
+  }
+
+
 
   getAllUserBets(){
     let payload = {
-      sportsId:null,
-      sportId:null,
-      matchId:null,
-      userId:null
+      sportId: null,
+      matchId: null,
+      userId: null,
+      marketId : null,
+      stakesFrom :null,
+      stakesTo :null,
+      fromDate : null,
+      toDate : null
+
     }
-    this.bookManagementService._getBookForBackendApi(payload).subscribe((res:any)=>{
-      console.log(res)
-    })
+    this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{
+      console.log(res);
+
+      this.allBets = res.data;
+    },(err)=>{
+      console.log(err);
+      this._sharedService.getToastPopup("Internal server error","","error")
+    });
+
+  }
+
+  searchList() {
+    let payload = {
+      sportId: this.sportId,
+      matchId: this.matchId,
+      marketId: this.marketTypeId,
+      userId: null,
+      stakesFrom :this.betTickerForm.value.stakesFromValue,
+      stakesTo : this.betTickerForm.value.stakesToValue,
+      fromDate : this.betTickerForm.value.fromDate,
+      toDate : this.betTickerForm.value.toDate
+    }
+
+    this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{
+      console.log(res);
+
+      this.allBets = res.data;
+
+    },(err)=>{
+      console.log(err);
+      this._sharedService.getToastPopup("Internal server error","","error")
+    });
   }
 
 }

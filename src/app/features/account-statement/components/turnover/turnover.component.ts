@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AccountStatementService } from '../../services/account-statement.service';
@@ -11,6 +12,8 @@ export class TurnoverComponent implements OnInit {
 
   filterForm:FormGroup;
   plStatement:any = [];
+  dateFormat = "yyyy-MM-dd";
+  language = "en";
 
   constructor(private _accountStatementService:AccountStatementService) { }
 
@@ -26,11 +29,15 @@ export class TurnoverComponent implements OnInit {
 
   _initForm(){
     this.filterForm = new FormGroup({
-      fromDate:new FormControl(new Date()),
-      toDate:new FormControl(new Date()),
+      fromDate:new FormControl(this.formatFormDate(new Date())),
+      toDate:new FormControl(this.formatFormDate(new Date())),
       page:new FormControl(1),
       subGame:new FormControl("All"),
     })
+  }
+
+  formatFormDate(date: Date) {
+    return formatDate(date, this.dateFormat,this.language);
   }
 
   getTurnOver(){

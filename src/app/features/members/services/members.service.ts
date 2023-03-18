@@ -56,4 +56,19 @@ export class MembersService {
     return this._apiHttpService.get(this._apiEndpointsService.getRolesEndpoint())
   }
 
+  _getTransferStatementForUserApi(paramObj){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.getTransferStatementForUserEndpoint(),paramObj);
+  }
+
+  _getMemberLoginHistoryApi(paramObj){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.getMemberLoginHistoryEndpoint(),paramObj);
+  }
+
+  _getMemberBooksForBackedApi(paramObj){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.getMemberBooksForBackendEndpoint(),paramObj);
+  }
+
 }

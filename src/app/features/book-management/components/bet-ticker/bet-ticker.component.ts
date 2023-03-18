@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { nameValidator } from '@shared/classes/validator';
 import { SharedService } from '@shared/services/shared.service';
-import { MembersService } from 'src/app/features/members/services/members.service';
+import { BookManagementService } from '../../services/book-management.service';
 
 @Component({
   selector: 'app-bet-ticker',
@@ -18,8 +18,9 @@ export class BetTickerComponent implements OnInit {
 
   constructor(
     private _sharedService:SharedService,
-    private _memberService:MembersService,
+    private bookManagementService:BookManagementService,
     private _fb: FormBuilder,
+
   ) { }
   get f(){
     return this.betTickerForm.controls;
@@ -106,4 +107,16 @@ export class BetTickerComponent implements OnInit {
     this.betTickerForm.controls['memberName'].reset()
   }
 
+  getAllUserBets(){
+    let payload = {
+      gameId:null,
+      sportId:null,
+      matchId:null,
+      userId:null
+    }
+    this.bookManagementService._getBookForBackendApi(payload).subscribe((res:any)=>{
+      console.log(res)
+    })
+  }
 }
+

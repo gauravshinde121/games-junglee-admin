@@ -1,10 +1,55 @@
-<div class="tab-pane fade show active" id="pills-netexposure" role="tabpanel" aria-labelledby="pills-netexposure-tab" tabindex="0">
+
+  <section class="section gamedetails">
   <div class="row">
-  <div class="col-md-12">Net Exposure</div>
-  <div class="col-md-12 mt-3">
-   <div class="border text-center p-5">
-   <h4>No data found </h4>
- </div>
- </div>
+  <div class="col-md-12">
+  <!--your code will come here start-->
+  <h4 class="text-pink"> Net Exposure</h4>
+  <div class="row">
+    <div *ngIf="!isLoading && booksForBackend.length==0" class="col-md-12 mt-3">
+      <div class="border text-center p-5">
+      <h4>No data found </h4>
+    </div>
+    </div>
+    <div *ngIf="!isLoading && booksForBackend.length>0" class="col-md-12">
+      <table class="table table-striped bg-white mt-3 text-center">
+        <tbody *ngFor="let book of booksForBackend">
+         <tr >
+        <th width="30%" class="text-start">{{book.matchName}}</th>
+        <th width="10%"> <a routerLink="/book-management/advance-workstation/1" class="btn btn-warning rounded-pill"> View total</a></th>
+        <th width="10%">Net Exposure</th>
+        <th width="10%">1</th>
+        <th width="10%">X</th>
+        <th width="10%">2</th>
+        <th width="10%">Fancy</th>
+        <th width="10%" class="last">Fancy Exposure</th>
+        </tr>
+        <tr *ngFor="let data of book.data">
+        <td  >
+          <span >{{data.marketName}}</span>
+        </td>
+        <td>
+          <a> <img src="../../../../../assets/images/net_exposure.png" width="22px" alt=""></a>
+        </td>
+        <td>
+          <a class="btn btn-pink rounded-pill pt-2 pb-2 w-100 text-danger"> {{data.netExposure}}</a></td>
+        <td>
+          <a class="btn rounded-pill alert alert-success pt-2 pb-2 w-100"> {{data.horses[0]?.finalAmount?data.horses[0]?.finalAmount:0}}</a>
+        </td>
+        <td>
+          <a *ngIf="data.horses[2]" class="btn rounded-pill alert alert-success pt-2 pb-2 w-100"> {{data.horses[2]?.finalAmount?data.horses[2]?.finalAmount:'--'}}</a></td>
+        <td>
+          <a class="btn btn-pink rounded-pill pt-2 pb-2 w-100 text-danger"> {{data.horses[1]?.finalAmount?data.horses[1]?.finalAmount:0}}</a>
+        </td>
+        <td >
+          <!-- <span *ngIf="data.fancyFlag">{{data.marketName}}</span> -->
+        </td>
+        <td></td>
+        </tr>
+        </tbody>
+        </table>
+    </div>
   </div>
- </div>
+  </div>
+  </div>
+  </section>
+

@@ -35,10 +35,14 @@ export class Constants {
     public readonly API_URL_GET_DOWNLINE_ACCOUNTS_DATA: string = 'api/junglee-admin/getDownlineAccountsData';
     public readonly API_URL_GET_DOWNLINE_ACCOUNTS_DATA_FOR_MEMBERS: string = 'api/junglee-admin/getDownLineAccountsForMember';
     public readonly API_URL_GET_ROLES: string = 'api/junglee-admin/getRoles';
+    public readonly API_URL_GET_TRANSFER_STATEMENT_FOR_USER: string = 'api/junglee-admin/getTransferStatementForUser';
+    public readonly API_URL_GET_MEMBER_LOGIN_HISTORY: string = 'api/junglee-admin/getMemberLoginHistory';
+    public readonly API_URL_GET_MEMBER_BOOKS_FOR_BACKEND: string = 'api/junglee-admin/getMemberBooksForBackend';
 
 
     //book management
     public readonly API_URL_GET_BOOK_FOR_BACKEND: string = 'api/junglee-admin/getBooksForBackend';
+    public readonly API_URL_GET_ALL_USER_BETS: string = 'api/junglee-admin/getAllBets';
 
 
     //account statement

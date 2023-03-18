@@ -12,15 +12,15 @@
               </h4>
             </div>
             <div class="col-md-6 text-end">
-              <span class="text-pink me-3 pt-2">Status</span>{{memberForm.value.isActive}}
+              <span class="text-pink me-3 pt-2">Status</span>
               <a class="text-decoration-none text-white">
                 <input
                   type="radio"
                   id="1"
                   formControlName="status"
-                  [checked]="memberForm.value.isActive != true"
+                  [checked]="true"
                   name="status"
-                  value="'Active'"
+                  value="Active"
                 /><span class="bg-success rounded-pill p-2 m-2">Active</span>
               </a>
               <a class="text-decoration-none text-white">
@@ -28,9 +28,9 @@
                   type="radio"
                   id="2"
                   formControlName="status"
-                  [checked]="this.memberForm.value.isActive == true"
+                  [checked]="true"
                   name="status"
-                  value="'Inactive'"
+                  value="Inactive"
                 /><span class="bg-warning rounded-pill p-2 m-2">Inactive</span>
               </a>
               <a class="text-decoration-none text-white">
@@ -40,7 +40,7 @@
                   formControlName="status"
                   ng-checked="this.memberForm.value.isActive == false"
                   name="status"
-                  value="'Closed'"
+                  value="Closed"
                 /><span class="bg-danger rounded-pill p-2 m-2">Closed</span>
               </a>
             </div>
@@ -48,7 +48,7 @@
           <div class="row mt-3">
             <div class="col-md-4">
               <label>Select Role</label>
-              <select formControlName="roleId" name="roleId" id="ab" class="form-select mt-2">
+              <select style="background-color:rgba(60, 62, 62, 0.7215686275)" formControlName="roleId" name="roleId" id="ab" class="form-select mt-2">
                 <option *ngFor="let role of roles" [value]="role.roleId">{{role.userRoleName}} </option>
                </select>
             </div>
@@ -165,7 +165,7 @@
         <div class="col-md-8">
           <input
             formControlName="sportsBookRate"
-            name="sportsBookRate" 
+            name="sportsBookRate"
             type="number"
             id="sportsBookRate"
             class="form-control pb-2"
@@ -179,7 +179,7 @@
         <div class="col-md-8">
           <input
             formControlName="liveCasinoRate"
-            name="liveCasinoRate" 
+            name="liveCasinoRate"
             type="number"
             id=""
             class="form-control pb-2"
@@ -187,7 +187,7 @@
           <p>(Min : 100) (Max : 100)</p>
         </div>
       </div>
-      <div class="row mt-5">
+      <div class="row mt-5" *ngIf="memberForm.value.roleId!=7">
         <div class="col-md-2">Partnership Percentage</div>
         <div class="col-md-2"> (%) </div>
         <div class="col-md-8">
@@ -213,7 +213,7 @@
             type="number"
             class="form-control"
           />
-          <p>(Min: 500)</p>
+          <p>(Min: 100)</p>
           <!-- <div class="text-danger" *ngIf="MinBetVail && MinBetVail.invalid && MinBetVail.touched">
             Please enter valid Min Rate
            </div>

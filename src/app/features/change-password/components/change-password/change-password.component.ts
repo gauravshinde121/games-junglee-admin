@@ -14,26 +14,26 @@ export class ChangePasswordComponent implements OnInit {
 
 
   authObj = {
-    currentPassword:"",
-    newPassword:"",
-    retypePassword:""
+    currentPassword: "",
+    newPassword: "",
+    retypePassword: ""
   }
 
-  constructor(private _changePasswordService:ChangePasswordService,
-              private _sharedService:SharedService,
-              private formbuilder: FormBuilder) { 
-              this.changePasswordForm = this.formbuilder.group({
-              oldPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-              newPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.pattern(
-                "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
-                    )]),
-              confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),  
-  },
-  {
+  constructor(private _changePasswordService: ChangePasswordService,
+    private _sharedService: SharedService,
+    private formbuilder: FormBuilder) {
+    this.changePasswordForm = this.formbuilder.group({
+      oldPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      newPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
+        "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+      )]),
+      confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+    },
+      {
 
-    validators: this.Mustmatch('newPassword', 'confirmPassword')
-  }
-  )
+        validators: this.Mustmatch('newPassword', 'confirmPassword')
+      }
+    )
   }
   get f() {
     return this.changePasswordForm.controls;
@@ -44,9 +44,9 @@ export class ChangePasswordComponent implements OnInit {
   }
 
 
-  postChangePassword(){
-    this._changePasswordService._getChangePasswordeApi(this.authObj).subscribe((res:any)=>{
-      console.log('pwd changed',res)
+  postChangePassword() {
+    this._changePasswordService._getChangePasswordeApi(this.authObj).subscribe((res: any) => {
+      console.log('pwd changed', res)
       this._sharedService.getToastPopup(res.message, 'Password', 'success');
       this.authObj.currentPassword = "";
       this.authObj.newPassword = "";

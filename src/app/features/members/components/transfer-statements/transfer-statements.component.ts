@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MembersService } from '../../services/members.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { SharedService } from '@shared/services/shared.service';
 @Component({
   selector: 'app-transfer-statements',
   templateUrl: './transfer-statements.component.html',
@@ -15,7 +17,15 @@ export class TransferStatementsComponent implements OnInit {
   userId:any = null;
   filterForm:FormGroup;
 
-  constructor(private _memberService: MembersService) { }
+  constructor(
+    private _memberService: MembersService,
+    private route: ActivatedRoute,
+    private _sharedService: SharedService) {
+
+    this.route.params.subscribe(params => {
+      this.userId = +params['id'];
+    })
+   }
 
   ngOnInit(): void {
     this._preConfig();
@@ -23,8 +33,8 @@ export class TransferStatementsComponent implements OnInit {
 
   _initForm(){
     this.filterForm = new FormGroup({
-      fromDate:new FormControl(this.formatDate(new Date())),
-      toDate:new FormControl(this.formatDate(new Date())),
+      fromDate:new FormControl(new Date()),
+      toDate:new FormControl(new Date()),
       page:new FormControl(1)
     })
   }
@@ -36,7 +46,13 @@ export class TransferStatementsComponent implements OnInit {
 
   getTransferStatement() {
 
-    this._memberService._getTransferStatementApi(this.filterForm.value).subscribe((data: any) => {
+    const payload= {
+      fromDate:this.filterForm.value['fromDate'],
+      toDate:this.filterForm.value['toDate'],
+      userId:this.userId
+    }
+
+    this._memberService._getTransferStatementForUserApi(payload).subscribe((data: any) => {
       console.log(data)
       this.transferStatements = data;
     })

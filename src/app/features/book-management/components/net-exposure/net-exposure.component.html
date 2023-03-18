@@ -6,13 +6,13 @@
   <h4 class="text-pink"> Net Exposure</h4>
   <div class="row">
     <div class="col-md-8 mt-2" [formGroup]="filterForm">
-      <a  class=" text-decoration-none text-white"> <input type="radio" (click)="onFilterChange()"  formControlName="selectedType" checked="true" class="radioselected" id="html" name="selectedType" value="MyPT"><span class="rounded-pill p-2 m-2">My PT</span> </a>
-      <a  class=" text-decoration-none text-white"> <input value="totalBook" (click)="onFilterChange()" formControlName="selectedType" type="radio" id="html" name="selectedType" value="TotalBook"><span class="rounded-pill p-2 m-2">Total Book</span> </a>
+      <a  class=" text-decoration-none text-white"> <input type="radio" (click)="onFilterChange({selectedType:'MyPt'})"  formControlName="selectedType" checked="true" class="radioselected" id="html" name="selectedType" value="MyPT"><span class="rounded-pill p-2 m-2">My PT</span> </a>
+      <a  class=" text-decoration-none text-white"> <input value="totalBook" (click)="onFilterChange({selectedType:'TotalBook'})" formControlName="selectedType" type="radio" id="html" name="selectedType" value="TotalBook"><span class="rounded-pill p-2 m-2">Total Book</span> </a>
       <span class="me-3 pt-2"><strong>Filter by Sport</strong></span>
-      <a class=" text-decoration-none text-white"> <input formControlName="event" (click)="onFilterChange()" type="radio" checked="true" class="radioselected" id="html" name="event" value="All"><span class="rounded-pill p-2 m-2">All</span> </a>
-      <a  class=" text-decoration-none text-white"> <input formControlName="event" (click)="onFilterChange()" type="radio" checked="" class="radioselected" id="html" name="event" value="Cricket"><span class="rounded-pill p-2 m-2">Cricket</span> </a>
-      <a  class=" text-decoration-none text-white"> <input formControlName="event" (click)="onFilterChange()" type="radio" checked="" class="radioselected" id="html" name="event" value="Soccer"><span class="rounded-pill p-2 m-2">Soccer</span> </a>
-      <a  class=" text-decoration-none text-white"> <input formControlName="event" (click)="onFilterChange()" type="radio" checked="" class="radioselected" id="html" name="event" value="Tennis"><span class="rounded-pill p-2 m-2">Tennis</span> </a>
+      <a class=" text-decoration-none text-white"> <input formControlName="event" (click)="onFilterChange({event:'All'})" type="radio" checked="true" class="radioselected" id="html" name="event" value="All"><span class="rounded-pill p-2 m-2">All</span> </a>
+      <a  class=" text-decoration-none text-white"> <input formControlName="event" (click)="onFilterChange({event:'Cricket'})" type="radio" checked="" class="radioselected" id="html" name="event" value="Cricket"><span class="rounded-pill p-2 m-2">Cricket</span> </a>
+      <a  class=" text-decoration-none text-white"> <input formControlName="event" (click)="onFilterChange({event:'Soccer'})" type="radio" checked="" class="radioselected" id="html" name="event" value="Soccer"><span class="rounded-pill p-2 m-2">Soccer</span> </a>
+      <a  class=" text-decoration-none text-white"> <input formControlName="event" (click)="onFilterChange({event:'Tennis'})" type="radio" checked="" class="radioselected" id="html" name="event" value="Tennis"><span class="rounded-pill p-2 m-2">Tennis</span> </a>
       </div>
 
   <div class="col-md-4">

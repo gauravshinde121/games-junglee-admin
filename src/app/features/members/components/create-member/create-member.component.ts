@@ -86,24 +86,18 @@ _createMemberForm(){
   this.memberForm = this._fb.group({
     username: ['', Validators.required],
     displayName: ['', Validators.required],
-    // password: ['', Validators.required],
-    // confirmPassword: ['', Validators.required],
     password: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.pattern(
       "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
           )]),
     confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     playerMaxCreditLimit: ['', Validators.required],
-    comments: ['', Validators.required],
+    comments: [''],
     sportsBookRate: [1,[(c: AbstractControl) => Validators.required(c),Validators.max(1),Validators.min(1)]],
     liveCasinoRate: [100, [(c: AbstractControl) => Validators.required(c),Validators.max(100),Validators.min(100)]],
-    minBet: [500,[(c: AbstractControl) => Validators.required(c),Validators.min(500)]],
+    minBet: [100,[(c: AbstractControl) => Validators.required(c),Validators.min(100)]],
     maxBet: [1000000, [(c: AbstractControl) => Validators.required(c),Validators.max(10000000),Validators.min(1)]],
     maxExposure: [50000000,[(c: AbstractControl) => Validators.required(c),Validators.max(50000000),Validators.min(1)]],
-    // status: [1, Validators.required],
-    // minBet: [100, Validators.required],
-    // maxBet: [1000000, Validators.required],
-    // maxExposure: [50000000, Validators.required],
-    // status: ['Active', Validators.required],
+    status: ['Active', Validators.required],
     roleId:[7,Validators.required],
     partnerShipPercent:[0,Validators.required]
   },
@@ -152,14 +146,15 @@ onSubmitMemberForm(){
   memberObs.subscribe(
     (res: any) => {
       console.log(res)
-      this._sharedService.getToastPopup(`User ${msg} Successfully`, 'User', 'success');
+      this._sharedService.getToastPopup(`User ${msg} Successfully`, 'Member', 'success');
       this._router.navigate(['/member/list'])
       this._sharedService.sharedSubject.next({
         'updateAdminDetails':true
       });
-    },
-    () => this.isLoading = false,
-    () => this.isLoading = false
+    },(error)=>{
+      this.isLoading = false;
+      this._sharedService.getToastPopup(`Error while creating the member.`, 'Member', 'error');
+    }
   )
 
 }
@@ -168,7 +163,7 @@ onSubmitMemberForm(){
 _getRoles(){
   this._memberService._getRolesApi().subscribe((roles:any)=>{
     console.log(roles);
-    this.roles = roles.data;   
+    this.roles = roles.data;
   })
 }
 

@@ -8,22 +8,19 @@
             <input type="text" class="form-control bg-dgrey" value="" placeholder="Enter or Select Member Name To Search">
               </div><br>
               <div class="row">
-              <div class="col-md-3 mt-3">
-                <button class="btn btn-outline-pink rounded-pill mt-4 w-100">
+              <div class="col-md-4 mt-3">
+                <button class="btn btn-outline-pink rounded-pill mt-2 w-100 mb-3">
                  <i class="fa fa-user-cog"></i> Clear Members</button>
               </div>
               <div class="col-md-4">
-                <p>From Date</p>
+                <label>From Date</label>
                 <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id="" placeholder="Month">
               </div>
               <div class="col-md-4">
-                <p>To Date</p>
+                <label>To Date</label>
                 <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month">
               </div>
-
-
-
-        <div class="col-md-3 mb-3">
+        <div class="col-md-3">
           <label>Select Game</label>
           <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
             <option value="0">All</option>
@@ -32,7 +29,7 @@
             </option>
           </select>
         </div>
-        <div class="col-md-3 mb-3">
+        <div class="col-md-3">
           <label>Select Match</label>
           <select
             formControlName="matchId"
@@ -47,12 +44,12 @@
         </div>
 
 
-              <div class="col-md-2 mt-2">
-                <p>Event</p>
+              <div class="col-md-3">
+                <label>Event</label>
                 <input type="text" name="" class="form-control" id="" placeholder="Select or Search event">
               </div>
-              <div class="col-md-2 mt-2">
-                <p>Select Type</p>
+              <div class="col-md-3">
+                <label>Select Type</label>
                 <select formControlName="type" name="type" id="ab" class="form-select bg-dgrey">
                   <option value="All">All </option>
                 </select>

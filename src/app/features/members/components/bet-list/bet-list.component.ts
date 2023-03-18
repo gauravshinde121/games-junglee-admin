@@ -31,9 +31,17 @@ export class BetListComponent implements OnInit {
     private _fb: FormBuilder,
     ) { }
 
+    get f(){
+      return this.filterForm.controls;
+    }
+
   ngOnInit(): void {
     this.route.params.subscribe(params=>{
       this.userId = +params['id'];
+
+      // this.filterForm = this._fb.group({
+      //   membername:new  FormControl('',[Validators.required]),
+      // })
     })
 
     this._preconfig();
@@ -83,7 +91,8 @@ export class BetListComponent implements OnInit {
       stakesFrom:new FormControl('All'),
       stakesTo:new FormControl('All'),
       betType:new FormControl("Matched"),
-      time:new FormControl("All")
+      time:new FormControl("All"),
+      membername: new FormControl('All')
     });
   }
 
@@ -140,5 +149,9 @@ export class BetListComponent implements OnInit {
     this._getMatchBySportId(sportId);
   }
 
+
+  clearMembers(){
+    this.filterForm.controls['membername'].reset()
+  }
 
 }

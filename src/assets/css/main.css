@@ -142,7 +142,7 @@ body {
 /********** Login end ************/
 /********** main start ************/
 #main {
-  padding: 20px 15px 20px 10px;
+  padding: 20px 15px 20px 0px;
   transition: all 0.3s;
   color: #fff;
   margin-top: -700px;
@@ -202,7 +202,7 @@ body {
 /********** Sidebar start ************/
 .sidebar {
   left: 0;
-  width: 275px;
+  width: 270px;
   z-index: 996;
   transition: all 0.3s;
   overflow-y: auto;
@@ -276,10 +276,31 @@ body {
      -moz-appearance: button;
           appearance: button;
   color: #fff;
-  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(166, 166, 166, 0.3411764706);
+  background: rgba(255, 255, 255, 0);
+}
+.gamedetails ::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 .gamedetails .form-control {
-  background-color: rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0);
+  color: #fff;
+  border: 1px solid rgba(166, 166, 166, 0.3411764706);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: rgb(255, 255, 255);
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /********** inner page pro end ************/

@@ -1,30 +1,13 @@
-<div
-  class="tab-pane fade show active"
-  id="pills-activity"
-  role="tabpanel"
-  aria-labelledby="pills-activity-tab"
-  tabindex="0"
->
-  <div
-    class="tab-pane fade show active p-3"
-    id="pills-activity"
-    role="tabpanel"
-    aria-labelledby="pills-activity-tab"
-  >
-    <form
-      [formGroup]="searchActivityForm"
-      (ngSubmit)="onSubmitSearchActivityForm()"
-    >
+<div class="tab-pane fade show active" id="pills-activity" role="tabpanel" aria-labelledby="pills-activity-tab"
+  tabindex="0">
+  <div class="tab-pane fade show active p-3" id="pills-activity" role="tabpanel" aria-labelledby="pills-activity-tab">
+    <form [formGroup]="searchActivityForm" (ngSubmit)="onSubmitSearchActivityForm()">
       <div class="row">
         <div class="col-md-12 mb-3">
-          <span class="me-3"
-            ><input formControlName="filter" type="radio" id="1" name="filter" />
-             <label for="1">Agent</label></span
-          >
-          <span
-            ><input formControlName="filter" type="radio" id="2" name="filter" />
-            <label for="2">All Members</label></span
-          >
+          <span class="me-3"><input formControlName="filter" type="radio" id="1" name="filter" />
+            <label for="1">Agent</label></span>
+          <span><input formControlName="filter" type="radio" id="2" name="filter" />
+            <label for="2">All Members</label></span>
         </div>
 
 
@@ -37,41 +20,26 @@
         </div>
         <div class="col-md-3 mb-3">
           <label>Select Match</label>
-          <select formControlName="matchId"  id="ab" class="form-select bg-dgrey">
+          <select formControlName="matchId" id="ab" class="form-select bg-dgrey">
             <option value="0">All</option>
             <option value="match.matchId" *ngFor="let match of matchList">{{match.matchName}}</option>
           </select>
         </div>
 
-
-        <div class="col-md-2">
+        <div class="col-md-2 mb-3">
           <label>From Date</label>
-          <input
-            type="text"
-            formControlName="fromDate"
-            placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
-            onfocus="(this.type='date')"
-            onblur="if(this.value==''){this.type='text'}"
-            class="form-control mt-2"
-            id=""
-            placeholder="Month"
-          />
+          <input type="text" formControlName="fromDate" placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
+            onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" class="form-control" id=""
+            placeholder="Month" />
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 mb-3">
           <label>To Date</label>
-          <input
-            type="text"
-            formControlName="toDate"
-            placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
-            onfocus="(this.type='date')"
-            onblur="if(this.value==''){this.type='text'}"
-            class="form-control mt-2"
-            id=""
-            placeholder="Month"
-          />
+          <input type="text" formControlName="toDate" placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
+            onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" class="form-control" id=""
+            placeholder="Month" />
         </div>
-        <div class="col-md-2 pt-2">
-          <button class="btn btn-pink rounded-pill w-100 mt-4" type="submit">
+        <div class="col-md-2 pt-3">
+          <button class="btn btn-pink rounded-pill w-100 mt-1" type="submit">
             Search
           </button>
         </div>
@@ -94,259 +62,209 @@
           <tbody>
             <tr>
               <td>Win</td>
-              <td
-                [ngClass]="
-                  activityData?.currentDateData[0].winAmt > 0
+              <td [ngClass]="
+              +(activityData?.currentDateData[0].winAmt) > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.currentDateData[0].winAmt | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.threeDaysBack[0].winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.threeDaysBack[0].winAmt | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.sevenDaysBack[0].winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.sevenDaysBack[0].winAmt | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.thirtyDaysBack[0].winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.thirtyDaysBack[0].winAmt | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.lifeTimeData[0].winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.lifeTimeData[0].winAmt | number }}
               </td>
               <td>0</td>
             </tr>
             <tr>
               <td>Betfair Commission</td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.currentDateData[0].commissionAmtForBetfair > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{
-                  activityData?.currentDateData[0].commissionAmtForBetfair
-                    | number
+                activityData?.currentDateData[0].commissionAmtForBetfair
+                | number
                 }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.threeDaysBack[0].commissionAmtForBetfair > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{
-                  activityData?.threeDaysBack[0].commissionAmtForBetfair
-                    | number
+                activityData?.threeDaysBack[0].commissionAmtForBetfair
+                | number
                 }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.sevenDaysBack[0].commissionAmtForBetfair > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{
-                  activityData?.sevenDaysBack[0].commissionAmtForBetfair
-                    | number
+                activityData?.sevenDaysBack[0].commissionAmtForBetfair
+                | number
                 }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.thirtyDaysBack[0].commissionAmtForBetfair > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{
-                  activityData?.thirtyDaysBack[0].commissionAmtForBetfair
-                    | number
+                activityData?.thirtyDaysBack[0].commissionAmtForBetfair
+                | number
                 }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.lifeTimeData[0].commissionAmtForBetfair > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{
-                  activityData?.lifeTimeData[0].commissionAmtForBetfair | number
+                activityData?.lifeTimeData[0].commissionAmtForBetfair | number
                 }}
               </td>
               <td>0</td>
             </tr>
             <tr>
               <td>Commission</td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.currentDateData[0].commissionAmt > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.currentDateData[0].commissionAmt | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.threeDaysBack[0].commissionAmt > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.threeDaysBack[0].commissionAmt | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.sevenDaysBack[0].commissionAmt > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.sevenDaysBack[0].commissionAmt | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.thirtyDaysBack[0].commissionAmt > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.thirtyDaysBack[0].commissionAmt | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.lifeTimeData[0].commissionAmt > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.lifeTimeData[0].commissionAmt | number }}
               </td>
               <td>0</td>
             </tr>
             <tr>
               <td>P&L</td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.currentDateData[0].netAmount > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.currentDateData[0].netAmount | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.threeDaysBack[0].netAmount > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.threeDaysBack[0].netAmount | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.sevenDaysBack[0].netAmount > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.sevenDaysBack[0].netAmount | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.thirtyDaysBack[0].netAmount > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.thirtyDaysBack[0].netAmount | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.lifeTimeData[0].netAmount > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.lifeTimeData[0].netAmount | number }}
               </td>
               <td>0</td>
             </tr>
             <tr>
               <td>Turnover</td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.currentDateData[0].turnover > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.currentDateData[0].turnover | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.threeDaysBack[0].turnover > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.threeDaysBack[0].turnover | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.sevenDaysBack[0].turnover > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.sevenDaysBack[0].turnover | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.thirtyDaysBack[0].turnover > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.thirtyDaysBack[0].turnover | number }}
               </td>
-              <td
-                [ngClass]="
+              <td [ngClass]="
                   activityData?.lifeTimeData[0].turnover > 0
                     ? 'text-success'
                     : 'text-danger'
-                "
-              >
+                ">
                 {{ activityData?.lifeTimeData[0].turnover | number }}
               </td>
               <td>0</td>

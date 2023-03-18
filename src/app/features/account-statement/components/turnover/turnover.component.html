@@ -1,19 +1,18 @@
 <main id="main" class="main">
   <section class="section gamedetails">
     <div class="row" [formGroup]="filterForm">
-
         <h3 class="text-pink">Turn Over</h3>
+        <hr>
         <div class="col-md-4">
-            <p>From Date</p>
-            <input type="date" data-date-format="dd/mm/yyyy" formControlName="fromDate" name="fromDate" class="form-control browncolor bg-light" id="" placeholder="Month">
+           <label>From Date</label>
+            <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id="" placeholder="Month">
           </div>
           <div class="col-md-4">
-            <p>To Date</p>
-            <input type="date" data-date-format="dd/mm/yyyy" formControlName="toDate" name="toDate" class="form-control browncolor bg-light" id="" placeholder="Month">
+           <label>To Date</label>
+            <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month">
           </div>
-          <div class="col-md-4"></div>
           <div class="col-md-4 btnmargin">
-            <p>Sub Games</p>
+           <label>Sub Games</label>
             <select formControlName="subGame" name="subGame" id="ab" class="form-select bg-dgrey">
               <option value="All">All </option>
               <option value="Cricket">Live Casino</option>
@@ -23,7 +22,7 @@
               <option value="Racing">Racing</option>
             </select>
           </div>
-          <div class="col-md-2 btnmarginauto pt-3">
+          <div class="col-md-2 btnmarginauto">
             <button type="button" class="btn btn-pink rounded-pill mt-4" (click)="getTurnOver()">
            Search</button>
 

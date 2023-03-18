@@ -1,37 +1,17 @@
-<div
-  [formGroup]="filterForm"
-  class="tab-pane fade show active"
-  id="pills-batlist"
-  role="tabpanel"
-  aria-labelledby="pills-batlist-tab"
-  tabindex="0"
->
+<div [formGroup]="filterForm" class="tab-pane fade show active" id="pills-batlist" role="tabpanel"
+  aria-labelledby="pills-batlist-tab" tabindex="0">
   <div class="row">
     <div class="col-md-2">
       <label>From Date</label>
-      <input
-        formControlName="fromDate"
-        type="text"
-        placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
-        onfocus="(this.type='date')"
-        onblur="if(this.value==''){this.type='text'}"
-        name="fromDate"
-        class="form-control mt-2"
-        id=""
-      />
+      <input formControlName="fromDate" type="text" placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
+        onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" name="fromDate"
+        class="form-control mt-2" id="" />
     </div>
     <div class="col-md-2">
       <label>To Date</label>
-      <input
-        formControlName="toDate"
-        type="text"
-        placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
-        onfocus="(this.type='date')"
-        onblur="if(this.value==''){this.type='text'}"
-        name="toDate"
-        class="form-control mt-2"
-        id=""
-      />
+      <input formControlName="toDate" type="text" placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
+        onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" name="toDate"
+        class="form-control mt-2" id="" />
     </div>
     <div class="col-md-3">
       <label>Enter Member Name</label>
@@ -45,7 +25,7 @@
       />
     </div>
     <div class="col-md-2 p-2">
-      <button class="btn btn-pink rounded-pill w-100 mt-4">
+      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="clearMembers()">
         <i class="fa fa-user-cog"></i> Clear Members
       </button>
     </div>
@@ -73,7 +53,7 @@
     </div>
     <div class="col-md-4 mb-2">
       <label>Select Match</label>
-      <select formControlName="matchId"  id="ab" class="form-select bg-dgrey">
+      <select formControlName="matchId" id="ab" class="form-select bg-dgrey">
         <option value="0">All</option>
         <option value="{{match.matchId}}" *ngFor="let match of matchList">{{match.matchName}}</option>
       </select>
@@ -111,10 +91,7 @@
       />
     </div>
     <div class="col-md-4 pt-2">
-      <button
-        class="btn btn-pink rounded-pill w-100 mt-4"
-        (click)="getMemberBets()"
-      >
+      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getMemberBets()">
         Search
       </button>
     </div>

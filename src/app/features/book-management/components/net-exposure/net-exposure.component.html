@@ -4,12 +4,12 @@
       <div class="col-md-12">
         <!--your code will come here start-->
         <h4 class="text-pink">Net Exposure</h4>
-        <div class="row">
-          <div class="col-md-8 mt-2" [formGroup]="filterForm">
+        <div class="row" [formGroup]="filterForm">
+          <div class="col-md-8 mt-2">
             <a class="text-decoration-none text-white">
               <input
                 type="radio"
-                (click)="onFilterChange({ selectedType: 'MyPt' })"
+                (click)="onFilterChange({ clicked: 'type', selectedType: 'MyPt' })"
                 formControlName="selectedType"
                 checked="true"
                 class="radioselected"
@@ -21,7 +21,7 @@
             <a class="text-decoration-none text-white">
               <input
                 value="totalBook"
-                (click)="onFilterChange({ selectedType: 'TotalBook' })"
+                (click)="onFilterChange({ clicked: 'type', selectedType: 'TotalBook' })"
                 formControlName="selectedType"
                 type="radio"
                 id="html"
@@ -32,72 +32,32 @@
             <span class="me-3 pt-2"><strong>Filter by Sport</strong></span>
             <a class="text-decoration-none text-white">
               <input
-                formControlName="event"
-                (click)="onFilterChange({ event: 'All' })"
+                (click)="onFilterChange({ clicked: 'sport', sport: '0' })"
                 type="radio"
                 checked="true"
                 class="radioselected"
                 id="html"
-                name="event"
+                name="sport"
                 value="All"
               /><span class="rounded-pill p-2 m-2">All</span>
             </a>
-            <a class="text-decoration-none text-white">
-              <input
-                formControlName="event"
-                (click)="onFilterChange({ event: 'Cricket' })"
-                type="radio"
-                checked=""
-                class="radioselected"
-                id="html"
-                name="event"
-                value="Cricket"
-              /><span class="rounded-pill p-2 m-2">Cricket</span>
-            </a>
-            <a class="text-decoration-none text-white">
-              <input
-                formControlName="event"
-                (click)="onFilterChange({ event: 'Soccer' })"
-                type="radio"
-                checked=""
-                class="radioselected"
-                id="html"
-                name="event"
-                value="Soccer"
-              /><span class="rounded-pill p-2 m-2">Soccer</span>
-            </a>
-            <a class="text-decoration-none text-white">
-              <input
-                formControlName="event"
-                (click)="onFilterChange({ event: 'Tennis' })"
-                type="radio"
-                checked=""
-                class="radioselected"
-                id="html"
-                name="event"
-                value="Tennis"
-              /><span class="rounded-pill p-2 m-2">Tennis</span>
-            </a>
+              <a *ngFor="let game of games" class="text-decoration-none text-white">
+                <input
+                  (click)="onFilterChange({ clicked: 'sport', sport: game.sportId })"
+                  type="radio"
+                  class="radioselected"
+                  id="html"
+                  name="sport"
+                  [value]="game.sportId"
+                /><span class="rounded-pill p-2 m-2">{{game.sportName}}</span>
+              </a>
+
           </div>
 
           <div class="col-md-4">
-            <select id="" class="form-select rounded-pill">
-              <option value="1" class="Active">All</option>
-              <option value="1" class="Active">A Potapova v Volynets</option>
-              <option value="1" class="Active">
-                ACS Petrolul 52 v FC U Craiova 1948
-              </option>
-              <option value="1" class="Active">
-                Australia Women v India Women
-              </option>
-              <option value="1" class="Active">
-                Australia Women v South Africa Women
-              </option>
-              <option value="1" class="Active">Bangladesh v England</option>
-              <option value="1" class="Active">FIFA World Cup</option>
-              <option value="1" class="Active">
-                Hobart Hurricanes v Melbourne Renegades
-              </option>
+            <select name="matchId" formControlName="matchId" id="ab" class="form-select bg-dgrey">
+              <option value="0">All</option>
+              <option (click)="onFilterChange({ clicked: 'match', sport: match.matchId })" value="{{match.matchId}}" *ngFor="let match of matchList">{{match.matchName}}</option>
             </select>
           </div>
         </div>

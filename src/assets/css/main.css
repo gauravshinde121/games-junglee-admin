@@ -110,7 +110,7 @@ body {
 .form-floating > .form-select {
   background: transparent;
   color: #fff;
-  border-bottom: 1px solid #ffffff !important;
+  border-bottom: 1px solid rgba(60, 62, 62, 0.7215686275) !important;
   border: 0px;
   border-radius: 0;
   padding: 24px 0px 15px 0px;

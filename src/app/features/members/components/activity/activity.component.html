@@ -4,9 +4,9 @@
     <form [formGroup]="searchActivityForm" (ngSubmit)="onSubmitSearchActivityForm()">
       <div class="row">
         <div class="col-md-12 mb-3">
-          <span class="me-3"><input formControlName="filter" type="radio" id="1" name="filter" />
+          <span class="me-3"><input formControlName="filter" type="radio" id="1" name="filter" value="Agent" />
             <label for="1">Agent</label></span>
-          <span><input formControlName="filter" type="radio" id="2" name="filter" />
+          <span><input formControlName="filter" type="radio" id="2" name="filter" value="All" />
             <label for="2">All Members</label></span>
         </div>
 

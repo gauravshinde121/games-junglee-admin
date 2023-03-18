@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AccountStatementService } from '../../services/account-statement.service';
 import { SharedService } from '@shared/services/shared.service';
+import { MembersService } from 'src/app/features/members/services/members.service';
 
 @Component({
   selector: 'app-player-pl',
@@ -15,10 +16,13 @@ export class PlayerPlComponent implements OnInit {
   games:any;
   matchList:any = [];
   marketList:any = [];
+  marketTypeList:any = [];
+  allMambers:any = [];
 
   constructor(
     private _accountStatementService:AccountStatementService,
-    private _sharedService:SharedService
+    private _sharedService:SharedService,
+    private _memberService:MembersService
   ) { }
 
   ngOnInit(): void {
@@ -27,26 +31,33 @@ export class PlayerPlComponent implements OnInit {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
+
+
+    this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
+      console.log('Selected matchId: ', selectedValue);
+      this._getMarketsByMatchId(selectedValue);
+    });
   }
 
   _preConfig(){
     this._initForm();
     this._getGames();
     this.getPlStatement();
+    this._getAllMarketTypeList();
+    this._getAllMembers();
   }
 
 
   _initForm(){
     this.filterForm = new FormGroup({
+      memberName:new FormControl("0"),
       fromDate:new FormControl(new Date()),
       toDate:new FormControl(new Date()),
       sportsId:new FormControl("0"),
       matchId:new FormControl("0"),
       page:new FormControl(1),
-      keyword:new FormControl("All"),
-      tms:new FormControl("All"),
-      type:new FormControl("All"),
-      typeName:new FormControl("All")
+      marketId:new FormControl("0"),
+      marketTypeId:new FormControl("0")
     })
   }
 
@@ -63,6 +74,26 @@ export class PlayerPlComponent implements OnInit {
       console.log(res)
       this.plStatement = res.admin
     })
+  }
+
+  _getAllMembers(){
+    this._memberService._getAllMembers().subscribe((data:any)=>{
+      console.log('match data',data);
+      if(data.allMambers){
+        this.allMambers = data.allMambers;
+        console.log('data.matchList',data.matchList);
+      }
+    });
+  }
+
+  _getAllMarketTypeList(){
+    this._sharedService.getAllMarketTypeList().subscribe((data:any)=>{
+      console.log('match data2',data);
+      if(data.data){
+        this.marketTypeList = data.data;
+        console.log('data.matchList',data.matchList);
+      }
+    });
   }
 
   getOneAccount(pl){

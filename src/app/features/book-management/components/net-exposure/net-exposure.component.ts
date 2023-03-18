@@ -70,10 +70,24 @@ export class NetExposureComponent implements OnInit {
 
     console.log('payload',payload)
     this._bookManagementService._getBookForBackendApi(payload).subscribe((res:any)=>{
-    this.isLoading = false;
-    this.booksForBackend = res.booksForBackend
-      console.log(res)
+      this.isLoading = false;
+      //this.booksForBackend = res.booksForBackend
+      //console.log(res)
+
+      for (let index = 0; index < res.booksForBackend.length; index++) {
+        if (res.booksForBackend[index].data.length > 1) {
+         let obj = res.booksForBackend[index].data.find(
+          (obj) => obj.fancyFlag == true
+          );
+           if (obj)
+           res.booksForBackend[index].data[0].fancyExposure = obj.netExposure;
+         }
+         res.booksForBackend[index].data = res.booksForBackend[index].data.filter(obj => obj.fancyFlag == false)
+          console.log(res.booksForBackend[index].data)
+       }
+
     })
+
   }
 
   _getGames(){

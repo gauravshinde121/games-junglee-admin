@@ -7,13 +7,12 @@
           <img src="../../../../../assets/images/pnl.png" alt="" /> PL Statement
         </h4>
         <hr />
-        <div class="col-md-12">
-          <input
-            type="text"
-            class="form-control bg-dgrey"
-            value=""
-            placeholder="Enter or Select Member Name To Search"
-          />
+        <div class="col-md-2 p-2">
+          <label>Select Member</label>
+          <select formControlName="memberName" id="ab" class="form-select bg-dgrey">
+            <option value="0">All</option>
+            <option *ngFor="let member of allMambers" [value]="member.id">{{member.name}}</option>
+          </select>
         </div>
         <br />
         <div class="row">
@@ -74,26 +73,40 @@
             </select>
           </div>
 
-          <div class="col-md-3">
-            <label>Event</label>
-            <input
-              type="text"
-              name=""
-              class="form-control"
-              id=""
-              placeholder="Select or Search event"
-            />
-          </div>
-          <div class="col-md-3">
-            <label>Select Type</label>
-            <select
-              formControlName="type"
-              name="type"
-              id="ab"
-              class="form-select bg-dgrey"
+
+        <div class="col-md-3">
+          <label>Select Market</label>
+          <select
+            formControlName="marketId"
+            id="ab"
+            class="form-select bg-dgrey"
+          >
+            <option value="0">All</option>
+            <option
+              value="{{ market.marketId }}"
+              *ngFor="let market of marketList"
             >
-              <option value="All">All</option>
-            </select>
+              {{ market.marketName }}
+            </option>
+          </select>
+        </div>
+
+
+          <div class="col-md-3">
+            <label>Select Market Type</label>
+              <select
+                formControlName="marketTypeId"
+                id="ab"
+                class="form-select bg-dgrey"
+              >
+                <option value="0">All</option>
+                <option
+                  [value]="market.marketTypeId"
+                  *ngFor="let market of marketTypeList"
+                >
+                  {{ market.marketType }}
+                </option>
+              </select>
           </div>
           <div class="col-md-3 pt-4">
             <button

@@ -65,6 +65,7 @@ export class BetListComponent implements OnInit {
     this._initForm();
     this.getMemberBets();
     this._getGames();
+    this._getAllMembers();
   }
 
   _initForm(){
@@ -72,7 +73,7 @@ export class BetListComponent implements OnInit {
       fromDate:new FormControl(this.formatDate(new Date())),
       toDate:new FormControl(this.formatDate(new Date())),
       memberName: [
-        "",
+        "0",
         {
           validators: [nameValidator("Member Name", 0, 25)],
           updateOn: "change",
@@ -92,8 +93,7 @@ export class BetListComponent implements OnInit {
       stakesFrom:new FormControl('All'),
       stakesTo:new FormControl('All'),
       betType:new FormControl("Matched"),
-      time:new FormControl("All"),
-      membername: new FormControl('All')
+      time:new FormControl("All")
     });
   }
 
@@ -121,8 +121,8 @@ export class BetListComponent implements OnInit {
 
   _getGames(){
     this._sharedService._getSports().subscribe((data:any)=>{
-      if(data.gamesList){
-        this.games = data.gamesList;
+      if(data){
+        this.games = data;
       }
     });
   }
@@ -149,9 +149,9 @@ export class BetListComponent implements OnInit {
   _getAllMembers(){
     this._memberService._getAllMembers().subscribe((data:any)=>{
       console.log('match data',data);
-      if(data.allMambers){
-        this.allMambers = data.allMambers;
-        //console.log('data.matchList',data.matchList);
+      if(data.memberData){
+        this.allMambers = data.memberData;
+        console.log('data.matchList',data.matchList);
       }
     });
   }

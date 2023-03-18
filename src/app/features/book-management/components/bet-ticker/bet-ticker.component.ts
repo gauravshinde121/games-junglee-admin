@@ -22,7 +22,7 @@ export class BetTickerComponent implements OnInit {
 
   ngOnInit(): void {
     this._preConfig();
-    this.betTickerForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+    this.betTickerForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
@@ -46,7 +46,7 @@ export class BetTickerComponent implements OnInit {
 
   _initForm(){
     this.betTickerForm = new FormGroup({
-      gameId:new FormControl('0'),
+      sportsId:new FormControl('0'),
       matchId:new FormControl('0'),
       marketId:new FormControl('0'),
       tms:new FormControl('All'),
@@ -58,7 +58,7 @@ export class BetTickerComponent implements OnInit {
   }
 
   _getGames(){
-    this._sharedService._getEvents().subscribe((data:any)=>{
+    this._sharedService._getSports().subscribe((data:any)=>{
       if(data.gamesList){
         this.games = data.gamesList;
       }
@@ -92,7 +92,7 @@ export class BetTickerComponent implements OnInit {
 
   getAllUserBets(){
     let payload = {
-      gameId:null,
+      sportsId:null,
       sportId:null,
       matchId:null,
       userId:null

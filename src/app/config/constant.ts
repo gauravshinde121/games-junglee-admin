@@ -62,7 +62,8 @@ export class Constants {
     public readonly API_GET_MATCHES_BY_SPORT_ID: string = 'api/getMatchBySportId';
     public readonly API_GET_MARKETS_BY_MATCH_ID: string = 'api/getMarketByMatchId';
     public readonly API_GET_GAMES: string = 'api/junglee-admin/getGames';
-    public readonly API_GET_MARKET_ALL_TYPE: string = 'api/junglee-admin/getAllMarketType';
+    public readonly API_GET_MARKET_ALL_TYPE: string = 'api/getMarketTypes';
+    public readonly API_GET_SPORTS: string = 'api/betfairSports';
 
     //settings
     public readonly API_URL_ADD_BALANCE: string = 'api/junglee-admin/addSuperAdminBalance';

@@ -21,7 +21,7 @@ export class BetSettingsComponent implements OnInit {
   ngOnInit(): void {
     this._preConfig();
 
-    this.betSettingForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+    this.betSettingForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
@@ -36,7 +36,7 @@ export class BetSettingsComponent implements OnInit {
 
   _initForm(){
     this.betSettingForm = new FormGroup({
-      gameId:new FormControl(0),
+      sportsId:new FormControl(0),
       matchId:new FormControl(0),
       fromDate:new FormControl(this.formatDate(new Date())),
       toDate:new FormControl(this.formatDate(new Date()))
@@ -45,7 +45,7 @@ export class BetSettingsComponent implements OnInit {
 
 
   _getGames(){
-    this._sharedService._getEvents().subscribe((data:any)=>{
+    this._sharedService._getSports().subscribe((data:any)=>{
       console.log('events',data.gamesList)
       if(data.gamesList){
         this.games = data.gamesList;

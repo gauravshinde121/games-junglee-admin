@@ -138,7 +138,7 @@
           <div class="toggle-button-cover">
             <div class="button1 r" id="button-2">
               <input
-              (click)="setGameStatus(game.isActive,game.gameId)"
+              (click)="setGameStatus(game.isActive,game.sportsId)"
                 type="checkbox"
                 class="checkbox"
                 [checked]="!game.isActive"
@@ -148,7 +148,7 @@
             </div>
           </div>
           <!-- <div class="form-check form-switch">
-            <input (click)="setGameStatus(game.isActive,game.gameId)" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="game.isActive">
+            <input (click)="setGameStatus(game.isActive,game.sportsId)" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="game.isActive">
           </div> -->
         </div>
       </div>

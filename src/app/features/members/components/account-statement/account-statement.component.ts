@@ -34,7 +34,7 @@ export class AccountStatementComponent implements OnInit {
     })
 
     this._preConfig();
-    this.filterForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+    this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
@@ -53,7 +53,7 @@ export class AccountStatementComponent implements OnInit {
     this.filterForm = new FormGroup({
       fromDate:new FormControl(this.formatDate(new Date())),
       toDate:new FormControl(this.formatDate(new Date())),
-      gameId:new FormControl('0'),
+      sportsId:new FormControl('0'),
       keyword:new FormControl('All'),
       page:new FormControl(1),
       matchId:new FormControl('0'),
@@ -100,7 +100,7 @@ export class AccountStatementComponent implements OnInit {
 
 
   _getGames(){
-    this._sharedService._getEvents().subscribe((data:any)=>{
+    this._sharedService._getSports().subscribe((data:any)=>{
       if(data.gamesList){
         this.games = data.gamesList;
       }

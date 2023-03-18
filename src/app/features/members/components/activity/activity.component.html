@@ -13,7 +13,7 @@
 
         <div class="col-md-3 mb-3">
           <label>Select Sports</label>
-          <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
+          <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
             <option value="0">All</option>
             <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
           </select>
@@ -22,7 +22,7 @@
           <label>Select Market Type</label>
           <select formControlName="marketTypeListId" id="ab" class="form-select bg-dgrey">
             <option value="0">All</option>
-            <option value="match.marketTypeListId" *ngFor="let match of matchList">{{match.matchName}}</option>
+            <option *ngFor="let market of marketTypeList">{{market.marketType}}</option>
           </select>
         </div>
 
@@ -47,7 +47,7 @@
     </form>
     <div class="row">
       <div class="col-md-12 mt-4">
-        <table class="table tableall">
+        <table class="table tableall" *ngIf="activityData.length > 0">
           <thead>
             <tr>
               <th scope="col"></th>

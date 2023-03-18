@@ -14,6 +14,7 @@ export class MyPlComponent implements OnInit {
   plStatement:any = [];
   games:any;
   matchList:any = [];
+  marketTypeList:any = [];
 
   constructor(
     private _accountStatementService:AccountStatementService,
@@ -22,7 +23,7 @@ export class MyPlComponent implements OnInit {
 
   ngOnInit(): void {
     this._preconfig();
-    this.filterForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+    this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
@@ -36,14 +37,16 @@ export class MyPlComponent implements OnInit {
     this._getGames();
     this.__initForm();
     this.getPlStatement();
+    this._getAllMarketTypeList();
   }
 
   __initForm(){
     this.filterForm = new FormGroup({
       fromDate:new FormControl(new Date()),
       toDate:new FormControl(new Date()),
-      gameId:new FormControl('All'),
-      matchId:new FormControl('All'),
+      sportsId:new FormControl('0'),
+      matchId:new FormControl('0'),
+      marketId:new FormControl('0'),
       page:new FormControl(1)
     })
   }
@@ -55,12 +58,20 @@ export class MyPlComponent implements OnInit {
     })
   }
 
+  _getAllMarketTypeList(){
+    this._sharedService.getAllMarketTypeList().subscribe((data:any)=>{
+      console.log('match data2',data);
+      if(data.data){
+        this.marketTypeList = data.data;
+        //console.log('data.matchList',data.matchList);
+      }
+    });
+  }
 
   _getGames(){
-    this._sharedService._getEvents().subscribe((data:any)=>{
-      if(data.gamesList){
-        this.games = data.gamesList;
-        console.log('data.gamesList;',data.gamesList);
+    this._sharedService._getSports().subscribe((data:any)=>{
+      if(data){
+        this.games = data;
       }
     });
   }

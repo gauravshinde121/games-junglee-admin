@@ -51,11 +51,10 @@ export class SharedService {
     .get(this._apiEndpointsService.getGames());
   }
 
-  _getEvents(){
+  _getSports(){
     return this._apiHttpService
-    .get(this._apiEndpointsService.getEvents());
+    .get(this._apiEndpointsService.getSports());
   }
-
 
   _adjustWinningsApi(userList){
     return this._apiHttpService

@@ -165,11 +165,11 @@ export class MembersListComponent implements OnInit {
     this.display = 'none';
   }
 
-  updateGameControl(status: any, gameId) {
+  updateGameControl(status: any, sportsId) {
     this._memberService
       ._updateGameControlApi({
         refUserId: this.userId,
-        gameControlId: gameId,
+        gameControlId: sportsId,
         isActive: !status,
       })
       .subscribe((data: any) => {

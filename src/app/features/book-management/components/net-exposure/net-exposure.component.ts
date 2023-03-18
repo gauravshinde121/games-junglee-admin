@@ -49,21 +49,21 @@ export class NetExposureComponent implements OnInit {
       payload = {
         selectedType: filterObj.selectedType,
         matchId: this.filterForm.value.matchId,
-        gameId: sport_value
+        sportsId: sport_value
       }
     }
     if(filterObj.clicked == 'sport'){
       this._getMatchBySportId(filterObj.sport);
       payload = {
         selectedType: this.filterForm.value.selectedType,
-        gameId: filterObj.sport,
+        sportsId: filterObj.sport,
         matchId: 0
       }
     }
     if(filterObj.clicked == 'match'){
       payload = {
         selectedType: this.filterForm.value.selectedType,
-        gameId: this.filterForm.value.matchId,
+        sportsId: this.filterForm.value.matchId,
         matchId: filterObj.matchId
       }
     }
@@ -77,9 +77,9 @@ export class NetExposureComponent implements OnInit {
   }
 
   _getGames(){
-    this._sharedService._getEvents().subscribe((data:any)=>{
-      if(data.gamesList){
-        this.games = data.gamesList;
+    this._sharedService._getSports().subscribe((data:any)=>{
+      if(data){
+        this.games = data;
       }
     });
   }

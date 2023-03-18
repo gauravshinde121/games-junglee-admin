@@ -232,6 +232,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_GET_EVENTS)
   }
 
+  public getSports(){
+    return this.createUrl(this._constants.API_GET_SPORTS)
+  }
 
   public getEditUserEndpoint(){
     return this.createUrl(this._constants.API_URL_EDIT_USER)

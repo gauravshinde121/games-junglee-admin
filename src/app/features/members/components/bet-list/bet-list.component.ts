@@ -46,7 +46,7 @@ export class BetListComponent implements OnInit {
     })
 
     this._preconfig();
-    /*this.filterForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+    /*this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
@@ -78,7 +78,7 @@ export class BetListComponent implements OnInit {
           updateOn: "change",
         },
       ],
-      gameId:new FormControl('0'),
+      sportsId:new FormControl('0'),
       matchId:new FormControl('0'),
       marketId:new FormControl('0'),
       highlightIp: [
@@ -120,7 +120,7 @@ export class BetListComponent implements OnInit {
 
 
   _getGames(){
-    this._sharedService._getEvents().subscribe((data:any)=>{
+    this._sharedService._getSports().subscribe((data:any)=>{
       if(data.gamesList){
         this.games = data.gamesList;
       }

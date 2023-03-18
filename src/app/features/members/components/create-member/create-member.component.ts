@@ -46,8 +46,8 @@ export class CreateMemberComponent implements OnInit {
     })
   }
 
-  setGameStatus(status,gameId){
-    this.gamesList.find(g=>g.gameId == gameId).isActive = !status
+  setGameStatus(status,sportsId){
+    this.gamesList.find(g=>g.sportsId == sportsId).isActive = !status
   }
 
 

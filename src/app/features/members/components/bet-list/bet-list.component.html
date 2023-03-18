@@ -45,7 +45,7 @@
 
     <div class="col-md-4 mb-2  p-2">
       <label>Select Sport</label>
-      <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
+      <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
         <option value="0">All</option>
         <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
       </select>

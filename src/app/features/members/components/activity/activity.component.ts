@@ -21,7 +21,7 @@ export class ActivityComponent implements OnInit {
   games:any;
   matchList:any = [];
   marketTypeList:any = [];
-
+  isChecked: boolean = true;
 
   constructor(
     private _fb: FormBuilder,
@@ -48,18 +48,11 @@ export class ActivityComponent implements OnInit {
 
   _initForm(){
     this.searchActivityForm = new FormGroup({
-      fromDate:new FormControl(this.formatDate(new Date())),
-      toDate:new FormControl(this.formatDate(new Date())),
-      game:new FormControl('All'),
-      keyword:new FormControl('All'),
-      page:new FormControl(1),
-      subGame:new FormControl('All'),
-      tms:new FormControl('All'),
-      type:new FormControl('All'),
-      typeName:new FormControl('All'),
-      filter:new FormControl("Agent"),
+      agent:new FormControl("1"),
       gameId:new FormControl(0),
       marketTypeListId:new FormControl(0),
+      fromDate:new FormControl(this.formatDate(new Date())),
+      toDate:new FormControl(this.formatDate(new Date()))
     });
   }
 
@@ -73,10 +66,6 @@ export class ActivityComponent implements OnInit {
   }
 
   _preConfig(){
-    // this._sharedService._getGames().subscribe((res:any)=>{
-    //   this.games = res.gamesList;
-    //   console.log('this.games',this.games);
-    // });
     this._getGames();
     this._initForm();
     this.searchActivity();
@@ -130,7 +119,7 @@ export class ActivityComponent implements OnInit {
   }
 
   searchActivity(){
-    this._memberService._getMemberActivityApi({refUserId:this.userId,fromDate:this.fromDate,toDate:this.toDate,filter:"Agent",subGame:"All",gameId:this.games,matchId:this.matchList}).subscribe(((res:any)=>{
+    this._memberService._getMemberActivityApi({refUserId:this.userId,fromDate:this.fromDate,toDate:this.toDate,agent:"1",marketTypeListId:"All",gameId:''}).subscribe(((res:any)=>{
       console.log(res);
       if(res){
         this.activityData = res.data;

@@ -46,7 +46,7 @@ export class BetListComponent implements OnInit {
     })
 
     this._preconfig();
-    this.filterForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+    /*this.filterForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
@@ -54,7 +54,7 @@ export class BetListComponent implements OnInit {
     this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected matchId: ', selectedValue);
       this._getMarketsByMatchId(selectedValue);
-    });
+    });*/
 
   }
 

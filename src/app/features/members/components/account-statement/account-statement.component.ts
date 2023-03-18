@@ -53,10 +53,10 @@ export class AccountStatementComponent implements OnInit {
     this.filterForm = new FormGroup({
       fromDate:new FormControl(this.formatDate(new Date())),
       toDate:new FormControl(this.formatDate(new Date())),
-      gameId:new FormControl('All'),
+      gameId:new FormControl('0'),
       keyword:new FormControl('All'),
       page:new FormControl(1),
-      matchId:new FormControl('All'),
+      matchId:new FormControl('0'),
       tms:new FormControl('All'),
       type:new FormControl('All'),
       typeName:new FormControl('All'),

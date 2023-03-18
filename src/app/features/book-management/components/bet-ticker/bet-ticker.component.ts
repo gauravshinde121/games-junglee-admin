@@ -44,8 +44,9 @@ export class BetTickerComponent implements OnInit {
 
   _initForm(){
     this.betTickerForm = new FormGroup({
-      gameId:new FormControl('All'),
-      matchId:new FormControl('All'),
+      gameId:new FormControl('0'),
+      matchId:new FormControl('0'),
+      marketId:new FormControl('0'),
       tms:new FormControl('All'),
       type:new FormControl('All'),
       typeName:new FormControl('All'),

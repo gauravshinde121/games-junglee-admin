@@ -77,9 +77,9 @@ export class BetListComponent implements OnInit {
           updateOn: "change",
         },
       ],
-      gameId:new FormControl('All'),
-      matchId:new FormControl('All'),
-      marketId:new FormControl('All'),
+      gameId:new FormControl('0'),
+      matchId:new FormControl('0'),
+      marketId:new FormControl('0'),
       highlightIp: [
         "",
         {

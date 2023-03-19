@@ -34,14 +34,14 @@
         </div>
         <div class="col-md-3"></div>
         <div class="col-md-12 mb-3 mt-3">
-          <span class="me-3"
+          <!-- <span class="me-3"
             ><input type="radio" class="radioselected" name="1" id="1" /> My
             PT</span
           >
           <span
             ><input type="radio" class="radioselected" name="1" id="1" /> Total
             Book</span
-          >
+          > -->
         </div>
       </div>
       <div class="row">
@@ -53,7 +53,7 @@
 
         <div class="col-md-4 mb-2">
           <label>Select Sport</label>
-          <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
+          <select formControlName="sportsId" id="ab" class="form-select bg-dgrey" (change)="changeGame($event)">
             <option value="0">All</option>
             <option *ngFor="let game of games" [value]="game.sportId">
               {{ game.sportName }}
@@ -65,7 +65,7 @@
           <select
             formControlName="matchId"
             id="ab"
-            class="form-select bg-dgrey"
+            class="form-select bg-dgrey" (change)="changeMatch($event)"
           >
             <option value="0">All</option>
             <option value="{{ match.matchId }}" *ngFor="let match of matchList">
@@ -79,6 +79,7 @@
             formControlName="marketId"
             id="ab"
             class="form-select bg-dgrey"
+            (change)="changeMarketType($event)"
           >
             <option value="0">All</option>
             <option
@@ -115,7 +116,8 @@
             name=""
             class="form-control"
             id=""
-            placeholder="Month"
+            placeholder="From date"
+            formControlName="fromDate"
           />
         </div>
         <div class="col-md-4 mb-2">
@@ -125,15 +127,15 @@
             name=""
             class="form-control"
             id=""
-            placeholder="Month"
+            placeholder="To date"
+            formControlName="toDate"
           />
         </div>
         <div class="col-md-4 mb-2 mt-4">
           <button
             type="button"
             class="btn btn-pink rounded-pill w-100"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
+            (click)="searchList()"
           >
             Search
           </button>
@@ -159,63 +161,43 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let bets of allBets"> 
               <td>026agarwal - INR</td>
-              <td>Feb 25, 2023 03:05:05</td>
-              <td>Feb 25, 2023 03:05:10</td>
-              <td>Match Odds</td>
+              <td>{{bets.member}}</td>
+              <td>{{bets.placeTime | date }}</td>
+              <td>{{bets.event}}</td>
               <td>
-                <span
-                  class="border border-2 bg-danger text-danger border-danger me-2"
+                <span *ngIf="!bets.isBack"
+                  class="border r-2 bg-danger text-danger border-danger me-2"
                 >
                 </span>
-                England
+                <span  *ngIf="bets.isBack"
+                class="border border-2 bg-primary text-primary border-primary me-2"
+              >
+              </span
+              >
+                {{bets.market}}
               </td>
-              <td>1.46</td>
-              <td>1.46</td>
-              <td>2000</td>
-              <td>--</td>
-              <td class="text-danger">9,200</td>
+
+              <td>{{bets.selection}}</td>
+              <td>{{bets.oddsPlaced}}</td>
+              <td>{{bets.oddsMatched}}</td>
+              <td>{{bets.matched}}</td>
+              <td class="text-danger">{{bets.unmatched}}</td>
               <td>
                 <i
                   class="fa fa-info-circle"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
                 ></i>
-                49.32.242.167
-              </td>
-            </tr>
-            <tr>
-              <td>026agarwal - INR</td>
-              <td>Feb 25, 2023 03:05:05</td>
-              <td>Feb 25, 2023 03:05:10</td>
-              <td>Match Odds</td>
-              <td>
-                <span
-                  class="border border-2 bg-primary text-primary border-primary me-2"
-                >
-                </span
-                >England
-              </td>
-              <td>1.46</td>
-              <td>1.46</td>
-              <td>2000</td>
-              <td>--</td>
-              <td class="text-success">9,200</td>
-              <td>
-                <i
-                  class="fa fa-info-circle"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
-                ></i>
-                49.32.242.167
+                {{bets.ip}}
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="col-md-12 mt-3">
+    <div class="col-md-12 mt-3"  *ngIf="allBets == '' || allBets == null ">
       <div class="border text-center p-5">
         <h4>No data found</h4>
       </div>

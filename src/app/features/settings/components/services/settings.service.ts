@@ -15,4 +15,8 @@ export class SettingsService {
       return this._apiHttpService
       .post(this._apiEndpointsService.getUpdateSuperAdminBalanceEndpoint(),{amount:amount});
     }
+
+    _getAllUserBetsApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.getAllUserBetsEndpoint(),filterObj)
+    }
 }

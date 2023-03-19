@@ -45,6 +45,21 @@ export class ChangePasswordComponent implements OnInit {
 
 
   postChangePassword() {
+    
+    if(this.authObj.currentPassword == ""){
+      this._sharedService.getToastPopup("Enter current password", 'Password', 'error');
+      return;
+    }
+    else if(this.authObj.newPassword == "") {
+      this._sharedService.getToastPopup("Enter new password", 'Password', 'error');
+      return;
+    }
+    else if(this.authObj.retypePassword == ""){
+      this._sharedService.getToastPopup("Enter confirm password", 'Password', 'error');
+      return;
+    }
+
+
     this._changePasswordService._getChangePasswordeApi(this.authObj).subscribe((res: any) => {
       console.log('pwd changed', res)
       this._sharedService.getToastPopup(res.message, 'Password', 'success');
@@ -86,5 +101,9 @@ export class ChangePasswordComponent implements OnInit {
       }
     }
   };
+
+  resetForm(){
+    this.changePasswordForm.reset();
+  }
 
 }

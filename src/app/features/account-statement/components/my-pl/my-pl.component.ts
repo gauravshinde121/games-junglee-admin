@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AccountStatementService } from '../../services/account-statement.service';
 import { SharedService } from '@shared/services/shared.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-my-pl',
@@ -15,6 +16,8 @@ export class MyPlComponent implements OnInit {
   games:any;
   matchList:any = [];
   marketTypeList:any = [];
+  dateFormat = "yyyy-MM-dd";
+  language = "en";
 
   constructor(
     private _accountStatementService:AccountStatementService,
@@ -42,13 +45,17 @@ export class MyPlComponent implements OnInit {
 
   __initForm(){
     this.filterForm = new FormGroup({
-      fromDate:new FormControl(new Date()),
-      toDate:new FormControl(new Date()),
-      sportsId:new FormControl('0'),
-      matchId:new FormControl('0'),
-      marketId:new FormControl('0'),
+      fromDate:new FormControl(this.formatFormDate(new Date())),
+      toDate:new FormControl(this.formatFormDate(new Date())),
+      sportsId:new FormControl(null),
+      matchId:new FormControl(null),
+      marketId:new FormControl(null),
       page:new FormControl(1)
     })
+  }
+
+  formatFormDate(date: Date) {
+    return formatDate(date, this.dateFormat,this.language);
   }
 
   getPlStatement(){

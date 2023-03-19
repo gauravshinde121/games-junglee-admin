@@ -50,21 +50,25 @@ export class ActivityComponent implements OnInit {
 
 
   _initForm(){
-    this.searchActivityForm = new FormGroup({
+    this.searchActivityForm = this._fb.group({
       agent:new FormControl(true),
       sportsId:new FormControl(null),
       marketId:new FormControl(null),
-      fromDate:new FormControl(this.formatDate(new Date())),
-      toDate:new FormControl(this.formatDate(new Date()))
+      fromDate : this.formatFormDate(new Date()),
+      toDate : this.formatFormDate(new Date())
     });
+  }
+
+  formatFormDate(date: Date) {
+    return formatDate(date, this.dateFormat,this.language);
   }
 
 
   onSubmitSearchActivityForm(){
     this._memberService._getMemberActivityApi({...this.searchActivityForm.value,refUserId:this.userId}).subscribe((res:any)=>{
       console.log('search',res);
-      this.activityData = res.data;
-      console.log('activity',this.activityData)
+      // this.activityData = res.data;
+      // console.log('activity',this.activityData)
     })
   }
 
@@ -117,15 +121,10 @@ export class ActivityComponent implements OnInit {
   //   this._getMatchBySportId(sportId);
   // }
 
-  private formatDate(date) {
-    return formatDate(date, this.dateFormat,this.language);
-
-  }
-
   searchActivity(){
     let payload = {
       refUserId:this.userId,
-      fromDate:this.searchActivityForm.value.fromDate,
+      fromDate: new Date(this.searchActivityForm.value.fromDate),
       toDate:this.searchActivityForm.value.toDate,
       agent:this.searchActivityForm.value.agent,
       marketId:this.searchActivityForm.value.marketId,

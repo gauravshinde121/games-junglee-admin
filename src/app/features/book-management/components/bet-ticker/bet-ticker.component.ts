@@ -152,19 +152,6 @@ export class BetTickerComponent implements OnInit {
     this.isLoading = true;
     this.allBets = [];
 
-    // let payload = {
-    //   sportId: null,
-    //   matchId: null,
-    //   userId: null,
-    //   marketId : null,
-    //   stakesFrom :null,
-    //   stakesTo :null,
-    //   fromDate : null,
-    //   toDate : null
-
-    // }
-
-
 
     let body = {
       sportsId: null,

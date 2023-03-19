@@ -33,6 +33,8 @@ export class MembersListComponent implements OnInit {
   pageSize: number = 10;
   totalPages: number = 0;
 
+  statusList : any = [];
+
   selectedIndex = -1;
   showContent(evt, index) {
     if (this.selectedIndex == index) {
@@ -55,6 +57,12 @@ export class MembersListComponent implements OnInit {
 
   ngOnInit(): void {
     this._preConfig();
+
+    this.statusList = [
+                      {id:1,status : "Active", color : 'green'},
+                      {id:2,status : "Inactive", color : 'yellow'},
+                      {id:3,status : "Closed", color :'red'}
+                    ]
   }
 
   _preConfig() {
@@ -201,5 +209,9 @@ export class MembersListComponent implements OnInit {
     this._router.navigate([
       `/member/member-details/Player/${user.username}/${user.createdDate}/${user.userId}`,
     ]);
+  }
+
+  changeStatus(evt){
+    console.log("Evt",evt.target.value);
   }
 }

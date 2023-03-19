@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MembersService } from '../../services/members.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
+import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-transfer-statements',
   templateUrl: './transfer-statements.component.html',
@@ -16,11 +17,14 @@ export class TransferStatementsComponent implements OnInit {
   toDate = new Date().toString();
   userId:any = null;
   filterForm:FormGroup;
+  dateFormat = "yyyy-MM-dd";
+  language = "en";
 
   constructor(
     private _memberService: MembersService,
     private route: ActivatedRoute,
-    private _sharedService: SharedService) {
+    private _sharedService: SharedService,
+    private _fb: FormBuilder) {
 
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
@@ -32,12 +36,17 @@ export class TransferStatementsComponent implements OnInit {
   }
 
   _initForm(){
-    this.filterForm = new FormGroup({
-      fromDate:new FormControl(new Date()),
-      toDate:new FormControl(new Date()),
-      page:new FormControl(1)
+    this.filterForm = this._fb.group({
+      fromDate : this.formatFormDate(new Date()),
+      toDate : this.formatFormDate(new Date()),
+
     })
   }
+
+  formatFormDate(date: Date) {
+    return formatDate(date, this.dateFormat,this.language);
+  }
+
 
   _preConfig(){
     this._initForm();
@@ -53,8 +62,8 @@ export class TransferStatementsComponent implements OnInit {
     }
 
     this._memberService._getTransferStatementForUserApi(payload).subscribe((data: any) => {
-      console.log(data)
-      this.transferStatements = data;
+      console.log(data.transferStatement)
+      this.transferStatements = data.transferStatement;
     })
   }
 

@@ -31,9 +31,17 @@
           <a> <img src="../../../../../assets/images/net_exposure.png" width="22px" alt=""></a>
         </td>
         <td>
-          <a class="btn btn-pink rounded-pill pt-2 pb-2 w-100 text-danger"> {{data.netExposure}}</a></td>
+          <a class="btn btn-pink rounded-pill pt-2 pb-2 w-100 text-danger"> <span [ngClass]="data.netExposure > 0
+            ? 'text-success'
+            : 'text-danger' "> {{data.netExposure}} </span></a></td>
         <td>
-          <a class="btn rounded-pill alert alert-success pt-2 pb-2 w-100"> {{data.horses[0]?.finalAmount?data.horses[0]?.finalAmount:0}}</a>
+          <a class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
+            <span [ngClass]="data.netExposure > 0
+              ? 'text-success'
+              : 'text-danger' ">
+            {{data.horses[0]?.finalAmount?data.horses[0]?.finalAmount:0}}
+              </span>
+          </a>
         </td>
         <td>
           <a *ngIf="data.horses[2]" class="btn rounded-pill alert alert-success pt-2 pb-2 w-100"> {{data.horses[2]?.finalAmount?data.horses[2]?.finalAmount:'--'}}</a></td>

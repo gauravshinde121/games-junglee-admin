@@ -1,27 +1,26 @@
-<div class="tab-pane fade show active" id="pills-commission" role="tabpanel" aria-labelledby="pills-commission-tab" tabindex="0">
+<div class="tab-pane fade show active" id="pills-commission" role="tabpanel" aria-labelledby="pills-commission-tab"
+  tabindex="0">
   <div class="col-md-12">
-   <div class="row">
-   <div class="col-md-2">
-   <label>From Date</label>
-   <input type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" name="" class="form-control mt-2" id="" placeholder="Month">
-
-   </div>
-   <div class="col-md-2">
-   <label>To Date</label>
-   <input type="text" placeholder="{{currentDate | date:'dd/MM/yyyy'}}" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" name="" class="form-control mt-2" id="" placeholder="Month">
-
-   </div>
-   <div class="col-md-8 pt-2">
-   <button class="btn btn-pink rounded-pill mt-4 w-25">Search</button>
-   </div>
-  <div class="col-md-4 mt-4">
-   <h3 class="text-success">Fancy</h3>
-   <button class="btn btn-dark border-secondary w-100 mt-1 p-3"> 0 </button>
+    <div class="row" [formGroup]="commisionForm">
+      <div class="col-md-2">
+        <label>From Date</label>
+        <input type="date" name="fromDate" formControlName="fromDate" class="form-control mt-2" id="">
+      </div>
+      <div class="col-md-2">
+        <label>To Date</label>
+        <input type="date" formControlName="toDate" name="toDate" class="form-control mt-2" id="">
+      </div>
+      <div class="col-md-8 pt-2">
+        <button class="btn btn-pink rounded-pill mt-4 w-25">Search</button>
+      </div>
+      <div class="col-md-4 mt-4">
+        <h3 class="text-success">Fancy</h3>
+        <button class="btn btn-dark border-secondary w-100 mt-1 p-3"> 0 </button>
+      </div>
+      <div class="col-md-4 mt-4">
+        <h3 class="text-danger">Bookmaker</h3>
+        <button class="btn btn-dark border-secondary w-100 mt-1 p-3">0 </button>
+      </div>
+    </div>
   </div>
-  <div class="col-md-4 mt-4">
-  <h3 class="text-danger">Bookmaker</h3>
-  <button class="btn btn-dark border-secondary w-100 mt-1 p-3">0 </button>
-  </div>
-   </div>
-  </div>
-  </div>
+</div>

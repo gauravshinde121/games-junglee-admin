@@ -7,6 +7,7 @@ import {
   nameValidator,
   ntpOrIpValidator
 } from "src/app/shared/classes/validator";
+import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-bet-list',
   templateUrl: './bet-list.component.html',
@@ -24,6 +25,23 @@ export class BetListComponent implements OnInit {
   matchList:any = [];
   marketList:any = [];
   allMembers:any = [];
+  dateFormat = "yyyy-MM-dd";
+  language = "en";
+  isLoading = false;
+  isMatch : boolean = false ;
+  searchTerm: string = '';
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 0;
+  status = "Enable";
+  sportsId: any = null;
+  matchId: any = null;
+  marketTypeId: any = null;
+
+  btnActive: string = 'current';
+  isActive : any = false;
+  isMatched : any = false;
+
 
   constructor(
     private _memberService:MembersService,
@@ -38,15 +56,15 @@ export class BetListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params=>{
-      this.userId = +params['id'];
+    this.userId = +params['id'];
+  
+    });
 
-      // this.filterForm = this._fb.group({
-      //   membername:new  FormControl('',[Validators.required]),
-      // })
-    })
+    this.isActive = true;
+    this.isMatched = true;
 
     this._preconfig();
-    /*this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
+    this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
@@ -54,7 +72,7 @@ export class BetListComponent implements OnInit {
     this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected matchId: ', selectedValue);
       this._getMarketsByMatchId(selectedValue);
-    });*/
+    });
 
   }
 
@@ -70,8 +88,8 @@ export class BetListComponent implements OnInit {
 
   _initForm(){
     this.filterForm = this._fb.group({
-      fromDate:new FormControl(this.formatDate(new Date())),
-      toDate:new FormControl(this.formatDate(new Date())),
+      fromDate : this.formatFormDate(new Date()),
+      toDate : this.formatFormDate(new Date()),
       memberName: [
         "0",
         {
@@ -79,9 +97,9 @@ export class BetListComponent implements OnInit {
           updateOn: "change",
         },
       ],
-      sportsId:new FormControl('0'),
-      matchId:new FormControl('0'),
-      marketId:new FormControl('0'),
+      sportsId: null,
+      matchId: null,
+      marketId: null,
       highlightIp: [
         "",
         {
@@ -89,35 +107,59 @@ export class BetListComponent implements OnInit {
           updateOn: "change",
         },
       ],
-      page:new FormControl(1),
-      stakesFrom:new FormControl('All'),
-      stakesTo:new FormControl('All'),
-      betType:new FormControl("Matched"),
-      time:new FormControl("All")
+      page: null,
+      stakesFrom: null,
+      stakesTo: null,
+      betType: null,
+      time: null
     });
   }
 
+  formatFormDate(date: Date) {
+    return formatDate(date, this.dateFormat,this.language);
+  }
 
   getMemberBets(){
-    this._memberService._getMemberBetseApi({...this.filterForm.value,userId:this.userId})
+
+    this.isLoading = true;
+    this.betList = [];
+
+    let body = {
+      isActive: this.isActive,
+      isMatched: this.isMatched,
+      sportId: this.filterForm.value.sportsId,
+      matchId : this.filterForm.value.matchId,
+      marketId : this.filterForm.value.marketId,
+      stakesFrom :this.filterForm.value.stakesFrom,
+      stakesTo :this.filterForm.value.stakesTo,
+      fromDate : this.filterForm.value.fromDate,
+      toDate : this.filterForm.value.toDate,
+      userId:this.userId,
+      pageNo: this.currentPage,
+      limit: 50,
+    };
+
+    this._memberService._getMemberBetseApi(body)
       .subscribe((res:any)=>{
-      console.log(res)
+      console.log(res);
+      this.isLoading = false;
       if(res){
-        this.betList = res.data.betList
+        this.betList = res.data.betList;
+        this.totalPages = Math.ceil(this.betList.length / this.pageSize);
       }
     })
   }
 
-  private formatDate(date) {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    return [day, month, year].join('/');
+
+  next(): void {
+    this.currentPage++;
+    this.getMemberBets();
   }
 
+  prev(): void {
+    this.currentPage--;
+    this.getMemberBets();
+  }
 
   _getGames(){
     this._sharedService._getSports().subscribe((data:any)=>{
@@ -161,8 +203,51 @@ export class BetListComponent implements OnInit {
   }
 
 
+  changeGame(evt) {
+    this.sportsId = evt.target.value;
+  }
+
+  changeMatch(evt) {
+    this.matchId = evt.target.value;
+  }
+
+  changeMarketType(evt) {
+    this.marketTypeId = evt.target.value;
+  }
+
   clearMembers(){
     this.filterForm.controls['membername'].reset()
   }
+
+  showMatch(linkActive: string){
+    
+    if(linkActive == 'current') {
+      this.isMatch = false;
+
+      this.isActive = true;
+      this.isMatched = true;
+      this.getMemberBets();
+    }
+    else if(linkActive == 'past'){
+      this.isMatch = true;
+      this.isActive = false;
+      this.isMatched = null;
+      this.getMemberBets();
+
+    }
+    else if(linkActive == 'unmatch'){
+      // this.isMatch = true;
+      this.isActive = true;
+      this.isMatched = false;
+      this.getMemberBets();
+
+    }
+    this.btnActive = linkActive;
+
+   
+  }
+
+
+
 
 }

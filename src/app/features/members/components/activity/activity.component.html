@@ -4,25 +4,25 @@
     <form [formGroup]="searchActivityForm" (ngSubmit)="onSubmitSearchActivityForm()">
       <div class="row">
         <div class="col-md-12 mb-3">
-          <span class="me-3"><input formControlName="agent" type="radio" [checked]="isChecked" id="1" value="Agent" />
+          <span class="me-3"><input formControlName="agent" type="radio" [checked]="isChecked" id="1" value="true" />
             <label for="1">Agent</label></span>
-          <span><input formControlName="agent" type="radio" id="0" value="All" />
+          <span><input formControlName="agent" type="radio" id="0" value="false" />
             <label for="0">All Members</label></span>
         </div>
 
 
         <div class="col-md-3 mb-3">
           <label>Select Sports</label>
-          <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
-            <option value="0">All</option>
-            <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
+          <select formControlName="sportsId" id="ab" class="form-select text-white bg-dark" (click)="_onSportSelect()">
+            <option class="text-dark bg-white" value="null">All</option>
+            <option class="text-dark bg-white" *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
           </select>
         </div>
         <div class="col-md-3 mb-3">
-          <label>Select Market Type</label>
-          <select formControlName="marketTypeListId" id="ab" class="form-select bg-dgrey">
-            <option value="0">All</option>
-            <option *ngFor="let market of marketTypeList">{{market.marketType}}</option>
+          <label>Select Market</label>
+          <select formControlName="marketId" id="ab" class="form-select text-white bg-dark">
+            <option class="text-dark bg-white" value="null">All</option>
+            <option class="text-dark bg-white" value="market.marketId" *ngFor="let market of marketList">{{market.marketName}}</option>
           </select>
         </div>
 

@@ -281,9 +281,12 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_MEMBER_BOOKS_FOR_BACKEND)
   }
 
-
-public getAllUserBetsEndpoint(){
+  public getAllUserBetsEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_ALL_USER_BETS)
+  }
+
+  public getMarketBySportIdEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_MARKET_BY_SPORT_ID)
   }
 
 }

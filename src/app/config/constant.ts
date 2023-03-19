@@ -39,6 +39,7 @@ export class Constants {
     public readonly API_URL_GET_MEMBER_LOGIN_HISTORY: string = 'api/junglee-admin/getMemberLoginHistory';
     public readonly API_URL_GET_MEMBER_BOOKS_FOR_BACKEND: string = 'api/junglee-admin/getMemberBooksForBackend';
     public readonly API_URL_ALL_MEMBERS:string = 'api/junglee-admin/getAllMembers';
+    public readonly API_URL_GET_MARKET_BY_SPORT_ID:string = 'api/junglee-admin/getMarketBySportId';
 
 
     //book management

@@ -147,5 +147,10 @@ export class SharedService {
     .post(this._apiEndpointsService.getAllMarketTypeEndpoint(),{});
   }
 
+  getMarketBySportId(sportId){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.getMarketBySportIdEndpoint(),{sportId:sportId});
+  }
+
 }
 

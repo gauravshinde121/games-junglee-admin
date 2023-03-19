@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MembersService } from '../../services/members.service';
 import { SharedService } from '@shared/services/shared.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { exit } from 'process';
+
 
 @Component({
   selector: 'app-activity',
@@ -21,7 +21,7 @@ export class ActivityComponent implements OnInit {
   activityData :any = []
   games:any;
   matchList:any = [];
-  marketTypeList:any = [];
+  marketList:any = [];
   isChecked: boolean = true;
 
   constructor(
@@ -42,15 +42,14 @@ export class ActivityComponent implements OnInit {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
-    this._getAllMarketTypeList();
   }
 
 
   _initForm(){
     this.searchActivityForm = new FormGroup({
-      agent:new FormControl("1"),
-      sportsId:new FormControl(0),
-      marketTypeListId:new FormControl(0),
+      agent:new FormControl(true),
+      sportsId:new FormControl(null),
+      marketId:new FormControl(null),
       fromDate:new FormControl(this.formatDate(new Date())),
       toDate:new FormControl(this.formatDate(new Date()))
     });
@@ -91,11 +90,17 @@ export class ActivityComponent implements OnInit {
     });
   }
 
-  _getAllMarketTypeList(){
-    this._sharedService.getAllMarketTypeList().subscribe((data:any)=>{
-      console.log('match data',data.data);
-      if(data.data){
-        this.marketTypeList = data.data;
+
+  _onSportSelect(){
+    console.log(this.searchActivityForm.value)
+    this._getAllMarkets(this.searchActivityForm.value.sportsId)
+  }
+
+  _getAllMarkets(sportId){
+    this._sharedService.getMarketBySportId(sportId).subscribe((data:any)=>{
+      console.log('market types',data.data);
+      if(data){
+        this.marketList = data.data;
         //console.log('data.matchList',data.matchList);
       }
     });
@@ -119,14 +124,7 @@ export class ActivityComponent implements OnInit {
 
   searchActivity(){
     console.log('poiut');
-    /*this._memberService._getMemberActivityApi({refUserId:this.userId,fromDate:this.fromDate,toDate:this.toDate,agent:"1",marketTypeListId:"All",sportsId:''}).subscribe(((res:any)=>{
-      console.log(res);
-      console.log('this.activityData',this.activityData);
-      if(res){
-        this.activityData = res.data;
-        console.log('this.activityData',this.activityData);
-      }
-    }))*/
+
     this._memberService._getMemberActivityApi({...this.searchActivityForm.value,refUserId:this.userId}).subscribe((res:any)=>{
       console.log('search',res);
       this.activityData = res.data;

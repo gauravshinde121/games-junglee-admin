@@ -248,6 +248,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ALL_MEMBERS)
   }
 
+  public getInvalidBetsEndpoint(){
+    return this.createUrl(this._constants.API_URL_INVALID_BETS)
+  }
+
   public getUpdateSuperAdminBalanceEndpoint(){
     return this.createUrl(this._constants.API_URL_ADD_BALANCE)
   }
@@ -258,6 +262,10 @@ export class ApiEndpointsService {
 
   public getMatchBySportIdEndpoint(){
     return this.createUrl(this._constants.API_GET_MATCHES_BY_SPORT_ID)
+  }
+
+  public getSurveillanceDataEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_SURVEILLANCE_DATA)
   }
 
   public getMarketsByMatchIdEndpoint(){

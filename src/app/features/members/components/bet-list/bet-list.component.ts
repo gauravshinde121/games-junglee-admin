@@ -23,7 +23,7 @@ export class BetListComponent implements OnInit {
   games:any;
   matchList:any = [];
   marketList:any = [];
-  allMambers:any = [];
+  allMembers:any = [];
 
   constructor(
     private _memberService:MembersService,
@@ -150,7 +150,7 @@ export class BetListComponent implements OnInit {
     this._memberService._getAllMembers().subscribe((data:any)=>{
       console.log('match data',data);
       if(data.memberData){
-        this.allMambers = data.memberData;
+        this.allMembers = data.memberData;
         console.log('data.matchList',data.matchList);
       }
     });

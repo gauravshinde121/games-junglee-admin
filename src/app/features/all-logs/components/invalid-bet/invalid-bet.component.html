@@ -1,50 +1,71 @@
 <main id="main" class="main">
   <section class="section gamedetails">
-    <div class="row">
+    <div class="row" [formGroup]="invalidBetForm">
       <div class="col-md-12">
         <!--your code will come here start-->
-        <h4 class="text-pink"> Invalid Bet </h4><hr>
+        <h4 class="text-pink">Invalid Bet</h4>
+        <hr />
 
         <div class="col-md-12">
-            <input type="text" class="form-control mb-3" placeholder="Enter Member Name to Search">
+          <label>Select Member</label>
+          <select formControlName="memberName" id="ab" class="form-select bg-dgrey">
+            <option value="0">All</option>
+            <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
+          </select>
         </div>
         <div class="col-md-12">
-            <div class="row" [formGroup]="invalidBetForm">
+          <div class="row" [formGroup]="invalidBetForm">
             <div class="col-md-4">
-                <label>From Date</label>
-                <input type="date" name="" class="form-control" id="" formControlName="fromDate">
-              </div>
-              <div class="col-md-4">
-                <label>To Date</label>
-                <input type="date" name="" class="form-control" id=""  formControlName="toDate">
-              </div>
-              <div class="col-md-4 mb-3 mt-4">
-                <span class="me-3"><input type="radio" class="radioselected" name="1" id="1"> VarBET</span>
-                <span><input type="radio" class="radioselected" name="1" id="1"> Invalid Bet</span>
-                </div>
-                  <div class="col-md-2 mt-5">
-                    <button type="button" class="btn btn-pink rounded-pill w-100">
-                  Get Log </button>
-                  </div>
-                  <div class="col-md-2 mt-5">
-                    <button type="button" class="btn btn-pink rounded-pill w-100">Clear Filters</button>
-                  </div>
-
-              </div>
-
+              <label>From Date</label>
+              <input
+                type="date"
+                name=""
+                class="form-control"
+                id=""
+                formControlName="fromDate"
+              />
             </div>
+            <div class="col-md-4">
+              <label>To Date</label>
+              <input
+                type="date"
+                name=""
+                class="form-control"
+                id=""
+                formControlName="toDate"
+              />
+            </div>
+            <div class="col-md-4 mb-3 mt-4">
+              <span class="me-3"
+                ><input type="radio" class="radioselected" value="0" formControlName="invalidBet" id="1" />
+                VarBET</span
+              >
+              <span
+                ><input type="radio" class="radioselected" value="1" formControlName="invalidBet" id="1" />
+                Invalid Bet</span
+              >
+            </div>
+            <div class="col-md-2 mt-5">
+              <button type="button" class="btn btn-pink rounded-pill w-100" (click)="getLogs()">
+                Get Log
+              </button>
+            </div>
+            <div class="col-md-2 mt-5">
+              <button type="button" class="btn btn-pink rounded-pill w-100" (click)="clearFilters()">
+                Clear Filters
+              </button>
+            </div>
+          </div>
         </div>
-
-        <!--your code will come here end-->
       </div>
 
+      <!--your code will come here end-->
+    </div>
   </section>
-
 
   <div class="col-md-12 mt-3">
     <div class="border text-center p-5">
-    <h4>No data found </h4>
+      <h4>No data found</h4>
+    </div>
   </div>
-  </div>
-
 </main>

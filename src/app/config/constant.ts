@@ -72,4 +72,7 @@ export class Constants {
 
     //all logs
     public readonly API_URL_INVALID_BETS:string = 'api/getVARBets';
+
+    //surveillance
+    public readonly API_URL_GET_SURVEILLANCE_DATA:string = 'api/getBetsForSurveilliance';
 }

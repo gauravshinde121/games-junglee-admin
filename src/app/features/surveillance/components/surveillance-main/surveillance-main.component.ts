@@ -69,7 +69,9 @@ export class SurveillanceMainComponent implements OnInit {
   }
 
   getSurveillanceData(){
-
+    this._sharedService._getSurveillanceDataApi({...this.filterForm.value}).subscribe((res:any)=>{
+      this.surveillanceData = res.data;
+    })
   }
 
   _getMatchBySportId(sportId){

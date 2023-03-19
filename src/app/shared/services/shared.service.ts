@@ -136,6 +136,11 @@ export class SharedService {
       .post(this._apiEndpointsService.getMatchBySportIdEndpoint(),{sportId:sportId});
   }
 
+  _getSurveillanceDataApi(body){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getSurveillanceDataEndpoint(),{body});
+  }
+
   getMarketsByMatchId(matchId){
     return this._apiHttpService
       .post(this._apiEndpointsService.getMarketsByMatchIdEndpoint(),{matchId:matchId});

@@ -136,7 +136,6 @@ export class SharedService {
       .post(this._apiEndpointsService.getMatchBySportIdEndpoint(),{sportId:sportId});
   }
 
-
   getMarketsByMatchId(matchId){
     return this._apiHttpService
       .post(this._apiEndpointsService.getMarketsByMatchIdEndpoint(),{matchId:matchId});

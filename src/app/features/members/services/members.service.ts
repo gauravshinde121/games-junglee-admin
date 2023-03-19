@@ -60,6 +60,11 @@ export class MembersService {
     return this._apiHttpService.get(this._apiEndpointsService.getAllMembersEndpoint())
   }
 
+  _getInvalidBetsApi(paramObj){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.getInvalidBetsEndpoint(),paramObj);
+  }
+
   _getTransferStatementForUserApi(paramObj){
     return this._apiHttpService
     .post(this._apiEndpointsService.getTransferStatementForUserEndpoint(),paramObj);

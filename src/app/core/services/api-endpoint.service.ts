@@ -248,6 +248,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ALL_MEMBERS)
   }
 
+  public getInvalidBetsEndpoint(){
+    return this.createUrl(this._constants.API_URL_INVALID_BETS)
+  }
+
   public getUpdateSuperAdminBalanceEndpoint(){
     return this.createUrl(this._constants.API_URL_ADD_BALANCE)
   }

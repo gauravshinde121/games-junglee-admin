@@ -17,10 +17,11 @@ export class PlayerPlComponent implements OnInit {
   games:any;
   matchList:any = [];
   marketList:any = [];
-  marketTypeList:any = [];
+  allMembersList:any = [];
   allMambers:any = [];
   dateFormat = "yyyy-MM-dd";
   language = "en";
+  marketTypeList:any;
 
   constructor(
     private _accountStatementService:AccountStatementService,
@@ -79,7 +80,7 @@ export class PlayerPlComponent implements OnInit {
   getPlStatement(){
     this._accountStatementService._getDownlineAccountsDataApi(this.filterForm.value).subscribe((res:any)=>{
       console.log(res)
-      this.plStatement = res.admin
+      this.plStatement = res.admin;
     })
   }
 

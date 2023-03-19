@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MembersService } from '../../services/members.service';
 import { SharedService } from '@shared/services/shared.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -23,6 +24,9 @@ export class ActivityComponent implements OnInit {
   matchList:any = [];
   marketList:any = [];
   isChecked: boolean = true;
+  dateFormat = "yyyy-MM-dd";
+  language = "en";
+
 
   constructor(
     private _fb: FormBuilder,
@@ -38,10 +42,10 @@ export class ActivityComponent implements OnInit {
   ngOnInit(): void {
     this._preConfig();
 
-    this.searchActivityForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected value: ', selectedValue);
-      this._getMatchBySportId(selectedValue);
-    });
+    // this.searchActivityForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
+    //   console.log('Selected value: ', selectedValue);
+    //   this._getMatchBySportId(selectedValue);
+    // });
   }
 
 
@@ -80,15 +84,15 @@ export class ActivityComponent implements OnInit {
     });
   }
 
-  _getMatchBySportId(sportId){
-    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
-      console.log(data)
-      if(data.matchList){
-        this.matchList = data.matchList;
-        console.log('matchList',this.matchList)
-      }
-    });
-  }
+  // _getMatchBySportId(sportId){
+  //   this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
+  //     console.log(data)
+  //     if(data.matchList){
+  //       this.matchList = data.matchList;
+  //       console.log('matchList',this.matchList)
+  //     }
+  //   });
+  // }
 
 
   _onSportSelect(){
@@ -97,6 +101,7 @@ export class ActivityComponent implements OnInit {
   }
 
   _getAllMarkets(sportId){
+    if(!sportId) return
     this._sharedService.getMarketBySportId(sportId).subscribe((data:any)=>{
       console.log('market types',data.data);
       if(data){
@@ -107,25 +112,27 @@ export class ActivityComponent implements OnInit {
   }
 
 
-  onGameSelected(sportId){
-    console.log(sportId)
-    this._getMatchBySportId(sportId);
-  }
+  // onGameSelected(sportId){
+  //   console.log(sportId)
+  //   this._getMatchBySportId(sportId);
+  // }
 
   private formatDate(date) {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    return [day, month, year].join('/');
+    return formatDate(date, this.dateFormat,this.language);
+
   }
 
   searchActivity(){
-    console.log('poiut');
+    let payload = {
+      refUserId:this.userId,
+      fromDate:this.searchActivityForm.value.fromDate,
+      toDate:this.searchActivityForm.value.toDate,
+      agent:this.searchActivityForm.value.agent,
+      marketId:this.searchActivityForm.value.marketId,
+      sportId:this.searchActivityForm.value.sportsId
+    }
 
-    this._memberService._getMemberActivityApi({...this.searchActivityForm.value,refUserId:this.userId}).subscribe((res:any)=>{
+    this._memberService._getMemberActivityApi(payload).subscribe((res:any)=>{
       console.log('search',res);
       this.activityData = res.data;
       console.log('activity',this.activityData)

@@ -45,9 +45,10 @@
         </div>
       </div>
     </form>
+
     <div class="row">
       <div class="col-md-12 mt-4">
-        <table class="table tableall" *ngIf="activityData.length > 0">
+        <table class="table tableall" *ngIf="activityData">
           <thead>
             <tr>
               <th scope="col"></th>
@@ -63,35 +64,35 @@
             <tr>
               <td>Win</td>
               <td [ngClass]="
-              +(activityData?.currentDateData[0].winAmt) > 0
+              +(activityData?.currentDateData[0]?.winAmt) > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
                 {{ activityData?.currentDateData[0].winAmt | number }}
               </td>
               <td [ngClass]="
-                  activityData?.threeDaysBack[0].winAmt > 0
+                  activityData?.threeDaysBack[0]?.winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
                 {{ activityData?.threeDaysBack[0].winAmt | number }}
               </td>
               <td [ngClass]="
-                  activityData?.sevenDaysBack[0].winAmt > 0
+                  activityData?.sevenDaysBack[0]?.winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
                 {{ activityData?.sevenDaysBack[0].winAmt | number }}
               </td>
               <td [ngClass]="
-                  activityData?.thirtyDaysBack[0].winAmt > 0
+                  activityData?.thirtyDaysBack[0]?.winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
                 {{ activityData?.thirtyDaysBack[0].winAmt | number }}
               </td>
               <td [ngClass]="
-                  activityData?.lifeTimeData[0].winAmt > 0
+                  activityData?.lifeTimeData[0]?.winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">

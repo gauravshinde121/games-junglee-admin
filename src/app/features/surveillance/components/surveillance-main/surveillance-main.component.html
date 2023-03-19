@@ -17,7 +17,7 @@
               id="ab"
               class="form-select bg-dgrey"
             >
-              <option value="0">All</option>
+              <option value="null">All</option>
               <option *ngFor="let member of allMembers" [value]="member.userId">
                 {{ member.username }}
               </option>
@@ -41,7 +41,7 @@
               id="ab"
               class="form-select bg-dgrey"
             >
-              <option value="0">All</option>
+              <option value="null">All</option>
               <option *ngFor="let game of games" [value]="game.sportId">
                 {{ game.sportName }}
               </option>
@@ -54,7 +54,7 @@
               id="ab"
               class="form-select bg-dgrey"
             >
-              <option value="0">All</option>
+              <option value="null">All</option>
               <option [value]="match.matchId" *ngFor="let match of matchList">
                 {{ match.matchName }}
               </option>
@@ -67,7 +67,7 @@
               id="ab"
               class="form-select bg-dgrey"
             >
-              <option value="0">All</option>
+              <option value="null">All</option>
               <option [value]="market.marketId" *ngFor="let market of marketList">
                 {{ market.marketName }}
               </option>

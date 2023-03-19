@@ -18,7 +18,7 @@ export class PlayerPlComponent implements OnInit {
   matchList:any = [];
   marketList:any = [];
   allMembersList:any = [];
-  allMambers:any = [];
+  allMembers:any = [];
   dateFormat = "yyyy-MM-dd";
   language = "en";
   marketTypeList:any;
@@ -37,13 +37,11 @@ export class PlayerPlComponent implements OnInit {
   ngOnInit(): void {
     this._preConfig();
     this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
 
 
     this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected matchId: ', selectedValue);
       this._getMarketsByMatchId(selectedValue);
     });
   }
@@ -96,7 +94,6 @@ export class PlayerPlComponent implements OnInit {
     };
 
     this._accountStatementService._getDownlineAccountsDataApi(body).subscribe((res:any)=>{
-      console.log(res);
       this.isLoading = false;
       this.plStatement = res.admin;
 
@@ -108,20 +105,16 @@ export class PlayerPlComponent implements OnInit {
 
   _getAllMembers(){
     this._memberService._getAllMembers().subscribe((data:any)=>{
-      console.log('match data',data);
-      if(data.allMambers){
-        this.allMambers = data.allMambers;
-        console.log('data.matchList',data.matchList);
+      if(data.memberData){
+        this.allMembers = data.memberData;
       }
     });
   }
 
   _getAllMarketTypeList(){
     this._sharedService.getAllMarketTypeList().subscribe((data:any)=>{
-      console.log('match data2',data);
       if(data.data){
         this.marketTypeList = data.data;
-        console.log('data.matchList',data.matchList);
       }
     });
   }
@@ -134,17 +127,14 @@ export class PlayerPlComponent implements OnInit {
     this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
       if(data.matchList){
         this.matchList = data.matchList;
-        //console.log('data.matchList',data.matchList);
       }
     });
   }
 
   _getMarketsByMatchId(matchId){
     this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
-      console.log('match data',data);
       if(data.marketList){
         this.marketList = data.marketList;
-        //console.log('data.matchList',data.matchList);
       }
     });
   }

@@ -43,10 +43,10 @@ export class NetExposureComponent implements OnInit {
 
   onFilterChange(filterObj){
     this.isLoading = true;
-    let payload = {};
+    let body = {};
     var sport_value = this.filterForm.value.sport;
     if(filterObj.clicked == 'type'){
-      payload = {
+      body = {
         selectedType: filterObj.selectedType,
         matchId: this.filterForm.value.matchId,
         sportsId: sport_value
@@ -54,22 +54,22 @@ export class NetExposureComponent implements OnInit {
     }
     if(filterObj.clicked == 'sport'){
       this._getMatchBySportId(filterObj.sport);
-      payload = {
+      body = {
         selectedType: this.filterForm.value.selectedType,
         sportsId: filterObj.sport,
         matchId: 0
       }
     }
     if(filterObj.clicked == 'match'){
-      payload = {
+      body = {
         selectedType: this.filterForm.value.selectedType,
         sportsId: this.filterForm.value.matchId,
         matchId: filterObj.matchId
       }
     }
 
-    console.log('payload',payload)
-    this._bookManagementService._getBookForBackendApi(payload).subscribe((res:any)=>{
+    console.log('body',body)
+    this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
       this.isLoading = false;
       //this.booksForBackend = res.booksForBackend
       //console.log(res)

@@ -23,6 +23,7 @@ export class MyPlComponent implements OnInit {
   pageSize: number = 10;
   totalPages: number = 0;
   isLoading = false;
+  marketList:any;
 
   constructor(
     private _accountStatementService:AccountStatementService,
@@ -32,15 +33,16 @@ export class MyPlComponent implements OnInit {
   ngOnInit(): void {
     this._preconfig();
     this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
+    });
+    this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
+      this._getMarketByMatchId(selectedValue);
     });
   }
 
   _preconfig(){
     /*this._sharedService._getGames().subscribe((res:any)=>{
       this.games = res.gamesList;
-      console.log('res.gamesList',res.gamesList);
     });*/
     this._getGames();
     this.__initForm();
@@ -63,10 +65,8 @@ export class MyPlComponent implements OnInit {
   }
 
   getPlStatement(){
-
     this.isLoading = true;
     this.plStatement = [];
-
     let body = {
       fromDate: this.filterForm.value.fromDate,
       toDate: this.filterForm.value.toDate,
@@ -76,22 +76,25 @@ export class MyPlComponent implements OnInit {
       pageNo: this.currentPage,
       limit: 50,
     };
-
     this._accountStatementService._getPlBySubgameAPi(body).subscribe((res:any)=>{
-      console.log(res);
       this.isLoading = false;
       this.plStatement = res.admin;
       this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
-
     });
   }
 
   _getAllMarketTypeList(){
     this._sharedService.getAllMarketTypeList().subscribe((data:any)=>{
-      console.log('match data2',data);
       if(data.data){
         this.marketTypeList = data.data;
-        //console.log('data.matchList',data.matchList);
+      }
+    });
+  }
+
+  _getMarketByMatchId(sportId){
+    this._sharedService.getMarketsByMatchId(sportId).subscribe((data:any)=>{
+      if(data.marketList){
+        this.marketList = data.marketList;
       }
     });
   }
@@ -108,7 +111,6 @@ export class MyPlComponent implements OnInit {
     this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
       if(data.matchList){
         this.matchList = data.matchList;
-        //console.log('data.matchList',data.matchList);
       }
     });
   }
@@ -126,4 +128,5 @@ export class MyPlComponent implements OnInit {
     this.currentPage--;
     this.getPlStatement();
   }
+
 }

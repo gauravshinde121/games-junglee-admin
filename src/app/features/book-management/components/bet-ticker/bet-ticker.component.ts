@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import { BookManagementService } from '../../services/book-management.service';
+import { MembersService } from 'src/app/features/members/services/members.service';
 
 @Component({
   selector: 'app-bet-ticker',
@@ -18,7 +19,7 @@ export class BetTickerComponent implements OnInit {
   dateFormat = "yyyy-MM-dd";
   language = "en";
   allBets: any;
-  sportId: any = null;
+  sportsId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
   searchTerm: string = '';
@@ -26,9 +27,11 @@ export class BetTickerComponent implements OnInit {
   pageSize: number = 10;
   totalPages: number = 0;
   isLoading = false;
+  allMembers:any;
 
   constructor(
     private _sharedService:SharedService,
+    private _memberService:MembersService,
     private bookManagementService:BookManagementService,
     private _fb: FormBuilder,
   ) { }
@@ -36,12 +39,10 @@ export class BetTickerComponent implements OnInit {
   ngOnInit(): void {
     this._preConfig();
     this.betTickerForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
 
     this.betTickerForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected matchId: ', selectedValue);
       this._getMarketsByMatchId(selectedValue);
     });
 
@@ -56,6 +57,7 @@ export class BetTickerComponent implements OnInit {
     });*/
     this._initForm();
     this._getGames();
+    this._getAllMembers();
 
   }
 
@@ -74,9 +76,10 @@ export class BetTickerComponent implements OnInit {
 
   _initForm(){
     this.betTickerForm = this._fb.group({
-      sportsId: ['0'],
-      matchId: ['0'],
-      marketId: ['0'],
+      memberName: null,
+      sportsId: null,
+      matchId: null,
+      marketId: null,
       tms: ['All'],
       type: ['All'],
       typeName:['All'],
@@ -95,7 +98,6 @@ export class BetTickerComponent implements OnInit {
 
   _getGames(){
     this._sharedService._getSports().subscribe((data:any)=>{
-      console.log("Data",data);
       if(data){
         this.games = data;
       }
@@ -106,18 +108,23 @@ export class BetTickerComponent implements OnInit {
     this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
       if(data.matchList){
         this.matchList = data.matchList;
-        //console.log('data.matchList',data.matchList);
       }
     });
   }
 
 
+  _getAllMembers(){
+    this._memberService._getAllMembers().subscribe((data:any)=>{
+      if(data.memberData){
+        this.allMembers = data.memberData;
+      }
+    });
+  }
+
   _getMarketsByMatchId(matchId){
     this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
-      console.log('match data',data);
       if(data.marketList){
         this.marketList = data.marketList;
-        //console.log('data.matchList',data.matchList);
       }
     });
   }
@@ -127,7 +134,7 @@ export class BetTickerComponent implements OnInit {
   }
 
   changeGame(evt) {
-    this.sportId = evt.target.value;
+    this.sportsId = evt.target.value;
   }
 
   changeMatch(evt) {
@@ -157,10 +164,10 @@ export class BetTickerComponent implements OnInit {
 
     // }
 
-    
+
 
     let body = {
-      sportId: null,
+      sportsId: null,
       matchId: null,
       userId: null,
       marketId : null,
@@ -173,7 +180,6 @@ export class BetTickerComponent implements OnInit {
     };
 
     this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
-      console.log(res);
       this.isLoading = false;
       this.allBets = res.data;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
@@ -195,7 +201,7 @@ export class BetTickerComponent implements OnInit {
 
   searchList() {
     let payload = {
-      sportId: this.sportId,
+      sportsId: this.sportsId,
       matchId: this.matchId,
       marketId: this.marketTypeId,
       userId: null,
@@ -206,8 +212,6 @@ export class BetTickerComponent implements OnInit {
     }
 
     this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{
-      console.log(res);
-
       this.allBets = res.data;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{

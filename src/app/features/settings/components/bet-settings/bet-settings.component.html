@@ -36,14 +36,14 @@
       <div class="col-md-3 mb-3">
         <label>Select Sport</label>
         <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
-          <option value="0">All</option>
+          <option value="null">All</option>
           <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
         </select>
       </div>
       <div class="col-md-3 mb-3">
         <label>Select Match</label>
         <select formControlName="matchId"  id="ab" class="form-select bg-dgrey">
-          <option value="0">All</option>
+          <option value="null">All</option>
           <option value="match.matchId" *ngFor="let match of matchList">{{match.matchName}}</option>
         </select>
       </div>
@@ -103,7 +103,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let bets of allBets"> 
+            <tr *ngFor="let bets of allBets">
               <td>026agarwal - INR</td>
               <td>{{bets.member}}</td>
               <td>{{bets.placeTime | date }}</td>

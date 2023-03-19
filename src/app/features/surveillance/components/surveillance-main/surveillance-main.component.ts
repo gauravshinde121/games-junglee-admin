@@ -42,10 +42,10 @@ export class SurveillanceMainComponent implements OnInit {
 
   _initForm(){
     this.filterForm = new FormGroup({
-      memberName:new FormControl('0'),
-      sportsId:new FormControl('0'),
-      matchId:new FormControl('0'),
-      marketId:new FormControl('0'),
+      memberName:new FormControl(null),
+      sportsId:new FormControl(null),
+      matchId:new FormControl(null),
+      marketId:new FormControl(null),
       fromStake:new FormControl(),
       toStake:new FormControl(),
       currencyType:new FormControl()
@@ -91,7 +91,7 @@ export class SurveillanceMainComponent implements OnInit {
   }
 
   clearMember(){
-    this.filterForm.controls['memberName'].setValue('0');
+    this.filterForm.controls['memberName'].setValue(null);
   }
 
 }

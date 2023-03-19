@@ -56,7 +56,7 @@
 
           <div class="col-md-4">
             <select name="matchId" formControlName="matchId" id="ab" class="form-select bg-dgrey">
-              <option value="0">All</option>
+              <option value="null">All</option>
               <option (click)="onFilterChange({ clicked: 'match', sport: match.matchId })" value="{{match.matchId}}" *ngFor="let match of matchList">{{match.matchName}}</option>
             </select>
           </div>

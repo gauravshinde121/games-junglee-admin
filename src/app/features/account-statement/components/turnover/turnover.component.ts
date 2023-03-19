@@ -38,7 +38,7 @@ export class TurnoverComponent implements OnInit {
       fromDate:new FormControl(this.formatFormDate(new Date())),
       toDate:new FormControl(this.formatFormDate(new Date())),
       page:new FormControl(1),
-      sportsId:new FormControl("0"),
+      sportsId:new FormControl(null),
     })
   }
 

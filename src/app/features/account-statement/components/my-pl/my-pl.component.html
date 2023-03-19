@@ -53,7 +53,7 @@
                 id="ab"
                 class="form-select bg-dgrey"
               >
-                <option value="0">All</option>
+                <option value="null">All</option>
                 <option [value]="match.matchId" *ngFor="let match of matchList">
                   {{ match.matchName }}
                 </option>
@@ -61,7 +61,7 @@
             </div>
 
             <div class="col-md-4 mb-2">
-              <label>Select Market Type</label>
+              <label>Select Market</label>
               <select
                 formControlName="marketId"
                 id="ab"
@@ -69,10 +69,10 @@
               >
                 <option value="null">All</option>
                 <option
-                  [value]="market.marketTypeId"
-                  *ngFor="let market of marketTypeList"
+                  [value]="market.marketId"
+                  *ngFor="let market of marketList"
                 >
-                  {{ market.marketType }}
+                  {{ market.marketName }}
                 </option>
               </select>
             </div>

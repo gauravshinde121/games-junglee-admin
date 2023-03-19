@@ -28,7 +28,7 @@ export class InvalidBetComponent implements OnInit {
 
   _initForm() {
     this.invalidBetForm = new FormGroup({
-      memberName: new FormControl(0),
+      memberName: new FormControl(null),
       invalidBet: new FormControl(0),
       fromDate: new FormControl(this.formatFormDate(new Date())),
       toDate: new FormControl(this.formatFormDate(new Date())),

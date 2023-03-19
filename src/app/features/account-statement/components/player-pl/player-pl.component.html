@@ -11,7 +11,7 @@
           <label>Select Member</label>
           <select formControlName="memberName" id="ab" class="form-select bg-dgrey">
             <option value="null">All</option>
-            <option *ngFor="let member of allMambers" [value]="member.id">{{member.name}}</option>
+            <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
           </select>
         </div>
         <br />

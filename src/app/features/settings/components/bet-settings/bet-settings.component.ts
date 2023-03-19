@@ -46,8 +46,8 @@ export class BetSettingsComponent implements OnInit {
 
   _initForm(){
     this.betSettingForm = new FormGroup({
-      sportsId:new FormControl(0),
-      matchId:new FormControl(0),
+      sportsId:new FormControl(null),
+      matchId:new FormControl(null),
       fromDate:new FormControl(this.formatFormDate(new Date())),
       toDate:new FormControl(this.formatFormDate(new Date()))
     })

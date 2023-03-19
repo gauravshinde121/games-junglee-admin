@@ -19,6 +19,11 @@ export class MyPlComponent implements OnInit {
   dateFormat = "yyyy-MM-dd";
   language = "en";
 
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 0;
+  isLoading = false;
+
   constructor(
     private _accountStatementService:AccountStatementService,
     private _sharedService:SharedService
@@ -49,8 +54,7 @@ export class MyPlComponent implements OnInit {
       toDate:new FormControl(this.formatFormDate(new Date())),
       sportsId:new FormControl(null),
       matchId:new FormControl(null),
-      marketId:new FormControl(null),
-      page:new FormControl(1)
+      marketId:new FormControl(null)
     })
   }
 
@@ -59,10 +63,27 @@ export class MyPlComponent implements OnInit {
   }
 
   getPlStatement(){
-    this._accountStatementService._getPlBySubgameAPi(this.filterForm.value).subscribe((res:any)=>{
-      console.log(res)
+
+    this.isLoading = true;
+    this.plStatement = [];
+
+    let body = {
+      fromDate: this.filterForm.value.fromDate,
+      toDate: this.filterForm.value.toDate,
+      sportsId:null,
+      matchId:null,
+      marketId:null,
+      pageNo: this.currentPage,
+      limit: 50,
+    };
+
+    this._accountStatementService._getPlBySubgameAPi(body).subscribe((res:any)=>{
+      console.log(res);
+      this.isLoading = false;
       this.plStatement = res.admin;
-    })
+      this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
+
+    });
   }
 
   _getAllMarketTypeList(){
@@ -94,5 +115,15 @@ export class MyPlComponent implements OnInit {
 
   onGameSelected(sportId){
     this._getMatchBySportId(sportId);
+  }
+
+  next(): void {
+    this.currentPage++;
+    this.getPlStatement();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getPlStatement();
   }
 }

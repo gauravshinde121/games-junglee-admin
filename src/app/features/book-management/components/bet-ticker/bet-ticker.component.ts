@@ -21,6 +21,11 @@ export class BetTickerComponent implements OnInit {
   sportId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
+  searchTerm: string = '';
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 0;
+  isLoading = false;
 
   constructor(
     private _sharedService:SharedService,
@@ -136,7 +141,25 @@ export class BetTickerComponent implements OnInit {
 
 
   getAllUserBets(){
-    let payload = {
+
+    this.isLoading = true;
+    this.allBets = [];
+
+    // let payload = {
+    //   sportId: null,
+    //   matchId: null,
+    //   userId: null,
+    //   marketId : null,
+    //   stakesFrom :null,
+    //   stakesTo :null,
+    //   fromDate : null,
+    //   toDate : null
+
+    // }
+
+    
+
+    let body = {
       sportId: null,
       matchId: null,
       userId: null,
@@ -144,18 +167,30 @@ export class BetTickerComponent implements OnInit {
       stakesFrom :null,
       stakesTo :null,
       fromDate : null,
-      toDate : null
+      toDate : null,
+      pageNo: this.currentPage,
+      limit: 50,
+    };
 
-    }
-    this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{
+    this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
       console.log(res);
-
+      this.isLoading = false;
       this.allBets = res.data;
+      this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
+  }
 
+  next(): void {
+    this.currentPage++;
+    this.getAllUserBets();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getAllUserBets();
   }
 
   searchList() {
@@ -174,7 +209,7 @@ export class BetTickerComponent implements OnInit {
       console.log(res);
 
       this.allBets = res.data;
-
+      this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")

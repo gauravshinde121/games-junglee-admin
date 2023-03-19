@@ -48,7 +48,14 @@ export class TransferStatementComponent implements OnInit {
 
 
   getTransferStatement(){
-    this._accountsService._getTransferStatementApi({fromDate:this.fromDate,toDate:this.toDate,page:1}).subscribe(res=>{
+
+    let payload = {
+      fromDate : this.transferStmtForm.value.fromDate,
+      toDate : this.transferStmtForm.value.toDate,
+      page : 1
+    }
+
+    this._accountsService._getTransferStatementApi(payload).subscribe(res=>{
       console.log(res)
       this.transferStatements = res;
     })

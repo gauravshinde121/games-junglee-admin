@@ -78,13 +78,11 @@
             </div>
 
 
-            <div class="col-md-3 pt-3">
+            <div class="col-md-3">
               <button
                 type="button"
                 (click)="getPlStatement()"
                 class="btn btn-pink rounded-pill mt-4"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
               >
                 Search
               </button>
@@ -98,7 +96,8 @@
   <div class="row mt-5">
     <div class="col-md-12 tablescroll">
       <div *ngIf="plStatement.length == 0" class="border text-center p-5">
-        <h4>No data found</h4>
+        <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
+        <h4 *ngIf="isLoading">Loading...</h4>
       </div>
       <table class="table tableall" *ngIf="plStatement.length > 0">
         <thead>
@@ -157,12 +156,23 @@
       </table>
     </div>
     <hr />
-    <div class="col-md-12">
+    <!-- <div class="col-md-12">
       <a class="btn bg-dgrey rounded-pill text-white">First</a>
       <a class="btn bg-dgrey rounded-pill text-white">Previous</a>
       <a class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a>
       <a class="btn bg-dgrey rounded-pill text-white">Next</a>
       <a class="btn bg-dgrey rounded-pill text-white">Last</a>
+    </div> -->
+    <div *ngIf="plStatement.length > 0 && !this.isLoading">
+
+      <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
+      <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage  / totalPages}} </span>
+      <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
+        Next
+      </button>
+
+
+
     </div>
   </div>
 </main>

@@ -23,6 +23,11 @@ export class PlayerPlComponent implements OnInit {
   language = "en";
   marketTypeList:any;
 
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 0;
+  isLoading = false;
+
   constructor(
     private _accountStatementService:AccountStatementService,
     private _sharedService:SharedService,
@@ -54,14 +59,13 @@ export class PlayerPlComponent implements OnInit {
 
   _initForm(){
     this.filterForm = new FormGroup({
-      memberName:new FormControl("0"),
+      memberName:new FormControl(null),
       fromDate:new FormControl(this.formatFormDate(new Date())),
       toDate:new FormControl(this.formatFormDate(new Date())),
-      sportsId:new FormControl("0"),
-      matchId:new FormControl("0"),
-      page:new FormControl(1),
-      marketId:new FormControl("0"),
-      marketTypeId:new FormControl("0")
+      sportsId:new FormControl(null),
+      matchId:new FormControl(null),
+      marketId:new FormControl(null),
+      marketTypeId:new FormControl(null)
     })
   }
 
@@ -78,9 +82,27 @@ export class PlayerPlComponent implements OnInit {
   }
 
   getPlStatement(){
-    this._accountStatementService._getDownlineAccountsDataApi(this.filterForm.value).subscribe((res:any)=>{
-      console.log(res)
+    this.isLoading = true;
+    this.plStatement = [];
+
+    let body = {
+      fromDate: this.filterForm.value.fromDate,
+      toDate: this.filterForm.value.toDate,
+      sportsId:null,
+      matchId:null,
+      marketId:null,
+      pageNo: this.currentPage,
+      limit: 50,
+    };
+
+    this._accountStatementService._getDownlineAccountsDataApi(body).subscribe((res:any)=>{
+      console.log(res);
+      this.isLoading = false;
       this.plStatement = res.admin;
+
+    },(err)=>{
+      console.log("Error Data",err);
+      this.isLoading = false;
     })
   }
 
@@ -125,6 +147,16 @@ export class PlayerPlComponent implements OnInit {
         //console.log('data.matchList',data.matchList);
       }
     });
+  }
+
+  next(): void {
+    this.currentPage++;
+    this.getPlStatement();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getPlStatement();
   }
 
 }

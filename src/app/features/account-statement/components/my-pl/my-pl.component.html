@@ -164,7 +164,7 @@
     <div *ngIf="plStatement.length > 0 && !this.isLoading">
 
       <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
-      <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage  / totalPages}} </span>
+      <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage }} / {{totalPages}} </span>
       <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
         Next
       </button>

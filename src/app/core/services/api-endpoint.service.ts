@@ -268,6 +268,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_SURVEILLANCE_DATA)
   }
 
+  public getBetDetailsForWorkStationEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_BET_DETAILS_FOR_WORK_STATION)
+  }
+
   public getMarketsByMatchIdEndpoint(){
     return this.createUrl(this._constants.API_GET_MARKETS_BY_MATCH_ID)
   }

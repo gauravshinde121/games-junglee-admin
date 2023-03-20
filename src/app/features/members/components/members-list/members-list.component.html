@@ -16,7 +16,8 @@
               placeholder="Search"
               aria-label="Search"
               aria-describedby="addon-wrapping"
-              [(ngModel)]="searchTerm" (ngModelChange)="search()"
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="search()"
             />
           </div>
         </div>
@@ -77,7 +78,6 @@
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
         <table
-
           #myTable
           class="table tableall"
           *ngIf="userList.length > 0 && !this.isLoading"
@@ -104,7 +104,7 @@
               <th scope="col" class="text-dark">Status</th>
               <th scope="col" class="text-dark">Change password</th>
               <th scope="col" class="last text-dark">Action</th>
-              
+
             </tr>
           </thead>
           <tbody>
@@ -188,7 +188,7 @@
                   <i class="fa-sharp fa-solid fa-eye text-pink"></i>
                 </a>
               </td>
-              
+
               <td>
                 <!-- <a (click)="openModal(user.userId)">
                   <i class="fa fa-lock text-pink"></i>
@@ -209,12 +209,12 @@
                          ? 'yellow'
                          : 'red'
                      ">
-                    {{ item.status }}  
-              </div> 
+                    {{ item.status }}
+              </div>
                       </option>
                     </select>
 
-                    
+
                     <!-- <input type="radio" [checked]="user.isActive" id="html" name="fav_language" value="item.status">
                     <label for="html">Active</label><br>
                     <input type="radio" id="css" [checked]="user.isActive" name="fav_language" value="item.status">
@@ -232,22 +232,32 @@
                   <i class="fa-sharp fa-solid fa-pen text-pink"></i>
                 </a>
               </td>
-              
+
             </tr>
           </tbody>
         </table>
 
         <div *ngIf="userList.length > 0 && !this.isLoading">
-
-          <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
-          <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage  / totalPages}} </span>
-          <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
+          <button
+            class="btn bg-dgrey rounded-pill text-white"
+            [disabled]="currentPage === 1"
+            (click)="prev()"
+          >
+            Prev
+          </button>
+          <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
+            >{{ currentPage / totalPages }}
+          </span>
+          <button
+            class="btn bg-dgrey rounded-pill text-white"
+            [disabled]="currentPage === totalPages"
+            (click)="next()"
+          >
             Next
           </button>
-
         </div>
 
-<!--
+        <!--
         <button [disabled]="currentPage === 1" (click)="prev()">Prev</button>
         <span>{{ currentPage }} / {{ totalPages }}</span>
         <button [disabled]="currentPage === totalPages" (click)="next()">

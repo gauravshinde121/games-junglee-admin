@@ -92,28 +92,7 @@
             placeholder="Enter Stake To..."
           />
         </div>
-        <div class="col-md-4 mb-2">
-          <label>From Date</label>
-          <input
-            type="date"
-            name=""
-            class="form-control"
-            id=""
-            placeholder="From date"
-            formControlName="fromDate"
-          />
-        </div>
-        <div class="col-md-4 mb-2">
-          <label>To Date</label>
-          <input
-            type="date"
-            name=""
-            class="form-control"
-            id=""
-            placeholder="To date"
-            formControlName="toDate"
-          />
-        </div>
+
         <div class="col-md-4 mb-2 mt-4">
           <button
             type="button"
@@ -143,14 +122,14 @@
               <th scope="col">Odds Matched</th>
               <th scope="col">Matched</th>
               <th scope="col">Unmatched</th>
-              <th scope="col" class="last">IP</th>
+              <th scope="col" class="last">Profit/Liability</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let bets of allBets; let i = index">
               <td>{{ i + 1 }}</td>
-              <td>{{ bets.member }}</td>
-              <td>{{ bets.placeTime | date }}</td>
+              <td>{{ bets.username }}</td>
+              <td>{{ bets.placedDate | date }}</td>
               <td>{{ bets.event }}</td>
               <td>
                 <span
@@ -163,21 +142,36 @@
                   class="border border-2 bg-primary text-primary border-primary me-2"
                 >
                 </span>
-                {{ bets.market }}
+                {{ bets.betCategory }}
               </td>
 
-              <td>{{ bets.selection }}</td>
-              <td>{{ bets.oddsPlaced }}</td>
-              <td>{{ bets.oddsMatched }}</td>
-              <td>{{ bets.matched }}</td>
-              <td class="text-danger">{{ bets.unmatched }}</td>
+              <td>{{ bets.selectionName }}</td>
+              <td>{{ bets.betRate }}</td>
+              <td>{{ bets.averagePriceMatched }}</td>
               <td>
-                <i
-                  class="fa fa-info-circle"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
-                ></i>
-                {{ bets.ip }}
+                <ng-container *ngIf="bets.isMatched; else notMatched">
+                  {{ bets.stake }}
+                </ng-container>
+                <ng-template #notMatched>
+                  --
+                </ng-template>
+              </td>
+              <td class="text-danger">
+                <ng-container *ngIf="!bets.isMatched; else notMatched">
+                  {{ bets.stake }}
+                </ng-container>
+                <ng-template #notMatched>
+                  --
+                </ng-template></td>
+              <td>
+                <span
+                [ngClass]="bets.profitLiability > 0
+                ? 'text-success'
+                : 'text-danger'
+                "
+                >
+                {{ bets.profitLiability }}
+                </span>
               </td>
             </tr>
           </tbody>
@@ -185,7 +179,7 @@
       </div>
     </div>
 
-    <div *ngIf="allBets.length > 0 && !this.isLoading">
+    <!--<div *ngIf="allBets.length > 0 && !this.isLoading">
       <button
         class="btn bg-dgrey rounded-pill text-white"
         [disabled]="currentPage === 1"
@@ -203,7 +197,7 @@
       >
         Next
       </button>
-    </div>
+    </div>-->
 
     <div class="col-md-12 mt-3" *ngIf="allBets.length == 0">
       <div class="border text-center p-5">

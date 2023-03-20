@@ -38,16 +38,32 @@
               <td>{{stmt.amount}}</td>
               <td>{{stmt.balance}}</td>
               <td>{{stmt.oldBalance}}</td>
-              <td>146:212:453:33</td>
+              <td>{{stmt.ipAddress}}</td>
             </tr>
           </tbody>
         </table>
-        <div *ngIf="clTransfers.length>0">
-          <a  class="btn bg-dgrey rounded-pill text-white">First</a>
-          <a class="btn bg-dgrey rounded-pill text-white">Previous</a>
-          <a class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a>
-          <a class="btn bg-dgrey rounded-pill text-white">Next</a>
-          <a  class="btn bg-dgrey rounded-pill text-white">Last</a>
+        <div class="row">
+          <div class="col-md-12">
+            <div *ngIf="clTransfers.length > 0 && !this.isLoading">
+              <button
+                class="btn bg-dgrey rounded-pill text-white"
+                [disabled]="currentPage === 1"
+                (click)="prev()"
+              >
+                Prev
+              </button>
+              <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
+                >{{ currentPage}} / {{totalPages }}
+              </span>
+              <button
+                class="btn bg-dgrey rounded-pill text-white"
+                [disabled]="currentPage === totalPages"
+                (click)="next()"
+              >
+                Next
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

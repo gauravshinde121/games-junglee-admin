@@ -19,7 +19,7 @@ export class BetSettingsComponent implements OnInit {
   betSettingForm:FormGroup;
   dateFormat = "yyyy-MM-dd";
   language = "en";
-  allBets: any;
+  allBets: any = [];
   gameId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
@@ -30,7 +30,6 @@ export class BetSettingsComponent implements OnInit {
     this._preConfig();
 
     this.betSettingForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
 
@@ -60,7 +59,6 @@ export class BetSettingsComponent implements OnInit {
 
   _getGames(){
     this._sharedService._getSports().subscribe((data:any)=>{
-      console.log('events',data)
       if(data){
         this.games = data;
       }
@@ -69,7 +67,6 @@ export class BetSettingsComponent implements OnInit {
 
   _getMatchBySportId(sportId){
     this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
-      console.log(data)
       if(data.matchList){
         this.matchList = data.matchList;
       }
@@ -78,7 +75,6 @@ export class BetSettingsComponent implements OnInit {
 
 
   onGameSelected(sportId){
-    console.log(sportId)
     this._getMatchBySportId(sportId);
   }
 
@@ -99,26 +95,25 @@ export class BetSettingsComponent implements OnInit {
   }
 
   getAllUserBets(){
+    this.isLoading = true;
     let payload = {
       sportId: null,
       matchId: null,
       userId: null,
       fromDate : null,
       toDate : null
-
     }
     this._settingService._getAllUserBetsApi(payload).subscribe((res:any)=>{
-      console.log(res);
-
       this.allBets = res.data;
     },(err)=>{
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
-
+    this.isLoading = false;
   }
 
   searchList() {
+    this.isLoading = true;
     let payload = {
       sportId: this.gameId,
       matchId: this.matchId,
@@ -127,14 +122,12 @@ export class BetSettingsComponent implements OnInit {
     }
 
     this._settingService._getAllUserBetsApi(payload).subscribe((res:any)=>{
-      console.log(res);
-
       this.allBets = res.data;
-
     },(err)=>{
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
+    this.isLoading = false;
   }
 
 }

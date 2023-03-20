@@ -45,10 +45,8 @@ export class NetExposureViewTotalComponent implements OnInit {
       this.isLoading = false;
       if(data.booksForBackend.length > 0){
         this.viewTotal = data.booksForBackend[0].result;
-        console.log('data.booksForBackend',data.booksForBackend);
       }
       this.totalPages = Math.ceil(this.viewTotal.length / this.pageSize);
-      console.log('this.viewTotal',this.viewTotal);
     });
   }
 
@@ -82,7 +80,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   }
 
   search(): void {
-    if(this.searchTerm.length > 2){
+    if(this.searchTerm.length > 2 || this.searchTerm.length == 0){
       var MarketAndMatchId = this._getPayLoad();
       this._getNetExposureViewTotal(MarketAndMatchId);
     }

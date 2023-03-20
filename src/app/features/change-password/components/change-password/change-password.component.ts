@@ -12,7 +12,6 @@ export class ChangePasswordComponent implements OnInit {
 
   changePasswordForm!: FormGroup;
 
-
   authObj = {
     currentPassword: "",
     newPassword: "",
@@ -43,25 +42,21 @@ export class ChangePasswordComponent implements OnInit {
 
   }
 
-
   postChangePassword() {
-    
-    if(this.authObj.currentPassword == ""){
+    if (this.authObj.currentPassword == "") {
       this._sharedService.getToastPopup("Enter current password", 'Password', 'error');
       return;
     }
-    else if(this.authObj.newPassword == "") {
+    else if (this.authObj.newPassword == "") {
       this._sharedService.getToastPopup("Enter new password", 'Password', 'error');
       return;
     }
-    else if(this.authObj.retypePassword == ""){
+    else if (this.authObj.retypePassword == "") {
       this._sharedService.getToastPopup("Enter confirm password", 'Password', 'error');
       return;
     }
 
-
     this._changePasswordService._getChangePasswordeApi(this.authObj).subscribe((res: any) => {
-      console.log('pwd changed', res)
       this._sharedService.getToastPopup(res.message, 'Password', 'success');
       this.authObj.currentPassword = "";
       this.authObj.newPassword = "";
@@ -75,7 +70,6 @@ export class ChangePasswordComponent implements OnInit {
     return this.changePasswordForm.get('oldPassword')
   }
 
-
   get newPasswordVail() {
     return this.changePasswordForm.get('newPassword')
   }
@@ -83,7 +77,6 @@ export class ChangePasswordComponent implements OnInit {
   get confirmPasswordVail() {
     return this.changePasswordForm.get('confirmPassword')
   }
-
 
   Mustmatch(newPassword: any, confirmPassword: any) {
     return (formGroup: FormGroup) => {
@@ -102,7 +95,7 @@ export class ChangePasswordComponent implements OnInit {
     }
   };
 
-  resetForm(){
+  resetForm() {
     this.changePasswordForm.reset();
   }
 

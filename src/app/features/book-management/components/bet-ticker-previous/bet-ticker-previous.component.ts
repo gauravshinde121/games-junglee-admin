@@ -20,7 +20,6 @@ export class BetTickerPreviousComponent implements OnInit {
   ngOnInit(): void {
     this._preconfig();
     this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
   }
@@ -28,7 +27,6 @@ export class BetTickerPreviousComponent implements OnInit {
   _preconfig(){
     this._sharedService._getGames().subscribe((res:any)=>{
       this.games = res.gamesList;
-      console.log('res.gamesList',res.gamesList);
     });
     this._initForm();
     //this._getGames();
@@ -46,7 +44,6 @@ export class BetTickerPreviousComponent implements OnInit {
     this._sharedService._getSports().subscribe((data:any)=>{
       if(data.gamesList){
         this.games = data.gamesList;
-        //console.log('this.games',this.games);
       }
     });
   }
@@ -55,7 +52,6 @@ export class BetTickerPreviousComponent implements OnInit {
     this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
       if(data.matchList){
         this.matchList = data.matchList;
-        console.log('data.matchList',data.matchList);
       }
     });
   }

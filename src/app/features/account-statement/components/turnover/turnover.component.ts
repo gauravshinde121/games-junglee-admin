@@ -16,6 +16,7 @@ export class TurnoverComponent implements OnInit {
   dateFormat = "yyyy-MM-dd";
   language = "en";
   games:any = [];
+  isLoading:boolean = false;
 
   constructor(
     private _accountStatementService:AccountStatementService,
@@ -47,10 +48,10 @@ export class TurnoverComponent implements OnInit {
   }
 
   getTurnOver(){
+    this.isLoading = true;
     this._accountStatementService._getCategoryForTO(this.filterForm.value).subscribe((res:any)=>{
-      console.log(res)
       this.plStatement = res;
-      console.log(this.plStatement)
+      this.isLoading = false;
     })
   }
 

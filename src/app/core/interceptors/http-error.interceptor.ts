@@ -28,7 +28,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse)=>{
-        console.log('hello',err);
         if(err['status'] === 401 || err['status'] === 503){
           console.log("inside unauthorize")
           this._sharedService.removeJWTToken();

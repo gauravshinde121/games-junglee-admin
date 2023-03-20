@@ -34,11 +34,7 @@ export class NetExposureComponent implements OnInit {
     const payload= {
       userId:this.userId
     }
-
-    console.log(payload)
-
     this._memberService._getMemberBooksForBackedApi(payload).subscribe((data: any) => {
-      console.log(data)
       this.booksForBackend = data.booksForBackend;
       this.isLoading = false;
     })

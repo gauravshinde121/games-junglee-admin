@@ -32,7 +32,6 @@ export class LeftNavigationComponent implements OnInit {
     this.isLoggedIn = this._sharedService.isLoggedIn();
     this.userDetails = this._sharedService.getUserDetails();
     this._sharedService.sharedSubject.subscribe((data:any)=>{
-      console.log(data)
       if(data.adminDetails){
         this.adminDetails = data.adminDetails
       }

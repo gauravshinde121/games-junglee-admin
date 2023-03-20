@@ -7,7 +7,7 @@
         <!--your code will come here end-->
       </div>
       <hr>
-      <div class="col-md-12 mt-3">
+      <div class="col-md-12 mt-3 overflow-auto">
         <div *ngIf="clTransfers.length==0" class="border text-center p-5">
           <h4 *ngIf="clTransfers.length==0 && !isLoading">No data found </h4>
           <h4 *ngIf="isLoading">Loading... </h4>

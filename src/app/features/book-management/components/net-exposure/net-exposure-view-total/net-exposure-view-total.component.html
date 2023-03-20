@@ -194,8 +194,7 @@
       (ngModelChange)="search()"
     />
     <div class="col-md-12 text-end">Bet Count : 5</div>
-  </section>
-
+<div class="col-md-12 overflow-auto">
   <table class="table table-dark">
     <thead>
       <tr>
@@ -255,6 +254,11 @@
 
     </tbody>
   </table>
+</div>
+
+  </section>
+
+
   <div class="row">
     <div class="col-md-12">
       <div *ngIf="viewTotal.length > 0 && !this.isLoading">

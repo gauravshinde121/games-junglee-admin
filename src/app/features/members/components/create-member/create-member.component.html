@@ -46,21 +46,22 @@
             </div>-->
           </div>
           <div class="row mt-3">
-            <div class="col-md-4">
-              <label>Select Role</label>
+            <div class="col-md-4 pt-5">
+              <label>Select Role{{editUserId}}</label>
               <select
+                [attr.disabled]="editMode"
                 style="background-color: rgba(60, 62, 62, 0.7215686275)"
                 formControlName="roleId"
                 name="roleId"
                 id="ab"
-                class="form-select mt-2"
+                class="form-select"
               >
                 <option *ngFor="let role of roles" [value]="role.roleId">
                   {{ role.userRoleName }}
                 </option>
               </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 pt-5">
               <label>Username</label>
               <input
                 [readOnly]="editMode"
@@ -78,7 +79,7 @@
                 Username is required
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 pt-5">
               <label>Display Name</label>
               <input
                 autocomplete="disabled"
@@ -98,7 +99,7 @@
                 Display Name is required
               </div>
             </div>
-            <div class="col-md-4 pt-5" *ngIf="!this.editMode">
+            <div class="col-md-4 pt-5" *ngIf="!editMode">
               <label>Password</label>
               <input
                 type="password"
@@ -120,7 +121,7 @@
                 1 specialcharacter
               </div>
             </div>
-            <div class="col-md-4 pt-5" *ngIf="!this.editMode">
+            <div class="col-md-4 pt-5" *ngIf="!editMode">
               <label>Confirm Password</label>
               <input
                 type="password"
@@ -178,6 +179,7 @@
         </div>
       </div>
       <div class="row">
+
         <div class="col-md-3 mt-3 d-flex" *ngFor="let game of gamesList">
           <p class="me-2 flex-fill">{{ game.name }}</p>
           <div class="toggle-button-cover">
@@ -366,12 +368,21 @@
         </button>
       </div>
       <div class="col-md-6">
-        <button
+
+    <button *ngIf="!editMode"
           type="submit"
           class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3"
           [disabled]="memberForm.invalid"
         >
           Save
+        </button>
+        <button
+          *ngIf="editMode"
+          type="submit"
+          class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3"
+          [disabled]="!memberForm.dirty"
+        >
+          Update
         </button>
       </div>
     </div>

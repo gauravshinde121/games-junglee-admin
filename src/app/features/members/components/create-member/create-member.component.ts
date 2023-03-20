@@ -21,6 +21,8 @@ export class CreateMemberComponent implements OnInit {
   gamesList:any = [];
   roles:any = [];
 
+  roleId:string = '';
+
   constructor(
     private _fb: FormBuilder,
     private _sharedService: SharedService,
@@ -29,14 +31,23 @@ export class CreateMemberComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit(): void {
-    this.route.snapshot.params['id']? this.getMemberInfo():this.getGames();
+  async ngOnInit(): Promise<void> {
+    //this.route.snapshot.params['id']? this.getMemberInfo():this.getGames();
     this._preConfig();
+    if(this.route.snapshot.params['id']){
+      this.editMode = true;
+      this.
+      editUserId = this.route.snapshot.params['id'];
+      await this.getMemberInfo();
+    } else {
+      this.getGames();
+    }
+
   }
 
   private _preConfig() {
     this._createMemberForm();
-    this._getRoles()
+    this._getRoles();
   }
 
   getGames(){
@@ -52,15 +63,16 @@ export class CreateMemberComponent implements OnInit {
   }
 
 
-  getMemberInfo() {
-    this.editMode = true;
-    this._sharedService._getSingleUsersApi({
+  async getMemberInfo() {
+      await this._sharedService._getSingleUsersApi({
       "userId": +this.route.snapshot.params['id']
     }).subscribe(((res: any) => {
       console.log(res)
       if (res) {
         this.memberData = res;
         this.gamesList = res.gameStatus;
+        this.roleId = this.memberData.roleId
+        console.log("this.gamesList",this.gamesList)
 
         this.memberForm.patchValue({
           status:this.memberData.isActive,
@@ -73,7 +85,7 @@ export class CreateMemberComponent implements OnInit {
           maxBet: this.memberData.maxBet,
           maxExposure: this.memberData.maxExposure,
           //isActive: this.memberData.isActive,
-          roleId:this.memberData.roleId
+          //roleId:this.memberData.roleId
         });
         console.log('this.memberForm',this.memberForm);
         console.log('this.memberForm',this.gamesList);
@@ -83,33 +95,59 @@ export class CreateMemberComponent implements OnInit {
 
 
 _createMemberForm(){
-  this.memberForm = this._fb.group({
-    username: [
-      "",
-      {
-        validators: [userNameValidator("User Name", 1, 25)],
-        updateOn: "change",
-      },
-    ],
-    displayName: ['', Validators.required],
-    password: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.pattern(
-      "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
-          )]),
-    confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-    playerMaxCreditLimit: ['', Validators.required],
-    comments: [''],
-    sportsBookRate: [1,[(c: AbstractControl) => Validators.required(c),Validators.max(1),Validators.min(1)]],
-    liveCasinoRate: [100, [(c: AbstractControl) => Validators.required(c),Validators.max(100),Validators.min(100)]],
-    minBet: [100,[(c: AbstractControl) => Validators.required(c),Validators.min(100)]],
-    maxBet: [1000000, [(c: AbstractControl) => Validators.required(c),Validators.max(10000000),Validators.min(1)]],
-    maxExposure: [50000000,[(c: AbstractControl) => Validators.required(c),Validators.max(50000000),Validators.min(1)]],
-    status: ['Active', Validators.required],
-    roleId:[7,Validators.required],
-    partnerShipPercent:[0,Validators.required]
-  },
-  {
-    validators: this.Mustmatch('password', 'confirmPassword')
-  })
+  console.log('this.editMode',this.editMode);
+  if(!this.editMode){
+    this.memberForm = this._fb.group({
+      username: [
+        "",
+        {
+          validators: [userNameValidator("User Name", 1, 25)],
+          updateOn: "change",
+        },
+      ],
+      displayName: ['', Validators.required],
+      password: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.pattern(
+        "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+            )]),
+      confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      playerMaxCreditLimit: ['', Validators.required],
+      comments: [''],
+      sportsBookRate: [1,[(c: AbstractControl) => Validators.required(c),Validators.max(1),Validators.min(1)]],
+      liveCasinoRate: [100, [(c: AbstractControl) => Validators.required(c),Validators.max(100),Validators.min(100)]],
+      minBet: [100,[(c: AbstractControl) => Validators.required(c),Validators.min(100)]],
+      maxBet: [1000000, [(c: AbstractControl) => Validators.required(c),Validators.max(10000000),Validators.min(1)]],
+      maxExposure: [50000000,[(c: AbstractControl) => Validators.required(c),Validators.max(50000000),Validators.min(1)]],
+      //status: ['Active', Validators.required],
+      roleId:[7,Validators.required],
+      partnerShipPercent:[0,Validators.required]
+    },
+    {
+      validators: this.Mustmatch('password', 'confirmPassword')
+    })
+  } else {
+    console.log('memberForm');
+    this.memberForm = this._fb.group({
+      username: [
+        "",
+        {
+          validators: [userNameValidator("User Name", 1, 25)],
+          updateOn: "change",
+        },
+      ],
+      displayName: ['', Validators.required],
+      playerMaxCreditLimit: ['', Validators.required],
+      comments: [''],
+      sportsBookRate: [1,[(c: AbstractControl) => Validators.required(c),Validators.max(1),Validators.min(1)]],
+      liveCasinoRate: [100, [(c: AbstractControl) => Validators.required(c),Validators.max(100),Validators.min(100)]],
+      minBet: [100,[(c: AbstractControl) => Validators.required(c),Validators.min(100)]],
+      maxBet: [1000000, [(c: AbstractControl) => Validators.required(c),Validators.max(10000000),Validators.min(1)]],
+      maxExposure: [50000000,[(c: AbstractControl) => Validators.required(c),Validators.max(50000000),Validators.min(1)]],
+      partnerShipPercent:[0,Validators.required]
+    },
+    {
+      validators: []
+    })
+  }
 }
 
 get f() {
@@ -119,22 +157,40 @@ get f() {
 onSubmitMemberForm(){
   this.isLoading = true;
 
-  console.log(this.memberForm.value)
+  console.log('this.memberForm.valueee',this.memberForm.value);
 
-  let memberData = {
-    "displayName": this.memberForm.value['displayName'],
-    "username": this.memberForm.value['username'],
-    "pwd": this.memberForm.value['password'],
-    "creditLimit": this.memberForm.value['playerMaxCreditLimit'],
-    "sportsBookRate": this.memberForm.value['sportsBookRate'],
-    "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
-    "minimumBet": this.memberForm.value['minBet'],
-    "maxBet": this.memberForm.value['maxBet'],
-    "maxExposure": this.memberForm.value['maxExposure'],
-    //"isActive": this.memberForm.value['status'],
-    "gameStatus":this.gamesList,
-    "roleId":this.memberForm.value['roleId'],
-    "partnerShipPercent":this.memberForm.value['partnerShipPercent']
+  let memberData = {};
+  if(!this.editMode){
+     memberData = {
+      "displayName": this.memberForm.value['displayName'],
+      "username": this.memberForm.value['username'],
+      "pwd": this.memberForm.value['password'],
+      "creditLimit": this.memberForm.value['playerMaxCreditLimit'],
+      "sportsBookRate": this.memberForm.value['sportsBookRate'],
+      "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
+      "minimumBet": this.memberForm.value['minBet'],
+      "maxBet": this.memberForm.value['maxBet'],
+      "maxExposure": this.memberForm.value['maxExposure'],
+      //"isActive": this.memberForm.value['status'],
+      "gameStatus":this.gamesList,
+      "roleId":this.memberForm.value['roleId'],
+      "partnerShipPercent":this.memberForm.value['partnerShipPercent']
+    }
+  } else {
+    memberData = {
+      "displayName": this.memberForm.value['displayName'],
+      "username": this.memberForm.value['username'],
+      "creditLimit": this.memberForm.value['playerMaxCreditLimit'],
+      "sportsBookRate": this.memberForm.value['sportsBookRate'],
+      "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
+      "minimumBet": this.memberForm.value['minBet'],
+      "maxBet": this.memberForm.value['maxBet'],
+      "maxExposure": this.memberForm.value['maxExposure'],
+      //"isActive": this.memberForm.value['status'],
+      "gameStatus":this.gamesList,
+      "roleId":this.memberForm.value['roleId'],
+      "partnerShipPercent":this.memberForm.value['partnerShipPercent']
+    }
   }
 
   console.log(memberData)
@@ -143,11 +199,11 @@ onSubmitMemberForm(){
   let msg = "";
   if(!this.editMode){
     msg = 'Created';
-    memberObs = this._memberService._getCreateNewUserApi(memberData)
+    memberObs = this._memberService._getCreateNewUserApi(memberData);
   }else{
     msg = 'Updated';
     memberData["userId"] = this.route.snapshot.params['id'];
-    memberObs = this._memberService._getEditUserApi(memberData)
+    memberObs = this._memberService._getEditUserApi(memberData);
   }
 
   memberObs.subscribe(
@@ -169,7 +225,7 @@ onSubmitMemberForm(){
 
 _getRoles(){
   this._memberService._getRolesApi().subscribe((roles:any)=>{
-    console.log(roles);
+    console.log('roles',roles);
     this.roles = roles.data;
   })
 }

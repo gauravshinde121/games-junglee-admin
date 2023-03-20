@@ -93,7 +93,7 @@ export class BetListComponent implements OnInit {
       memberName: [
         "0",
         {
-          validators: [nameValidator("Member Name", 0, 25)],
+          validators: [nameValidator("Member Name", 1, 25)],
           updateOn: "change",
         },
       ],
@@ -216,7 +216,7 @@ export class BetListComponent implements OnInit {
   }
 
   clearMembers(){
-    this.filterForm.controls['membername'].reset()
+    this.filterForm.controls['memberName'].reset()
   }
 
   showMatch(linkActive: string){

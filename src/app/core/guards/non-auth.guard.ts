@@ -18,7 +18,7 @@ export class NonAuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       const isLoggedIn = this._sharedService.getJWTToken();
       if(isLoggedIn){
-        this._router.navigate(['/dashboard'])
+        this._router.navigate(['/login'])
         return false
       } else {
           return true

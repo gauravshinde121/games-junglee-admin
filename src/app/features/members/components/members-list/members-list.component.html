@@ -91,19 +91,19 @@
                 <i class="fa-sharp fa-regular fa-address-card"></i>
               </th>
               <th scope="col" class="text-dark">UserName</th>
-              <th scope="col" class="text-dark">Credit Limit</th>
-              <th scope="col" class="text-dark">Net Exposure</th>
-              <th scope="col" class="text-dark">Take</th>
-              <th scope="col" class="text-dark">Give</th>
-              <th scope="col" class="text-dark">Available Credit</th>
+              <th scope="col" class="text-dark text-center">Credit Limit</th>
+              <th scope="col" class="text-dark text-center">Net Exposure</th>
+              <th scope="col" class="text-dark text-center">Take</th>
+              <th scope="col" class="text-dark text-center">Give</th>
+              <th scope="col" class="text-dark text-center">Available Credit</th>
               <!-- <th scope="col" class="text-dark">
                 <i class="fa-sharp fa-regular fa-square-check"></i> Status
               </th> -->
               <!-- <th scope="col" class="text-dark">Info</th> -->
-              <th scope="col" class="text-dark">Details</th>
-              <th scope="col" class="text-dark">Status</th>
-              <th scope="col" class="text-dark">Change password</th>
-              <th scope="col" class="last text-dark">Action</th>
+              <th scope="col" class="text-dark text-center">Details</th>
+              <th scope="col" class="text-dark text-center">Status</th>
+              <th scope="col" class="text-dark text-center">Change password</th>
+              <th scope="col" class="last text-dark text-center">Action</th>
 
             </tr>
           </thead>
@@ -124,17 +124,17 @@
               </td>
               <td>{{ i + 1 }}</td>
               <td>{{ user.username }}</td>
-              <td>{{ user.creditLimit | number }}</td>
-              <td style="padding-left: 2rem;" [ngClass]="user.exposure > 0 ? 'text-danger' : ''">
+              <td  class="text-center ">{{ user.creditLimit | number }}</td>
+              <td class="text-center " [ngClass]="user.exposure > 0 ? 'text-danger' : ''">
                 {{ user.exposure | number }}
               </td>
-              <td [ngClass]="user.take > 0 ? 'text-success' : ''">
+              <td [ngClass]="user.take > 0 ? 'text-success' : ''"  class="text-center ">
                 {{ user.take | number }}
               </td>
-              <td  [ngClass]="user.give > 0 ? 'text-danger' : ''">
+              <td  [ngClass]="user.give > 0 ? 'text-danger' : ''"  class="text-center ">
                 {{ user.give | number }}
               </td>
-              <td>{{ user.availableCredit | number }}</td>
+              <td  class="text-center">{{ user.availableCredit | number }}</td>
               <!-- <td> -->
                 <!-- <button
                   *ngIf="user.isActive"
@@ -183,19 +183,19 @@
                   </div>
                 </div>
               </td> -->
-              <td>
+              <td class=" text-center">
                 <a (click)="navigateToDownline(user)">
                   <i class="fa-sharp fa-solid fa-eye text-pink"></i>
                 </a>
               </td>
 
-              <td>
+              <td class="text-center">
                 <!-- <a (click)="openModal(user.userId)">
                   <i class="fa fa-lock text-pink"></i>
                 </a> -->
 
                 <select
-                      class="custom-select select-table-dropdown form-control select_group"
+                      class="custom-select select-table-dropdown form-control select_group text-center" 
                       (change)="changeStatus($event)"
                     >
                       <option
@@ -203,14 +203,14 @@
                         [value]="item.id"
                         [selected]="item.status == user.isActive"
                       >
-                       <div
-                       [ngClass]="item.status == 'Active' ? 'green'
-                         : item.status == 'Inactive'
-                         ? 'yellow'
-                         : 'red'
-                     ">
-                    {{ item.status }}
-              </div>
+                        <div
+                            [ngClass]="item.status == 'Active' ? 'green'
+                              : item.status == 'Inactive'
+                              ? 'yellow'
+                              : 'red'
+                          ">
+                            {{ item.status }}
+                        </div>
                       </option>
                     </select>
 
@@ -222,12 +222,12 @@
                     <input type="radio" [checked]="user.isActive" id="javascript" name="fav_language" value="item.status">
                     <label for="javascript">Closed</label> -->
               </td>
-              <td style="padding-left: 4rem;">
+              <td class="text-center">
                 <a>
                   <i class="fa-sharp fa fa-lock text-pink"></i>
                 </a>
               </td>
-              <td>
+              <td class="text-center">
                 <a routerLink="/member/edit-member/{{ user.userId }}">
                   <i class="fa-sharp fa-solid fa-pen text-pink"></i>
                 </a>

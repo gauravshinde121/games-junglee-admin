@@ -94,4 +94,8 @@ export class SurveillanceMainComponent implements OnInit {
     this.filterForm.controls['memberName'].setValue(null);
   }
 
+  clearMembers(){
+    this.filterForm.controls['memberName'].reset()
+  }
+
 }

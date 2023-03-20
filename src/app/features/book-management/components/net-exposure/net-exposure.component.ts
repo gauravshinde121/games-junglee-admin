@@ -30,14 +30,14 @@ export class NetExposureComponent implements OnInit {
   _preConfig(){
     this._getGames();
     this._initForm();
-    this.onFilterChange({selectedType:"MyPt",event:"0"});
+    this.onFilterChange({selectedType:"MyPt",matchId:null,sportId:null, clicked:'firstTime' });
   }
 
   _initForm(){
     this.filterForm = new FormGroup({
       selectedType: new FormControl('MyPT'),
-      sport: new FormControl('0'),
-      matchId: new FormControl('0')
+      sport: new FormControl(null),
+      matchId: new FormControl(null)
     });
   }
 
@@ -49,31 +49,34 @@ export class NetExposureComponent implements OnInit {
       body = {
         selectedType: filterObj.selectedType,
         matchId: this.filterForm.value.matchId,
-        sportsId: sport_value
+        sportId: sport_value
       }
     }
     if(filterObj.clicked == 'sport'){
       this._getMatchBySportId(filterObj.sport);
       body = {
         selectedType: this.filterForm.value.selectedType,
-        sportsId: filterObj.sport,
-        matchId: 0
+        sportId: filterObj.sport,
+        matchId: null
       }
     }
     if(filterObj.clicked == 'match'){
       body = {
         selectedType: this.filterForm.value.selectedType,
-        sportsId: this.filterForm.value.matchId,
+        sportId: this.filterForm.value.matchId,
+        matchId: filterObj.matchId
+      }
+    }
+    if(filterObj.clicked == 'firstTime'){
+      body = {
+        selectedType: filterObj.selectedType,
+        sportId: filterObj.sportId,
         matchId: filterObj.matchId
       }
     }
 
-    console.log('body',body)
     this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
       this.isLoading = false;
-      //this.booksForBackend = res.booksForBackend
-      //console.log(res)
-
       for (let index = 0; index < res.booksForBackend.length; index++) {
         if (res.booksForBackend[index].data.length > 1) {
          let obj = res.booksForBackend[index].data.find(
@@ -83,10 +86,10 @@ export class NetExposureComponent implements OnInit {
            res.booksForBackend[index].data[0].fancyExposure = obj.netExposure;
          }
          res.booksForBackend[index].data = res.booksForBackend[index].data.filter(obj => obj.fancyFlag == false)
-          console.log(res.booksForBackend[index].data)
        }
-
+       this.booksForBackend = res.booksForBackend;
     })
+
 
   }
 

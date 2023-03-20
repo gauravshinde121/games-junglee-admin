@@ -32,7 +32,7 @@
             <span class="me-3 pt-2"><strong>Filter by Sport</strong></span>
             <a class="text-decoration-none text-white">
               <input
-                (click)="onFilterChange({ clicked: 'sport', sport: '0' })"
+                (click)="onFilterChange({ clicked: 'sport', sport: null })"
                 type="radio"
                 checked="true"
                 class="radioselected"
@@ -81,7 +81,7 @@
                   <th width="30%" class="text-start">{{ book.matchName }}</th>
                   <th width="10%">
                     <a
-                      routerLink="/book-management/advance-workstation/1"
+                      routerLink="/book-management/advance-workstation/match/{{book.matchId}}"
                       class="btn btn-warning rounded-pill"
                     >
                       View total</a
@@ -99,7 +99,7 @@
                     <span>{{ data.marketName }}</span>
                   </td>
                   <td>
-                    <a>
+                    <a routerLink="/book-management/advance-workstation/market/{{data.marketId}}">
                       <img
                         src="../../../../../assets/images/net_exposure.png"
                         width="22px"
@@ -108,14 +108,24 @@
                   </td>
                   <td>
                     <a
-                      class="btn btn-pink rounded-pill pt-2 pb-2 w-100 text-danger"
+                      class="btn rounded-pill pt-2 pb-2 w-100"
+                      [ngClass]="
+                      data.netExposure > 0
+                    ? 'text-success alert-success'
+                    : 'text-danger btn-pink'
+                "
                     >
                       {{ data.netExposure }}</a
                     >
                   </td>
                   <td>
                     <a
-                      class="btn rounded-pill alert alert-success pt-2 pb-2 w-100"
+                      class="btn rounded-pill pt-2 pb-2 w-100"
+                      [ngClass]="
+                      data.horses[0]?.finalAmount > 0
+                    ? 'text-success alert-success'
+                    : 'text-danger btn-pink'
+                "
                     >
                       {{
                         data.horses[0]?.finalAmount
@@ -127,7 +137,12 @@
                   <td>
                     <a
                       *ngIf="data.horses[2]"
-                      class="btn rounded-pill alert alert-success pt-2 pb-2 w-100"
+                      class="btn rounded-pill pt-2 pb-2 w-100"
+                      [ngClass]="
+                      data.horses[2]?.finalAmount > 0
+                    ? 'text-success alert-success'
+                    : 'text-danger btn-pink'
+                "
                     >
                       {{
                         data.horses[2]?.finalAmount
@@ -138,7 +153,12 @@
                   </td>
                   <td>
                     <a
-                      class="btn btn-pink rounded-pill pt-2 pb-2 w-100 text-danger"
+                      class="btn rounded-pill pt-2 pb-2 w-100"
+                      [ngClass]="
+                      data.horses[1]?.finalAmount > 0
+                    ? 'text-success alert-success'
+                    : 'text-danger btn-pink'
+                "
                     >
                       {{
                         data.horses[1]?.finalAmount

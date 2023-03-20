@@ -44,7 +44,7 @@ export class Constants {
 
     //book management
     public readonly API_URL_GET_BOOK_FOR_BACKEND: string = 'api/junglee-admin/getBooksForBackend';
-    public readonly API_URL_GET_ALL_USER_BETS: string = 'api/junglee-admin/getAllBets';
+    public readonly API_URL_GET_ALL_USER_BETS: string = 'api/junglee-admin/getBetTicker';
 
 
     //account statement
@@ -75,4 +75,7 @@ export class Constants {
 
     //surveillance
     public readonly API_URL_GET_SURVEILLANCE_DATA:string = 'api/getBetsForSurveilliance';
+
+    //BOOK MANAGEMENT
+    public readonly API_URL_GET_BET_DETAILS_FOR_WORK_STATION:string = 'api/junglee-admin/getBetDetailsForWorkStation';
 }

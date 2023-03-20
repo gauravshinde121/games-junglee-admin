@@ -148,23 +148,8 @@ export class BetTickerComponent implements OnInit {
 
 
   getAllUserBets(){
-
     this.isLoading = true;
     this.allBets = [];
-
-    // let payload = {
-    //   sportId: null,
-    //   matchId: null,
-    //   userId: null,
-    //   marketId : null,
-    //   stakesFrom :null,
-    //   stakesTo :null,
-    //   fromDate : null,
-    //   toDate : null
-
-    // }
-
-
 
     let body = {
       sportsId: null,
@@ -173,15 +158,15 @@ export class BetTickerComponent implements OnInit {
       marketId : null,
       stakesFrom :null,
       stakesTo :null,
-      fromDate : null,
-      toDate : null,
       pageNo: this.currentPage,
       limit: 50,
     };
 
     this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
+      console.log('res',res.userBetList.betList[0]);
+
       this.isLoading = false;
-      this.allBets = res.data;
+      this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
       console.log(err);
@@ -212,7 +197,7 @@ export class BetTickerComponent implements OnInit {
     }
 
     this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{
-      this.allBets = res.data;
+      this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
       console.log(err);

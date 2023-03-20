@@ -51,7 +51,7 @@ export class MembersListComponent implements OnInit {
     private _router: Router,
     private _sharedService: SharedService,
     private _memberService: MembersService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._preConfig();

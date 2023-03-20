@@ -16,7 +16,8 @@
               placeholder="Search"
               aria-label="Search"
               aria-describedby="addon-wrapping"
-              [(ngModel)]="searchTerm" (ngModelChange)="search()"
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="search()"
             />
           </div>
         </div>
@@ -77,7 +78,6 @@
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
         <table
-
           #myTable
           class="table tableall"
           *ngIf="userList.length > 0 && !this.isLoading"
@@ -201,18 +201,26 @@
         </table>
 
         <div *ngIf="userList.length > 0 && !this.isLoading">
-
-          <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
-          <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage  / totalPages}} </span>
-          <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
+          <button
+            class="btn bg-dgrey rounded-pill text-white"
+            [disabled]="currentPage === 1"
+            (click)="prev()"
+          >
+            Prev
+          </button>
+          <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
+            >{{ currentPage / totalPages }}
+          </span>
+          <button
+            class="btn bg-dgrey rounded-pill text-white"
+            [disabled]="currentPage === totalPages"
+            (click)="next()"
+          >
             Next
           </button>
-
-
-
         </div>
 
-<!--
+        <!--
         <button [disabled]="currentPage === 1" (click)="prev()">Prev</button>
         <span>{{ currentPage }} / {{ totalPages }}</span>
         <button [disabled]="currentPage === totalPages" (click)="next()">

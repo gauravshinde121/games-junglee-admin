@@ -113,8 +113,6 @@
             <th scope="col" class="text-dark">D/L Commission</th>
             <th scope="col" class="text-dark">User Count</th>
             <th scope="col" class="text-dark">Bet Count</th>
-            <th scope="col" class="text-dark"></th>
-            <th scope="col" class="text-dark"></th>
           </tr>
         </thead>
         <tbody>
@@ -132,7 +130,7 @@
             <td>0</td>
             <td>{{ pl.userCount }}</td>
             <td>{{ pl.userBetCount }}</td>
-            <td>
+            <!--<td>
               <button
                 class="btn btn-pink rounded-pill w-100 mt-4"
                 (click)="getPlStatement()"
@@ -147,7 +145,7 @@
               >
                 User
               </button>
-            </td>
+            </td>-->
             <td [ngClass]="pl.type ? 'text-success' : 'text-danger'">
               {{ pl.profitLiability }}
             </td>

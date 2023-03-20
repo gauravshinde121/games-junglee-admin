@@ -2,18 +2,46 @@
   <section class="section gamedetails mb-3">
     <div class="row">
       <div class="col-md-12">
-        <h4>
-          <a routerLink="/book-management/net-exposure"
-            ><i class="fa fa-1x fa-circle-chevron-left"></i
-          ></a>
-          England Women v South Africa Women
-        </h4>
         <div class="row">
+          <div class="col-md-6">
+            <h4>
+              <a routerLink="/book-management/net-exposure"
+                ><i class="fa fa-1x fa-circle-chevron-left"></i
+              ></a>
+              {{matchName}}
+            </h4>
+          </div>
+          <div class="col-md-6 text-end">
+            <p>
+              <a href="" class="text-decoration-none text-white">
+                <input
+                  type="radio"
+                  checked=""
+                  class="radioselected"
+                  id="html"
+                  name="fav_language"
+                  value="HTML"
+                /><span class="rounded-pill p-2 m-2">My PT</span>
+              </a>
+              <a href="" class="text-decoration-none text-white">
+                <input
+                  type="radio"
+                  checked=""
+                  class="radioselected"
+                  id="html"
+                  name="fav_language"
+                  value="HTML"
+                /><span class="rounded-pill p-2 m-2">Total Book</span>
+              </a>
+            </p>
+          </div>
+        </div>
+        <!--<div class="row">
           <div class="col-md-12">
             <div class="accordion" id="accordionExample">
               <div class="accordion-item bg-transparent border-0 p-3">
                 <h2 class="accordion-header" id="headingOne">
-                  <!-- <a class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> -->
+                  <a class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   <div
                     class="row"
                     data-bs-toggle="collapse"
@@ -27,32 +55,9 @@
                         <i class="fa fa-plus"></i> Match Odds
                       </p>
                     </div>
-                    <div class="col-md-6 text-end">
-                      <p>
-                        <a href="" class="text-decoration-none text-white">
-                          <input
-                            type="radio"
-                            checked=""
-                            class="radioselected"
-                            id="html"
-                            name="fav_language"
-                            value="HTML"
-                          /><span class="rounded-pill p-2 m-2">My PT</span>
-                        </a>
-                        <a href="" class="text-decoration-none text-white">
-                          <input
-                            type="radio"
-                            checked=""
-                            class="radioselected"
-                            id="html"
-                            name="fav_language"
-                            value="HTML"
-                          /><span class="rounded-pill p-2 m-2">Total Book</span>
-                        </a>
-                      </p>
-                    </div>
+
                   </div>
-                  <!-- </a> -->
+                   </a>
                 </h2>
                 <div
                   id="collapseOne"
@@ -173,7 +178,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </section>

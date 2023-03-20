@@ -149,4 +149,8 @@ export class PlayerPlComponent implements OnInit {
     this.getPlStatement();
   }
 
+  clearMemberName(){
+    this.filterForm.controls['memberName'].setValue(null);
+  }
+
 }

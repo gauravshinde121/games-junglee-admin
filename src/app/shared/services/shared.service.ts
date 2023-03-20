@@ -138,12 +138,12 @@ export class SharedService {
 
   _getBetDetailsForWorkStationApi(body){
     return this._apiHttpService
-      .post(this._apiEndpointsService.getBetDetailsForWorkStationEndpoint(),{body});
+      .post(this._apiEndpointsService.getBetDetailsForWorkStationEndpoint(),body);
   }
 
   _getSurveillanceDataApi(body){
     return this._apiHttpService
-      .post(this._apiEndpointsService.getSurveillanceDataEndpoint(),{body});
+      .post(this._apiEndpointsService.getSurveillanceDataEndpoint(),body);
   }
 
   getMarketsByMatchId(matchId){

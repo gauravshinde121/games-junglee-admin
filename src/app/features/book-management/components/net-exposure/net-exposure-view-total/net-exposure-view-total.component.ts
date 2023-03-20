@@ -16,6 +16,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   pageSize: number = 10;
   totalPages: number = 0;
   selectedRoleId = 7;
+  matchName:any;
 
   constructor(
     private _sharedService:SharedService,
@@ -23,6 +24,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.matchName = localStorage.getItem('matchName');
     var MarketAndMatchId = this._getPayLoad();
     this._getNetExposureViewTotal(MarketAndMatchId);
   }
@@ -43,8 +45,10 @@ export class NetExposureViewTotalComponent implements OnInit {
       this.isLoading = false;
       if(data.booksForBackend.length > 0){
         this.viewTotal = data.booksForBackend[0].result;
+        console.log('data.booksForBackend',data.booksForBackend);
       }
       this.totalPages = Math.ceil(this.viewTotal.length / this.pageSize);
+      console.log('this.viewTotal',this.viewTotal);
     });
   }
 

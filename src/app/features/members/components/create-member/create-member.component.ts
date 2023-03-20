@@ -72,7 +72,7 @@ export class CreateMemberComponent implements OnInit {
           minimumBet: this.memberData.minimumBet,
           maxBet: this.memberData.maxBet,
           maxExposure: this.memberData.maxExposure,
-          isActive: this.memberData.isActive,
+          //isActive: this.memberData.isActive,
           roleId:this.memberData.roleId
         });
         console.log('this.memberForm',this.memberForm);
@@ -131,7 +131,7 @@ onSubmitMemberForm(){
     "minimumBet": this.memberForm.value['minBet'],
     "maxBet": this.memberForm.value['maxBet'],
     "maxExposure": this.memberForm.value['maxExposure'],
-    "isActive": this.memberForm.value['status'],
+    //"isActive": this.memberForm.value['status'],
     "gameStatus":this.gamesList,
     "roleId":this.memberForm.value['roleId'],
     "partnerShipPercent":this.memberForm.value['partnerShipPercent']

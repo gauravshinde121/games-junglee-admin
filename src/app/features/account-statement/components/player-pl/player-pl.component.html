@@ -7,21 +7,23 @@
           <img src="../../../../../assets/images/pnl.png" alt="" /> PL Statement
         </h4>
         <hr />
-        <div class="col-md-2 p-2">
+        <div class="row">
+        <div class="col-md-6">
           <label>Select Member</label>
           <select formControlName="memberName" id="ab" class="form-select bg-dgrey">
             <option value="null">All</option>
             <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
           </select>
         </div>
-        <br />
+        <div class="col-md-6 mt-3">
+          <button class="btn btn-outline-pink rounded-pill mt-2 w-100 mb-3" (click)="clearMemberName();">
+            <i class="fa fa-user-cog"></i> Clear Members
+          </button>
+        </div>
+      </div>
         <div class="row">
-          <div class="col-md-4 mt-3">
-            <button class="btn btn-outline-pink rounded-pill mt-2 w-100 mb-3">
-              <i class="fa fa-user-cog"></i> Clear Members
-            </button>
-          </div>
-          <div class="col-md-4">
+
+          <div class="col-md-6">
             <label>From Date</label>
             <input
               type="date"
@@ -32,7 +34,7 @@
               placeholder="Month"
             />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <label>To Date</label>
             <input
               type="date"

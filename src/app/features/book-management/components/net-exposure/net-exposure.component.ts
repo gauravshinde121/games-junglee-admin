@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BookManagementService } from '../../services/book-management.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-net-exposure',
@@ -20,7 +21,8 @@ export class NetExposureComponent implements OnInit {
 
   constructor(
     private _bookManagementService:BookManagementService,
-    private _sharedService:SharedService
+    private _sharedService:SharedService,
+    private _router:Router
   ) { }
 
   ngOnInit(): void {
@@ -107,6 +109,11 @@ export class NetExposureComponent implements OnInit {
         this.matchList = data.matchList;
       }
     });
+  }
+
+  redirectUrl(type,id,matchName){
+    localStorage.setItem('matchName',matchName);
+    this._router.navigate(['/book-management/advance-workstation/'+type+'/'+id]);
   }
 
 }

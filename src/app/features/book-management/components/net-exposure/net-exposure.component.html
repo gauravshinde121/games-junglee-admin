@@ -81,7 +81,7 @@
                   <th width="30%" class="text-start">{{ book.matchName }}</th>
                   <th width="10%">
                     <a
-                      routerLink="/book-management/advance-workstation/match/{{book.matchId}}"
+                    (click)="redirectUrl('match',book.matchId,book.matchName)"
                       class="btn btn-warning rounded-pill"
                     >
                       View total</a
@@ -99,7 +99,7 @@
                     <span>{{ data.marketName }}</span>
                   </td>
                   <td>
-                    <a routerLink="/book-management/advance-workstation/market/{{data.marketId}}">
+                    <a (click)="redirectUrl('market',book.matchId,book.matchName)" >
                       <img
                         src="../../../../../assets/images/net_exposure.png"
                         width="22px"

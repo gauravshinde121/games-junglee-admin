@@ -11,7 +11,7 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   isLoading = false;
   viewTotal: any = [];
-  searchTerm: string = '';
+  searchTerm:any;
   currentPage: number = 1;
   pageSize: number = 10;
   totalPages: number = 0;

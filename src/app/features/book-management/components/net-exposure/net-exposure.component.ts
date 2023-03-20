@@ -78,7 +78,6 @@ export class NetExposureComponent implements OnInit {
     }
 
     this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
-      this.isLoading = false;
       for (let index = 0; index < res.booksForBackend.length; index++) {
         if (res.booksForBackend[index].data.length > 1) {
          let obj = res.booksForBackend[index].data.find(
@@ -90,16 +89,19 @@ export class NetExposureComponent implements OnInit {
          res.booksForBackend[index].data = res.booksForBackend[index].data.filter(obj => obj.fancyFlag == false)
        }
        this.booksForBackend = res.booksForBackend;
+       this.isLoading = false;
     })
 
 
   }
 
   _getGames(){
+    this.isLoading=true;
     this._sharedService._getSports().subscribe((data:any)=>{
       if(data){
         this.games = data;
       }
+    this.isLoading = false;
     });
   }
 

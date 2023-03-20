@@ -118,9 +118,9 @@
        (click)="showMatch('current')">Current</a>
       <a class="nav-link cursor-pointer" [class]="btnActive === 'past' ? 'activeLink' : ''"
       (click)="showMatch('past')" >Past</a>
-      <a *ngIf="!isMatch" [class]="btnActive === 'current' ? 'activeLink' : ''" 
+      <a *ngIf="!isMatch" [class]="btnActive === 'current' ? 'activeLink' : ''"
       (click)="showMatch('match')" class="nav-link text-pink cursor-pointer">Matched</a>
-      <a *ngIf="!isMatch" [class]="btnActive === 'unmatch' ? 'activeLink' : ''" 
+      <a *ngIf="!isMatch" [class]="btnActive === 'unmatch' ? 'activeLink' : ''"
       (click)="showMatch('unmatch')" class="nav-link cursor-pointer">Unmatched</a>
     </nav>
     <div class="col-md-12 mt-3">
@@ -173,7 +173,7 @@
         Prev
       </button>
       <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
-        >{{ currentPage / totalPages }}
+        >{{ currentPage}} / {{totalPages }}
       </span>
       <button
         class="btn bg-dgrey rounded-pill text-white"

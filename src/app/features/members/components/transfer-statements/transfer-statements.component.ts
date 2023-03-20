@@ -62,7 +62,6 @@ export class TransferStatementsComponent implements OnInit {
     }
 
     this._memberService._getTransferStatementForUserApi(payload).subscribe((data: any) => {
-      console.log(data.transferStatement)
       this.transferStatements = data.transferStatement;
     })
   }

@@ -24,6 +24,7 @@ export class MyPlComponent implements OnInit {
   totalPages: number = 0;
   isLoading = false;
   marketList:any;
+  //currentTotalPage:any;
 
   constructor(
     private _accountStatementService:AccountStatementService,
@@ -80,6 +81,7 @@ export class MyPlComponent implements OnInit {
       this.isLoading = false;
       this.plStatement = res.admin;
       this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
+      //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     });
   }
 

@@ -20,6 +20,8 @@ export class TransferStatementComponent implements OnInit {
   transferStmtForm : FormGroup
   dateFormat = "yyyy-MM-dd";
   language = "en";
+  currentPage: number = 1;
+  totalPages: number = 0;
 
   constructor(
     private _accountsService:AccountStatementService
@@ -48,17 +50,28 @@ export class TransferStatementComponent implements OnInit {
 
 
   getTransferStatement(){
-
+    this.isLoading = true;
     let payload = {
       fromDate : this.transferStmtForm.value.fromDate,
       toDate : this.transferStmtForm.value.toDate,
-      page : 1
+      pageNo: this.currentPage,
+      limit: 50,
     }
 
     this._accountsService._getTransferStatementApi(payload).subscribe(res=>{
-      console.log(res)
+      this.isLoading = false;
       this.transferStatements = res;
     })
+  }
+
+  next(): void {
+    this.currentPage++;
+    this.getTransferStatement();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getTransferStatement();
   }
 
 

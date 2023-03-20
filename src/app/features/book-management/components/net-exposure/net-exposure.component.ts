@@ -43,6 +43,19 @@ export class NetExposureComponent implements OnInit {
     });
   }
 
+  onFilterChangeDropDown(event){
+    this.isLoading = true;
+    let body = {};
+    body = {
+      selectedType: this.filterForm.value.selectedType,
+      sportId: this.filterForm.value.matchId,
+      matchId: event.value
+    }
+    this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
+      this.alterData(res);
+    })
+  }
+
   onFilterChange(filterObj){
     this.isLoading = true;
     let body = {};
@@ -55,7 +68,9 @@ export class NetExposureComponent implements OnInit {
       }
     }
     if(filterObj.clicked == 'sport'){
+      if(filterObj.sport){
       this._getMatchBySportId(filterObj.sport);
+      }
       body = {
         selectedType: this.filterForm.value.selectedType,
         sportId: filterObj.sport,
@@ -78,21 +93,25 @@ export class NetExposureComponent implements OnInit {
     }
 
     this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
-      for (let index = 0; index < res.booksForBackend.length; index++) {
-        if (res.booksForBackend[index].data.length > 1) {
-         let obj = res.booksForBackend[index].data.find(
-          (obj) => obj.fancyFlag == true
-          );
-           if (obj)
-           res.booksForBackend[index].data[0].fancyExposure = obj.netExposure;
-         }
-         res.booksForBackend[index].data = res.booksForBackend[index].data.filter(obj => obj.fancyFlag == false)
-       }
-       this.booksForBackend = res.booksForBackend;
-       this.isLoading = false;
+      this.alterData(res);
     })
 
 
+  }
+
+  alterData(res){
+    for (let index = 0; index < res.booksForBackend.length; index++) {
+      if (res.booksForBackend[index].data.length > 1) {
+       let obj = res.booksForBackend[index].data.find(
+        (obj) => obj.fancyFlag == true
+        );
+         if (obj)
+         res.booksForBackend[index].data[0].fancyExposure = obj.netExposure;
+       }
+       res.booksForBackend[index].data = res.booksForBackend[index].data.filter(obj => obj.fancyFlag == false)
+     }
+     this.booksForBackend = res.booksForBackend;
+     this.isLoading = false;
   }
 
   _getGames(){
@@ -101,7 +120,7 @@ export class NetExposureComponent implements OnInit {
       if(data){
         this.games = data;
       }
-    this.isLoading = false;
+    //this.isLoading = false;
     });
   }
 

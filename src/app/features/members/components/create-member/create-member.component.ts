@@ -59,6 +59,8 @@ export class CreateMemberComponent implements OnInit {
   }
 
   setGameStatus(status,sportsId){
+    console.log("Status",status);
+    console.log("sportsId",sportsId);
     this.gamesList.find(g=>g.sportsId == sportsId).isActive = !status
   }
 
@@ -67,26 +69,26 @@ export class CreateMemberComponent implements OnInit {
       await this._sharedService._getSingleUsersApi({
       "userId": +this.route.snapshot.params['id']
     }).subscribe(((res: any) => {
-      console.log(res)
+      console.log('res',res)
       if (res) {
-        this.memberData = res;
+        this.memberData = res.user;
         this.gamesList = res.gameStatus;
         this.roleId = this.memberData.roleId
-        console.log("this.gamesList",this.gamesList)
+        console.log("this.gamesList",this.gamesList);
 
-        this.memberForm.patchValue({
-          status:this.memberData.isActive,
-          username: this.memberData.username,
-          displayName: this.memberData.displayName,
-          playerMaxCreditLimit: this.memberData.creditLimit,
-          sportsBookRate: this.memberData.sportsBookRate,
-          liveCasinoRate: this.memberData.liveCasinoRate,
-          minimumBet: this.memberData.minimumBet,
-          maxBet: this.memberData.maxBet,
-          maxExposure: this.memberData.maxExposure,
-          //isActive: this.memberData.isActive,
-          //roleId:this.memberData.roleId
-        });
+        // this.memberForm.patchValue({
+        //   status:this.memberData.isActive,
+        //   username: this.memberData.username,
+        //   displayName: this.memberData.displayName,
+        //   playerMaxCreditLimit: this.memberData.creditLimit,
+        //   sportsBookRate: this.memberData.sportsBookRate,
+        //   liveCasinoRate: this.memberData.liveCasinoRate,
+        //   minimumBet: this.memberData.minimumBet,
+        //   maxBet: this.memberData.maxBet,
+        //   maxExposure: this.memberData.maxExposure,
+        //   //isActive: this.memberData.isActive,
+        //   //roleId:this.memberData.roleId
+        // });
         console.log('this.memberForm',this.memberForm);
         console.log('this.memberForm',this.gamesList);
       }
@@ -127,13 +129,6 @@ _createMemberForm(){
   } else {
     console.log('memberForm');
     this.memberForm = this._fb.group({
-      username: [
-        "",
-        {
-          validators: [userNameValidator("User Name", 1, 25)],
-          updateOn: "change",
-        },
-      ],
       displayName: ['', Validators.required],
       playerMaxCreditLimit: ['', Validators.required],
       comments: [''],

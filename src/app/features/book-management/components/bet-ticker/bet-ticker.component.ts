@@ -35,6 +35,9 @@ export class BetTickerComponent implements OnInit {
     private bookManagementService:BookManagementService,
     private _fb: FormBuilder,
   ) { }
+  get f(){
+    return this.betTickerForm.controls;
+  }
 
   ngOnInit(): void {
     this._preConfig();
@@ -204,5 +207,5 @@ export class BetTickerComponent implements OnInit {
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
-
 }
+

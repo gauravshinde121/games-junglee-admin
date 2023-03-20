@@ -53,7 +53,7 @@ const routes: Routes = [
     loadChildren: () => import('./features/google-authentication/google-authentication.module').then((m) => m.GoogleAuthenticationModule)
   },
 
-  { path: '**', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/member/list', pathMatch: 'full' },
 ];
 
 @NgModule({

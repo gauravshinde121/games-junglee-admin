@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AccountStatementService } from '../../services/account-statement.service';
 import { SharedService } from '@shared/services/shared.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
@@ -29,9 +29,9 @@ export class PlayerPlComponent implements OnInit {
   isLoading = false;
 
   constructor(
+    private _memberService:MembersService,
     private _accountStatementService:AccountStatementService,
     private _sharedService:SharedService,
-    private _memberService:MembersService
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +54,9 @@ export class PlayerPlComponent implements OnInit {
     this._getAllMembers();
   }
 
+  get f(){
+    return this.filterForm.controls;
+  }
 
   _initForm(){
     this.filterForm = new FormGroup({

@@ -1,8 +1,9 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { nameValidator } from '@shared/classes/validator';
 import { SharedService } from '@shared/services/shared.service';
 import { BookManagementService } from '../../services/book-management.service';
+import { MembersService } from 'src/app/features/members/services/members.service';
 
 @Component({
   selector: 'app-bet-ticker',
@@ -15,12 +16,24 @@ export class BetTickerComponent implements OnInit {
   games:any;
   matchList:any = [];
   marketList:any = [];
+  dateFormat = "yyyy-MM-dd";
+  language = "en";
+  allBets: any;
+  sportsId: any = null;
+  matchId: any = null;
+  marketTypeId: any = null;
+  searchTerm: string = '';
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 0;
+  isLoading = false;
+  allMembers:any;
 
   constructor(
     private _sharedService:SharedService,
+    private _memberService:MembersService,
     private bookManagementService:BookManagementService,
     private _fb: FormBuilder,
-
   ) { }
   get f(){
     return this.betTickerForm.controls;
@@ -28,15 +41,15 @@ export class BetTickerComponent implements OnInit {
 
   ngOnInit(): void {
     this._preConfig();
-    this.betTickerForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected value: ', selectedValue);
+    this.betTickerForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       this._getMatchBySportId(selectedValue);
     });
 
     this.betTickerForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected matchId: ', selectedValue);
       this._getMarketsByMatchId(selectedValue);
     });
+
+    this.getAllUserBets();
   }
 
   _preConfig(){
@@ -47,34 +60,49 @@ export class BetTickerComponent implements OnInit {
     });*/
     this._initForm();
     this._getGames();
+    this._getAllMembers();
 
   }
 
+  // _initForm(){
+  //   this.betTickerForm = new FormGroup({
+  //     sportsId:new FormControl('0'),
+  //     matchId:new FormControl('0'),
+  //     marketId:new FormControl('0'),
+  //     tms:new FormControl('All'),
+  //     type:new FormControl('All'),
+  //     typeName:new FormControl('All'),
+  //     betType:new FormControl("Matched"),
+  //     time:new FormControl("All")
+  //   });
+  // }
+
   _initForm(){
-    this.betTickerForm =  this._fb.group({
-      memberName: [
-        "",
-        {
-          validators: [nameValidator("Member Name", 1, 25)],
-          updateOn: "change",
-        },
-      ],
-      gameId:new FormControl('All'),
-      matchId:new FormControl('All'),
-      tms:new FormControl('All'),
-      type:new FormControl('All'),
-      typeName:new FormControl('All'),
-      betType:new FormControl("Matched"),
-      time:new FormControl("All"),
-      stakesFrom:new FormControl('All'),
-      stakesTo:new FormControl('All'),
+    this.betTickerForm = this._fb.group({
+      memberName: null,
+      sportsId: null,
+      matchId: null,
+      marketId: null,
+      tms: ['All'],
+      type: ['All'],
+      typeName:['All'],
+      betType:["Matched"],
+      time: ["All"],
+      fromDate : this.formatFormDate(new Date()),
+      toDate : this.formatFormDate(new Date()),
+      stakesFromValue : [null],
+      stakesToValue : [null]
     });
   }
 
+  formatFormDate(date: Date) {
+    return formatDate(date, this.dateFormat,this.language);
+  }
+
   _getGames(){
-    this._sharedService._getEvents().subscribe((data:any)=>{
-      if(data.gamesList){
-        this.games = data.gamesList;
+    this._sharedService._getSports().subscribe((data:any)=>{
+      if(data){
+        this.games = data;
       }
     });
   }
@@ -83,18 +111,23 @@ export class BetTickerComponent implements OnInit {
     this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
       if(data.matchList){
         this.matchList = data.matchList;
-        //console.log('data.matchList',data.matchList);
       }
     });
   }
 
 
+  _getAllMembers(){
+    this._memberService._getAllMembers().subscribe((data:any)=>{
+      if(data.memberData){
+        this.allMembers = data.memberData;
+      }
+    });
+  }
+
   _getMarketsByMatchId(matchId){
     this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
-      console.log('match data',data);
       if(data.marketList){
         this.marketList = data.marketList;
-        //console.log('data.matchList',data.matchList);
       }
     });
   }
@@ -103,20 +136,76 @@ export class BetTickerComponent implements OnInit {
     this._getMatchBySportId(sportId);
   }
 
-  clearMembers(){
-    this.betTickerForm.controls['memberName'].reset()
+  changeGame(evt) {
+    this.sportsId = evt.target.value;
   }
 
+  changeMatch(evt) {
+    this.matchId = evt.target.value;
+  }
+
+  changeMarketType(evt) {
+    this.marketTypeId = evt.target.value;
+  }
+
+
+
   getAllUserBets(){
+    this.isLoading = true;
+    this.allBets = [];
+
+    let body = {
+      sportsId: null,
+      matchId: null,
+      userId: null,
+      marketId : null,
+      stakesFrom :null,
+      stakesTo :null,
+      pageNo: this.currentPage,
+      limit: 50,
+    };
+
+    this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
+      console.log('res',res.userBetList.betList[0]);
+
+      this.isLoading = false;
+      this.allBets = res.userBetList.betList;
+      this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
+    },(err)=>{
+      console.log(err);
+      this._sharedService.getToastPopup("Internal server error","","error")
+    });
+  }
+
+  next(): void {
+    this.currentPage++;
+    this.getAllUserBets();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getAllUserBets();
+  }
+
+  searchList() {
     let payload = {
-      gameId:null,
-      sportId:null,
-      matchId:null,
-      userId:null
+      sportsId: this.sportsId,
+      matchId: this.matchId,
+      marketId: this.marketTypeId,
+      userId: null,
+      stakesFrom :this.betTickerForm.value.stakesFromValue,
+      stakesTo : this.betTickerForm.value.stakesToValue,
+      fromDate : this.betTickerForm.value.fromDate,
+      toDate : this.betTickerForm.value.toDate
     }
-    this.bookManagementService._getBookForBackendApi(payload).subscribe((res:any)=>{
-      console.log(res)
-    })
+
+    this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{
+      this.allBets = res.userBetList.betList;
+      this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
+    },(err)=>{
+      console.log(err);
+      this._sharedService.getToastPopup("Internal server error","","error")
+    });
   }
 }
 

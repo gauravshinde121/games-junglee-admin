@@ -36,9 +36,9 @@ export class SharedService {
       .get(this._apiEndpointsService.getAdminDetailEndpoint());
   }
 
-  _getAllUsersApi(roleId){
+  _getAllUsersApi(body){
     return this._apiHttpService
-      .post(this._apiEndpointsService.getAllUserEndpoint(),{roleId:roleId});
+      .post(this._apiEndpointsService.getAllUserEndpoint(),body);
   }
 
   _getSingleUsersApi(user){
@@ -51,11 +51,10 @@ export class SharedService {
     .get(this._apiEndpointsService.getGames());
   }
 
-  _getEvents(){
+  _getSports(){
     return this._apiHttpService
-    .get(this._apiEndpointsService.getEvents());
+    .get(this._apiEndpointsService.getSports());
   }
-
 
   _adjustWinningsApi(userList){
     return this._apiHttpService
@@ -137,10 +136,29 @@ export class SharedService {
       .post(this._apiEndpointsService.getMatchBySportIdEndpoint(),{sportId:sportId});
   }
 
+  _getBetDetailsForWorkStationApi(body){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getBetDetailsForWorkStationEndpoint(),{body});
+  }
+
+  _getSurveillanceDataApi(body){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getSurveillanceDataEndpoint(),{body});
+  }
 
   getMarketsByMatchId(matchId){
     return this._apiHttpService
       .post(this._apiEndpointsService.getMarketsByMatchIdEndpoint(),{matchId:matchId});
+  }
+
+  getAllMarketTypeList(){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.getAllMarketTypeEndpoint(),{});
+  }
+
+  getMarketBySportId(sportId){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.getMarketBySportIdEndpoint(),{sportId:sportId});
   }
 
 }

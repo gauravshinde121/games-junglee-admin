@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { nameValidator } from '@shared/classes/validator';
+import { FormGroup, FormControl } from '@angular/forms';
+import { MembersService } from 'src/app/features/members/services/members.service';
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-surveillance-main',
@@ -11,41 +12,86 @@ export class SurveillanceMainComponent implements OnInit {
 
   filterForm:FormGroup;
   surveillanceData:any = [];
+  allMembers:any = [];
+  games:any = [];
+  matchList:any = [];
+  marketList:any = [];
 
-  constructor(    private _fb: FormBuilder,
-    ) { }
+  constructor(
+    private _memberService:MembersService,
+    private _sharedService:SharedService
+  ) { }
 
   ngOnInit(): void {
-    this._preConfig()
+    this._preConfig();
+    this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
+      this._getMatchBySportId(selectedValue);
+    });
+
+    this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
+      this._getMarketByMatchId(selectedValue);
+    });
   }
 
 
   _preConfig(){
-    this._initForm()
+    this._initForm();
+    this._getAllMembers();
+    this._getGames();
   }
 
   _initForm(){
-    this.filterForm =this._fb.group({
-      // member:new FormControl(),
-      memberName: [
-        "",
-        {
-          validators: [nameValidator("Member Name", 1, 25)],
-          updateOn: "change",
-        },
-      ],
-      subGame:new FormControl(),
-      event:new FormControl(),
-      marketType:new FormControl(),
-      stakesFrom:new FormControl('All'),
-      stakesTo:new FormControl('All'),
+    this.filterForm = new FormGroup({
+      memberName:new FormControl(null),
+      sportsId:new FormControl(null),
+      matchId:new FormControl(null),
+      marketId:new FormControl(null),
+      fromStake:new FormControl(),
+      toStake:new FormControl(),
       currencyType:new FormControl()
     })
   }
 
+  _getGames(){
+    this._sharedService._getSports().subscribe((data:any)=>{
+      if(data){
+        this.games = data;
+      }
+    });
+  }
+
+  _getAllMembers(){
+    this._memberService._getAllMembers().subscribe((data:any)=>{
+      if(data.memberData){
+        this.allMembers = data.memberData;
+      }
+    });
+  }
 
   getSurveillanceData(){
+    this._sharedService._getSurveillanceDataApi({...this.filterForm.value}).subscribe((res:any)=>{
+      this.surveillanceData = res.data;
+    })
+  }
 
+  _getMatchBySportId(sportId){
+    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
+      if(data.matchList){
+        this.matchList = data.matchList;
+      }
+    });
+  }
+
+  _getMarketByMatchId(sportId){
+    this._sharedService.getMarketsByMatchId(sportId).subscribe((data:any)=>{
+      if(data.marketList){
+        this.marketList = data.marketList;
+      }
+    });
+  }
+
+  clearMember(){
+    this.filterForm.controls['memberName'].setValue(null);
   }
 
   clearMembers(){

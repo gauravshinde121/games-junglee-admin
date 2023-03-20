@@ -20,7 +20,7 @@ export class BetTickerFlagFinalComponent implements OnInit {
   ngOnInit(): void {
 
     this._preconfig();
-    this.filterForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+    this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
@@ -39,13 +39,13 @@ export class BetTickerFlagFinalComponent implements OnInit {
 
   _initForm(){
     this.filterForm = new FormGroup({
-      gameId:new FormControl('All'),
+      sportsId:new FormControl('All'),
       matchId:new FormControl('All'),
     });
   }
 
   _getGames(){
-    this._sharedService._getEvents().subscribe((data:any)=>{
+    this._sharedService._getSports().subscribe((data:any)=>{
       if(data.gamesList){
         this.games = data.gamesList;
       }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MembersService } from '../../services/members.service';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
+import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-account-statement',
   templateUrl: './account-statement.component.html',
@@ -20,11 +21,14 @@ export class AccountStatementComponent implements OnInit {
   selectedAccount:any = null;
   games:any;
   matchList:any = [];
+  dateFormat = "yyyy-MM-dd";
+  language = "en";
 
   constructor(
     private _memberService:MembersService,
     private route:ActivatedRoute,
-    private _sharedService:SharedService
+    private _sharedService:SharedService,
+    private _fb: FormBuilder,
     ) { }
 
   ngOnInit(): void {
@@ -34,7 +38,7 @@ export class AccountStatementComponent implements OnInit {
     })
 
     this._preConfig();
-    this.filterForm.get('gameId')?.valueChanges.subscribe((selectedValue) => {
+    this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
@@ -50,17 +54,20 @@ export class AccountStatementComponent implements OnInit {
 
 
   _initForm(){
-    this.filterForm = new FormGroup({
-      fromDate:new FormControl(this.formatDate(new Date())),
-      toDate:new FormControl(this.formatDate(new Date())),
-      gameId:new FormControl('All'),
-      keyword:new FormControl('All'),
-      page:new FormControl(1),
-      matchId:new FormControl('All'),
-      tms:new FormControl('All'),
-      type:new FormControl('All'),
+      this.filterForm = this._fb.group({
+      fromDate : this.formatFormDate(new Date()),
+      toDate : this.formatFormDate(new Date()),
+      sportsId:new FormControl(null),
+      keyword:new FormControl(null),
+      matchId:new FormControl(null),
+      tms:new FormControl(null),
+      type:new FormControl(null),
       typeName:new FormControl('All'),
     });
+  }
+
+  formatFormDate(date: Date) {
+    return formatDate(date, this.dateFormat,this.language);
   }
 
 
@@ -100,7 +107,7 @@ export class AccountStatementComponent implements OnInit {
 
 
   _getGames(){
-    this._sharedService._getEvents().subscribe((data:any)=>{
+    this._sharedService._getSports().subscribe((data:any)=>{
       if(data.gamesList){
         this.games = data.gamesList;
       }

@@ -4,6 +4,7 @@ import { SharedService } from '../../../../shared/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from '../../services/members.service';
 import { Observable } from 'rxjs';
+import { userNameValidator } from '@shared/classes/validator';
 
 @Component({
   selector: 'app-create-member',
@@ -46,8 +47,8 @@ export class CreateMemberComponent implements OnInit {
     })
   }
 
-  setGameStatus(status,gameId){
-    this.gamesList.find(g=>g.gameId == gameId).isActive = !status
+  setGameStatus(status,sportsId){
+    this.gamesList.find(g=>g.sportsId == sportsId).isActive = !status
   }
 
 
@@ -60,7 +61,6 @@ export class CreateMemberComponent implements OnInit {
       if (res) {
         this.memberData = res;
         this.gamesList = res.gameStatus;
-
 
         this.memberForm.patchValue({
           status:this.memberData.isActive,
@@ -84,7 +84,13 @@ export class CreateMemberComponent implements OnInit {
 
 _createMemberForm(){
   this.memberForm = this._fb.group({
-    username: ['', Validators.required],
+    username: [
+      "",
+      {
+        validators: [userNameValidator("User Name", 1, 25)],
+        updateOn: "change",
+      },
+    ],
     displayName: ['', Validators.required],
     password: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.pattern(
       "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
@@ -105,6 +111,7 @@ _createMemberForm(){
     validators: this.Mustmatch('password', 'confirmPassword')
   })
 }
+
 get f() {
   return this.memberForm.controls;
 }

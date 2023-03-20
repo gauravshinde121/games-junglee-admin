@@ -3,64 +3,34 @@
   <div class="row" [formGroup]="filterForm">
 
     <div class="col-md-3 mb-3">
-      <label>Select Game</label>
-      <select formControlName="gameId" id="ab" class="form-select bg-dgrey">
-        <option value="0">All</option>
+      <label>Select Sport</label>
+      <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
+        <option value="null">All</option>
         <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
       </select>
     </div>
     <div class="col-md-3 mb-3">
-      <label>Select Match</label>
-      <select formControlName="matchId" id="ab" class="form-select bg-dgrey">
-        <option value="0">All</option>
-        <option value="{{match.matchId}}" *ngFor="let match of matchList">{{match.matchName}}</option>
-      </select>
-    </div>
-    <div class="col-md-2">
       <label>From Date</label>
-      <input formControlName="fromDate" type="text" placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
+      <input formControlName="fromDate" type="date" 
         onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" name="fromDate"
         class="form-control" id="" />
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3 mb-3">
       <label>To Date</label>
-      <input formControlName="toDate" type="text" placeholder="{{ currentDate | date : 'dd/MM/yyyy' }}"
+      <input formControlName="toDate" type="date"
         onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" name="toDate"
         class="form-control" id="" />
     </div>
-    <div class="col-2">
+    <div class="col-md-3 mb-3">
       <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getAccountStatement()">
         Search
       </button>
     </div>
-    <div class="col-md-3">
-      <button class="btn btn-pink w-100 mt-4">
-        <img src="assets/images/ac_state_pl.png" /> Player P&L Statement
-      </button>
-    </div>
-    <div class="col-md-3">
-      <button class="btn btn-dark border-secondary w-100 mt-4">
-        <img src="assets/images/ac_player_pl.png" /> P&L Statement
-      </button>
-    </div>
-    <div class="col-md-4 mt-4 pt-2 text-end">
-      Total Net Share : <span class="colorgreen">0</span>
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-pink rounded-pill w-100 mt-4">
-        <i class="fa fa-download"></i> Download
-      </button>
-    </div>
   </div>
   <div class="row">
-    <div class="col-2">
-      <button class="btn rounded-pill mt-4 text-white border-danger w-50">
-        All
-      </button>
-    </div>
     <div class="col-md-12 mt-3">
       <div class="border text-center p-5" *ngIf="accountStatement.length == 0">
-        <h4>No data found</h4>
+        <h4 >No data found</h4>
       </div>
 
       <table class="table tableall" *ngIf="accountStatement.length > 0">
@@ -202,7 +172,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let bet of selectedAccount.bets">
+              <tr *ngFor="let bet of selectedAccount?.bets">
                 <td>{{ bet.createDateTime | date : "medium" }}</td>
                 <td>{{ bet.createDateTime | date : "medium" }}</td>
                 <td>{{ bet.type }}</td>

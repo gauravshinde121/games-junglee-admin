@@ -2,3 +2,28 @@
 input.ng-invalid.ng-dirty {
   border: solid #dc3545 !important;
 }
+
+
+.border-bottom {
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+.border-none {
+  border: none;
+}
+
+.green {
+  border-bottom: 1px solid #dee2e6 !important;
+} 
+
+.red {
+  border: none;
+}
+
+.activeLink {
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

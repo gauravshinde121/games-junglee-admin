@@ -232,6 +232,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_GET_EVENTS)
   }
 
+  public getSports(){
+    return this.createUrl(this._constants.API_GET_SPORTS)
+  }
 
   public getEditUserEndpoint(){
     return this.createUrl(this._constants.API_URL_EDIT_USER)
@@ -239,6 +242,14 @@ export class ApiEndpointsService {
 
   public getRolesEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_ROLES)
+  }
+
+  public getAllMembersEndpoint(){
+    return this.createUrl(this._constants.API_URL_ALL_MEMBERS)
+  }
+
+  public getInvalidBetsEndpoint(){
+    return this.createUrl(this._constants.API_URL_INVALID_BETS)
   }
 
   public getUpdateSuperAdminBalanceEndpoint(){
@@ -253,10 +264,21 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_GET_MATCHES_BY_SPORT_ID)
   }
 
+  public getSurveillanceDataEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_SURVEILLANCE_DATA)
+  }
+
+  public getBetDetailsForWorkStationEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_BET_DETAILS_FOR_WORK_STATION)
+  }
+
   public getMarketsByMatchIdEndpoint(){
     return this.createUrl(this._constants.API_GET_MARKETS_BY_MATCH_ID)
   }
 
+  public getAllMarketTypeEndpoint(){
+    return this.createUrl(this._constants.API_GET_MARKET_ALL_TYPE)
+  }
 
   public getTransferStatementForUserEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_TRANSFER_STATEMENT_FOR_USER)
@@ -271,9 +293,12 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_MEMBER_BOOKS_FOR_BACKEND)
   }
 
-
-public getAllUserBetsEndpoint(){
+  public getAllUserBetsEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_ALL_USER_BETS)
+  }
+
+  public getMarketBySportIdEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_MARKET_BY_SPORT_ID)
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookManagementService } from '../../services/book-management.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-net-exposure',
@@ -12,41 +13,100 @@ export class NetExposureComponent implements OnInit {
   filterForm: FormGroup;
   booksForBackend:any = [];
   isLoading = false;
+  games:any;
+  matchList:any = [];
+  selectedType:any;
+  sport:any;
 
-  constructor(private _bookManagementService:BookManagementService) { }
+  constructor(
+    private _bookManagementService:BookManagementService,
+    private _sharedService:SharedService
+  ) { }
 
   ngOnInit(): void {
     this._preConfig();
   }
 
-
   _preConfig(){
+    this._getGames();
     this._initForm();
-    this.onFilterChange({selectedType:"MyPt",event:"All"});
+    this.onFilterChange({selectedType:"MyPt",matchId:null,sportId:null, clicked:'firstTime' });
   }
-
 
   _initForm(){
     this.filterForm = new FormGroup({
       selectedType: new FormControl('MyPT'),
-      event: new FormControl('All')
+      sport: new FormControl(null),
+      matchId: new FormControl(null)
     });
   }
 
-
   onFilterChange(filterObj){
-    let payload = {
-      selectedType:filterObj.selectedType,
-      event:"All"
+    this.isLoading = true;
+    let body = {};
+    var sport_value = this.filterForm.value.sport;
+    if(filterObj.clicked == 'type'){
+      body = {
+        selectedType: filterObj.selectedType,
+        matchId: this.filterForm.value.matchId,
+        sportId: sport_value
+      }
+    }
+    if(filterObj.clicked == 'sport'){
+      this._getMatchBySportId(filterObj.sport);
+      body = {
+        selectedType: this.filterForm.value.selectedType,
+        sportId: filterObj.sport,
+        matchId: null
+      }
+    }
+    if(filterObj.clicked == 'match'){
+      body = {
+        selectedType: this.filterForm.value.selectedType,
+        sportId: this.filterForm.value.matchId,
+        matchId: filterObj.matchId
+      }
+    }
+    if(filterObj.clicked == 'firstTime'){
+      body = {
+        selectedType: filterObj.selectedType,
+        sportId: filterObj.sportId,
+        matchId: filterObj.matchId
+      }
     }
 
-    console.log(payload)
-    this.isLoading = true;
-    this._bookManagementService._getBookForBackendApi(payload).subscribe((res:any)=>{
-    this.isLoading = false;
-    this.booksForBackend = res.booksForBackend
-      console.log(res)
+    this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
+      this.isLoading = false;
+      for (let index = 0; index < res.booksForBackend.length; index++) {
+        if (res.booksForBackend[index].data.length > 1) {
+         let obj = res.booksForBackend[index].data.find(
+          (obj) => obj.fancyFlag == true
+          );
+           if (obj)
+           res.booksForBackend[index].data[0].fancyExposure = obj.netExposure;
+         }
+         res.booksForBackend[index].data = res.booksForBackend[index].data.filter(obj => obj.fancyFlag == false)
+       }
+       this.booksForBackend = res.booksForBackend;
     })
+
+
+  }
+
+  _getGames(){
+    this._sharedService._getSports().subscribe((data:any)=>{
+      if(data){
+        this.games = data;
+      }
+    });
+  }
+
+  _getMatchBySportId(sportId){
+    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
+      if(data.matchList){
+        this.matchList = data.matchList;
+      }
+    });
   }
 
 }

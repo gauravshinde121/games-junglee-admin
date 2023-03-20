@@ -38,11 +38,13 @@ export class Constants {
     public readonly API_URL_GET_TRANSFER_STATEMENT_FOR_USER: string = 'api/junglee-admin/getTransferStatementForUser';
     public readonly API_URL_GET_MEMBER_LOGIN_HISTORY: string = 'api/junglee-admin/getMemberLoginHistory';
     public readonly API_URL_GET_MEMBER_BOOKS_FOR_BACKEND: string = 'api/junglee-admin/getMemberBooksForBackend';
+    public readonly API_URL_ALL_MEMBERS:string = 'api/junglee-admin/getAllMembers';
+    public readonly API_URL_GET_MARKET_BY_SPORT_ID:string = 'api/junglee-admin/getMarketBySportId';
 
 
     //book management
     public readonly API_URL_GET_BOOK_FOR_BACKEND: string = 'api/junglee-admin/getBooksForBackend';
-    public readonly API_URL_GET_ALL_USER_BETS: string = 'api/junglee-admin/getAllBets';
+    public readonly API_URL_GET_ALL_USER_BETS: string = 'api/junglee-admin/getBetTicker';
 
 
     //account statement
@@ -61,9 +63,19 @@ export class Constants {
     public readonly API_GET_MATCHES_BY_SPORT_ID: string = 'api/getMatchBySportId';
     public readonly API_GET_MARKETS_BY_MATCH_ID: string = 'api/getMarketByMatchId';
     public readonly API_GET_GAMES: string = 'api/junglee-admin/getGames';
+    public readonly API_GET_MARKET_ALL_TYPE: string = 'api/getMarketTypes';
+    public readonly API_GET_SPORTS: string = 'api/betfairSports';
 
     //settings
     public readonly API_URL_ADD_BALANCE: string = 'api/junglee-admin/addSuperAdminBalance';
     public readonly API_URL_GET_CL_TRANSFERS: string = 'api/junglee-admin/getClTransferStatement';
 
+    //all logs
+    public readonly API_URL_INVALID_BETS:string = 'api/getVARBets';
+
+    //surveillance
+    public readonly API_URL_GET_SURVEILLANCE_DATA:string = 'api/getBetsForSurveilliance';
+
+    //BOOK MANAGEMENT
+    public readonly API_URL_GET_BET_DETAILS_FOR_WORK_STATION:string = 'api/junglee-admin/getBetDetailsForWorkStation';
 }

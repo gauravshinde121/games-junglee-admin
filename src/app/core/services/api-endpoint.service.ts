@@ -159,6 +159,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ALL_USERS);
   }
 
+  public testFuncEndpoint():string{
+    return this.createUrl(this._constants.API_URL_TEST_FUNC);
+  }
+
   public getSingleUserEndpoint():string{
     return this.createUrl(this._constants.API_URL_SINGLE_USERS);
   }

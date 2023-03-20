@@ -78,4 +78,7 @@ export class Constants {
 
     //BOOK MANAGEMENT
     public readonly API_URL_GET_BET_DETAILS_FOR_WORK_STATION:string = 'api/junglee-admin/getBetDetailsForWorkStation';
+
+    //TEST
+    public readonly API_URL_TEST_FUNC:string = 'api/getBetsForSurveilliance';
 }

@@ -1,15 +1,14 @@
-
 <main id="main" class="main">
   <form [formGroup]="memberForm" (ngSubmit)="onSubmitMemberForm()">
     <section class="section gamedetails">
-
       <div class="row">
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-6 text-pink">
               <h4>
                 <i class="fa fa-solid fa-user text-pink me-2"></i>
-                <i class="fa fa-bars text-pink me-2"></i> {{editMode?'Update Member':'Create Member'}}
+                <i class="fa fa-bars text-pink me-2"></i>
+                {{ editMode ? "Update Member" : "Create Member" }}
               </h4>
             </div>
             <!--<div class="col-md-6 text-end">
@@ -49,31 +48,57 @@
           <div class="row mt-3">
             <div class="col-md-4">
               <label>Select Role</label>
-              <select style="background-color:rgba(60, 62, 62, 0.7215686275)" formControlName="roleId" name="roleId" id="ab" class="form-select mt-2">
-                <option *ngFor="let role of roles" [value]="role.roleId">{{role.userRoleName}} </option>
-               </select>
+              <select
+                style="background-color: rgba(60, 62, 62, 0.7215686275)"
+                formControlName="roleId"
+                name="roleId"
+                id="ab"
+                class="form-select mt-2"
+              >
+                <option *ngFor="let role of roles" [value]="role.roleId">
+                  {{ role.userRoleName }}
+                </option>
+              </select>
             </div>
             <div class="col-md-4">
               <label>Username</label>
-              <input [readOnly]="editMode" formControlName="username" type="text" class="form-control" placeholder="Username*"/>
-              <div class="text-danger" *ngIf="usernameVail && usernameVail.invalid && usernameVail.touched">
+              <input
+                [readOnly]="editMode"
+                formControlName="username"
+                type="text"
+                class="form-control"
+                placeholder="Username*"
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  usernameVail && usernameVail.invalid && usernameVail.touched
+                "
+              >
                 Username is required
-               </div>
+              </div>
             </div>
             <div class="col-md-4">
               <label>Display Name</label>
               <input
-              autocomplete="disabled"
+                autocomplete="disabled"
                 formControlName="displayName"
                 type="text"
                 class="form-control"
                 placeholder="Display Name*"
               />
-              <div class="text-danger" *ngIf="displaynameVail && displaynameVail.invalid && displaynameVail.touched">
+              <div
+                class="text-danger"
+                *ngIf="
+                  displaynameVail &&
+                  displaynameVail.invalid &&
+                  displaynameVail.touched
+                "
+              >
                 Display Name is required
-               </div>
+              </div>
             </div>
-            <div class="col-md-4 pt-5">
+            <div class="col-md-4 pt-5" *ngIf="!this.editMode">
               <label>Password</label>
               <input
                 type="password"
@@ -81,16 +106,21 @@
                 formControlName="password"
                 placeholder="Password*"
               />
-              <div class="text-danger" *ngIf="passwordVail && passwordVail.invalid && passwordVail.touched">
-                Password should be atleast 8 characters long.<br>
-                It should Contain<br>
-                1 alpha-numeric character<br>
-                1 upper case character<br>
-                1 lower case character<br>
+              <div
+                class="text-danger"
+                *ngIf="
+                  passwordVail && passwordVail.invalid && passwordVail.touched
+                "
+              >
+                Password should be atleast 8 characters long.<br />
+                It should Contain<br />
+                1 alpha-numeric character<br />
+                1 upper case character<br />
+                1 lower case character<br />
                 1 specialcharacter
               </div>
             </div>
-            <div class="col-md-4 pt-5">
+            <div class="col-md-4 pt-5" *ngIf="!this.editMode">
               <label>Confirm Password</label>
               <input
                 type="password"
@@ -98,8 +128,22 @@
                 formControlName="confirmPassword"
                 placeholder="Confirm Password*"
               />
-              <div  *ngIf="confirmPasswordVail && confirmPasswordVail.invalid && confirmPasswordVail.touched" class="text-danger">Confirm Password is required</div>
-              <div *ngIf="f['confirmPassword'].getError('Mustmatch')!=null" class="small text-danger col-md-12 ps-5">Confirm password doesn't match</div>
+              <div
+                *ngIf="
+                  confirmPasswordVail &&
+                  confirmPasswordVail.invalid &&
+                  confirmPasswordVail.touched
+                "
+                class="text-danger"
+              >
+                Confirm Password is required
+              </div>
+              <div
+                *ngIf="f['confirmPassword'].getError('Mustmatch') != null"
+                class="small text-danger col-md-12 ps-5"
+              >
+                Confirm password doesn't match
+              </div>
             </div>
             <div class="col-md-4 pt-5">
               <label>Player Max Credit Limit</label>
@@ -135,11 +179,11 @@
       </div>
       <div class="row">
         <div class="col-md-3 mt-3 d-flex" *ngFor="let game of gamesList">
-          <p class="me-2 flex-fill">{{game.name}}</p>
+          <p class="me-2 flex-fill">{{ game.name }}</p>
           <div class="toggle-button-cover">
             <div class="button1 r" id="button-2">
               <input
-              (click)="setGameStatus(game.isActive,game.sportsId)"
+                (click)="setGameStatus(game.isActive, game.sportsId)"
                 type="checkbox"
                 class="checkbox"
                 [checked]="!game.isActive"
@@ -171,7 +215,7 @@
             id="sportsBookRate"
             class="form-control pb-2"
           />
-        <p>(Min : 1) (Max : 1)</p>
+          <p>(Min : 1) (Max : 1)</p>
         </div>
       </div>
       <div class="row mt-5">
@@ -188,9 +232,9 @@
           <p>(Min : 100) (Max : 100)</p>
         </div>
       </div>
-      <div class="row mt-5" *ngIf="memberForm.value.roleId!=7">
+      <div class="row mt-5" *ngIf="memberForm.value.roleId != 7">
         <div class="col-md-2">Partnership Percentage</div>
-        <div class="col-md-2"> (%) </div>
+        <div class="col-md-2">(%)</div>
         <div class="col-md-8">
           <input
             formControlName="partnerShipPercent"
@@ -209,38 +253,67 @@
         <div class="col-md-4">
           <h4 class="text-pink">Min Bet</h4>
           <label>Member Min Bet</label>
-          <input
-            formControlName="minBet"
-            type="number"
-            class="form-control"
-          />
+          <input formControlName="minBet" type="number" class="form-control" />
           <p>(Min: 100)</p>
           <!-- <div class="text-danger" *ngIf="MinBetVail && MinBetVail.invalid && MinBetVail.touched">
             Please enter valid Min Rate
            </div>
            <span class="text-danger" *ngIf="memberForm.controls['minBet'].errors?.min"> Please enter valid Min Rate</span> -->
-           <div *ngIf="(memberForm.controls['minBet'].touched || memberForm.controls['minBet'].dirty)  && memberForm.controls['minBet'].invalid">
-            <div class="text-danger" *ngIf="memberForm.controls['minBet'].errors?.required">Please enter valid Min Rate</div>
-            <div class="text-danger" *ngIf="memberForm.controls['minBet'].errors?.['min']">Please enter valid Min Rate</div>
-           </div>
+          <div
+            *ngIf="
+              (memberForm.controls['minBet'].touched ||
+                memberForm.controls['minBet'].dirty) &&
+              memberForm.controls['minBet'].invalid
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="memberForm.controls['minBet'].errors?.required"
+            >
+              Please enter valid Min Rate
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="memberForm.controls['minBet'].errors?.['min']"
+            >
+              Please enter valid Min Rate
+            </div>
+          </div>
         </div>
         <div class="col-md-4">
           <h4 class="text-pink">Max Bet</h4>
           <label> Member Max Bet Amt </label>
-          <input
-            formControlName="maxBet"
-            type="number"
-            class="form-control"
-          />
+          <input formControlName="maxBet" type="number" class="form-control" />
           <p>(Min: 1) (Max: 10000000)</p>
           <!-- <div class="text-danger" *ngIf="MaxBetVail && MaxBetVail.invalid && MaxBetVail.touched">
             Please enter valid Bet Amount
           </div> -->
-          <div *ngIf="(memberForm.controls['maxBet'].touched || memberForm.controls['maxBet'].dirty)  && memberForm.controls['maxBet'].invalid">
-            <div class="text-danger" *ngIf="memberForm.controls['maxBet'].errors?.required">Please enter valid Bet Amount</div>
-            <div class="text-danger" *ngIf="memberForm.controls['maxBet'].errors?.['max']">Please enter valid Bet Amount</div>
-            <div class="text-danger" *ngIf="memberForm.controls['maxBet'].errors?.['min']">Please enter valid Bet Amount</div>
-           </div>
+          <div
+            *ngIf="
+              (memberForm.controls['maxBet'].touched ||
+                memberForm.controls['maxBet'].dirty) &&
+              memberForm.controls['maxBet'].invalid
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="memberForm.controls['maxBet'].errors?.required"
+            >
+              Please enter valid Bet Amount
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="memberForm.controls['maxBet'].errors?.['max']"
+            >
+              Please enter valid Bet Amount
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="memberForm.controls['maxBet'].errors?.['min']"
+            >
+              Please enter valid Bet Amount
+            </div>
+          </div>
         </div>
         <div class="col-md-4">
           <h4 class="text-pink">Max Exposure</h4>
@@ -254,11 +327,32 @@
           <!-- <div class="text-danger" *ngIf="maxExposureAmtVail && maxExposureAmtVail.invalid && maxExposureAmtVail.touched">
             Please enter valid Exposure Amount
            </div> -->
-           <div *ngIf="(memberForm.controls['maxExposure'].touched || memberForm.controls['maxExposure'].dirty)  && memberForm.controls['maxExposure'].invalid">
-            <div class="text-danger" *ngIf="memberForm.controls['maxExposure'].errors?.required">Please enter valid Bet Amount</div>
-            <div class="text-danger" *ngIf="memberForm.controls['maxExposure'].errors?.['max']">Please enter valid Bet Amount</div>
-            <div class="text-danger" *ngIf="memberForm.controls['maxExposure'].errors?.['min']">Please enter valid Bet Amount</div>
-           </div>
+          <div
+            *ngIf="
+              (memberForm.controls['maxExposure'].touched ||
+                memberForm.controls['maxExposure'].dirty) &&
+              memberForm.controls['maxExposure'].invalid
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="memberForm.controls['maxExposure'].errors?.required"
+            >
+              Please enter valid Bet Amount
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="memberForm.controls['maxExposure'].errors?.['max']"
+            >
+              Please enter valid Bet Amount
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="memberForm.controls['maxExposure'].errors?.['min']"
+            >
+              Please enter valid Bet Amount
+            </div>
+          </div>
         </div>
       </div>
     </section>

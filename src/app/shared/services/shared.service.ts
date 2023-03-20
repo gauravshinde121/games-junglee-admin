@@ -41,6 +41,11 @@ export class SharedService {
       .post(this._apiEndpointsService.getAllUserEndpoint(),body);
   }
 
+  testFunc(body){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.testFuncEndpoint(),body);
+  }
+
   _getSingleUsersApi(user){
     return this._apiHttpService
       .post(this._apiEndpointsService.getSingleUserEndpoint(),user);

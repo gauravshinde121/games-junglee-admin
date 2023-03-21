@@ -1,6 +1,8 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
+import { MembersService } from 'src/app/features/members/services/members.service';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { SettingsService } from '../services/settings.service';
 
@@ -24,32 +26,80 @@ export class BetSettingsComponent implements OnInit {
   matchId: any = null;
   marketTypeId: any = null;
 
-  constructor(private _sharedService:SharedService,private _settingService:SettingsService) { }
+  betTickerForm: FormGroup;
+  
+  searchTerm: string = '';
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 0;
+  allMembers:any;
+  marketList:any = [];
+  sportsId: any = null;
+
+  constructor(private _sharedService: SharedService,
+    private _settingService: SettingsService,
+    private _memberService : MembersService,
+    private bookManagementService: BookManagementService,
+    private _fb: FormBuilder) { }
+
+
+    get f(){
+      return this.betTickerForm.controls;
+    }
 
   ngOnInit(): void {
     this._preConfig();
-
-    this.betSettingForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
+    this.betTickerForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       this._getMatchBySportId(selectedValue);
+    });
+
+    this.betTickerForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
+      this._getMarketsByMatchId(selectedValue);
     });
 
     this.getAllUserBets();
   }
 
+  _getMarketsByMatchId(matchId){
+    this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
+      if(data.marketList){
+        this.marketList = data.marketList;
+      }
+    });
+  }
 
   _preConfig(){
+
     this._initForm();
     this._getGames();
+    this._getAllMembers();
 
   }
 
+  _getAllMembers(){
+    this._memberService._getAllMembers().subscribe((data:any)=>{
+      if(data.memberData){
+        this.allMembers = data.memberData;
+      }
+    });
+  }
+
   _initForm(){
-    this.betSettingForm = new FormGroup({
-      sportsId:new FormControl(null),
-      matchId:new FormControl(null),
-      fromDate:new FormControl(this.formatFormDate(new Date())),
-      toDate:new FormControl(this.formatFormDate(new Date()))
-    })
+    this.betTickerForm = this._fb.group({
+      memberName: null,
+      sportsId: null,
+      matchId: null,
+      marketId: null,
+      tms: ['All'],
+      type: ['All'],
+      typeName:['All'],
+      betType:["Matched"],
+      time: ["All"],
+      fromDate : this.formatFormDate(new Date()),
+      toDate : this.formatFormDate(new Date()),
+      stakesFromValue : [null],
+      stakesToValue : [null]
+    });
   }
 
   formatFormDate(date: Date) {
@@ -73,61 +123,91 @@ export class BetSettingsComponent implements OnInit {
     });
   }
 
-
   onGameSelected(sportId){
     this._getMatchBySportId(sportId);
   }
 
-
-  private formatDate(date) {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    return [day, month, year].join('/');
+  changeGame(evt) {
+    this.sportsId = evt.target.value;
   }
 
-
-  onSubmitBetListForm(){
-    console.log(this.betSettingForm.value)
+  changeMatch(evt) {
+    this.matchId = evt.target.value;
   }
+
+  changeMarketType(evt) {
+    this.marketTypeId = evt.target.value;
+  }
+
 
   getAllUserBets(){
     this.isLoading = true;
-    let payload = {
-      sportId: null,
+    this.allBets = [];
+
+    let body = {
+      sportsId: null,
       matchId: null,
       userId: null,
-      fromDate : null,
-      toDate : null
-    }
-    this._settingService._getAllUserBetsApi(payload).subscribe((res:any)=>{
-      this.allBets = res.data;
+      marketId : null,
+      stakesFrom :null,
+      stakesTo :null,
+      pageNo: this.currentPage,
+      limit: 50,
+    };
+
+    this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
+      this.isLoading = false;
+      this.allBets = res.userBetList.betList;
+      this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
-    this.isLoading = false;
+  }
+
+  next(): void {
+    this.currentPage++;
+    this.getAllUserBets();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getAllUserBets();
   }
 
   searchList() {
-    this.isLoading = true;
     let payload = {
-      sportId: this.gameId,
+      sportsId: this.sportsId,
       matchId: this.matchId,
-      fromDate : this.betSettingForm.value.fromDate,
-      toDate : this.betSettingForm.value.toDate
+      marketId: this.marketTypeId,
+      userId: null,
+      stakesFrom :this.betTickerForm.value.stakesFromValue,
+      stakesTo : this.betTickerForm.value.stakesToValue,
+      fromDate : this.betTickerForm.value.fromDate,
+      toDate : this.betTickerForm.value.toDate
     }
 
-    this._settingService._getAllUserBetsApi(payload).subscribe((res:any)=>{
-      this.allBets = res.data;
+    this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{
+      this.allBets = res.userBetList.betList;
+      this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
-    this.isLoading = false;
   }
 
+  clearMember(){
+    this.betTickerForm.value.memberName = null;
+  }
+
+  deleteBet(user) {
+    let body = {
+      "userId": user.userId,
+      "betId": user.betId
+    }
+    this._settingService._deleteBetApi(body).subscribe(res=>{
+      this._sharedService.getToastPopup(res['message'],"","success");
+      this.getAllUserBets();
+    })
+  }
 }

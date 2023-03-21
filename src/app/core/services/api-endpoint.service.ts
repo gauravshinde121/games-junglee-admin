@@ -317,6 +317,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_CHANGE_MEMBER_PASSWORD)
   }
 
+  public deleteBetEndpoint(){
+    return this.createUrl(this._constants.API_URL_DELETE_BET)
+  }
+
 
 
 }

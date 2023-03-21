@@ -71,6 +71,7 @@ export class Constants {
     //settings
     public readonly API_URL_ADD_BALANCE: string = 'api/junglee-admin/addSuperAdminBalance';
     public readonly API_URL_GET_CL_TRANSFERS: string = 'api/junglee-admin/getClTransferStatement';
+    public readonly API_URL_DELETE_BET: string = 'api/junglee-admin/deleteBetByAdmin';
 
     //all logs
     public readonly API_URL_INVALID_BETS:string = 'api/getVARBets';

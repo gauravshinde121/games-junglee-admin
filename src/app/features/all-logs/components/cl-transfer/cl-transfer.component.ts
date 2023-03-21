@@ -29,7 +29,7 @@ export class ClTransferComponent implements OnInit {
   getClTransfers(){
     this.isLoading = true;
     this.clTransfers = [];
-    var body = {
+    let body = {
       pageNo: this.currentPage,
       limit: 50,
     }

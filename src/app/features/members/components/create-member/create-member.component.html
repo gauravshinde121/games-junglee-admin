@@ -47,7 +47,7 @@
           </div>
           <div class="row mt-3">
             <div class="col-md-4 pt-5">
-              <label>Select Role{{editUserId}}</label>
+              <label>Select Role</label>
               <select
                 [attr.disabled]="editMode"
                 style="background-color: rgba(60, 62, 62, 0.7215686275)"
@@ -185,7 +185,7 @@
           <div class="toggle-button-cover">
             <div class="button1 r" id="button-2">
               <input
-                (click)="setGameStatus(game.isActive, game.sportsId)"
+                (click)="setGameStatus(game.isActive, game.gameId)"
                 type="checkbox"
                 class="checkbox"
                 [checked]="!game.isActive"

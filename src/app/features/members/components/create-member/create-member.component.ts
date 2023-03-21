@@ -39,9 +39,10 @@ export class CreateMemberComponent implements OnInit {
       this.
       editUserId = this.route.snapshot.params['id'];
       await this.getMemberInfo();
-    } else {
-      this.getGames();
     }
+    //else {
+      this.getGames();
+    //}
 
   }
 
@@ -52,9 +53,11 @@ export class CreateMemberComponent implements OnInit {
 
   getGames(){
     this._sharedService._getGames().subscribe((res:any)=>{
-      if(res){
-        this.gamesList = res.gamesList.map(game=>({...game,isActive:true}));
+      console.log('games',res.gamesList);
+      if(res.gamesList){
+        this.gamesList = res.gamesList.map(gameId=>({...gameId,isActive:true}));
       }
+      console.log('this.gamesList',this.gamesList);
     })
   }
 
@@ -72,32 +75,28 @@ export class CreateMemberComponent implements OnInit {
       console.log('res',res)
       if (res) {
         this.memberData = res.user;
+        console.log(this.memberData);
         this.gamesList = res.gameStatus;
-        this.roleId = this.memberData.roleId
-        console.log("this.gamesList",this.gamesList);
-
-        // this.memberForm.patchValue({
-        //   status:this.memberData.isActive,
-        //   username: this.memberData.username,
-        //   displayName: this.memberData.displayName,
-        //   playerMaxCreditLimit: this.memberData.creditLimit,
-        //   sportsBookRate: this.memberData.sportsBookRate,
-        //   liveCasinoRate: this.memberData.liveCasinoRate,
-        //   minimumBet: this.memberData.minimumBet,
-        //   maxBet: this.memberData.maxBet,
-        //   maxExposure: this.memberData.maxExposure,
-        //   //isActive: this.memberData.isActive,
-        //   //roleId:this.memberData.roleId
-        // });
-        console.log('this.memberForm',this.memberForm);
-        console.log('this.memberForm',this.gamesList);
+        this.roleId = this.memberData.roleId;
+        this.memberForm.patchValue({
+          status:this.memberData.isActive,
+          username: this.memberData.username,
+          displayName: this.memberData.displayName,
+          playerMaxCreditLimit: this.memberData.creditLimit,
+          sportsBookRate: this.memberData.sportsBookRate,
+          liveCasinoRate: this.memberData.liveCasinoRate,
+          minimumBet: this.memberData.minimumBet,
+          maxBet: this.memberData.maxBet,
+          maxExposure: this.memberData.maxExposure,
+          //isActive: this.memberData.isActive,
+          //roleId:this.memberData.roleId
+        });
       }
     }))
   }
 
 
 _createMemberForm(){
-  console.log('this.editMode',this.editMode);
   if(!this.editMode){
     this.memberForm = this._fb.group({
       username: [
@@ -127,7 +126,6 @@ _createMemberForm(){
       validators: this.Mustmatch('password', 'confirmPassword')
     })
   } else {
-    console.log('memberForm');
     this.memberForm = this._fb.group({
       displayName: ['', Validators.required],
       playerMaxCreditLimit: ['', Validators.required],
@@ -151,8 +149,6 @@ get f() {
 
 onSubmitMemberForm(){
   this.isLoading = true;
-
-  console.log('this.memberForm.valueee',this.memberForm.value);
 
   let memberData = {};
   if(!this.editMode){
@@ -188,8 +184,6 @@ onSubmitMemberForm(){
     }
   }
 
-  console.log(memberData)
-
   let memberObs:Observable<any>;
   let msg = "";
   if(!this.editMode){
@@ -203,7 +197,6 @@ onSubmitMemberForm(){
 
   memberObs.subscribe(
     (res: any) => {
-      console.log(res)
       this._sharedService.getToastPopup(`User ${msg} Successfully`, 'Member', 'success');
       this._router.navigate(['/member/list'])
       this._sharedService.sharedSubject.next({
@@ -220,7 +213,6 @@ onSubmitMemberForm(){
 
 _getRoles(){
   this._memberService._getRolesApi().subscribe((roles:any)=>{
-    console.log('roles',roles);
     this.roles = roles.data;
   })
 }

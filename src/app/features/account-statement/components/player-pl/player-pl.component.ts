@@ -89,9 +89,9 @@ export class PlayerPlComponent implements OnInit {
     let body = {
       fromDate: this.filterForm.value.fromDate,
       toDate: this.filterForm.value.toDate,
-      sportsId:null,
-      matchId:null,
-      marketId:null,
+      sportsId:this.filterForm.value.sportsId,
+      matchId:this.filterForm.value.matchId,
+      marketId:this.filterForm.value.marketId,
       pageNo: this.currentPage,
       limit: 50,
     };

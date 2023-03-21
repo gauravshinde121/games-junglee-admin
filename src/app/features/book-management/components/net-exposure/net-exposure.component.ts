@@ -59,7 +59,7 @@ export class NetExposureComponent implements OnInit {
   onFilterChange(filterObj){
     this.isLoading = true;
     let body = {};
-    var sport_value = this.filterForm.value.sport;
+    let sport_value = this.filterForm.value.sport;
     if(filterObj.clicked == 'type'){
       body = {
         selectedType: filterObj.selectedType,
@@ -91,15 +91,17 @@ export class NetExposureComponent implements OnInit {
         matchId: filterObj.matchId
       }
     }
-
     this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
+      this.isLoading = false;
       this.alterData(res);
+
     })
 
 
   }
 
   alterData(res){
+    this.isLoading = true;
     for (let index = 0; index < res.booksForBackend.length; index++) {
       if (res.booksForBackend[index].data.length > 1) {
        let obj = res.booksForBackend[index].data.find(

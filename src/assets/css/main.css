@@ -571,3 +571,8 @@ select:-webkit-autofill:focus {
 .memberslist .nav-link.active {
   color: #000;
 }/*# sourceMappingURL=main.css.map */
+
+
+.cursor-pointer {
+  cursor : pointer;
+}

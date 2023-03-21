@@ -97,10 +97,20 @@ export class PlayerPlComponent implements OnInit {
   getPlStatement(){
     this.isLoading = true;
     this.plStatement = [];
+    
+    let fromDate = new Date(this.filterForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.filterForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
 
     let body = {
-      fromDate: this.filterForm.value.fromDate,
-      toDate: this.filterForm.value.toDate,
+      fromDate: fromDate,
+      toDate: toDate,
       sportsId:this.filterForm.value.sportsId,
       matchId:this.filterForm.value.matchId,
       marketId:this.filterForm.value.marketId,

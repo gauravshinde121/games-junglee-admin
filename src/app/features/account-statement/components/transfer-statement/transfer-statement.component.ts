@@ -4,7 +4,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { AccountStatementService } from '../../services/account-statement.service';
 
-
 @Component({
   selector: 'app-transfer-statement',
   templateUrl: './transfer-statement.component.html',
@@ -22,6 +21,7 @@ export class TransferStatementComponent implements OnInit {
   language = "en";
   currentPage: number = 1;
   totalPages: number = 0;
+  pageSize:number = 10;
 
   constructor(
     private _accountsService:AccountStatementService
@@ -30,7 +30,6 @@ export class TransferStatementComponent implements OnInit {
   ngOnInit(): void {
     this._preConfig();
   }
-
 
   _preConfig(){
     this._initForm();
@@ -61,7 +60,8 @@ export class TransferStatementComponent implements OnInit {
     this._accountsService._getTransferStatementApi(payload).subscribe(res=>{
       this.isLoading = false;
       this.transferStatements = res;
-    })
+      this.totalPages = Math.ceil(this.transferStatements.length / this.pageSize);
+    });
   }
 
   next(): void {

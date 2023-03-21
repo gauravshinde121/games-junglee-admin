@@ -17,6 +17,9 @@ export class TurnoverComponent implements OnInit {
   language = "en";
   games:any = [];
   isLoading:boolean = false;
+  currentPage: number = 1;
+  totalPages: number = 0;
+  pageSize:number = 10;
 
   constructor(
     private _accountStatementService:AccountStatementService,
@@ -38,7 +41,6 @@ export class TurnoverComponent implements OnInit {
     this.filterForm = new FormGroup({
       fromDate:new FormControl(this.formatFormDate(new Date())),
       toDate:new FormControl(this.formatFormDate(new Date())),
-      page:new FormControl(1),
       sportsId:new FormControl(null),
     })
   }
@@ -49,9 +51,19 @@ export class TurnoverComponent implements OnInit {
 
   getTurnOver(){
     this.isLoading = true;
-    this._accountStatementService._getCategoryForTO(this.filterForm.value).subscribe((res:any)=>{
+    var body = {
+      fromDate:this.filterForm.value.fromDate,
+      toDate:this.filterForm.value.toDate,
+      sportsId:this.filterForm.value.sportsId,
+      pageNo: this.currentPage,
+      limit: 50,
+    }
+    this._accountStatementService._getCategoryForTO(body).subscribe((res:any)=>{
       this.plStatement = res;
       this.isLoading = false;
+      console.log('plStatement',this.plStatement.length);
+      console.log('pageSize',this.pageSize);
+      this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
     })
   }
 
@@ -69,5 +81,16 @@ export class TurnoverComponent implements OnInit {
       console.log(res)
     })
   }
+
+  next(): void {
+    this.currentPage++;
+    this.getTurnOver();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getTurnOver();
+  }
+
 
 }

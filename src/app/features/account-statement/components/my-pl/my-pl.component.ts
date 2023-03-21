@@ -80,6 +80,8 @@ export class MyPlComponent implements OnInit {
     this._accountStatementService._getPlBySubgameAPi(body).subscribe((res:any)=>{
       this.isLoading = false;
       this.plStatement = res.admin;
+      console.log('this.plStatement.length',this.plStatement.length);
+      console.log('this.pageSize',this.pageSize);
       this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     });

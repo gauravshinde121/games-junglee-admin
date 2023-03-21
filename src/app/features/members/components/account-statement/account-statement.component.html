@@ -1,28 +1,49 @@
-<div class="tab-pane fade show active" id="pills-accountstatement" role="tabpanel"
-  aria-labelledby="pills-accountstatement-tab" tabindex="0">
+<div
+  class="tab-pane fade show active"
+  id="pills-accountstatement"
+  role="tabpanel"
+  aria-labelledby="pills-accountstatement-tab"
+  tabindex="0"
+>
   <div class="row" [formGroup]="filterForm">
-
     <div class="col-md-3 mb-3">
       <label>Select Sport</label>
       <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
         <option value="null">All</option>
-        <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
+        <option *ngFor="let game of games" [value]="game.sportId">
+          {{ game.sportName }}
+        </option>
       </select>
     </div>
     <div class="col-md-3 mb-3">
       <label>From Date</label>
-      <input formControlName="fromDate" type="date" 
-        onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" name="fromDate"
-        class="form-control" id="" />
+      <input
+        formControlName="fromDate"
+        type="date"
+        onfocus="(this.type='date')"
+        onblur="if(this.value==''){this.type='text'}"
+        name="fromDate"
+        class="form-control"
+        id=""
+      />
     </div>
     <div class="col-md-3 mb-3">
       <label>To Date</label>
-      <input formControlName="toDate" type="date"
-        onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" name="toDate"
-        class="form-control" id="" />
+      <input
+        formControlName="toDate"
+        type="date"
+        onfocus="(this.type='date')"
+        onblur="if(this.value==''){this.type='text'}"
+        name="toDate"
+        class="form-control"
+        id=""
+      />
     </div>
     <div class="col-md-3 mb-3">
-      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getAccountStatement()">
+      <button
+        class="btn btn-pink rounded-pill w-100 mt-4"
+        (click)="getAccountStatement()"
+      >
         Search
       </button>
     </div>
@@ -54,7 +75,9 @@
               {{ acc.netAmt | number }}
             </td>
             <td>
-              <a (click)="openModal(acc)"><i class="fa-sharp fa-solid fa-eye text-pink"></i></a>
+              <a (click)="openModal(acc)"
+                ><i class="fa-sharp fa-solid fa-eye text-pink"></i
+              ></a>
             </td>
           </tr>
         </tbody>
@@ -77,7 +100,7 @@
       Prev
     </button>
     <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
-      >{{ currentPage}} / {{totalPages }}
+      >{{ currentPage }} / {{ totalPages }}
     </span>
     <button
       class="btn bg-dgrey rounded-pill text-white"
@@ -90,16 +113,29 @@
 </div>
 
 <!-- Modal start-->
-<div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static"
-  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog modal-lg">
     <div class="modal-content modal-size">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-dark" id="staticBackdropLabel">
           Game Detail &nbsp; <i class="fa fa-lock text-pink"></i>
         </h5>
-        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
-          aria-label="Close"></button>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body bg-dark text-white">
         <div class="row">
@@ -130,11 +166,13 @@
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
-                  <td [ngClass]="
+                  <td
+                    [ngClass]="
                       selectedAccount?.netAmt > 0
                         ? 'text-success'
                         : 'text-danger'
-                    ">
+                    "
+                  >
                     {{ selectedAccount?.netAmt }}
                   </td>
                 </tr>
@@ -144,11 +182,13 @@
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
-                  <td [ngClass]="
+                  <td
+                    [ngClass]="
                       selectedAccount?.netAmt > 0
                         ? 'text-success'
                         : 'text-danger'
-                    ">
+                    "
+                  >
                     {{ selectedAccount?.netAmt }}
                   </td>
                 </tr>
@@ -208,7 +248,9 @@
                 <td>{{ bet.odds }}</td>
                 <td>{{ bet.stake }}</td>
                 <td>{{ bet.stake }}</td>
-                <td [ngClass]="bet.netAmount > 0 ? 'text-success' : 'text-danger'">
+                <td
+                  [ngClass]="bet.netAmount > 0 ? 'text-success' : 'text-danger'"
+                >
                   {{ bet.netAmount | number }}
                 </td>
                 <td>49.36.104.151</td>

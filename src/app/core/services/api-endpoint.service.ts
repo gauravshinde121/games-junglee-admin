@@ -276,6 +276,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_BET_DETAILS_FOR_WORK_STATION)
   }
 
+  public getOneAccountEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_ONE_ACCOUNT)
+  }
+
   public getMarketsByMatchIdEndpoint(){
     return this.createUrl(this._constants.API_GET_MARKETS_BY_MATCH_ID)
   }
@@ -307,12 +311,12 @@ export class ApiEndpointsService {
 
   public changeMemberStatusEndpoint(){
     return this.createUrl(this._constants.API_URL_CHANGE_MEMBER_STATUS)
-  } 
+  }
 
   public changePasswordEndpoint(){
     return this.createUrl(this._constants.API_URL_CHANGE_MEMBER_PASSWORD)
-  } 
-  
+  }
+
 
 
 }

@@ -301,4 +301,14 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_MARKET_BY_SPORT_ID)
   }
 
+  public changeMemberStatusEndpoint(){
+    return this.createUrl(this._constants.API_URL_CHANGE_MEMBER_STATUS)
+  } 
+
+  public changePasswordEndpoint(){
+    return this.createUrl(this._constants.API_URL_CHANGE_MEMBER_PASSWORD)
+  } 
+  
+
+
 }

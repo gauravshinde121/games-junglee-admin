@@ -11,7 +11,7 @@ import { formatDate } from '@angular/common';
 })
 export class TransferStatementsComponent implements OnInit {
 
-  transferStatements: any;
+  transferStatements: any = [];
   currentDate = new Date();
   fromDate = new Date().toString();
   toDate = new Date().toString();
@@ -19,6 +19,7 @@ export class TransferStatementsComponent implements OnInit {
   filterForm:FormGroup;
   dateFormat = "yyyy-MM-dd";
   language = "en";
+  isLoading = false;
 
   constructor(
     private _memberService: MembersService,
@@ -54,14 +55,26 @@ export class TransferStatementsComponent implements OnInit {
   }
 
   getTransferStatement() {
+    this.isLoading = true;
+
+    let fromDate = new Date(this.filterForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.filterForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
 
     const payload= {
-      fromDate:this.filterForm.value['fromDate'],
-      toDate:this.filterForm.value['toDate'],
+      fromDate: fromDate,
+      toDate: toDate,
       userId:this.userId
     }
 
     this._memberService._getTransferStatementForUserApi(payload).subscribe((data: any) => {
+      this.isLoading = false;
       this.transferStatements = data.transferStatement;
     })
   }

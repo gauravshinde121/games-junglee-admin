@@ -1,28 +1,42 @@
-<div class="tab-pane fade show active" id="pills-balance" role="tabpanel" aria-labelledby="pills-balance-tab" tabindex="0">
+<div class="tab-pane fade show active" id="pills-balance" role="tabpanel" aria-labelledby="pills-balance-tab"
+  tabindex="0">
+
+
+
   <div class="col-md-12 ">
-   <table class="table tableall" *ngIf="memberBalance">
-  <tbody>
-  <tr>
-  <td>Net Exposure (Sports Book)</td>
-  <td class=" text-center text-success" [ngClass]="memberBalance.netExposure>0?'text-success':'text-danger'">{{memberBalance.netExposure}}</td>
-  </tr>
-  <tr>
-  <td>Balance Up</td>
-  <td class="text-center" [ngClass]="memberBalance.balanceUp>0?'text-success':'text-danger'">{{memberBalance.balanceUp}}</td>
-  </tr>
-  <tr>
-  <td>Balance Down</td>
-  <td class="text-center" [ngClass]="memberBalance.balanceDown>0?'text-success':'text-danger'">{{memberBalance.balanceDown}}</td>
-  </tr>
-  <tr>
-  <td> Credit Limit</td>
-  <td class="text-center">{{memberBalance.creditLimit}}</td>
-  </tr>
-  <tr class="bg-pink">
-  <td>Available Credit</td>
-  <td class="text-center">{{memberBalance.availableBalance}}</td>
-   </tr>
-  </tbody>
-  </table>
-   </div>
-   </div>
+    <table class="table tableall" *ngIf="memberBalance && !this.isLoading">
+      <tbody>
+        <tr>
+          <td>Net Exposure (Sports Book)</td>
+          <td class=" text-center text-success" [ngClass]="memberBalance.netExposure>0?'text-success':'text-danger'">
+            {{memberBalance.netExposure}}</td>
+        </tr>
+        <tr>
+          <td>Balance Up</td>
+          <td class="text-center" [ngClass]="memberBalance.balanceUp>0?'text-success':'text-danger'">
+            {{memberBalance.balanceUp}}</td>
+        </tr>
+        <tr>
+          <td>Balance Down</td>
+          <td class="text-center" [ngClass]="memberBalance.balanceDown>0?'text-success':'text-danger'">
+            {{memberBalance.balanceDown}}</td>
+        </tr>
+        <tr>
+          <td> Credit Limit</td>
+          <td class="text-center">{{memberBalance.creditLimit}}</td>
+        </tr>
+        <tr class="bg-pink">
+          <td>Available Credit</td>
+          <td class="text-center">{{memberBalance.availableBalance}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-12 mt-3" *ngIf="!memberBalance">
+    <div class="border text-center p-5">
+      <h4 *ngIf="!memberBalance&& !isLoading">No data found</h4>
+      <h4 *ngIf="isLoading">Loading...</h4>
+    </div>
+  </div>
+</div>

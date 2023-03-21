@@ -26,6 +26,7 @@ export class ActivityComponent implements OnInit {
   isChecked: boolean = true;
   dateFormat = "yyyy-MM-dd";
   language = "en";
+  isLoading : boolean = false;
 
 
   constructor(
@@ -65,10 +66,33 @@ export class ActivityComponent implements OnInit {
 
 
   onSubmitSearchActivityForm(){
-    this._memberService._getMemberActivityApi({...this.searchActivityForm.value,refUserId:this.userId}).subscribe((res:any)=>{
+
+    this.isLoading = true;
+
+    let fromDate = new Date(this.searchActivityForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.searchActivityForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
+
+    let payload = {
+      refUserId:this.userId,
+      fromDate: fromDate,
+      toDate: toDate,
+      agent:this.searchActivityForm.value.agent,
+      marketId:this.searchActivityForm.value.marketId,
+      sportId:this.searchActivityForm.value.sportsId
+    }
+
+    this._memberService._getMemberActivityApi(payload).subscribe((res:any)=>{
       console.log('search',res);
-      // this.activityData = res.data;
-      // console.log('activity',this.activityData)
+      this.isLoading = false;
+      this.activityData = res;
+      console.log('activity',this.activityData)
     })
   }
 
@@ -122,10 +146,23 @@ export class ActivityComponent implements OnInit {
   // }
 
   searchActivity(){
+
+    this.isLoading = true;
+
+    let fromDate = new Date(this.searchActivityForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.searchActivityForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
+
     let payload = {
       refUserId:this.userId,
-      fromDate: new Date(this.searchActivityForm.value.fromDate),
-      toDate:this.searchActivityForm.value.toDate,
+      fromDate: fromDate,
+      toDate: toDate,
       agent:this.searchActivityForm.value.agent,
       marketId:this.searchActivityForm.value.marketId,
       sportId:this.searchActivityForm.value.sportsId
@@ -133,6 +170,7 @@ export class ActivityComponent implements OnInit {
 
     this._memberService._getMemberActivityApi(payload).subscribe((res:any)=>{
       console.log('search',res);
+      this.isLoading = false;
       this.activityData = res.data;
       console.log('activity',this.activityData)
     })

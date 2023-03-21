@@ -93,7 +93,7 @@
           </select>
         </div>
 
-          <div class="col-md-3">
+          <div class="col-md-3 mt-3">
             <button
               type="button"
               class="btn btn-pink rounded-pill mt-4 w-100"
@@ -134,8 +134,8 @@
           <th scope="col">Sub Game</th>
           <th scope="col">Event</th>
           <th scope="col">Player</th>
-          <th scope="col">Master</th>
-          <th scope="col">Multiplier</th>
+          <!-- <th scope="col">Master</th>
+          <th scope="col">Multiplier</th> -->
           <th scope="col">Details</th>
         </tr>
       </thead>
@@ -152,13 +152,13 @@
             </div>
             <div class="text-green">
               {{ pl.gameData.netAmt | number }}
-              <i
+              <!-- <i
                 class="fa-sharp fa-solid fa-info-circle text-pink"
                 role="button"
                 id="dropdownMenuLink"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-              ></i>
+              ></i> -->
               <ul class="dropdown-menu idd" aria-labelledby="dropdownMenuLink">
                 <div class="col-md-12">
                   <li class="dropdown-item ddcontent">Player-INR</li>
@@ -206,9 +206,9 @@
               </ul>
             </div>
           </td>
-          <td>50,000</td>
+          <!-- <td>50,000</td> -->
 
-          <td>1</td>
+          <!-- <td>1</td> -->
           <td>
             <i
               (click)="getOneAccount(pl)"

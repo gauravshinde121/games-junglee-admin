@@ -19,12 +19,9 @@
     </div>
   </div>
   <div class="col-md-12 mt-3">
-    <div class="border text-center p-5" *ngIf="transferStatements.length == 0">
-      <h4>No data found </h4>
-    </div>
 
     <div class="row">
-      <table class="table tableall" *ngIf="transferStatements.length != 0">
+      <table class="table tableall" *ngIf="transferStatements.length > 0 && !this.isLoading">
         <thead>
           <tr>
             <th scope="col" class="text-dark">Date</th>
@@ -42,5 +39,15 @@
         </tbody>
       </table>
     </div>
+
+    
   </div>
+  <div class="col-md-12 mt-3" *ngIf="transferStatements?.length == 0">
+    <div class="border text-center p-5" >
+      <h4 *ngIf="transferStatements.length == 0 && !isLoading">No data found</h4>
+      <h4 *ngIf="isLoading">Loading...</h4>
+    </div>
+  </div>
+
+  
 </div>

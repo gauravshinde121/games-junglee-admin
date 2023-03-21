@@ -80,4 +80,13 @@ export class MembersService {
     .post(this._apiEndpointsService.getMemberBooksForBackendEndpoint(),paramObj);
   }
 
+  _changeMemberStatusApi(paramObj){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.changeMemberStatusEndpoint(),paramObj);
+  }
+
+  _changeMemberPasswordApi(paramObj){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.changePasswordEndpoint(),paramObj);
+  }
 }

@@ -23,6 +23,12 @@ export class AccountStatementComponent implements OnInit {
   matchList:any = [];
   dateFormat = "yyyy-MM-dd";
   language = "en";
+  isLoading = false;
+  searchTerm: string = '';
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 0;
+
 
   constructor(
     private _memberService:MembersService,
@@ -58,11 +64,6 @@ export class AccountStatementComponent implements OnInit {
       fromDate : this.formatFormDate(new Date()),
       toDate : this.formatFormDate(new Date()),
       sportsId:new FormControl(null),
-      keyword:new FormControl(null),
-      matchId:new FormControl(null),
-      tms:new FormControl(null),
-      type:new FormControl(null),
-      typeName:new FormControl('All'),
     });
   }
 
@@ -70,6 +71,16 @@ export class AccountStatementComponent implements OnInit {
     return formatDate(date, this.dateFormat,this.language);
   }
 
+
+  next(): void {
+    this.currentPage++;
+    this.getAccountStatement();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getAccountStatement();
+  }
 
   showDetails(account){
     console.log(account)
@@ -86,11 +97,31 @@ export class AccountStatementComponent implements OnInit {
 
   getAccountStatement(){
 
-    console.log(this.filterForm.value)
+    this.isLoading = true;
 
-    this._memberService._getDownlineAccountsDataForMemberApi({...this.filterForm.value,userId:this.userId}).subscribe((data:any)=>{
+    let fromDate = new Date(this.filterForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.filterForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
+    
+    let body = {
+      fromDate : fromDate,
+      toDate : toDate,
+      sportsId : this.filterForm.value.sportsId,
+      userId: this.userId
+    }
+
+    this._memberService._getDownlineAccountsDataForMemberApi(body).subscribe((data:any)=>{
       console.log(data);
+      this.isLoading = false;
       this.accountStatement = data.data;
+      this.totalPages = Math.ceil(this.accountStatement.length / this.pageSize);
+
     })
   }
 
@@ -108,8 +139,8 @@ export class AccountStatementComponent implements OnInit {
 
   _getGames(){
     this._sharedService._getSports().subscribe((data:any)=>{
-      if(data.gamesList){
-        this.games = data.gamesList;
+      if(data){
+        this.games = data;
       }
     });
   }

@@ -359,7 +359,7 @@
       </div>
     </section>
     <div class="row mt-3">
-      <div class="col-md-6 text-end">
+      <div class="col-md-6 col-6 text-end">
         <button
           type="button"
           class="btn btn-pink rounded-pill ps-5 pe-5 pt-3 pb-3"
@@ -367,9 +367,9 @@
           Cancel
         </button>
       </div>
-      <div class="col-md-6">
-
-    <button *ngIf="!editMode"
+      <div class="col-md-6 col-6 ">
+        <button
+        *ngIf="!editMode"
           type="submit"
           class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3"
           [disabled]="memberForm.invalid"

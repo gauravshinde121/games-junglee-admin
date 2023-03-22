@@ -14,8 +14,7 @@
         <div class="form-floating mt-4">
               <input [type]="show ? 'text' : 'password'" readonly onfocus="this.removeAttribute('readonly');"
               class="form-control" placeholder="Enter Password" formControlName="password">
-
-            <!-- <input type="text" class="form-control" autocomplete="disabled" formControlName="password" id="floatingInput" placeholder="Password*">
+<!-- <input type="text" class="form-control" autocomplete="disabled" formControlName="password" id="floatingInput" placeholder="Password*">
     -->
             <label for="floatingInput">Password</label>
             <span class="fa text-white" (click)="show=!show" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>

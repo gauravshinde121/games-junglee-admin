@@ -50,7 +50,7 @@
         role="tablist"
       >
         <li
-          class="nav-item mr-5"
+          class="nav-item mr-5 mb-2"
           role="presentation"
           *ngFor="let role of roles"
         >
@@ -72,7 +72,7 @@
       </ul>
     </div>
     <div class="row mt-3">
-      <div class="col-md-12">
+      <div class="col-md-12 overflow-auto">
         <div *ngIf="userList.length == 0" class="border text-center p-5">
           <h4 *ngIf="userList.length == 0 && !isLoading">No data found</h4>
           <h4 *ngIf="isLoading">Loading...</h4>
@@ -194,8 +194,20 @@
                   <i class="fa fa-lock text-pink"></i>
                 </a> -->
 
-                <select
-                      class="custom-select select-table-dropdown form-control select_group text-center" 
+              <div class="btn-group">
+                  <a data-bs-toggle="dropdown" aria-expanded="false" class="text-decoration-none text-white">
+                    Status
+                  </a>
+                  <ul class="dropdown-menu p-0">
+                    <li><a class="dropdown-item bg-success text-white" href="#"><i class="fa fa-check"></i> Active</a></li>
+                    <li><a class="dropdown-item bg-warning text-white" href="#"><i class="fa fa-check"></i> Inactive</a></li>
+                    <li><a class="dropdown-item bg-danger text-white" href="#"><i class="fa fa-check"></i> Close</a></li>
+                  </ul>
+                </div>
+
+
+                <!-- <select
+                      class="custom-select select-table-dropdown form-control select_group"
                       (change)="changeStatus($event)"
                     >
                       <option
@@ -203,17 +215,23 @@
                         [value]="item.id"
                         [selected]="item.status == user.isActive"
                       >
-                        <div
-                            [ngClass]="item.status == 'Active' ? 'green'
-                              : item.status == 'Inactive'
-                              ? 'yellow'
-                              : 'red'
-                          ">
-                            {{ item.status }}
-                        </div>
+                       <div
+                       [ngClass]="item.status == 'Active' ? 'bg-success'
+                         : item.status == 'Inactive' ? 'yellow'
+                         : 'red'
+                     ">
+                    {{ item.status }}
+              </div>
                       </option>
-                    </select>
+                    </select> -->
 
+
+                    <!-- <select [(ngModel)]="selected" [compareWith]="compareObjects">
+                      <option *ngFor="let datas of data" [ngStyle]="{'background-color': datas.color}" [ngValue]="datas">{{datas.name}}</option>
+                     </select>
+
+                    <div [ngStyle]="{'background-color': selected.color}">{{selected.name}}</div>
+                     -->
 
                     <!-- <input type="radio" [checked]="user.isActive" id="html" name="fav_language" value="item.status">
                     <label for="html">Active</label><br>

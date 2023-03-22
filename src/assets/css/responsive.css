@@ -23,6 +23,7 @@
    }
 
    #main {
+     padding: 20px 15px 20px 20px;
      margin-top: 55px;
      border-top: 1px solid #ffa7a3;
    }
@@ -39,9 +40,11 @@
    .disnone {
      display: none;
    }
+
    .header {
-    height: 60px;
-  }
+     height: 60px;
+   }
+
    .header .toggle-sidebar-btn {
      padding-left: 0px;
    }
@@ -65,25 +68,27 @@
 
  /* Extra large devices (large laptops and desktops, 1200px and up) */
  @media only screen and (min-width: 1200px) {
-  #main {
-    margin-left: 270px;
-  }
-  .toggle-sidebar #main {
-    margin-left: 0;
-  }
+   #main {
+     margin-left: 270px;
+   }
 
-  .toggle-sidebar .sidebar {
-    left: -300px;
-  }
+   .toggle-sidebar #main {
+     margin-left: 0;
+   }
+
+   .toggle-sidebar .sidebar {
+     left: -300px;
+   }
  }
 
  @media (max-width: 1199px) {
-  .sidebar {
-    left: -300px;
-  }
-}
-@media (max-width: 1199px) {
-  .toggle-sidebar .sidebar {
-    left: 0;
-  }
-}
+   .sidebar {
+     left: -300px;
+   }
+ }
+
+ @media (max-width: 1199px) {
+   .toggle-sidebar .sidebar {
+     left: 0;
+   }
+ }

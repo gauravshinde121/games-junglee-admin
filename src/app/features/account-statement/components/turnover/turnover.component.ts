@@ -20,6 +20,8 @@ export class TurnoverComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 0;
   pageSize:number = 10;
+  display = '';
+  turnoverDetails:any;
 
   constructor(
     private _accountStatementService:AccountStatementService,
@@ -92,5 +94,9 @@ export class TurnoverComponent implements OnInit {
     this.getTurnOver();
   }
 
+
+  closeModal(){
+    this.display = 'none';
+  }
 
 }

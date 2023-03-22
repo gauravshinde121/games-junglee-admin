@@ -10,6 +10,7 @@ import { MembersService } from '../../services/members.service';
   styleUrls: ['./members-list.component.scss'],
 })
 export class MembersListComponent implements OnInit {
+
   userList: any = [];
   isLoading = false;
   selectedUserForAdjustment: any = [];
@@ -37,7 +38,7 @@ export class MembersListComponent implements OnInit {
   statusList : any = [];
 
   changePasswordForm!: FormGroup;
-  
+
   selectedColor = "";
   // authObj = {
   //   currentPassword: "",
@@ -242,7 +243,7 @@ export class MembersListComponent implements OnInit {
   openModal(userId) {
     this.userId = userId;
     this.display = 'block';
-    
+
   }
 
   closeModal() {
@@ -288,12 +289,12 @@ export class MembersListComponent implements OnInit {
   }
 
   changeStatus(evt,user){
-    // this.selectedColor = 
+    // this.selectedColor =
     console.log("Evt",user);
     console.log("Value",evt.target.value);
     let status = evt.target.value;
     let body = {
-      "userId": user.userId, 
+      "userId": user.userId,
       "isActive": status
     }
 
@@ -303,5 +304,5 @@ export class MembersListComponent implements OnInit {
     })
   }
 
-  
+
 }

@@ -68,9 +68,12 @@
 
  /* Extra large devices (large laptops and desktops, 1200px and up) */
  @media only screen and (min-width: 1200px) {
-   #main {
-     margin-left: 270px;
-   }
+  /* #main {
+    margin-left: 270px;
+  }*/
+  .toggle-sidebar #main {
+    margin-left: 0;
+  }
 
    .toggle-sidebar #main {
      margin-left: 0;
@@ -82,13 +85,15 @@
  }
 
  @media (max-width: 1199px) {
-   .sidebar {
-     left: -300px;
-   }
- }
+  .sidebar {
+    left: -300px;
+  }
+}
+@media (max-width: 1199px) {
+  .toggle-sidebar .sidebar {
+    left: 0;
+  }
+}
 
- @media (max-width: 1199px) {
-   .toggle-sidebar .sidebar {
-     left: 0;
-   }
- }
+
+.dummy:last-child { width: 100%; }

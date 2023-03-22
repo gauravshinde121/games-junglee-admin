@@ -13,6 +13,7 @@ import { BookManagementService } from 'src/app/features/book-management/services
 })
 export class SurveillanceMainComponent implements OnInit {
 
+  isLeftMenuOpen: boolean;
   filterForm:FormGroup;
   surveillanceData:any = [];
   allMembers:any = [];
@@ -32,7 +33,7 @@ export class SurveillanceMainComponent implements OnInit {
   marketTypeId: any = null;
 
   betTickerForm: FormGroup;
-  
+
   searchTerm: string = '';
   currentPage: number = 1;
   pageSize: number = 10;
@@ -62,6 +63,9 @@ export class SurveillanceMainComponent implements OnInit {
     });
 
     this.getAllUserBets();
+    this._sharedService.leftMenuStatus.subscribe((res: any) => {
+      this.isLeftMenuOpen = res.leftMenuOpen;
+    });
   }
 
   _getMarketsByMatchId(matchId){
@@ -160,6 +164,7 @@ export class SurveillanceMainComponent implements OnInit {
   getAllUserBets(){
     this.isLoading = true;
     this.allBets = [];
+    
 
     let body = {
       sportsId: null,

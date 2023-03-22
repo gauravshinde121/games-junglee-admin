@@ -50,9 +50,20 @@ export class TransferStatementComponent implements OnInit {
 
   getTransferStatement(){
     this.isLoading = true;
+
+    let fromDate = new Date(this.transferStmtForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.transferStmtForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
+
     let payload = {
-      fromDate : this.transferStmtForm.value.fromDate,
-      toDate : this.transferStmtForm.value.toDate,
+      fromDate : fromDate,
+      toDate : toDate,
       pageNo: this.currentPage,
       limit: 50,
     }

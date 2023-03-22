@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { Subscription } from 'rxjs';
 
@@ -10,18 +10,18 @@ import { Subscription } from 'rxjs';
 })
 export class LeftNavigationComponent implements OnInit {
 
-  mainMenu:any = [];
-  viewMoreNavList:any = [];
+  mainMenu: any = [];
+  viewMoreNavList: any = [];
 
-  isLoggedIn:boolean = false;
-  sportsName:string;
-  userDetails:any;
+  isLoggedIn: boolean = false;
+  sportsName: string;
+  userDetails: any;
 
-  menuList:any;
-  tourId:any;
-  matchId:any;
+  menuList: any;
+  tourId: any;
+  matchId: any;
 
-  adminDetails:any = null;
+  adminDetails: any = null;
 
   showSideNav = false;
   subscription: Subscription;
@@ -37,21 +37,15 @@ export class LeftNavigationComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = this._sharedService.isLoggedIn();
     this.userDetails = this._sharedService.getUserDetails();
-    this._sharedService.sharedSubject.subscribe((data:any)=>{
-      if(data.adminDetails){
+    this._sharedService.sharedSubject.subscribe((data: any) => {
+      if (data.adminDetails) {
         this.adminDetails = data.adminDetails
       }
-    })
-
-    this.subscription = this._sharedService.get().subscribe(sideNav => this.showSideNav = sideNav);
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+    });
   }
 
 
-  onLogout(){
+  onLogout() {
     this._sharedService.removeJWTToken();
     this._sharedService.removeUserDetails();
     this._router.navigate(['/login']);

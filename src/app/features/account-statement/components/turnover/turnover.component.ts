@@ -22,6 +22,7 @@ export class TurnoverComponent implements OnInit {
   pageSize:number = 10;
   display = '';
   turnoverDetails:any;
+  marketInfo:any;
 
   constructor(
     private _accountStatementService:AccountStatementService,
@@ -88,9 +89,10 @@ export class TurnoverComponent implements OnInit {
   }
 
   getTOForMatch(matchId){
-    this._accountStatementService._getTOForMatch({matchId:matchId}).subscribe((res:any)=>{
-      console.log(res)
-    })
+      this._accountStatementService._getTOForMatch({matchId:matchId}).subscribe((res:any)=>{
+        this.marketInfo = res;
+        console.log('marketInfo',this.marketInfo);
+      });
   }
 
   next(): void {

@@ -1,7 +1,225 @@
 <div class="container-fluid">
-  <app-header></app-header>
+  <div class="row">
+    <div class="col-md-12">
+      <app-header></app-header>
+    </div>
+    <div class="col-md-12">
+      <div class="d-flex">
+      <app-left-navigation *ngIf="isLeftMenuOpen"></app-left-navigation>
+      <main id="main" class="main w-100">
+        <section class="section gamedetails">
+          <div
+            [formGroup]="betTickerForm"
+            class="tab-pane fade show active"
+            id="pills-batlist"
+            role="tabpanel"
+            aria-labelledby="pills-batlist-tab"
+            tabindex="0"
+          >
+            <div class="row">
+              <div class="col-md-3">
+                <h3 class="text-pink">Surveillance</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Select Member</label>
+                <select formControlName="memberName" id="ab" class="form-select bg-dgrey">
+                  <option value="null">All</option>
+                  <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <button class="btn border-pink rounded-pill mt-4 w-100 text-white" (click)="clearMember()">
+                  <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-2">
+                <label>Select Sport</label>
+                <select
+                  formControlName="sportsId"
+                  id="ab"
+                  class="form-select bg-dgrey"
+                  (change)="changeGame($event)"
+                >
+                  <option value="null">All</option>
+                  <option *ngFor="let game of games" [value]="game.sportId">
+                    {{ game.sportName }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4 mb-2">
+                <label>Select Match</label>
+                <select
+                  formControlName="matchId"
+                  id="ab"
+                  class="form-select bg-dgrey"
+                  (change)="changeMatch($event)"
+                >
+                  <option value="null">All</option>
+                  <option value="{{ match.matchId }}" *ngFor="let match of matchList">
+                    {{ match.matchName }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4 mb-2">
+                <label>Select Market Type</label>
+                <select
+                  formControlName="marketId"
+                  id="ab"
+                  class="form-select bg-dgrey"
+                  (change)="changeMarketType($event)"
+                >
+                  <option value="null">All</option>
+                  <option
+                    value="{{ market.marketId }}"
+                    *ngFor="let market of marketList"
+                  >
+                    {{ market.marketName }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-4 mb-2">
+                <label>Stakes From Value</label>
+                <input
+                  type="number"
+                  class="form-control bg-dgrey"
+                  value=""
+                  placeholder="Enter Stake From..."
+                />
+              </div>
+              <div class="col-md-4 mb-2">
+                <label>Stakes To Value</label>
+                <input
+                  type="number"
+                  class="form-control bg-dgrey"
+                  value=""
+                  placeholder="Enter Stake To..."
+                />
+              </div>
+
+              <div class="col-md-4 mb-2 mt-4">
+                <button
+                  type="button"
+                  class="btn btn-pink rounded-pill w-100"
+                  (click)="searchList()"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <table
+                class="table table-dark"
+                *ngIf="allBets.length > 0 && !this.isLoading"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col" class="first">#</th>
+                    <th scope="col">Member</th>
+                    <th scope="col">Place time</th>
+                    <th scope="col">Events</th>
+                    <th scope="col">Market</th>
+                    <th scope="col">Selection</th>
+                    <th scope="col">Odds Placed</th>
+                    <th scope="col">Odds Matched</th>
+                    <th scope="col">Matched</th>
+                    <th scope="col">Unmatched</th>
+                    <th scope="col">Profit/Liability</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let bets of allBets; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ bets.username }}</td>
+                    <td>{{ bets.placedDate | date }}</td>
+                    <td>{{ bets.event }}</td>
+                    <td>
+                      <span
+                        *ngIf="!bets.isBack"
+                        class="border r-2 bg-danger text-danger border-danger me-2"
+                      >
+                      </span>
+                      <span
+                        *ngIf="bets.isBack"
+                        class="border border-2 bg-primary text-primary border-primary me-2"
+                      >
+                      </span>
+                      {{ bets.betCategory }}
+                    </td>
+
+                    <td>{{ bets.selectionName }}</td>
+                    <td>{{ bets.betRate }}</td>
+                    <td>{{ bets.averagePriceMatched }}</td>
+                    <td>
+                      <ng-container *ngIf="bets.isMatched; else notMatched">
+                        {{ bets.stake }}
+                      </ng-container>
+                      <ng-template #notMatched>
+                        --
+                      </ng-template>
+                    </td>
+                    <td class="text-danger">
+                      <ng-container *ngIf="!bets.isMatched; else notMatched">
+                        {{ bets.stake }}
+                      </ng-container>
+                      <ng-template #notMatched>
+                        --
+                      </ng-template></td>
+                    <td>
+                      <span
+                      [ngClass]="bets.profitLiability > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                      "
+                      >
+                      {{ bets.profitLiability }}
+                      </span>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div *ngIf="allBets.length > 0 && !this.isLoading">
+            <button
+              class="btn bg-dgrey rounded-pill text-white"
+              [disabled]="currentPage === 1"
+              (click)="prev()"
+            >
+              Prev
+            </button>
+            <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
+              >{{ currentPage / totalPages }}
+            </span>
+            <button
+              class="btn bg-dgrey rounded-pill text-white"
+              [disabled]="currentPage === totalPages"
+              (click)="next()"
+            >
+              Next
+            </button>
+          </div>
+
+          <div class="col-md-12 mt-3" *ngIf="allBets.length == 0">
+            <div class="border text-center p-5">
+              <h4 *ngIf="allBets.length == 0 && !isLoading">No data found</h4>
+              <h4 *ngIf="isLoading">Loading...</h4>
+            </div>
+          </div>
+        </section>
+      </main>
+      </div>
+    </div>
+  </div>
 </div>
-<app-left-navigation *ngIf="isLeftMenuOpen"></app-left-navigation>
 
 <!-- <main id="main" class="main">
   <section class="section gamedetails">
@@ -167,213 +385,4 @@
 </main> -->
 
 
-<main id="main" class="main">
-  <section class="section gamedetails">
-    <div
-      [formGroup]="betTickerForm"
-      class="tab-pane fade show active"
-      id="pills-batlist"
-      role="tabpanel"
-      aria-labelledby="pills-batlist-tab"
-      tabindex="0"
-    >
-      <div class="row">
-        <div class="col-md-3">
-          <h3 class="text-pink">Surveillance</h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <label>Select Member</label>
-          <select formControlName="memberName" id="ab" class="form-select bg-dgrey">
-            <option value="null">All</option>
-            <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <button class="btn border-pink rounded-pill mt-4 w-100 text-white" (click)="clearMember()">
-            <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
-          </button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 mb-2">
-          <label>Select Sport</label>
-          <select
-            formControlName="sportsId"
-            id="ab"
-            class="form-select bg-dgrey"
-            (change)="changeGame($event)"
-          >
-            <option value="null">All</option>
-            <option *ngFor="let game of games" [value]="game.sportId">
-              {{ game.sportName }}
-            </option>
-          </select>
-        </div>
-        <div class="col-md-4 mb-2">
-          <label>Select Match</label>
-          <select
-            formControlName="matchId"
-            id="ab"
-            class="form-select bg-dgrey"
-            (change)="changeMatch($event)"
-          >
-            <option value="null">All</option>
-            <option value="{{ match.matchId }}" *ngFor="let match of matchList">
-              {{ match.matchName }}
-            </option>
-          </select>
-        </div>
-        <div class="col-md-4 mb-2">
-          <label>Select Market Type</label>
-          <select
-            formControlName="marketId"
-            id="ab"
-            class="form-select bg-dgrey"
-            (change)="changeMarketType($event)"
-          >
-            <option value="null">All</option>
-            <option
-              value="{{ market.marketId }}"
-              *ngFor="let market of marketList"
-            >
-              {{ market.marketName }}
-            </option>
-          </select>
-        </div>
 
-        <div class="col-md-4 mb-2">
-          <label>Stakes From Value</label>
-          <input
-            type="number"
-            class="form-control bg-dgrey"
-            value=""
-            placeholder="Enter Stake From..."
-          />
-        </div>
-        <div class="col-md-4 mb-2">
-          <label>Stakes To Value</label>
-          <input
-            type="number"
-            class="form-control bg-dgrey"
-            value=""
-            placeholder="Enter Stake To..."
-          />
-        </div>
-
-        <div class="col-md-4 mb-2 mt-4">
-          <button
-            type="button"
-            class="btn btn-pink rounded-pill w-100"
-            (click)="searchList()"
-          >
-            Search
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <table
-          class="table table-dark"
-          *ngIf="allBets.length > 0 && !this.isLoading"
-        >
-          <thead>
-            <tr>
-              <th scope="col" class="first">#</th>
-              <th scope="col">Member</th>
-              <th scope="col">Place time</th>
-              <th scope="col">Events</th>
-              <th scope="col">Market</th>
-              <th scope="col">Selection</th>
-              <th scope="col">Odds Placed</th>
-              <th scope="col">Odds Matched</th>
-              <th scope="col">Matched</th>
-              <th scope="col">Unmatched</th>
-              <th scope="col">Profit/Liability</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bets of allBets; let i = index">
-              <td>{{ i + 1 }}</td>
-              <td>{{ bets.username }}</td>
-              <td>{{ bets.placedDate | date }}</td>
-              <td>{{ bets.event }}</td>
-              <td>
-                <span
-                  *ngIf="!bets.isBack"
-                  class="border r-2 bg-danger text-danger border-danger me-2"
-                >
-                </span>
-                <span
-                  *ngIf="bets.isBack"
-                  class="border border-2 bg-primary text-primary border-primary me-2"
-                >
-                </span>
-                {{ bets.betCategory }}
-              </td>
-
-              <td>{{ bets.selectionName }}</td>
-              <td>{{ bets.betRate }}</td>
-              <td>{{ bets.averagePriceMatched }}</td>
-              <td>
-                <ng-container *ngIf="bets.isMatched; else notMatched">
-                  {{ bets.stake }}
-                </ng-container>
-                <ng-template #notMatched>
-                  --
-                </ng-template>
-              </td>
-              <td class="text-danger">
-                <ng-container *ngIf="!bets.isMatched; else notMatched">
-                  {{ bets.stake }}
-                </ng-container>
-                <ng-template #notMatched>
-                  --
-                </ng-template></td>
-              <td>
-                <span
-                [ngClass]="bets.profitLiability > 0
-                ? 'text-success'
-                : 'text-danger'
-                "
-                >
-                {{ bets.profitLiability }}
-                </span>
-              </td>
-
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div *ngIf="allBets.length > 0 && !this.isLoading">
-      <button
-        class="btn bg-dgrey rounded-pill text-white"
-        [disabled]="currentPage === 1"
-        (click)="prev()"
-      >
-        Prev
-      </button>
-      <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
-        >{{ currentPage / totalPages }}
-      </span>
-      <button
-        class="btn bg-dgrey rounded-pill text-white"
-        [disabled]="currentPage === totalPages"
-        (click)="next()"
-      >
-        Next
-      </button>
-    </div>
-
-    <div class="col-md-12 mt-3" *ngIf="allBets.length == 0">
-      <div class="border text-center p-5">
-        <h4 *ngIf="allBets.length == 0 && !isLoading">No data found</h4>
-        <h4 *ngIf="isLoading">Loading...</h4>
-      </div>
-    </div>
-  </section>
-</main>

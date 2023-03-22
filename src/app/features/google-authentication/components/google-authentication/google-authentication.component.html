@@ -1,56 +1,64 @@
 <div class="container-fluid">
-  <app-header></app-header>
-</div>
-<app-left-navigation></app-left-navigation>
-
-<main id="main" class="main">
-  <section class="section gamedetails">
-    <div class="row">
-      <div class="col-md-12">
-        <!--your code will come here start-->
-        <div class="col-md-12">
-            <div class="row">
-            <h3 class="editmemberUA mb-2"> Two-factor Authentication Security</h3>
-            <hr class="hr">
-        </div>
-          </div>
-
-             <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-8">
-                              <p>
-                                Step 1 : Download Google Authenticator on your phone directly
-                                from AppStore or GooglePlay.
-                              </p>
-
-                              <div class="row">
-                                <img src="../../../../../assets/images/google-play.png" alt="" class="google-playimg">
-                                <img src="../../../../../assets/images/apple-store.png" alt="" class="google-playimg">
-
-                              </div>
-
-                              <p class="mt-4">Step 2 : Setup account within Google Authenticator.</p>
-                              <p>
-                                Step 3 : Scan QR in Google Authenticator and enter the
-                                verification code.
-                              </p>
-                    </div>
-                    <div class="col-md-4">
-                        <img src="../../../../../assets/images/qr.png" alt="" style="margin-left: 55px;">
-
-                        <input type="text" class="form-control mt-3 inpuths" placeholder="Enter QR Code">
-
-                        <button class="btn btn-success mt-4" >
-                            Enable Two Factor Authentication
-                          </button>
-                    </div>
-                </div>
-             </div>
-
-
-
-        <!--your code will come here end-->
-      </div>
+  <div class="row">
+    <div class="col-md-12">
+      <app-header></app-header>
     </div>
-  </section>
-</main>
+    <div class="col-md-12">
+      <div class="d-flex">
+      <app-left-navigation ></app-left-navigation>
+      <main id="main" class=" w-100">
+        <section class="section gamedetails">
+          <div class="row">
+            <div class="col-md-12">
+              <!--your code will come here start-->
+              <div class="col-md-12">
+                  <div class="row">
+                  <h3 class="editmemberUA mb-2"> Two-factor Authentication Security</h3>
+                  <hr class="hr">
+              </div>
+                </div>
+
+                   <div class="col-md-12">
+                      <div class="row">
+                          <div class="col-md-8">
+                                    <p>
+                                      Step 1 : Download Google Authenticator on your phone directly
+                                      from AppStore or GooglePlay.
+                                    </p>
+
+                                    <div class="row">
+                                      <img src="../../../../../assets/images/google-play.png" alt="" class="google-playimg">
+                                      <img src="../../../../../assets/images/apple-store.png" alt="" class="google-playimg">
+
+                                    </div>
+
+                                    <p class="mt-4">Step 2 : Setup account within Google Authenticator.</p>
+                                    <p>
+                                      Step 3 : Scan QR in Google Authenticator and enter the
+                                      verification code.
+                                    </p>
+                          </div>
+                          <div class="col-md-4">
+                              <img src="../../../../../assets/images/qr.png" alt="" style="margin-left: 55px;">
+
+                              <input type="text" class="form-control mt-3 inpuths" placeholder="Enter QR Code">
+
+                              <button class="btn btn-success mt-4" >
+                                  Enable Two Factor Authentication
+                                </button>
+                          </div>
+                      </div>
+                   </div>
+
+
+
+              <!--your code will come here end-->
+            </div>
+          </div>
+        </section>
+      </main></div>
+    </div>
+  </div>
+</div>
+
+

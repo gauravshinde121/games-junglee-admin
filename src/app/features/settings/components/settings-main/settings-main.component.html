@@ -1,5 +1,12 @@
 <div class="container-fluid">
-  <app-header></app-header>
+  <div class="row">
+    <div class="col-md-12">
+      <app-header></app-header>
+    </div>
+    <div class="col-md-12">
+      <div class="d-flex">
+      <app-left-navigation *ngIf="isLeftMenuOpen"></app-left-navigation>
+      <router-outlet></router-outlet></div>
+    </div>
+  </div>
 </div>
-<app-left-navigation *ngIf="isLeftMenuOpen"></app-left-navigation>
-<router-outlet></router-outlet>

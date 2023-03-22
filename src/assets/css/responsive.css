@@ -23,6 +23,7 @@
    }
 
    #main {
+     padding: 20px 15px 20px 20px;
      margin-top: 55px;
      border-top: 1px solid #ffa7a3;
    }
@@ -39,9 +40,11 @@
    .disnone {
      display: none;
    }
+
    .header {
-    height: 60px;
-  }
+     height: 60px;
+   }
+
    .header .toggle-sidebar-btn {
      padding-left: 0px;
    }
@@ -72,9 +75,13 @@
     margin-left: 0;
   }
 
-  .toggle-sidebar .sidebar {
-    left: -300px;
-  }
+   .toggle-sidebar #main {
+     margin-left: 0;
+   }
+
+   .toggle-sidebar .sidebar {
+     left: -300px;
+   }
  }
 
  @media (max-width: 1199px) {

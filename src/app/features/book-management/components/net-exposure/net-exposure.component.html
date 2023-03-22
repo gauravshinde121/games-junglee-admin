@@ -14,7 +14,7 @@
                 "
                 formControlName="selectedType"
                 checked="true"
-                class="radioselected"
+                class="radioselected cursor-pointer"
                 id="html"
                 name="selectedType"
                 value="MyPT"
@@ -31,6 +31,7 @@
                 id="html"
                 name="selectedType"
                 value="TotalBook"
+                class="cursor-pointer"
               /><span class="rounded-pill p-2 m-2">Total Book</span>
             </a>
             <span class="me-3 pt-2"><strong>Filter by Sport</strong></span>
@@ -39,7 +40,7 @@
                 (click)="onFilterChange({ clicked: 'sport', sport: null })"
                 type="radio"
                 checked="true"
-                class="radioselected"
+                class="radioselected cursor-pointerr"
                 id="html"
                 name="sport"
                 value="All"
@@ -54,7 +55,7 @@
                   onFilterChange({ clicked: 'sport', sport: game.sportId })
                 "
                 type="radio"
-                class="radioselected"
+                class="radioselected cursor-pointer"
                 id="html"
                 name="sport"
                 [value]="game.sportId"
@@ -67,7 +68,7 @@
               name="matchId"
               formControlName="matchId"
               id="ab"
-              class="form-select bg-dgrey"
+              class="form-select bg-dgrey cursor-pointer"
               (change)="onFilterChangeDropDown($event)"
               data-clicked="match"
             >
@@ -80,18 +81,21 @@
                 {{ match.matchName }}
               </option>
             </select>
+
+            
+          </div>
+         
+          <div class="col-md-12 mt-3" *ngIf="booksForBackend.length == 0">
+            <div class="border text-center p-5">
+              <h4 *ngIf="isLoading">Loading...</h4>
+              <h4 *ngIf="booksForBackend.length == 0 && !isLoading">No data found</h4>
+              
+            </div>
           </div>
         </div>
 
-        <div class="row pppp">
-          <div
-            class="col-md-12 mt-3"
-          >
-            <h4 *ngIf="booksForBackend.length == 0 && !isLoading">
-              No data found
-            </h4>
-            <h4 *ngIf="isLoading">Loading...</h4>
-          </div>
+        <div class="row">
+          
           <div
             *ngIf="!isLoading && booksForBackend.length > 0"
             class="col-md-12"

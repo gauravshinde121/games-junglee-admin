@@ -39,7 +39,7 @@
       </ul>
     </div>
     <div class="row mt-3">
-      <div class="col-md-12">
+      <div class="col-md-12 overflow-auto">
         <div *ngIf="userList.length == 0" class="border text-center p-5">
           <h4 *ngIf="userList.length == 0 && !isLoading">No data found</h4>
           <h4 *ngIf="isLoading">Loading...</h4>
@@ -142,7 +142,7 @@
               </td> -->
               <td class=" text-center">
                 <a (click)="navigateToDownline(user)">
-                  <i class="fa-sharp fa-solid fa-eye text-pink"></i>
+                  <i class="fa-sharp fa-solid fa-eye text-pink cursor-pointer"></i>
                 </a>
               </td>
 
@@ -168,12 +168,12 @@
               </td>
               <td class="text-center">
                 <a (click)="openModal(user.userId)">
-                  <i class="fa-sharp fa fa-lock text-pink"></i>
+                  <i class="fa-sharp fa fa-lock text-pink cursor-pointer"></i>
                 </a>
               </td>
               <td class="text-center">
                 <a routerLink="/member/edit-member/{{ user.userId }}">
-                  <i class="fa-sharp fa-solid fa-pen text-pink"></i>
+                  <i class="fa-sharp fa-solid fa-pen text-pink cursor-pointer"></i>
                 </a>
               </td>
 

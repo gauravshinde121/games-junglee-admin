@@ -13,21 +13,21 @@
           </div>
           <div class="col-md-6 text-end">
             <p>
-              <a href="" class="text-decoration-none text-white">
+              <a class="text-decoration-none text-white">
                 <input
                   type="radio"
                   checked=""
-                  class="radioselected"
+                  class="radioselected cursor-pointer"
                   id="html"
                   name="fav_language"
                   value="HTML"
                 /><span class="rounded-pill p-2 m-2">My PT</span>
               </a>
-              <a href="" class="text-decoration-none text-white">
+              <a class="text-decoration-none text-white">
                 <input
                   type="radio"
                   checked=""
-                  class="radioselected"
+                  class="radioselected cursor-pointer"
                   id="html"
                   name="fav_language"
                   value="HTML"
@@ -194,8 +194,7 @@
       (ngModelChange)="search()"
     />
     <div class="col-md-12 text-end">Bet Count : {{ viewTotal.length }}</div>
-  </section>
-
+<div class="col-md-12 overflow-auto">
   <table class="table table-dark">
     <thead>
       <tr>
@@ -251,6 +250,11 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+  </section>
+
+
   <div *ngIf="viewTotal.length == 0" class="border text-center p-5">
     <h4 *ngIf="viewTotal.length == 0 && !isLoading">No data found</h4>
     <h4 *ngIf="isLoading">Loading...</h4>

@@ -15,6 +15,12 @@ export class InvalidBetComponent implements OnInit {
   language = "en";
   allMembers: any;
   logList: any;
+  allBets: any = [];
+  searchTerm: string = '';
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 0;
+  isLoading = false;
 
   constructor(
     private _memberService: MembersService
@@ -23,6 +29,7 @@ export class InvalidBetComponent implements OnInit {
   ngOnInit(): void {
     this._initForm();
     this._getAllMembers();
+    this.getLogs();
   }
 
 
@@ -49,12 +56,30 @@ export class InvalidBetComponent implements OnInit {
 
   getLogs() {
 
-    
-    this._memberService._getInvalidBetsApi({ ...this.invalidBetForm.value })
+    let fromDate = new Date(this.invalidBetForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.invalidBetForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
+
+    let body = {
+      fromDate : fromDate, 
+      toDate : toDate,
+      userId :null
+    }
+    this.isLoading = true;
+    this._memberService._getInvalidBetsApi(body)
       .subscribe((res: any) => {
         console.log(res)
         if (res) {
-          this.logList = res.data.betList;
+          // this.logList = res.data.betList;
+          this.isLoading = false;
+          this.allBets = res.invalidBetList;
+          this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
         }
       })
   }

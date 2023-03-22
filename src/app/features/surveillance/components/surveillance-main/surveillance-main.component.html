@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <app-header></app-header>
 </div>
-<app-left-navigation></app-left-navigation>
+<app-left-navigation *ngIf="isLeftMenuOpen"></app-left-navigation>
 
 <!-- <main id="main" class="main">
   <section class="section gamedetails">
@@ -342,7 +342,7 @@
                 {{ bets.profitLiability }}
                 </span>
               </td>
-              
+
             </tr>
           </tbody>
         </table>

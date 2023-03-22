@@ -16,7 +16,6 @@ export class MembersMainComponent implements OnInit {
 
   ngOnInit(): void {
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
-      console.log('ice.sharedSubject.subs', res);
       this.isLeftMenuOpen = res.leftMenuOpen;
     });
    }

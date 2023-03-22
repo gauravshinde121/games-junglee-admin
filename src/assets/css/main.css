@@ -582,3 +582,9 @@ select:-webkit-autofill:focus {
 .cursor-pointer {
   cursor: pointer;  
 }
+
+.modal-width {
+  width: 150%;
+  right: 15% ;
+}
+

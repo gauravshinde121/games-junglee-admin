@@ -17,8 +17,6 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col"> Creation Date</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
               <th scope="col">From </th>
               <th scope="col">To</th>
               <th scope="col">Credit Limit</th>
@@ -31,14 +29,20 @@
               <tr *ngFor="let stmt of clTransfers;let i = index">
               <td>{{i+1}}</td>
               <td>{{stmt.createdDate | date:'medium'}}</td>
-              <td></td>
-              <td></td>
               <td>{{stmt.fromRefUserName}}</td>
               <td>{{stmt.toRefUserName}}</td>
               <td>{{stmt.amount}}</td>
               <td>{{stmt.balance}}</td>
               <td>{{stmt.oldBalance}}</td>
-              <td>{{stmt.ipAddress}}</td>
+              <!-- <td>{{stmt.}} -->
+              <td>
+              <ng-container *ngIf="stmt.ipAddress; else notMatched">
+                {{ stmt.ipAddress }}
+              </ng-container>
+              <ng-template #notMatched>
+                --
+              </ng-template>
+            </td>
             </tr>
           </tbody>
         </table>

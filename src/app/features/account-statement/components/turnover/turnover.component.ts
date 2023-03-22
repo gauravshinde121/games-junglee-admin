@@ -53,9 +53,21 @@ export class TurnoverComponent implements OnInit {
 
   getTurnOver(){
     this.isLoading = true;
-    var body = {
-      fromDate:this.filterForm.value.fromDate,
-      toDate:this.filterForm.value.toDate,
+    this.isLoading = true;
+
+    let fromDate = new Date(this.filterForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.filterForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
+
+    let body = {
+      fromDate: fromDate,
+      toDate: toDate,
       sportsId:this.filterForm.value.sportsId,
       pageNo: this.currentPage,
       limit: 50,
@@ -63,8 +75,6 @@ export class TurnoverComponent implements OnInit {
     this._accountStatementService._getCategoryForTO(body).subscribe((res:any)=>{
       this.plStatement = res;
       this.isLoading = false;
-      console.log('plStatement',this.plStatement.length);
-      console.log('pageSize',this.pageSize);
       this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
     })
   }

@@ -59,13 +59,79 @@
         </div>
       </div>
 
+      
+
       <!--your code will come here end-->
+    </div>
+
+    <div class="row pt-5">
+      <div class="col-md-12">
+        <table
+          class="table table tableall"
+          *ngIf="allBets.length > 0 && !this.isLoading"
+        >
+          <thead>
+            <tr>
+              <th scope="col" class="first">#</th>
+              <th scope="col">Member</th>
+              <th scope="col">Place time</th>
+              <th scope="col">Events</th>
+              <th scope="col">Market</th>
+              <th scope="col">Selection</th>
+              <th scope="col">Odds Placed</th>
+              <th scope="col">Matched</th>
+              <th scope="col">Unmatched</th>
+              <th scope="col">Profit/Liability</th>
+              <th scope="col" class="last">Remark</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bets of allBets; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ bets.member }}</td>
+              <td>{{ bets.placedTime | date }}</td>
+              <td>{{ bets.event }}</td>
+              <td>{{ bets.market }}</td>
+              <td>{{ bets.selection }}</td>
+              <td>{{ bets.oddsPlaced }}</td>
+              <td>
+                <ng-container *ngIf="bets.isMatched; else notMatched">
+                  {{ bets.stake }}
+                </ng-container>
+                <ng-template #notMatched>
+                  --
+                </ng-template>
+              </td>
+              <td class="text-danger">
+                <ng-container *ngIf="!bets.isMatched; else notMatched">
+                  {{ bets.stake }}
+                </ng-container>
+                <ng-template #notMatched>
+                  --
+                </ng-template></td>
+              <td>
+                <span
+                [ngClass]="bets.profitLiability > 0
+                ? 'text-success'
+                : 'text-danger'
+                "
+                >
+                {{ bets.profitLiability }}
+                </span>
+              </td>
+              <td>{{bets.remarks}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
-  <div class="col-md-12 mt-3">
+  <div class="col-md-12 mt-3" *ngIf="allBets.length == 0">
     <div class="border text-center p-5">
-      <h4>No data found</h4>
+      <h4 *ngIf="allBets.length == 0 && !isLoading">No data found</h4>
+      <h4 *ngIf="isLoading">Loading...</h4>
     </div>
   </div>
+
 </main>

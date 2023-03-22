@@ -97,7 +97,6 @@ export class PlayerPlComponent implements OnInit {
   getPlStatement(){
     this.isLoading = true;
     this.plStatement = [];
-    
     let fromDate = new Date(this.filterForm.value.fromDate);
     fromDate.setHours(0)
     fromDate.setMinutes(0);

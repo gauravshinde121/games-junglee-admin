@@ -75,6 +75,7 @@ export class Constants {
     public readonly API_URL_DELETE_BET: string = 'api/junglee-admin/deleteBetByAdmin';
 
     //all logs
+    // public readonly API_URL_INVALID_BETS:string = 'api/getVARBets';
     public readonly API_URL_INVALID_BETS:string = 'api/junglee-admin/getInvalidBets';
 
     //surveillance

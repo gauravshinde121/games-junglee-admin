@@ -5,6 +5,12 @@
   <!--your code will come here start-->
   <h4 class="text-pink"> Net Exposure</h4>
   <div class="row">
+    <div *ngIf="!isLoading && booksForBackend.length==0" class="col-md-12 overflow-scroll mt-3">
+      <div class="border text-center p-5">
+      <h4>No data found </h4>
+    </div>
+    </div>
+    <div *ngIf="!isLoading && booksForBackend.length>0" class="col-md-12 overflow-scroll">
     <div *ngIf="!isLoading && booksForBackend.length > 0" class="col-md-12">
       <table class="table table-striped bg-white mt-3 text-center">
         <tbody *ngFor="let book of booksForBackend">

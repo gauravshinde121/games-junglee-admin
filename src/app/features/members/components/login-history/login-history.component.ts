@@ -84,7 +84,7 @@ export class LoginHistoryComponent implements OnInit {
     toDate.setSeconds(59);
 
     const payload = {
-      userId:this.userId,
+      userId: this.userId,
       fromDate: fromDate,
       toDate: toDate,
       pageNo: this.currentPage,

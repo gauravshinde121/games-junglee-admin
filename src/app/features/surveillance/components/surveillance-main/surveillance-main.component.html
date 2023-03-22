@@ -90,8 +90,9 @@
                     <input
                       type="number"
                       class="form-control bg-dgrey"
-                      value=""
+                      formControlName="stakesFromValue"
                       placeholder="Enter Stake From..."
+                      (keypress)="numberOnly($event)"
                     />
                   </div>
                   <div class="col-md-4 mb-2">
@@ -99,8 +100,9 @@
                     <input
                       type="number"
                       class="form-control bg-dgrey"
-                      value=""
+                      formControlName="stakesToValue"
                       placeholder="Enter Stake To..."
+                      (keypress)="numberOnly($event)"
                     />
                   </div>
 
@@ -144,12 +146,12 @@
                         <td>{{ bets.event }}</td>
                         <td>
                           <span
-                            *ngIf="!bets.isBack"
+                            *ngIf="!bets.type"
                             class="border r-2 bg-danger text-danger border-danger me-2"
                           >
                           </span>
                           <span
-                            *ngIf="bets.isBack"
+                            *ngIf="bets.type"
                             class="border border-2 bg-primary text-primary border-primary me-2"
                           >
                           </span>

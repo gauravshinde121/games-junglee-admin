@@ -12,6 +12,8 @@ export class ChangePasswordComponent implements OnInit {
 
   changePasswordForm!: FormGroup;
 
+  isLeftMenuOpen: boolean;
+  mainClass:String = 'col-md-10';
   authObj = {
     currentPassword: "",
     newPassword: "",
@@ -42,6 +44,14 @@ export class ChangePasswordComponent implements OnInit {
     var sportId:any;
     this._sharedService.testFunc(sportId).subscribe((data:any)=>{
       console.log(data);
+    });
+    this._sharedService.leftMenuStatus.subscribe((res: any) => {
+      this.isLeftMenuOpen = res.leftMenuOpen;
+      if(this.isLeftMenuOpen){
+        this.mainClass = 'col-md-10';
+      } else {
+        this.mainClass = 'col-md-12';
+      }
     });
   }
 

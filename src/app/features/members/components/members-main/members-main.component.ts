@@ -9,6 +9,7 @@ import { SharedService } from '@shared/services/shared.service';
 export class MembersMainComponent implements OnInit {
 
   isLeftMenuOpen: boolean;
+  mainClass:String = 'col-md-10';
 
   constructor(
     private _sharedService:SharedService
@@ -17,6 +18,11 @@ export class MembersMainComponent implements OnInit {
   ngOnInit(): void {
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
       this.isLeftMenuOpen = res.leftMenuOpen;
+      if(this.isLeftMenuOpen){
+        this.mainClass = 'col-md-10';
+      } else {
+        this.mainClass = 'col-md-12';
+      }
     });
    }
 

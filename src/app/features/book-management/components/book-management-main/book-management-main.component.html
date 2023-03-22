@@ -4,9 +4,14 @@
       <app-header></app-header>
     </div>
     <div class="col-md-12">
-      <div class="d-flex">
-      <app-left-navigation *ngIf="isLeftMenuOpen"></app-left-navigation>
-      <router-outlet></router-outlet></div>
+      <div class="row d-flex">
+        <div class="col-md-2" *ngIf="isLeftMenuOpen">
+          <app-left-navigation></app-left-navigation>
+          </div>
+        <div class="{{mainClass}}">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </div>
   </div>
 </div>

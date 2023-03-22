@@ -1,93 +1,194 @@
 <aside id="sidebar" class="sidebar flex-shrink-0 fixed-sidebar">
-    <ul class="nav">
-      <li>
-        <a class="btn text-white collapsed"
-        data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-        <i class="fa-solid fa-user text-pink me-2"></i> Member</a>
-        <div class="collapse" id="home-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li><a routerLink="/member/list" class="nav-link small ps-5">Member List</a></li>
-            <!-- <li><a routerLink="/member/user-access" class="nav-link small ps-5">User Access Level</a></li> -->
-          </ul>
-        </div>
-      </li>
-      <li>
-        <a class="btn text-white collapsed"
-        data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-        <i class="fa-solid fa-bookmark text-pink me-2"></i> Book Management</a>
-        <div class="collapse" id="dashboard-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li><a routerLink="/book-management/net-exposure" class="nav-link small ps-5">Net Exposure</a></li>
-            <!-- <li><a routerLink="/book-management/net-exposure-racing" class="nav-link small ps-5">Net Exposure Racing</a></li> -->
-            <li><a routerLink="/book-management/bet-ticker"  class="nav-link small ps-5">Bet Ticker</a></li>
-            <!-- <li><a routerLink="/book-management/bet-ticker-flag-final" class="nav-link small ps-5">Bet Ticker Flag Final</a></li> -->
-            <!-- <li><a routerLink="/book-management/bet-ticker-previous"  class="nav-link small ps-5">Bet Ticker Previous</a></li> -->
-            <!-- <li><a routerLink="/book-management/premium-sportsbook"  class="nav-link small ps-5">Premium Sportsbook</a></li> -->
-          </ul>
-        </div>
-      </li>
-      <li>
-        <a class="btn text-white collapsed"
-        data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-        <i class="fa-solid fa-receipt text-pink me-2"></i> Account Statement</a>
-        <div class="collapse" id="orders-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li><a routerLink="/account-statement/my-pl" class="nav-link small ps-5" >My P/L</a></li>
-            <li><a routerLink="/account-statement/player-pl" class="nav-link small ps-5">Player P/L</a></li>
-            <li><a routerLink="/account-statement/transfer-statement" class="nav-link small ps-5">Transfer Statement</a></li>
-            <li><a routerLink="/account-statement/turnover" class="nav-link small ps-5">Turn Over</a></li>
-            <!-- <li><a routerLink="/account-statement/commission" class="nav-link small ps-5">Commission</a></li> -->
-          </ul>
-        </div>
-      </li>
-      <li>
-        <a class="btn text-white collapsed"
-        data-bs-toggle="collapse" data-bs-target="#allLog-collapse" aria-expanded="false">
-        <i class="fa-solid fa-pen-to-square text-pink me-2"></i> All Logs </a>
-        <div class="collapse" id="allLog-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <!-- <li><a routerLink="/all-logs/analytics" class="nav-link small ps-5">Analytics</a></li> -->
-            <!-- <li><a routerLink="/all-logs/reports" class="nav-link small ps-5">Reports</a></li> -->
-            <li><a routerLink="/all-logs/cl-transfer" class="nav-link small ps-5">CL Transfers</a></li>
-            <!-- <li><a routerLink="/all-logs/betfair-rate-log" class="nav-link small ps-5">BetfairRates Log</a></li> -->
-            <li><a routerLink="/all-logs/invalid-bet" class="nav-link small ps-5">Invalid Bets</a></li>
-            <!-- <li><a routerLink="/all-logs/multiple-ip" class="nav-link small ps-5">Multiple IP</a></li>
+  <ul class="nav">
+    <li>
+      <a
+        class="btn text-white collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#home-collapse"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-user text-pink me-2"></i> Member</a
+      >
+      <div class="collapse" id="home-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal">
+          <li>
+            <a routerLink="/member/list" class="nav-link small ps-5"
+              >Member List</a
+            >
+          </li>
+          <!-- <li><a routerLink="/member/user-access" class="nav-link small ps-5">User Access Level</a></li> -->
+        </ul>
+      </div>
+    </li>
+    <li>
+      <a
+        class="btn text-white collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#dashboard-collapse"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-bookmark text-pink me-2"></i> Book Management</a
+      >
+      <div class="collapse" id="dashboard-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal">
+          <li>
+            <a
+              routerLink="/book-management/net-exposure"
+              class="nav-link small ps-5"
+              >Net Exposure</a
+            >
+          </li>
+          <!-- <li><a routerLink="/book-management/net-exposure-racing" class="nav-link small ps-5">Net Exposure Racing</a></li> -->
+          <li>
+            <a
+              routerLink="/book-management/bet-ticker"
+              class="nav-link small ps-5"
+              >Bet Ticker</a
+            >
+          </li>
+          <!-- <li><a routerLink="/book-management/bet-ticker-flag-final" class="nav-link small ps-5">Bet Ticker Flag Final</a></li> -->
+          <!-- <li><a routerLink="/book-management/bet-ticker-previous"  class="nav-link small ps-5">Bet Ticker Previous</a></li> -->
+          <!-- <li><a routerLink="/book-management/premium-sportsbook"  class="nav-link small ps-5">Premium Sportsbook</a></li> -->
+        </ul>
+      </div>
+    </li>
+    <li>
+      <a
+        class="btn text-white collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#orders-collapse"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-receipt text-pink me-2"></i> Account Statement</a
+      >
+      <div class="collapse" id="orders-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal">
+          <li>
+            <a routerLink="/account-statement/my-pl" class="nav-link small ps-5"
+              >My P/L</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/account-statement/player-pl"
+              class="nav-link small ps-5"
+              >Player P/L</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/account-statement/transfer-statement"
+              class="nav-link small ps-5"
+              >Transfer Statement</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/account-statement/turnover"
+              class="nav-link small ps-5"
+              >Turn Over</a
+            >
+          </li>
+          <!-- <li><a routerLink="/account-statement/commission" class="nav-link small ps-5">Commission</a></li> -->
+        </ul>
+      </div>
+    </li>
+    <li>
+      <a
+        class="btn text-white collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#allLog-collapse"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-pen-to-square text-pink me-2"></i> All Logs
+      </a>
+      <div class="collapse" id="allLog-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal">
+          <!-- <li><a routerLink="/all-logs/analytics" class="nav-link small ps-5">Analytics</a></li> -->
+          <!-- <li><a routerLink="/all-logs/reports" class="nav-link small ps-5">Reports</a></li> -->
+          <li>
+            <a routerLink="/all-logs/cl-transfer" class="nav-link small ps-5"
+              >CL Transfers</a
+            >
+          </li>
+          <!-- <li><a routerLink="/all-logs/betfair-rate-log" class="nav-link small ps-5">BetfairRates Log</a></li> -->
+          <li>
+            <a routerLink="/all-logs/invalid-bet" class="nav-link small ps-5"
+              >Invalid Bets</a
+            >
+          </li>
+          <!-- <li><a routerLink="/all-logs/multiple-ip" class="nav-link small ps-5">Multiple IP</a></li>
             <li><a routerLink="/all-logs/blocked-ip" class="nav-link small ps-5">Blocked IP</a></li>
             <li><a routerLink="/all-logs/login-from-blocked-ip" class="nav-link small ps-5">Login From Blocked IP</a></li> -->
-          </ul>
-        </div>
-      </li>
-<br>
-        <li>
-          <a routerLink="/surveillance" class="btn text-white collapsed" routerLink="/surveillance"
-        data-bs-toggle="collapse" data-bs-target="#surv-collapse" aria-expanded="false">
-        <i class="fa-solid fa-magnifying-glass text-pink me-2"></i> Surveillance </a></li>
+        </ul>
+      </div>
+    </li>
+    <br />
+    <li>
+      <a
+        routerLink="/surveillance"
+        class="btn text-white collapsed"
+        routerLink="/surveillance"
+        data-bs-toggle="collapse"
+        data-bs-target="#surv-collapse"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-magnifying-glass text-pink me-2"></i> Surveillance
+      </a>
+    </li>
 
-        <li>
-        <a routerLink="/change-password" class="btn text-white collapsed"
-        data-bs-toggle="collapse" data-bs-target="#pwd-collapse" aria-expanded="false">
-        <i class="fa-solid fa-lock text-pink me-2"></i> Change Password </a>
-        </li>
-        <li>
-          <a routerLink="/google-authentication" class="nav-link"><i class="fa fa-key text-pink me-2"></i> Google Authentication</a>
-        </li>
+    <li>
+      <a
+        routerLink="/change-password"
+        class="btn text-white collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#pwd-collapse"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-lock text-pink me-2"></i> Change Password
+      </a>
+    </li>
+    <li>
+      <a routerLink="/google-authentication" class="nav-link"
+        ><i class="fa fa-key text-pink me-2"></i> Google Authentication</a
+      >
+    </li>
 
-        <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN'">
-          <a class="btn text-white collapsed"
-          data-bs-toggle="collapse" data-bs-target="#settings-collapse" aria-expanded="false">
-          <i class="fa-solid fa-pen-to-square text-pink me-2"></i> Settings </a>
-          <div class="collapse" id="settings-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal">
-              <li><a routerLink="/settings/balance" class="nav-link small ps-5">Balance</a></li>
-              <li><a routerLink="/settings/bet-settings" class="nav-link small ps-5">Bet Settings</a></li>
-            </ul>
-          </div>
-        </li>
+    <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN'">
+      <a
+        class="btn text-white collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#settings-collapse"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-pen-to-square text-pink me-2"></i> Settings
+      </a>
+      <div class="collapse" id="settings-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal">
+          <li>
+            <a routerLink="/settings/balance" class="nav-link small ps-5"
+              >Balance</a
+            >
+          </li>
+          <li>
+            <a routerLink="/settings/bet-settings" class="nav-link small ps-5"
+              >Bet Settings</a
+            >
+          </li>
+        </ul>
+      </div>
+    </li>
 
-        <li>
-          <a class="btn text-white collapsed" (click)="onLogout()"
-        data-bs-toggle="collapse" data-bs-target="#pwd-collapse" aria-expanded="false">
-        <i class="fa-solid fa-right-from-bracket text-pink me-2"></i> Logout </a>
-        </li>
-    </ul>
+    <li>
+      <a
+        class="btn text-white collapsed"
+        (click)="onLogout()"
+        data-bs-toggle="collapse"
+        data-bs-target="#pwd-collapse"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-right-from-bracket text-pink me-2"></i> Logout
+      </a>
+    </li>
+  </ul>
 </aside>

@@ -582,3 +582,9 @@ select:-webkit-autofill:focus {
 .cursor-pointer {
   cursor: pointer;
 }
+
+@media only screen and (max-width: 600px) {
+  .mobile-menu #sidebar{
+    left:0;
+  }
+}

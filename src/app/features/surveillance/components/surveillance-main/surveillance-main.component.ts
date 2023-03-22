@@ -160,6 +160,7 @@ export class SurveillanceMainComponent implements OnInit {
   getAllUserBets(){
     this.isLoading = true;
     this.allBets = [];
+    
 
     let body = {
       sportsId: null,

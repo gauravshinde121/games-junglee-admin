@@ -22,6 +22,13 @@ export class PlayerPlComponent implements OnInit {
   dateFormat = "yyyy-MM-dd";
   language = "en";
   marketTypeList:any;
+  selectedAccount:any;
+  accountStatement:any;
+  display = '';
+  gameData:any;
+  playerData:any;
+  pl:any;
+  oneAccount:any;
 
   currentPage: number = 1;
   pageSize: number = 10;
@@ -82,6 +89,11 @@ export class PlayerPlComponent implements OnInit {
     });
   }
 
+
+  closeModal(){
+    this.display = 'none';
+  }
+
   getPlStatement(){
     this.isLoading = true;
     this.plStatement = [];
@@ -89,9 +101,9 @@ export class PlayerPlComponent implements OnInit {
     let body = {
       fromDate: this.filterForm.value.fromDate,
       toDate: this.filterForm.value.toDate,
-      sportsId:null,
-      matchId:null,
-      marketId:null,
+      sportsId:this.filterForm.value.sportsId,
+      matchId:this.filterForm.value.matchId,
+      marketId:this.filterForm.value.marketId,
       pageNo: this.currentPage,
       limit: 50,
     };
@@ -99,7 +111,8 @@ export class PlayerPlComponent implements OnInit {
     this._accountStatementService._getDownlineAccountsDataApi(body).subscribe((res:any)=>{
       this.isLoading = false;
       this.plStatement = res.admin;
-
+      console.log('this.plStatement',this.plStatement);
+      this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
     },(err)=>{
       console.log("Error Data",err);
       this.isLoading = false;
@@ -123,7 +136,19 @@ export class PlayerPlComponent implements OnInit {
   }
 
   getOneAccount(pl){
-    console.log(pl)
+    var body = {
+      "userId":pl.userId,
+      "marketId":pl.marketIds[0]
+    }
+    console.log('one account body',body);
+    this._sharedService.getOneAccount(body).subscribe((data:any)=>{
+      if(data.oneAccount){
+        this.oneAccount = data.oneAccount;
+      }
+    });
+    this.pl = pl;
+    this.gameData = pl.gameData;
+    this.playerData = pl.playerData;
   }
 
   _getMatchBySportId(sportId){

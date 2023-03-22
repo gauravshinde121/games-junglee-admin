@@ -150,9 +150,8 @@
                 <!-- <a (click)="openModal(user.userId)">
                   <i class="fa fa-lock text-pink"></i>
                 </a> -->
-                
-
-                <select class="custom-select select-table-dropdown form-control select_group text-center"
+              
+                <select class="custom-ddl"
                   (change)="changeStatus($event,user)">
                   <option *ngFor="let item of statusList" [value]="item.status"
                     [selected]="item.status == user.isActive">
@@ -166,13 +165,6 @@
                   </option>
                 </select>
 
-
-                <!-- <input type="radio" [checked]="user.isActive" id="html" name="fav_language" value="item.status">
-                    <label for="html">Active</label><br>
-                    <input type="radio" id="css" [checked]="user.isActive" name="fav_language" value="item.status">
-                    <label for="css">Inactive</label><br>
-                    <input type="radio" [checked]="user.isActive" id="javascript" name="fav_language" value="item.status">
-                    <label for="javascript">Closed</label> -->
               </td>
               <td class="text-center">
                 <a (click)="openModal(user.userId)">

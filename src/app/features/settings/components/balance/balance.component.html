@@ -11,7 +11,7 @@
                 <hr>
                 <div class="row p-5">
                 <div class="col-md-6">
-                  <input formControlName="balanceAmount" type="number" class="form-control" placeholder="Add balance"/>
+                  <input (keypress)="numberOnly($event)"  formControlName="balanceAmount" type="number" class="form-control" placeholder="Add balance"/>
                 </div>
                   <!-- <div class="col-md-3">
                     <button type="button" class="btn btn-pink rounded-pill w-100">Cancel</button>

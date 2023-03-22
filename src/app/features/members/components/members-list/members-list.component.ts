@@ -37,7 +37,8 @@ export class MembersListComponent implements OnInit {
   statusList : any = [];
 
   changePasswordForm!: FormGroup;
-
+  
+  selectedColor = "";
   // authObj = {
   //   currentPassword: "",
   //   newPassword: "",
@@ -287,7 +288,9 @@ export class MembersListComponent implements OnInit {
   }
 
   changeStatus(evt,user){
-    console.log("Evt",user.userId);
+    // this.selectedColor = 
+    console.log("Evt",user);
+    console.log("Value",evt.target.value);
     let status = evt.target.value;
     let body = {
       "userId": user.userId, 

@@ -45,7 +45,7 @@
               placeholder="Month"
             />
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 mt-3">
             <label>Select Sport</label>
             <select
               formControlName="sportsId"
@@ -58,7 +58,7 @@
               </option>
             </select>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 mt-3">
             <label>Select Match</label>
             <select
               formControlName="matchId"
@@ -76,12 +76,12 @@
           </div>
 
 
-        <div class="col-md-3">
+        <div class="col-md-3 mt-3">
           <label>Select Market</label>
           <select
             formControlName="marketId"
             id="ab"
-            class="form-select bg-dgrey mt-3"
+            class="form-select bg-dgrey"
           >
             <option value="null">All</option>
             <option
@@ -130,9 +130,9 @@
         <tr>
           <th scope="col"></th>
           <th scope="col"><i class="fa fa-"></i> Date</th>
-          <th scope="col">Game</th>
-          <th scope="col">Sub Game</th>
-          <th scope="col">Event</th>
+          <th scope="col">Sport</th>
+          <!--<th scope="col">Sub Game</th>-->
+          <th scope="col">Match</th>
           <th scope="col">Player</th>
           <!-- <th scope="col">Master</th>
           <th scope="col">Multiplier</th> -->
@@ -143,8 +143,8 @@
         <tr *ngFor="let pl of plStatement; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ pl.createDateTime | date }}</td>
-          <td>{{ pl.gameData.gameName }}</td>
           <td>{{ pl.gameData.subGame }}</td>
+          <!--<td>{{ pl.gameData.gameName }}</td>-->
           <td>{{ pl.gameData.eventName }}</td>
           <td>
             <div class="text">
@@ -225,7 +225,7 @@
     <div *ngIf="plStatement.length > 0 && !this.isLoading">
 
       <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
-      <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage  / totalPages}} </span>
+      <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage}}  / {{totalPages}} </span>
       <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
         Next
       </button>
@@ -233,10 +233,11 @@
   </div>
 </main>
 
-<!-- <-MODAL-> -->
 
+<!-- Modal start-->
 <div
-  class="modal fade"
+  class="modal"
+  [ngStyle]="{ display: display }"
   id="staticBackdrop"
   data-bs-backdrop="static"
   data-bs-keyboard="false"
@@ -244,70 +245,143 @@
   aria-labelledby="staticBackdropLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog widthmodal">
-    <div class="modal-content">
-      <div class="modal-header mheader">
-        <h2 class="modal-title cassino" id="staticBackdropLabel">Game info</h2>
-
+  <div class="modal-dialog modal-dialog modal-lg">
+    <div class="modal-content modal-size">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino text-dark" id="staticBackdropLabel">
+          Game Detail &nbsp; <i class="fa fa-lock text-pink"></i>
+        </h5>
         <button
           type="button"
+          (click)="closeModal()"
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bgbody">
-        <div class="col-md-12 text-white">
-          <div class="row">
-            <div class="col-md-6 p-4">
-              <div class="row">
-                <div class="col-md-12 bg-dark p-4">Game info</div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-6">Game Date :</div>
-                <div class="col-md-6">49.32.242.167</div>
-              </div>
-
-              <div class="row mt-3 bg-dark p-4">
-                <div class="col-md-6">Player Name :</div>
-                <div class="col-md-6">testjunglee</div>
-              </div>
-
-              <div class="row mt-3">
-                <div class="col-md-6">Game Type:</div>
-                <div class="col-md-6">Soccer</div>
-              </div>
-              <div class="row mt-3 bg-dark p-4">
-                <div class="col-md-6">Win/Loss:</div>
-                <div class="col-md-6">Lose</div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-6">Win Amt:</div>
-                <div class="col-md-6">-50</div>
-              </div>
-
-              <div class="row mt-3 bg-dark p-4">
-                <div class="col-md-6">Commission Amt:</div>
-                <div class="col-md-6">0</div>
-              </div>
-            </div>
-
-            <div class="col-md-6 p-2">
-              <div class="row mt-3 bg-dark p-4">
-                <div class="col-md-12">Winner</div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-6">Winner Name :</div>
-                <div class="col-md-6">Over 0.5 Goals</div>
-              </div>
-              <div class="row mt-3 bg-dark p-4">
-                <div class="col-md-6">Match :</div>
-                <div class="col-md-6">Genoa v Cosenza</div>
-              </div>
-            </div>
+      <div class="modal-body bg-dark text-white">
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table tableall">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-dark">Game Info</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Game Date :</td>
+                  <td>{{ pl?.createDateTime | date : "medium" }}</td>
+                </tr>
+                <tr>
+                  <td>Player Name :</td>
+                  <td>{{ playerData?.name }}</td>
+                </tr>
+                <tr>
+                  <td>Game Type:</td>
+                  <td>{{ gameData?.subGame }}</td>
+                </tr>
+                <tr>
+                  <td>Win/Loss:</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>Win Amt:</td>
+                  <td
+                    [ngClass]="
+                       gameData?.netAmt > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    "
+                  >
+                    {{  gameData?.netAmt }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Commission Amt:</td>
+                  <td>{{  gameData?.commission }}</td>
+                </tr>
+                <tr>
+                  <td>Win Amt:</td>
+                  <td
+                    [ngClass]="
+                       gameData?.netAmt > 0
+                        ? 'text-success'
+                        : 'text-danger'
+                    "
+                  >
+                    {{ gameData?.netAmt }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Round Id:</td>
+                  <td>{{  gameData?.marketId }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+          <div class="col-md-6">
+            <table class="table tableall">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-dark">Winner</th>
+                  <th scope="col" class="text-dark"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Winner Name :</td>
+                  <td>{{ gameData?.winningHorseName }}</td>
+                </tr>
+                <tr>
+                  <td>Match :</td>
+                  <td>{{ gameData?.eventName }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <table class="table tableall">
+            <thead>
+              <tr>
+                <th scope="col" class="text-dark">Place Date</th>
+                <th scope="col" class="text-dark">Matched Date</th>
+                <th scope="col" class="text-dark">Type</th>
+                <th scope="col" class="text-dark">Status</th>
+                <th scope="col" class="text-dark">Horse Name</th>
+                <th scope="col" class="text-dark">Avg. Odds</th>
+                <th scope="col" class="text-dark">Odds</th>
+                <th scope="col" class="text-dark">Stake</th>
+                <th scope="col" class="text-dark">Matched Stake</th>
+                <th scope="col" class="text-dark">Profit/Loss (In INR)</th>
+                <th scope="col" class="text-dark">IP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bet of oneAccount?.bets">
+                <td>{{ bet.placedDate | date : "medium" }}</td>
+                <td>{{ bet.matchedDate | date : "medium" }}</td>
+                <td>{{ bet.type }}</td>
+                <td>{{ bet.status }}</td>
+                <td>{{ bet.horseName }}</td>
+                <td>{{ bet.avgOdds | number }}</td>
+                <td>{{ bet.odds }}</td>
+                <td>{{ bet.odds }}</td>
+                <td>{{ bet.matchedStake }}</td>
+                <td
+                  [ngClass]="bet.profitLoss > 0 ? 'text-success' : 'text-danger'"
+                >
+                  {{ bet.profitLoss | number }}
+                </td>
+                <td>{{bet.ipAddress}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- Modal end -->

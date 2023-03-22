@@ -14,6 +14,7 @@ export class SharedService {
 
   sharedSubject=new Subject();
   getUserBalance = new Subject();
+  leftMenuStatus = new BehaviorSubject( {'leftMenuOpen': true} );
   private currentAdmin = null;
 
   sportsList:Isports[];

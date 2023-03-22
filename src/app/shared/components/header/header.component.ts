@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   searchList:any = [];
   userBalance:any;
   adminDetails:any = null;
+  leftMenuOpen:boolean = true;
 
   constructor(
     private _sharedService: SharedService
@@ -36,6 +37,13 @@ export class HeaderComponent implements OnInit {
     this.isShowRightSideBar=!this.isShowRightSideBar;
     this._sharedService.sharedSubject.next({
       'isShowRightSideBar':this.isShowRightSideBar
+    });
+  }
+
+  toggleMenu(){
+    this.leftMenuOpen=!this.leftMenuOpen;
+    this._sharedService.leftMenuStatus.next({
+      'leftMenuOpen': this.leftMenuOpen
     });
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-members-main',
@@ -7,8 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MembersMainComponent implements OnInit {
 
-  constructor() { }
+  isLeftMenuOpen: boolean;
 
-  ngOnInit(): void { }
+  constructor(
+    private _sharedService:SharedService
+  ) { }
+
+  ngOnInit(): void {
+    this._sharedService.leftMenuStatus.subscribe((res: any) => {
+      console.log('ice.sharedSubject.subs', res);
+      this.isLeftMenuOpen = res.leftMenuOpen;
+    });
+   }
 
 }

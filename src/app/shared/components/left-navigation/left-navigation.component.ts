@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 
 @Component({
@@ -9,18 +9,18 @@ import { SharedService } from '@shared/services/shared.service';
 })
 export class LeftNavigationComponent implements OnInit {
 
-  mainMenu:any = [];
-  viewMoreNavList:any = [];
+  mainMenu: any = [];
+  viewMoreNavList: any = [];
 
-  isLoggedIn:boolean = false;
-  sportsName:string;
-  userDetails:any;
+  isLoggedIn: boolean = false;
+  sportsName: string;
+  userDetails: any;
 
-  menuList:any;
-  tourId:any;
-  matchId:any;
+  menuList: any;
+  tourId: any;
+  matchId: any;
 
-  adminDetails:any = null;
+  adminDetails: any = null;
 
   constructor(
     private _route: ActivatedRoute,
@@ -31,15 +31,15 @@ export class LeftNavigationComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = this._sharedService.isLoggedIn();
     this.userDetails = this._sharedService.getUserDetails();
-    this._sharedService.sharedSubject.subscribe((data:any)=>{
-      if(data.adminDetails){
+    this._sharedService.sharedSubject.subscribe((data: any) => {
+      if (data.adminDetails) {
         this.adminDetails = data.adminDetails
       }
-    })
+    });
   }
 
 
-  onLogout(){
+  onLogout() {
     this._sharedService.removeJWTToken();
     this._sharedService.removeUserDetails();
     this._router.navigate(['/login']);

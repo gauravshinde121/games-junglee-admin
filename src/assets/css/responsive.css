@@ -65,9 +65,9 @@
 
  /* Extra large devices (large laptops and desktops, 1200px and up) */
  @media only screen and (min-width: 1200px) {
-  #main {
+  /* #main {
     margin-left: 270px;
-  }
+  }*/
   .toggle-sidebar #main {
     margin-left: 0;
   }
@@ -87,3 +87,6 @@
     left: 0;
   }
 }
+
+
+.dummy:last-child { width: 100%; }

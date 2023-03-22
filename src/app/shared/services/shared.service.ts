@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ApiEndpointsService } from 'src/app/core/services/api-endpoint.service';
 import { ApiHttpService } from 'src/app/core/services/api-http.service';
 import { Isports } from '../models/shared';
@@ -15,6 +15,9 @@ export class SharedService {
   sharedSubject=new Subject();
   getUserBalance = new Subject();
   private currentAdmin = null;
+  
+  isCollapsed = false;
+  private showSideNavSubject = new Subject<boolean>();
 
   sportsList:Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
@@ -165,6 +168,19 @@ export class SharedService {
     return this._apiHttpService
     .post(this._apiEndpointsService.getMarketBySportIdEndpoint(),{sportId:sportId});
   }
+
+
+  toggleMenu(): void {
+    this.isCollapsed = !this.isCollapsed;
+    this.showSideNavSubject.next(this.isCollapsed);
+  }
+
+  get(): Observable<boolean> {
+    return this.showSideNavSubject.asObservable();
+  }
+
+  // toggleMenu()
+  //  {this.isCollapsed = !this.isCollapsed;}
 
 }
 

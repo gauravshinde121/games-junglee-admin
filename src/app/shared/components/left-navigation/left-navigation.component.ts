@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-left-navigation',
@@ -22,6 +23,11 @@ export class LeftNavigationComponent implements OnInit {
 
   adminDetails:any = null;
 
+  showSideNav = false;
+  subscription: Subscription;
+
+
+
   constructor(
     private _route: ActivatedRoute,
     public _sharedService: SharedService,
@@ -36,6 +42,12 @@ export class LeftNavigationComponent implements OnInit {
         this.adminDetails = data.adminDetails
       }
     })
+
+    this.subscription = this._sharedService.get().subscribe(sideNav => this.showSideNav = sideNav);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 

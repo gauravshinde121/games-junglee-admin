@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   searchList:any = [];
   userBalance:any;
   adminDetails:any = null;
-
+  
   constructor(
     private _sharedService: SharedService
   ) { }
@@ -56,6 +56,10 @@ export class HeaderComponent implements OnInit {
         })
       }
     })
+  }
+
+  toggle() {
+    this._sharedService.toggleMenu();
   }
 
 }

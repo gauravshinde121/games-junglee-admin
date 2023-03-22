@@ -45,8 +45,8 @@
     </form>
 
     <div class="row">
-      <div class="col-md-12 mt-4 overflow-auto">
-        <table class="table tableall" *ngIf="activityData != undefined">
+      <div class="col-md-12 mt-4">
+        <table class="table tableall" *ngIf="activityData.data">
           <thead>
             <tr>
               <th scope="col"></th>
@@ -61,91 +61,91 @@
           <tbody>
             <tr>
               <td>Win</td>
-              <td  [ngClass]="activityData?.currentDateData[0]?.winAmt > 0
+              <td  [ngClass]="activityData?.data.currentDateData[0]?.winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.currentDateData[0]?.winAmt | number }}
+                {{ activityData?.data.currentDateData[0]?.winAmt | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.threeDaysBack[0]?.winAmt > 0
+                  activityData?.data.threeDaysBack[0]?.winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.threeDaysBack[0]?.winAmt | number }}
+                {{ activityData?.data.threeDaysBack[0]?.winAmt | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.sevenDaysBack[0]?.winAmt > 0
+                  activityData?.data.sevenDaysBack[0]?.winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.sevenDaysBack[0].winAmt | number }}
+                {{ activityData?.data.sevenDaysBack[0].winAmt | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.thirtyDaysBack[0]?.winAmt > 0
+                  activityData?.data.thirtyDaysBack[0]?.winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.thirtyDaysBack[0].winAmt | number }}
+                {{ activityData?.data.thirtyDaysBack[0].winAmt | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.lifeTimeData[0]?.winAmt > 0
+                  activityData?.data.lifeTimeData[0]?.winAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.lifeTimeData[0].winAmt | number }}
+                {{ activityData?.data.lifeTimeData[0].winAmt | number }}
               </td>
               <td>0</td>
             </tr>
             <tr>
               <td>Betfair Commission</td>
               <td [ngClass]="
-                  activityData?.currentDateData[0].commissionAmtForBetfair > 0
+                  activityData?.data.currentDateData[0].commissionAmtForBetfair > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
                 {{
-                activityData?.currentDateData[0].commissionAmtForBetfair
+                activityData?.data.currentDateData[0].commissionAmtForBetfair
                 | number
                 }}
               </td>
               <td  [ngClass]="
-                  activityData?.threeDaysBack[0].commissionAmtForBetfair > 0
+                  activityData?.data.threeDaysBack[0].commissionAmtForBetfair > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
                 {{
-                activityData?.threeDaysBack[0].commissionAmtForBetfair
+                activityData?.data.threeDaysBack[0].commissionAmtForBetfair
                 | number
                 }}
               </td>
               <td  [ngClass]="
-                  activityData?.sevenDaysBack[0].commissionAmtForBetfair > 0
+                  activityData?.data.sevenDaysBack[0].commissionAmtForBetfair > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
                 {{
-                activityData?.sevenDaysBack[0].commissionAmtForBetfair
+                activityData?.data.sevenDaysBack[0].commissionAmtForBetfair
                 | number
                 }}
               </td>
               <td  [ngClass]="
-                  activityData?.thirtyDaysBack[0].commissionAmtForBetfair > 0
+                  activityData?.data.thirtyDaysBack[0].commissionAmtForBetfair > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
                 {{
-                activityData?.thirtyDaysBack[0].commissionAmtForBetfair
+                activityData?.data.thirtyDaysBack[0].commissionAmtForBetfair
                 | number
                 }}
               </td>
               <td  [ngClass]="
-                  activityData?.lifeTimeData[0].commissionAmtForBetfair > 0
+                  activityData?.data.lifeTimeData[0].commissionAmtForBetfair > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
                 {{
-                activityData?.lifeTimeData[0].commissionAmtForBetfair | number
+                activityData?.data.lifeTimeData[0].commissionAmtForBetfair | number
                 }}
               </td>
               <td>0</td>
@@ -153,117 +153,117 @@
             <tr>
               <td>Commission</td>
               <td  [ngClass]="
-                  activityData?.currentDateData[0].commissionAmt > 0
+                  activityData?.data.currentDateData[0].commissionAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.currentDateData[0].commissionAmt | number }}
+                {{ activityData?.data.currentDateData[0].commissionAmt | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.threeDaysBack[0].commissionAmt > 0
+                  activityData?.data.threeDaysBack[0].commissionAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.threeDaysBack[0].commissionAmt | number }}
+                {{ activityData?.data.threeDaysBack[0].commissionAmt | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.sevenDaysBack[0].commissionAmt > 0
+                  activityData?.data.sevenDaysBack[0].commissionAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.sevenDaysBack[0].commissionAmt | number }}
+                {{ activityData?.data.sevenDaysBack[0].commissionAmt | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.thirtyDaysBack[0].commissionAmt > 0
+                  activityData?.data.thirtyDaysBack[0].commissionAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.thirtyDaysBack[0].commissionAmt | number }}
+                {{ activityData?.data.thirtyDaysBack[0].commissionAmt | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.lifeTimeData[0].commissionAmt > 0
+                  activityData?.data.lifeTimeData[0].commissionAmt > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.lifeTimeData[0].commissionAmt | number }}
+                {{ activityData?.data.lifeTimeData[0].commissionAmt | number }}
               </td>
               <td>0</td>
             </tr>
             <tr>
               <td>P&L</td>
               <td  [ngClass]="
-                  activityData?.currentDateData[0].netAmount > 0
+                  activityData?.data.currentDateData[0].netAmount > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.currentDateData[0].netAmount | number }}
+                {{ activityData?.data.currentDateData[0].netAmount | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.threeDaysBack[0].netAmount > 0
+                  activityData?.data.threeDaysBack[0].netAmount > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.threeDaysBack[0].netAmount | number }}
+                {{ activityData?.data.threeDaysBack[0].netAmount | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.sevenDaysBack[0].netAmount > 0
+                  activityData?.data.sevenDaysBack[0].netAmount > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.sevenDaysBack[0].netAmount | number }}
+                {{ activityData?.data.sevenDaysBack[0].netAmount | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.thirtyDaysBack[0].netAmount > 0
+                  activityData?.data.thirtyDaysBack[0].netAmount > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.thirtyDaysBack[0].netAmount | number }}
+                {{ activityData?.data.thirtyDaysBack[0].netAmount | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.lifeTimeData[0].netAmount > 0
+                  activityData?.data.lifeTimeData[0].netAmount > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.lifeTimeData[0].netAmount | number }}
+                {{ activityData?.data.lifeTimeData[0].netAmount | number }}
               </td>
               <td>0</td>
             </tr>
             <tr>
               <td>Turnover</td>
               <td  [ngClass]="
-                  activityData?.currentDateData[0].turnover > 0
+                  activityData?.data.currentDateData[0].turnover > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.currentDateData[0].turnover | number }}
+                {{ activityData?.data.currentDateData[0].turnover | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.threeDaysBack[0].turnover > 0
+                  activityData?.data.threeDaysBack[0].turnover > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.threeDaysBack[0].turnover | number }}
+                {{ activityData?.data.threeDaysBack[0].turnover | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.sevenDaysBack[0].turnover > 0
+                  activityData?.data.sevenDaysBack[0].turnover > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.sevenDaysBack[0].turnover | number }}
+                {{ activityData?.data.sevenDaysBack[0].turnover | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.thirtyDaysBack[0].turnover > 0
+                  activityData?.data.thirtyDaysBack[0].turnover > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.thirtyDaysBack[0].turnover | number }}
+                {{ activityData?.data.thirtyDaysBack[0].turnover | number }}
               </td>
               <td  [ngClass]="
-                  activityData?.lifeTimeData[0].turnover > 0
+                  activityData?.data.lifeTimeData[0].turnover > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
-                {{ activityData?.lifeTimeData[0].turnover | number }}
+                {{ activityData?.data.lifeTimeData[0].turnover | number }}
               </td>
               <td>0</td>
             </tr>
@@ -271,5 +271,14 @@
         </table>
       </div>
     </div>
+
+    <div class="col-md-12 mt-3" *ngIf="!activityData?.data">
+      <div class="border text-center p-5">
+
+        <h4 *ngIf="!activityData?.data && !isLoading">No data found</h4>
+        <h4 *ngIf="isLoading">Loading...</h4>
+      </div>
+    </div>
+
   </div>
 </div>

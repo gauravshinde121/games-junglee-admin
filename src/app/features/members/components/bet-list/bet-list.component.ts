@@ -124,6 +124,16 @@ export class BetListComponent implements OnInit {
     this.isLoading = true;
     this.betList = [];
 
+    let fromDate = new Date(this.filterForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.filterForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
+
     let body = {
       isActive: this.isActive,
       isMatched: this.isMatched,
@@ -132,8 +142,8 @@ export class BetListComponent implements OnInit {
       marketId : this.filterForm.value.marketId,
       stakesFrom :this.filterForm.value.stakesFrom,
       stakesTo :this.filterForm.value.stakesTo,
-      fromDate : this.filterForm.value.fromDate,
-      toDate : this.filterForm.value.toDate,
+      fromDate : fromDate,
+      toDate : toDate,
       userId:this.userId,
       pageNo: this.currentPage,
       limit: 50,

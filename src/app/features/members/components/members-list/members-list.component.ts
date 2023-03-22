@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { MembersService } from '../../services/members.service';
@@ -35,6 +36,86 @@ export class MembersListComponent implements OnInit {
 
   statusList : any = [];
 
+  changePasswordForm!: FormGroup;
+  
+  selectedColor = "";
+  // authObj = {
+  //   currentPassword: "",
+  //   newPassword: "",
+  //   retypePassword: ""
+  // }
+
+  createPasswordForm(){
+    this.changePasswordForm = this.formbuilder.group({
+      password: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
+        "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+      )]),
+      confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+    },
+      {
+
+        validators: this.Mustmatch('password', 'confirmPassword')
+      }
+    )
+  }
+
+  get f() {
+    return this.changePasswordForm.controls;
+  }
+
+  postChangePassword() {
+    if (this.changePasswordForm.value.password == "") {
+      this._sharedService.getToastPopup("Enter password", 'Password', 'error');
+      return;
+    }
+    else if (this.changePasswordForm.value.confirmPassword == "") {
+      this._sharedService.getToastPopup("Enter confirm password", 'Password', 'error');
+      return;
+    }
+
+    let body = {
+      "userId": this.userId,
+      "password": this.changePasswordForm.value.password
+    }
+
+
+    this._memberService._changeMemberPasswordApi(body).subscribe((res: any) => {
+      this._sharedService.getToastPopup(res.message, 'Password', 'success');
+      this.closeModal();
+    })
+  }
+
+  // Validation & Confirm Password
+
+  get passwordValue() {
+    return this.changePasswordForm.get('password')
+  }
+
+  get confirmPasswordVail() {
+    return this.changePasswordForm.get('confirmPassword')
+  }
+
+  Mustmatch(password: any, confirmPassword: any) {
+    return (formGroup: FormGroup) => {
+      const passwordControl = formGroup.controls[password];
+      const confirmPasswordcontrol = formGroup.controls[confirmPassword];
+
+      if (confirmPasswordcontrol.errors && !confirmPasswordcontrol.errors['Mustmatch']) {
+        return;
+      }
+      if (passwordControl.value !== confirmPasswordcontrol.value) {
+        confirmPasswordcontrol.setErrors({ Mustmatch: true });
+      }
+      else {
+        confirmPasswordcontrol.setErrors(null);
+      }
+    }
+  };
+
+  resetForm() {
+    this.changePasswordForm.reset();
+  }
+
   selectedIndex = -1;
   showContent(evt, index) {
     if (this.selectedIndex == index) {
@@ -52,7 +133,8 @@ export class MembersListComponent implements OnInit {
   constructor(
     private _router: Router,
     private _sharedService: SharedService,
-    private _memberService: MembersService
+    private _memberService: MembersService,
+    private formbuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -66,6 +148,7 @@ export class MembersListComponent implements OnInit {
   }
 
   _preConfig() {
+    this.createPasswordForm();
     this._getRoles();
     this._getAllUserInfo(this.selectedRoleId);
   }
@@ -159,14 +242,7 @@ export class MembersListComponent implements OnInit {
   openModal(userId) {
     this.userId = userId;
     this.display = 'block';
-    this._sharedService
-      ._getSingleUsersApi({ userId: userId })
-      .subscribe((users: any) => {
-        console.log('USER', users);
-        this.gameStatus = users.gameStatus;
-        this.eventStatus = users.eventStatus;
-        console.log('event', this.gameStatus);
-      });
+    
   }
 
   closeModal() {
@@ -211,7 +287,21 @@ export class MembersListComponent implements OnInit {
     ]);
   }
 
-  changeStatus(evt){
-    console.log("Evt",evt.target.value);
+  changeStatus(evt,user){
+    // this.selectedColor = 
+    console.log("Evt",user);
+    console.log("Value",evt.target.value);
+    let status = evt.target.value;
+    let body = {
+      "userId": user.userId, 
+      "isActive": status
+    }
+
+    this._memberService._changeMemberStatusApi(body).subscribe(res=>{
+      console.log("Res",res);
+      this._sharedService.getToastPopup(res['message'],'','success');
+    })
   }
+
+  
 }

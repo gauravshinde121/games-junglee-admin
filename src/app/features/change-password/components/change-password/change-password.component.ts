@@ -39,7 +39,10 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    var sportId:any;
+    this._sharedService.testFunc(sportId).subscribe((data:any)=>{
+      console.log(data);
+    });
   }
 
   postChangePassword() {

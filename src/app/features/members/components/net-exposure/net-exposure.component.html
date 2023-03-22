@@ -11,6 +11,7 @@
     </div>
     </div>
     <div *ngIf="!isLoading && booksForBackend.length>0" class="col-md-12 overflow-scroll">
+    <div *ngIf="!isLoading && booksForBackend.length > 0" class="col-md-12">
       <table class="table table-striped bg-white mt-3 text-center">
         <tbody *ngFor="let book of booksForBackend">
          <tr >
@@ -57,6 +58,19 @@
         </table>
     </div>
   </div>
+
+  <div class="col-md-12 mt-3" *ngIf="booksForBackend.length == 0">
+    <div class="border text-center p-5">
+      <h4 *ngIf="booksForBackend.length == 0 && !isLoading">No data found</h4>
+      <h4 *ngIf="isLoading">Loading...</h4>
+    </div>
+  </div>
+
+  <!-- <div *ngIf="!isLoading && booksForBackend.length==0" class="col-md-12 mt-3">
+    <div class="border text-center p-5">
+    <h4>No data found </h4>
+  </div>
+  </div> -->
   </div>
   </div>
   </section>

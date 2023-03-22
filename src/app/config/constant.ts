@@ -40,6 +40,8 @@ export class Constants {
     public readonly API_URL_GET_MEMBER_BOOKS_FOR_BACKEND: string = 'api/junglee-admin/getMemberBooksForBackend';
     public readonly API_URL_ALL_MEMBERS:string = 'api/junglee-admin/getAllMembers';
     public readonly API_URL_GET_MARKET_BY_SPORT_ID:string = 'api/junglee-admin/getMarketBySportId';
+    public readonly API_URL_CHANGE_MEMBER_STATUS:string = 'api/junglee-admin/setMemberStatus';
+    public readonly API_URL_CHANGE_MEMBER_PASSWORD:string = 'api/junglee-admin/changeMemberPassword'
 
 
     //book management
@@ -52,6 +54,7 @@ export class Constants {
     public readonly API_URL_GET_PL_BY_SUBGAME: string = 'api/junglee-admin/getAdminPlBySubGame';
     public readonly API_URL_GET_CATEGORY_FOR_TO: string = 'api/junglee-admin/getCategoryForTO';
     public readonly API_URL_GET_TO_FOR_MATCH: string = 'api/junglee-admin/getTurnOverForMatch';
+    public readonly API_URL_GET_ONE_ACCOUNT: string = 'api/junglee-admin/getOneAccount';
 
 
     //change password
@@ -69,6 +72,7 @@ export class Constants {
     //settings
     public readonly API_URL_ADD_BALANCE: string = 'api/junglee-admin/addSuperAdminBalance';
     public readonly API_URL_GET_CL_TRANSFERS: string = 'api/junglee-admin/getClTransferStatement';
+    public readonly API_URL_DELETE_BET: string = 'api/junglee-admin/deleteBetByAdmin';
 
     //all logs
     public readonly API_URL_INVALID_BETS:string = 'api/getVARBets';
@@ -78,4 +82,7 @@ export class Constants {
 
     //BOOK MANAGEMENT
     public readonly API_URL_GET_BET_DETAILS_FOR_WORK_STATION:string = 'api/junglee-admin/getBetDetailsForWorkStation';
+
+    //TEST
+    public readonly API_URL_TEST_FUNC:string = 'api/getBetsForSurveilliance';
 }

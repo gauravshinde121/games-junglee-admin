@@ -73,10 +73,20 @@ export class LoginHistoryComponent implements OnInit {
 
     this.isLoading = true;
 
+    let fromDate = new Date(this.loginHistoryForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.loginHistoryForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
+
     const payload = {
       userId:this.userId,
-      fromDate:this.loginHistoryForm.value['fromDate'],
-      toDate:this.loginHistoryForm.value['toDate'],
+      fromDate: fromDate,
+      toDate: toDate,
       pageNo: this.currentPage,
       limit: 50,
     }

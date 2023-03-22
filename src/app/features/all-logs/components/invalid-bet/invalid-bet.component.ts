@@ -48,6 +48,8 @@ export class InvalidBetComponent implements OnInit {
   }
 
   getLogs() {
+
+    
     this._memberService._getInvalidBetsApi({ ...this.invalidBetForm.value })
       .subscribe((res: any) => {
         console.log(res)
@@ -58,7 +60,12 @@ export class InvalidBetComponent implements OnInit {
   }
 
   clearFilters() {
-    window.location.reload();
+    // window.location.reload();
+    this._initForm();
+    // this.invalidBetForm.value.memberName = null;
+    // this.invalidBetForm.value.invalidBet = 0;
+    // this.invalidBetForm.value.fromDate = this.formatFormDate(new Date());
+    // this.invalidBetForm.value.toDate = this.formatFormDate(new Date();
   }
 
 }

@@ -19,4 +19,9 @@ export class SettingsService {
     _getAllUserBetsApi(filterObj){
       return this._apiHttpService.post(this._apiEndpointsService.getAllUserBetsEndpoint(),filterObj)
     }
+
+    _deleteBetApi(paramsObj) {
+      return this._apiHttpService.post(this._apiEndpointsService.deleteBetEndpoint(),paramsObj)
+    }
+    
 }

@@ -588,3 +588,9 @@ select:-webkit-autofill:focus {
     left:0;
   }
 }
+
+.modal-width {
+  width: 150%;
+  right: 15% ;
+}
+

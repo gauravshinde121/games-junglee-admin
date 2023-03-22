@@ -41,10 +41,6 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var sportId:any;
-    this._sharedService.testFunc(sportId).subscribe((data:any)=>{
-      console.log(data);
-    });
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
       this.isLeftMenuOpen = res.leftMenuOpen;
       if(this.isLeftMenuOpen){
@@ -53,6 +49,10 @@ export class ChangePasswordComponent implements OnInit {
         this.mainClass = 'col-md-12';
       }
     });
+    // var sportId:any;
+    // this._sharedService.testFunc(sportId).subscribe((data:any)=>{
+    //   console.log(data);
+    // });
   }
 
   postChangePassword() {

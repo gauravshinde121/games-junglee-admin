@@ -309,6 +309,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_ALL_USER_BETS)
   }
 
+  public getBetsForBetSettingsEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_BETS_FOR_BET_SETTINGS)
+  }
+
   public getMarketBySportIdEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_MARKET_BY_SPORT_ID)
   }

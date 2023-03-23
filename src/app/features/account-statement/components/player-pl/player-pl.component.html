@@ -126,14 +126,15 @@
       <h4 *ngIf="isLoading">Loading...</h4>
     </div>
     <table class="table tableall" *ngIf="plStatement.length > 0">
-      <thead>
+      <thead class="text-dark">
         <tr>
           <th scope="col"></th>
           <th scope="col"><i class="fa fa-"></i> Date</th>
           <th scope="col">Sport</th>
           <!--<th scope="col">Sub Game</th>-->
           <th scope="col">Match</th>
-          <th scope="col">Player</th>
+          <th scope="col">Username</th>
+          <th scope="col">Amount</th>
           <!-- <th scope="col">Master</th>
           <th scope="col">Multiplier</th> -->
           <th scope="col">Details</th>
@@ -142,77 +143,27 @@
       <tbody>
         <tr *ngFor="let pl of plStatement; let i = index">
           <td>{{ i + 1 }}</td>
-          <td>{{ pl.createDateTime | date }}</td>
+          <td>{{ pl.createDateTime | date :'medium' }}</td>
           <td>{{ pl.gameData.subGame }}</td>
           <!--<td>{{ pl.gameData.gameName }}</td>-->
           <td>{{ pl.gameData.eventName }}</td>
           <td>
-            <div class="text">
-              {{ pl.playerData.name }}
-            </div>
-            <div class="text-green">
+            {{ pl.playerData.name }}
+          </td>
+          <td>
+            <div [ngClass]="pl.gameData.netAmt > 0
+              ? 'text-success'
+              : 'text-danger'
+          ">
               {{ pl.gameData.netAmt | number }}
-              <!-- <i
-                class="fa-sharp fa-solid fa-info-circle text-pink"
-                role="button"
-                id="dropdownMenuLink"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              ></i> -->
-              <ul class="dropdown-menu idd" aria-labelledby="dropdownMenuLink">
-                <div class="col-md-12">
-                  <li class="dropdown-item ddcontent">Player-INR</li>
-                </div>
-                <div class="row">
-                  <div class="col-md-5">
-                    <li>
-                      <a class="dropdown-item ddcontent"
-                        >Win Amt. &nbsp; &nbsp; &nbsp;
-                      </a>
-                    </li>
-                  </div>
-                  <div class="col-md-7 text-green">100</div>
-                </div>
-                <li>
-                  <a class="dropdown-item ddcontent"
-                    >Commision% &nbsp; &nbsp; &nbsp; 4</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item ddcontent"
-                    >Total com. &nbsp; &nbsp; &nbsp; 1
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item ddcontent"
-                    >My Share &nbsp; &nbsp; &nbsp;1
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item ddcontent"
-                    >My Rate &nbsp; &nbsp; &nbsp; 1
-                  </a>
-                </li>
-                <div class="row">
-                  <div class="col-md-7">
-                    <li>
-                      <a class="dropdown-item ddcontent"
-                        >Net Amount &nbsp; &nbsp; &nbsp;
-                      </a>
-                    </li>
-                  </div>
-                  <div class="col-md-5 text-green">196</div>
-                </div>
-              </ul>
+              
             </div>
           </td>
-          <!-- <td>50,000</td> -->
-
-          <!-- <td>1</td> -->
+          
           <td>
             <i
               (click)="getOneAccount(pl)"
-              class="fa-sharp fa-solid fa-eye text-pink"
+              class="fa-sharp fa-solid fa-eye text-pink cursor-pointer"
               aria-hidden="true"
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
@@ -246,7 +197,7 @@
   aria-hidden="true"
 >
   <div class="modal-dialog modal-dialog modal-lg">
-    <div class="modal-content modal-size" style="width: 120%">
+    <div class="modal-content modal-size modal-width">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-dark" id="staticBackdropLabel">
           Game Detail &nbsp; <i class="fa fa-lock text-pink"></i>
@@ -276,7 +227,7 @@
                 </tr>
                 <tr>
                   <td>Player Name :</td>
-                  <td>{{ playerData?.name }}</td>
+                  <td>{{ oneAccount?.playerName }}</td>
                 </tr>
                 <tr>
                   <td>Game Type:</td>

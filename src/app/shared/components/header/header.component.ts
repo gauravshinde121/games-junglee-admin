@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   userBalance:any;
   adminDetails:any = null;
   leftMenuOpen:boolean = true;
+  isLeftBarDisplay:boolean = true;
 
   constructor(
     private _sharedService: SharedService
@@ -42,6 +43,7 @@ export class HeaderComponent implements OnInit {
 
   toggleMenu(){
     this.leftMenuOpen=!this.leftMenuOpen;
+    this.isLeftBarDisplay=!this.isLeftBarDisplay;
     this._sharedService.leftMenuStatus.next({
       'leftMenuOpen': this.leftMenuOpen
     });

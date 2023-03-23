@@ -14,6 +14,7 @@ import { BookManagementService } from 'src/app/features/book-management/services
 export class SurveillanceMainComponent implements OnInit {
 
   isLeftMenuOpen: boolean;
+  mainClass:String = 'col-md-10';
   filterForm:FormGroup;
   surveillanceData:any = [];
   allMembers:any = [];
@@ -65,6 +66,11 @@ export class SurveillanceMainComponent implements OnInit {
     this.getAllUserBets();
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
       this.isLeftMenuOpen = res.leftMenuOpen;
+      if(this.isLeftMenuOpen){
+        this.mainClass = 'col-md-10';
+      } else {
+        this.mainClass = 'col-md-12';
+      }
     });
   }
 
@@ -97,8 +103,8 @@ export class SurveillanceMainComponent implements OnInit {
       time: ["All"],
       fromDate : this.formatFormDate(new Date()),
       toDate : this.formatFormDate(new Date()),
-      stakesFromValue : [null],
-      stakesToValue : [null]
+      stakesFromValue : null,
+      stakesToValue : null
     });
   }
 
@@ -164,7 +170,7 @@ export class SurveillanceMainComponent implements OnInit {
   getAllUserBets(){
     this.isLoading = true;
     this.allBets = [];
-    
+
 
     let body = {
       sportsId: null,
@@ -220,6 +226,15 @@ export class SurveillanceMainComponent implements OnInit {
 
   clearMember(){
     this.betTickerForm.value.memberName = null;
+  }
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
   }
 
 }

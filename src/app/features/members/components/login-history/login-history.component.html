@@ -60,7 +60,7 @@
         <tr *ngFor="let history of loginHistory; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ history.username }}</td>
-          <td>{{ history.createdDate | date }}</td>
+          <td>{{ history.createdDate | date:'medium' }}</td>
           <td>{{history.userIpAddress}}</td>
           <td>desktop</td>
           <td>Chrome 110.0</td>

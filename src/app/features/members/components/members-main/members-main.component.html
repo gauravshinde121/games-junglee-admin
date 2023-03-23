@@ -1,15 +1,17 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-    <app-header></app-header></div>
-    <div class="col-md-12">
-      <div class="d-flex dummy">
-     <app-left-navigation *ngIf="isLeftMenuOpen"></app-left-navigation>
-      <router-outlet></router-outlet>
+      <app-header></app-header>
     </div>
+    <div class="col-md-12">
+      <div class="row d-flex">
+        <div class="col-md-2 {{sideBarClass}}" *ngIf="isLeftMenuOpen">
+          <app-left-navigation></app-left-navigation>
+          </div>
+        <div class="{{mainClass}}">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
-

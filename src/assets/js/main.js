@@ -210,7 +210,7 @@
     }, 200);
   }
 
-  setTimeout(function () {
-    $("#main").parent().addClass('w-100');
-  }, 3000);
+  //setTimeout(function () {
+  //  $("#main").parent().addClass('w-100');
+  //}, 3000);
 })();

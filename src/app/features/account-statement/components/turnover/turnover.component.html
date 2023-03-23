@@ -70,7 +70,7 @@
             <td>
               <a (click)="getTOForMatch(pl.matchId)"
                 ><i
-                  class="fa-sharp fa-solid fa-eye text-pink"
+                  class="fa-sharp fa-solid fa-eye text-pink cursor-pointer"
                   aria-hidden="true"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
@@ -78,7 +78,15 @@
               ></a>
             </td>
             <td>
-              <a><i class="fa-sharp fa-solid fa-eye text-pink"></i></a>
+              <a (click)="getBetDetailsForMatch(pl.matchId)">
+                <i class="fa-sharp fa-solid fa-eye text-pink cursor-pointer"
+                aria-hidden="true"
+                  data-bs-toggle="modal"
+                  data-bs-target="#betDetailBackdrop"
+                >
+
+                </i>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -132,6 +140,112 @@
         ></button>
       </div>
       <div class="modal-body bg-dark text-white" *ngIf="marketInfo">
+        
+        <div class=" col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+                <h6>Stakes</h6>
+            </div>
+            <div class="col-md-6">
+              <p class="float-end">Total: <span [ngClass]="marketInfo?.stakes?.totalStake > 0
+                ? 'text-success'
+                : 'text-danger'
+            ">{{marketInfo?.stakes?.totalStake}}</span></p>
+            </div>
+          </div>
+            <table class="table table-striped table-hover text-white table-dark">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Level</th>
+                  <th>Stake</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- ngRepeat: stake in stakes.detail -->
+                <tr class="ng-scope text-white">
+                  <td class="ng-binding" >{{marketInfo?.stakes['details'][0]?.level }}</td>
+                  <td class="ng-binding" [ngClass]="marketInfo?.stakes['details'][0]?.stake > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                ">{{marketInfo?.stakes['details'][0]?.stake }}</td>
+                </tr>
+                <!-- end ngRepeat: stake in stakes.detail -->
+              </tbody>
+            </table>
+        </div>
+
+        <div class=" col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+                <h6>Win/Lose</h6>
+            </div>
+            <div class="col-md-6">
+              <p class="float-end">Total: <span [ngClass]="marketInfo?.winLose?.totalWinLose > 0
+                ? 'text-success'
+                : 'text-danger'
+            ">{{marketInfo?.winLose?.totalWinLose}}</span></p>
+            </div>
+          </div>
+            <table class="table table-striped table-hover text-white table-dark">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Level</th>
+                  <th>Win</th>
+                  <th>Lose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- ngRepeat: stake in stakes.detail -->
+                <tr class="ng-scope text-white">
+                  <td class="ng-binding">{{marketInfo?.winLose['details'][0]?.level}}</td>
+                  <td class="ng-binding" [ngClass]="marketInfo?.winLose['details'][0]?.win > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                ">{{marketInfo?.winLose['details'][0]?.win}}</td>
+                  <td class="ng-binding" [ngClass]="marketInfo?.winLose['details'][0]?.lose > 0
+                    ? 'text-success'
+                    : 'text-danger'
+                ">{{marketInfo?.winLose['details'][0]?.lose}}</td> 
+                </tr>
+                <!-- end ngRepeat: stake in stakes.detail -->
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->
+
+
+<!-- betDetail Modal start-->
+
+<div
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="betDetailBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="betDetailLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog modal-lg">
+    <div class="modal-content modal-size">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino text-dark" id="betDetailLabel">
+          Detail &nbsp; <i class="fa fa-lock text-pink"></i>
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark text-white" *ngIf="betInfo">
         <div class=" col-md-12">
           <div class="row">
             <div class="col-md-6">
@@ -151,7 +265,7 @@
               <tbody>
                 <!-- ngRepeat: stake in stakes.detail -->
                 <tr class="ng-scope text-white">
-                  <td class="ng-binding">{{marketInfo.marketInfo.marketName}}</td>
+                  <td class="ng-binding">{{betInfo.marketInfo.marketName}}</td>
                   <td class="ng-binding">1,000</td>
                 </tr>
                 <!-- end ngRepeat: stake in stakes.detail -->
@@ -180,8 +294,8 @@
                 <!-- ngRepeat: stake in stakes.detail -->
                 <tr class="ng-scope text-white">
                   <td class="ng-binding">Fancy Market</td>
-                  <td class="ng-binding">{{marketInfo.marketInfo[0].win}}</td>
-                  <td class="ng-binding">{{marketInfo.marketInfo[0].lose}}</td>
+                  <td class="ng-binding">{{betInfo.marketInfo[0].win}}</td>
+                  <td class="ng-binding">{{betInfo.marketInfo[0].lose}}</td>
                 </tr>
                 <!-- end ngRepeat: stake in stakes.detail -->
               </tbody>
@@ -192,4 +306,3 @@
     </div>
   </div>
 </div>
-<!-- Modal end -->

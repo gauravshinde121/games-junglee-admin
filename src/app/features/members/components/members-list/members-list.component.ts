@@ -32,7 +32,7 @@ export class MembersListComponent implements OnInit {
 
   searchTerm: string = '';
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 25;
   totalPages: number = 0;
 
   statusList : any = [];
@@ -126,7 +126,7 @@ export class MembersListComponent implements OnInit {
       this._sharedService
         ._getSingleUsersApi({ userId: index })
         .subscribe((users: any) => {
-          console.log(users);
+          //console.log(users);
         });
     }
   }

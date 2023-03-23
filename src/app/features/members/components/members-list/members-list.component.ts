@@ -237,6 +237,7 @@ export class MembersListComponent implements OnInit {
           });
           this.selectedUserForAdjustment = [];
           this._getAllUserInfo(this.selectedRoleId);
+          this.closeModal();
         });
     //}
   }

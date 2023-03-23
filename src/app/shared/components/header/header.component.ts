@@ -68,8 +68,4 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  toggle() {
-    this._sharedService.toggleMenu();
-  }
-
 }

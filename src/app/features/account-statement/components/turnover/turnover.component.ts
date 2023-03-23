@@ -98,7 +98,7 @@ export class TurnoverComponent implements OnInit {
 
   getBetDetailsForMatch(matchId){
     this._accountStatementService._getBetDetailForMatch({matchId:matchId}).subscribe((res:any)=>{
-      this.betInfo = res;
+      this.betInfo = res.betsForTO;
       console.log('marketInfo',this.betInfo);
     });
   }

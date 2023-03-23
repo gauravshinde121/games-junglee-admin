@@ -126,7 +126,7 @@
   aria-hidden="true"
 >
   <div class="modal-dialog modal-dialog modal-lg">
-    <div class="modal-content modal-size">
+    <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-dark" id="staticBackdropLabel">
           Detail &nbsp; <i class="fa fa-lock text-pink"></i>
@@ -247,59 +247,72 @@
       </div>
       <div class="modal-body bg-dark text-white" *ngIf="betInfo">
         <div class=" col-md-12">
-          <div class="row">
-            <div class="col-md-6">
-                <h6>Stakes</h6>
-            </div>
-            <div class="col-md-6">
-              <p class="float-end">Total: <span class="text-success">0</span></p>
-            </div>
-          </div>
-            <table class="table table-striped table-hover text-white table-dark">
-              <thead class="thead-dark">
+          <div class="col-md-12 mt-3">
+            <table class="table tableall" *ngIf="betInfo.length > 0">
+              <thead>
                 <tr>
-                  <th>Level</th>
-                  <th>Stake</th>
+                  <th scope="col">#</th>
+                  <th scope="col" class="text-dark">Member</th>
+                  <th scope="col" class="text-dark">Placed</th>
+                  <th scope="col" class="text-dark">Matched Date</th>
+                  <th scope="col" class="text-dark">Event</th>
+                  <th scope="col" class="text-dark">Market</th>
+                  <th scope="col" class="text-dark">Selection</th>
+                  <th scope="col" class="text-dark">Odds Placed</th>
+                  <th scope="col" class="text-dark">Odds Matched</th>
+                  <th scope="col" class="text-dark">Matched</th>
+                  <th scope="col" class="text-dark">Unmatched</th>
+                  <th scope="col" class="text-dark">Profit Liability</th>
+                  <th scope="col" class="text-dark">IP</th>
                 </tr>
               </thead>
               <tbody>
-                <!-- ngRepeat: stake in stakes.detail -->
-                <tr class="ng-scope text-white">
-                  <td class="ng-binding">{{betInfo.marketInfo.marketName}}</td>
-                  <td class="ng-binding">1,000</td>
+                <tr *ngFor="let bet of betInfo; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ bet.member }}</td>
+                  <td>{{ bet.placeTime | date : "medium" }}</td>
+                  <td>{{ bet.placeTime | date : "medium" }}</td>
+                  <td>{{ bet.event }}</td>
+                  <td>
+                    <span
+                      *ngIf="!bet.isBack"
+                      class="border r-2 bg-danger text-danger border-danger me-2"
+                    >
+                    </span>
+                    <span
+                      *ngIf="bet.isBack"
+                      class="border border-2 bg-primary text-primary border-primary me-2"
+                    >
+                    </span>
+                    {{ bet.market }}
+                  </td>
+                  <td>{{ bet.selection }}</td>
+                  <td>{{ bet.oddsPlaced }}</td>
+                  <td>{{ bet.oddsPlaced }}</td>
+                  <td>
+                      <ng-container *ngIf="bet.isMatched; else notMatched">
+                        {{ bet.stake }}
+                      </ng-container>
+                      <ng-template #notMatched>
+                        --
+                      </ng-template>
+                  </td>
+                  <td class="text-danger">
+                      <ng-container *ngIf="!bet.isMatched; else notMatched">
+                        {{ bet.stake }}
+                      </ng-container>
+                      <ng-template #notMatched>
+                        --
+                      </ng-template>
+                  </td>
+                  <td [ngClass]="bet.type ? 'text-success' : 'text-danger'">
+                    {{ bet.profitLiability }}
+                  </td>
+                  <td>{{bet.ip}}</td>
                 </tr>
-                <!-- end ngRepeat: stake in stakes.detail -->
               </tbody>
             </table>
-        </div>
-
-        <div class=" col-md-12">
-          <div class="row">
-            <div class="col-md-6">
-                <h6>Win/Lose</h6>
-            </div>
-            <div class="col-md-6">
-              <p class="float-end">Total: <span class="text-success">0</span></p>
-            </div>
           </div>
-            <table class="table table-striped table-hover text-white table-dark">
-              <thead class="thead-dark">
-                <tr>
-                  <th>Level</th>
-                  <th>Win</th>
-                  <th>Lose</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- ngRepeat: stake in stakes.detail -->
-                <tr class="ng-scope text-white">
-                  <td class="ng-binding">Fancy Market</td>
-                  <td class="ng-binding">{{betInfo.marketInfo[0].win}}</td>
-                  <td class="ng-binding">{{betInfo.marketInfo[0].lose}}</td>
-                </tr>
-                <!-- end ngRepeat: stake in stakes.detail -->
-              </tbody>
-            </table>
         </div>
 
       </div>

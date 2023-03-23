@@ -49,5 +49,14 @@
         ><i class="fa fa-redo-alt disnone"></i> Refresh</a
       >
     </div>
-  </div>
-</header>
+      <div class="col-md-2 col-3 mb-5">
+        <div class="user">
+          <!-- <p>{{adminDetails?.createdDate | date:'medium'}}</p> -->
+          <p>{{adminDetails?.username}},</p>
+          <a (click)="refreshPage()" class="btn btn-pink radius-all"><i class="fa fa-redo-alt disnone"></i> Refresh</a>
+        </div>
+      </div>
+      <!-- <div id="menus" class="mt-xl-4">
+        <app-left-navigation isDisplayed="isDisplayed"></app-left-navigation>
+      </div> -->
+    </header>

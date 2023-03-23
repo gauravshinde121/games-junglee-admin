@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-left-navigation',
@@ -21,6 +22,11 @@ export class LeftNavigationComponent implements OnInit {
   matchId: any;
 
   adminDetails: any = null;
+
+  showSideNav = false;
+  subscription: Subscription;
+
+
 
   constructor(
     private _route: ActivatedRoute,

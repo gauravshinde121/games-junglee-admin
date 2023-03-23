@@ -14,6 +14,7 @@ import { BookManagementService } from 'src/app/features/book-management/services
 export class SurveillanceMainComponent implements OnInit {
 
   isLeftMenuOpen: boolean;
+  sideBarClass:String = 'mobile-menu';
   mainClass:String = 'col-md-10';
   filterForm:FormGroup;
   surveillanceData:any = [];
@@ -66,9 +67,14 @@ export class SurveillanceMainComponent implements OnInit {
     this.getAllUserBets();
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
       this.isLeftMenuOpen = res.leftMenuOpen;
+      console.log(this.sideBarClass);
       if(this.isLeftMenuOpen){
+        console.log('1');
+        this.sideBarClass = 'mobile-menu';
         this.mainClass = 'col-md-10';
       } else {
+        console.log('2');
+        this.sideBarClass = '';
         this.mainClass = 'col-md-12';
       }
     });

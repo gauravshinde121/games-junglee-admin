@@ -34,6 +34,10 @@ export class AccountStatementService {
     return this._apiHttpService.post(this._apiEndpointsService.getTOForMatch(),filterObj)
   }
 
+  _getBetDetailForMatch(filterObj){
+    return this._apiHttpService.post(this._apiEndpointsService.getBetsForMatch(),filterObj)
+  }
+
 
   _getDownlineAccountsData(paramObj){
     return this._apiHttpService.post(this._apiEndpointsService.getDownlineAccountsDataEndpoint(),paramObj)

@@ -228,6 +228,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_TO_FOR_MATCH)
   }
 
+  public getBetsForMatch(){
+    return this.createUrl(this._constants.API_URL_GET_BETS_FOR_TO)
+  }
+
   public getGames(){
     return this.createUrl(this._constants.API_GET_GAMES)
   }

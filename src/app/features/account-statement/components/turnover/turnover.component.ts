@@ -23,6 +23,7 @@ export class TurnoverComponent implements OnInit {
   display = '';
   turnoverDetails:any;
   marketInfo:any;
+  betInfo:any;
 
   constructor(
     private _accountStatementService:AccountStatementService,
@@ -93,6 +94,13 @@ export class TurnoverComponent implements OnInit {
         this.marketInfo = res;
         console.log('marketInfo',this.marketInfo);
       });
+  }
+
+  getBetDetailsForMatch(matchId){
+    this._accountStatementService._getBetDetailForMatch({matchId:matchId}).subscribe((res:any)=>{
+      this.betInfo = res;
+      console.log('marketInfo',this.betInfo);
+    });
   }
 
   next(): void {

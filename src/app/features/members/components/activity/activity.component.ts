@@ -91,7 +91,7 @@ export class ActivityComponent implements OnInit {
     this._memberService._getMemberActivityApi(payload).subscribe((res:any)=>{
       console.log('search',res);
       this.isLoading = false;
-      this.activityData = res;
+      this.activityData = res.data;
       console.log('activity',this.activityData)
     })
   }

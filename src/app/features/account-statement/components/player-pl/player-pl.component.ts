@@ -145,12 +145,14 @@ export class PlayerPlComponent implements OnInit {
   }
 
   getOneAccount(pl){
-    var body = {
+    this.isLoading = true;
+    let body = {
       "userId":pl.userId,
       "marketId":pl.marketIds[0]
     }
     console.log('one account body',body);
     this._sharedService.getOneAccount(body).subscribe((data:any)=>{
+      this.isLoading = false;
       if(data.oneAccount){
         this.oneAccount = data.oneAccount;
       }

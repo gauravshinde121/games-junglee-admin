@@ -103,8 +103,8 @@ export class SurveillanceMainComponent implements OnInit {
       time: ["All"],
       fromDate : this.formatFormDate(new Date()),
       toDate : this.formatFormDate(new Date()),
-      stakesFromValue : [null],
-      stakesToValue : [null]
+      stakesFromValue : null,
+      stakesToValue : null
     });
   }
 
@@ -226,6 +226,15 @@ export class SurveillanceMainComponent implements OnInit {
 
   clearMember(){
     this.betTickerForm.value.memberName = null;
+  }
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+
   }
 
 }

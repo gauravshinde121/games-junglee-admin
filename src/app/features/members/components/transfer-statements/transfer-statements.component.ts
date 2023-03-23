@@ -20,6 +20,9 @@ export class TransferStatementsComponent implements OnInit {
   dateFormat = "yyyy-MM-dd";
   language = "en";
   isLoading = false;
+  currentPage: number = 1;
+  pageSize: number = 25;
+  totalPages: number = 0;
 
   constructor(
     private _memberService: MembersService,
@@ -70,12 +73,15 @@ export class TransferStatementsComponent implements OnInit {
     const payload= {
       fromDate: fromDate,
       toDate: toDate,
-      userId:this.userId
+      userId:this.userId,
+      pageNo: this.currentPage,
+      limit: 50,
     }
 
     this._memberService._getTransferStatementForUserApi(payload).subscribe((data: any) => {
       this.isLoading = false;
       this.transferStatements = data.transferStatement;
+      this.totalPages = Math.ceil(this.transferStatements.length / this.pageSize);
     })
   }
 
@@ -87,6 +93,16 @@ export class TransferStatementsComponent implements OnInit {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
     return [day, month, year].join('/');
+  }
+
+  next(): void {
+    this.currentPage++;
+    this.getTransferStatement();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getTransferStatement();
   }
 
 

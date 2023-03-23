@@ -108,12 +108,14 @@ export class AccountStatementComponent implements OnInit {
     toDate.setHours(23)
     toDate.setMinutes(59);
     toDate.setSeconds(59);
-    
+
     let body = {
       fromDate : fromDate,
       toDate : toDate,
       sportsId : this.filterForm.value.sportsId,
-      userId: this.userId
+      userId: this.userId,
+      pageNo: this.currentPage,
+      limit: 50,
     }
 
     this._memberService._getDownlineAccountsDataForMemberApi(body).subscribe((data:any)=>{

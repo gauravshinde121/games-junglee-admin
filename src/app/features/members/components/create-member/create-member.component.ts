@@ -15,7 +15,7 @@ export class CreateMemberComponent implements OnInit {
 
   memberForm: FormGroup;
   isLoading = false;
-  editMode = false;
+  editMode:boolean;
   memberData: any;
   editUserId: any;
   gamesList: any = [];
@@ -40,6 +40,7 @@ export class CreateMemberComponent implements OnInit {
         editUserId = this.route.snapshot.params['id'];
       await this.getMemberInfo();
     }
+    console.log('this.editMode();',this.editMode);
     //else {
     this.getGames();
     //}

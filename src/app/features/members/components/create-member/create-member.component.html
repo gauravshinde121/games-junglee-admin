@@ -49,6 +49,7 @@
             <div class="col-md-4 pt-5">
               <label>Select Role</label>
               <select
+                [attr.disabled]="editMode"
                 style="background-color: rgba(60, 62, 62, 0.7215686275)"
                 formControlName="roleId"
                 name="roleId"

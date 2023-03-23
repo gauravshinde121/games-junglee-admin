@@ -16,6 +16,7 @@ export class MembersListComponent implements OnInit {
   selectedUserForAdjustment: any = [];
   display: string = 'none';
   showMyContainer: boolean = false;
+  modalNumber:number;
 
   userId: any;
 
@@ -35,7 +36,7 @@ export class MembersListComponent implements OnInit {
   pageSize: number = 25;
   totalPages: number = 0;
 
-  statusList : any = [];
+  statusList: any = [];
 
   changePasswordForm!: FormGroup;
 
@@ -46,7 +47,7 @@ export class MembersListComponent implements OnInit {
   //   retypePassword: ""
   // }
 
-  createPasswordForm(){
+  createPasswordForm() {
     this.changePasswordForm = this.formbuilder.group({
       password: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
         "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
@@ -142,10 +143,10 @@ export class MembersListComponent implements OnInit {
     this._preConfig();
 
     this.statusList = [
-                      {id:1,status : "Active", color : 'green'},
-                      {id:2,status : "Inactive", color : 'yellow'},
-                      {id:3,status : "Closed", color :'red'}
-                    ]
+      { id: 1, status: "Active", color: 'green' },
+      { id: 2, status: "Inactive", color: 'yellow' },
+      { id: 3, status: "Closed", color: 'red' }
+    ]
   }
 
   _preConfig() {
@@ -222,7 +223,7 @@ export class MembersListComponent implements OnInit {
   }
 
   adjustWinnings() {
-    if (confirm('Do you want bulk transfer ?')) {
+    //if (confirm('Do you want bulk transfer ?')) {
       this._sharedService
         ._adjustWinningsApi({ userList: this.selectedUserForAdjustment })
         .subscribe((res: any) => {
@@ -237,13 +238,18 @@ export class MembersListComponent implements OnInit {
           this.selectedUserForAdjustment = [];
           this._getAllUserInfo(this.selectedRoleId);
         });
-    }
+    //}
   }
 
   openModal(userId) {
     this.userId = userId;
     this.display = 'block';
 
+  }
+
+  openBulkTransferModal(){
+    this.modalNumber = 1;
+    this.display = 'block';
   }
 
   closeModal() {
@@ -288,19 +294,19 @@ export class MembersListComponent implements OnInit {
     ]);
   }
 
-  changeStatus(evt,user){
+  changeStatus(evt, user) {
     // this.selectedColor =
-    console.log("Evt",user);
-    console.log("Value",evt.target.value);
+    console.log("Evt", user);
+    console.log("Value", evt.target.value);
     let status = evt.target.value;
     let body = {
       "userId": user.userId,
       "isActive": status
     }
 
-    this._memberService._changeMemberStatusApi(body).subscribe(res=>{
-      console.log("Res",res);
-      this._sharedService.getToastPopup(res['message'],'','success');
+    this._memberService._changeMemberStatusApi(body).subscribe(res => {
+      console.log("Res", res);
+      this._sharedService.getToastPopup(res['message'], '', 'success');
     })
   }
 

@@ -1,4 +1,57 @@
-<main id="main" class="main">
+<main id="main" class="main"><section class="section gamedetails">
+  <div class="row" [formGroup]="filterForm">
+    <div class="col-md-12">
+      <!--your code will come here start-->
+      <h4 class="text-pink">
+        <img src="../../../../../assets/images/pnl.png" alt="" /> PL Statement
+      </h4>
+      <hr />
+      <div class="row">
+
+        <div class="col-md-6">
+          <label>From Date</label>
+          <input
+            type="date"
+            formControlName="fromDate"
+            name="fromDate"
+            class="form-control"
+            id=""
+            placeholder="Month"
+          />
+        </div>
+        <div class="col-md-6">
+          <label>To Date</label>
+          <input
+            type="date"
+            formControlName="toDate"
+            name="toDate"
+            class="form-control"
+            id=""
+            placeholder="Month"
+          />
+        </div>
+        <div class="col-md-6">
+          <label>Select Member</label>
+          <select formControlName="memberName" id="ab" class="form-select bg-dgrey">
+            <option value="null">All</option>
+            <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <button
+            type="button"
+            class="btn btn-pink rounded-pill mt-4 w-100"
+            (click)="getClTransfers()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+      <!--your code will come here end-->
+    </div>
+  </div>
+</section>
+<br>
   <section class="section gamedetails">
     <div class="row">
       <div class="col-md-12">

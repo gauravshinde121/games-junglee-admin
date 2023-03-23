@@ -14,6 +14,6 @@ export class AllLogsService {
 
 
   _getClTransferApi(body){
-    return this._apiHttpService.get(this._apiEndpointsService.getClTransferEndpoint(),body)
+    return this._apiHttpService.post(this._apiEndpointsService.getClTransferEndpoint(),body)
   }
 }

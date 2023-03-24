@@ -192,7 +192,7 @@ export class SurveillanceMainComponent implements OnInit {
     this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
       this.isLoading = false;
       this.allBets = res.userBetList.betList;
-      this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
+      this.totalPages = Math.ceil(res.userBetList.totalNoOfRecords / this.pageSize);
     },(err)=>{
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")

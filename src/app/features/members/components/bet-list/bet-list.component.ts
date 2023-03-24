@@ -31,7 +31,7 @@ export class BetListComponent implements OnInit {
   isMatch : boolean = false ;
   searchTerm: string = '';
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 50;
   totalPages: number = 0;
   status = "Enable";
   sportsId: any = null;
@@ -57,7 +57,7 @@ export class BetListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params=>{
     this.userId = +params['id'];
-  
+
     });
 
     this.isActive = true;
@@ -155,7 +155,7 @@ export class BetListComponent implements OnInit {
       this.isLoading = false;
       if(res){
         this.betList = res.data.betList;
-        this.totalPages = Math.ceil(this.betList.length / this.pageSize);
+        this.totalPages = Math.ceil(res.data.totalNoOfRecords / this.pageSize);
       }
     })
   }
@@ -230,7 +230,7 @@ export class BetListComponent implements OnInit {
   }
 
   showMatch(linkActive: string){
-    
+
     if(linkActive == 'current') {
       this.isMatch = false;
 
@@ -254,7 +254,7 @@ export class BetListComponent implements OnInit {
     }
     this.btnActive = linkActive;
 
-   
+
   }
 
 

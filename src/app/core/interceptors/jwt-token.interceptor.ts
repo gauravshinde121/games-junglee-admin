@@ -18,7 +18,8 @@ export class JwtTokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    if(this._sharedService.getJWTToken() !== null && request['url'] !== "https://jsonip.com"){
+    //if(this._sharedService.getJWTToken() !== null && request['url'] !== "https://jsonip.com"){
+      if(this._sharedService.getJWTToken() !== null){
       let jwtTokenHeader = {
         'Authorization':'Bearer '+ this._sharedService.getJWTToken()
       };

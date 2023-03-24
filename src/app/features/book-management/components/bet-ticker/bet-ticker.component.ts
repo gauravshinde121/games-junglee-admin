@@ -207,5 +207,9 @@ export class BetTickerComponent implements OnInit {
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
-}
 
+  clearMemberName(){
+    this.betTickerForm.controls['memberName'].setValue(null);
+  }
+
+} 

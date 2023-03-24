@@ -243,4 +243,9 @@ export class SurveillanceMainComponent implements OnInit {
 
   }
 
+  
+  clearMemberName(){
+    this.betTickerForm.controls['memberName'].setValue(null);
+  }
+
 }

@@ -33,11 +33,11 @@ import { ToastrModule } from 'ngx-toastr';
       useClass: HttpErrorInterceptor,
       multi: true
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: SubscriptionTokenInterceptor,
-      multi: true
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: SubscriptionTokenInterceptor,
+    //   multi: true
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtTokenInterceptor,

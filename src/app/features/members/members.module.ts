@@ -17,6 +17,7 @@ import { LoginHistoryComponent } from './components/login-history/login-history.
 import { CommissionComponent } from './components/commission/commission.component';
 import { NetExposureComponent } from './components/net-exposure/net-exposure.component';
 import { UserAccessComponent } from './components/user-access/user-access.component';
+import { WorkstationComponent } from './components/workstation/workstation.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { UserAccessComponent } from './components/user-access/user-access.compon
     CommissionComponent,
     NetExposureComponent,
     UserAccessComponent,
+    WorkstationComponent,
   ],
   imports: [
     CommonModule,

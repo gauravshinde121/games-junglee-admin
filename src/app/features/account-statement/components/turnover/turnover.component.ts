@@ -74,7 +74,7 @@ export class TurnoverComponent implements OnInit {
       limit: 50,
     }
     this._accountStatementService._getCategoryForTO(body).subscribe((res:any)=>{
-      this.plStatement = res;
+      this.plStatement = res.finalList;
       this.isLoading = false;
       this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
     })

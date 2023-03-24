@@ -82,20 +82,20 @@
               </option>
             </select>
 
-            
+
           </div>
-         
+
           <div class="col-md-12 mt-3" *ngIf="booksForBackend.length == 0">
             <div class="border text-center p-5">
               <h4 *ngIf="isLoading">Loading...</h4>
               <h4 *ngIf="booksForBackend.length == 0 && !isLoading">No data found</h4>
-              
+
             </div>
           </div>
         </div>
 
         <div class="row">
-          
+
           <div
             *ngIf="!isLoading && booksForBackend.length > 0"
             class="col-md-12"
@@ -118,8 +118,8 @@
                   <th width="10%">1</th>
                   <th width="10%">X</th>
                   <th width="10%">2</th>
-                  <th width="10%">Fancy</th>
-                  <th width="10%" class="last">Fancy Exposure</th>
+                  <!--<th width="10%">Fancy</th>
+                  <th width="10%" class="last">Fancy Exposure</th>-->
                 </tr>
                 <tr *ngFor="let data of book.data">
                   <td>
@@ -198,11 +198,10 @@
                       }}</a
                     >
                   </td>
-                  <td></td>
+                  <!--<td></td>
                   <td>
-                    <!-- <span *ngIf="data.fancyFlag">{{data.marketName}}</span> -->
                     {{ data.fancyExposure ? data.fancyExposure : "" }}
-                  </td>
+                  </td>-->
                   <td></td>
                 </tr>
               </tbody>

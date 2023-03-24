@@ -20,7 +20,7 @@ export class MyPlComponent implements OnInit {
   language = "en";
 
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 50;
   totalPages: number = 0;
   isLoading = false;
   marketList:any;
@@ -89,10 +89,12 @@ export class MyPlComponent implements OnInit {
     };
     this._accountStatementService._getPlBySubgameAPi(body).subscribe((res:any)=>{
       this.isLoading = false;
-      this.plStatement = res.admin;
+      if(res.admin.finalResult.length > 0){
+      this.plStatement = res.admin.finalResult;
       console.log('this.plStatement.length',this.plStatement.length);
       console.log('this.pageSize',this.pageSize);
-      this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
+      this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+      }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     });
   }

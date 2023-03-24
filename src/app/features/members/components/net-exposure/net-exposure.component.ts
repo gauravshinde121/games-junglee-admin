@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from '../../services/members.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class NetExposureComponent implements OnInit {
   booksForBackend:any = [];
   isLoading = false;
 
-  constructor(private _memberService: MembersService, private route: ActivatedRoute) { }
+  constructor(private _memberService: MembersService, private route: ActivatedRoute,
+    private _router:Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -38,6 +39,11 @@ export class NetExposureComponent implements OnInit {
       this.booksForBackend = data.booksForBackend;
       this.isLoading = false;
     })
+  }
+
+  redirectUrl(type,id,matchName){
+    localStorage.setItem('matchName',matchName);
+    this._router.navigate(['/member/workstation/'+type+'/'+id+'/'+this.userId]);
   }
 
 }

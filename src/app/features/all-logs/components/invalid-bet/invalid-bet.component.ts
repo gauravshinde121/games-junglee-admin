@@ -69,7 +69,9 @@ export class InvalidBetComponent implements OnInit {
     let body = {
       fromDate : fromDate, 
       toDate : toDate,
-      userId :null
+      userId :null,
+      limit:50,
+      pageNo:this.currentPage,
     }
     this.isLoading = true;
     this._memberService._getInvalidBetsApi(body)
@@ -78,12 +80,21 @@ export class InvalidBetComponent implements OnInit {
         if (res) {
           // this.logList = res.data.betList;
           this.isLoading = false;
-          this.allBets = res.invalidBetList;
-          this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
+          this.allBets = res.invalidBetList.finalResult;
+          this.totalPages = Math.ceil(res.invalidBetList.totalNoOfRecords / this.pageSize);
         }
       })
   }
 
+  next(): void {
+    this.currentPage++;
+    this.getLogs();
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.getLogs();
+  }
   clearFilters() {
     // window.location.reload();
     this._initForm();

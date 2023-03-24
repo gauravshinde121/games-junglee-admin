@@ -104,7 +104,7 @@
               <tbody *ngFor="let book of booksForBackend">
                 <tr>
                   <th width="30%" class="text-start">{{ book.matchName }}</th>
-                  <th width="10%">
+                  <th width="20%">
                     <a
                       (click)="
                         redirectUrl('match', book.matchId, book.matchName)
@@ -114,12 +114,12 @@
                       View total</a
                     >
                   </th>
-                  <th width="10%">Net Exposure</th>
+                  <th width="20%">Net Exposure</th>
                   <th width="10%">1</th>
                   <th width="10%">X</th>
                   <th width="10%">2</th>
-                  <th width="10%">Fancy</th>
-                  <th width="10%" class="last">Fancy Exposure</th>
+                  <!--<th width="10%">Fancy</th>
+                  <th width="10%" class="last">Fancy Exposure</th>-->
                 </tr>
                 <tr *ngFor="let data of book.data">
                   <td>
@@ -198,11 +198,10 @@
                       }}</a
                     >
                   </td>
-                  <td></td>
+                  <!--<td></td>
                   <td>
-                    <!-- <span *ngIf="data.fancyFlag">{{data.marketName}}</span> -->
                     {{ data.fancyExposure ? data.fancyExposure : "" }}
-                  </td>
+                  </td>-->
                   <td></td>
                 </tr>
               </tbody>

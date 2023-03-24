@@ -31,7 +31,7 @@ export class PlayerPlComponent implements OnInit {
   oneAccount:any;
 
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 50;
   totalPages: number = 0;
   isLoading = false;
 
@@ -119,9 +119,11 @@ export class PlayerPlComponent implements OnInit {
 
     this._accountStatementService._getDownlineAccountsDataApi(body).subscribe((res:any)=>{
       this.isLoading = false;
-      this.plStatement = res.admin;
-      console.log('this.plStatement',this.plStatement);
-      this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
+      if(res.admin.finalList.length >0){
+      this.plStatement = res.admin.finalList;
+      console.log('this.totalNoOfRecords',res.admin.totalNoOfRecords);
+      this.totalPages = Math.ceil(res.admin.totalNoOfRecords/ this.pageSize);
+      }
     },(err)=>{
       console.log("Error Data",err);
       this.isLoading = false;

@@ -63,14 +63,14 @@ export class ClTransferComponent implements OnInit {
     let body = {
       fromDate: fromDate,
       toDate: toDate,
-      memberName: this.filterForm.value.memberName,
+      memberId: this.filterForm.value.memberName,
       pageNo: this.currentPage,
       limit: 50,
     }
     this.allLogService._getClTransferApi(body).subscribe((data:any)=>{
       this.isLoading = false;
-      if(data.clTransferStatement){
-        this.clTransfers = data.clTransferStatement
+      if(data.clTransferStatement.clTrnsfers){
+        this.clTransfers = data.clTransferStatement.clTrnsfers
       }
       this.totalPages = Math.ceil(this.clTransfers.length / this.pageSize);
     })

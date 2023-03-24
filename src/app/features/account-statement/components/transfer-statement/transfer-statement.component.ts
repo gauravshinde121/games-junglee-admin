@@ -68,9 +68,10 @@ export class TransferStatementComponent implements OnInit {
       limit: 50,
     }
 
-    this._accountsService._getTransferStatementApi(payload).subscribe(res=>{
+    this._accountsService._getTransferStatementApi(payload).subscribe((res:any)=>{
+      console.log('res',res);
       this.isLoading = false;
-      this.transferStatements = res;
+      this.transferStatements = res.transferStatement;
       this.totalPages = Math.ceil(this.transferStatements.length / this.pageSize);
     });
   }

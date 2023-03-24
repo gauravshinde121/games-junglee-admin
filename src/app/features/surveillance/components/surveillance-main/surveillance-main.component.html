@@ -129,8 +129,9 @@
                 </div>
               </div>
               <div *ngIf="allBets.length > 0 && !this.isLoading">
-                <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()"> Prev </button>
-                <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage / totalPages }}
+                <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
+                <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">
+                  {{ currentPage}} / {{totalPages }}
                 </span>
                 <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()"> Next </button>
               </div>

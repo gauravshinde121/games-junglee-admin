@@ -42,6 +42,7 @@ export class LeftNavigationComponent implements OnInit {
   onLogout() {
     this._sharedService.removeJWTToken();
     this._sharedService.removeUserDetails();
+    localStorage.clear();
     this._router.navigate(['/login']);
   }
 

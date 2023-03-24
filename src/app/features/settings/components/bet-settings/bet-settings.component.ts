@@ -27,7 +27,7 @@ export class BetSettingsComponent implements OnInit {
   marketTypeId: any = null;
 
   betTickerForm: FormGroup;
-  
+
   searchTerm: string = '';
   currentPage: number = 1;
   pageSize: number = 10;
@@ -155,7 +155,7 @@ export class BetSettingsComponent implements OnInit {
       limit: 50,
     };
 
-    this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
+    this._settingService._getBetsApi(body).subscribe((res:any)=>{
       this.isLoading = false;
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);

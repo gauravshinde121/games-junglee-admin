@@ -99,6 +99,10 @@ export class SharedService {
     sessionStorage.setItem('GJA_jwtToken',jwtToken)
   }
 
+  getIPApi(){
+    return this._apiHttpService.get('https://jsonip.com');
+  }
+
   removeJWTToken(){
     sessionStorage.removeItem('GJA_jwtToken');
   }

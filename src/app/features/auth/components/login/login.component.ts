@@ -48,17 +48,19 @@ export class LoginComponent implements OnInit {
       userIp:'111:111:111:111',
       rememberme: true
     }
-
-    this._authService._postLoginApi(loginData).subscribe(
-      (res: any) => {
-        this._sharedService.setJWTToken(res['token']);
-        this._sharedService.setUserDetails(jwt_decode(res['token']));
-          this.isLoading = false;
-          this._router.navigate(['/member/list'])
-      },
-      ()=> this.isLoading = false,
-      ()=> this.isLoading = false
-    )
+    this._sharedService.getIPApi().subscribe(res=>{
+      loginData['userIp'] = res['ip'];
+      this._authService._postLoginApi(loginData).subscribe(
+        (res: any) => {
+          this._sharedService.setJWTToken(res['token']);
+          this._sharedService.setUserDetails(jwt_decode(res['token']));
+            this.isLoading = false;
+            this._router.navigate(['/member/list'])
+        },
+        ()=> this.isLoading = false,
+        ()=> this.isLoading = false
+      )
+    })
     }
     }
 

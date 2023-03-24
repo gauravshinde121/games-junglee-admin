@@ -104,7 +104,7 @@
               <tbody *ngFor="let book of booksForBackend">
                 <tr>
                   <th width="30%" class="text-start">{{ book.matchName }}</th>
-                  <th width="10%">
+                  <th width="20%">
                     <a
                       (click)="
                         redirectUrl('match', book.matchId, book.matchName)
@@ -114,7 +114,7 @@
                       View total</a
                     >
                   </th>
-                  <th width="10%">Net Exposure</th>
+                  <th width="20%">Net Exposure</th>
                   <th width="10%">1</th>
                   <th width="10%">X</th>
                   <th width="10%">2</th>

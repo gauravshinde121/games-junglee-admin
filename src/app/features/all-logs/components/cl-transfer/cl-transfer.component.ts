@@ -69,8 +69,8 @@ export class ClTransferComponent implements OnInit {
     }
     this.allLogService._getClTransferApi(body).subscribe((data:any)=>{
       this.isLoading = false;
-      if(data.clTransferStatement){
-        this.clTransfers = data.clTransferStatement
+      if(data.clTransferStatement.clTrnsfers){
+        this.clTransfers = data.clTransferStatement.clTrnsfers
       }
       this.totalPages = Math.ceil(this.clTransfers.length / this.pageSize);
     })

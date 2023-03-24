@@ -8,7 +8,7 @@
   <div class="row" [formGroup]="filterForm">
     <div class="col-md-3 mb-3">
       <label>Select Sport</label>
-      <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
+      <select formControlName="sportsId" id="ab" class="form-select">
         <option value="null">All</option>
         <option *ngFor="let game of games" [value]="game.sportId">
           {{ game.sportName }}
@@ -93,7 +93,7 @@
 
   <div *ngIf="accountStatement.length > 0 && !this.isLoading">
     <button
-      class="btn bg-dgrey rounded-pill text-white"
+      class="btn rounded-pill text-white"
       [disabled]="currentPage === 1"
       (click)="prev()"
     >
@@ -103,7 +103,7 @@
       >{{ currentPage }} / {{ totalPages }}
     </span>
     <button
-      class="btn bg-dgrey rounded-pill text-white"
+      class="btn rounded-pill text-white"
       [disabled]="currentPage === totalPages"
       (click)="next()"
     >

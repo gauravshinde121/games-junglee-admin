@@ -18,6 +18,7 @@ $background-color_8: #aab7cf;
 $background-color_9: #d9d9d9;
 $border-color_1: #ffa7a3;
 $border-color_2: #dc3545;
+$border-color_3: #a2a2a2;
 
 $background-color_13: #6abefa;
 $background-color_14: #6abefa5e;
@@ -26,15 +27,17 @@ $background-color_16: #ffb9b5;
 $background-color_17: #ffb9b560;
 $background-color_18: hsla(3.5, 21.3%, 52.2%, 0.78);
 $background-color_19: #d9d9d9;
+$background-color_20: #343535;
+
 
 .browncolor {
   background-color: $background-color_1;
 }
 .bg-pink {
-  background: #ffa7a3 !important;
+  background: $color_1 !important;
 }
 .border-pink {
-  border: 1px solid #ffa7a3;
+  border: 1px solid $color_1;
 }
 // .btn {
 //   font-size: 12px;
@@ -75,14 +78,14 @@ $background-color_19: #d9d9d9;
   border-radius: 15px;
 }
 .inputbb {
-  background-color: #343535;
+  background-color: $background-color_20;
   border: none;
-  border-bottom: 0.5px solid #a2a2a2;
-  color: #ffffff;
+  border-bottom: 0.5px solid $border-color_3;
+  color: $color_2;
   border-radius: 0;
 }
 .radioselected {
-  accent-color: #ffa7a3;
+  accent-color: $color_1;
 }
 /********** common property end ************/
 /********** Login start ************/
@@ -92,7 +95,7 @@ $background-color_19: #d9d9d9;
   height: 100vh;
 }
 .login {
-  border: 1px solid rgb(255, 167, 163);
+  border: 1px solid $color_1;
   padding: 10px;
   background: rgba(18, 14, 17, 0.88);
   margin-top: 30px;
@@ -125,8 +128,8 @@ $background-color_19: #d9d9d9;
 .form-signin .form-floating > .form-control,
 .form-floating > .form-select {
   background: rgba(60, 62, 62, 0);
-  color: #fff;
-  border-bottom: 1px solid #ffffff !important;
+  color: $color_2;
+  border-bottom: 1px solid $color_2 !important;
   border: 0px;
   border-radius: 0;
   padding: 24px 0px 15px 0px;
@@ -136,27 +139,26 @@ $background-color_19: #d9d9d9;
   border: 1px solid transparent;
   transform-origin: 0 0;
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
-  color: #fff;
+  color: $color_2;
   padding: 0px 0px 0 12px;
 }
 .form-signin .form-floating span {
   margin-top: -30px;
-  float: right;
-  text-align: right;
-  margin-right: 13px;
+  position: absolute;
+right: 13px;
+cursor: pointer;
 }
 .form-signin .form-floating input:focus {
   border-bottom: 1px solid rgb(255, 167, 163) !important;
-  color: #ffa7a3;
+  color: $color_1;
   box-shadow: none;
 }
 /********** Login end ************/
 /********** main start ************/
 #main {
-  padding: 20px 15px 20px 0px;
+  padding: 20px 10px;
   transition: all 0.3s;
   color: $color_2;
-  margin-top: -700px;
 }
 /********** main end ************/
 /********** header start ************/
@@ -275,16 +277,16 @@ $background-color_19: #d9d9d9;
   background: rgba(60, 62, 62, 0.7215686275);
   .form-select {
     appearance: button;
-    color: #fff;
+    color: $color_2;
     border: 1px solid #a6a6a657;
-    background: #fff0;
+    background: $background-color_20;
   }
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
   .form-control {
     background: #fff0;
-    color: #fff;
+    color: $color_2;
     border: 1px solid #a6a6a657;
   }
 }
@@ -313,7 +315,7 @@ select:-webkit-autofill:focus {
   visibility: hidden;
   width: 170px;
   background-color: black;
-  color: #fff;
+  color: $color_2;
   // text-align: center;
   border-radius: 6px;
   padding: 10px 0;
@@ -335,7 +337,7 @@ select:-webkit-autofill:focus {
   width: 60px;
   height: 25px;
   overflow: hidden;
-  background: #ffa7a3;
+  background: $color_1;
 }
 
 .button1.r,
@@ -424,7 +426,7 @@ select:-webkit-autofill:focus {
     vertical-align: middle;
     padding: 2px 5px;
     text-align: center;
-    border-top: 2px solid #fff;
+    border-top: 2px solid $color_2;
     font-size: 11px;
     line-height: 13px;
   }
@@ -464,12 +466,12 @@ select:-webkit-autofill:focus {
   .table {
     .tfirstcol {
       border-top-left-radius: 15px;
-      background: #ffa7a3;
+      background: $color_1;
     }
   }
   .tlastcol {
     border-top-right-radius: 15px;
-    background: #ffa7a3;
+    background: $color_1;
   }
   .coldark {
     background: #272727 !important;
@@ -478,7 +480,7 @@ select:-webkit-autofill:focus {
   //color box start
   .colblue {
     background-color: $background-color_13 !important;
-    border-left: 1px solid #fff;
+    border-left: 1px solid $color_2;
   }
   .colblue.light {
     background-color: $background-color_14 !important;
@@ -488,7 +490,7 @@ select:-webkit-autofill:focus {
   }
   .colpink {
     background-color: $background-color_16 !important;
-    border-left: 1px solid #fff;
+    border-left: 1px solid $color_2;
   }
   .colpink.light {
     background-color: $background-color_17 !important;
@@ -500,7 +502,7 @@ select:-webkit-autofill:focus {
   }
   .colgray {
     background-color: $background-color_19 !important;
-    border-left: 1px solid #fff;
+    border-left: 1px solid $color_2;
   }
   .colpink.last {
     border-bottom-right-radius: 15px;
@@ -572,3 +574,7 @@ select:-webkit-autofill:focus {
     color: $color_3;
   }
 }
+
+.changepassword{width: 50%;}
+
+

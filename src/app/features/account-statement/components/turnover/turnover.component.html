@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-4 btnmargin">
         <label>Select Sport</label>
-        <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
+        <select formControlName="sportsId" id="ab" class="form-select">
           <option value="null">All</option>
           <option *ngFor="let game of games" [value]="game.sportId">
             {{ game.sportName }}
@@ -94,7 +94,7 @@
     </div>
     <div *ngIf="plStatement.length > 0 && !this.isLoading" class="mt-3">
       <button
-        class="btn bg-dgrey rounded-pill text-white"
+        class="btn rounded-pill text-white"
         [disabled]="currentPage === 1"
         (click)="prev()"
       >
@@ -104,7 +104,7 @@
         >{{ currentPage }} / {{ totalPages }}
       </span>
       <button
-        class="btn bg-dgrey rounded-pill text-white"
+        class="btn rounded-pill text-white"
         [disabled]="currentPage === totalPages"
         (click)="next()"
       >
@@ -140,7 +140,7 @@
         ></button>
       </div>
       <div class="modal-body bg-dark text-white" *ngIf="marketInfo">
-        
+
         <div class=" col-md-12">
           <div class="row">
             <div class="col-md-6">
@@ -205,7 +205,7 @@
                   <td class="ng-binding" [ngClass]="marketInfo?.winLose['details'][0]?.lose > 0
                     ? 'text-success'
                     : 'text-danger'
-                ">{{marketInfo?.winLose['details'][0]?.lose}}</td> 
+                ">{{marketInfo?.winLose['details'][0]?.lose}}</td>
                 </tr>
                 <!-- end ngRepeat: stake in stakes.detail -->
               </tbody>

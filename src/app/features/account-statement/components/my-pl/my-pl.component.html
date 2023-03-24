@@ -5,41 +5,21 @@
         <!--your code will come here start-->
         <i class="fa"></i>
         <h4 class="text-pink">
-          <img src="../../../../../assets/images/master_dashboard.png" alt="" />
-          Master Dashboard
-        </h4>
+          <img src="../../../../../assets/images/master_dashboard.png" alt="" /> Master Dashboard</h4>
         <hr />
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-3 mb-3">
               <label>From Date</label>
-              <input
-                type="date"
-                formControlName="fromDate"
-                name="fromDate"
-                class="form-control"
-                id=""
-                placeholder="Month"
-              />
+              <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id="" placeholder="Month" />
             </div>
             <div class="col-md-3 mb-3">
               <label>To Date</label>
-              <input
-                type="date"
-                formControlName="toDate"
-                name="toDate"
-                class="form-control"
-                id=""
-                placeholder="Month"
-              />
+              <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month" />
             </div>
             <div class="col-md-3 mb-3">
               <label>Select Sport</label>
-              <select
-                formControlName="sportsId"
-                id="ab"
-                class="form-select bg-dgrey"
-              >
+              <select formControlName="sportsId" id="ab" class="form-select">
                 <option value="null">All</option>
                 <option *ngFor="let game of games" [value]="game.sportId">
                   {{ game.sportName }}
@@ -48,44 +28,24 @@
             </div>
             <div class="col-md-3 mb-3">
               <label>Select Match</label>
-              <select
-                formControlName="matchId"
-                id="ab"
-                class="form-select bg-dgrey"
-              >
+              <select formControlName="matchId" id="ab" class="form-select">
                 <option value="null">All</option>
                 <option [value]="match.matchId" *ngFor="let match of matchList">
                   {{ match.matchName }}
                 </option>
               </select>
             </div>
-
             <div class="col-md-4 mb-2">
               <label>Select Market</label>
-              <select
-                formControlName="marketId"
-                id="ab"
-                class="form-select bg-dgrey"
-              >
+              <select formControlName="marketId" id="ab" class="form-select">
                 <option value="null">All</option>
-                <option
-                  [value]="market.marketId"
-                  *ngFor="let market of marketList"
-                >
+                <option [value]="market.marketId" *ngFor="let market of marketList">
                   {{ market.marketName }}
                 </option>
               </select>
             </div>
-
-
             <div class="col-md-3">
-              <button
-                type="button"
-                (click)="getPlStatement()"
-                class="btn btn-pink rounded-pill mt-4"
-              >
-                Search
-              </button>
+              <button type="button" (click)="getPlStatement()" class="btn btn-pink rounded-pill mt-4"> Search </button>
             </div>
           </div>
         </div>
@@ -94,7 +54,7 @@
     </div>
   </section>
   <div class="row mt-5">
-    <div class="col-md-12 tablescroll">
+    <div class="col-md-12 tablescroll overflow-auto">
       <div *ngIf="plStatement.length == 0" class="border text-center p-5">
         <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
         <h4 *ngIf="isLoading">Loading...</h4>
@@ -130,22 +90,17 @@
             <td>0</td>
             <td>{{ pl.userCount }}</td>
             <td>{{ pl.userBetCount }}</td>
-            <!--<td>
-              <button
+            <!--<td><button
                 class="btn btn-pink rounded-pill w-100 mt-4"
                 (click)="getPlStatement()"
               >
                 Market
-              </button>
-            </td>
-            <td>
-              <button
+              </button></td><td><button
                 class="btn btn-pink rounded-pill w-100 mt-4"
                 (click)="getPlStatement()"
               >
                 User
-              </button>
-            </td>-->
+              </button></td>-->
             <td [ngClass]="pl.type ? 'text-success' : 'text-danger'">
               {{ pl.profitLiability }}
             </td>
@@ -153,24 +108,11 @@
         </tbody>
       </table>
     </div>
-    <hr />
-    <!-- <div class="col-md-12">
-      <a class="btn bg-dgrey rounded-pill text-white">First</a>
-      <a class="btn bg-dgrey rounded-pill text-white">Previous</a>
-      <a class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a>
-      <a class="btn bg-dgrey rounded-pill text-white">Next</a>
-      <a class="btn bg-dgrey rounded-pill text-white">Last</a>
-    </div> -->
+    <!-- <div class="col-md-12"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
     <div *ngIf="plStatement.length > 0 && !this.isLoading">
-
-      <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
+      <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
       <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage }} / {{totalPages}} </span>
-      <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
-        Next
-      </button>
-
-
-
+      <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()"> Next </button>
     </div>
   </div>
 </main>

@@ -45,8 +45,8 @@
     </form>
 
     <div class="row">
-      <div class="col-md-12 mt-4">
-       
+      <div class="col-md-12 mt-4 overflow-auto">
+
         <table class="table tableall" *ngIf="activityData">
           <thead class="text-dark">
             <tr>
@@ -95,7 +95,7 @@
                 ">
                 {{ activityData?.lifeTimeData[0].winAmt | number }}
               </td>
-              
+
             </tr>
             <tr>
               <td>Betfair Commission</td>
@@ -148,7 +148,7 @@
                 activityData?.lifeTimeData[0]?.commissionAmtForBetfair | number
                 }}
               </td>
-              
+
             </tr>
             <tr>
               <td>Commission</td>
@@ -187,7 +187,7 @@
                 ">
                 {{ activityData?.lifeTimeData[0]?.commissionAmt | number }}
               </td>
-              
+
             </tr>
             <tr>
               <td>P&L</td>
@@ -226,7 +226,7 @@
                 ">
                 {{ activityData?.lifeTimeData[0]?.netAmount | number }}
               </td>
-              
+
             </tr>
             <tr>
               <td>Turnover</td>
@@ -265,7 +265,7 @@
                 ">
                 {{ activityData?.lifeTimeData[0]?.turnover | number }}
               </td>
-              
+
             </tr>
           </tbody>
         </table>
@@ -277,7 +277,7 @@
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
     </div> -->
-    
+
     <div class="col-md-12 mt-3" *ngIf="!activityData && !isLoading">
       <div class="border text-center p-5">
         <h4 *ngIf="!activityData && !isLoading">No data found</h4>

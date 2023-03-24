@@ -36,7 +36,7 @@
         <div class="col-md-12 mb-3 mt-3">
           <input
             type="text"
-            class="form-control bg-dgrey"
+            class="form-control"
             value=""
             placeholder="Enter or Select Member Name To Search"
           />
@@ -51,7 +51,7 @@
 
         <div class="col-md-3 mb-3">
           <label>Select Sport</label>
-          <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
+          <select formControlName="sportsId" id="ab" class="form-select">
             <option value="null">All</option>
             <option *ngFor="let game of games" [value]="game.sportId">
               {{ game.sportName }}
@@ -63,7 +63,7 @@
           <select
             formControlName="matchId"
             id="ab"
-            class="form-select bg-dgrey"
+            class="form-select"
           >
             <option value="null">All</option>
             <option value="{{ match.matchId }}" *ngFor="let match of matchList">
@@ -74,7 +74,7 @@
 
         <div class="col-md-3 mb-3">
           <label>Select Market Type</label>
-          <select name="" id="ab" class="form-select bg-dgrey">
+          <select name="" id="ab" class="form-select">
             <option value="">Select or search a event in the list...</option>
             <option value="">Gemes jungly</option>
             <option value="">Gemes jungly</option>
@@ -84,7 +84,7 @@
         </div>
         <div class="col-md-3 mb-3">
           <label>Currency Types</label>
-          <select name="" id="ab" class="form-select bg-dgrey">
+          <select name="" id="ab" class="form-select">
             <option value="">All</option>
             <option value="">Gemes jungly</option>
             <option value="">Gemes jungly</option>
@@ -94,7 +94,7 @@
         </div>
         <div class="col-md-3 mb-3">
           <label>Market Types</label>
-          <select name="" id="ab" class="form-select bg-dgrey">
+          <select name="" id="ab" class="form-select">
             <option value="">All</option>
             <option value="">Gemes jungly</option>
             <option value="">Gemes jungly</option>
@@ -106,7 +106,7 @@
           <label>Stakes From Value</label>
           <input
             type="number"
-            class="form-control bg-dgrey"
+            class="form-control"
             value=""
             placeholder="Enter Stake From..."
           />
@@ -115,7 +115,7 @@
           <label>Stakes To Value</label>
           <input
             type="number"
-            class="form-control bg-dgrey"
+            class="form-control"
             value=""
             placeholder="Enter Stake To..."
           />

@@ -16,7 +16,7 @@
 
     <div class="col-md-4 mb-2  p-2">
       <label>Select Sport</label>
-      <select formControlName="sportsId" id="ab" class="form-select bg-dgrey">
+      <select formControlName="sportsId" id="ab" class="form-select">
         <option value="null">All</option>
         <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
       </select>
@@ -24,7 +24,7 @@
 
     <!-- <div class="col-md-2 p-2">
       <label>Select Member</label>
-      <select formControlName="memberName" id="ab" class="form-select bg-dgrey">
+      <select formControlName="memberName" id="ab" class="form-select">
         <option value="null">All</option>
         <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
       </select>
@@ -56,7 +56,7 @@
       <select
         formControlName="matchId"
         id="ab"
-        class="form-select bg-dgrey"
+        class="form-select"
         (change)="changeMatch($event)"
       >
         <option value="null">All</option>
@@ -71,7 +71,7 @@
       <select
         formControlName="marketId"
         id="ab"
-        class="form-select bg-dgrey"
+        class="form-select"
         (change)="changeMarketType($event)"
       >
         <option value="null">All</option>
@@ -166,7 +166,7 @@
 
     <div *ngIf="betList.length > 0 && !this.isLoading">
       <button
-        class="btn bg-dgrey rounded-pill text-white"
+        class="btn rounded-pill text-white"
         [disabled]="currentPage === 1"
         (click)="prev()"
       >
@@ -176,7 +176,7 @@
         >{{ currentPage}} / {{totalPages }}
       </span>
       <button
-        class="btn bg-dgrey rounded-pill text-white"
+        class="btn rounded-pill text-white"
         [disabled]="currentPage === totalPages"
         (click)="next()"
       >

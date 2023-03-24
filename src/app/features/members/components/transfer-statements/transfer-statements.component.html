@@ -52,7 +52,7 @@
 
   <div *ngIf="transferStatements.length > 0 && !this.isLoading">
     <button
-      class="btn bg-dgrey rounded-pill text-white"
+      class="btn rounded-pill text-white"
       [disabled]="currentPage === 1"
       (click)="prev()"
     >
@@ -62,7 +62,7 @@
       >{{ currentPage }} / {{ totalPages }}
     </span>
     <button
-      class="btn bg-dgrey rounded-pill text-white"
+      class="btn rounded-pill text-white"
       [disabled]="currentPage === totalPages"
       (click)="next()"
     >

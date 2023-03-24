@@ -63,7 +63,7 @@ export class ClTransferComponent implements OnInit {
     let body = {
       fromDate: fromDate,
       toDate: toDate,
-      memberName: this.filterForm.value.memberName,
+      memberId: this.filterForm.value.memberName,
       pageNo: this.currentPage,
       limit: 50,
     }

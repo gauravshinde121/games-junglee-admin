@@ -240,11 +240,6 @@
           <ng-template #notMatched> -- </ng-template>
         </td>
         <td>
-          <i
-            class="fa fa-info-circle"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
-          ></i>
           {{ viewTotalEach.IP }}
         </td>
       </tr>
@@ -263,7 +258,7 @@
     <div class="col-md-12">
       <div *ngIf="viewTotal.length > 0 && !this.isLoading">
         <button
-          class="btn bg-dgrey rounded-pill text-white"
+          class="btn rounded-pill text-white"
           [disabled]="currentPage === 1"
           (click)="prev()"
         >
@@ -273,7 +268,7 @@
           >{{ currentPage}} / {{totalPages }}
         </span>
         <button
-          class="btn bg-dgrey rounded-pill text-white"
+          class="btn rounded-pill text-white"
           [disabled]="currentPage === totalPages"
           (click)="next()"
         >

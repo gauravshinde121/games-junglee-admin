@@ -37,7 +37,7 @@
         </div>
 
         <!-- <div class="col-md-12"> -->
-            
+
             <div class="col-md-2 mt-4">
               <button type="button" class="btn btn-pink rounded-pill w-100" (click)="getLogs()">
                 Get Log
@@ -51,17 +51,13 @@
         <!-- </div> -->
       <!-- </div> -->
 
-      
+
 
       <!--your code will come here end-->
     </div>
-
     <div class="row pt-5">
-      <div class="col-md-12">
-        <table
-          class="table table tableall"
-          *ngIf="allBets.length > 0 && !this.isLoading"
-        >
+      <div class="col-md-12 overflow-auto">
+        <table class="table table tableall" *ngIf="allBets.length > 0 && !this.isLoading">
           <thead class="text-dark">
             <tr>
               <th scope="col" class="first">#</th>
@@ -90,25 +86,20 @@
                 <ng-container *ngIf="bets.isMatched; else notMatched">
                   {{ bets.stake }}
                 </ng-container>
-                <ng-template #notMatched>
-                  --
-                </ng-template>
+                <ng-template #notMatched> -- </ng-template>
               </td>
               <td class="text-danger">
                 <ng-container *ngIf="!bets.isMatched; else notMatched">
                   {{ bets.stake }}
                 </ng-container>
-                <ng-template #notMatched>
-                  --
-                </ng-template></td>
+                <ng-template #notMatched> -- </ng-template>
+              </td>
               <td>
-                <span
-                [ngClass]="bets.profitLiability > 0
+                <span [ngClass]="bets.profitLiability > 0
                 ? 'text-success'
                 : 'text-danger'
-                "
-                >
-                {{ bets.profitLiability }}
+                ">
+                  {{ bets.profitLiability }}
                 </span>
               </td>
               <td>{{bets.remarks}}</td>
@@ -118,12 +109,29 @@
       </div>
     </div>
   </section>
-
+  <div *ngIf="allBets.length > 0 && !this.isLoading" class="mt-2">
+    <button
+      class="btn bg-dgrey rounded-pill text-white"
+      [disabled]="currentPage === 1"
+      (click)="prev()"
+    >
+      Prev
+    </button>
+    <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
+      >{{ currentPage}} / {{totalPages }}
+    </span>
+    <button
+      class="btn bg-dgrey rounded-pill text-white"
+      [disabled]="currentPage === totalPages"
+      (click)="next()"
+    >
+      Next
+    </button>
+  </div>
   <div class="col-md-12 mt-3" *ngIf="allBets.length == 0">
     <div class="border text-center p-5">
       <h4 *ngIf="allBets.length == 0 && !isLoading">No data found</h4>
       <h4 *ngIf="isLoading">Loading...</h4>
     </div>
   </div>
-
 </main>

@@ -7,18 +7,11 @@
       <div class="row d-flex">
         <div class="col-md-2 {{sideBarClass}}" *ngIf="isLeftMenuOpen">
           <app-left-navigation></app-left-navigation>
-          </div>
+        </div>
         <div class="{{mainClass}}">
           <main id="main" class="main w-100">
             <section class="section gamedetails">
-              <div
-                [formGroup]="betTickerForm"
-                class="tab-pane fade show active"
-                id="pills-batlist"
-                role="tabpanel"
-                aria-labelledby="pills-batlist-tab"
-                tabindex="0"
-              >
+              <div [formGroup]="betTickerForm" class="tab-pane fade show active" id="pills-batlist" role="tabpanel" aria-labelledby="pills-batlist-tab" tabindex="0">
                 <div class="row">
                   <div class="col-md-3">
                     <h3 class="text-pink">Surveillance</h3>
@@ -27,7 +20,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <label>Select Member</label>
-                    <select formControlName="memberName" id="ab" class="form-select bg-dgrey">
+                    <select formControlName="memberName" id="ab" class="form-select">
                       <option value="null">All</option>
                       <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
                     </select>
@@ -41,12 +34,7 @@
                 <div class="row">
                   <div class="col-md-4 mb-2">
                     <label>Select Sport</label>
-                    <select
-                      formControlName="sportsId"
-                      id="ab"
-                      class="form-select bg-dgrey"
-                      (change)="changeGame($event)"
-                    >
+                    <select formControlName="sportsId" id="ab" class="form-select" (change)="changeGame($event)">
                       <option value="null">All</option>
                       <option *ngFor="let game of games" [value]="game.sportId">
                         {{ game.sportName }}
@@ -55,12 +43,7 @@
                   </div>
                   <div class="col-md-4 mb-2">
                     <label>Select Match</label>
-                    <select
-                      formControlName="matchId"
-                      id="ab"
-                      class="form-select bg-dgrey"
-                      (change)="changeMatch($event)"
-                    >
+                    <select formControlName="matchId" id="ab" class="form-select" (change)="changeMatch($event)">
                       <option value="null">All</option>
                       <option value="{{ match.matchId }}" *ngFor="let match of matchList">
                         {{ match.matchName }}
@@ -69,60 +52,29 @@
                   </div>
                   <div class="col-md-4 mb-2">
                     <label>Select Market Type</label>
-                    <select
-                      formControlName="marketId"
-                      id="ab"
-                      class="form-select bg-dgrey"
-                      (change)="changeMarketType($event)"
-                    >
+                    <select formControlName="marketId" id="ab" class="form-select" (change)="changeMarketType($event)">
                       <option value="null">All</option>
-                      <option
-                        value="{{ market.marketId }}"
-                        *ngFor="let market of marketList"
-                      >
+                      <option value="{{ market.marketId }}" *ngFor="let market of marketList">
                         {{ market.marketName }}
                       </option>
                     </select>
                   </div>
-
                   <div class="col-md-4 mb-2">
                     <label>Stakes From Value</label>
-                    <input
-                      type="number"
-                      class="form-control bg-dgrey"
-                      formControlName="stakesFromValue"
-                      placeholder="Enter Stake From..."
-                      (keypress)="numberOnly($event)"
-                    />
+                    <input type="number" class="form-control" formControlName="stakesFromValue" placeholder="Enter Stake From..." (keypress)="numberOnly($event)" />
                   </div>
                   <div class="col-md-4 mb-2">
                     <label>Stakes To Value</label>
-                    <input
-                      type="number"
-                      class="form-control bg-dgrey"
-                      formControlName="stakesToValue"
-                      placeholder="Enter Stake To..."
-                      (keypress)="numberOnly($event)"
-                    />
+                    <input type="number" class="form-control" formControlName="stakesToValue" placeholder="Enter Stake To..." (keypress)="numberOnly($event)" />
                   </div>
-
                   <div class="col-md-4 mb-2 mt-4">
-                    <button
-                      type="button"
-                      class="btn btn-pink rounded-pill w-100"
-                      (click)="searchList()"
-                    >
-                      Search
-                    </button>
+                    <button type="button" class="btn btn-pink rounded-pill w-100" (click)="searchList()"> Search </button>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <table
-                    class="table table-dark"
-                    *ngIf="allBets.length > 0 && !this.isLoading"
-                  >
+              <div class="row mt-3">
+                <div class="col-md-12 overflow-auto">
+                  <table class="table table-dark" *ngIf="allBets.length > 0 && !this.isLoading">
                     <thead>
                       <tr>
                         <th scope="col" class="first">#</th>
@@ -145,19 +97,10 @@
                         <td>{{ bets.placedDate | date }}</td>
                         <td>{{ bets.event }}</td>
                         <td>
-                          <span
-                            *ngIf="!bets.type"
-                            class="border r-2 bg-danger text-danger border-danger me-2"
-                          >
-                          </span>
-                          <span
-                            *ngIf="bets.type"
-                            class="border border-2 bg-primary text-primary border-primary me-2"
-                          >
-                          </span>
+                          <span *ngIf="!bets.type" class="border r-2 bg-danger text-danger border-danger me-2"></span>
+                          <span *ngIf="bets.type" class="border border-2 bg-primary text-primary border-primary me-2"></span>
                           {{ bets.betCategory }}
                         </td>
-
                         <td>{{ bets.selectionName }}</td>
                         <td>{{ bets.betRate }}</td>
                         <td>{{ bets.averagePriceMatched }}</td>
@@ -165,54 +108,34 @@
                           <ng-container *ngIf="bets.isMatched; else notMatched">
                             {{ bets.stake }}
                           </ng-container>
-                          <ng-template #notMatched>
-                            --
-                          </ng-template>
+                          <ng-template #notMatched> -- </ng-template>
                         </td>
                         <td class="text-danger">
                           <ng-container *ngIf="!bets.isMatched; else notMatched">
                             {{ bets.stake }}
                           </ng-container>
-                          <ng-template #notMatched>
-                            --
-                          </ng-template></td>
+                          <ng-template #notMatched> -- </ng-template>
+                        </td>
                         <td>
-                          <span
-                          [ngClass]="bets.profitLiability > 0
+                          <span [ngClass]="bets.profitLiability > 0
                           ? 'text-success'
                           : 'text-danger'
-                          "
-                          >
-                          {{ bets.profitLiability }}
+                          ">
+                            {{ bets.profitLiability }}
                           </span>
                         </td>
-
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
-
               <div *ngIf="allBets.length > 0 && !this.isLoading">
-                <button
-                  class="btn bg-dgrey rounded-pill text-white"
-                  [disabled]="currentPage === 1"
-                  (click)="prev()"
-                >
-                  Prev
-                </button>
-                <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
-                  >{{ currentPage}} / {{totalPages }}
+                <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
+                <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">
+                  {{ currentPage}} / {{totalPages }}
                 </span>
-                <button
-                  class="btn bg-dgrey rounded-pill text-white"
-                  [disabled]="currentPage === totalPages"
-                  (click)="next()"
-                >
-                  Next
-                </button>
+                <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()"> Next </button>
               </div>
-
               <div class="col-md-12 mt-3" *ngIf="allBets.length == 0">
                 <div class="border text-center p-5">
                   <h4 *ngIf="allBets.length == 0 && !isLoading">No data found</h4>

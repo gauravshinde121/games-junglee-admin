@@ -62,7 +62,7 @@ body {
   background-color: #343535;
   border: none;
   border-bottom: 0.5px solid #a2a2a2;
-  color: #ffffff;
+  color: #fff;
   border-radius: 0;
 }
 
@@ -79,7 +79,7 @@ body {
 }
 
 .login {
-  border: 1px solid rgb(255, 167, 163);
+  border: 1px solid #ffa7a3;
   padding: 10px;
   background: rgba(18, 14, 17, 0.88);
   margin-top: 30px;
@@ -110,7 +110,7 @@ body {
 .form-floating > .form-select {
   background: rgba(60, 62, 62, 0);
   color: #fff;
-  border-bottom: 1px solid #ffffff !important;
+  border-bottom: 1px solid #fff !important;
   border: 0px;
   border-radius: 0;
   padding: 24px 0px 15px 0px;
@@ -127,9 +127,9 @@ body {
 
 .form-signin .form-floating span {
   margin-top: -30px;
-  float: right;
-  text-align: right;
-  margin-right: 13px;
+  position: absolute;
+  right: 13px;
+  cursor: pointer;
 }
 
 .form-signin .form-floating input:focus {
@@ -141,10 +141,9 @@ body {
 /********** Login end ************/
 /********** main start ************/
 #main {
-  padding: 20px 15px 20px 0px;
+  padding: 20px 10px;
   transition: all 0.3s;
   color: #fff;
-  /* margin-top: -700px; */
 }
 
 /********** main end ************/
@@ -276,7 +275,7 @@ body {
           appearance: button;
   color: #fff;
   border: 1px solid rgba(166, 166, 166, 0.3411764706);
-  background: rgba(255, 255, 255, 0);
+  background: #343535;
 }
 .gamedetails ::-webkit-calendar-picker-indicator {
   filter: invert(1);
@@ -576,21 +575,8 @@ select:-webkit-autofill:focus {
 }
 .memberslist .nav-link.active {
   color: #000;
+}
+
+.changepassword {
+  width: 50%;
 }/*# sourceMappingURL=main.css.map */
-
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-@media only screen and (max-width: 600px) {
-  .mobile-menu #sidebar{
-    left:0;
-  }
-}
-
-.modal-width {
-  width: 150%;
-  right: 15% ;
-}
-

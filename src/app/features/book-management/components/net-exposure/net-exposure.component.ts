@@ -92,11 +92,11 @@ export class NetExposureComponent implements OnInit {
       }
     }
     this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
-      this.isLoading = false;
-      this.alterData(res);
+      // this.alterData(res);
+      this.booksForBackend = res.booksForBackend;
+     this.isLoading = false;
 
     })
-
 
   }
 

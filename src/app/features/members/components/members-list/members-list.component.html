@@ -55,6 +55,7 @@
               <!-- <th scope="col" class="text-dark"><i class="fa-sharp fa-regular fa-square-check"></i> Status
               </th> -->
               <!-- <th scope="col" class="text-dark">Info</th> -->
+              <th scope="col" class="text-dark text-center" *ngIf="selectedRoleId!=7">Partnership %</th>
               <th scope="col" class="text-dark text-center">Details</th>
               <th scope="col" class="text-dark text-center">Status</th>
               <th scope="col" class="text-dark text-center">Change password</th>
@@ -80,29 +81,8 @@
                 {{ user.give | number }}
               </td>
               <td class="text-center">{{ user.availableCredit | number }}</td>
-              <!-- <td> -->
-              <!-- <button
-                  *ngIf="user.isActive"
-                  class="btn btn-success rounded-pill btn-sm ps-3 pe-3"
-                  type="button"
-                >
-                  Active
-                </button> -->
-              <!-- <button
-                  *ngIf="!user.isActive"
-                  class="btn btn-danger rounded-pill btn-sm ps-3 pe-3"
-                  type="button"
-                >
-                  InActive
-                </button> -->
-              <!-- </td> -->
-              <!-- <td><div class="tooltipnk"><i
-                    class="fa-sharp fa-solid fa-info text-pink"
-                    (click)="showContent(this, user.userId)"
-                  ></i><div
-                    class="tooltiptext row"
-                    *ngIf="selectedIndex == user.userId"
-                  ><div class="col-md-12 pb-2">Player-INR</div><div class="col-md-8 pb-2"><span>Live Casino </span></div><div class="col-md-4 text-end"><span>{{ liveCasinoRate }}</span></div><div class="col-md-8 pb-2"><span>Sportsbook</span></div><div class="col-md-4 text-end"><span>{{ sportsBook }}</span></div><div class="col-md-8 pb-2"><span>Club Casino</span></div><div class="col-md-4 text-end"><span>{{ clubCasino }}</span></div></div></div></td> -->
+              <td *ngIf="selectedRoleId!=7" class="text-center">{{ user.partnerShipPercent | number }}</td>
+
               <td class="text-center">
                 <a (click)="navigateToDownline(user)">
                   <i class="fa-sharp fa-solid fa-eye text-pink cursor-pointer"></i>

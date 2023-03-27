@@ -118,7 +118,7 @@ export class CreateMemberComponent implements OnInit {
         maxExposure: [50000000, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
         //status: ['Active', Validators.required],
         roleId: [7, Validators.required],
-        partnerShipPercent: [0, Validators.required]
+        partnerShipPercent: [8,[(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(8)]]
       },
         {
           validators: this.Mustmatch('password', 'confirmPassword')
@@ -133,7 +133,7 @@ export class CreateMemberComponent implements OnInit {
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [1000000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
         maxExposure: [50000000, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
-        partnerShipPercent: [0, Validators.required]
+        partnerShipPercent: [8, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(8)]]
       },
         {
           validators: []

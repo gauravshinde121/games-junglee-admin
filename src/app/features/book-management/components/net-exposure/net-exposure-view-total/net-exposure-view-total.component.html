@@ -215,7 +215,7 @@
       <tr *ngFor="let viewTotalEach of viewTotal; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ viewTotalEach.userName }}</td>
-        <td>{{ viewTotalEach.placedDate }}</td>
+        <td>{{ viewTotalEach.placedDate  | date : "medium" }}</td>
         <td>{{ viewTotalEach.event }}</td>
         <td>
           <span
@@ -226,7 +226,7 @@
         </td>
         <td>{{ viewTotalEach.selectionName }}</td>
         <td>{{ viewTotalEach.betRate }}</td>
-        <td>20{{ viewTotalEach.betRate }}</td>
+        <td>{{ viewTotalEach.betRate }}</td>
         <td>
           <ng-container *ngIf="viewTotalEach.isMatched; else notMatched">
             {{ viewTotalEach.stake }}

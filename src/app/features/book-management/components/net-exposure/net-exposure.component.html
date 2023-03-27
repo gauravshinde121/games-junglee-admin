@@ -138,70 +138,60 @@
                     /></a>
                   </td>
                   <td>
-                    <a
-                      class="btn rounded-pill pt-2 pb-2 w-100"
-                      [ngClass]="
-                        data.netExposure >= 0
-                          ? 'text-success alert-success'
-                          : 'text-danger btn-pink'
-                      "
-                    >
-                      {{ data.netExposure }}</a
-                    >
+                    <a class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100 text-danger">
+                      <span [ngClass]="data.netExposure > 0 ? 'text-success' : 'text-danger'">{{ data.netExposure }}</span>
+                    </a>
                   </td>
                   <td>
-                    <a
-                      class="btn rounded-pill pt-2 pb-2 w-100"
-                      [ngClass]="
-                        data.horses[0]?.finalAmount >= 0
-                          ? 'text-success alert-success'
-                          : 'text-danger btn-pink'
-                      "
-                    >
-                      {{
-                        data.horses[0]?.finalAmount
-                          ? data.horses[0]?.finalAmount
-                          : 0
-                      }}</a
-                    >
+                    <a *ngIf="data.horses[0]?.finalAmount>0" class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
+                      <span class="text-success">
+                        {{ data.horses[0]?.finalAmount? data.horses[0]?.finalAmount: 0}}
+                      </span>
+                    </a>
+                    <a *ngIf="data.horses[0]?.finalAmount<0" class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
+                      <span class="text-danger">
+                        {{ data.horses[0]?.finalAmount? data.horses[0]?.finalAmount: 0}}
+                      </span>
+                    </a>
+                    <a *ngIf="data.horses[0]?.finalAmount==0" class="btn rounded-pill alert pt-2 pb-2 w-100">
+                      <span>
+                        --
+                      </span>
+                    </a>
                   </td>
                   <td>
-                    <a
-                      *ngIf="data.horses[2]"
-                      class="btn rounded-pill pt-2 pb-2 w-100"
-                      [ngClass]="
-                        data.horses[2]?.finalAmount >= 0
-                          ? 'text-success alert-success'
-                          : 'text-danger btn-pink'
-                      "
-                    >
-                      {{
-                        data.horses[2]?.finalAmount
-                          ? data.horses[2]?.finalAmount
-                          : "--"
-                      }}</a
-                    >
+                    <ng-container *ngIf="data.horses[2]">
+                      <a *ngIf="data.horses[2].finalAmount>0"  class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
+                        <span class="text-success">
+                          {{ data.horses[2]?.finalAmount? data.horses[2]?.finalAmount: 0}}
+                        </span>
+                      </a >
+                      <a *ngIf="data.horses[2].finalAmount<0"  class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
+                        <span class="text-danger">
+                          {{ data.horses[2]?.finalAmount? data.horses[2]?.finalAmount: 0}}
+                        </span>
+                      </a >
+                      <a *ngIf="data.horses[2].finalAmount==0"  class="btn rounded-pill alert pt-2 pb-2 w-100">
+                        <span>
+                          --
+                        </span>
+                      </a >
+                    </ng-container>
                   </td>
                   <td>
-                    <a
-                      class="btn rounded-pill pt-2 pb-2 w-100"
-                      [ngClass]="
-                        data.horses[1]?.finalAmount >= 0
-                          ? 'text-success alert-success'
-                          : 'text-danger btn-pink'
-                      "
-                    >
-                      {{
-                        data.horses[1]?.finalAmount
-                          ? data.horses[1]?.finalAmount
-                          : 0
-                      }}</a
-                    >
+                    <a *ngIf="data.horses[1]?.finalAmount<0"  class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
+                      <span class="text-danger">{{ data.horses[1]?.finalAmount? data.horses[1]?.finalAmount: 0}}</span>
+                    </a>
+
+                    <a *ngIf="data.horses[1]?.finalAmount>0" class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
+                      <span class="text-success">{{ data.netExposure }}</span>
+                    </a>
+
+                    <a *ngIf="data.horses[1]?.finalAmount==0" class="btn rounded-pill alert pt-2 pb-2 w-100">
+                      <span>--</span>
+                    </a>
                   </td>
-                  <!--<td></td>
-                  <td>
-                    {{ data.fancyExposure ? data.fancyExposure : "" }}
-                  </td>-->
+
                   <td></td>
                 </tr>
               </tbody>

@@ -36,7 +36,7 @@
             </p>
           </div>
         </div>
-        <!--<div class="row">
+        <div class="row">
           <div class="col-md-12">
             <div class="accordion" id="accordionExample">
               <div class="accordion-item bg-transparent border-0 p-3">
@@ -74,8 +74,7 @@
                               <td class="text-start ps-2 heading border-top">
                                 <a href=""
                                   >England Women <br />
-                                  <span class="text-success">Rs. 0</span></a
-                                >
+                                  <span class="text-success">Rs. 0</span></a>
                               </td>
                               <td class="colblue light">
                                 <a href=""><strong>1.78</strong> <br />160</a>
@@ -178,7 +177,7 @@
               </div>
             </div>
           </div>
-        </div>-->
+        </div>
       </div>
     </div>
   </section>
@@ -215,7 +214,7 @@
       <tr *ngFor="let viewTotalEach of viewTotal; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ viewTotalEach.userName }}</td>
-        <td>{{ viewTotalEach.placedDate }}</td>
+        <td>{{ viewTotalEach.placedDate  | date : "medium" }}</td>
         <td>{{ viewTotalEach.event }}</td>
         <td>
           <span
@@ -226,7 +225,7 @@
         </td>
         <td>{{ viewTotalEach.selectionName }}</td>
         <td>{{ viewTotalEach.betRate }}</td>
-        <td>20{{ viewTotalEach.betRate }}</td>
+        <td>{{ viewTotalEach.betRate }}</td>
         <td>
           <ng-container *ngIf="viewTotalEach.isMatched; else notMatched">
             {{ viewTotalEach.stake }}

@@ -17,7 +17,7 @@ export class BalanceComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _settingsService: SettingsService,
-    private _sharedService:SharedService
+    private _sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -39,12 +39,12 @@ export class BalanceComponent implements OnInit {
     this._settingsService._updateSuperAdminBalanceApi(this.balanceForm.value['balanceAmount']).subscribe((res: any) => {
       if (res) {
         this._sharedService.sharedSubject.next({
-          'updateAdminDetails':true
+          'updateAdminDetails': true
         });
         this._sharedService.getToastPopup(`Balance updated Successfully.`, 'Balance', 'success');
         this.isLoading = false;
         this.balanceForm.patchValue({
-          balanceAmount:[null,Validators.required]
+          balanceAmount: [null, Validators.required]
         })
       }
     })

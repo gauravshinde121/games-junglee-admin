@@ -243,6 +243,7 @@ export class MembersListComponent implements OnInit {
   }
 
   openModal(userId) {
+    this.modalNumber = 2;
     this.userId = userId;
     this.display = 'block';
 

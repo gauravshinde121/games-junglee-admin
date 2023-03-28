@@ -13,6 +13,8 @@ import { MembersService } from 'src/app/features/members/services/members.servic
 export class BetTickerComponent implements OnInit {
 
   betTickerForm: FormGroup;
+  fromDate = new Date().toString();
+  toDate = new Date().toString();
   games:any;
   matchList:any = [];
   marketList:any = [];
@@ -151,10 +153,22 @@ export class BetTickerComponent implements OnInit {
 
 
   getAllUserBets(){
+
     this.isLoading = true;
     this.allBets = [];
+    let fromDate = new Date(this.betTickerForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.betTickerForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
 
     let body = {
+      fromDate:fromDate,
+      toDate:toDate,
       sportsId: null,
       matchId: null,
       userId: null,
@@ -188,6 +202,15 @@ export class BetTickerComponent implements OnInit {
   }
 
   searchList() {
+    let fromDate = new Date(this.betTickerForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.betTickerForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
     let payload = {
       sportsId: this.sportsId,
       matchId: this.matchId,
@@ -195,8 +218,8 @@ export class BetTickerComponent implements OnInit {
       userId: null,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
-      fromDate : this.betTickerForm.value.fromDate,
-      toDate : this.betTickerForm.value.toDate
+      fromDate : fromDate,
+      toDate : toDate
     }
 
     this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{

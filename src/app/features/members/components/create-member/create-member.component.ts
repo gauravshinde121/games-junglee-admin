@@ -87,7 +87,7 @@ export class CreateMemberComponent implements OnInit {
           maxBet: this.memberData.maxBet,
           maxExposure: this.memberData.maxExposure,
           //isActive: this.memberData.isActive,
-          //roleId:this.memberData.roleId
+          roleId:this.memberData.roleId
         });
       }
     }))
@@ -129,6 +129,7 @@ export class CreateMemberComponent implements OnInit {
         playerMaxCreditLimit: ['', Validators.required],
         //comments: [''],
         sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(1), Validators.min(1)]],
+        roleId: ['', Validators.required],
         liveCasinoRate: [100, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(100)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [1000000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
@@ -193,6 +194,7 @@ export class CreateMemberComponent implements OnInit {
       msg = 'Updated';
       memberData["userId"] = this.route.snapshot.params['id'];
       memberObs = this._memberService._getEditUserApi(memberData);
+      console.log(memberObs)
     }
 
     memberObs.subscribe(
@@ -214,6 +216,9 @@ export class CreateMemberComponent implements OnInit {
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
+      if(roles){
+        this.memberForm.controls['roleId'].setValidators([(c: AbstractControl) => Validators.required(roles.roleId)]);
+      }
     })
   }
 

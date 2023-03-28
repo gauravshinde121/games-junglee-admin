@@ -8,7 +8,7 @@
 
         <div class="col-md-4">
           <label>Select Member</label>
-          <select formControlName="memberName" id="ab" class="form-select bg-dgrey">
+          <select formControlName="memberName" id="ab" class="form-select bg-dgrey pointer">
             <option value="null">All</option>
             <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
           </select>

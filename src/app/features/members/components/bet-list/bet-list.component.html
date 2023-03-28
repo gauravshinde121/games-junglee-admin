@@ -16,7 +16,7 @@
 
     <div class="col-md-4 mb-2  p-2">
       <label>Select Sport</label>
-      <select formControlName="sportsId" id="ab" class="form-select">
+      <select formControlName="sportsId" id="ab" class="form-select pointer">
         <option value="null">All</option>
         <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
       </select>
@@ -56,7 +56,7 @@
       <select
         formControlName="matchId"
         id="ab"
-        class="form-select"
+        class="form-select pointer"
         (change)="changeMatch($event)"
       >
         <option value="null">All</option>
@@ -71,7 +71,7 @@
       <select
         formControlName="marketId"
         id="ab"
-        class="form-select"
+        class="form-select pointer"
         (change)="changeMarketType($event)"
       >
         <option value="null">All</option>

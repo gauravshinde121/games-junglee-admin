@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-4 btnmargin">
         <label>Select Sport</label>
-        <select formControlName="sportsId" id="ab" class="form-select">
+        <select formControlName="sportsId" id="ab" class="form-select pointer">
           <option value="null">All</option>
           <option *ngFor="let game of games" [value]="game.sportId">
             {{ game.sportName }}
@@ -70,7 +70,7 @@
             <td>
               <a (click)="getTOForMatch(pl.matchId)"
                 ><i
-                  class="fa-sharp fa-solid fa-eye text-pink cursor-pointer"
+                  class="fa-sharp fa-solid fa-eye text-pink pointer"
                   aria-hidden="true"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
@@ -79,7 +79,7 @@
             </td>
             <td>
               <a (click)="getBetDetailsForMatch(pl.matchId)">
-                <i class="fa-sharp fa-solid fa-eye text-pink cursor-pointer"
+                <i class="fa-sharp fa-solid fa-eye text-pink pointer"
                 aria-hidden="true"
                   data-bs-toggle="modal"
                   data-bs-target="#betDetailBackdrop"
@@ -246,8 +246,8 @@
         ></button>
       </div>
       <div class="modal-body bg-dark text-white" *ngIf="betInfo">
-        <div class=" col-md-12">
-          <div class="col-md-12 mt-3">
+        <div class="col-md-12">
+       
             <table class="table tableall" *ngIf="betInfo.length > 0">
               <thead>
                 <tr>
@@ -312,7 +312,7 @@
                 </tr>
               </tbody>
             </table>
-          </div>
+          
         </div>
 
       </div>

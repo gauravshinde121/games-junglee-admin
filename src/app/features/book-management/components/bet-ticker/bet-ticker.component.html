@@ -23,7 +23,7 @@
       <div class="row">
         <div class="col-md-4 mb-2">
           <label>Select Sport</label>
-          <select formControlName="sportsId" id="ab" class="form-select" (change)="changeGame($event)">
+          <select formControlName="sportsId" id="ab" class="form-select pointer" (change)="changeGame($event)">
             <option value="null">All</option>
             <option *ngFor="let game of games" [value]="game.sportId">
               {{ game.sportName }}
@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-4 mb-2">
           <label>Select Match</label>
-          <select formControlName="matchId" id="ab" class="form-select" (change)="changeMatch($event)">
+          <select formControlName="matchId" id="ab" class="form-select pointer" (change)="changeMatch($event)">
             <option value="null">All</option>
             <option value="{{ match.matchId }}" *ngFor="let match of matchList">
               {{ match.matchName }}
@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-4 mb-2">
           <label>Select Market Type</label>
-          <select formControlName="marketId" id="ab" class="form-select" (change)="changeMarketType($event)">
+          <select formControlName="marketId" id="ab" class="form-select pointer" (change)="changeMarketType($event)">
             <option value="null">All</option>
             <option value="{{ market.marketId }}" *ngFor="let market of marketList">
               {{ market.marketName }}

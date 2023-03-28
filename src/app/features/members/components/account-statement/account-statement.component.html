@@ -8,7 +8,7 @@
   <div class="row" [formGroup]="filterForm">
     <div class="col-md-3 mb-3">
       <label>Select Sport</label>
-      <select formControlName="sportsId" id="ab" class="form-select">
+      <select formControlName="sportsId" id="ab" class="form-select pointer">
         <option value="null">All</option>
         <option *ngFor="let game of games" [value]="game.sportId">
           {{ game.sportName }}

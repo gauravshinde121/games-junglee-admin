@@ -14,7 +14,7 @@
                 "
                 formControlName="selectedType"
                 checked="true"
-                class="radioselected cursor-pointer"
+                class="radioselected pointer"
                 id="html"
                 name="selectedType"
                 value="MyPT"
@@ -31,7 +31,7 @@
                 id="html"
                 name="selectedType"
                 value="TotalBook"
-                class="cursor-pointer"
+                class="pointer"
               /><span class="rounded-pill p-2 m-2">Total Book</span>
             </a>
             <span class="me-3 pt-2"><strong>Filter by Sport</strong></span>
@@ -40,7 +40,7 @@
                 (click)="onFilterChange({ clicked: 'sport', sport: null })"
                 type="radio"
                 checked="true"
-                class="radioselected cursor-pointerr"
+                class="radioselected pointerr"
                 id="html"
                 name="sport"
                 value="All"
@@ -55,7 +55,7 @@
                   onFilterChange({ clicked: 'sport', sport: game.sportId })
                 "
                 type="radio"
-                class="radioselected cursor-pointer"
+                class="radioselected pointer"
                 id="html"
                 name="sport"
                 [value]="game.sportId"
@@ -63,17 +63,17 @@
             </a>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4 pointer" >
             <select
               name="matchId"
               formControlName="matchId"
               id="ab"
-              class="form-select cursor-pointer"
+              class="form-select pointer"
               (change)="onFilterChangeDropDown($event)"
               data-clicked="match"
             >
-              <option value="null">All</option>
-              <option
+              <option value="null" class="pointer">All</option>
+              <option class="pointer"
 
                 value="{{ match.matchId }}"
                 *ngFor="let match of matchList"

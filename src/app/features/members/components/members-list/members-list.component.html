@@ -40,7 +40,7 @@
         <table #myTable class="table tableall" *ngIf="userList.length > 0 && !this.isLoading">
           <thead>
             <tr>
-              <th scope="col" class="first">
+              <th scope="col" class="first pointer">
                 <input type="checkbox" />
               </th>
               <th scope="col" class="text-dark">
@@ -66,7 +66,7 @@
             <h1 class="text-center" *ngIf="userList.length == 0 && !this.isLoading"> No users Found </h1>
             <tr *ngFor="let user of userList; let i = index">
               <td>
-                <input type="checkbox" (change)="checkUserForAdjustment(user.userId)" *ngIf="user.take > 0 || user.give > 0" />
+                <input type="checkbox"  class="pointer" (change)="checkUserForAdjustment(user.userId)" *ngIf="user.take > 0 || user.give > 0" />
               </td>
               <td>{{ i + 1 }}</td>
               <td>{{ user.username }}</td>
@@ -85,20 +85,26 @@
 
               <td class="text-center">
                 <a (click)="navigateToDownline(user)">
-                  <i class="fa-sharp fa-solid fa-eye text-pink cursor-pointer"></i>
+                  <i class="fa-sharp fa-solid fa-eye text-pink pointer"></i>
                 </a>
               </td>
               <td class="text-center">
                 <!-- <a (click)="openModal(user.userId)"><i class="fa fa-lock text-pink"></i></a> -->
-                <select class="custom-ddl" (change)="changeStatus($event, user)">
-                  <option *ngFor="let item of statusList" [value]="item.status" [selected]="item.status == user.isActive">
+                <select class="custom-ddl text-white pointer" (change)="changeStatus($event, user)">
+                  <option *ngFor="let item of statusList" [value]="item.status" [selected]="item.status == user.isActive"  [ngClass]="
+                  item.status == 'Active'
+                    ? 'green'
+                    : item.status == 'Inactive'
+                    ? 'yellow'
+                    : 'red'
+                ">
                     <div [ngClass]="
-                        item.status == 'Active'
-                          ? 'green'
-                          : item.status == 'Inactive'
-                          ? 'yellow'
-                          : 'red'
-                      ">
+                    item.status == 'Active'
+                      ? 'green'
+                      : item.status == 'Inactive'
+                      ? 'yellow'
+                      : 'red'
+                  ">
                       {{ item.status }}
                     </div>
                   </option>
@@ -106,12 +112,12 @@
               </td>
               <td class="text-center">
                 <a (click)="openModal(user.userId)">
-                  <i class="fa-sharp fa fa-lock text-pink cursor-pointer"></i>
+                  <i class="fa-sharp fa fa-lock text-pink pointer"></i>
                 </a>
               </td>
               <td class="text-center">
                 <a routerLink="/member/edit-member/{{ user.userId }}">
-                  <i class="fa-sharp fa-solid fa-pen text-pink cursor-pointer"></i>
+                  <i class="fa-sharp fa-solid fa-pen text-pink pointer"></i>
                 </a>
               </td>
             </tr>

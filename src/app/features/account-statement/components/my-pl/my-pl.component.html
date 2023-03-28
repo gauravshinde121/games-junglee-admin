@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-3 mb-3">
               <label>Select Sport</label>
-              <select formControlName="sportsId" id="ab" class="form-select">
+              <select formControlName="sportsId" id="ab" class="form-select pointer">
                 <option value="null">All</option>
                 <option *ngFor="let game of games" [value]="game.sportId">
                   {{ game.sportName }}
@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-3 mb-3">
               <label>Select Match</label>
-              <select formControlName="matchId" id="ab" class="form-select">
+              <select formControlName="matchId" id="ab" class="form-select pointer">
                 <option value="null">All</option>
                 <option [value]="match.matchId" *ngFor="let match of matchList">
                   {{ match.matchName }}
@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-4 mb-2">
               <label>Select Market</label>
-              <select formControlName="marketId" id="ab" class="form-select">
+              <select formControlName="marketId" id="ab" class="form-select pointer">
                 <option value="null">All</option>
                 <option [value]="market.marketId" *ngFor="let market of marketList">
                   {{ market.marketName }}
@@ -59,7 +59,7 @@
         <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
-      <table class="table tableall" *ngIf="plStatement.length > 0">
+      <table class="table tableall pointer" *ngIf="plStatement.length > 0">
         <thead>
           <tr>
             <th scope="col" class="text-dark">Date</th>

@@ -28,6 +28,8 @@ export class SurveillanceMainComponent implements OnInit {
   events:any = [];
   betSettingForm:FormGroup;
   dateFormat = "yyyy-MM-dd";
+  fromDate = new Date().toString();
+  toDate = new Date().toString();
   language = "en";
   allBets: any = [];
   gameId: any = null;
@@ -41,6 +43,7 @@ export class SurveillanceMainComponent implements OnInit {
   pageSize: number = 10;
   totalPages: number = 0;
   sportsId: any = null;
+  memberId: any = null;
 
   constructor(
     private _sharedService: SharedService,
@@ -98,7 +101,7 @@ export class SurveillanceMainComponent implements OnInit {
 
   _initForm(){
     this.betTickerForm = this._fb.group({
-      memberName: null,
+      memberId: null,
       sportsId: null,
       matchId: null,
       marketId: null,
@@ -176,9 +179,20 @@ export class SurveillanceMainComponent implements OnInit {
   getAllUserBets(){
     this.isLoading = true;
     this.allBets = [];
+    let fromDate = new Date(this.betTickerForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
 
+    let toDate = new Date(this.betTickerForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
 
     let body = {
+      memberId:null,
+      fromDate:fromDate,
+      toDate:toDate,
       sportsId: null,
       matchId: null,
       userId: null,
@@ -210,6 +224,15 @@ export class SurveillanceMainComponent implements OnInit {
   }
 
   searchList() {
+    let fromDate = new Date(this.betTickerForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.betTickerForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
     let payload = {
       sportsId: this.sportsId,
       matchId: this.matchId,
@@ -217,8 +240,9 @@ export class SurveillanceMainComponent implements OnInit {
       userId: null,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
-      fromDate : this.betTickerForm.value.fromDate,
-      toDate : this.betTickerForm.value.toDate
+      memberId: this.betTickerForm.value.memberId,
+      fromDate : fromDate,
+      toDate : toDate
     }
 
     this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{

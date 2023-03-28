@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 mb-2">
+        <div class="col-md-3 mb-2">
           <label>Select Member</label>
           <select formControlName="memberName" id="ab" class="form-select">
             <option value="null">All</option>
@@ -18,6 +18,15 @@
           <button class="btn border-pink rounded-pill mt-4 w-100 text-white"  (click)="clearMemberName()">
             <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
           </button>
+        </div>
+
+        <div class="col-md-3">
+          <label>From Date</label>
+          <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id="" placeholder="Month" />
+        </div>
+        <div class="col-md-3">
+          <label>To Date</label>
+          <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month" />
         </div>
       </div>
       <div class="row">

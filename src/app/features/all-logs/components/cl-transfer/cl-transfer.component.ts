@@ -20,6 +20,7 @@ export class ClTransferComponent implements OnInit {
   totalPages: number = 0;
   pageSize: number = 10;
   allMembers:any = [];
+  memberId:any = null;
 
   constructor(
     private allLogService:AllLogsService,

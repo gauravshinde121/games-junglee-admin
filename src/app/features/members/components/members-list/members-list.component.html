@@ -68,7 +68,10 @@
               <td>
                 <input type="checkbox"  class="pointer" (change)="checkUserForAdjustment(user.userId)" *ngIf="user.take > 0 || user.give > 0" />
               </td>
-              <td>{{ i + 1 }}</td>
+              <td>
+                <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
+                <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+              </td>
               <td>{{ user.username }}</td>
               <td class="text-center">{{ user.creditLimit | number }}</td>
               <td class="text-center" [ngClass]="user.exposure > 0 ? 'text-danger' : ''">

@@ -18,6 +18,7 @@ export class MembersListComponent implements OnInit {
   showMyContainer: boolean = false;
   modalNumber:number;
 
+  limit:number = 50;
   userId: any;
 
   liveCasinoRate: any;
@@ -181,7 +182,7 @@ export class MembersListComponent implements OnInit {
     let body = {
       roleId: roleId,
       pageNo: this.currentPage,
-      limit: 50,
+      limit: this.limit,
       searchName: this.searchTerm,
     };
 

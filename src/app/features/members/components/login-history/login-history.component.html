@@ -58,7 +58,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let history of loginHistory; let i = index">
-          <td>{{ i + 1 }}</td>
+          <td>
+            <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
+            <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+          </td>
           <td>{{ history.username }}</td>
           <td>{{ history.createdDate | date:'medium' }}</td>
           <td>{{history.userIpAddress}}</td>

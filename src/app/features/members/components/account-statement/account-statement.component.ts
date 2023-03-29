@@ -11,6 +11,7 @@ import { formatDate } from '@angular/common';
 })
 export class AccountStatementComponent implements OnInit {
 
+  limit:number = 50;
   currentDate = new Date();
   fromDate = new Date().toString();
   toDate = new Date().toString();
@@ -115,7 +116,7 @@ export class AccountStatementComponent implements OnInit {
       sportsId : this.filterForm.value.sportsId,
       userId: this.userId,
       pageNo: this.currentPage,
-      limit: 50,
+      limit: this.limit,
     }
 
     this._memberService._getDownlineAccountsDataForMemberApi(body).subscribe((data:any)=>{

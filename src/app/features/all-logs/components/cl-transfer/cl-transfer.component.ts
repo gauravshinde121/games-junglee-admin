@@ -21,6 +21,7 @@ export class ClTransferComponent implements OnInit {
   pageSize: number = 10;
   allMembers:any = [];
   memberId:any = null;
+  limit:number = 50;
 
   constructor(
     private allLogService:AllLogsService,
@@ -66,7 +67,7 @@ export class ClTransferComponent implements OnInit {
       toDate: toDate,
       memberId: this.filterForm.value.memberName,
       pageNo: this.currentPage,
-      limit: 50,
+      limit: this.limit,
     }
     this.allLogService._getClTransferApi(body).subscribe((data:any)=>{
       this.isLoading = false;

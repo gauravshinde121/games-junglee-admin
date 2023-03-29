@@ -21,6 +21,7 @@ export class LoginHistoryComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 10;
   totalPages: number = 0;
+  limit:number = 50;
 
   constructor(
     private _memberService: MembersService,
@@ -88,7 +89,7 @@ export class LoginHistoryComponent implements OnInit {
       fromDate: fromDate,
       toDate: toDate,
       pageNo: this.currentPage,
-      limit: 50,
+      limit: this.limit,
     }
 
     this._memberService._getMemberLoginHistoryApi(payload).subscribe((res: any) => {

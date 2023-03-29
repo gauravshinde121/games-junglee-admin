@@ -67,7 +67,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let acc of accountStatement; let i = index">
-            <td>{{ i + 1 }}</td>
+            <td>
+              <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
+              <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+            </td>
             <td>{{ acc.settledDate | date : "medium" }}</td>
             <td>Betting P&L</td>
             <td>{{ acc.matchName }}</td>

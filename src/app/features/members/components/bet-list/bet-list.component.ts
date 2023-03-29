@@ -37,6 +37,7 @@ export class BetListComponent implements OnInit {
   sportsId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
+  limit:number = 50;
 
   btnActive: string = 'current';
   isActive : any = false;
@@ -146,7 +147,7 @@ export class BetListComponent implements OnInit {
       toDate : toDate,
       userId:this.userId,
       pageNo: this.currentPage,
-      limit: 50,
+      limit: this.limit,
     };
 
     this._memberService._getMemberBetseApi(body)

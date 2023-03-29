@@ -75,7 +75,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let bets of allBets; let i = index">
-              <td>{{ i + 1 }}</td>
+              <td>
+                <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
+                <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+              </td>
               <td>{{ bets.member }}</td>
               <td>{{ bets.placedTime | date }}</td>
               <td>{{ bets.event }}</td>

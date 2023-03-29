@@ -26,10 +26,11 @@ export class BetTickerComponent implements OnInit {
   marketTypeId: any = null;
   searchTerm: string = '';
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 50;
   totalPages: number = 0;
   isLoading = false;
   allMembers:any;
+  limit:number = 50;
 
   constructor(
     private _sharedService:SharedService,
@@ -176,7 +177,7 @@ export class BetTickerComponent implements OnInit {
       stakesFrom :null,
       stakesTo :null,
       pageNo: this.currentPage,
-      limit: 50,
+      limit: this.limit,
     };
 
     this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
@@ -235,4 +236,4 @@ export class BetTickerComponent implements OnInit {
     this.betTickerForm.controls['memberName'].setValue(null);
   }
 
-} 
+}

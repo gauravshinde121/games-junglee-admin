@@ -14,7 +14,7 @@
             <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
           </select>
         </div>
-        <div class="col-md-6  mb-2">
+        <div class="col-md-3  mb-2">
           <button class="btn border-pink rounded-pill mt-4 w-100 text-white"  (click)="clearMemberName()">
             <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
           </button>
@@ -90,7 +90,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let bets of allBets; let i = index">
-              <td>{{ i + 1 }}</td>
+              <td>
+                <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
+                <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+              </td>
               <td>{{ bets.username }}</td>
               <td>{{ bets.placedDate | date }}</td>
               <td>{{ bets.event }}</td>

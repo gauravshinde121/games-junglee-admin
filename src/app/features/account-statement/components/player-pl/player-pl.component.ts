@@ -12,6 +12,7 @@ import { formatDate } from '@angular/common';
 })
 export class PlayerPlComponent implements OnInit {
 
+  limit:number = 50;
   filterForm:FormGroup;
   plStatement:any = [];
   games:any;
@@ -114,7 +115,7 @@ export class PlayerPlComponent implements OnInit {
       matchId:this.filterForm.value.matchId,
       marketId:this.filterForm.value.marketId,
       pageNo: this.currentPage,
-      limit: 50,
+      limit: this.limit,
     };
 
     this._accountStatementService._getDownlineAccountsDataApi(body).subscribe((res:any)=>{

@@ -64,7 +64,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let pl of plStatement; let i = index">
-            <td>{{ i + 1 }}</td>
+            <td>
+              <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
+              <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+            </td>
             <td>{{ pl.matchName }}</td>
             <td>{{ pl.matchTime | date : "medium" }}</td>
             <td>
@@ -247,7 +250,7 @@
       </div>
       <div class="modal-body bg-dark text-white" *ngIf="betInfo">
         <div class="col-md-12">
-       
+
             <table class="table tableall" *ngIf="betInfo.length > 0">
               <thead>
                 <tr>
@@ -312,7 +315,7 @@
                 </tr>
               </tbody>
             </table>
-          
+
         </div>
 
       </div>

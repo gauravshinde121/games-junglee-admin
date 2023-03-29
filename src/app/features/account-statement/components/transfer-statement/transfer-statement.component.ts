@@ -22,6 +22,7 @@ export class TransferStatementComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 0;
   pageSize:number = 10;
+  limit:number = 50;
 
   constructor(
     private _accountsService:AccountStatementService
@@ -65,7 +66,7 @@ export class TransferStatementComponent implements OnInit {
       fromDate : fromDate,
       toDate : toDate,
       pageNo: this.currentPage,
-      limit: 50,
+      limit: this.limit,
     }
 
     this._accountsService._getTransferStatementApi(payload).subscribe((res:any)=>{

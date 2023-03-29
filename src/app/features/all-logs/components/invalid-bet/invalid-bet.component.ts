@@ -18,9 +18,10 @@ export class InvalidBetComponent implements OnInit {
   allBets: any = [];
   searchTerm: string = '';
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 50;
   totalPages: number = 0;
   isLoading = false;
+  limit:number = 50;
 
   constructor(
     private _memberService: MembersService
@@ -70,7 +71,7 @@ export class InvalidBetComponent implements OnInit {
       fromDate : fromDate, 
       toDate : toDate,
       userId :null,
-      limit:50,
+      limit:this.limit,
       pageNo:this.currentPage,
     }
     this.isLoading = true;

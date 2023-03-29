@@ -86,7 +86,10 @@
 
         <tr *ngFor="let user of transferStatements; let i = index">
           <td class="tds tdts">
-            {{ i + 1 }}
+
+            <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
+            <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+
           </td>
           <td class="tds tdts">
             {{ user.createdDate | date : "medium" }}

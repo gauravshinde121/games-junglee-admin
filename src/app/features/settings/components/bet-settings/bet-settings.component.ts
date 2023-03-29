@@ -30,7 +30,7 @@ export class BetSettingsComponent implements OnInit {
 
   searchTerm: string = '';
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 50;
   totalPages: number = 0;
   allMembers:any;
   marketList:any = [];
@@ -86,7 +86,7 @@ export class BetSettingsComponent implements OnInit {
 
   _initForm(){
     this.betTickerForm = this._fb.group({
-      memberName: null,
+      memberId: null,
       sportsId: null,
       matchId: null,
       marketId: null,
@@ -145,6 +145,7 @@ export class BetSettingsComponent implements OnInit {
     this.allBets = [];
 
     let body = {
+      memberId: null,
       sportsId: null,
       matchId: null,
       userId: null,
@@ -177,6 +178,7 @@ export class BetSettingsComponent implements OnInit {
 
   searchList() {
     let payload = {
+      memberId: this.betTickerForm.value.memberId,
       sportsId: this.sportsId,
       matchId: this.matchId,
       marketId: this.marketTypeId,
@@ -197,7 +199,7 @@ export class BetSettingsComponent implements OnInit {
   }
 
   clearMember(){
-    this.betTickerForm.value.memberName = null;
+    this.betTickerForm.controls['memberId'].setValue(null);
   }
 
   deleteBet(user) {

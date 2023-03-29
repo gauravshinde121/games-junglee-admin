@@ -14,7 +14,7 @@ export class WorkstationComponent implements OnInit {
   viewTotal: any = [];
   searchTerm:any;
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 50;
   totalPages: number = 0;
   selectedRoleId = 7;
   matchName:any;

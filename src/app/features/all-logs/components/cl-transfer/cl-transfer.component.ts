@@ -18,7 +18,7 @@ export class ClTransferComponent implements OnInit {
   language = "en";
   currentPage: number = 1;
   totalPages: number = 0;
-  pageSize: number = 10;
+  pageSize: number = 50;
   allMembers:any = [];
   memberId:any = null;
   limit:number = 50;
@@ -74,7 +74,7 @@ export class ClTransferComponent implements OnInit {
       if(data.clTransferStatement.clTrnsfers){
         this.clTransfers = data.clTransferStatement.clTrnsfers
       }
-      this.totalPages = Math.ceil(this.clTransfers.length / this.pageSize);
+      this.totalPages = Math.ceil(data.clTransferStatement.totalNoOfRecords / this.pageSize);
     })
   }
 

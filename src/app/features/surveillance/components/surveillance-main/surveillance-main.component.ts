@@ -40,7 +40,7 @@ export class SurveillanceMainComponent implements OnInit {
 
   searchTerm: string = '';
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 50;
   totalPages: number = 0;
   sportsId: any = null;
   memberId: any = null;
@@ -255,7 +255,7 @@ export class SurveillanceMainComponent implements OnInit {
   }
 
   clearMember(){
-    this.betTickerForm.value.memberName = null;
+    this.betTickerForm.value.memberId = null;
   }
 
   numberOnly(event): boolean {
@@ -267,9 +267,9 @@ export class SurveillanceMainComponent implements OnInit {
 
   }
 
-  
+
   clearMemberName(){
-    this.betTickerForm.controls['memberName'].setValue(null);
+    this.betTickerForm.controls['memberId'].setValue(null);
   }
 
 }

@@ -11,6 +11,7 @@ import { SharedService } from '@shared/services/shared.service';
 })
 export class TurnoverComponent implements OnInit {
 
+  limit:number = 50;
   filterForm:FormGroup;
   plStatement:any = [];
   dateFormat = "yyyy-MM-dd";
@@ -19,7 +20,7 @@ export class TurnoverComponent implements OnInit {
   isLoading:boolean = false;
   currentPage: number = 1;
   totalPages: number = 0;
-  pageSize:number = 10;
+  pageSize:number = 50;
   display = '';
   turnoverDetails:any;
   marketInfo:any;
@@ -71,12 +72,12 @@ export class TurnoverComponent implements OnInit {
       toDate: toDate,
       sportsId:this.filterForm.value.sportsId,
       pageNo: this.currentPage,
-      limit: 50,
+      limit: this.limit,
     }
     this._accountStatementService._getCategoryForTO(body).subscribe((res:any)=>{
       this.plStatement = res.finalList;
       this.isLoading = false;
-      this.totalPages = Math.ceil(this.plStatement.length / this.pageSize);
+      this.totalPages = Math.ceil(res.totalNoOfRecords / this.pageSize);
     })
   }
 

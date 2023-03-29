@@ -19,7 +19,7 @@ export class LoginHistoryComponent implements OnInit {
   isLoading = false;
   searchTerm: string = '';
   currentPage: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 50;
   totalPages: number = 0;
   limit:number = 50;
 

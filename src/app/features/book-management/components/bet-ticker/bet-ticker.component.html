@@ -85,7 +85,7 @@
               <th scope="col">Odds Matched</th>
               <th scope="col">Matched</th>
               <th scope="col">Unmatched</th>
-              <th scope="col" class="last">Profit/Liability</th>
+              <!-- <th scope="col" class="last">Profit/Liability</th> -->
             </tr>
           </thead>
           <tbody>
@@ -95,11 +95,11 @@
                 <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
               </td>
               <td>{{ bets.username }}</td>
-              <td>{{ bets.placedDate | date }}</td>
+              <td>{{ bets.placedDate | date:"medium" }}</td>
               <td>{{ bets.event }}</td>
               <td>
-                <span *ngIf="!bets.isBack" class="border r-2 bg-danger text-danger border-danger me-2"></span>
-                <span *ngIf="bets.isBack" class="border border-2 bg-primary text-primary border-primary me-2"></span>
+                <span *ngIf="!bets.type" class="border r-2 bg-danger text-danger border-danger me-2"></span>
+                <span *ngIf="bets.type" class="border border-2 bg-primary text-primary border-primary me-2"></span>
                 {{ bets.betCategory }}
               </td>
               <td>{{ bets.selectionName }}</td>
@@ -117,14 +117,12 @@
                 </ng-container>
                 <ng-template #notMatched> -- </ng-template>
               </td>
-              <td>
-                <span [ngClass]="bets.profitLiability > 0
-                ? 'text-success'
-                : 'text-danger'
+              <!-- <td>
+                <span [ngClass]="bets.type? 'text-success': 'text-danger'
                 ">
                   {{ bets.profitLiability }}
                 </span>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>

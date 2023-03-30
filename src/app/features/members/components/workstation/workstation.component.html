@@ -12,7 +12,7 @@
             </h4>
           </div>
           <div class="col-md-6 text-end">
-            <p>
+            <!-- <p>
               <a class="text-decoration-none text-white">
                 <input
                   type="radio"
@@ -33,7 +33,7 @@
                   value="HTML"
                 /><span class="rounded-pill p-2 m-2">Total Book</span>
               </a>
-            </p>
+            </p> -->
           </div>
         </div>
       </div>
@@ -64,24 +64,23 @@
         <th scope="col">Odds Matched</th>
         <th scope="col">Matched</th>
         <th scope="col">Unmatched</th>
-        <th scope="col" class="last">IP</th>
+        <th scope="col">Profit Liability</th>
+        <th scope="col" class="last text-center">IP</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let viewTotalEach of viewTotal; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ viewTotalEach.placedDate }}</td>
+        <td>{{ viewTotalEach.placedDate | date : "medium" }}</td>
         <td>{{ viewTotalEach.event }}</td>
         <td>
-          <span
-            class="border border-2 bg-danger text-danger border-danger me-2"
-          >
-          </span>
+          <span *ngIf="!viewTotalEach.isBack" class="border border-2 bg-danger text-danger border-danger me-2"></span>
+          <span *ngIf="viewTotalEach.isBack" class="border border-2 bg-primary text-primary border-primary me-2"></span>
           {{ viewTotalEach.marketName }}
         </td>
         <td>{{ viewTotalEach.selectionName }}</td>
         <td>{{ viewTotalEach.betRate }}</td>
-        <td>20{{ viewTotalEach.betRate }}</td>
+        <td>{{ viewTotalEach.betRate }}</td>
         <td>
           <ng-container *ngIf="viewTotalEach.isMatched; else notMatched">
             {{ viewTotalEach.stake }}
@@ -93,6 +92,9 @@
             {{ viewTotalEach.stake }}
           </ng-container>
           <ng-template #notMatched> -- </ng-template>
+        </td>
+        <td [ngClass]="viewTotalEach.isBack ? 'text-success' : 'text-danger'">
+          {{ viewTotalEach.profitLiability }}
         </td>
         <td>
           {{ viewTotalEach.IP }}

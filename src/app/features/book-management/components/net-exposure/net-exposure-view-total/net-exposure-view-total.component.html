@@ -11,7 +11,7 @@
               {{ matchName }}
             </h4>
           </div>
-          <div class="col-md-6 text-end">
+          <!-- <div class="col-md-6 text-end">
             <p>
               <a class="text-decoration-none text-white">
                 <input
@@ -34,14 +34,14 @@
                 /><span class="rounded-pill p-2 m-2">Total Book</span>
               </a>
             </p>
-          </div>
+          </div> -->
         </div>
         <div class="row">
           <div class="col-md-12">
             <div class="accordion" id="accordionExample">
               <div class="accordion-item bg-transparent border-0 p-3">
                 <h2 class="accordion-header" id="headingOne">
-                  <a class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <a class="text-decoration-none text-white w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   <div
                     class="row"
                     data-bs-toggle="collapse"
@@ -51,15 +51,16 @@
                   >
                     <div class="col-md-6">
                       <p>
-                        <i class="fa fa-minus"></i>
-                        <i class="fa fa-plus"></i> Match Odds
+                        <!-- <i class="fa fa-minus"></i>
+                        <i class="fa fa-plus"></i>  -->
+                        Match Odds
                       </p>
                     </div>
 
                   </div>
                    </a>
                 </h2>
-                <div
+                <!-- <div
                   id="collapseOne"
                   class="accordion-collapse collapse show"
                   aria-labelledby="headingOne"
@@ -173,7 +174,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -205,9 +206,10 @@
         <th scope="col">Selection</th>
         <th scope="col">Odds Placed</th>
         <th scope="col">Odds Matched</th>
-        <th scope="col">Matched</th>
-        <th scope="col">Unmatched</th>
-        <th scope="col" class="last">IP</th>
+        <th scope="col">Matched Stake</th>
+        <th scope="col">Unmatched Stake</th>
+        <!-- <th scope="col">Profit/Liability</th> -->
+        <th scope="col" class="last text-center">IP</th>
       </tr>
     </thead>
     <tbody>
@@ -217,10 +219,8 @@
         <td>{{ viewTotalEach.placedDate  | date : "medium" }}</td>
         <td>{{ viewTotalEach.event }}</td>
         <td>
-          <span
-            class="border border-2 bg-danger text-danger border-danger me-2"
-          >
-          </span>
+          <span *ngIf="!viewTotalEach.isBack" class="border border-2 bg-danger text-danger border-danger me-2"></span>
+          <span *ngIf="viewTotalEach.isBack" class="border border-2 bg-primary text-primary border-primary me-2"></span>
           {{ viewTotalEach.marketName }}
         </td>
         <td>{{ viewTotalEach.selectionName }}</td>
@@ -238,8 +238,11 @@
           </ng-container>
           <ng-template #notMatched> -- </ng-template>
         </td>
+        <!-- <td [ngClass]="viewTotalEach.isBack? 'text-success': 'text-danger'">
+          {{ viewTotalEach.profitLiability }}
+        </td> -->
         <td>
-          {{ viewTotalEach.IP }}
+         <small>{{ viewTotalEach.IP }}</small>
         </td>
       </tr>
     </tbody>

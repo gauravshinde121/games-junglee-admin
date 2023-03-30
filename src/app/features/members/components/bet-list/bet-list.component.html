@@ -21,32 +21,6 @@
         <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
       </select>
     </div>
-
-    <!-- <div class="col-md-2 p-2">
-      <label>Select Member</label>
-      <select formControlName="memberName" id="ab" class="form-select">
-        <option value="null">All</option>
-        <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
-      </select>
-    </div> -->
-
-
-    <!-- <div class="col-md-2 p-2">
-      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="clearMembers()">
-        <i class="fa fa-user-cog"></i> Clear Members
-      </button>
-    </div> -->
-    <!-- <div class="col-md-3">
-      <label>Highlight Ip</label>
-      <input
-        formControlName="highlightIp"
-        type="text"
-        name=""
-        class="form-control mt-2"
-        id=""
-        placeholder="Search for ip"
-      />
-    </div> -->
   </div>
   <div class="row mt-3">
 
@@ -139,7 +113,7 @@
             <th scope="col" class="text-dark">Matched</th>
             <th scope="col" class="text-dark">Unmatched</th>
             <th scope="col" class="text-dark">Profit Liability</th>
-            <th scope="col" class="text-dark">IP</th>
+            <th scope="col" class="text-dark text-center">IP</th>
           </tr>
         </thead>
         <tbody>
@@ -152,13 +126,17 @@
             <td>{{ bet.placedDate | date : "medium" }}</td>
             <td>{{ bet.createdAt | date : "medium" }}</td>
             <td>{{ bet.event }}</td>
-            <td>{{ bet.betCategory }}</td>
+            <td>
+              <span *ngIf="!bet.isBack" class="border border-2 bg-danger text-danger border-danger me-2"></span>
+              <span *ngIf="bet.isBack" class="border border-2 bg-primary text-primary border-primary me-2"></span>
+              {{ bet.betCategory }}
+            </td>
             <td>{{ bet.selectionName }}</td>
             <td>{{ bet.betRate }}</td>
             <td>{{ bet.betRate }}</td>
             <td>{{ bet.stake }}</td>
             <td>-</td>
-            <td [ngClass]="bet.type ? 'text-success' : 'text-danger'">
+            <td [ngClass]="bet.isBack ? 'text-success' : 'text-danger'">
               {{ bet.profitLiability }}
             </td>
             <td>{{bet.ip}}</td>

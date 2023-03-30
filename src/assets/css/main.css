@@ -3,6 +3,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.table {
+  font-size: 14px;
+}
+
 .browncolor {
   background-color: #202121;
 }
@@ -579,4 +583,8 @@ select:-webkit-autofill:focus {
 
 .changepassword {
   width: 50%;
+}
+
+.pointer {
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */

@@ -123,7 +123,7 @@
       <a *ngIf="!isMatch" [class]="btnActive === 'unmatch' ? 'activeLink' : ''"
       (click)="showMatch('unmatch')" class="nav-link cursor-pointer">Unmatched</a>
     </nav>
-    <div class="col-md-12 mt-3">
+    <div class="col-md-12 mt-3 overflow-auto">
       <table class="table tableall" *ngIf="betList.length > 0">
         <thead>
           <tr>

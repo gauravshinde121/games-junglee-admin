@@ -16,9 +16,9 @@ export class MembersListComponent implements OnInit {
   selectedUserForAdjustment: any = [];
   display: string = 'none';
   showMyContainer: boolean = false;
-  modalNumber:number;
+  modalNumber: number;
 
-  limit:number = 50;
+  limit: number = 50;
   userId: any;
 
   liveCasinoRate: any;
@@ -147,7 +147,7 @@ export class MembersListComponent implements OnInit {
       { id: 1, status: "Active", color: 'green' },
       { id: 2, status: "Inactive", color: 'yellow' },
       { id: 3, status: "Closed", color: 'red' }
-    ]
+    ];
   }
 
   _preConfig() {
@@ -158,6 +158,7 @@ export class MembersListComponent implements OnInit {
 
   fetchListByCategory(category) {
     this.selectedRoleId = category.roleId;
+
     this._getAllUserInfo(this.selectedRoleId);
   }
 
@@ -176,6 +177,10 @@ export class MembersListComponent implements OnInit {
   }
 
   _getAllUserInfo(roleId) {
+    console.log('_getAllUserInfo called',roleId);
+    this._sharedService.selectedUserRoleId.next({
+      'createUserWithRoleId': roleId
+    });
     this.isLoading = true;
     this.userList = [];
 
@@ -225,21 +230,21 @@ export class MembersListComponent implements OnInit {
 
   adjustWinnings() {
     //if (confirm('Do you want bulk transfer ?')) {
-      this._sharedService
-        ._adjustWinningsApi({ userList: this.selectedUserForAdjustment })
-        .subscribe((res: any) => {
-          this._sharedService.getToastPopup(
-            'Adjusted Successfully',
-            'User',
-            'success'
-          );
-          this._sharedService.sharedSubject.next({
-            updateAdminDetails: true,
-          });
-          this.selectedUserForAdjustment = [];
-          this._getAllUserInfo(this.selectedRoleId);
-          this.closeModal();
+    this._sharedService
+      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment })
+      .subscribe((res: any) => {
+        this._sharedService.getToastPopup(
+          'Adjusted Successfully',
+          'User',
+          'success'
+        );
+        this._sharedService.sharedSubject.next({
+          updateAdminDetails: true,
         });
+        this.selectedUserForAdjustment = [];
+        this._getAllUserInfo(this.selectedRoleId);
+        this.closeModal();
+      });
     //}
   }
 
@@ -250,7 +255,7 @@ export class MembersListComponent implements OnInit {
 
   }
 
-  openBulkTransferModal(){
+  openBulkTransferModal() {
     this.modalNumber = 1;
     this.display = 'block';
   }

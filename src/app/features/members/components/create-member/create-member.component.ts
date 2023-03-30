@@ -15,14 +15,15 @@ export class CreateMemberComponent implements OnInit {
 
   memberForm: FormGroup;
   isLoading = false;
-  editMode:boolean;
+  editMode: boolean;
   memberData: any;
   editUserId: any;
   gamesList: any = [];
   roles: any = [];
-  userDetails:any;
-  isSuperAdmin:any;
+  userDetails: any;
+  isSuperAdmin: any;
   roleId: string = '';
+  createUserWithRoleId:number;
 
   constructor(
     private _fb: FormBuilder,
@@ -33,6 +34,11 @@ export class CreateMemberComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
+    this._sharedService.selectedUserRoleId.subscribe((res: any) => {
+      console.log('selectedUserRoleId shared service acalled', res['createUserWithRoleId']);
+      this.createUserWithRoleId = res['createUserWithRoleId'];
+    });
+    console.log('this.createUserWithRoleId 22',this.createUserWithRoleId );
     //this.route.snapshot.params['id']? this.getMemberInfo():this.getGames();
     this._preConfig();
     if (this.route.snapshot.params['id']) {
@@ -41,7 +47,7 @@ export class CreateMemberComponent implements OnInit {
         editUserId = this.route.snapshot.params['id'];
       await this.getMemberInfo();
     }
-    console.log('this.editMode();',this.editMode);
+    console.log('this.editMode();', this.editMode);
     //else {
     this.getGames();
     //}
@@ -88,7 +94,7 @@ export class CreateMemberComponent implements OnInit {
           maxBet: this.memberData.maxBet,
           maxExposure: this.memberData.maxExposure,
           //isActive: this.memberData.isActive,
-          roleId:this.memberData.roleId
+          roleId: this.memberData.roleId
         });
       }
     }))
@@ -99,13 +105,13 @@ export class CreateMemberComponent implements OnInit {
     if (!this.editMode) {
       this.userDetails = this._sharedService.getUserDetails();
       this.isSuperAdmin = this.userDetails.roleId.indexOf(1);
-      console.log('this.isSuperAdmin',this.isSuperAdmin);
+      console.log('this.isSuperAdmin', this.isSuperAdmin);
       var sportsBookRate = 1;
       var liveCasinoRate = 100;
       var minBet = 100;
       var maxBet = 1000000;
       var maxExposure = 50000000;
-      if(this.isSuperAdmin == -1){
+      if (this.isSuperAdmin == -1) {
         console.log('not super admin');
         sportsBookRate = this.userDetails.sportsBookRate;
         liveCasinoRate = this.userDetails.liveCasinoRate;
@@ -134,8 +140,8 @@ export class CreateMemberComponent implements OnInit {
         maxBet: [maxBet, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
         maxExposure: [maxExposure, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
         //status: ['Active', Validators.required],
-        roleId: [7, Validators.required],
-        partnerShipPercent: [8,[(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(8)]]
+        roleId: [this.createUserWithRoleId, Validators.required],
+        partnerShipPercent: [8, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(8)]]
       },
         {
           validators: this.Mustmatch('password', 'confirmPassword')
@@ -165,7 +171,7 @@ export class CreateMemberComponent implements OnInit {
 
   onSubmitMemberForm() {
     this.isLoading = true;
-    console.log('this.memberForm.value',this.memberForm.value);
+    console.log('this.memberForm.value', this.memberForm.value);
     let memberData = {};
     if (!this.editMode) {
       memberData = {

@@ -124,7 +124,7 @@
         <div class="col-md-2">Sportsbook (INR)</div>
         <div class="col-md-2">Max Rate (INR) <br />My Share : 0 </div>
         <div class="col-md-8">
-          <input formControlName="sportsBookRate" name="sportsBookRate" type="number" id="sportsBookRate" class="form-control pb-2" />
+          <input [readOnly]="this.isSuperAdmin == -1" formControlName="sportsBookRate" name="sportsBookRate" type="number" id="sportsBookRate" class="form-control pb-2" />
           <p>(Min : 1) (Max : 1)</p>
         </div>
       </div>
@@ -132,7 +132,7 @@
         <div class="col-md-2">Live Casino</div>
         <div class="col-md-2">Max Rate (INR) <br />My Share : 0 </div>
         <div class="col-md-8">
-          <input formControlName="liveCasinoRate" name="liveCasinoRate" type="number" id="" class="form-control pb-2" />
+          <input [readOnly]="this.isSuperAdmin == -1"  formControlName="liveCasinoRate" name="liveCasinoRate" type="number" id="" class="form-control pb-2" />
           <p>(Min : 100) (Max : 100)</p>
         </div>
       </div>
@@ -140,7 +140,7 @@
         <div class="col-md-2">Partnership Percentage</div>
         <div class="col-md-2">(%)</div>
         <div class="col-md-8">
-          <input formControlName="partnerShipPercent" name="partnerShipPercent" type="number" id="" class="form-control pb-2" placeholder="(Min : 1) (Max : 100)" />
+          <input [readOnly]="this.isSuperAdmin == -1"  formControlName="partnerShipPercent" name="partnerShipPercent" type="number" id="" class="form-control pb-2" placeholder="(Min : 1) (Max : 100)" />
           <p>(Min : 8) (Max : 100)</p>
         </div>
       </div>
@@ -150,7 +150,7 @@
         <div class="col-md-4">
           <h4 class="text-pink">Min Bet</h4>
           <label>Member Min Bet</label>
-          <input formControlName="minBet" type="number" class="form-control" />
+          <input [readOnly]="this.isSuperAdmin == -1"  formControlName="minBet" type="number" class="form-control" />
           <p>(Min: 100)</p>
           <!-- <div class="text-danger" *ngIf="MinBetVail && MinBetVail.invalid && MinBetVail.touched">
             Please enter valid Min Rate
@@ -167,7 +167,7 @@
         <div class="col-md-4">
           <h4 class="text-pink">Max Bet</h4>
           <label> Member Max Bet Amt </label>
-          <input formControlName="maxBet" type="number" class="form-control" />
+          <input [readOnly]="this.isSuperAdmin == -1"  formControlName="maxBet" type="number" class="form-control" />
           <p>(Min: 1) (Max: 10000000)</p>
           <!-- <div class="text-danger" *ngIf="MaxBetVail && MaxBetVail.invalid && MaxBetVail.touched">
             Please enter valid Bet Amount
@@ -185,7 +185,7 @@
         <div class="col-md-4">
           <h4 class="text-pink">Max Exposure</h4>
           <label> Member Max Exposure Amt </label>
-          <input formControlName="maxExposure" type="number" class="form-control" />
+          <input [readOnly]="this.isSuperAdmin == -1"  formControlName="maxExposure" type="number" class="form-control" />
           <p>(Min: 1) (Max: 50000000 )</p>
           <!-- <div class="text-danger" *ngIf="maxExposureAmtVail && maxExposureAmtVail.invalid && maxExposureAmtVail.touched">
             Please enter valid Exposure Amount
@@ -207,7 +207,7 @@
         <button type="button" class="btn btn-pink rounded-pill ps-5 pe-5 pt-3 pb-3" routerLink="member/list"> Cancel </button>
       </div>
       <div class="col-md-6 col-6 ">
-        <button *ngIf="!editMode" type="submit" class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3" [disabled]="memberForm.invalid"> Save </button>
+        <button *ngIf="!editMode" type="submit" class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3"> Save </button>
         <button *ngIf="editMode" type="submit" class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3" [disabled]="!memberForm.dirty"> Update </button>
       </div>
     </div>

@@ -20,7 +20,8 @@ export class CreateMemberComponent implements OnInit {
   editUserId: any;
   gamesList: any = [];
   roles: any = [];
-
+  userDetails:any;
+  isSuperAdmin:any;
   roleId: string = '';
 
   constructor(
@@ -96,6 +97,22 @@ export class CreateMemberComponent implements OnInit {
 
   _createMemberForm() {
     if (!this.editMode) {
+      this.userDetails = this._sharedService.getUserDetails();
+      this.isSuperAdmin = this.userDetails.roleId.indexOf(1);
+      console.log('this.isSuperAdmin',this.isSuperAdmin);
+      var sportsBookRate = 1;
+      var liveCasinoRate = 100;
+      var minBet = 100;
+      var maxBet = 1000000;
+      var maxExposure = 50000000;
+      if(this.isSuperAdmin == -1){
+        console.log('not super admin');
+        sportsBookRate = this.userDetails.sportsBookRate;
+        liveCasinoRate = this.userDetails.liveCasinoRate;
+        minBet = this.userDetails.minimumBet;
+        maxBet = this.userDetails.maxBet;
+        maxExposure = this.userDetails.maxExposure;
+      }
       this.memberForm = this._fb.group({
         username: [
           "",
@@ -111,11 +128,11 @@ export class CreateMemberComponent implements OnInit {
         confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
         playerMaxCreditLimit: ['', Validators.required],
         //comments: [''],
-        sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(1), Validators.min(1)]],
-        liveCasinoRate: [100, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(100)]],
-        minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
-        maxBet: [1000000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
-        maxExposure: [50000000, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
+        sportsBookRate: [sportsBookRate, [(c: AbstractControl) => Validators.required(c), Validators.max(1), Validators.min(1)]],
+        liveCasinoRate: [liveCasinoRate, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(100)]],
+        minBet: [minBet, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
+        maxBet: [maxBet, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
+        maxExposure: [maxExposure, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
         //status: ['Active', Validators.required],
         roleId: [7, Validators.required],
         partnerShipPercent: [8,[(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(8)]]
@@ -148,7 +165,7 @@ export class CreateMemberComponent implements OnInit {
 
   onSubmitMemberForm() {
     this.isLoading = true;
-
+    console.log('this.memberForm.value',this.memberForm.value);
     let memberData = {};
     if (!this.editMode) {
       memberData = {
@@ -216,9 +233,9 @@ export class CreateMemberComponent implements OnInit {
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
-      if(roles){
+      /*if(roles){
         this.memberForm.controls['roleId'].setValidators([(c: AbstractControl) => Validators.required(roles.roleId)]);
-      }
+      }*/
     })
   }
 

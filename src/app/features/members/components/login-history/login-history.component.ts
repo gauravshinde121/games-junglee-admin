@@ -96,8 +96,8 @@ export class LoginHistoryComponent implements OnInit {
       console.log(res);
       this.isLoading = false;
       if(res.userDeviceLogs){
-        this.loginHistory = res.userDeviceLogs;
-        this.totalPages = Math.ceil(this.loginHistory.length / this.pageSize);
+        this.loginHistory = res.userDeviceLogs.loginHistory;
+        this.totalPages = Math.ceil(res.userDeviceLogs.totalNoOfRecords / this.pageSize);
       }
     },(err)=>{
       console.log(err);

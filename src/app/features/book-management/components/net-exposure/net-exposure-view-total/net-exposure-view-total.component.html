@@ -201,47 +201,47 @@
         <th scope="col" class="first">#</th>
         <th scope="col">Member</th>
         <th scope="col">Place time</th>
-        <th scope="col">Events</th>
+        <th scope="col-2">Events</th>
         <th scope="col">Market</th>
         <th scope="col">Selection</th>
         <th scope="col">Odds Placed</th>
         <th scope="col">Odds Matched</th>
-        <th scope="col">Matched Stake</th>
-        <th scope="col">Unmatched Stake</th>
-        <!-- <th scope="col">Profit/Liability</th> -->
+        <th scope="col">Matched</th>
+        <th scope="col">Unmatched</th>
+        <th scope="col">Profit/Liability</th>
         <th scope="col" class="last text-center">IP</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let viewTotalEach of viewTotal; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ viewTotalEach.userName }}</td>
-        <td>{{ viewTotalEach.placedDate  | date : "medium" }}</td>
-        <td>{{ viewTotalEach.event }}</td>
-        <td>
+        <td class="col">{{ i + 1 }}</td>
+        <td class="col">{{ viewTotalEach.userName }}</td>
+        <td class="col">{{ viewTotalEach.placedDate  | date:'mediumTime' }}</td>
+        <td class="col">{{ viewTotalEach.event | truncate : 33}}</td>
+        <td class="col">
           <span *ngIf="!viewTotalEach.isBack" class="border border-2 bg-danger text-danger border-danger me-2"></span>
           <span *ngIf="viewTotalEach.isBack" class="border border-2 bg-primary text-primary border-primary me-2"></span>
           {{ viewTotalEach.marketName }}
         </td>
-        <td>{{ viewTotalEach.selectionName }}</td>
-        <td>{{ viewTotalEach.betRate }}</td>
-        <td>{{ viewTotalEach.betRate }}</td>
-        <td>
+        <td class="col">{{ viewTotalEach.selectionName }}</td>
+        <td class="col">{{ viewTotalEach.betRate }}</td>
+        <td class="col">{{ viewTotalEach.betRate }}</td>
+        <td class="col">
           <ng-container *ngIf="viewTotalEach.isMatched; else notMatched">
             {{ viewTotalEach.stake }}
           </ng-container>
           <ng-template #notMatched> -- </ng-template>
         </td>
-        <td class="text-danger">
+        <td class="text-danger col">
           <ng-container *ngIf="!viewTotalEach.isMatched; else notMatched">
             {{ viewTotalEach.stake }}
           </ng-container>
           <ng-template #notMatched> -- </ng-template>
         </td>
-        <!-- <td [ngClass]="viewTotalEach.isBack? 'text-success': 'text-danger'">
-          {{ viewTotalEach.profitLiability }}
-        </td> -->
-        <td>
+        <td class="col" [ngClass]="viewTotalEach.isBack? 'text-danger': 'text-success'">
+          <strong>{{ viewTotalEach.profitLiability }}</strong>
+        </td>
+        <td class="col">
          <small>{{ viewTotalEach.IP }}</small>
         </td>
       </tr>

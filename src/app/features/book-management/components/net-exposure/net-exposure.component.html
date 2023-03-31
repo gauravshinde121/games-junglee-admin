@@ -6,7 +6,7 @@
         <h4 class="text-pink">Net Exposure</h4>
         <div class="row" [formGroup]="filterForm">
           <div class="col-md-8 mt-2">
-            <a class="text-decoration-none text-white">
+            <!-- <a class="text-decoration-none text-white">
               <input
                 type="radio"
                 (click)="
@@ -19,8 +19,8 @@
                 name="selectedType"
                 value="MyPT"
               /><span class="rounded-pill p-2 m-2">My PT</span>
-            </a>
-            <a class="text-decoration-none text-white">
+            </a> -->
+            <!-- <a class="text-decoration-none text-white">
               <input
                 value="totalBook"
                 (click)="
@@ -33,7 +33,7 @@
                 value="TotalBook"
                 class="pointer"
               /><span class="rounded-pill p-2 m-2">Total Book</span>
-            </a>
+            </a> -->
             <span class="me-3 pt-2"><strong>Filter by Sport</strong></span>
             <a class="text-decoration-none text-white">
               <input
@@ -139,18 +139,18 @@
                   </td>
                   <td>
                     <a class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100 text-danger">
-                      <span [ngClass]="data.netExposure > 0 ? 'text-success' : 'text-danger'">{{ data.netExposure }}</span>
+                      <span [ngClass]="data.netExposure > 0 ? 'text-success' : 'text-danger'">{{ data.netExposure | number : '1.2-2' }}</span>
                     </a>
                   </td>
                   <td>
                     <a *ngIf="data.horses[0]?.finalAmount>0" class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
                       <span class="text-success">
-                        {{ data.horses[0]?.finalAmount? data.horses[0]?.finalAmount: 0}}
+                        {{ data.horses[0]?.finalAmount? (data.horses[0]?.finalAmount| number : '1.2-2'): 0}}
                       </span>
                     </a>
                     <a *ngIf="data.horses[0]?.finalAmount<0" class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
                       <span class="text-danger">
-                        {{ data.horses[0]?.finalAmount? data.horses[0]?.finalAmount: 0}}
+                        {{ data.horses[0]?.finalAmount? (data.horses[0]?.finalAmount| number : '1.2-2'): 0}}
                       </span>
                     </a>
                     <a *ngIf="data.horses[0]?.finalAmount==0" class="btn rounded-pill alert pt-2 pb-2 w-100">
@@ -163,12 +163,12 @@
                     <ng-container *ngIf="data.horses[2]">
                       <a *ngIf="data.horses[2].finalAmount>0"  class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
                         <span class="text-success">
-                          {{ data.horses[2]?.finalAmount? data.horses[2]?.finalAmount: 0}}
+                          {{ data.horses[2]?.finalAmount? (data.horses[2]?.finalAmount | number : '1.2-2'): 0}}
                         </span>
                       </a >
                       <a *ngIf="data.horses[2].finalAmount<0"  class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
                         <span class="text-danger">
-                          {{ data.horses[2]?.finalAmount? data.horses[2]?.finalAmount: 0}}
+                          {{ data.horses[2]?.finalAmount? (data.horses[2]?.finalAmount | number : '1.2-2'): 0}}
                         </span>
                       </a >
                       <a *ngIf="data.horses[2].finalAmount==0"  class="btn rounded-pill alert pt-2 pb-2 w-100">
@@ -180,11 +180,11 @@
                   </td>
                   <td>
                     <a *ngIf="data.horses[1]?.finalAmount<0"  class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
-                      <span class="text-danger">{{ data.horses[1]?.finalAmount? data.horses[1]?.finalAmount: 0}}</span>
+                      <span class="text-danger">{{ data.horses[1]?.finalAmount? (data.horses[1]?.finalAmount | number : '1.2-2') : 0}}</span>
                     </a>
 
                     <a *ngIf="data.horses[1]?.finalAmount>0" class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
-                      <span class="text-success">{{ data.netExposure }}</span>
+                      <span class="text-success">{{ data.horses[1]?.finalAmount? (data.horses[1]?.finalAmount | number : '1.2-2'): 0}}</span>
                     </a>
 
                     <a *ngIf="data.horses[1]?.finalAmount==0" class="btn rounded-pill alert pt-2 pb-2 w-100">

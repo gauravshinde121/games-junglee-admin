@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { LeftNavigationComponent } from './components/left-navigation/left-navigation.component';
 import { FormsModule } from '@angular/forms';
+import { TruncatePipe } from './pipe/truncate.pipe';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     LeftNavigationComponent,
+    TruncatePipe,
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     HeaderComponent,
-    LeftNavigationComponent
+    LeftNavigationComponent,
+    TruncatePipe
   ]
 })
 export class SharedModule { }

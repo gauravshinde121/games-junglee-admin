@@ -16,7 +16,6 @@ export class NetExposureComponent implements OnInit {
   isLoading = false;
   games:any;
   matchList:any = [];
-  selectedType:any;
   sport:any;
 
   constructor(
@@ -32,12 +31,11 @@ export class NetExposureComponent implements OnInit {
   _preConfig(){
     this._getGames();
     this._initForm();
-    this.onFilterChange({selectedType:"MyPt",matchId:null,sportId:null, clicked:'firstTime' });
+    this.onFilterChange({matchId:null,sportId:null, clicked:'firstTime' });
   }
 
   _initForm(){
     this.filterForm = new FormGroup({
-      selectedType: new FormControl('MyPT'),
       sport: new FormControl(null),
       matchId: new FormControl(null)
     });
@@ -47,7 +45,6 @@ export class NetExposureComponent implements OnInit {
     this.isLoading = true;
     let body = {};
     body = {
-      selectedType: this.filterForm.value.selectedType,
       sportId: this.filterForm.value.matchId,
       matchId: event.value
     }
@@ -62,7 +59,6 @@ export class NetExposureComponent implements OnInit {
     let sport_value = this.filterForm.value.sport;
     if(filterObj.clicked == 'type'){
       body = {
-        selectedType: filterObj.selectedType,
         matchId: this.filterForm.value.matchId,
         sportId: sport_value
       }
@@ -72,21 +68,18 @@ export class NetExposureComponent implements OnInit {
       this._getMatchBySportId(filterObj.sport);
       }
       body = {
-        selectedType: this.filterForm.value.selectedType,
         sportId: filterObj.sport,
         matchId: null
       }
     }
     if(filterObj.clicked == 'match'){
       body = {
-        selectedType: this.filterForm.value.selectedType,
         sportId: this.filterForm.value.matchId,
         matchId: filterObj.matchId
       }
     }
     if(filterObj.clicked == 'firstTime'){
       body = {
-        selectedType: filterObj.selectedType,
         sportId: filterObj.sportId,
         matchId: filterObj.matchId
       }
@@ -95,8 +88,10 @@ export class NetExposureComponent implements OnInit {
       // this.alterData(res);
       this.booksForBackend = res.booksForBackend;
      this.isLoading = false;
-
-    })
+    },
+    ()=>this.isLoading = false,
+    ()=>this.isLoading = false
+    )
 
   }
 

@@ -83,48 +83,48 @@
               <th scope="col">Selection</th>
               <th scope="col">Odds Placed</th>
               <th scope="col">Odds Matched</th>
-              <th scope="col">Matched Stake</th>
-              <th scope="col">Unmatched Stake</th>
-              <!-- <th scope="col" class="last">Profit/Liability</th> -->
+              <th scope="col">Matched</th>
+              <th scope="col">Unmatched</th>
+              <th scope="col" class="last">Profit/Liability</th>
               <th scope="col" class="last">IP</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let bets of allBets; let i = index">
-              <td>
+              <td class="col">
                 <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
                 <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
               </td>
-              <td>{{ bets.username }}</td>
-              <td>{{ bets.placedDate | date:"medium" }}</td>
-              <td>{{ bets.event }}</td>
-              <td>
+              <td class="col">{{ bets.username }}</td>
+              <td class="col">{{ bets.placedDate | date:'mediumTime' }}</td>
+              <td class="col">{{ bets.event | truncate : 28}}</td>
+              <td class="col">
                 <span *ngIf="!bets.type" class="border r-2 bg-danger text-danger border-danger me-2"></span>
                 <span *ngIf="bets.type" class="border border-2 bg-primary text-primary border-primary me-2"></span>
                 {{ bets.betCategory }}
               </td>
-              <td>{{ bets.selectionName }}</td>
-              <td>{{ bets.betRate }}</td>
-              <td>{{ bets.averagePriceMatched }}</td>
-              <td>
+              <td class="col">{{ bets.selectionName }}</td>
+              <td class="col">{{ bets.betRate }}</td>
+              <td class="col">{{ bets.averagePriceMatched }}</td>
+              <td class="col">
                 <ng-container *ngIf="bets.isMatched; else notMatched">
                   {{ bets.stake }}
                 </ng-container>
                 <ng-template #notMatched> -- </ng-template>
               </td>
-              <td class="text-danger">
+              <td class="text-danger col">
                 <ng-container *ngIf="!bets.isMatched; else notMatched">
                   {{ bets.stake }}
                 </ng-container>
                 <ng-template #notMatched> -- </ng-template>
               </td>
-              <!-- <td>
-                <span [ngClass]="bets.type? 'text-success': 'text-danger'
+              <td class="col">
+                <span [ngClass]="bets.type? 'text-danger': 'text-success'
                 ">
-                  {{ bets.profitLiability }}
+                  <strong>{{ bets.profitLiability }}</strong>
                 </span>
-              </td> -->
-              <td>{{ bets.ip }}</td>
+              </td>
+              <td class="col">{{ bets.ip }}</td>
             </tr>
           </tbody>
         </table>

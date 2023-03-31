@@ -95,8 +95,8 @@ export class BetSettingsComponent implements OnInit {
       typeName:['All'],
       betType:["Matched"],
       time: ["All"],
-      fromDate : this.formatFormDate(new Date()),
-      toDate : this.formatFormDate(new Date()),
+      fromDate:new FormControl(this.formatFormDate(new Date())),
+      toDate:new FormControl(this.formatFormDate(new Date())),
       stakesFromValue : [null],
       stakesToValue : [null]
     });
@@ -177,6 +177,16 @@ export class BetSettingsComponent implements OnInit {
   }
 
   searchList() {
+    let fromDate = new Date(this.betTickerForm.value.fromDate);
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.betTickerForm.value.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
+
     let payload = {
       memberId: this.betTickerForm.value.memberId,
       sportsId: this.sportsId,
@@ -185,8 +195,8 @@ export class BetSettingsComponent implements OnInit {
       userId: null,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
-      fromDate : this.betTickerForm.value.fromDate,
-      toDate : this.betTickerForm.value.toDate
+      fromDate : fromDate,
+      toDate : toDate
     }
 
     this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{

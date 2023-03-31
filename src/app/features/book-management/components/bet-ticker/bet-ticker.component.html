@@ -59,11 +59,11 @@
         </div>
         <div class="col-md-4 mb-2">
           <label>Stakes From Value</label>
-          <input type="number" class="form-control" value="" placeholder="Enter Stake From..." />
+          <input formControlName="stakesFromValue" type="number" class="form-control" value="" placeholder="Enter Stake From..." />
         </div>
         <div class="col-md-4 mb-2">
           <label>Stakes To Value</label>
-          <input type="number" class="form-control" value="" placeholder="Enter Stake To..." />
+          <input formControlName="stakesToValue" type="number" class="form-control" value="" placeholder="Enter Stake To..." />
         </div>
         <div class="col-md-4 mb-2 mt-4">
           <button type="button" class="btn btn-pink rounded-pill w-100" (click)="searchList()"> Search </button>
@@ -85,7 +85,8 @@
               <th scope="col">Odds Matched</th>
               <th scope="col">Matched</th>
               <th scope="col">Unmatched</th>
-              <th scope="col" class="last">Profit/Liability</th>
+              <th scope="col">Profit/Liability</th>
+              <th scope="col" class="last">IP</th>
             </tr>
           </thead>
           <tbody>
@@ -125,6 +126,7 @@
                   {{ bets.profitLiability }}
                 </span>
               </td>
+              <td>{{ bets.ip }}</td>
             </tr>
           </tbody>
         </table>

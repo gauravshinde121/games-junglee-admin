@@ -23,26 +23,7 @@
         </select>
       </div>
 
-      <div class="col-md-3 mb-3">
-        <label>From Date</label>
-        <input
-        formControlName="fromDate"
-          type="date"
-          class="form-control"
-          id=""
-          placeholder="Month"
-        />
-      </div>
-      <div class="col-md-3 mb-3">
-        <label>To Date</label>
-        <input
-          type="date"
-          formControlName="toDate"
-          class="form-control"
-          id=""
-          placeholder="Month"
-        />
-      </div>
+
       <div class="col-md-3 mt-2 mb-4">
         <button
           type="submit"
@@ -141,17 +122,37 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
           <label>Select Member</label>
           <select formControlName="memberId" id="ab" class="form-select pointer">
             <option value="null">All</option>
             <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
           </select>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
           <button class="btn border-pink rounded-pill mt-4 w-100 text-white" (click)="clearMember()">
             <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
           </button>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label>From Date</label>
+          <input
+          formControlName="fromDate"
+            type="date"
+            class="form-control"
+            id=""
+            placeholder="Month"
+          />
+        </div>
+        <div class="col-md-3 mb-3">
+          <label>To Date</label>
+          <input
+            type="date"
+            formControlName="toDate"
+            class="form-control"
+            id=""
+            placeholder="Month"
+          />
         </div>
       </div>
       <div class="row">
@@ -204,6 +205,7 @@
         <div class="col-md-4 mb-2">
           <label>Stakes From Value</label>
           <input
+          formControlName="stakesFromValue"
             type="number"
             class="form-control"
             value=""
@@ -213,6 +215,7 @@
         <div class="col-md-4 mb-2">
           <label>Stakes To Value</label>
           <input
+          formControlName="stakesToValue"
             type="number"
             class="form-control"
             value=""
@@ -250,6 +253,7 @@
               <th scope="col">Matched Stake</th>
               <th scope="col">Unmatched Stake</th>
               <!-- <th scope="col">Profit/Liability</th> -->
+              <th scope="col">IP</th>
               <th scope="col" class="last">Action</th>
             </tr>
           </thead>
@@ -288,6 +292,7 @@
                 {{ bets.profitLiability }}
                 </span>
               </td> -->
+              <td>{{ bets.ip }}</td>
               <td>
                 <button
                 (click)="deleteBet(bets)"

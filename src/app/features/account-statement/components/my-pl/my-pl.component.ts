@@ -11,11 +11,11 @@ import { formatDate } from '@angular/common';
 })
 export class MyPlComponent implements OnInit {
 
-  filterForm:FormGroup;
-  plStatement:any = [];
-  games:any;
-  matchList:any = [];
-  marketTypeList:any = [];
+  filterForm: FormGroup;
+  plStatement: any = [];
+  games: any;
+  matchList: any = [];
+  marketTypeList: any = [];
   dateFormat = "yyyy-MM-dd";
   language = "en";
 
@@ -23,12 +23,12 @@ export class MyPlComponent implements OnInit {
   pageSize: number = 50;
   totalPages: number = 0;
   isLoading = false;
-  marketList:any;
+  marketList: any;
   //currentTotalPage:any;
 
   constructor(
-    private _accountStatementService:AccountStatementService,
-    private _sharedService:SharedService
+    private _accountStatementService: AccountStatementService,
+    private _sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +41,7 @@ export class MyPlComponent implements OnInit {
     });
   }
 
-  _preconfig(){
+  _preconfig() {
     /*this._sharedService._getGames().subscribe((res:any)=>{
       this.games = res.gamesList;
     });*/
@@ -51,21 +51,21 @@ export class MyPlComponent implements OnInit {
     this._getAllMarketTypeList();
   }
 
-  __initForm(){
+  __initForm() {
     this.filterForm = new FormGroup({
-      fromDate:new FormControl(this.formatFormDate(new Date())),
-      toDate:new FormControl(this.formatFormDate(new Date())),
-      sportsId:new FormControl(null),
-      matchId:new FormControl(null),
-      marketId:new FormControl(null)
+      fromDate: new FormControl(this.formatFormDate(new Date())),
+      toDate: new FormControl(this.formatFormDate(new Date())),
+      sportsId: new FormControl(null),
+      matchId: new FormControl(null),
+      marketId: new FormControl(null)
     })
   }
 
   formatFormDate(date: Date) {
-    return formatDate(date, this.dateFormat,this.language);
+    return formatDate(date, this.dateFormat, this.language);
   }
 
-  getPlStatement(){
+  getPlStatement() {
     this.isLoading = true;
     this.plStatement = [];
     let fromDate = new Date(this.filterForm.value.fromDate);
@@ -81,57 +81,57 @@ export class MyPlComponent implements OnInit {
     let body = {
       fromDate: fromDate,
       toDate: toDate,
-      sportsId:this.filterForm.value.sportsId,
-      matchId:this.filterForm.value.matchId,
-      marketId:this.filterForm.value.marketId,
+      sportsId: this.filterForm.value.sportsId,
+      matchId: this.filterForm.value.matchId,
+      marketId: this.filterForm.value.marketId,
       pageNo: this.currentPage,
       limit: 50,
     };
-    this._accountStatementService._getPlBySubgameAPi(body).subscribe((res:any)=>{
+    this._accountStatementService._getPlBySubgameAPi(body).subscribe((res: any) => {
       this.isLoading = false;
-      if(res.admin.finalResult.length > 0){
-      this.plStatement = res.admin.finalResult;
-      console.log('this.plStatement.length',this.plStatement.length);
-      console.log('this.pageSize',this.pageSize);
-      this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+      if (res.admin.finalResult.length > 0) {
+        this.plStatement = res.admin.finalResult;
+        console.log('this.plStatement.length', this.plStatement.length);
+        console.log('this.pageSize', this.pageSize);
+        this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
       }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     });
   }
 
-  _getAllMarketTypeList(){
-    this._sharedService.getAllMarketTypeList().subscribe((data:any)=>{
-      if(data.data){
+  _getAllMarketTypeList() {
+    this._sharedService.getAllMarketTypeList().subscribe((data: any) => {
+      if (data.data) {
         this.marketTypeList = data.data;
       }
     });
   }
 
-  _getMarketByMatchId(sportId){
-    this._sharedService.getMarketsByMatchId(sportId).subscribe((data:any)=>{
-      if(data.marketList){
+  _getMarketByMatchId(sportId) {
+    this._sharedService.getMarketsByMatchId(sportId).subscribe((data: any) => {
+      if (data.marketList) {
         this.marketList = data.marketList;
       }
     });
   }
 
-  _getGames(){
-    this._sharedService._getSports().subscribe((data:any)=>{
-      if(data){
+  _getGames() {
+    this._sharedService._getSports().subscribe((data: any) => {
+      if (data) {
         this.games = data;
       }
     });
   }
 
-  _getMatchBySportId(sportId){
-    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
-      if(data.matchList){
+  _getMatchBySportId(sportId) {
+    this._sharedService.getMatchBySportId(sportId).subscribe((data: any) => {
+      if (data.matchList) {
         this.matchList = data.matchList;
       }
     });
   }
 
-  onGameSelected(sportId){
+  onGameSelected(sportId) {
     this._getMatchBySportId(sportId);
   }
 

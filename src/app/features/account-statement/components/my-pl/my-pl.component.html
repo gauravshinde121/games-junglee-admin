@@ -66,11 +66,11 @@
             <th scope="col" class="text-dark">Game</th>
             <th scope="col" class="text-dark">Sub Game</th>
             <th scope="col" class="text-dark">Event</th>
-            <th scope="col" class="text-dark">Win</th>
+            <th scope="col" class="text-dark">Win/Loss</th>
             <th scope="col" class="text-dark">Commission</th>
             <th scope="col" class="text-dark">Net Amount</th>
-            <th scope="col" class="text-dark">U/L Commission</th>
-            <th scope="col" class="text-dark">D/L Commission</th>
+            <!-- <th scope="col" class="text-dark">U/L Commission</th>
+            <th scope="col" class="text-dark">D/L Commission</th> -->
             <th scope="col" class="text-dark">User Count</th>
             <th scope="col" class="text-dark">Bet Count</th>
           </tr>
@@ -86,8 +86,8 @@
             </td>
             <td>{{ pl.commission | number }}</td>
             <td>{{ pl.netAmount | number }}</td>
-            <td>0</td>
-            <td>0</td>
+            <!-- <td>0</td>
+            <td>0</td> -->
             <td>{{ pl.userCount }}</td>
             <td>{{ pl.userBetCount }}</td>
             <!--<td><button

@@ -165,12 +165,12 @@
               </thead>
               <tbody>
                 <!-- ngRepeat: stake in stakes.detail -->
-                <tr class="ng-scope text-white">
-                  <td class="ng-binding" >{{marketInfo?.stakes['details'][0]?.level }}</td>
-                  <td class="ng-binding" [ngClass]="marketInfo?.stakes['details'][0]?.stake > 0
+                <tr class="ng-scope text-white" *ngFor="let info of marketInfo?.stakes['details']">
+                  <td class="ng-binding" >{{info.level }}</td>
+                  <td class="ng-binding" [ngClass]="info.stake > 0
                     ? 'text-success'
                     : 'text-danger'
-                ">{{marketInfo?.stakes['details'][0]?.stake }}</td>
+                ">{{info.stake }}</td>
                 </tr>
                 <!-- end ngRepeat: stake in stakes.detail -->
               </tbody>
@@ -199,16 +199,16 @@
               </thead>
               <tbody>
                 <!-- ngRepeat: stake in stakes.detail -->
-                <tr class="ng-scope text-white">
-                  <td class="ng-binding">{{marketInfo?.winLose['details'][0]?.level}}</td>
-                  <td class="ng-binding" [ngClass]="marketInfo?.winLose['details'][0]?.win > 0
+                <tr class="ng-scope text-white" *ngFor="let info of marketInfo?.winLose['details']">
+                  <td class="ng-binding">{{info.level}}</td>
+                  <td class="ng-binding" [ngClass]="info.win > 0
                     ? 'text-success'
                     : 'text-danger'
-                ">{{marketInfo?.winLose['details'][0]?.win}}</td>
-                  <td class="ng-binding" [ngClass]="marketInfo?.winLose['details'][0]?.lose > 0
+                ">{{info.win}}</td>
+                  <td class="ng-binding" [ngClass]="info.lose > 0
                     ? 'text-success'
                     : 'text-danger'
-                ">{{marketInfo?.winLose['details'][0]?.lose}}</td>
+                ">{{info.lose}}</td>
                 </tr>
                 <!-- end ngRepeat: stake in stakes.detail -->
               </tbody>

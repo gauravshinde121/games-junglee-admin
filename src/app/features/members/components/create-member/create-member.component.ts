@@ -24,6 +24,7 @@ export class CreateMemberComponent implements OnInit {
   isSuperAdmin: any;
   roleId: string = '';
   createUserWithRoleId:number;
+  uplineInfo;
 
   constructor(
     private _fb: FormBuilder,
@@ -38,24 +39,19 @@ export class CreateMemberComponent implements OnInit {
       console.log('selectedUserRoleId shared service acalled', res['createUserWithRoleId']);
       this.createUserWithRoleId = res['createUserWithRoleId'];
     });
-    console.log('this.createUserWithRoleId 22',this.createUserWithRoleId );
-    //this.route.snapshot.params['id']? this.getMemberInfo():this.getGames();
+
     this._preConfig();
+
+
     if (this.route.snapshot.params['id']) {
       this.editMode = true;
-      this.
-        editUserId = this.route.snapshot.params['id'];
-      await this.getMemberInfo();
+      this.editUserId = this.route.snapshot.params['id'];
     }
-    console.log('this.editMode();', this.editMode);
-    //else {
-    this.getGames();
-    //}
 
   }
 
   private _preConfig() {
-    this._createMemberForm();
+    this.getGames();
     this._getRoles();
   }
 
@@ -74,7 +70,7 @@ export class CreateMemberComponent implements OnInit {
 
 
   async getMemberInfo() {
-    await this._sharedService._getSingleUsersApi({
+    this._sharedService._getSingleUsersApi({
       "userId": +this.route.snapshot.params['id']
     }).subscribe(((res: any) => {
       console.log('res', res)
@@ -84,16 +80,15 @@ export class CreateMemberComponent implements OnInit {
         this.gamesList = res.gameStatus;
         this.roleId = this.memberData.roleId;
         this.memberForm.patchValue({
-          status: this.memberData.isActive,
           username: this.memberData.username,
           displayName: this.memberData.displayName,
           playerMaxCreditLimit: this.memberData.creditLimit,
           sportsBookRate: this.memberData.sportsBookRate,
           liveCasinoRate: this.memberData.liveCasinoRate,
-          minimumBet: this.memberData.minimumBet,
+          minBet: this.memberData.minimumBet,
           maxBet: this.memberData.maxBet,
           maxExposure: this.memberData.maxExposure,
-          //isActive: this.memberData.isActive,
+          partnerShipPercent:this.memberData.partnerShipPercent,
           roleId: this.memberData.roleId
         });
       }
@@ -103,61 +98,39 @@ export class CreateMemberComponent implements OnInit {
 
   _createMemberForm() {
     if (!this.editMode) {
-      this.userDetails = this._sharedService.getUserDetails();
-      this.isSuperAdmin = this.userDetails.roleId.indexOf(1);
-      console.log('this.isSuperAdmin', this.isSuperAdmin);
-      var sportsBookRate = 1;
-      var liveCasinoRate = 100;
-      var minBet = 100;
-      var maxBet = 1000000;
-      var maxExposure = 50000000;
-      if (this.isSuperAdmin == -1) {
-        console.log('not super admin');
-        sportsBookRate = this.userDetails.sportsBookRate;
-        liveCasinoRate = this.userDetails.liveCasinoRate;
-        minBet = this.userDetails.minimumBet;
-        maxBet = this.userDetails.maxBet;
-        maxExposure = this.userDetails.maxExposure;
-      }
+
+      console.log(this.createUserWithRoleId)
       this.memberForm = this._fb.group({
-        username: [
-          "",
-          {
-            validators: [userNameValidator("User Name", 1, 25)],
-            updateOn: "change",
-          },
-        ],
+        username: ['', Validators.required],
         displayName: ['', Validators.required],
         password: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
           "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
         )]),
         confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
         playerMaxCreditLimit: ['', Validators.required],
-        //comments: [''],
-        sportsBookRate: [sportsBookRate, [(c: AbstractControl) => Validators.required(c), Validators.max(1), Validators.min(1)]],
-        liveCasinoRate: [liveCasinoRate, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(100)]],
-        minBet: [minBet, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
-        maxBet: [maxBet, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
-        maxExposure: [maxExposure, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
-        //status: ['Active', Validators.required],
+        sportsBookRate: [this.uplineInfo.sportsBookRate, [(c: AbstractControl) => Validators.required(c), Validators.max(1), Validators.min(1)]],
+        liveCasinoRate: [this.uplineInfo.liveCasinoRate, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(100)]],
+        minBet: [this.uplineInfo.minimumBet, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
+        maxBet: [this.uplineInfo.maxBet, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
+        maxExposure: [this.uplineInfo.maxExposure, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
         roleId: [this.createUserWithRoleId, Validators.required],
-        partnerShipPercent: [8, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(8)]]
+        partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]]
       },
         {
           validators: this.Mustmatch('password', 'confirmPassword')
         })
     } else {
       this.memberForm = this._fb.group({
-        displayName: ['', Validators.required],
+        displayName: [''],
+        username: [''],
         playerMaxCreditLimit: ['', Validators.required],
-        //comments: [''],
         sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(1), Validators.min(1)]],
         roleId: ['', Validators.required],
         liveCasinoRate: [100, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(100)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [1000000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
         maxExposure: [50000000, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
-        partnerShipPercent: [8, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(8)]]
+        partnerShipPercent: [0, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]]
       },
         {
           validators: []
@@ -178,14 +151,12 @@ export class CreateMemberComponent implements OnInit {
         "displayName": this.memberForm.value['displayName'],
         "username": this.memberForm.value['username'],
         "pwd": this.memberForm.value['password'],
-        //"comments":this.memberForm.value['comments'],
         "creditLimit": this.memberForm.value['playerMaxCreditLimit'],
         "sportsBookRate": this.memberForm.value['sportsBookRate'],
         "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
         "minimumBet": this.memberForm.value['minBet'],
         "maxBet": this.memberForm.value['maxBet'],
         "maxExposure": this.memberForm.value['maxExposure'],
-        //"isActive": this.memberForm.value['status'],
         "gameStatus": this.gamesList,
         "roleId": this.memberForm.value['roleId'],
         "partnerShipPercent": this.memberForm.value['partnerShipPercent']
@@ -239,10 +210,23 @@ export class CreateMemberComponent implements OnInit {
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
-      /*if(roles){
-        this.memberForm.controls['roleId'].setValidators([(c: AbstractControl) => Validators.required(roles.roleId)]);
-      }*/
+      this._getUplineInfo();
     })
+  }
+
+
+  _getUplineInfo(){
+    this._sharedService._getAdminDetailsApi().subscribe(((info:any)=>{
+      console.log(info.admin)
+      this.uplineInfo = info.admin;
+      this._createMemberForm()
+      if (this.route.snapshot.params['id']) {
+        this.editMode = true;
+        this.editUserId = this.route.snapshot.params['id'];
+        this.getMemberInfo();
+      }
+    }))
+
   }
 
   // Must Match Password

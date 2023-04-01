@@ -1,5 +1,8 @@
 <main id="main" class="main">
-  <form [formGroup]="memberForm" (ngSubmit)="onSubmitMemberForm()">
+  <div *ngIf="!memberForm" class="border text-center p-5">
+    <h4>Loading...</h4>
+  </div>
+  <form *ngIf="memberForm" [formGroup]="memberForm" (ngSubmit)="onSubmitMemberForm()">
     <section class="section gamedetails">
       <div class="row">
         <div class="col-md-12">
@@ -11,28 +14,7 @@
                 {{ editMode ? "Update Member" : "Create Member" }}
               </h4>
             </div>
-            <!--<div class="col-md-6 text-end"><span class="text-pink me-3 pt-2">Status</span><a class="text-decoration-none text-white"><input
-                  type="radio"
-                  id="1"
-                  formControlName="status"
-                  [checked]="true"
-                  name="status"
-                  value="Active"
-                /><span class="bg-success rounded-pill p-2 m-2">Active</span></a><a class="text-decoration-none text-white"><input
-                  type="radio"
-                  id="2"
-                  formControlName="status"
-                  [checked]="true"
-                  name="status"
-                  value="Inactive"
-                /><span class="bg-warning rounded-pill p-2 m-2">Inactive</span></a><a class="text-decoration-none text-white"><input
-                  type="radio"
-                  id="3"
-                  formControlName="status"
-                  ng-checked="this.memberForm.value.isActive == false"
-                  name="status"
-                  value="Closed"
-                /><span class="bg-danger rounded-pill p-2 m-2">Closed</span></a></div>-->
+
           </div>
           <div class="row mt-3">
             <div class="col-md-3 mb-2 mb-2">
@@ -46,34 +28,30 @@
             <div class="col-md-3 mb-2">
               <label>Username</label>
               <input [readOnly]="editMode" formControlName="username" type="text" class="form-control" placeholder="Username*" />
-              <div class="text-danger" *ngIf="
-                  usernameVail && usernameVail.invalid && usernameVail.touched
-                "> Username is required </div>
+              <div class="text-danger" *ngIf="memberForm.controls['username'].errors?.required && memberForm.controls['username'].touched">
+                Username is required </div>
             </div>
             <div class="col-md-3 mb-2">
               <label>Display Name</label>
               <input autocomplete="disabled" formControlName="displayName" type="text" class="form-control" placeholder="Display Name*" />
-              <div class="text-danger" *ngIf="
-                  displaynameVail &&
-                  displaynameVail.invalid &&
-                  displaynameVail.touched
-                "> Display Name is required </div>
+              <div class="text-danger" *ngIf="memberForm.controls['displayName'].errors?.required && memberForm.controls['displayName'].touched"> Display Name is required </div>
             </div>
             <div class="col-md-3 mb-2" *ngIf="!editMode">
               <label>Password</label>
               <input type="password" class="form-control" formControlName="password" placeholder="Password*" />
-              <div class="text-danger" *ngIf="
-                  passwordVail && passwordVail.invalid && passwordVail.touched
-                "> Password should be atleast 8 characters long. <br /> It should Contain <br /> 1 alpha-numeric character <br /> 1 upper case character <br /> 1 lower case character <br /> 1 specialcharacter </div>
+              <div class="text-danger" *ngIf="memberForm.controls['password'].errors?.required && memberForm.controls['password'].touched">
+                <small>Password is required</small>
+              </div>
+              <div class="text-danger" *ngIf="memberForm.controls['password'].touched && memberForm.controls['password'].errors?.pattern ">
+                <small>Password should be atleast 8 characters long. <br /> It should Contain <br /> 1 alpha-numeric character <br /> 1 upper case character <br /> 1 lower case character <br /> 1 specialcharacter</small>
+              </div>
+
             </div>
             <div class="col-md-3 mb-2" *ngIf="!editMode">
               <label>Confirm Password</label>
               <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password*" />
-              <div *ngIf="
-                  confirmPasswordVail &&
-                  confirmPasswordVail.invalid &&
-                  confirmPasswordVail.touched
-                " class="text-danger"> Confirm Password is required </div>
+              <div *ngIf="memberForm.controls['confirmPassword'].errors?.required && memberForm.controls['confirmPassword'].touched"
+               class="text-danger"> Confirm Password is required </div>
               <div *ngIf="f['confirmPassword'].getError('Mustmatch') != null" class="small text-danger col-md-12 ps-5"> Confirm password doesn't match </div>
             </div>
             <div class="col-md-3 mb-2">
@@ -140,8 +118,9 @@
         <div class="col-md-2">Partnership Percentage</div>
         <div class="col-md-2">(%)</div>
         <div class="col-md-8">
-          <input [readOnly]="this.isSuperAdmin == -1"  formControlName="partnerShipPercent" name="partnerShipPercent" type="number" id="" class="form-control pb-2" placeholder="(Min : 1) (Max : 100)" />
-          <p>(Min : 8) (Max : 100)</p>
+          <input  formControlName="partnerShipPercent" name="partnerShipPercent" type="number" class="form-control pb-2" />
+          <p>(Min : {{uplineInfo?.partnerShipPercent}} ) (Max : 100)</p>
+          <div *ngIf="f.partnerShipPercent?.errors?.min" class="small text-danger col-md-12 ps-5">value cannot be less than {{uplineInfo?.partnerShipPercent}}  </div>
         </div>
       </div>
     </section>
@@ -207,8 +186,8 @@
         <button type="button" class="btn btn-pink rounded-pill ps-5 pe-5 pt-3 pb-3" routerLink="member/list"> Cancel </button>
       </div>
       <div class="col-md-6 col-6 ">
-        <button *ngIf="!editMode" type="submit" class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3"> Save </button>
-        <button *ngIf="editMode" type="submit" class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3" [disabled]="!memberForm.dirty"> Update </button>
+        <button *ngIf="!editMode" type="submit" class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3" [disabled]="!memberForm.valid"> Save </button>
+        <button *ngIf="editMode" type="submit" class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3" [disabled]="!memberForm.valid"> Update </button>
       </div>
     </div>
     <!--your code will come here end-->

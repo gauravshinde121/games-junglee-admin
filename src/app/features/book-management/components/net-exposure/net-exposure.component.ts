@@ -129,9 +129,17 @@ export class NetExposureComponent implements OnInit {
     });
   }
 
-  redirectUrl(type,id,matchName){
-    localStorage.setItem('matchName',matchName);
-    this._router.navigate(['/book-management/advance-workstation/'+type+'/'+id]);
+  // redirectUrl(type,id,matchName){
+  //   localStorage.setItem('matchName',matchName);
+  //   this._router.navigate(['/book-management/advance-workstation/'+type+'/'+id]);
+  // }
+
+  redirectUrl(data){
+    console.log(data)
+    let marketIds = data.map(id=>`${id.marketId}`).join(",");
+    console.log(marketIds)
+
+    this._router.navigate(['/book-management/advance-workstation/'+marketIds]);
   }
 
 }

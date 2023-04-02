@@ -25,23 +25,32 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   ngOnInit(): void {
     this.matchName = localStorage.getItem('matchName');
-    var MarketAndMatchId = this._getPayLoad();
-    this._getNetExposureViewTotal(MarketAndMatchId);
+    var payload = this._getPayLoad();
+    this._getNetExposureViewTotal(payload);
   }
 
-  _getNetExposureViewTotal(netExposure) {
+
+  _getPayLoad(){
+    var payload = {};
+    var marketIds = this.route.snapshot.params['marketIds'];
+
+      payload = {
+        marketIds:marketIds.split(','),
+        pageNo:1,
+        limit:50,
+        searchText:null
+      }
+      console.log(payload)
+
+    return payload;
+  }
+
+
+  _getNetExposureViewTotal(payload) {
     this.isLoading = true;
     this.viewTotal = [];
 
-    let body = {
-      marketId:netExposure.marketId,
-      matchId:netExposure.matchId,
-      pageNo: this.currentPage,
-      limit: 50,
-      searchText: this.searchTerm,
-    };
-
-    this._sharedService._getBetDetailsForWorkStationApi(body).subscribe((data: any) => {
+    this._sharedService._getBetDetailsForWorkStationApi(payload).subscribe((data: any) => {
       this.isLoading = false;
       if(data.booksForBackend.length > 0){
         this.viewTotal = data.booksForBackend[0].result;
@@ -50,24 +59,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     });
   }
 
-  _getPayLoad(){
-    var payload = {};
-    var type = this.route.snapshot.params['type'];
-    var id = this.route.snapshot.params['id'];
-    if(type == 'market'){
-      payload = {
-        marketId:id,
-        matchId:null
-      }
-    }
-    if(type == 'match'){
-      payload = {
-        marketId:null,
-        matchId:id
-      }
-    }
-    return payload;
-  }
+
 
   next(): void {
     this.currentPage++;

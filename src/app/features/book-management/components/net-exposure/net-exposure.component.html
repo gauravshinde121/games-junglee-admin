@@ -107,7 +107,7 @@
                   <th width="20%">
                     <a
                       (click)="
-                        redirectUrl('match', book.matchId, book.matchName)
+                        redirectUrl(book.data)
                       "
                       class="btn btn-warning rounded-pill"
                     >
@@ -128,7 +128,7 @@
                   <td>
                     <a
                       (click)="
-                        redirectUrl('market', data.marketId, book.matchName)
+                        redirectUrl([data])
                       "
                     >
                       <img

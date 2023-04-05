@@ -27,6 +27,7 @@ export class CreateMemberComponent implements OnInit {
   createUserWithRoleId: number;
   uplineInfo;
   maxBetMinValue: number;
+  memberPercentage:number = 0;
 
   constructor(
     private _fb: FormBuilder,
@@ -67,6 +68,10 @@ export class CreateMemberComponent implements OnInit {
         this.gamesList = res.gamesList.map(gameId => ({ ...gameId, isActive: true }));
       }
     })
+  }
+
+  calculateMemberPercentage(e){
+    this.memberPercentage = e.target.value - this.uplineInfo.partnerShipPercent;
   }
 
   setGameStatus(status, sportsId) {

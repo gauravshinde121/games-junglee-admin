@@ -229,6 +229,7 @@
             name="partnerShipPercent"
             type="number"
             class="form-control pb-2"
+            (keyup)="calculateMemberPercentage($event)"
           />
           <p>(Min : {{ uplineInfo?.partnerShipPercent }} ) (Max : 100)</p>
           <div
@@ -238,6 +239,9 @@
             value cannot be less than {{ uplineInfo?.partnerShipPercent }}
           </div>
         </div>
+        <div class="col-md-2">Member Percentage</div>
+        <div class="col-md-2">(%)</div>
+        <div class="col-md-8">{{memberPercentage}}</div>
       </div>
     </section>
     <section class="section gamedetails mt-3">

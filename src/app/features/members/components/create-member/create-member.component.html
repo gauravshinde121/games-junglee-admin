@@ -195,7 +195,7 @@
         <div class="col-md-2">Max Rate (INR) <br />My Share : 1</div>
         <div class="col-md-8">
           <input
-            [readOnly]=true
+            [readOnly]="true"
             formControlName="sportsBookRate"
             name="sportsBookRate"
             type="number"
@@ -210,7 +210,7 @@
         <div class="col-md-2">Max Rate (INR) <br />My Share : 1</div>
         <div class="col-md-8">
           <input
-            [readOnly]=true
+            [readOnly]="true"
             formControlName="liveCasinoRate"
             name="liveCasinoRate"
             type="number"
@@ -250,6 +250,7 @@
             formControlName="minBet"
             type="number"
             class="form-control"
+            (blur)="onMinBetChange($event)"
           />
           <p>(Min: 100)</p>
           <!-- <div class="text-danger" *ngIf="MinBetVail && MinBetVail.invalid && MinBetVail.touched">
@@ -285,7 +286,7 @@
             type="number"
             class="form-control"
           />
-          <p>(Min: 1) (Max: 10000000)</p>
+          <p>(Min: {{ maxBetMinValue }}) (Max: 10000000)</p>
           <!-- <div class="text-danger" *ngIf="MaxBetVail && MaxBetVail.invalid && MaxBetVail.touched">
             Please enter valid Bet Amount
           </div> -->

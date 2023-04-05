@@ -14,6 +14,7 @@ export class SharedService {
   sharedSubject=new Subject();
   getUserBalance = new Subject();
   selectedUserRoleId = new BehaviorSubject( {'createUserWithRoleId': 7} );
+  maxBetMinValue = new BehaviorSubject( {'value': 100} );
   leftMenuStatus = new BehaviorSubject( {'leftMenuOpen': true} );
   private currentAdmin = null;
 

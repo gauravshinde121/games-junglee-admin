@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from '../../services/members.service';
 import { Observable } from 'rxjs';
 import { userNameValidator } from '@shared/classes/validator';
+import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-member',
@@ -25,6 +26,7 @@ export class CreateMemberComponent implements OnInit {
   roleId: string = '';
   createUserWithRoleId: number;
   uplineInfo;
+  maxBetMinValue: number;
 
   constructor(
     private _fb: FormBuilder,
@@ -40,6 +42,10 @@ export class CreateMemberComponent implements OnInit {
       this.createUserWithRoleId = res['createUserWithRoleId'];
     });
 
+    this._sharedService.maxBetMinValue.subscribe((res: any) => {
+      this.maxBetMinValue = res['value'];
+      console.log('this.maxBetMinValue',res['value'],this.maxBetMinValue);
+    });
     this._preConfig();
 
 
@@ -110,7 +116,7 @@ export class CreateMemberComponent implements OnInit {
         sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
-        maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
+        maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(this.maxBetMinValue)]],
         maxExposure: [this.uplineInfo.maxExposure, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
         roleId: [this.createUserWithRoleId, Validators.required],
         partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]]
@@ -135,6 +141,15 @@ export class CreateMemberComponent implements OnInit {
           validators: []
         })
     }
+  }
+
+  onMinBetChange(e){
+    this._sharedService.maxBetMinValue.next({
+      'value' : e.target.value
+    });
+    /*this.memberForm = this._fb.group({
+      maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(e.target.value)]],
+    });*/
   }
 
   get f() {
@@ -212,7 +227,6 @@ export class CreateMemberComponent implements OnInit {
       this._getUplineInfo();
     })
   }
-
 
   _getUplineInfo() {
     this._sharedService._getAdminDetailsApi().subscribe(((info: any) => {

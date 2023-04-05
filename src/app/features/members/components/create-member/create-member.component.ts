@@ -23,7 +23,7 @@ export class CreateMemberComponent implements OnInit {
   userDetails: any;
   isSuperAdmin: any;
   roleId: string = '';
-  createUserWithRoleId:number;
+  createUserWithRoleId: number;
   uplineInfo;
 
   constructor(
@@ -88,7 +88,7 @@ export class CreateMemberComponent implements OnInit {
           minBet: this.memberData.minimumBet,
           maxBet: this.memberData.maxBet,
           maxExposure: this.memberData.maxExposure,
-          partnerShipPercent:this.memberData.partnerShipPercent,
+          partnerShipPercent: this.memberData.partnerShipPercent,
           roleId: this.memberData.roleId
         });
       }
@@ -97,9 +97,8 @@ export class CreateMemberComponent implements OnInit {
 
 
   _createMemberForm() {
+    console.log('this.uplineInfo',this.uplineInfo);
     if (!this.editMode) {
-
-      console.log(this.createUserWithRoleId)
       this.memberForm = this._fb.group({
         username: ['', Validators.required],
         displayName: ['', Validators.required],
@@ -108,8 +107,8 @@ export class CreateMemberComponent implements OnInit {
         )]),
         confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
         playerMaxCreditLimit: ['', Validators.required],
-        sportsBookRate: [this.uplineInfo.sportsBookRate, [(c: AbstractControl) => Validators.required(c), Validators.max(1), Validators.min(1)]],
-        liveCasinoRate: [this.uplineInfo.liveCasinoRate, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(100)]],
+        sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
+        liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         minBet: [this.uplineInfo.minimumBet, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [this.uplineInfo.maxBet, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
         maxExposure: [this.uplineInfo.maxExposure, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
@@ -124,9 +123,9 @@ export class CreateMemberComponent implements OnInit {
         displayName: [''],
         username: [''],
         playerMaxCreditLimit: ['', Validators.required],
-        sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(1), Validators.min(1)]],
+        sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         roleId: ['', Validators.required],
-        liveCasinoRate: [100, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(100)]],
+        liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [1000000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
         maxExposure: [50000000, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
@@ -215,9 +214,9 @@ export class CreateMemberComponent implements OnInit {
   }
 
 
-  _getUplineInfo(){
-    this._sharedService._getAdminDetailsApi().subscribe(((info:any)=>{
-      console.log(info.admin)
+  _getUplineInfo() {
+    this._sharedService._getAdminDetailsApi().subscribe(((info: any) => {
+      console.log('info.admin',info.admin)
       this.uplineInfo = info.admin;
       this._createMemberForm()
       if (this.route.snapshot.params['id']) {

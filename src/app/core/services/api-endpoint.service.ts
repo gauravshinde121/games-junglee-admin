@@ -342,5 +342,8 @@ export class ApiEndpointsService {
   }
 
 
+  public getUserAdminPubSubEndPoint(){
+    return this.createUrl(this._constants.API_URL_GET_USER_ADMIN_PUB_SUB)
+  }
 
 }

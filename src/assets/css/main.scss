@@ -47,9 +47,24 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 //   font-size: 12px;
 // }
 .btn-pink {
-  color: $color_3;
-  background: $background-color_3;
-  border-color: $border-color_1;
+  // color: $color_3;
+  // background: $background-color_3;
+  // border-color: $border-color_1;
+  transition: all .2s ease-in;
+  transform: scale(1);
+  border: none;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-size: 1rem;
+    background-image: linear-gradient(0deg,#cd212f 0,#e76f26);
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 .btn-pink:hover {
   // background: $gradient-btn;
@@ -286,6 +301,7 @@ cursor: pointer;
   border-radius: 15px;
   padding: 15px;
   // background: rgba(60, 62, 62, 0.7215686275);
+  background: transparent;
   .form-select {
     appearance: button;
     color: $color_2;
@@ -590,3 +606,7 @@ select:-webkit-autofill:focus {
 .pointer {cursor: pointer;}
 
 
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #b44b5d;
+}

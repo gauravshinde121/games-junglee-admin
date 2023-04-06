@@ -10,7 +10,8 @@
 .align_thead tbody tr td:nth-child(3),
 .align_thead tbody tr td:nth-child(4),
 .align_thead tbody tr td:nth-child(5){
-text-align: center;}
+text-align: center;
+font-size: 14px;}
 
 .align_thead tbody tr th{vertical-align: middle; font-size: 14px;}
 .align_thead tbody tr td{vertical-align: middle; font-size: 14px;}
@@ -29,4 +30,20 @@ text-align: center;}
     .tablematchodds{
         height: 100%;
         margin-bottom: 0;
+    }
+
+    .accordion-header .fa-plus:before{
+        display: none;
+            }
+
+    .accordion-header .collapsed .fa-plus:before{
+        display: block;
+    }
+
+    .accordion-header .fa-minus:before{
+        display: block;
+            }
+
+    .accordion-header .collapsed .fa-minus:before{
+        display: none;
     }

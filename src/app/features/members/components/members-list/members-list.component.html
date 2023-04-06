@@ -25,7 +25,7 @@
       <div class="col-md-2">
         <button
           routerLink="/member/create-member"
-          class="btn btn-pink radius-all text-dark"
+          class="btn btn-pink radius-all "
         >
           <i class="fa fa-pen"></i> Create New
         </button>
@@ -87,31 +87,31 @@
               <th scope="col" class="first pointer">
                 <input type="checkbox" />
               </th>
-              <th scope="col" class="text-dark">
+              <th scope="col" class="">
                 <i class="fa-sharp fa-regular fa-address-card"></i>
               </th>
-              <th scope="col" class="text-dark">UserName</th>
-              <th scope="col" class="text-dark text-center">Credit Limit</th>
-              <th scope="col" class="text-dark text-center">Net Exposure</th>
-              <th scope="col" class="text-dark text-center">Take</th>
-              <th scope="col" class="text-dark text-center">Give</th>
-              <th scope="col" class="text-dark text-center">
+              <th scope="col" class="">UserName</th>
+              <th scope="col" class=" text-center">Credit Limit</th>
+              <th scope="col" class=" text-center">Net Exposure</th>
+              <th scope="col" class=" text-center">Take</th>
+              <th scope="col" class=" text-center">Give</th>
+              <th scope="col" class=" text-center">
                 Available Credit
               </th>
-              <!-- <th scope="col" class="text-dark"><i class="fa-sharp fa-regular fa-square-check"></i> Status
+              <!-- <th scope="col" class=""><i class="fa-sharp fa-regular fa-square-check"></i> Status
               </th> -->
-              <!-- <th scope="col" class="text-dark">Info</th> -->
+              <!-- <th scope="col" class="">Info</th> -->
               <th
                 scope="col"
-                class="text-dark text-center"
+                class=" text-center"
                 *ngIf="selectedRoleId != 7"
               >
                 Partnership %
               </th>
-              <th scope="col" class="text-dark text-center">Details</th>
-              <th scope="col" class="text-dark text-center">Status</th>
-              <th scope="col" class="text-dark text-center">Change password</th>
-              <th scope="col" class="last text-dark text-center">Action</th>
+              <th scope="col" class=" text-center">Details</th>
+              <th scope="col" class=" text-center">Status</th>
+              <th scope="col" class=" text-center">Change password</th>
+              <th scope="col" class="last  text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -219,7 +219,7 @@
           >
             Prev
           </button>
-          <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
+          <span class="btn btn-pink rounded-pill  ps-4 pe-4"
             >{{ currentPage }} / {{ totalPages }}
           </span>
           <button

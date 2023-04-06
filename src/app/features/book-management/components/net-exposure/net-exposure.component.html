@@ -100,7 +100,7 @@
             *ngIf="!isLoading && booksForBackend.length > 0"
             class="col-md-12 overflow-auto"
           >
-            <table class="table table-striped bg-white mt-3 align_thead" *ngFor="let book of booksForBackend">
+            <table class="table table-striped bg-white mt-3 align_thead mb-0" *ngFor="let book of booksForBackend">
               <thead>
                 <!-- <tr>
                   <th width="30%" class="text-start">{{ book.matchName }}</th>
@@ -151,6 +151,7 @@
                       (click)="
                         redirectUrl([data])
                       "
+                      class="pointer"
                     >
                       <img
                         src="../../../../../assets/images/net_exposure.png"

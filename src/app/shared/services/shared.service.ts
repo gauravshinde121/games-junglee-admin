@@ -177,5 +177,15 @@ export class SharedService {
     .post(this._apiEndpointsService.getMarketBySportIdEndpoint(),{sportId:sportId});
   }
 
+  _getWebSocketURLByDeviceApi(liveStreamMatchObj: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getWebSocketURLByDevice(), liveStreamMatchObj);
+  }
+
+  _getUniqueDeviceKeyApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getUniqueDeviceKey());
+  }
+
 }
 

@@ -5,12 +5,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { LeftNavigationComponent } from './components/left-navigation/left-navigation.component';
 import { FormsModule } from '@angular/forms';
 import { TruncatePipe } from './pipe/truncate.pipe';
+import { MarketRateFormaterPipe } from './pipe/market-rate-formater.pipe';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     LeftNavigationComponent,
     TruncatePipe,
+    MarketRateFormaterPipe
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { TruncatePipe } from './pipe/truncate.pipe';
   exports: [
     HeaderComponent,
     LeftNavigationComponent,
-    TruncatePipe
+    TruncatePipe,
+    MarketRateFormaterPipe
   ]
 })
 export class SharedModule { }

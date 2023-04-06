@@ -38,7 +38,7 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <div class="accordion" id="accordionExample">
+            <div class="accordion" id="accordionExample" *ngFor="let singleAdminBook of adminBooksList">
               <div class="accordion-item bg-transparent border-0 ">
                 <h2 class="accordion-header" id="headingOne">
                   <a class="text-decoration-none text-white w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -53,7 +53,7 @@
                       <p>
                          <i class="fa fa-minus"></i>
                         <i class="fa fa-plus"></i>
-                        Match Odds
+                        {{singleAdminBook['marketName']}}
                       </p>
                     </div>
 
@@ -72,69 +72,32 @@
                         <div class="bg-white h-100 border-5">
                         <table class="table tablematchodds bg-transparent">
                           <tbody>
-                            <tr>
+                            <tr *ngFor="let runner of singleAdminBook['adminBook']">
                               <td class="text-start ps-2 heading border-top">
-                                <a href=""
-                                  >England Women <br />
-                                  <span class="text-success">Rs. 0</span></a>
+                                <a href="">{{runner['RunnerName']}} <br />
+                                <span class="text-success">Rs. 0</span></a>
                               </td>
                               <td class="colblue light">
-                                <a href=""><strong>1.78</strong> <br />160</a>
+                                <a href=""><strong>{{runner['back2']}}</strong> <br />{{runner['vback2'] | marketRateFormater}}</a>
                               </td>
                               <td class="colpink light">
-                                <a href=""><strong>1.78</strong> <br />160</a>
+                                <a href=""><strong>{{runner['back1']}}</strong> <br />{{runner['vback1'] | marketRateFormater}}</a>
                               </td>
-                              <td class="colgray">-</td>
-                              <td class="colgray">-</td>
-                              <td class="colblue">
-                                <a href=""><strong>1.78</strong> <br />160</a>
+                              <!-- <td class="colgray">-</td>
+                              <td class="colgray">-</td> -->
+                              <td class="colblue light">
+                                <a href=""><strong>{{runner['back0']}}</strong> <br />{{runner['vback0'] | marketRateFormater}}</a>
                               </td>
-                              <td class="colpink">
-                                <a href=""><strong>1.78</strong> <br />160</a>
+                              <td class="colpink light">
+                                <a href=""><strong>{{runner['lay0']}}</strong> <br />{{runner['vlay0'] | marketRateFormater}}</a>
                               </td>
-                            </tr>
-                            <tr>
-                              <td class="text-start ps-2 heading border-top">
-                                <a href=""
-                                  >England <br />
-                                  <span class="text-success">Rs. 0</span></a
-                                >
+
+                              <td class="colblue light">
+                                <a href=""><strong>{{runner['lay1']}}</strong> <br />{{runner['vlay1'] | marketRateFormater}}</a>
                               </td>
-                              <td class="colblue">
-                                <a href=""><strong>1.78</strong> <br />160</a>
-                              </td>
-                              <td class="colpink">
-                                <a href=""><strong>1.78</strong> <br />160</a>
-                              </td>
-                              <td class="colgray">-</td>
-                              <td class="colgray">-</td>
-                              <td class="colblue">
-                                <a href=""><strong>1.78</strong> <br />160</a>
-                              </td>
-                              <td class="colpink">
-                                <a href=""><strong>1.78</strong> <br />160</a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="text-start ps-2 heading border-top">
-                                <a href=""
-                                  >The Draw <br />
-                                  <span class="text-success">Rs. 0</span></a
-                                >
-                              </td>
-                              <td class="colblue">
-                                <a href=""><strong>1.78</strong> <br />160</a>
-                              </td>
-                              <td class="colpink">
-                                <a href=""><strong>1.78</strong> <br />160</a>
-                              </td>
-                              <td class="colgray">-</td>
-                              <td class="colgray">-</td>
-                              <td class="colblue">
-                                <a href=""><strong>1.78</strong> <br />160</a>
-                              </td>
-                              <td class="colpink">
-                                <a href=""><strong>1.78</strong> <br />160</a>
+
+                              <td class="colpink light">
+                                <a href=""><strong>{{runner['lay2']}}</strong> <br />{{runner['vlay2'] | marketRateFormater}}</a>
                               </td>
                             </tr>
                           </tbody>
@@ -147,24 +110,26 @@
                             <tr>
                               <th ></th>
                               <th ></th>
-                              <th >Net Exposure</th>
-                              <th >Bangladesh</th>
-                              <th>England</th>
+                              <th >Stakes</th>
+                              <th >1</th>
+                              <th >X</th>
+                              <th >2</th>
                             </tr>
                           </thead>
                           <tbody>
                             
-                            <tr>
-                              <td class="border-top">vkm25</td>
+                            <tr *ngFor="let userBook of singleAdminBook['userBook']">
+                              <td class="border-top">{{userBook['username']}}</td>
                               <td class="border-top">
                                 <img
                                   src="/assets/images/net_expo.png"
                                   width="12"
                                 />
                               </td>
-                              <td class="text-success border-top">Rs. 0</td>
-                              <td class="text-success border-top">Rs. 0</td>
-                              <td class="text-success border-top">Rs. 0</td>
+                              <td class="text-success border-top">Rs. {{userBook['stake']}}</td>
+                              <td class="text-success border-top">Rs. {{userBook['runner1']}}</td>
+                              <td class="text-success border-top">Rs. {{userBook['runner2']}}</td>
+                              <td class="text-success border-top">Rs. {{userBook['runner3']}}</td>
                             </tr>
                           
                                   <tr>
@@ -191,6 +156,12 @@
                                       class="text-success border-top text-danger"
                                     >
                                       4
+                                    </td>
+                                    <td
+                                      
+                                      class="text-success border-top text-danger"
+                                    >
+                                      5
                                     </td>
                                   </tr>
                           </tbody>

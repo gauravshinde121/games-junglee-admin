@@ -280,6 +280,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_BET_DETAILS_FOR_WORK_STATION)
   }
 
+  public getBooksForAdminBookMgmEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_AMDMIN_BOOK_MGM)
+  }
+
   public getOneAccountEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_ONE_ACCOUNT)
   }
@@ -329,6 +333,17 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_DELETE_BET)
   }
 
+  public getWebSocketURLByDevice():string{
+    return this.createUrl(this._constants.API_URL_GET_WEBSOCKET_URL_BY_DEVICE)
+  }
 
+  public getUniqueDeviceKey():string{
+    return this.createUrl(this._constants.API_URL_UNIQUE_DEVICE_KEY)
+  }
+
+
+  public getUserAdminPubSubEndPoint(){
+    return this.createUrl(this._constants.API_URL_GET_USER_ADMIN_PUB_SUB)
+  }
 
 }

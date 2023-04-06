@@ -141,6 +141,10 @@ export class SharedService {
     sessionStorage.removeItem('GJA_adminDetails');
   }
 
+  getUserAdminPubSubApi(){
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getUserAdminPubSubEndPoint());
+  }
 
   getMatchBySportId(sportId){
     return this._apiHttpService
@@ -175,6 +179,16 @@ export class SharedService {
   getMarketBySportId(sportId){
     return this._apiHttpService
     .post(this._apiEndpointsService.getMarketBySportIdEndpoint(),{sportId:sportId});
+  }
+
+  _getWebSocketURLByDeviceApi(liveStreamMatchObj: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getWebSocketURLByDevice(), liveStreamMatchObj);
+  }
+
+  _getUniqueDeviceKeyApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getUniqueDeviceKey());
   }
 
 }

@@ -19,7 +19,7 @@ export class NetExposureComponent implements OnInit {
   matchList:any = [];
   sport:any;
   realDataWebSocket:any;
-  MyPT:boolean = true;
+  MyPT:boolean;
 
   currentMatchId:any;
   currentSportId:any;
@@ -101,11 +101,11 @@ export class NetExposureComponent implements OnInit {
     this.isLoading = true;
     let body = {};
     let sport_value = this.filterForm.value.sport;
-    console.log('this.filterForm',this.filterForm);
-    console.log('this.filterForm.value.selectedType',this.filterForm.value.selectedType);
-    if(this.filterForm.value.selectedType == 'TotalBook'){
+    console.log('this.filterForm',this.filterForm.value);
+    console.log('this.filterForm.value.selectedType',filterObj.selectedType);
+    if(filterObj.selectedType == 'TotalBook'){
       this.MyPT = false;
-    } else {
+    } else{
       this.MyPT = true;
     }
     console.log('this.MyPT',this.MyPT);

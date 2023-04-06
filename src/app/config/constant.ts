@@ -88,4 +88,7 @@ export class Constants {
 
     //TEST
     public readonly API_URL_TEST_FUNC:string = 'api/getBetsForSurveilliance';
+
+    //pubsub
+    public readonly API_URL_GET_USER_ADMIN_PUB_SUB:string = 'api/getUserAdminPubSub';
 }

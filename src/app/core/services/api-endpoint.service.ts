@@ -329,6 +329,8 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_DELETE_BET)
   }
 
-
+  public getUserAdminPubSubEndPoint(){
+    return this.createUrl(this._constants.API_URL_GET_USER_ADMIN_PUB_SUB)
+  }
 
 }

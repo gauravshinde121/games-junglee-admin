@@ -141,6 +141,10 @@ export class SharedService {
     sessionStorage.removeItem('GJA_adminDetails');
   }
 
+  getUserAdminPubSubApi(){
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getUserAdminPubSubEndPoint());
+  }
 
   getMatchBySportId(sportId){
     return this._apiHttpService

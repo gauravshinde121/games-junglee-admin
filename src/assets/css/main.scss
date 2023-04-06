@@ -28,10 +28,12 @@ $background-color_17: #ffb9b560;
 $background-color_18: hsla(3.5, 21.3%, 52.2%, 0.78);
 $background-color_19: #d9d9d9;
 $background-color_20: #343535;
+$background-color_21: #000;
+$background-color_22:  #d35862;
 
-.table{font-size: 11px;}
+.table{font-size: 12px;}
 .browncolor {
-  background-color: $background-color_1;
+  background-color: $background-color_21;
 }
 .bg-pink {
   background: $color_1 !important;
@@ -89,11 +91,11 @@ $background-color_20: #343535;
 }
 /********** common property end ************/
 /********** Login start ************/
-.logins {
-  background: url(../images/bg.png) no-repeat;
-  background-size: cover;
-  height: 100vh;
-}
+// .logins {
+//   background: url(../images/bg.png) no-repeat;
+//   background-size: cover;
+//   height: 100vh;
+// }
 .login {
   border: 1px solid $color_1;
   padding: 10px;
@@ -179,7 +181,7 @@ cursor: pointer;
   background-image: url(../images/balance.png);
   width: 100%;
   height: 158px;
-  background-color: $background-color_4;
+  background-color: $background-color_22;
   border-radius: 10px;
   color: $color_2;
   display: flex;
@@ -274,7 +276,7 @@ cursor: pointer;
   border: 1px solid rgba(255, 167, 163, 0.3411764706);
   border-radius: 15px;
   padding: 15px;
-  background: rgba(60, 62, 62, 0.7215686275);
+  // background: rgba(60, 62, 62, 0.7215686275);
   .form-select {
     appearance: button;
     color: $color_2;

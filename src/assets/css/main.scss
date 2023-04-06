@@ -31,6 +31,8 @@ $background-color_20: #343535;
 $background-color_21: #000;
 $background-color_22:  #d35862;
 
+$gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
+
 .table{font-size: 12px;}
 .browncolor {
   background-color: $background-color_21;
@@ -46,18 +48,20 @@ $background-color_22:  #d35862;
 // }
 .btn-pink {
   color: $color_3;
-  background-color: $background-color_3;
+  background: $background-color_3;
   border-color: $border-color_1;
 }
 .btn-pink:hover {
-  background: $color_2;
-  color: $color_3;
+  // background: $gradient-btn;
+  // color: $color_3;
+  transition: all .2s ease-in;
+    transform: scale(1.1);
 }
 .w-30 {
   width: 30%;
 }
 .text-pink {
-  color: $color_1 !important;
+  color: $background-color_22 !important;
 }
 .btn-outline-pink {
   color: $color_1;
@@ -97,10 +101,15 @@ $background-color_22:  #d35862;
 //   height: 100vh;
 // }
 .login {
-  border: 1px solid $color_1;
-  padding: 10px;
-  background: rgba(18, 14, 17, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.3215686275);
+  border-radius: 25px;
+  padding: 10px 35px;
+  background: rgba(108, 108, 108, 0.5098039216);
   margin-top: 30px;
+  // border: 1px solid $color_1;
+  // padding: 10px;
+  // background: rgba(18, 14, 17, 0.88);
+  // margin-top: 30px;
   a {
     text-decoration: none;
   }

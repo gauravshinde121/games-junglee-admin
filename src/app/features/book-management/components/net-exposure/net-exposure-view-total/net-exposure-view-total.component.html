@@ -39,7 +39,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="accordion" id="accordionExample">
-              <div class="accordion-item bg-transparent border-0 p-3">
+              <div class="accordion-item bg-transparent border-0 ">
                 <h2 class="accordion-header" id="headingOne">
                   <a class="text-decoration-none text-white w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   <div
@@ -66,10 +66,11 @@
                   aria-labelledby="headingOne"
                   data-bs-parent="#accordionExample"
                 >
-                  <div class="accordion-body">
+                  <div class="accordion-body p-0">
                     <div class="row">
-                      <div class="col-md-6">
-                        <table class="table tablematchodds bg-white">
+                      <div class="col-md-6 ">
+                        <div class="bg-white h-100 border-5">
+                        <table class="table tablematchodds bg-transparent">
                           <tbody>
                             <tr>
                               <td class="text-start ps-2 heading border-top">
@@ -114,24 +115,50 @@
                                 <a href=""><strong>1.78</strong> <br />160</a>
                               </td>
                             </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="col-md-6">
-                        <table class="table tablematchodds bg-white">
-                          <tbody>
                             <tr>
-                              <td width="20%"></td>
-                              <td width="20%"></td>
-                              <td width="15%">Net Exposure</td>
-                              <td width="15%">Bangladesh</td>
-                              <td width="20%">England</td>
+                              <td class="text-start ps-2 heading border-top">
+                                <a href=""
+                                  >The Draw <br />
+                                  <span class="text-success">Rs. 0</span></a
+                                >
+                              </td>
+                              <td class="colblue">
+                                <a href=""><strong>1.78</strong> <br />160</a>
+                              </td>
+                              <td class="colpink">
+                                <a href=""><strong>1.78</strong> <br />160</a>
+                              </td>
+                              <td class="colgray">-</td>
+                              <td class="colgray">-</td>
+                              <td class="colblue">
+                                <a href=""><strong>1.78</strong> <br />160</a>
+                              </td>
+                              <td class="colpink">
+                                <a href=""><strong>1.78</strong> <br />160</a>
+                              </td>
                             </tr>
+                          </tbody>
+                        </table></div>
+                      </div>
+                      <div class="col-md-6 ">
+                        <div class="bg-white h-100 border-5">
+                        <table class="table  bg-transparent align_thead">
+                          <thead>
+                            <tr>
+                              <th ></th>
+                              <th ></th>
+                              <th >Net Exposure</th>
+                              <th >Bangladesh</th>
+                              <th>England</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
                             <tr>
                               <td class="border-top">vkm25</td>
                               <td class="border-top">
                                 <img
-                                  src="../../../../../../assets/images/net_expo.png"
+                                  src="/assets/images/net_expo.png"
                                   width="12"
                                 />
                               </td>
@@ -139,38 +166,36 @@
                               <td class="text-success border-top">Rs. 0</td>
                               <td class="text-success border-top">Rs. 0</td>
                             </tr>
-                            <tr>
-                              <td colspan="5" align="center">
-                                <table class="table border-top">
+                          
                                   <tr>
-                                    <td width="20%" class="border-top text-end">
+                                    <td></td>
+
+                                    <td  class="border-top ">
                                       1
                                     </td>
-                                    <td width="20%" class="border-top"></td>
+                                    
                                     <td
-                                      width="15%"
+                                     
                                       class="text-success border-top text-danger"
                                     >
                                       2
                                     </td>
                                     <td
-                                      width="15%"
+                                     
                                       class="text-success border-top text-danger"
                                     >
                                       3
                                     </td>
                                     <td
-                                      width="20%"
+                                      
                                       class="text-success border-top text-danger"
                                     >
                                       4
                                     </td>
                                   </tr>
-                                </table>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -195,7 +220,7 @@
     />
     <div class="col-md-12 text-end">Bet Count : {{ viewTotal.length }}</div>
 <div class="col-md-12 overflow-auto">
-  <table class="table table-dark">
+  <table class="table table-dark m-0">
     <thead>
       <tr>
         <th scope="col" class="first">#</th>

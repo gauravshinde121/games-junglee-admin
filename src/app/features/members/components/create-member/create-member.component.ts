@@ -108,6 +108,13 @@ export class CreateMemberComponent implements OnInit {
           partnerShipPercent: this.memberData.partnerShipPercent,
           roleId: this.memberData.roleId
         });
+        var memPer:any;
+        memPer = this.memberData.partnerShipPercent - this.uplineInfo.partnerShipPercent;
+        if(memPer < 1){
+          this.memberPercentage = '--';
+        }else {
+          this.memberPercentage = memPer;
+        }
       }
     }))
   }

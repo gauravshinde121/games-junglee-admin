@@ -24,30 +24,30 @@ body {
   /* color: #000;
   background: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   border-color: #ffa7a3; */
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
   transform: scale(1);
 
   border: none;
-    color: #fff;
-    padding: 10px 30px;
-    border-radius: 25px;
-    font-size: 1rem;
-    background-image: linear-gradient(0deg,#cd212f 0,#e76f26);
-    -moz-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-    /* display: flex; */
-    align-items: center;
-    justify-content: space-around;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 25px;
+  font-size: 1rem;
+  background-image: linear-gradient(0deg, #cd212f 0, #e76f26);
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  /* display: flex; */
+  align-items: center;
+  justify-content: space-around;
 }
 
 .btn-pink:hover {
   /* background: #fff; */
   /* color: #000; */
   color: #fff;
-  transition: all .2s ease-in;
-    transform: scale(1.1);
+  transition: all 0.2s ease-in;
+  transform: scale(1.1);
 }
 
 .w-30 {
@@ -187,7 +187,7 @@ body {
 }
 .header .toggle-sidebar-btn {
   font-size: 32px;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   cursor: pointer;
   color: #012970;
 }
@@ -208,6 +208,7 @@ body {
   color: #fff;
   line-height: 26px;
   letter-spacing: 1px;
+  font-weight: 600;
 }
 .balance span {
   font-size: 16px;
@@ -230,14 +231,15 @@ body {
 /********** Sidebar start ************/
 .sidebar {
   left: 0;
-  width: 270px;
+  /* width: 270px; */
+  width: 100%;
   z-index: 996;
   transition: all 0.3s;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
 }
 .sidebar .nav-link {
   color: #fff;
@@ -263,7 +265,7 @@ body {
   padding: 0 10px;
   top: 0px;
   bottom: auto;
-  height: 700px;
+  /* height: 700px; */
 }
 
 /********** Sidebar end ************/
@@ -274,7 +276,7 @@ body {
 }
 .tableall th {
   /* background-color: #ffa7a3; */
-  background: linear-gradient(0deg,#cd212f 0,#e76f26);
+  background: linear-gradient(0deg, #cd212f 0, #e76f26);
   border: 0px;
   font-weight: 500;
   color: #fff;
@@ -304,8 +306,8 @@ body {
 }
 .gamedetails .form-select {
   -webkit-appearance: button;
-     -moz-appearance: button;
-          appearance: button;
+  -moz-appearance: button;
+  appearance: button;
   color: #fff;
   border: 1px solid rgba(166, 166, 166, 0.3411764706);
   background: #343535;
@@ -616,8 +618,9 @@ select:-webkit-autofill:focus {
 
 .pointer {
   cursor: pointer;
-}/*# sourceMappingURL=main.css.map */
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+} /*# sourceMappingURL=main.css.map */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   color: #fff;
-  background: linear-gradient(0deg,#cd212f 0,#e76f26);
+  background: linear-gradient(0deg, #cd212f 0, #e76f26);
 }

@@ -84,39 +84,39 @@
                             <ng-container *ngIf="singleAdminBook['marketTypName'] == 'Match Odds'">
                               <tr *ngFor="let runner of singleAdminBook['adminBook']">
                                 <td class="text-start ps-2 heading border-top">
-                                  <a href="">{{runner['RunnerName']}} <br />
+                                  <a>{{runner['RunnerName']}} <br />
                                   <span *ngIf="runner['amount'] > 0" class="text-success">Rs. {{runner['amount']}}</span>
                                   <span *ngIf="runner['amount'] <= 0" class="text-danger">Rs. {{runner['amount']}}</span>
                                 </a>
                                 </td>
                                 <td class="colblue light">
-                                  <a href=""><strong>{{runner['back2']}}</strong> <br />{{runner['vback2'] | marketRateFormater}}</a>
+                                  <a ><strong>{{runner['back2']}}</strong> <br />{{runner['vback2'] | marketRateFormater}}</a>
                                 </td>
                                 <td class="colpink light">
-                                  <a href=""><strong>{{runner['back1']}}</strong> <br />{{runner['vback1'] | marketRateFormater}}</a>
+                                  <a ><strong>{{runner['back1']}}</strong> <br />{{runner['vback1'] | marketRateFormater}}</a>
                                 </td>
                                 <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
                                 <td class="colblue light">
-                                  <a href=""><strong>{{runner['back0']}}</strong> <br />{{runner['vback0'] | marketRateFormater}}</a>
+                                  <a><strong>{{runner['back0']}}</strong> <br />{{runner['vback0'] | marketRateFormater}}</a>
                                 </td>
                                 <td class="colpink light">
-                                  <a href=""><strong>{{runner['lay0']}}</strong> <br />{{runner['vlay0'] | marketRateFormater}}</a>
+                                  <a><strong>{{runner['lay0']}}</strong> <br />{{runner['vlay0'] | marketRateFormater}}</a>
                                 </td>
 
                                 <td class="colblue light">
-                                  <a href=""><strong>{{runner['lay1']}}</strong> <br />{{runner['vlay1'] | marketRateFormater}}</a>
+                                  <a><strong>{{runner['lay1']}}</strong> <br />{{runner['vlay1'] | marketRateFormater}}</a>
                                 </td>
 
                                 <td class="colpink light">
-                                  <a href=""><strong>{{runner['lay2']}}</strong> <br />{{runner['vlay2'] | marketRateFormater}}</a>
+                                  <a><strong>{{runner['lay2']}}</strong> <br />{{runner['vlay2'] | marketRateFormater}}</a>
                                 </td>
                               </tr>
                             </ng-container>
                             <ng-container *ngIf="singleAdminBook['marketTypName'] == 'Bookmaker'">
                               <tr *ngFor="let runner of singleAdminBook['adminBook']">
                                 <td class="text-start ps-2 heading border-top">
-                                  <a href="">{{runner['RunnerName']}} <br />
+                                  <a >{{runner['RunnerName']}} <br />
                                     <strong><span *ngIf="runner['amount']>=0" class="text-success">Rs. {{runner['amount'] | number : '1.2-2'}}</span></strong>
                                     <strong><span *ngIf="runner['amount']<0" class="text-danger">Rs. {{runner['amount'] | number : '1.2-2'}}</span></strong>
                                 </a>
@@ -153,7 +153,7 @@
                                   <a ><strong>{{runner['lay1']}}</strong> <br />{{runner['vlay1'] | marketRateFormater}}</a>
                                 </td>
                                 <td class="colblue light">
-                                  <a href=""><strong>{{runner['back1']}}</strong> <br />{{runner['vback1'] | marketRateFormater}}</a>
+                                  <a ><strong>{{runner['back1']}}</strong> <br />{{runner['vback1'] | marketRateFormater}}</a>
                                 </td>
 
                                 <td ><a ><strong></strong> <br /></a></td>

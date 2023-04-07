@@ -81,7 +81,7 @@
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .sidebar .btn {
-    font-size: 7px;
+    font-size: 8px;
   }
 }
 
@@ -91,7 +91,7 @@
 
 @media only screen and (min-width: 1024px) {
   .sidebar .btn {
-    font-size: 9px;
+    font-size: 12px;
   }
 }
 
@@ -144,6 +144,21 @@
   }
 }
 
+@media only screen and (min-width: 2304px) {
+  .table {
+    font-size: 20px;
+  }
+  body,
+  .form-control,
+  .form-select,
+  .btn-pink,
+  h4,
+  .btn,
+  .sidebar .btn {
+    font-size: 1.5rem;
+  }
+}
+
 @media only screen and (min-width: 2560px) {
   .sidebar .btn {
     font-size: 1rem;
@@ -176,5 +191,20 @@
   .btn,
   .sidebar .btn {
     font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 6144px) {
+  .table {
+    font-size: 54px;
+  }
+  body,
+  .form-control,
+  .form-select,
+  .btn-pink,
+  h4,
+  .btn,
+  .sidebar .btn {
+    font-size: 4rem;
   }
 }

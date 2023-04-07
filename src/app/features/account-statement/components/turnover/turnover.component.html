@@ -55,11 +55,11 @@
       <table class="table tableall" *ngIf="plStatement.length > 0">
         <thead>
           <tr>
-            <th scope="col" class="text-dark">#</th>
-            <th scope="col" class="text-dark">Event</th>
-            <th scope="col" class="text-dark">Date</th>
-            <th scope="col" class="text-dark">Detail</th>
-            <th scope="col" class="text-dark">Bet Detail</th>
+            <th scope="col" class="first">#</th>
+            <th scope="col" class="">Event</th>
+            <th scope="col" class="">Date</th>
+            <th scope="col" class="">Detail</th>
+            <th scope="col" class="last">Bet Detail</th>
           </tr>
         </thead>
         <tbody>
@@ -133,8 +133,8 @@
   <div class="modal-dialog modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino text-dark" id="staticBackdropLabel">
-          Detail &nbsp; <i class="fa fa-lock text-pink"></i>
+        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
+          Detail &nbsp; <i class="fa fa-lock"></i>
         </h5>
         <button
           type="button"
@@ -262,8 +262,8 @@
   <div class="modal-dialog modal-dialog modal-lg">
     <div class="modal-content modal-size">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino text-dark" id="betDetailLabel">
-          Detail &nbsp; <i class="fa fa-lock text-pink"></i>
+        <h5 class="modal-title cassino text-white" id="betDetailLabel">
+          Detail &nbsp; <i class="fa fa-lock"></i>
         </h5>
         <button
           type="button"
@@ -274,23 +274,23 @@
         ></button>
       </div>
       <div class="modal-body bg-dark text-white" *ngIf="betInfo">
-        <div class="col-md-12">
+        <div class="col-md-12 overflow-auto">
           <table class="table tableall" *ngIf="betInfo.length > 0">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col" class="text-dark">Member</th>
-                <th scope="col" class="text-dark">Placed</th>
-                <th scope="col" class="text-dark">Matched Date</th>
-                <th scope="col" class="text-dark">Event</th>
-                <th scope="col" class="text-dark">Market</th>
-                <th scope="col" class="text-dark">Selection</th>
-                <th scope="col" class="text-dark">Odds Placed</th>
-                <th scope="col" class="text-dark">Odds Matched</th>
-                <th scope="col" class="text-dark">Matched</th>
-                <th scope="col" class="text-dark">Unmatched</th>
-                <!-- <th scope="col" class="text-dark">Profit Liability</th> -->
-                <th scope="col" class="text-dark">IP</th>
+                <th scope="col" class="first">#</th>
+                <th scope="col" class="">Member</th>
+                <th scope="col" class="">Placed</th>
+                <th scope="col" class="">Matched Date</th>
+                <th scope="col" class="">Event</th>
+                <th scope="col" class="">Market</th>
+                <th scope="col" class="">Selection</th>
+                <th scope="col" class="">Odds Placed</th>
+                <th scope="col" class="">Odds Matched</th>
+                <th scope="col" class="">Matched</th>
+                <th scope="col" class="">Unmatched</th>
+                <!-- <th scope="col" class="">Profit Liability</th> -->
+                <th scope="col" class="last">IP</th>
               </tr>
             </thead>
             <tbody>
@@ -308,7 +308,7 @@
                   </span>
                   <span
                     *ngIf="bet.isBack"
-                    class="border  bg-primary text-primary border-primary me-2"
+                    class="border bg-primary text-primary border-primary me-2"
                   >
                   </span>
                   {{ bet.market }}

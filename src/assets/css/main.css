@@ -57,7 +57,7 @@ body {
 }
 
 .text-pink {
-  color: #d35862 !important;
+  color: #f9c9d4 !important;
 }
 
 .btn-outline-pink {
@@ -373,7 +373,7 @@ select:-webkit-autofill:focus {
   width: 60px;
   height: 25px;
   overflow: hidden;
-  background: #ffa7a3;
+  background: #f9c9d4;
 }
 
 .button1.r,

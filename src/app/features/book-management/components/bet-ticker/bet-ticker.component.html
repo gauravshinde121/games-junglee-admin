@@ -8,12 +8,12 @@
       aria-labelledby="pills-batlist-tab"
       tabindex="0"
     >
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-md-3">
           <h3 class="text-pink">Bet Ticker</h3>
         </div>
       </div>
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-md-3 mb-2">
           <label>Select Member</label>
           <select formControlName="memberName" id="ab" class="form-select">
@@ -25,7 +25,7 @@
         </div>
         <div class="col-md-3 mb-2">
           <button
-            class="btn border-pink rounded-pill mt-4 w-100 text-white"
+            class="btn btn-pink border-pink rounded-pill mt-4 w-100 text-white"
             (click)="clearMemberName()"
           >
             <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
@@ -55,8 +55,8 @@
           />
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4 mb-2">
+      <div class="row mb-3">
+        <div class="col-md-4 mb-3">
           <label>Select Sport</label>
           <select
             formControlName="sportsId"
@@ -70,7 +70,7 @@
             </option>
           </select>
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-4 mb-3">
           <label>Select Match</label>
           <select
             formControlName="matchId"
@@ -84,7 +84,7 @@
             </option>
           </select>
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-4 mb-3">
           <label>Select Market Type</label>
           <select
             formControlName="marketId"
@@ -101,7 +101,7 @@
             </option>
           </select>
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-4 mb-3">
           <label>Stakes From Value</label>
           <input
             formControlName="stakesFromValue"
@@ -111,7 +111,7 @@
             placeholder="Enter Stake From..."
           />
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-4 mb-3">
           <label>Stakes To Value</label>
           <input
             formControlName="stakesToValue"
@@ -121,10 +121,10 @@
             placeholder="Enter Stake To..."
           />
         </div>
-        <div class="col-md-4 mb-2 mt-4">
+        <div class="col-md-4 mb-3 mt-4">
           <button
             type="button"
-            class="btn btn-pink rounded-pill w-100 searchBtn"
+            class="btn btn-pink rounded-pill w-100"
             (click)="searchList()"
           >
             Search
@@ -132,10 +132,10 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-md-12 overflow-auto">
         <table
-          class="table table-dark"
+          class="table tableall"
           *ngIf="allBets.length > 0 && !this.isLoading"
         >
           <thead>
@@ -150,7 +150,7 @@
               <th scope="col">Odds Matched</th>
               <th scope="col">Matched</th>
               <th scope="col">Unmatched</th>
-              <th scope="col" class="last">Profit/Liability</th>
+              <th scope="col">Profit/Liability</th>
               <th scope="col" class="last">IP</th>
             </tr>
           </thead>

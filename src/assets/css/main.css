@@ -4,7 +4,8 @@ body {
 }
 
 .table {
-  font-size: 12px;
+  font-size: 14px;
+  white-space: pre;
 }
 
 .browncolor {
@@ -13,7 +14,8 @@ body {
 }
 
 .bg-pink {
-  background: #ffa7a3 !important;
+  /* background: #ffa7a3 !important; */
+  background: linear-gradient(0deg, #cd212f 0, #e76f26) !important;
 }
 
 .border-pink {
@@ -24,30 +26,30 @@ body {
   /* color: #000;
   background: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   border-color: #ffa7a3; */
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
   transform: scale(1);
 
   border: none;
-    color: #fff;
-    padding: 10px 30px;
-    border-radius: 25px;
-    font-size: 1rem;
-    background-image: linear-gradient(0deg,#cd212f 0,#e76f26);
-    -moz-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-    /* display: flex; */
-    align-items: center;
-    justify-content: space-around;
+  color: #fff;
+  /* padding: 10px 30px; */
+  border-radius: 25px;
+  font-size: 1rem;
+  background-image: linear-gradient(0deg, #cd212f 0, #e76f26);
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  /* display: flex; */
+  align-items: center;
+  justify-content: space-around;
 }
 
 .btn-pink:hover {
   /* background: #fff; */
   /* color: #000; */
   color: #fff;
-  transition: all .2s ease-in;
-    transform: scale(1.1);
+  transition: all 0.2s ease-in;
+  transform: scale(1.01);
 }
 
 .w-30 {
@@ -55,7 +57,7 @@ body {
 }
 
 .text-pink {
-  color: #d35862 !important;
+  color: #ce2430 !important;
 }
 
 .btn-outline-pink {
@@ -187,7 +189,7 @@ body {
 }
 .header .toggle-sidebar-btn {
   font-size: 32px;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   cursor: pointer;
   color: #012970;
 }
@@ -208,6 +210,7 @@ body {
   color: #fff;
   line-height: 26px;
   letter-spacing: 1px;
+  font-weight: 600;
 }
 .balance span {
   font-size: 16px;
@@ -230,14 +233,15 @@ body {
 /********** Sidebar start ************/
 .sidebar {
   left: 0;
-  width: 270px;
+  /* width: 270px; */
+  width: 100%;
   z-index: 996;
   transition: all 0.3s;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
 }
 .sidebar .nav-link {
   color: #fff;
@@ -263,7 +267,7 @@ body {
   padding: 0 10px;
   top: 0px;
   bottom: auto;
-  height: 700px;
+  /* height: 700px; */
 }
 
 /********** Sidebar end ************/
@@ -274,7 +278,7 @@ body {
 }
 .tableall th {
   /* background-color: #ffa7a3; */
-  background: linear-gradient(0deg,#cd212f 0,#e76f26);
+  background: linear-gradient(0deg, #cd212f 0, #e76f26);
   border: 0px;
   font-weight: 500;
   color: #fff;
@@ -304,11 +308,11 @@ body {
 }
 .gamedetails .form-select {
   -webkit-appearance: button;
-     -moz-appearance: button;
-          appearance: button;
+  -moz-appearance: button;
+  appearance: button;
   color: #fff;
   border: 1px solid rgba(166, 166, 166, 0.3411764706);
-  background: #343535;
+  background: #000;
 }
 .gamedetails ::-webkit-calendar-picker-indicator {
   filter: invert(1);
@@ -369,7 +373,7 @@ select:-webkit-autofill:focus {
   width: 60px;
   height: 25px;
   overflow: hidden;
-  background: #ffa7a3;
+  background: #f9c9d4;
 }
 
 .button1.r,
@@ -512,7 +516,7 @@ select:-webkit-autofill:focus {
   border-left: 1px solid #fff;
 }
 .tablematchodds .colblue.light {
-  background-color: rgba(106, 190, 250, 0.368627451) !important;
+  background-color: #a7d8fd !important;
 }
 .tablematchodds .colblue.dis {
   background-color: hsla(205.2deg, 29%, 58%, 0.86) !important;
@@ -522,7 +526,7 @@ select:-webkit-autofill:focus {
   border-left: 1px solid #fff;
 }
 .tablematchodds .colpink.light {
-  background-color: rgba(255, 185, 181, 0.3764705882) !important;
+  background-color: #f9c9d4 !important;
 }
 .tablematchodds .colpink.dis {
   background-color: hsla(3.5deg, 21.3%, 52.2%, 0.78) !important;
@@ -616,8 +620,66 @@ select:-webkit-autofill:focus {
 
 .pointer {
   cursor: pointer;
-}/*# sourceMappingURL=main.css.map */
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+} /*# sourceMappingURL=main.css.map */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   color: #fff;
-  background: linear-gradient(0deg,#cd212f 0,#e76f26);
+  background: linear-gradient(0deg, #cd212f 0, #e76f26);
+}
+
+#loginregbg {
+  --s: 10vmin;
+  --p: calc(var(--s) / 2);
+  --c1: #ffc0e636;
+  --c2: #00418063;
+  --c3: #ffffff69;
+  --bg: var(--c3);
+  --d: 2000ms;
+  --e: cubic-bezier(0.76, 0, 0.24, 1);
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 192, 230, 0.0705882353) 25%,
+    rgba(0, 0, 0, 0.6) 25%
+  );
+  background-size: var(--s) var(--s);
+  /* background-position: calc(var(--p) * 1) calc(var(--p) * 0),
+    calc(var(--p) * -1) calc(var(--p) * 1),
+    calc(var(--p) * 1) calc(var(--p) * -1),
+    calc(var(--p) * -1) calc(var(--p) * 0); */
+  -webkit-animation: color var(--d) var(--e) infinite,
+    position var(--d) var(--e) infinite;
+  animation: color var(--d) var(--e) infinite,
+    position var(--d) var(--e) infinite;
+  background-color: #000;
+  padding-top: 4%;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+@keyframes color {
+  0% {
+    background-position: calc(var(--p) * -1) calc(var(--p) * -1);
+  }
+
+  100% {
+    background-position: calc(var(--p) * 1) calc(var(--p) * 1);
+  }
+}
+
+.sidebar .btn {
+  text-align: start;
+}
+
+.bg-dark_new {
+  background-color: #000;
+}
+
+.modal {
+  backdrop-filter: blur(3px);
+}
+
+.bg-dark {
+  background-color: #000 !important;
 }

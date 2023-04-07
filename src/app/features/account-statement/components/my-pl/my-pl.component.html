@@ -5,21 +5,41 @@
         <!--your code will come here start-->
         <i class="fa"></i>
         <h4 class="text-pink">
-          <img src="../../../../../assets/images/master_dashboard.png" alt="" /> My P/L Statement</h4>
+          <img src="../../../../../assets/images/master_dashboard.png" alt="" />
+          My P/L Statement
+        </h4>
         <hr />
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-3 mb-3">
               <label>From Date</label>
-              <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id="" placeholder="Month" />
+              <input
+                type="date"
+                formControlName="fromDate"
+                name="fromDate"
+                class="form-control"
+                id=""
+                placeholder="Month"
+              />
             </div>
             <div class="col-md-3 mb-3">
               <label>To Date</label>
-              <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month" />
+              <input
+                type="date"
+                formControlName="toDate"
+                name="toDate"
+                class="form-control"
+                id=""
+                placeholder="Month"
+              />
             </div>
             <div class="col-md-3 mb-3">
               <label>Select Sport</label>
-              <select formControlName="sportsId" id="ab" class="form-select pointer">
+              <select
+                formControlName="sportsId"
+                id="ab"
+                class="form-select pointer"
+              >
                 <option value="null">All</option>
                 <option *ngFor="let game of games" [value]="game.sportId">
                   {{ game.sportName }}
@@ -28,7 +48,11 @@
             </div>
             <div class="col-md-3 mb-3">
               <label>Select Match</label>
-              <select formControlName="matchId" id="ab" class="form-select pointer">
+              <select
+                formControlName="matchId"
+                id="ab"
+                class="form-select pointer"
+              >
                 <option value="null">All</option>
                 <option [value]="match.matchId" *ngFor="let match of matchList">
                   {{ match.matchName }}
@@ -37,15 +61,28 @@
             </div>
             <div class="col-md-4 mb-2">
               <label>Select Market</label>
-              <select formControlName="marketId" id="ab" class="form-select pointer">
+              <select
+                formControlName="marketId"
+                id="ab"
+                class="form-select pointer"
+              >
                 <option value="null">All</option>
-                <option [value]="market.marketId" *ngFor="let market of marketList">
+                <option
+                  [value]="market.marketId"
+                  *ngFor="let market of marketList"
+                >
                   {{ market.marketName }}
                 </option>
               </select>
             </div>
             <div class="col-md-3">
-              <button type="button" (click)="getPlStatement()" class="btn btn-pink rounded-pill mt-4"> Search </button>
+              <button
+                type="button"
+                (click)="getPlStatement()"
+                class="btn btn-pink rounded-pill mt-4"
+              >
+                Search
+              </button>
             </div>
           </div>
         </div>
@@ -62,17 +99,18 @@
       <table class="table tableall pointer" *ngIf="plStatement.length > 0">
         <thead>
           <tr>
-            <th scope="col" class="text-dark">Date</th>
-            <th scope="col" class="text-dark">Game</th>
-            <th scope="col" class="text-dark">Sub Game</th>
-            <th scope="col" class="text-dark">Event</th>
-            <th scope="col" class="text-dark">Win/Loss</th>
-            <th scope="col" class="text-dark">Commission</th>
-            <th scope="col" class="text-dark">Net Amount</th>
-            <!-- <th scope="col" class="text-dark">U/L Commission</th>
-            <th scope="col" class="text-dark">D/L Commission</th> -->
-            <th scope="col" class="text-dark">User Count</th>
-            <th scope="col" class="text-dark">Bet Count</th>
+            <th scope="col" class="first">Date</th>
+            <th scope="col">Game</th>
+            <th scope="col">Sub Game</th>
+            <th scope="col">Event</th>
+            <th scope="col">Win/Loss</th>
+            <th scope="col">Commission</th>
+            <th scope="col">Net Amount</th>
+            <!-- <th scope="col" class="">U/L Commission</th>
+            <th scope="col" class="">D/L Commission</th> -->
+            <th scope="col">User Count</th>
+            <th scope="col">Bet Count</th>
+            <th scope="col" class="last"></th>
           </tr>
         </thead>
         <tbody>
@@ -110,9 +148,23 @@
     </div>
     <!-- <div class="col-md-12"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
     <div *ngIf="plStatement.length > 0 && !this.isLoading">
-      <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
-      <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage }} / {{totalPages}} </span>
-      <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()"> Next </button>
+      <button
+        class="btn rounded-pill text-white"
+        [disabled]="currentPage === 1"
+        (click)="prev()"
+      >
+        Prev
+      </button>
+      <span class="btn btn-pink rounded-pill ps-4 pe-4"
+        >{{ currentPage }} / {{ totalPages }}
+      </span>
+      <button
+        class="btn rounded-pill text-white"
+        [disabled]="currentPage === totalPages"
+        (click)="next()"
+      >
+        Next
+      </button>
     </div>
   </div>
 </main>

@@ -2,62 +2,77 @@
   <section class="section gamedetails">
     <div class="row" [formGroup]="invalidBetForm">
       <!-- <div class="col-md-12"> -->
-        <!--your code will come here start-->
-        <h4 class="text-pink">Invalid Bet</h4>
-        <hr />
+      <!--your code will come here start-->
+      <h4 class="text-pink">Invalid Bet</h4>
+      <hr />
 
-        <div class="col-md-4">
-          <label>Select Member</label>
-          <select formControlName="memberName" id="ab" class="form-select bg-dgrey pointer">
-            <option value="null">All</option>
-            <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
-          </select>
-        </div>
+      <div class="col-md-4">
+        <label>Select Member</label>
+        <select
+          formControlName="memberName"
+          id="ab"
+          class="form-select bg-dgrey pointer"
+        >
+          <option value="null">All</option>
+          <option *ngFor="let member of allMembers" [value]="member.userId">
+            {{ member.username }}
+          </option>
+        </select>
+      </div>
 
-        <div class="col-md-4">
-          <label>From Date</label>
-          <input
-            type="date"
-            name=""
-            class="form-control"
-            id=""
-            formControlName="fromDate"
-          />
-        </div>
+      <div class="col-md-4">
+        <label>From Date</label>
+        <input
+          type="date"
+          name=""
+          class="form-control"
+          id=""
+          formControlName="fromDate"
+        />
+      </div>
 
-        <div class="col-md-4">
-          <label>To Date</label>
-          <input
-            type="date"
-            name=""
-            class="form-control"
-            id=""
-            formControlName="toDate"
-          />
-        </div>
+      <div class="col-md-4">
+        <label>To Date</label>
+        <input
+          type="date"
+          name=""
+          class="form-control"
+          id=""
+          formControlName="toDate"
+        />
+      </div>
 
-        <!-- <div class="col-md-12"> -->
+      <!-- <div class="col-md-12"> -->
 
-            <div class="col-md-2 mt-4">
-              <button type="button" class="btn btn-pink rounded-pill w-100" (click)="getLogs()">
-                Get Log
-              </button>
-            </div>
-            <div class="col-md-2 mt-4">
-              <button type="button" class="btn btn-pink rounded-pill w-100" (click)="clearFilters()">
-                Clear Filters
-              </button>
-            </div>
-        <!-- </div> -->
+      <div class="col-md-2 mt-4">
+        <button
+          type="button"
+          class="btn btn-pink rounded-pill w-100"
+          (click)="getLogs()"
+        >
+          Get Log
+        </button>
+      </div>
+      <div class="col-md-2 mt-4">
+        <button
+          type="button"
+          class="btn btn-pink rounded-pill w-100"
+          (click)="clearFilters()"
+        >
+          Clear Filters
+        </button>
+      </div>
       <!-- </div> -->
-
-
+      <!-- </div> -->
 
       <!--your code will come here end-->
     </div>
     <div class="row pt-5">
       <div class="col-md-12 overflow-auto">
-        <table class="table table tableall" *ngIf="allBets.length > 0 && !this.isLoading">
+        <table
+          class="table table tableall"
+          *ngIf="allBets.length > 0 && !this.isLoading"
+        >
           <thead class="text-dark">
             <tr>
               <th scope="col" class="first">#</th>
@@ -76,8 +91,10 @@
           <tbody>
             <tr *ngFor="let bets of allBets; let i = index">
               <td>
-                <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
-                <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+                <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+                <span *ngIf="currentPage > 1">{{
+                  i + 1 + (currentPage - 1) * limit
+                }}</span>
               </td>
               <td>{{ bets.member }}</td>
               <td>{{ bets.placedTime | date }}</td>
@@ -98,14 +115,15 @@
                 <ng-template #notMatched> -- </ng-template>
               </td>
               <td>
-                <span [ngClass]="bets.profitLiability > 0
-                ? 'text-success'
-                : 'text-danger'
-                ">
+                <span
+                  [ngClass]="
+                    bets.profitLiability > 0 ? 'text-success' : 'text-danger'
+                  "
+                >
                   {{ bets.profitLiability }}
                 </span>
               </td>
-              <td>{{bets.remarks}}</td>
+              <td>{{ bets.remarks }}</td>
             </tr>
           </tbody>
         </table>
@@ -120,8 +138,8 @@
     >
       Prev
     </button>
-    <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
-      >{{ currentPage}} / {{totalPages }}
+    <span class="btn btn-pink rounded-pill ps-4 pe-4"
+      >{{ currentPage }} / {{ totalPages }}
     </span>
     <button
       class="btn bg-dgrey rounded-pill text-white"

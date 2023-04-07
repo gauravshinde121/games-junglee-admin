@@ -1,0 +1,25 @@
+.balance,
+.balance-up .balance {
+  background-color: transparent;
+}
+
+.balance-down .balance {
+  background-color: transparent;
+}
+
+.balance-first,
+.balance-up,
+.balance-down {
+  border-radius: 10px;
+}
+
+.balance-first {
+  background: linear-gradient(0deg, #ff2738 0, #d35862);
+}
+.balance-up {
+  background: linear-gradient(0deg, #00cc38 0, #71ff97);
+}
+
+.balance-down {
+  background: linear-gradient(0deg, #cd212f 0, #e76f26);
+}

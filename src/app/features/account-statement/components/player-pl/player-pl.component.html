@@ -4,34 +4,63 @@
       <div class="col-md-12">
         <!--your code will come here start-->
         <h4 class="text-pink">
-          <img src="../../../../../assets/images/pnl.png" alt="" /> Player P/L Statement
+          <img src="../../../../../assets/images/pnl.png" alt="" /> Player P/L
+          Statement
         </h4>
         <hr />
         <div class="row">
           <div class="col-md-6">
             <label>Select Member</label>
-            <select formControlName="memberName" id="ab" class="form-select bg-dgre pointer">
+            <select
+              formControlName="memberName"
+              id="ab"
+              class="form-select bg-dgre pointer"
+            >
               <option value="null">All</option>
-              <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
+              <option *ngFor="let member of allMembers" [value]="member.userId">
+                {{ member.username }}
+              </option>
             </select>
           </div>
           <div class="col-md-6 mt-3">
-            <button class="btn btn-outline-pink rounded-pill mt-2 w-100 mb-3" (click)="clearMemberName();">
-              <i class="fa fa-user-cog"></i> Clear Members </button>
+            <button
+              class="btn btn-outline-pink btn-pink text-white rounded-pill mt-2 w-100 mb-3"
+              (click)="clearMemberName()"
+            >
+              <i class="fa fa-user-cog"></i> Clear Members
+            </button>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <label>From Date</label>
-            <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id="" placeholder="Month" />
+            <input
+              type="date"
+              formControlName="fromDate"
+              name="fromDate"
+              class="form-control"
+              id=""
+              placeholder="Month"
+            />
           </div>
           <div class="col-md-6">
             <label>To Date</label>
-            <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month" />
+            <input
+              type="date"
+              formControlName="toDate"
+              name="toDate"
+              class="form-control"
+              id=""
+              placeholder="Month"
+            />
           </div>
           <div class="col-md-3 mt-3">
             <label>Select Sport</label>
-            <select formControlName="sportsId" id="ab" class="form-select pointer">
+            <select
+              formControlName="sportsId"
+              id="ab"
+              class="form-select pointer"
+            >
               <option value="null">All</option>
               <option *ngFor="let game of games" [value]="game.sportId">
                 {{ game.sportName }}
@@ -40,24 +69,44 @@
           </div>
           <div class="col-md-3 mt-3">
             <label>Select Match</label>
-            <select formControlName="matchId" id="ab" class="form-select pointer">
+            <select
+              formControlName="matchId"
+              id="ab"
+              class="form-select pointer"
+            >
               <option value="null">All</option>
-              <option value="{{ match.matchId }}" *ngFor="let match of matchList">
+              <option
+                value="{{ match.matchId }}"
+                *ngFor="let match of matchList"
+              >
                 {{ match.matchName }}
               </option>
             </select>
           </div>
           <div class="col-md-3 mt-3">
             <label>Select Market</label>
-            <select formControlName="marketId" id="ab" class="form-select pointer">
+            <select
+              formControlName="marketId"
+              id="ab"
+              class="form-select pointer"
+            >
               <option value="null">All</option>
-              <option value="{{ market.marketId }}" *ngFor="let market of marketList">
+              <option
+                value="{{ market.marketId }}"
+                *ngFor="let market of marketList"
+              >
                 {{ market.marketName }}
               </option>
             </select>
           </div>
           <div class="col-md-3 mt-3">
-            <button type="button" class="btn btn-pink rounded-pill mt-4 w-100" (click)="getPlStatement()"> Search </button>
+            <button
+              type="button"
+              class="btn btn-pink rounded-pill mt-4 w-100"
+              (click)="getPlStatement()"
+            >
+              Search
+            </button>
           </div>
         </div>
         <!--your code will come here end-->
@@ -67,9 +116,14 @@
   <br />
   <div class="col-md-12 text-right font">
     <span>
-      <img src="../../../../../assets/images/dollaricon.png" alt="" class="doneLoading" />
+      <img
+        src="../../../../../assets/images/dollaricon.png"
+        alt=""
+        class="doneLoading"
+      />
     </span>
-    <strong> NET Total Amount</strong>&nbsp;&nbsp; <span class="text-danger">{{plStatement.length}}</span>
+    <strong> NET Total Amount</strong>&nbsp;&nbsp;
+    <span class="text-danger">{{ plStatement.length }}</span>
   </div>
   <br />
   <div class="col-md-12 overflow-auto">
@@ -80,26 +134,26 @@
     <table class="table tableall" *ngIf="plStatement.length > 0">
       <thead class="text-dark">
         <tr>
-          <th scope="col"></th>
-          <th scope="col">
-            <i class="fa fa-"></i> Date
-          </th>
+          <th scope="col" class="first"></th>
+          <th scope="col"><i class="fa fa-"></i> Date</th>
           <th scope="col">Sport</th>
           <!--<th scope="col">Sub Game</th>-->
           <th scope="col">Match</th>
           <th scope="col">Username</th>
           <th scope="col">Amount</th>
           <!-- <th scope="col">Master</th><th scope="col">Multiplier</th> -->
-          <th scope="col">Details</th>
+          <th scope="col" class="last">Details</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let pl of plStatement; let i = index">
           <td>
-            <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
-            <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+            <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+            <span *ngIf="currentPage > 1">{{
+              i + 1 + (currentPage - 1) * limit
+            }}</span>
           </td>
-          <td>{{ pl.createDateTime | date :'medium' }}</td>
+          <td>{{ pl.createDateTime | date : "medium" }}</td>
           <td>{{ pl.gameData.subGame }}</td>
           <!--<td>{{ pl.gameData.gameName }}</td>-->
           <td>{{ pl.gameData.eventName }}</td>
@@ -107,36 +161,72 @@
             {{ pl.playerData.name }}
           </td>
           <td>
-            <div [ngClass]="pl.gameData.netAmt > 0
-              ? 'text-success'
-              : 'text-danger'
-          ">
+            <div
+              [ngClass]="
+                pl.gameData.netAmt > 0 ? 'text-success' : 'text-danger'
+              "
+            >
               {{ pl.gameData.netAmt | number }}
-
             </div>
           </td>
 
           <td>
-            <i (click)="getOneAccount(pl)" class="fa-sharp fa-solid fa-eye text-pink pointer" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+            <i
+              (click)="getOneAccount(pl)"
+              class="fa-sharp fa-solid fa-eye text-pink pointer"
+              aria-hidden="true"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            ></i>
           </td>
         </tr>
       </tbody>
     </table>
     <div *ngIf="plStatement.length > 0 && !this.isLoading">
-      <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">Prev</button>
-      <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4">{{ currentPage}} / {{totalPages}} </span>
-      <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()"> Next </button>
+      <button
+        class="btn rounded-pill text-white"
+        [disabled]="currentPage === 1"
+        (click)="prev()"
+      >
+        Prev
+      </button>
+      <span class="btn btn-pink rounded-pill ps-4 pe-4"
+        >{{ currentPage }} / {{ totalPages }}
+      </span>
+      <button
+        class="btn rounded-pill text-white"
+        [disabled]="currentPage === totalPages"
+        (click)="next()"
+      >
+        Next
+      </button>
     </div>
   </div>
 </main>
 <!-- Modal start-->
-<div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog modal-lg">
     <div class="modal-content modal-size modal-width">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino text-dark" id="staticBackdropLabel"> Game Detail &nbsp; <i class="fa fa-lock text-pink"></i>
+        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
+          Game Detail &nbsp; <i class="fa fa-lock"></i>
         </h5>
-        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body bg-dark text-white">
         <div class="row">
@@ -144,8 +234,8 @@
             <table class="table tableall">
               <thead>
                 <tr>
-                  <th scope="col" class="text-dark">Game Info</th>
-                  <th scope="col"></th>
+                  <th scope="col" class="first">Game Info</th>
+                  <th scope="col" class="last"></th>
                 </tr>
               </thead>
               <tbody>
@@ -167,11 +257,11 @@
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
-                  <td [ngClass]="
-                       gameData?.netAmt > 0
-                        ? 'text-success'
-                        : 'text-danger'
-                    ">
+                  <td
+                    [ngClass]="
+                      gameData?.netAmt > 0 ? 'text-success' : 'text-danger'
+                    "
+                  >
                     {{ gameData?.netAmt }}
                   </td>
                 </tr>
@@ -181,11 +271,11 @@
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
-                  <td [ngClass]="
-                       gameData?.netAmt > 0
-                        ? 'text-success'
-                        : 'text-danger'
-                    ">
+                  <td
+                    [ngClass]="
+                      gameData?.netAmt > 0 ? 'text-success' : 'text-danger'
+                    "
+                  >
                     {{ gameData?.netAmt }}
                   </td>
                 </tr>
@@ -200,8 +290,8 @@
             <table class="table tableall">
               <thead>
                 <tr>
-                  <th scope="col" class="text-dark">Winner</th>
-                  <th scope="col" class="text-dark"></th>
+                  <th scope="col" class="first">Winner</th>
+                  <th scope="col" class="last"></th>
                 </tr>
               </thead>
               <tbody>
@@ -221,17 +311,17 @@
           <table class="table tableall">
             <thead>
               <tr>
-                <th scope="col" class="text-dark">Place Date</th>
-                <th scope="col" class="text-dark">Matched Date</th>
-                <th scope="col" class="text-dark">Type</th>
-                <th scope="col" class="text-dark">Status</th>
-                <th scope="col" class="text-dark">Horse Name</th>
-                <th scope="col" class="text-dark">Avg. Odds</th>
-                <th scope="col" class="text-dark">Odds</th>
-                <th scope="col" class="text-dark">Stake</th>
-                <th scope="col" class="text-dark">Matched Stake</th>
-                <th scope="col" class="text-dark">Profit/Loss (In INR)</th>
-                <th scope="col" class="text-dark">IP</th>
+                <th scope="col" class="first">Place Date</th>
+                <th scope="col" class="">Matched Date</th>
+                <th scope="col" class="">Type</th>
+                <th scope="col" class="">Status</th>
+                <th scope="col" class="">Horse Name</th>
+                <th scope="col" class="">Avg. Odds</th>
+                <th scope="col" class="">Odds</th>
+                <th scope="col" class="">Stake</th>
+                <th scope="col" class="">Matched Stake</th>
+                <th scope="col" class="">Profit/Loss (In INR)</th>
+                <th scope="col" class="last">IP</th>
               </tr>
             </thead>
             <tbody>
@@ -245,10 +335,14 @@
                 <td>{{ bet.odds }}</td>
                 <td>{{ bet.odds }}</td>
                 <td>{{ bet.matchedStake }}</td>
-                <td [ngClass]="bet.profitLoss > 0 ? 'text-success' : 'text-danger'">
+                <td
+                  [ngClass]="
+                    bet.profitLoss > 0 ? 'text-success' : 'text-danger'
+                  "
+                >
                   {{ bet.profitLoss | number }}
                 </td>
-                <td>{{bet.ipAddress}}</td>
+                <td>{{ bet.ipAddress }}</td>
               </tr>
             </tbody>
           </table>

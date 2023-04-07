@@ -1,41 +1,86 @@
-<div class="tab-pane fade show active" id="pills-activity" role="tabpanel" aria-labelledby="pills-activity-tab" tabindex="0">
-  <div class="tab-pane fade show active p-3" id="pills-activity" role="tabpanel" aria-labelledby="pills-activity-tab">
-    <form [formGroup]="searchActivityForm" (ngSubmit)="onSubmitSearchActivityForm()">
+<div
+  class="tab-pane fade show active"
+  id="pills-activity"
+  role="tabpanel"
+  aria-labelledby="pills-activity-tab"
+  tabindex="0"
+>
+  <div
+    class="tab-pane fade show active"
+    id="pills-activity"
+    role="tabpanel"
+    aria-labelledby="pills-activity-tab"
+  >
+    <form
+      [formGroup]="searchActivityForm"
+      (ngSubmit)="onSubmitSearchActivityForm()"
+    >
       <div class="row">
         <!-- <div class="col-md-12 mb-3"><span class="me-3"><input formControlName="agent" type="radio" [checked]="isChecked" id="1" value="true" /><label for="1">Agent</label></span><span><input formControlName="agent" type="radio" id="0" value="false" /><label for="0">All Members</label></span></div> -->
         <div class="col-md-3 mb-3">
           <label>Select Sports</label>
-          <select formControlName="sportsId" id="ab" class="form-select text-white bg-dark pointer" (click)="_onSportSelect()">
+          <select
+            formControlName="sportsId"
+            id="ab"
+            class="form-select text-white bg-dark pointer"
+            (click)="_onSportSelect()"
+          >
             <option class="text-dark bg-white" value="null">All</option>
-            <option class="text-dark bg-white" *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}
+            <option
+              class="text-dark bg-white"
+              *ngFor="let game of games"
+              [value]="game.sportId"
+            >
+              {{ game.sportName }}
             </option>
           </select>
         </div>
         <div class="col-md-3 mb-3">
           <label>Select Market</label>
-          <select formControlName="marketId" id="ab" class="form-select text-white bg-dark pointer">
+          <select
+            formControlName="marketId"
+            id="ab"
+            class="form-select text-white bg-dark pointer"
+          >
             <option class="text-dark bg-white" value="null">All</option>
-            <option class="text-dark bg-white" value="market.marketId" *ngFor="let market of marketList">
-              {{market.marketName}}
+            <option
+              class="text-dark bg-white"
+              value="market.marketId"
+              *ngFor="let market of marketList"
+            >
+              {{ market.marketName }}
             </option>
           </select>
         </div>
         <div class="col-md-2 mb-3">
           <label>From Date</label>
-          <input type="date" formControlName="fromDate" class="form-control" id="" placeholder="Month" />
+          <input
+            type="date"
+            formControlName="fromDate"
+            class="form-control"
+            id=""
+            placeholder="Month"
+          />
         </div>
         <div class="col-md-2 mb-3">
           <label>To Date</label>
-          <input type="date" formControlName="toDate" class="form-control" id="" />
+          <input
+            type="date"
+            formControlName="toDate"
+            class="form-control"
+            id=""
+          />
         </div>
         <div class="col-md-2 pt-3">
-          <button class="btn btn-pink rounded-pill w-100 mt-1" type="submit"> Search </button>
+          <button class="btn btn-pink rounded-pill w-100 mt-1" type="submit">
+            Search
+          </button>
         </div>
       </div>
     </form>
     <div class="row">
       <div class="col-md-12 mt-4 overflow-auto">
-        <table class="table tableall" *ngIf="activityData">
+        <table class="table tableall m-0" *ngIf="activityData">
           <thead class="text-dark">
             <tr>
               <th scope="col"></th>
@@ -50,46 +95,57 @@
             <tr>
               <td>Win</td>
               <ng-container *ngIf="activityData?.currentDateData">
-                <td [ngClass]="activityData?.currentDateData[0]?.winAmt > 0
-                  ? 'text-success'
-                  : 'text-danger'
-              ">
+                <td
+                  [ngClass]="
+                    activityData?.currentDateData[0]?.winAmt > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.currentDateData[0]?.winAmt | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.threeDaysBack">
-                <td [ngClass]="
-                  activityData?.threeDaysBack[0]?.winAmt > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.threeDaysBack[0]?.winAmt > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.threeDaysBack[0]?.winAmt | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.sevenDaysBack">
-                <td [ngClass]="
-                  activityData?.sevenDaysBack[0]?.winAmt > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.sevenDaysBack[0]?.winAmt > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.sevenDaysBack[0]?.winAmt | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.thirtyDaysBack">
-                <td [ngClass]="
-                  activityData?.thirtyDaysBack[0]?.winAmt > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.thirtyDaysBack[0]?.winAmt > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.thirtyDaysBack[0]?.winAmt | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.lifeTimeData">
-                <td [ngClass]="
-                  activityData?.lifeTimeData[0]?.winAmt > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.lifeTimeData[0]?.winAmt > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.lifeTimeData[0].winAmt | number }}
                 </td>
               </ng-container>
@@ -97,104 +153,131 @@
             <tr>
               <td>Betfair Commission</td>
               <ng-container *ngIf="activityData?.currentDateData">
-                <td [ngClass]="
-                  activityData?.currentDateData[0]?.commissionAmtForBetfair > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
-                  {{ activityData?.currentDateData[0]?.commissionAmtForBetfair
-                | number
-                }}
+                <td
+                  [ngClass]="
+                    activityData?.currentDateData[0]?.commissionAmtForBetfair >
+                    0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
+                  {{
+                    activityData?.currentDateData[0]?.commissionAmtForBetfair
+                      | number
+                  }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.threeDaysBack">
-                <td [ngClass]="
-                  activityData?.threeDaysBack[0]?.commissionAmtForBetfair > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
-                  {{ activityData?.threeDaysBack[0]?.commissionAmtForBetfair
-                | number
-                }}
+                <td
+                  [ngClass]="
+                    activityData?.threeDaysBack[0]?.commissionAmtForBetfair > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
+                  {{
+                    activityData?.threeDaysBack[0]?.commissionAmtForBetfair
+                      | number
+                  }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.sevenDaysBack">
-                <td [ngClass]="
-                activityData?.sevenDaysBack[0]?.commissionAmtForBetfair > 0
-                  ? 'text-success'
-                  : 'text-danger'
-              ">
-                  {{ activityData?.sevenDaysBack[0]?.commissionAmtForBetfair
-              | number
-              }}
+                <td
+                  [ngClass]="
+                    activityData?.sevenDaysBack[0]?.commissionAmtForBetfair > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
+                  {{
+                    activityData?.sevenDaysBack[0]?.commissionAmtForBetfair
+                      | number
+                  }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.thirtyDaysBack">
-                <td [ngClass]="
-                  activityData?.thirtyDaysBack[0]?.commissionAmtForBetfair > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
-                  {{ activityData?.thirtyDaysBack[0]?.commissionAmtForBetfair
-                | number
-                }}
+                <td
+                  [ngClass]="
+                    activityData?.thirtyDaysBack[0]?.commissionAmtForBetfair > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
+                  {{
+                    activityData?.thirtyDaysBack[0]?.commissionAmtForBetfair
+                      | number
+                  }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.lifeTimeData">
-                <td [ngClass]="
-                  activityData?.lifeTimeData[0]?.commissionAmtForBetfair > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
-                  {{ activityData?.lifeTimeData[0]?.commissionAmtForBetfair | number
-                }}
+                <td
+                  [ngClass]="
+                    activityData?.lifeTimeData[0]?.commissionAmtForBetfair > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
+                  {{
+                    activityData?.lifeTimeData[0]?.commissionAmtForBetfair
+                      | number
+                  }}
                 </td>
               </ng-container>
             </tr>
             <tr>
               <td>Commission</td>
               <ng-container *ngIf="activityData?.currentDateData">
-                <td [ngClass]="
-                  activityData?.currentDateData[0]?.commissionAmt > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.currentDateData[0]?.commissionAmt > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.currentDateData[0]?.commissionAmt | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.threeDaysBack">
-                <td [ngClass]="
-                  activityData?.threeDaysBack[0]?.commissionAmt > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.threeDaysBack[0]?.commissionAmt > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.threeDaysBack[0]?.commissionAmt | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.sevenDaysBack">
-                <td [ngClass]="
-                  activityData?.sevenDaysBack[0]?.commissionAmt > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.sevenDaysBack[0]?.commissionAmt > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.sevenDaysBack[0]?.commissionAmt | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.thirtyDaysBack">
-                <td [ngClass]="
-                  activityData?.thirtyDaysBack[0]?.commissionAmt > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.thirtyDaysBack[0]?.commissionAmt > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.thirtyDaysBack[0]?.commissionAmt | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.lifeTimeData">
-                <td [ngClass]="
-                  activityData?.lifeTimeData[0]?.commissionAmt > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.lifeTimeData[0]?.commissionAmt > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.lifeTimeData[0]?.commissionAmt | number }}
                 </td>
               </ng-container>
@@ -202,47 +285,57 @@
             <tr>
               <td>P&L</td>
               <ng-container *ngIf="activityData?.currentDateData">
-                <td [ngClass]="
-                  activityData?.currentDateData[0]?.netAmount > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.currentDateData[0]?.netAmount > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.currentDateData[0]?.netAmount | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.threeDaysBack">
-                <td [ngClass]="
-                  activityData?.threeDaysBack[0]?.netAmount > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.threeDaysBack[0]?.netAmount > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.threeDaysBack[0]?.netAmount | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.sevenDaysBack">
-                <td [ngClass]="
-                  activityData?.sevenDaysBack[0]?.netAmount > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.sevenDaysBack[0]?.netAmount > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.sevenDaysBack[0]?.netAmount | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.thirtyDaysBack">
-                <td [ngClass]="
-                  activityData?.thirtyDaysBack[0]?.netAmount > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.thirtyDaysBack[0]?.netAmount > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.thirtyDaysBack[0]?.netAmount | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.lifeTimeData">
-                <td [ngClass]="
-                  activityData?.lifeTimeData[0]?.netAmount > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.lifeTimeData[0]?.netAmount > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.lifeTimeData[0]?.netAmount | number }}
                 </td>
               </ng-container>
@@ -250,47 +343,57 @@
             <tr>
               <td>Turnover</td>
               <ng-container *ngIf="activityData?.currentDateData">
-                <td [ngClass]="
-                  activityData?.currentDateData[0]?.turnover > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.currentDateData[0]?.turnover > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.currentDateData[0]?.turnover | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.currentDateData">
-                <td [ngClass]="
-                  activityData?.threeDaysBack[0]?.turnover > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.threeDaysBack[0]?.turnover > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.threeDaysBack[0]?.turnover | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.sevenDaysBack">
-                <td [ngClass]="
-                  activityData?.sevenDaysBack[0]?.turnover > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.sevenDaysBack[0]?.turnover > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.sevenDaysBack[0]?.turnover | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.thirtyDaysBack">
-                <td [ngClass]="
-                  activityData?.thirtyDaysBack[0]?.turnover > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.thirtyDaysBack[0]?.turnover > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.thirtyDaysBack[0]?.turnover | number }}
                 </td>
               </ng-container>
               <ng-container *ngIf="activityData?.lifeTimeData">
-                <td [ngClass]="
-                  activityData?.lifeTimeData[0]?.turnover > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                ">
+                <td
+                  [ngClass]="
+                    activityData?.lifeTimeData[0]?.turnover > 0
+                      ? 'text-success'
+                      : 'text-danger'
+                  "
+                >
                   {{ activityData?.lifeTimeData[0]?.turnover | number }}
                 </td>
               </ng-container>
@@ -303,7 +406,7 @@
     <div class="col-md-12 mt-3" *ngIf="!activityData && !isLoading">
       <div class="border text-center p-5">
         <h4 *ngIf="!activityData && !isLoading">No data found</h4>
-        {{isLoading | json}}
+        {{ isLoading | json }}
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
     </div>

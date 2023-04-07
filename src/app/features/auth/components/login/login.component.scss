@@ -1,42 +1,23 @@
 .busy {
-    animation: spin 1s infinite linear;
-    display: inline-block;
-    font-weight: bold;
-    font-family: sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    color: #555;
-  }
-  
-  .busy::before {
-    content: "\25E0";
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-  
-    100% {
-      transform: rotate(359deg);
-    }
+  animation: spin 1s infinite linear;
+  display: inline-block;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  color: #555;
+}
+
+.busy::before {
+  content: "\25E0";
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
 
-  #loginregbg {
-    --s: 10vmin;
-    --p: calc(var(--s) / 2);
-    --c1: #ffc0e636;
-    --c2: #00418063;
-    --c3: #ffffff69;
-    --bg: var(--c3);
-    --d: 6000ms;
-    --e: cubic-bezier(0.76, 0, 0.24, 1);
-    background-image: linear-gradient(45deg, rgba(255, 192, 230, 0.0705882353) 25%, rgba(0, 0, 0, 0.6) 25%);
-    background-size: var(--s) var(--s);
-    background-position: calc(var(--p) * 1) calc(var(--p) * 0), calc(var(--p) * -1) calc(var(--p) * 1), calc(var(--p) * 1) calc(var(--p) * -1), calc(var(--p) * -1) calc(var(--p) * 0);
-    -webkit-animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
-    animation: color var(--d) var(--e) infinite, position var(--d) var(--e) infinite;
-    background-color: #000;
-    padding-top: 4%;
-    height: 100vh;
+  100% {
+    transform: rotate(359deg);
+  }
 }

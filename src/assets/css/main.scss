@@ -30,6 +30,8 @@ $background-color_19: #d9d9d9;
 $background-color_20: #343535;
 $background-color_21: #000;
 $background-color_22: #d35862;
+$background-color_23: #a7d8fd;
+$background-color_24: #f9c9d4;
 
 $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 
@@ -69,7 +71,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   // background: $gradient-btn;
   // color: $color_3;
   transition: all 0.2s ease-in;
-  transform: scale(1.1);
+  transform: scale(1.01);
 }
 .w-30 {
   width: 30%;
@@ -510,7 +512,7 @@ select:-webkit-autofill:focus {
     border-left: 1px solid $color_2;
   }
   .colblue.light {
-    background-color: $background-color_14 !important;
+    background-color: $background-color_23 !important;
   }
   .colblue.dis {
     background-color: $background-color_15 !important;
@@ -617,4 +619,14 @@ select:-webkit-autofill:focus {
 
 .bg-dark_new {
   background-color: $background-color_21;
+}
+
+.bg-dark {
+  // background-color: #212529 !important;
+  background-color: $background-color_21 !important;
+}
+
+.radius-left-tb {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }

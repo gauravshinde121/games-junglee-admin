@@ -49,7 +49,7 @@ body {
   /* color: #000; */
   color: #fff;
   transition: all 0.2s ease-in;
-  transform: scale(1.1);
+  transform: scale(1.01);
 }
 
 .w-30 {
@@ -312,7 +312,7 @@ body {
   appearance: button;
   color: #fff;
   border: 1px solid rgba(166, 166, 166, 0.3411764706);
-  background: #343535;
+  background: #000;
 }
 .gamedetails ::-webkit-calendar-picker-indicator {
   filter: invert(1);
@@ -516,7 +516,7 @@ select:-webkit-autofill:focus {
   border-left: 1px solid #fff;
 }
 .tablematchodds .colblue.light {
-  background-color: rgba(106, 190, 250, 0.368627451) !important;
+  background-color: #a7d8fd !important;
 }
 .tablematchodds .colblue.dis {
   background-color: hsla(205.2deg, 29%, 58%, 0.86) !important;
@@ -526,7 +526,7 @@ select:-webkit-autofill:focus {
   border-left: 1px solid #fff;
 }
 .tablematchodds .colpink.light {
-  background-color: rgba(255, 185, 181, 0.3764705882) !important;
+  background-color: #f9c9d4 !important;
 }
 .tablematchodds .colpink.dis {
   background-color: hsla(3.5deg, 21.3%, 52.2%, 0.78) !important;
@@ -678,4 +678,8 @@ select:-webkit-autofill:focus {
 
 .modal {
   backdrop-filter: blur(3px);
+}
+
+.bg-dark {
+  background-color: #000 !important;
 }

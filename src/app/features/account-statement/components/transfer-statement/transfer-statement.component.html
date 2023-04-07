@@ -59,9 +59,7 @@
     <table class="table text-white b-0" *ngIf="transferStatements.length > 0">
       <tbody>
         <tr>
-          <th class="thts">
-            #
-          </th>
+          <th class="thts">#</th>
           <th class="thts">
             <i class="fa-regular fa-calendar-days text-pink"></i>&nbsp; Creation
             Date
@@ -86,10 +84,10 @@
 
         <tr *ngFor="let user of transferStatements; let i = index">
           <td class="tds tdts">
-
-            <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
-            <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
-
+            <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+            <span *ngIf="currentPage > 1">{{
+              i + 1 + (currentPage - 1) * limit
+            }}</span>
           </td>
           <td class="tds tdts">
             {{ user.createdDate | date : "medium" }}
@@ -110,8 +108,7 @@
             {{ user.isGiven ? "Given" : "Taken" }}
           </td>
           <td class="tds tdts">
-            <i class="fa-sharp fa-solid fa-info text-pink"></i> &nbsp;
-            --
+            <i class="fa-sharp fa-solid fa-info text-pink"></i> &nbsp; --
           </td>
         </tr>
       </tbody>
@@ -125,8 +122,8 @@
     >
       Prev
     </button>
-    <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
-      >{{ currentPage}} / {{totalPages }}
+    <span class="btn btn-pink rounded-pill ps-4 pe-4"
+      >{{ currentPage }} / {{ totalPages }}
     </span>
     <button
       class="btn rounded-pill text-white"

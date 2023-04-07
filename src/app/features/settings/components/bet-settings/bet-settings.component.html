@@ -305,8 +305,8 @@
               <td>{{ bets.ip }}</td>
               <td>
                 <button
-                  (click)="deleteBet(bets)"
                   class="btn btn-danger rounded-pill w-80"
+                  (click)="openModal(bets)"
                 >
                   Delete
                 </button>
@@ -345,3 +345,85 @@
     </div>
   </section>
 </main>
+
+<!-- Modal start-->
+<div
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog modal-md">
+    <div class="modal-content modal-size modal-width">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
+          Add Remark
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark text-white">
+        <div class="row">
+          <section class="section m-auto mt-4">
+            <form [formGroup]="deleteBetForm">
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-5">Remark*</div>
+                <div class="col-md-7">
+                  <input
+                    type="text"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="remarks"
+                    placeholder="Enter remarks"
+                  />
+                  <!--<div
+                    class="text-danger"
+                    *ngIf="
+                    remarks &&
+                    remarks.invalid &&
+                    remarks.touched
+                    "
+                  >
+                  Remark is required.
+                  </div>-->
+                </div>
+              </div>
+
+              <div class="row mt-5">
+                <div class="col-md-6 text-end">
+                  <button
+                    (click)="confirmDeleteBet()"
+                    [disabled]="deleteBetForm.invalid"
+                    class="btn btn-danger rounded-pill w-80 mt-4"
+                  >
+                    Save Remark and Delete
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-danger rounded-pill w-80 mt-4"
+                    (click)="closeModal()"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
+            <!--your code will come here end-->
+            <!-- </div> -->
+            <!-- </div> -->
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

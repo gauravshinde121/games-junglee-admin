@@ -4,7 +4,8 @@ body {
 }
 
 .table {
-  font-size: 12px;
+  font-size: 14px;
+  white-space: pre;
 }
 
 .browncolor {
@@ -29,7 +30,7 @@ body {
 
   border: none;
   color: #fff;
-  padding: 10px 30px;
+  /* padding: 10px 30px; */
   border-radius: 25px;
   font-size: 1rem;
   background-image: linear-gradient(0deg, #cd212f 0, #e76f26);
@@ -664,4 +665,8 @@ select:-webkit-autofill:focus {
   100% {
     background-position: calc(var(--p) * 1) calc(var(--p) * 1);
   }
+}
+
+.sidebar .btn {
+  text-align: start;
 }

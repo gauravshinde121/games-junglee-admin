@@ -33,9 +33,6 @@ $background-color_22: #d35862;
 
 $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 
-.table {
-  font-size: 12px;
-}
 .browncolor {
   background-color: $background-color_21;
 }
@@ -56,7 +53,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   transform: scale(1);
   border: none;
   color: #fff;
-  padding: 10px 30px;
+  // padding: 10px 30px;
   border-radius: 25px;
   font-size: 1rem;
   background-image: linear-gradient(0deg, #cd212f 0, #e76f26);

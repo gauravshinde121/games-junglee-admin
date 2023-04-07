@@ -1,7 +1,7 @@
 <main id="main" class="main">
   <section class="section dashboard">
     <div class="row">
-      <div class="col-md-6 col-12 mb-3">
+      <div class="col-md-6 col-lg-6 col-xl-6 mb-3">
         <div class="row text-white">
           <div class="input-group flex-nowrap">
             <span
@@ -22,15 +22,15 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-3 col-lg-3 col-xl-2">
         <button
           routerLink="/member/create-member"
-          class="btn btn-pink radius-all "
+          class="btn btn-pink radius-all"
         >
           <i class="fa fa-pen"></i> Create New
         </button>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-3 col-lg-3 col-xl-2">
         <button
           *ngIf="selectedUserForAdjustment.length > 0"
           (click)="openBulkTransferModal()"
@@ -40,7 +40,9 @@
           <i class="fa fa-pen"></i> Bulk Transfer
         </button>
       </div>
-      <div class="col-md-2 text-end">( Total : {{ userList.length }} )</div>
+      <div class="col-md-12 col-lg-12 col-xl-2 text-end">
+        ( Total : {{ userList.length }} )
+      </div>
     </div>
     <div class="row">
       <!-- nav tab -->
@@ -91,27 +93,21 @@
                 <i class="fa-sharp fa-regular fa-address-card"></i>
               </th>
               <th scope="col" class="">UserName</th>
-              <th scope="col" class=" text-center">Credit Limit</th>
-              <th scope="col" class=" text-center">Net Exposure</th>
-              <th scope="col" class=" text-center">Take</th>
-              <th scope="col" class=" text-center">Give</th>
-              <th scope="col" class=" text-center">
-                Available Credit
-              </th>
+              <th scope="col" class="text-center">Credit Limit</th>
+              <th scope="col" class="text-center">Net Exposure</th>
+              <th scope="col" class="text-center">Take</th>
+              <th scope="col" class="text-center">Give</th>
+              <th scope="col" class="text-center">Available Credit</th>
               <!-- <th scope="col" class=""><i class="fa-sharp fa-regular fa-square-check"></i> Status
               </th> -->
               <!-- <th scope="col" class="">Info</th> -->
-              <th
-                scope="col"
-                class=" text-center"
-                *ngIf="selectedRoleId != 7"
-              >
+              <th scope="col" class="text-center" *ngIf="selectedRoleId != 7">
                 Partnership %
               </th>
-              <th scope="col" class=" text-center">Details</th>
-              <th scope="col" class=" text-center">Status</th>
-              <th scope="col" class=" text-center">Change password</th>
-              <th scope="col" class="last  text-center">Action</th>
+              <th scope="col" class="text-center">Details</th>
+              <th scope="col" class="text-center">Status</th>
+              <th scope="col" class="text-center">Change password</th>
+              <th scope="col" class="last text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -219,7 +215,7 @@
           >
             Prev
           </button>
-          <span class="btn btn-pink rounded-pill  ps-4 pe-4"
+          <span class="btn btn-pink rounded-pill ps-4 pe-4"
             >{{ currentPage }} / {{ totalPages }}
           </span>
           <button

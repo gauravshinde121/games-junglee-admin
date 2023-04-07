@@ -1,29 +1,35 @@
 .select-table-dropdown {
-    background-color: transparent;
-    /* color: rgba(255, 255, 255, 0.4); */
-    color: none;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    cursor: pointer;
+  background-color: transparent;
+  /* color: rgba(255, 255, 255, 0.4); */
+  color: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
 }
 
 .green {
-    background-color: #198754 !important;
+  background-color: #198754 !important;
 }
 
 .yellow {
-    background-color: #ffc107 !important;
+  background-color: #ffc107 !important;
 }
 
 .red {
-   background-color: #dc3545 !important
+  background-color: #dc3545 !important;
 }
 
 .custom-ddl {
-    background-color: transparent;
-    color: none;
-    border:none
+  background-color: transparent;
+  color: none;
+  border: none;
 }
 
-.pointer {cursor: pointer;}
+.pointer {
+  cursor: pointer;
+}
+
+.cassino {
+  color: #fff;
+}

@@ -247,11 +247,11 @@
   aria-labelledby="staticBackdropLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog modal-lg">
+  <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
-          Change Password &nbsp; <i class="fa fa-lock text-pink"></i>
+          Change Password &nbsp; <i class="fa fa-lock"></i>
         </h5>
         <button
           type="button"
@@ -261,16 +261,16 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body bg-dark_new text-white">
         <div class="row">
           <section class="section w-75 m-auto mt-4">
             <!-- <div class="row p-4 pt-5"> -->
             <!-- <div class="col-md-12"> -->
             <!--your code will come here start-->
             <form [formGroup]="changePasswordForm">
-              <div class="row mb-4">
-                <div class="col-md-3">Password*</div>
-                <div class="col-md-9">
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-5">Password*</div>
+                <div class="col-md-7">
                   <input
                     type="password"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
@@ -295,9 +295,9 @@
                   </div>
                 </div>
               </div>
-              <div class="row mb-4">
-                <div class="col-md-3">Confirm&nbsp;Password*</div>
-                <div class="col-md-9">
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-5">Confirm&nbsp;Password*</div>
+                <div class="col-md-7">
                   <input
                     type="password"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"

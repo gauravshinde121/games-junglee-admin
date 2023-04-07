@@ -14,7 +14,8 @@ body {
 }
 
 .bg-pink {
-  background: #ffa7a3 !important;
+  /* background: #ffa7a3 !important; */
+  background: linear-gradient(0deg, #cd212f 0, #e76f26) !important;
 }
 
 .border-pink {
@@ -669,4 +670,12 @@ select:-webkit-autofill:focus {
 
 .sidebar .btn {
   text-align: start;
+}
+
+.bg-dark_new {
+  background-color: #000;
+}
+
+.modal {
+  backdrop-filter: blur(3px);
 }

@@ -86,7 +86,7 @@ export class NetExposureViewTotalComponent implements OnInit {
           singleBook['isExpand'] = true;
           this.setOrUnsetWebSocketParamsObj.push(singleBook.centralId);
           return singleBook['adminBook'].map(runnerRes=>{
-            switch(singleBook['marketName']){
+            switch(singleBook['marketTypName']){
               case 'Match Odds':
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
@@ -138,6 +138,44 @@ export class NetExposureViewTotalComponent implements OnInit {
     })
   }
 
+  private _updateMarketData(data: any) {
+    let parseData = JSON.parse(data);
+    if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
+      // console.log('data', JSON.parse(data));
+        let webSocketData = parseData['data'];
+        this.adminBooksList.map((singleBook)=>{
+          let singleWebSocketMarketData = _.find(webSocketData, ['bmi', singleBook['marketId']]);
+          if(singleWebSocketMarketData != undefined){
+              return singleBook['adminBook'].map((runnerRes) => {
+                let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
+                for (let singleWebsocketRunner of webSocketRunners) {
+                  if (singleWebsocketRunner['ib']) {
+                    //back
+
+                    //Live Rate
+                    runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+
+                    //Volume from Betfair
+                    runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+
+                  } else {
+                    //lay
+
+                    //Live Rate
+                    runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+
+                    //Volume from Betfair
+                    runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+
+                  }
+                }
+                return runnerRes;
+              })
+          }
+      })
+    }
+  }
+
 
   _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
     this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
@@ -153,8 +191,8 @@ export class NetExposureViewTotalComponent implements OnInit {
   _subscribeWebSocket(){
     this.realDataWebSocket.subscribe(
       data => {
-        // if(typeof data == 'string') this._updateMarketData(data);
-        if(typeof data == 'string') console.log('sub',data);
+        if(typeof data == 'string') this._updateMarketData(data);
+        // if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).

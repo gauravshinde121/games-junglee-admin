@@ -193,7 +193,7 @@ export class SurveillanceMainComponent implements OnInit {
       memberId:null,
       fromDate:fromDate,
       toDate:toDate,
-      sportsId: null,
+      sportId: null,
       matchId: null,
       userId: null,
       marketId : null,
@@ -233,11 +233,25 @@ export class SurveillanceMainComponent implements OnInit {
     toDate.setHours(23)
     toDate.setMinutes(59);
     toDate.setSeconds(59);
+
+    if(this.sportsId == 'null'){
+      this.sportsId = null;
+    }
+    if(this.matchId == 'null'){
+      this.matchId = null;
+    }
+    if(this.marketTypeId == 'null'){
+      this.marketTypeId = null;
+    }
+    if(this.betTickerForm.value.memberId == 'null'){
+      this.betTickerForm.patchValue( {'memberId':null} );
+    }
+
     let payload = {
-      sportsId: this.sportsId,
+      sportId: this.sportsId,
       matchId: this.matchId,
       marketId: this.marketTypeId,
-      userId: null,
+      userId: this.betTickerForm.value.memberId,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
       memberId: this.betTickerForm.value.memberId,

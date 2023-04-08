@@ -74,7 +74,7 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   _getNetExposureViewTotal() {
     this.isLoading = true;
-    this.viewTotal = [];
+    // this.viewTotal = [];
 
     this._sharedService._getBetDetailsForWorkStationApi(this.payload).subscribe((data: any) => {
       this.isLoading = false;

@@ -316,13 +316,13 @@
     </div>
   </section>
 
-  <div *ngIf="viewTotal.length == 0" class="border text-center p-5">
+  <!-- <div *ngIf="viewTotal.length == 0" class="border text-center p-5">
     <h4 *ngIf="viewTotal.length == 0 && !isLoading">No data found</h4>
     <h4 *ngIf="isLoading">Loading...</h4>
-  </div>
+  </div> -->
   <div class="row">
     <div class="col-md-12">
-      <div *ngIf="viewTotal.length > 0 && !this.isLoading">
+      <div *ngIf="viewTotal.length > 0">
         <button
           class="btn rounded-pill text-white"
           [disabled]="currentPage === 1"

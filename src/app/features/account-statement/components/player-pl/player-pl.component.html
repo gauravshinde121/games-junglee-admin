@@ -214,8 +214,8 @@
   aria-labelledby="staticBackdropLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog modal-lg">
-    <div class="modal-content modal-size modal-width">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content modal-size border-danger modal-width">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
           Game Detail
@@ -229,7 +229,7 @@
         ></button>
       </div>
       <div class="modal-body bg-dark text-white">
-        <div class="row">
+        <div class="row mb-4">
           <div class="col-md-6">
             <table class="table tableall">
               <thead>
@@ -308,44 +308,49 @@
           </div>
         </div>
         <div class="row">
-          <table class="table tableall">
-            <thead>
-              <tr>
-                <th scope="col" class="first">Place Date</th>
-                <th scope="col" class="">Matched Date</th>
-                <th scope="col" class="">Type</th>
-                <th scope="col" class="">Status</th>
-                <th scope="col" class="">Horse Name</th>
-                <th scope="col" class="">Avg. Odds</th>
-                <th scope="col" class="">Odds</th>
-                <th scope="col" class="">Stake</th>
-                <th scope="col" class="">Matched Stake</th>
-                <th scope="col" class="">Profit/Loss (In INR)</th>
-                <th scope="col" class="last">IP</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let bet of oneAccount?.bets">
-                <td>{{ bet.placedDate | date : "medium" }}</td>
-                <td>{{ bet.matchedDate | date : "medium" }}</td>
-                <td>{{ bet.type }}</td>
-                <td>{{ bet.status }}</td>
-                <td>{{ bet.horseName }}</td>
-                <td>{{ bet.avgOdds | number }}</td>
-                <td>{{ bet.odds }}</td>
-                <td>{{ bet.odds }}</td>
-                <td>{{ bet.matchedStake }}</td>
-                <td
-                  [ngClass]="
-                    bet.profitLoss > 0 ? 'text-success' : 'text-danger'
-                  "
-                >
-                  {{ bet.profitLoss | number }}
-                </td>
-                <td>{{ bet.ipAddress }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="col-md-12">
+            <table class="table tableall">
+              <thead>
+                <tr>
+                  <th scope="col" class="first">Place Date</th>
+                  <th scope="col" class="">Matched Date</th>
+                  <th scope="col" class="">Type</th>
+                  <th scope="col" class="">Status</th>
+                  <th scope="col" class="">Horse Name</th>
+                  <th scope="col" class="">Avg. Odds</th>
+                  <th scope="col" class="">Odds</th>
+                  <th scope="col" class="">Stake</th>
+                  <th scope="col" class="">Matched Stake</th>
+                  <th scope="col" class="">Profit/Loss (In INR)</th>
+                  <th scope="col" class="last">IP</th>
+                </tr>
+              </thead>
+              <table *ngIf="!oneAccount">
+                Loading...
+              </table>
+              <tbody *ngIf="oneAccount">
+                <tr *ngFor="let bet of oneAccount?.bets">
+                  <td>{{ bet.placedDate | date : "medium" }}</td>
+                  <td>{{ bet.matchedDate | date : "medium" }}</td>
+                  <td>{{ bet.type }}</td>
+                  <td>{{ bet.status }}</td>
+                  <td>{{ bet.horseName }}</td>
+                  <td>{{ bet.avgOdds | number }}</td>
+                  <td>{{ bet.odds }}</td>
+                  <td>{{ bet.odds }}</td>
+                  <td>{{ bet.matchedStake }}</td>
+                  <td
+                    [ngClass]="
+                      bet.profitLoss > 0 ? 'text-success' : 'text-danger'
+                    "
+                  >
+                    {{ bet.profitLoss | number }}
+                  </td>
+                  <td>{{ bet.ipAddress }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

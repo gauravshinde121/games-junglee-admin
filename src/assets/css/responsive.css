@@ -174,7 +174,8 @@
     font-size: 1rem;
   }
 
-  .form-control {
+  .form-control,
+  .form-select {
     padding: 3px 10px;
   }
 

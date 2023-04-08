@@ -27,7 +27,6 @@
               <a class="text-decoration-none text-white">
                 <input
                   type="radio"
-                  checked=""
                   class="radioselected cursor-pointer"
                   id="html"
                   name="fav_language"
@@ -95,89 +94,236 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="bg-white h-100 border-5 overflow-auto">
-                        <table class="table tablematchodds bg-transparent">
-                          <tbody>
-                            <ng-container *ngIf="singleAdminBook['marketTypName'] == 'Match Odds'">
-                              <tr *ngFor="let runner of singleAdminBook['adminBook']">
-                                <td class="text-start ps-2 heading border-top">
-                                  <a>{{runner['RunnerName']}} <br />
-                                  <span *ngIf="runner['amount'] > 0" class="text-success">Rs. {{runner['amount']}}</span>
-                                  <span *ngIf="runner['amount'] <= 0" class="text-danger">Rs. {{runner['amount']}}</span>
-                                </a>
-                                </td>
-                                <td class="colblue light">
-                                  <a ><strong>{{runner['back2']}}</strong> <br />{{runner['vback2'] | marketRateFormater}}</a>
-                                </td>
-                                <td class="colpink light">
-                                  <a ><strong>{{runner['back1']}}</strong> <br />{{runner['vback1'] | marketRateFormater}}</a>
-                                </td>
-                                <!-- <td class="colgray">-</td>
+                          <table class="table tablematchodds bg-transparent">
+                            <tbody>
+                              <ng-container
+                                *ngIf="
+                                  singleAdminBook['marketTypName'] ==
+                                  'Match Odds'
+                                "
+                              >
+                                <tr
+                                  *ngFor="
+                                    let runner of singleAdminBook['adminBook']
+                                  "
+                                >
+                                  <td
+                                    class="text-start ps-2 heading border-top"
+                                  >
+                                    <a href=""
+                                      >{{ runner["RunnerName"] }} <br />
+                                      <p class="mb-0 mt-1">
+                                        <span
+                                          *ngIf="runner['amount'] > 0"
+                                          class="text-success"
+                                          >Rs. {{ runner["amount"] }}</span
+                                        >
+                                        <span
+                                          *ngIf="runner['amount'] <= 0"
+                                          class="text-danger"
+                                          >Rs. {{ runner["amount"] }}</span
+                                        >
+                                      </p>
+                                    </a>
+                                  </td>
+                                  <td class="colblue light">
+                                    <a
+                                      ><strong>{{ runner["back2"] }}</strong>
+                                      <br />{{
+                                        runner["vback2"] | marketRateFormater
+                                      }}</a
+                                    >
+                                  </td>
+                                  <td class="colpink light">
+                                    <a
+                                      ><strong>{{ runner["back1"] }}</strong>
+                                      <br />{{
+                                        runner["vback1"] | marketRateFormater
+                                      }}</a
+                                    >
+                                  </td>
+                                  <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
-                                <td class="colblue light">
-                                  <a><strong>{{runner['back0']}}</strong> <br />{{runner['vback0'] | marketRateFormater}}</a>
-                                </td>
-                                <td class="colpink light">
-                                  <a><strong>{{runner['lay0']}}</strong> <br />{{runner['vlay0'] | marketRateFormater}}</a>
-                                </td>
+                                  <td class="colblue light">
+                                    <a
+                                      ><strong>{{ runner["back0"] }}</strong>
+                                      <br />{{
+                                        runner["vback0"] | marketRateFormater
+                                      }}</a
+                                    >
+                                  </td>
+                                  <td class="colpink light">
+                                    <a
+                                      ><strong>{{ runner["lay0"] }}</strong>
+                                      <br />{{
+                                        runner["vlay0"] | marketRateFormater
+                                      }}</a
+                                    >
+                                  </td>
 
-                                <td class="colblue light">
-                                  <a><strong>{{runner['lay1']}}</strong> <br />{{runner['vlay1'] | marketRateFormater}}</a>
-                                </td>
+                                  <td class="colblue light">
+                                    <a
+                                      ><strong>{{ runner["lay1"] }}</strong>
+                                      <br />{{
+                                        runner["vlay1"] | marketRateFormater
+                                      }}</a
+                                    >
+                                  </td>
 
-                                <td class="colpink light">
-                                  <a><strong>{{runner['lay2']}}</strong> <br />{{runner['vlay2'] | marketRateFormater}}</a>
-                                </td>
-                              </tr>
-                            </ng-container>
-                            <ng-container *ngIf="singleAdminBook['marketTypName'] == 'Bookmaker'">
-                              <tr *ngFor="let runner of singleAdminBook['adminBook']">
-                                <td class="text-start ps-2 heading border-top">
-                                  <a >{{runner['RunnerName']}} <br />
-                                    <strong><span *ngIf="runner['amount']>=0" class="text-success">Rs. {{runner['amount'] | number : '1.2-2'}}</span></strong>
-                                    <strong><span *ngIf="runner['amount']<0" class="text-danger">Rs. {{runner['amount'] | number : '1.2-2'}}</span></strong>
-                                </a>
-                                </td>
-                                <td ><a ><strong></strong> <br /></a></td>
-                                <td ><a ><strong></strong> <br /></a></td>
-                                <!-- <td class="colgray">-</td>
+                                  <td class="colpink light">
+                                    <a
+                                      ><strong>{{ runner["lay2"] }}</strong>
+                                      <br />{{
+                                        runner["vlay2"] | marketRateFormater
+                                      }}</a
+                                    >
+                                  </td>
+                                </tr>
+                              </ng-container>
+                              <ng-container
+                                *ngIf="
+                                  singleAdminBook['marketTypName'] ==
+                                  'Bookmaker'
+                                "
+                              >
+                                <tr
+                                  *ngFor="
+                                    let runner of singleAdminBook['adminBook']
+                                  "
+                                >
+                                  <td
+                                    class="text-start ps-2 heading border-top"
+                                  >
+                                    <a
+                                      >{{ runner["RunnerName"] }} <br />
+                                      <strong
+                                        ><span
+                                          *ngIf="runner['amount'] >= 0"
+                                          class="text-success"
+                                          >Rs.
+                                          {{
+                                            runner["amount"] | number : "1.2-2"
+                                          }}</span
+                                        ></strong
+                                      >
+                                      <strong
+                                        ><span
+                                          *ngIf="runner['amount'] < 0"
+                                          class="text-danger"
+                                          >Rs.
+                                          {{
+                                            runner["amount"] | number : "1.2-2"
+                                          }}</span
+                                        ></strong
+                                      >
+                                    </a>
+                                  </td>
+                                  <td>
+                                    <a><strong></strong> <br /></a>
+                                  </td>
+                                  <td>
+                                    <a><strong></strong> <br /></a>
+                                  </td>
+                                  <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
-                                <td class="colblue light">
-                                  <a ><strong>{{runner['back0']}}</strong> <br />{{runner['vback0'] | marketRateFormater}}</a>
-                                </td>
-                                <td class="colpink light">
-                                  <a ><strong>{{runner['lay0']}}</strong> <br />{{runner['vlay0'] | marketRateFormater}}</a>
-                                </td>
+                                  <td class="colblue light">
+                                    <a
+                                      ><strong>{{ runner["back0"] }}</strong>
+                                      <br />{{
+                                        runner["vback0"] | marketRateFormater
+                                      }}</a
+                                    >
+                                  </td>
+                                  <td class="colpink light">
+                                    <a
+                                      ><strong>{{ runner["lay0"] }}</strong>
+                                      <br />{{
+                                        runner["vlay0"] | marketRateFormater
+                                      }}</a
+                                    >
+                                  </td>
 
-                                <td ><a ><strong></strong> <br /></a></td>
-                                <td ><a ><strong></strong> <br /></a></td>
-                              </tr>
-                            </ng-container>
-                            <ng-container *ngIf="singleAdminBook['marketTypName'] == 'Fancy'">
-                              <tr *ngFor="let runner of singleAdminBook['adminBook']">
-                                <td class="text-start ps-2 heading border-top">
-                                  <a >{{runner['RunnerName']}} <br />
-                                    <strong><span *ngIf="runner['amount']>=0" class="text-success">Rs. {{runner['amount'] | number : '1.2-2'}}</span></strong>
-                                    <strong><span *ngIf="runner['amount']<0" class="text-danger">Rs. {{runner['amount'] | number : '1.2-2'}}</span></strong>
-                                </a>
-                                </td>
-                                <td ><a ><strong></strong> <br /></a></td>
-                                <td ><a ><strong></strong> <br /></a></td>
-                                <!-- <td class="colgray">-</td>
+                                  <td>
+                                    <a><strong></strong> <br /></a>
+                                  </td>
+                                  <td>
+                                    <a><strong></strong> <br /></a>
+                                  </td>
+                                </tr>
+                              </ng-container>
+                              <ng-container
+                                *ngIf="
+                                  singleAdminBook['marketTypName'] == 'Fancy'
+                                "
+                              >
+                                <tr
+                                  *ngFor="
+                                    let runner of singleAdminBook['adminBook']
+                                  "
+                                >
+                                  <td
+                                    class="text-start ps-2 heading border-top"
+                                  >
+                                    <a
+                                      >{{ runner["RunnerName"] }} <br />
+                                      <strong
+                                        ><span
+                                          *ngIf="runner['amount'] >= 0"
+                                          class="text-success"
+                                          >Rs.
+                                          {{
+                                            runner["amount"] | number : "1.2-2"
+                                          }}</span
+                                        ></strong
+                                      >
+                                      <strong
+                                        ><span
+                                          *ngIf="runner['amount'] < 0"
+                                          class="text-danger"
+                                          >Rs.
+                                          {{
+                                            runner["amount"] | number : "1.2-2"
+                                          }}</span
+                                        ></strong
+                                      >
+                                    </a>
+                                  </td>
+                                  <td>
+                                    <a><strong></strong> <br /></a>
+                                  </td>
+                                  <td>
+                                    <a><strong></strong> <br /></a>
+                                  </td>
+                                  <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
 
-                                <td class="colpink light">
-                                  <a ><strong>{{runner['lay1']}}</strong> <br />{{runner['vlay1'] | marketRateFormater}}</a>
-                                </td>
-                                <td class="colblue light">
-                                  <a ><strong>{{runner['back1']}}</strong> <br />{{runner['vback1'] | marketRateFormater}}</a>
-                                </td>
+                                  <td class="colpink light">
+                                    <a
+                                      ><strong>{{ runner["lay1"] }}</strong>
+                                      <br />{{
+                                        runner["vlay1"] | marketRateFormater
+                                      }}</a
+                                    >
+                                  </td>
+                                  <td class="colblue light">
+                                    <a
+                                      ><strong>{{ runner["back1"] }}</strong>
+                                      <br />{{
+                                        runner["vback1"] | marketRateFormater
+                                      }}</a
+                                    >
+                                  </td>
 
-                                <td ><a ><strong></strong> <br /></a></td>
-                                <td ><a ><strong></strong> <br /></a></td>
-                            </ng-container>
-
-                          </tbody>
-                        </table></div>
+                                  <td>
+                                    <a><strong></strong> <br /></a>
+                                  </td>
+                                  <td>
+                                    <a><strong></strong> <br /></a>
+                                  </td></tr
+                              ></ng-container>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                       <div class="col-md-6">
                         <div class="bg-white h-100 border-5 overflow-auto">
@@ -211,16 +357,52 @@
                                   <strong>{{ userBook["stake"] }}</strong>
                                 </td>
                                 <td class="border-top">
-                                  Rs.<strong class="text-danger" *ngIf="userBook['runner1']>0">{{ userBook["runner1"] | number : '1.2-2' }}</strong>
-                                  <strong class="text-success" *ngIf="userBook['runner1']<=0">{{ userBook["runner1"] | number : '1.2-2' }}</strong>
+                                  Rs.<strong
+                                    class="text-danger"
+                                    *ngIf="userBook['runner1'] > 0"
+                                    >{{
+                                      userBook["runner1"] | number : "1.2-2"
+                                    }}</strong
+                                  >
+                                  <strong
+                                    class="text-success"
+                                    *ngIf="userBook['runner1'] <= 0"
+                                    >{{
+                                      userBook["runner1"] | number : "1.2-2"
+                                    }}</strong
+                                  >
                                 </td>
                                 <td class="border-top">
-                                  Rs.<strong class="text-danger" *ngIf="userBook['runner3']>0">{{ userBook["runner3"] | number : '1.2-2' }}</strong>
-                                  <strong class="text-success" *ngIf="userBook['runner3']<=0">{{ userBook["runner3"] | number : '1.2-2' }}</strong>
+                                  Rs.<strong
+                                    class="text-danger"
+                                    *ngIf="userBook['runner3'] > 0"
+                                    >{{
+                                      userBook["runner3"] | number : "1.2-2"
+                                    }}</strong
+                                  >
+                                  <strong
+                                    class="text-success"
+                                    *ngIf="userBook['runner3'] <= 0"
+                                    >{{
+                                      userBook["runner3"] | number : "1.2-2"
+                                    }}</strong
+                                  >
                                 </td>
                                 <td class="border-top">
-                                  Rs.<strong class="text-danger" *ngIf="userBook['runner2']>0">{{ userBook["runner2"] | number : '1.2-2' }}</strong>
-                                  <strong class="text-success" *ngIf="userBook['runner2']<=0">{{ userBook["runner2"] | number : '1.2-2' }}</strong>
+                                  Rs.<strong
+                                    class="text-danger"
+                                    *ngIf="userBook['runner2'] > 0"
+                                    >{{
+                                      userBook["runner2"] | number : "1.2-2"
+                                    }}</strong
+                                  >
+                                  <strong
+                                    class="text-success"
+                                    *ngIf="userBook['runner2'] <= 0"
+                                    >{{
+                                      userBook["runner2"] | number : "1.2-2"
+                                    }}</strong
+                                  >
                                 </td>
                               </tr>
                             </tbody>

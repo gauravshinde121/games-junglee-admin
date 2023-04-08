@@ -130,7 +130,7 @@ export class NetExposureViewTotalComponent implements OnInit {
               case 'Bookmaker':
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
-    
+
                 runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
                 runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
               break;
@@ -219,7 +219,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     );
   }
 
-  
+
 
 
   next(): void {

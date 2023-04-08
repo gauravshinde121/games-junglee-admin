@@ -159,6 +159,12 @@ export class ActivityComponent implements OnInit {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
 
+    if(this.searchActivityForm.value.sportsId == 'null'){
+      this.searchActivityForm.patchValue( {'sportsId':null} );
+    }
+    if(this.searchActivityForm.value.marketId == 'null'){
+      this.searchActivityForm.patchValue( {'marketId':null} );
+    }
     let payload = {
       refUserId:this.userId,
       fromDate: fromDate,

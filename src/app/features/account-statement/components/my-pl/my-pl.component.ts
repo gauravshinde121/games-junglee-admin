@@ -78,10 +78,19 @@ export class MyPlComponent implements OnInit {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
 
+    if(this.filterForm.value.sportsId == 'null'){
+      this.filterForm.patchValue( {'sportsId':null} );
+    }
+    if(this.filterForm.value.matchId == 'null'){
+      this.filterForm.patchValue( {'matchId':null} );
+    }
+    if(this.filterForm.value.marketId == 'null'){
+      this.filterForm.patchValue( {'marketId':null} );
+    }
     let body = {
       fromDate: fromDate,
       toDate: toDate,
-      sportsId: this.filterForm.value.sportsId,
+      sportId: this.filterForm.value.sportsId,
       matchId: this.filterForm.value.matchId,
       marketId: this.filterForm.value.marketId,
       pageNo: this.currentPage,

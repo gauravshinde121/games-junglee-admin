@@ -113,7 +113,7 @@ export class AccountStatementComponent implements OnInit {
     let body = {
       fromDate : fromDate,
       toDate : toDate,
-      sportsId : this.filterForm.value.sportsId,
+      sportId : this.filterForm.value.sportsId,
       userId: this.userId,
       pageNo: this.currentPage,
       limit: this.limit,

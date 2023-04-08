@@ -57,6 +57,10 @@ export class NetExposureComponent implements OnInit {
   onFilterChangeDropDown(event){
     this.isLoading = true;
     let body = {};
+
+    if(this.filterForm.value.matchId == 'null'){
+      this.filterForm.patchValue( {'matchId':null} );
+    }
     body = {
       sportId: this.filterForm.value.matchId,
       matchId: event.value
@@ -108,8 +112,9 @@ export class NetExposureComponent implements OnInit {
     } else{
       this.MyPT = true;
     }
-    console.log('this.MyPT',this.MyPT);
+
     if(filterObj.clicked == 'type'){
+      console.log('1');
       this.currentClicked = 'type';
       this.currentMatchId = this.filterForm.value.matchId;
       this.currentSportId = sport_value;
@@ -120,6 +125,7 @@ export class NetExposureComponent implements OnInit {
       }
     }
     if(filterObj.clicked == 'sport'){
+      console.log('2');
       this.currentClicked = 'sport';
       this.currentMatchId = null;
       this.currentSportId = filterObj.sport;
@@ -133,6 +139,7 @@ export class NetExposureComponent implements OnInit {
       }
     }
     if(filterObj.clicked == 'match'){
+      console.log('3');
       this.currentClicked = 'match';
       this.currentMatchId = filterObj.matchId;
       this.currentSportId = this.filterForm.value.matchId;
@@ -143,6 +150,7 @@ export class NetExposureComponent implements OnInit {
       }
     }
     if(filterObj.clicked == 'firstTime'){
+      console.log('4');
       this.currentClicked = 'firstTime';
       this.currentMatchId = filterObj.matchId;
       this.currentSportId = filterObj.sportId;

@@ -150,7 +150,6 @@ export class NetExposureViewTotalComponent implements OnInit {
       // console.log('data', JSON.parse(data));
         let webSocketData = parseData['data'];
         this.adminBooksList.map((singleBook)=>{
-          console.log(webSocketData,singleBook['marketId']);
           let singleWebSocketMarketData = _.find(webSocketData, ['bmi', +singleBook['marketId']]);
           if(singleWebSocketMarketData != undefined){
               return singleBook['adminBook'].map((runnerRes) => {

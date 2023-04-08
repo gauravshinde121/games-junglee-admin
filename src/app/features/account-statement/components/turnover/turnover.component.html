@@ -134,7 +134,7 @@
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
-          Detail &nbsp; <i class="fa fa-lock"></i>
+          Detail
         </h5>
         <button
           type="button"
@@ -143,6 +143,9 @@
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
+      </div>
+      <div class="modal-body bg-dark text-white" *ngIf="!marketInfo">
+        Loading...
       </div>
       <div class="modal-body bg-dark text-white" *ngIf="marketInfo">
         <div class="col-md-12">
@@ -263,7 +266,7 @@
     <div class="modal-content modal-size">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-white" id="betDetailLabel">
-          Detail &nbsp; <i class="fa fa-lock"></i>
+          Detail
         </h5>
         <button
           type="button"
@@ -272,6 +275,9 @@
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
+      </div>
+      <div class="modal-body bg-dark text-white" *ngIf="!betInfo">
+        Loading...
       </div>
       <div class="modal-body bg-dark text-white" *ngIf="betInfo">
         <div class="col-md-12 overflow-auto">

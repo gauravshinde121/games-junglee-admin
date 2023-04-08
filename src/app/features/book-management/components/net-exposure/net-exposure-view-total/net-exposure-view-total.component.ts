@@ -25,6 +25,8 @@ export class NetExposureViewTotalComponent implements OnInit {
   setOrUnsetWebSocketParamsObj:any =[];
   realDataWebSocket:any;
   myPT:boolean = false;
+  refreshCount:number =8;
+  resetTimerInterval:any;
 
   constructor(
     private _sharedService:SharedService,
@@ -35,6 +37,13 @@ export class NetExposureViewTotalComponent implements OnInit {
   ngOnInit(): void {
     this.matchName = localStorage.getItem('matchName');
     this._initConfig();
+    this.resetTimerInterval = setInterval(()=>{
+      if(this.refreshCount == 0){
+        this.refreshCall();
+        this.refreshCount = 9;
+      }
+      this.refreshCount--;
+    },1000)
   }
 
   _initConfig(){
@@ -65,7 +74,7 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   _getNetExposureViewTotal() {
     this.isLoading = true;
-    this.viewTotal = [];
+    // this.viewTotal = [];
 
     this._sharedService._getBetDetailsForWorkStationApi(this.payload).subscribe((data: any) => {
       this.isLoading = false;
@@ -78,6 +87,11 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   onFilterChange(params){
     this.myPT = params;
+    this._postBooksForAdminBookMgmApi(this.payload['marketIds']);
+  }
+
+  refreshCall(){
+    this._getNetExposureViewTotal();
     this._postBooksForAdminBookMgmApi(this.payload['marketIds']);
   }
 
@@ -116,7 +130,7 @@ export class NetExposureViewTotalComponent implements OnInit {
               case 'Bookmaker':
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
-    
+
                 runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
                 runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
               break;
@@ -205,7 +219,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     );
   }
 
-  
+
 
 
   next(): void {
@@ -233,6 +247,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     }
     this._setOrUnsetWebSocketData(unSetObj);
     if(this.realDataWebSocket) this.realDataWebSocket.complete();
+    clearInterval(this.resetTimerInterval)
   }
 
 }

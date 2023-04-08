@@ -5,7 +5,7 @@ body {
 
 .table {
   font-size: 14px;
-  white-space: pre;
+  /* white-space: pre; */
 }
 
 .browncolor {
@@ -57,7 +57,7 @@ body {
 }
 
 .text-pink {
-  color: #ce2430 !important;
+  color: #d35862  !important;
 }
 
 .btn-outline-pink {
@@ -93,7 +93,7 @@ body {
 }
 
 .radioselected {
-  accent-color: #ffa7a3;
+  accent-color: #d35862;
 }
 
 /********** common property end ************/
@@ -373,7 +373,7 @@ select:-webkit-autofill:focus {
   width: 60px;
   height: 25px;
   overflow: hidden;
-  background: #f9c9d4;
+  background: #d35862;
 }
 
 .button1.r,
@@ -653,9 +653,9 @@ select:-webkit-autofill:focus {
   background-color: #000;
   padding-top: 4%;
   height: 100vh;
-  position: fixed;
+  /* position: fixed;
   left: 0;
-  right: 0;
+  right: 0; */
 }
 
 @keyframes color {
@@ -682,4 +682,8 @@ select:-webkit-autofill:focus {
 
 .bg-dark {
   background-color: #000 !important;
+}
+
+.icon-pink {
+  color: #d35862 !important;
 }

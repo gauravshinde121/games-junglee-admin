@@ -6,6 +6,7 @@ import { LeftNavigationComponent } from './components/left-navigation/left-navig
 import { FormsModule } from '@angular/forms';
 import { TruncatePipe } from './pipe/truncate.pipe';
 import { MarketRateFormaterPipe } from './pipe/market-rate-formater.pipe';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,15 @@ import { MarketRateFormaterPipe } from './pipe/market-rate-formater.pipe';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    TooltipModule
   ],
   exports: [
     HeaderComponent,
     LeftNavigationComponent,
     TruncatePipe,
-    MarketRateFormaterPipe
+    MarketRateFormaterPipe,
+    TooltipModule
   ]
 })
 export class SharedModule { }

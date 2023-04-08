@@ -27,7 +27,7 @@
   }
 
   .user p {
-    font-size: 8px;
+    font-size: 12px;
     margin: 5px 0;
   }
 
@@ -85,8 +85,22 @@
   }
 }
 
+@media only screen and (min-width: 960px) {
+  .table {
+    font-size: 5.8px;
+  }
+}
+
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+}
+
+
+
+@media only screen and (min-width: 1097.14px) {
+  .table{
+    font-size: 7px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -132,17 +146,39 @@
   width: 100%;
 }
 
+@media only screen and (min-width: 1280px) {
+  .table {
+    font-size: 8px;
+  }
+}
+
 @media only screen and (min-width: 1440px) {
   .sidebar .btn {
     font-size: 14px;
   }
 }
 
+@media only screen and (min-width: 1536px) {
+  .table {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (min-width: 1920px){
+.table {
+    font-size: 14px;
+}}
+
 @media only screen and (min-width: 2048px) {
   .table {
     font-size: 18px;
   }
 }
+
+@media only screen and (min-width: 2133.33px){
+.table {
+    font-size: 16px;
+}}
 
 @media only screen and (min-width: 2304px) {
   .table {
@@ -159,12 +195,17 @@
   }
 }
 
+@media only screen and (min-width: 2400px){
+.table {
+    font-size: 19px;
+}}
+
 @media only screen and (min-width: 2560px) {
   .sidebar .btn {
     font-size: 1rem;
   }
   .table {
-    font-size: 24px;
+    font-size: 20px;
   }
 }
 @media only screen and (min-width: 3072px) {

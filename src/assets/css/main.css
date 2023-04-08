@@ -93,7 +93,7 @@ body {
 }
 
 .radioselected {
-  accent-color: #ffa7a3;
+  accent-color: #d35862;
 }
 
 /********** common property end ************/
@@ -653,9 +653,9 @@ select:-webkit-autofill:focus {
   background-color: #000;
   padding-top: 4%;
   height: 100vh;
-  position: fixed;
+  /* position: fixed;
   left: 0;
-  right: 0;
+  right: 0; */
 }
 
 @keyframes color {

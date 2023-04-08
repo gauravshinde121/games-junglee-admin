@@ -1,19 +1,18 @@
-<header id="header" class="header d-flex align-items-center row">
-  <div class="col-md-2 col-1 ps-0">
-    <div class="align-items-center justify-content-between">
-      <i class="toggle-sidebar-btn pe-2 d-flex">
+<header id="header" class="header d-flex align-items-center ">
+  <div class="col-md-2">
+    <div class="toggle-sidebar-btn  d-flex align-items-center justify-content-between">
+     
         <!-- <a (click)="toggleMenu()" onclick="on()">-->
         <a (click)="toggleMenu()">
           <i class="fa fa-bars fa-1x text-white"></i>
         </a>
-        <a [routerLink]="['member/list']" routerLinkActive="router-link-active">
+        <a class="mx-4" [routerLink]="['member/list']" routerLinkActive="router-link-active">
           <img
             src="../assets/images/logo_game_junglee.png"
             alt=""
             class="w-100"
           />
         </a>
-      </i>
     </div>
   </div>
   <div class="col-md-8 col-8">

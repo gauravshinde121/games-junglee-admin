@@ -5,7 +5,7 @@ body {
 
 .table {
   font-size: 14px;
-  white-space: pre;
+  /* white-space: pre; */
 }
 
 .browncolor {
@@ -57,7 +57,7 @@ body {
 }
 
 .text-pink {
-  color: #ce2430 !important;
+  color: #d35862  !important;
 }
 
 .btn-outline-pink {

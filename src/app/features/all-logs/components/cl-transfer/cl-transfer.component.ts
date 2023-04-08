@@ -62,6 +62,10 @@ export class ClTransferComponent implements OnInit {
     toDate.setHours(23)
     toDate.setMinutes(59);
     toDate.setSeconds(59);
+
+    if(this.filterForm.value.memberName == 'null'){
+      this.filterForm.patchValue( {'memberName':null} );
+    }
     let body = {
       fromDate: fromDate,
       toDate: toDate,

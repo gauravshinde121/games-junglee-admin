@@ -153,7 +153,7 @@ export class BetSettingsComponent implements OnInit {
 
     let body = {
       memberId: null,
-      sportsId: null,
+      sportId: null,
       matchId: null,
       userId: null,
       marketId : null,
@@ -194,12 +194,24 @@ export class BetSettingsComponent implements OnInit {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
 
+    if(this.sportsId == 'null'){
+      this.sportsId = null;
+    }
+    if(this.matchId == 'null'){
+      this.matchId = null;
+    }
+    if(this.marketTypeId == 'null'){
+      this.marketTypeId = null;
+    }
+    if(this.betTickerForm.value.memberId == 'null'){
+      this.betTickerForm.patchValue( {'memberId':null} );
+    }
     let payload = {
       memberId: this.betTickerForm.value.memberId,
-      sportsId: this.sportsId,
+      sportId: this.sportsId,
       matchId: this.matchId,
       marketId: this.marketTypeId,
-      userId: null,
+      userId: this.betTickerForm.value.memberId,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
       fromDate : fromDate,

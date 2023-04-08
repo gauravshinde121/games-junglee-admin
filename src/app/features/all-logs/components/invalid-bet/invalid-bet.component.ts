@@ -49,6 +49,7 @@ export class InvalidBetComponent implements OnInit {
 
   _getAllMembers() {
     this._memberService._getAllMembers().subscribe((data: any) => {
+      console.log('data',data);
       if (data.memberData) {
         this.allMembers = data.memberData;
       }
@@ -67,10 +68,13 @@ export class InvalidBetComponent implements OnInit {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
 
+    if(this.invalidBetForm.value.memberName == 'null'){
+      this.invalidBetForm.patchValue( {'memberName':null} );
+    }
     let body = {
       fromDate : fromDate, 
       toDate : toDate,
-      userId :null,
+      userId :this.invalidBetForm.value.memberName,
       limit:this.limit,
       pageNo:this.currentPage,
     }

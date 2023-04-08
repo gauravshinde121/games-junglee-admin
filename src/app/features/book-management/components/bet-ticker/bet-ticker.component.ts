@@ -170,7 +170,7 @@ export class BetTickerComponent implements OnInit {
     let body = {
       fromDate:fromDate,
       toDate:toDate,
-      sportsId: null,
+      sportId: null,
       matchId: null,
       userId: null,
       marketId : null,
@@ -178,6 +178,7 @@ export class BetTickerComponent implements OnInit {
       stakesTo :null,
       pageNo: this.currentPage,
       limit: this.limit,
+      memberId: null
     };
 
     this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
@@ -212,15 +213,24 @@ export class BetTickerComponent implements OnInit {
     toDate.setHours(23)
     toDate.setMinutes(59);
     toDate.setSeconds(59);
+
+    if(this.sportsId == 'null'){
+      this.sportsId = null;
+    }
+    if(this.matchId == 'null'){
+      this.matchId = null;
+    }
+
     let payload = {
-      sportsId: this.sportsId,
+      sportId: this.sportsId,
       matchId: this.matchId,
       marketId: this.marketTypeId,
       userId: null,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
       fromDate : fromDate,
-      toDate : toDate
+      toDate : toDate,
+      memberId: this.betTickerForm.value.memberName
     }
 
     this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{

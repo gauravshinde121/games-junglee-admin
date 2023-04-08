@@ -135,6 +135,15 @@ export class BetListComponent implements OnInit {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
 
+    if(this.filterForm.value.sportsId == 'null'){
+      this.filterForm.patchValue( {'sportsId':null} );
+    }
+    if(this.filterForm.value.matchId == 'null'){
+      this.filterForm.patchValue( {'matchId':null} );
+    }
+    if(this.filterForm.value.marketId == 'null'){
+      this.filterForm.patchValue( {'marketId':null} );
+    }
     let body = {
       isActive: this.isActive,
       isMatched: this.isMatched,
@@ -181,22 +190,24 @@ export class BetListComponent implements OnInit {
   }
 
   _getMatchBySportId(sportId){
-    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
-      if(data.matchList){
-        this.matchList = data.matchList;
-        //console.log('data.matchList',data.matchList);
-      }
-    });
+      this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
+        if(data.matchList){
+          this.matchList = data.matchList;
+          //console.log('data.matchList',data.matchList);
+        }
+      });
+
   }
 
   _getMarketsByMatchId(matchId){
-    this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
-      console.log('match data',data);
-      if(data.marketList){
-        this.marketList = data.marketList;
-        //console.log('data.matchList',data.matchList);
-      }
-    });
+      this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
+        console.log('match data',data);
+        if(data.marketList){
+          this.marketList = data.marketList;
+          //console.log('data.matchList',data.matchList);
+        }
+      });
+
   }
 
   _getAllMembers(){

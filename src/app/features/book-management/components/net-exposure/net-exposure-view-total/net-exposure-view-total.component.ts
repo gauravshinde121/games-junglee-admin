@@ -50,7 +50,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   _getWebSocketUrl(){
     this.route.params.subscribe((routeParams)=>{
       let marketIdArr = routeParams['marketIds'].split(',');
-      this._postBooksForAdminBookMgmApi(marketIdArr);
+      this._postBooksForAdminBookMgmApi(marketIdArr,true);
       this.payload = {
         marketIds:marketIdArr,
         pageNo:this.currentPage,
@@ -75,10 +75,10 @@ export class NetExposureViewTotalComponent implements OnInit {
     });
   }
 
-  _postBooksForAdminBookMgmApi(marketIdArr){
+  _postBooksForAdminBookMgmApi(marketIdArr, myPT){
     let bookMgmParams = {
       marketIds: marketIdArr,
-      myPT:false
+      myPT:myPT
     };
     this._bookMgmService._postBooksForAdminBookMgmApi(bookMgmParams).subscribe((res:any)=>{
       if(res['book'].length >0){
@@ -110,7 +110,7 @@ export class NetExposureViewTotalComponent implements OnInit {
               case 'Bookmaker':
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
-    
+
                 runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
                 runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
               break;
@@ -199,7 +199,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     );
   }
 
-  
+
 
 
   next(): void {

@@ -95,10 +95,8 @@
 @media only screen and (min-width: 992px) {
 }
 
-
-
 @media only screen and (min-width: 1097.14px) {
-  .table{
+  .table {
     font-size: 7px;
   }
 }
@@ -160,14 +158,36 @@
 
 @media only screen and (min-width: 1536px) {
   .table {
-    font-size: 11px;
+    font-size: 12px;
+  }
+  body {
+    font-size: 0.9rem;
+  }
+  .accordion p,
+  .memberslist,
+  .form-select,
+  .form-control {
+    font-size: 0.75rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  .form-control {
+    padding: 3px 10px;
+  }
+
+  .list-unstyled {
+    font-size: 14px;
   }
 }
 
-@media only screen and (min-width: 1920px){
-.table {
+@media only screen and (min-width: 1920px) {
+  .table {
     font-size: 14px;
-}}
+  }
+}
 
 @media only screen and (min-width: 2048px) {
   .table {
@@ -175,10 +195,11 @@
   }
 }
 
-@media only screen and (min-width: 2133.33px){
-.table {
+@media only screen and (min-width: 2133.33px) {
+  .table {
     font-size: 16px;
-}}
+  }
+}
 
 @media only screen and (min-width: 2304px) {
   .table {
@@ -195,10 +216,11 @@
   }
 }
 
-@media only screen and (min-width: 2400px){
-.table {
+@media only screen and (min-width: 2400px) {
+  .table {
     font-size: 19px;
-}}
+  }
+}
 
 @media only screen and (min-width: 2560px) {
   .sidebar .btn {

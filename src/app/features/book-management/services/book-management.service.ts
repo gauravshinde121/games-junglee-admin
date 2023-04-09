@@ -22,4 +22,10 @@ export class BookManagementService {
   _postBooksForAdminBookMgmApi(bodyObj:any){
     return this._apiHttpService.post(this._apiEndpointsService.getBooksForAdminBookMgmEndpoint(),bodyObj)
   }
+
+  _postTotalBookApi(bodyObj:any){
+    return this._apiHttpService.post(this._apiEndpointsService.getTotalBookEndpoint(),bodyObj)
+  }
+
+  
 }

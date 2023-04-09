@@ -351,6 +351,7 @@
                                   <img
                                     src="/assets/images/net_expo.png"
                                     width="12"
+                                    (click)="getTotalBookViewTotal(singleAdminBook['marketId'],singleAdminBook['isTotaltotalBookView'])"
                                   />
                                 </td>
                                 <td class="border-top">
@@ -401,6 +402,69 @@
                                     *ngIf="userBook['runner2'] <= 0"
                                     >{{
                                       userBook["runner2"] | number : "1.2-2"
+                                    }}</strong
+                                  >
+                                </td>
+                              </tr>
+                              <tr
+                                *ngFor="
+                                  let totalBook of singleAdminBook['totalBook']
+                                "
+                              >
+                                <td class="border-top">
+                                  {{ totalBook["username"] }}
+                                </td>
+                                <td class="border-top">
+                                  
+                                </td>
+                                <td class="border-top">
+                                  <strong>{{ totalBook["stake"] }}</strong>
+                                </td>
+                                <td class="border-top">
+                                  Rs.<strong
+                                    class="text-danger"
+                                    *ngIf="totalBook['runner1'] > 0"
+                                    >{{
+                                      totalBook["runner1"] | number : "1.2-2"
+                                    }}</strong
+                                  >
+                                  <strong
+                                    class="text-success"
+                                    *ngIf="totalBook['runner1'] <= 0"
+                                    >{{
+                                      totalBook["runner1"] | number : "1.2-2"
+                                    }}</strong
+                                  >
+                                </td>
+                                <td class="border-top">
+                                  Rs.<strong
+                                    class="text-danger"
+                                    *ngIf="totalBook['runner3'] > 0"
+                                    >{{
+                                      totalBook["runner3"] | number : "1.2-2"
+                                    }}</strong
+                                  >
+                                  <strong
+                                    class="text-success"
+                                    *ngIf="totalBook['runner3'] <= 0"
+                                    >{{
+                                      totalBook["runner3"] | number : "1.2-2"
+                                    }}</strong
+                                  >
+                                </td>
+                                <td class="border-top">
+                                  Rs.<strong
+                                    class="text-danger"
+                                    *ngIf="totalBook['runner2'] > 0"
+                                    >{{
+                                      totalBook["runner2"] | number : "1.2-2"
+                                    }}</strong
+                                  >
+                                  <strong
+                                    class="text-success"
+                                    *ngIf="totalBook['runner2'] <= 0"
+                                    >{{
+                                      totalBook["runner2"] | number : "1.2-2"
                                     }}</strong
                                   >
                                 </td>

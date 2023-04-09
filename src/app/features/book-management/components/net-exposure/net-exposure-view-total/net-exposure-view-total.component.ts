@@ -27,6 +27,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   myPT:boolean = false;
   refreshCount:number =8;
   resetTimerInterval:any;
+  totalBooks:any = [];
 
   constructor(
     private _sharedService:SharedService,
@@ -85,6 +86,42 @@ export class NetExposureViewTotalComponent implements OnInit {
     });
   }
 
+  getTotalBookViewTotal(marketId,totalBookStatus) {
+    if(totalBookStatus){
+      this.adminBooksList.map((adminBook)=>{
+        if(adminBook['marketId'] == marketId){
+          adminBook['totalBook'] = [];
+          adminBook['isTotaltotalBookView'] = false;
+        }
+        return adminBook;
+      })
+      this.totalBooks.map((singleBook)=>{
+        if(singleBook['marketId'] == marketId){
+          this.totalBooks = this.totalBooks.filter((item) => item.marketId !== marketId);
+        }
+        return singleBook;
+      })
+      return;
+    }
+    let totalBookParams = {
+      marketId:marketId
+    };
+    this._bookMgmService._postTotalBookApi(totalBookParams).subscribe((data: any) => {
+      console.log(data);
+      if(data['book'].length >0){
+        this.totalBooks.push({marketId:marketId,totalBook:data['book'],isTotaltotalBookView:true});
+        this.adminBooksList.map((adminBook)=>{
+          if(adminBook['marketId'] == marketId){
+            adminBook['totalBook'] = data['book'];
+            adminBook['isTotaltotalBookView'] = true;
+          }
+          return adminBook;
+        })
+      }
+    });
+  }
+  
+
   onFilterChange(params){
     this.myPT = params;
     this._postBooksForAdminBookMgmApi(this.payload['marketIds']);
@@ -105,6 +142,11 @@ export class NetExposureViewTotalComponent implements OnInit {
         res['book'].map((singleBook)=>{
           singleBook['isExpand'] = true;
           this.setOrUnsetWebSocketParamsObj.push(singleBook.centralId);
+          let totalBookMarket = _.find(this.totalBooks, ['marketId', singleBook['marketId']]);
+          if(totalBookMarket != undefined){
+            singleBook['totalBook'] = totalBookMarket['totalBook']
+            singleBook['isTotaltotalBookView'] = totalBookMarket['isTotaltotalBookView']
+          } 
           return singleBook['adminBook'].map(runnerRes=>{
             switch(singleBook['marketTypName']){
               case 'Match Odds':

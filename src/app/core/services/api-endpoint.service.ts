@@ -284,6 +284,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_AMDMIN_BOOK_MGM)
   }
 
+  public getTotalBookEndpoint(){
+    return this.createUrl(this._constants.API_URL_TOTAL_BOOK)
+  }
+
   public getOneAccountEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_ONE_ACCOUNT)
   }

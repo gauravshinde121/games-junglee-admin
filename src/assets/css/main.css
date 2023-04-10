@@ -19,7 +19,8 @@ body {
 }
 
 .border-pink {
-  border: 1px solid #ffa7a3;
+  /* border: 1px solid #ffa7a3; */
+  border: 1px solid #d35862 ;
 }
 
 .btn-pink {
@@ -301,7 +302,8 @@ body {
 /********** table pro end ************/
 /********** inner page pro start ************/
 .gamedetails {
-  border: 1px solid rgba(255, 167, 163, 0.3411764706);
+  /* border: 1px solid rgba(255, 167, 163, 0.3411764706); */
+  border: 1px solid #d35862;
   border-radius: 15px;
   padding: 15px;
   /* background: rgba(60, 62, 62, 0.7215686275); */

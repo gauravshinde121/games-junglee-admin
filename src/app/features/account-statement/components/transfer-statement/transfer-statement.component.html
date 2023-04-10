@@ -1,6 +1,6 @@
 <main id="main" class="main">
   <section class="section gamedetails">
-    <div class="row">
+    <div class="row pb-2">
       <div class="col-md-12">
         <!--your code will come here start-->
 
@@ -18,28 +18,14 @@
           <div class="row" [formGroup]="transferStmtForm">
             <div class="col-md-4">
               <label for="text" class="cassino"> From Date</label><br />
-              <input
-                type="date"
-                formControlName="fromDate"
-                name="fromDate"
-                class="mt-2 form-control"
-              />
+              <input type="date" formControlName="fromDate" name="fromDate" class="mt-2 form-control" />
             </div>
             <div class="col-md-4 responsivets">
               <label for="text" class="cassino">To Date</label><br />
-              <input
-                type="date"
-                formControlName="toDate"
-                class="mt-2 form-control"
-                name="toDate"
-              />
+              <input type="date" formControlName="toDate" class="mt-2 form-control" name="toDate" />
             </div>
             <div class="col-md-2 mt-auto TScenter">
-              <a
-                (click)="getTransferStatement()"
-                class="btn btn-pink radius-all responsivets"
-                >Search</a
-              >
+              <a (click)="getTransferStatement()" class="btn btn-pink radius-all responsivets">Search</a>
             </div>
           </div>
         </div>
@@ -49,89 +35,81 @@
     </div>
   </section>
 
-  <section class="section gamedetails mt-3">
-    <div *ngIf="transferStatements.length == 0" class="border text-center p-5">
-      <h4 *ngIf="transferStatements.length == 0 && !isLoading">
-        No data found
-      </h4>
-      <h4 *ngIf="isLoading">Loading...</h4>
+  <!-- <section class="section gamedetails mt-3"> -->
+  <div class="row mt-3">
+    <div class="col-md-12 tablescroll overflow-auto">
+      <div *ngIf="transferStatements.length == 0" class="border text-center p-5">
+        <h4 *ngIf="transferStatements.length == 0 && !isLoading">
+          No data found
+        </h4>
+        <h4 *ngIf="isLoading">Loading...</h4>
+      </div>
+
+      <table class="table text-white b-0" *ngIf="transferStatements.length > 0">
+        <tbody>
+          <tr>
+            <th class="thts">#</th>
+            <th class="thts">
+              <i class="fa-regular fa-calendar-days text-pink"></i>&nbsp; Creation
+              Date
+            </th>
+            <th class="thts">
+              <i class="fa-solid fa-user text-pink"></i> From User
+            </th>
+            <th class="thts">
+              <i class="fa-solid fa-user text-pink"></i> To User
+            </th>
+            <th class="thts">
+              <i class="fa-sharp fa-solid fa-indian-rupee-sign text-pink"></i>
+              Amount
+            </th>
+            <th class="thts">
+              <i class="fa-solid fa-text-width text-pink"></i> Transaction Type
+            </th>
+            <th class=" last">
+              <i class="fa-solid fa-grip-vertical text-pink"></i> IP
+            </th>
+          </tr>
+
+          <tr *ngFor="let user of transferStatements; let i = index">
+            <td class="tds tdts">
+              <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+              <span *ngIf="currentPage > 1">{{
+                i + 1 + (currentPage - 1) * limit
+                }}</span>
+            </td>
+            <td class="tds tdts">
+              {{ user.createdDate | date : "medium" }}
+            </td>
+            <td class="tds tdts">
+              {{ user.fromUsername }}
+            </td>
+            <td class="tds tdts">
+              {{ user.toUsername }}
+            </td>
+            <td [ngClass]="user.isGiven ? 'text-danger' : 'text-success'" class="amountt tds tdts">
+              {{ user.amount | number }}
+            </td>
+            <td class="tds tdts">
+              {{ user.isGiven ? "Given" : "Taken" }}
+            </td>
+            <td class="tds tdts">
+              <i class="fa-sharp fa-solid fa-info text-pink"></i> &nbsp; --
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="transferStatements.length > 0 && !this.isLoading" class="mt-3">
+        <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
+          Prev
+        </button>
+        <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
+        </span>
+        <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
+          Next
+        </button>
+      </div>
     </div>
-
-    <table class="table text-white b-0" *ngIf="transferStatements.length > 0">
-      <tbody>
-        <tr>
-          <th class="thts">#</th>
-          <th class="thts">
-            <i class="fa-regular fa-calendar-days text-pink"></i>&nbsp; Creation
-            Date
-          </th>
-          <th class="thts">
-            <i class="fa-solid fa-user text-pink"></i> From User
-          </th>
-          <th class="thts">
-            <i class="fa-solid fa-user text-pink"></i> To User
-          </th>
-          <th class="thts">
-            <i class="fa-sharp fa-solid fa-indian-rupee-sign text-pink"></i>
-            Amount
-          </th>
-          <th class="thts">
-            <i class="fa-solid fa-text-width text-pink"></i> Transaction Type
-          </th>
-          <th class="">
-            <i class="fa-solid fa-grip-vertical text-pink"></i> IP
-          </th>
-        </tr>
-
-        <tr *ngFor="let user of transferStatements; let i = index">
-          <td class="tds tdts">
-            <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
-            <span *ngIf="currentPage > 1">{{
-              i + 1 + (currentPage - 1) * limit
-            }}</span>
-          </td>
-          <td class="tds tdts">
-            {{ user.createdDate | date : "medium" }}
-          </td>
-          <td class="tds tdts">
-            {{ user.fromUsername }}
-          </td>
-          <td class="tds tdts">
-            {{ user.toUsername }}
-          </td>
-          <td
-            [ngClass]="user.isGiven ? 'text-danger' : 'text-success'"
-            class="amountt tds tdts"
-          >
-            {{ user.amount | number }}
-          </td>
-          <td class="tds tdts">
-            {{ user.isGiven ? "Given" : "Taken" }}
-          </td>
-          <td class="tds tdts">
-            <i class="fa-sharp fa-solid fa-info text-pink"></i> &nbsp; --
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-  <div *ngIf="transferStatements.length > 0 && !this.isLoading" class="mt-3">
-    <button
-      class="btn rounded-pill text-white"
-      [disabled]="currentPage === 1"
-      (click)="prev()"
-    >
-      Prev
-    </button>
-    <span class="btn btn-pink rounded-pill ps-4 pe-4"
-      >{{ currentPage }} / {{ totalPages }}
-    </span>
-    <button
-      class="btn rounded-pill text-white"
-      [disabled]="currentPage === totalPages"
-      (click)="next()"
-    >
-      Next
-    </button>
   </div>
 </main>

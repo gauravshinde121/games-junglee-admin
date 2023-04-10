@@ -144,13 +144,15 @@
                 [ngClass]="user.take > 0 ? 'text-success' : ''"
                 class="text-center"
               >
-                {{ user.take | number }}
+                <a class="pointer text-success text-decoration-none" *ngIf="user.take > 0" (click)="adjustWinningsForSingleUser(user,false)">{{ user.take | number }}</a>
+                <span *ngIf="user.take <= 0">{{ user.take | number }}</span>
               </td>
               <td
                 [ngClass]="user.give > 0 ? 'text-danger' : ''"
                 class="text-center"
               >
-                {{ user.give | number }}
+              <a class="pointer text-danger text-decoration-none" *ngIf="user.give > 0" (click)="adjustWinningsForSingleUser(user,true)">{{ user.give | number }}</a>
+                <span *ngIf="user.give <= 0">{{ user.give | number }}</span>
               </td>
               <td class="text-center">{{ user.availableCredit | number }}</td>
               <td *ngIf="selectedRoleId != 7" class="text-center">
@@ -402,3 +404,81 @@
   </div>
 </div>
 <!-- Modal end -->
+
+
+
+<div
+  *ngIf="modalNumber == 3"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          Transaction
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark_new text-white">
+        <div class="row">
+          <section class="section w-75 m-auto mt-4">
+            <table>
+              <tr>
+                <th>Credit Limit:</th>
+                <th>Give Amount:</th>
+                <th>NetExposure:</th>
+                <th>Difference:</th>
+              </tr>
+            </table>
+            <form [formGroup]="changePasswordForm">
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-5">You Can Transfer 372 Amount</div>
+                <div class="col-md-7">
+                  <input
+                    type="password"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="password"
+                    placeholder="Enter password"
+                  />
+                </div>
+              </div>
+
+              <div class="row mt-5">
+                <div class="col-md-6 text-end">
+                  <button
+                    (click)="postChangePassword()"
+                    [disabled]="changePasswordForm.invalid"
+                    class="btn btn-danger rounded-pill w-80 mt-4"
+                  >
+                    Save
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-danger rounded-pill w-80 mt-4"
+                    (click)="resetForm()"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

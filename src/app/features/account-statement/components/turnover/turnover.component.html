@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-4 btnmargin">
         <label>Select Sport</label>
-        <select formControlName="sportsId" id="ab" class="form-select pointer">
+        <select formControlName="sportsId" id="ab" class="form-select pointer pt-2">
           <option value="null">All</option>
           <option *ngFor="let game of games" [value]="game.sportId">
             {{ game.sportName }}

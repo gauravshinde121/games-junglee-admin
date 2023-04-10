@@ -17,6 +17,7 @@ export class MembersListComponent implements OnInit {
   display: string = 'none';
   showMyContainer: boolean = false;
   modalNumber: number;
+  userDetails:any;
 
   limit: number = 50;
   userId: any;
@@ -114,6 +115,13 @@ export class MembersListComponent implements OnInit {
       }
     }
   };
+
+  adjustWinningsForSingleUser(user,isGiven){
+    this.modalNumber = 3;
+    this.userDetails = user;
+    this.display = 'block';
+
+  }
 
   resetForm() {
     this.changePasswordForm.reset();

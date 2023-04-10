@@ -434,21 +434,22 @@
       </div>
       <div class="modal-body bg-dark_new text-white">
         <div class="row">
-          <div class="col-md-3"><label >Creadit Limit :</label><br>1234</div>
-          <div class="col-md-3"><label >Creadit Limit :</label><br>1234</div>
-          <div class="col-md-3"><label >Creadit Limit :</label><br>1234</div>
-          <div class="col-md-3"><label >Creadit Limit :</label><br>1234</div>
+          <div class="col-md-3"><label >Creadit Limit:</label><br>{{userDetails.creditLimit}}</div>
+          <div *ngIf="isGiven" class="col-md-3"><label >Give Amount:</label><br>{{userDetails.give}}</div>
+          <div *ngIf="!isGiven" class="col-md-3"><label >Take Amount:</label><br>{{userDetails.take}}</div>
+          <div class="col-md-3"><label >NetExposure:</label><br>{{userDetails.partnerShipPercent}}</div>
+          <div class="col-md-3"><label >Difference:</label><br>{{userDetails.availableCredit - userDetails.partnerShipPercent}}</div>
           <div class="col-md-12">
           <section class="section  m-auto ">
-            <form [formGroup]="changePasswordForm">
+            <form [formGroup]="adjustWinningsForSingleUserForm">
               <div class="row mb-4 align-items-center">
-                <div class="col-md-12 pt-3">You Can Transfer 372 Amount</div>
+                <div *ngIf="isGiven" class="col-md-12 pt-3">You Can Transfer {{userDetails.give}} Amount</div>
+                <div *ngIf="!isGiven" class="col-md-12 pt-3">You Can Transfer {{userDetails.take}} Amount</div>
                 <div class="col-md-12 pt-2">
                   <input
-                    type="password"
+                    type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="password"
-                    placeholder="Enter password"
+                    formControlName="amount"
                   />
                 </div>
               </div>
@@ -456,8 +457,8 @@
               <div class="row">
                 <div class="col-md-6 text-end">
                   <button
-                    (click)="postChangePassword()"
-                    [disabled]="changePasswordForm.invalid"
+                    (click)="postAdjustWinningsForSingleUser()"
+                    [disabled]="adjustWinningsForSingleUserForm.invalid"
                     class="btn btn-danger rounded-pill w-80 "
                   >
                     Save
@@ -466,7 +467,7 @@
                 <div class="col-md-6">
                   <button
                     class="btn btn-danger rounded-pill w-80 "
-                    (click)="resetForm()"
+                    (click)="closeModal()"
                   >
                     Cancel
                   </button>

@@ -333,6 +333,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_CHANGE_MEMBER_PASSWORD)
   }
 
+  public adjustWinningsForSingleUserEndpoint(){
+    return this.createUrl(this._constants.API_URL_ADJUST_WINNING_FOR_SINGLE_USER)
+  }
+
   public deleteBetEndpoint(){
     return this.createUrl(this._constants.API_URL_DELETE_BET)
   }

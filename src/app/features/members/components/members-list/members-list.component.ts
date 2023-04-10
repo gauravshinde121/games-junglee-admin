@@ -17,7 +17,8 @@ export class MembersListComponent implements OnInit {
   display: string = 'none';
   showMyContainer: boolean = false;
   modalNumber: number;
-  userDetails:any;
+  userDetails: any;
+  isGiven: boolean;
 
   limit: number = 50;
   userId: any;
@@ -41,7 +42,7 @@ export class MembersListComponent implements OnInit {
   statusList: any = [];
 
   changePasswordForm!: FormGroup;
-
+  adjustWinningsForSingleUserForm: FormGroup;
   selectedColor = "";
   // authObj = {
   //   currentPassword: "",
@@ -116,11 +117,42 @@ export class MembersListComponent implements OnInit {
     }
   };
 
-  adjustWinningsForSingleUser(user,isGiven){
+  adjustWinningsForSingleUser(user, isGiven) {
+    this.userId = user.userId;
+    var adjustWinningsForSingleUserValue:number;
+    if(isGiven){
+      adjustWinningsForSingleUserValue = user.give;
+      this.createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue);
+      this.adjustWinningsForSingleUserForm.patchValue( {'amount':user.give} );
+    } else {
+      adjustWinningsForSingleUserValue = user.take;
+      this.createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue);
+      this.adjustWinningsForSingleUserForm.patchValue( {'amount':user.take} );
+    }
     this.modalNumber = 3;
     this.userDetails = user;
+    this.isGiven = isGiven;
     this.display = 'block';
+  }
 
+  createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue) {
+    this.adjustWinningsForSingleUserForm = this.formbuilder.group({
+      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.max(adjustWinningsForSingleUserValue)]),
+    });
+  }
+
+  postAdjustWinningsForSingleUser() {
+    console.log('adjustWinningsForSingleUserForm', this.adjustWinningsForSingleUserForm.value);
+    let body = {
+      "userId": this.userId,
+      "amount": this.adjustWinningsForSingleUserForm.value.amount,
+      "isGiven":this.isGiven
+    }
+    console.log('body', body);
+    /*this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
+      this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
+      this.closeModal();
+    });*/
   }
 
   resetForm() {
@@ -185,7 +217,7 @@ export class MembersListComponent implements OnInit {
   }
 
   _getAllUserInfo(roleId) {
-    console.log('_getAllUserInfo called',roleId);
+    console.log('_getAllUserInfo called', roleId);
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });

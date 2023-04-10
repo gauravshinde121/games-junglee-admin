@@ -131,14 +131,22 @@
               </div>
             </div>
             <div class="col-md-3 mb-2">
-              <label>Player Max Credit Limit</label>
+              <label>Max Credit Limit</label>
               <input
                 type="number"
                 class="form-control"
                 formControlName="playerMaxCreditLimit"
                 placeholder="Player Max Credit Limit*"
               />
-              <p>(Max: 20,00,000)</p>
+            </div>
+            <div class="col-md-3 mb-2">
+              <label>Available Credit</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="playerAvailableCredit"
+                placeholder="Player Max Credit Limit*"
+              />
             </div>
             <div
               class="text-danger"
@@ -146,15 +154,6 @@
             >
               Please enter credit limit
             </div>
-            <!--<div class="col-md-12"><label>Comments</label><textarea
-                formControlName="comments"
-                name="comments"
-                id="Comments"
-                class="form-control"
-                placeholder="Comments"
-                cols="30"
-                rows="2"
-              ></textarea></div>-->
           </div>
         </div>
       </div>
@@ -331,9 +330,6 @@
             class="form-control"
           />
           <p>(Min: 1) (Max: 50000000 )</p>
-          <!-- <div class="text-danger" *ngIf="maxExposureAmtVail && maxExposureAmtVail.invalid && maxExposureAmtVail.touched">
-            Please enter valid Exposure Amount
-           </div> -->
           <div
             *ngIf="
               (memberForm.controls['maxExposure'].touched ||

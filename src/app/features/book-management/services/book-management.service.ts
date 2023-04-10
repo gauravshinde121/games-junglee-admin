@@ -18,4 +18,14 @@ export class BookManagementService {
   _getAllUserBetsApi(filterObj){
     return this._apiHttpService.post(this._apiEndpointsService.getAllUserBetsEndpoint(),filterObj)
   }
+
+  _postBooksForAdminBookMgmApi(bodyObj:any){
+    return this._apiHttpService.post(this._apiEndpointsService.getBooksForAdminBookMgmEndpoint(),bodyObj)
+  }
+
+  _postTotalBookApi(bodyObj:any){
+    return this._apiHttpService.post(this._apiEndpointsService.getTotalBookEndpoint(),bodyObj)
+  }
+
+  
 }

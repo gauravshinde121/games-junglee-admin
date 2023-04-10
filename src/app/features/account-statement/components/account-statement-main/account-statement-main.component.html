@@ -5,10 +5,10 @@
     </div>
     <div class="col-md-12">
       <div class="row d-flex">
-        <div class="col-md-2 {{sideBarClass}}" *ngIf="isLeftMenuOpen">
+        <div class="col-md-2 {{ sideBarClass }} p-md-0" *ngIf="isLeftMenuOpen">
           <app-left-navigation></app-left-navigation>
-          </div>
-        <div class="{{mainClass}}">
+        </div>
+        <div class="{{ mainClass }}">
           <router-outlet></router-outlet>
         </div>
       </div>

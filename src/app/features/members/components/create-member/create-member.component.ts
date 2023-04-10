@@ -27,7 +27,7 @@ export class CreateMemberComponent implements OnInit {
   createUserWithRoleId: number;
   uplineInfo;
   maxBetMinValue: number;
-  memberPercentage:number = 0;
+  memberPercentage:any = '--';
 
   constructor(
     private _fb: FormBuilder,
@@ -71,7 +71,13 @@ export class CreateMemberComponent implements OnInit {
   }
 
   calculateMemberPercentage(e){
-    this.memberPercentage = e.target.value - this.uplineInfo.partnerShipPercent;
+    var memPer:any;
+    memPer = e.target.value - this.uplineInfo.partnerShipPercent;
+    if(memPer < 1){
+      this.memberPercentage = '--';
+    }else {
+      this.memberPercentage = memPer;
+    }
   }
 
   setGameStatus(status, sportsId) {
@@ -102,6 +108,13 @@ export class CreateMemberComponent implements OnInit {
           partnerShipPercent: this.memberData.partnerShipPercent,
           roleId: this.memberData.roleId
         });
+        var memPer:any;
+        memPer = this.memberData.partnerShipPercent - this.uplineInfo.partnerShipPercent;
+        if(memPer < 1){
+          this.memberPercentage = '--';
+        }else {
+          this.memberPercentage = memPer;
+        }
       }
     }))
   }

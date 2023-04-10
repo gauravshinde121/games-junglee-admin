@@ -28,10 +28,15 @@ $background-color_17: #ffb9b560;
 $background-color_18: hsla(3.5, 21.3%, 52.2%, 0.78);
 $background-color_19: #d9d9d9;
 $background-color_20: #343535;
+$background-color_21: #000;
+$background-color_22: #d35862;
+$background-color_23: #a7d8fd;
+$background-color_24: #f9c9d4;
 
-.table{font-size: 11px;}
+$gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
+
 .browncolor {
-  background-color: $background-color_1;
+  background-color: $background-color_21;
 }
 .bg-pink {
   background: $color_1 !important;
@@ -43,19 +48,37 @@ $background-color_20: #343535;
 //   font-size: 12px;
 // }
 .btn-pink {
-  color: $color_3;
-  background-color: $background-color_3;
-  border-color: $border-color_1;
+  // color: $color_3;
+  // background: $background-color_3;
+  // border-color: $border-color_1;
+  transition: all 0.2s ease-in;
+  transform: scale(1);
+  border: none;
+  color: #fff;
+  // padding: 10px 30px;
+  border-radius: 25px;
+  // font-size: 1rem;
+  font-size: 0.75rem;
+  background-image: linear-gradient(0deg, #cd212f 0, #e76f26);
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 .btn-pink:hover {
-  background: $color_2;
-  color: $color_3;
+  // background: $gradient-btn;
+  // color: $color_3;
+  transition: all 0.2s ease-in;
+  transform: scale(1.01);
 }
 .w-30 {
   width: 30%;
 }
 .text-pink {
-  color: $color_1 !important;
+  color: $background-color_24 !important;
 }
 .btn-outline-pink {
   color: $color_1;
@@ -85,20 +108,25 @@ $background-color_20: #343535;
   border-radius: 0;
 }
 .radioselected {
-  accent-color: $color_1;
+  accent-color: $background-color_22;
 }
 /********** common property end ************/
 /********** Login start ************/
-.logins {
-  background: url(../images/bg.png) no-repeat;
-  background-size: cover;
-  height: 100vh;
-}
+// .logins {
+//   background: url(../images/bg.png) no-repeat;
+//   background-size: cover;
+//   height: 100vh;
+// }
 .login {
-  border: 1px solid $color_1;
-  padding: 10px;
-  background: rgba(18, 14, 17, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.3215686275);
+  border-radius: 25px;
+  padding: 10px 35px;
+  background: rgba(108, 108, 108, 0.5098039216);
   margin-top: 30px;
+  // border: 1px solid $color_1;
+  // padding: 10px;
+  // background: rgba(18, 14, 17, 0.88);
+  // margin-top: 30px;
   a {
     text-decoration: none;
   }
@@ -145,8 +173,8 @@ $background-color_20: #343535;
 .form-signin .form-floating span {
   margin-top: -30px;
   position: absolute;
-right: 13px;
-cursor: pointer;
+  right: 13px;
+  cursor: pointer;
 }
 .form-signin .form-floating input:focus {
   border-bottom: 1px solid rgb(255, 167, 163) !important;
@@ -179,7 +207,7 @@ cursor: pointer;
   background-image: url(../images/balance.png);
   width: 100%;
   height: 158px;
-  background-color: $background-color_4;
+  background-color: $background-color_22;
   border-radius: 10px;
   color: $color_2;
   display: flex;
@@ -209,14 +237,15 @@ cursor: pointer;
 /********** Sidebar start ************/
 .sidebar {
   left: 0;
-  width: 270px;
+  // width: 270px;
+  width: 100%;
   z-index: 996;
   transition: all 0.3s;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  letter-spacing: 1px;
+  // letter-spacing: 1px;
   .nav-link {
     color: $color_2;
   }
@@ -241,7 +270,7 @@ cursor: pointer;
   padding: 0 10px;
   top: 0px;
   bottom: auto;
-  height: 700px;
+  // height: 700px;
 }
 
 /********** Sidebar end ************/
@@ -274,7 +303,8 @@ cursor: pointer;
   border: 1px solid rgba(255, 167, 163, 0.3411764706);
   border-radius: 15px;
   padding: 15px;
-  background: rgba(60, 62, 62, 0.7215686275);
+  // background: rgba(60, 62, 62, 0.7215686275);
+  background: transparent;
   .form-select {
     appearance: button;
     color: $color_2;
@@ -337,7 +367,7 @@ select:-webkit-autofill:focus {
   width: 60px;
   height: 25px;
   overflow: hidden;
-  background: $color_1;
+  background: $background-color_22;
 }
 
 .button1.r,
@@ -483,7 +513,7 @@ select:-webkit-autofill:focus {
     border-left: 1px solid $color_2;
   }
   .colblue.light {
-    background-color: $background-color_14 !important;
+    background-color: $background-color_23 !important;
   }
   .colblue.dis {
     background-color: $background-color_15 !important;
@@ -575,7 +605,33 @@ select:-webkit-autofill:focus {
   }
 }
 
-.changepassword{width: 50%;}
-.pointer {cursor: pointer;}
+.changepassword {
+  width: 50%;
+}
+.pointer {
+  cursor: pointer;
+}
 
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #b44b5d;
+}
 
+.bg-dark_new {
+  background-color: $background-color_21;
+}
+
+.bg-dark {
+  // background-color: #212529 !important;
+  background-color: $background-color_21 !important;
+}
+
+.radius-left-tb {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.icon-pink {
+  color: $background-color_22 !important;
+}

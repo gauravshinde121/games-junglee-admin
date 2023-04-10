@@ -1,0 +1,49 @@
+.align_thead thead tr th:nth-child(1){font-size: 14px}
+.align_thead thead tr th a.btn{font-size: 10px; font-weight: 600; padding: 3px 24px; background: linear-gradient(246deg,#ff665f  0%,#d98e94 100%);}
+
+.align_thead thead tr th:nth-child(2),
+.align_thead thead tr th:nth-child(3),
+.align_thead thead tr th:nth-child(4),
+.align_thead thead tr th:nth-child(5), 
+.align_thead thead tr th:nth-child(6),
+.align_thead tbody tr td:nth-child(2),
+.align_thead tbody tr td:nth-child(3),
+.align_thead tbody tr td:nth-child(4),
+.align_thead tbody tr td:nth-child(5){
+text-align: center;
+font-size: 14px;}
+
+.align_thead tbody tr th{vertical-align: middle; font-size: 14px;}
+.align_thead tbody tr td{vertical-align: middle; font-size: 14px;}
+
+    .align_thead tbody tr td a{
+        margin: 0;
+        font-size: 12px;
+        font-weight: 600;
+        
+    }
+
+    .border-5{
+        border-radius: 5px;
+    }
+
+    .tablematchodds{
+        height: 100%;
+        margin-bottom: 0;
+    }
+
+    .accordion-header .fa-plus:before{
+        display: none;
+            }
+
+    .accordion-header .collapsed .fa-plus:before{
+        display: block;
+    }
+
+    .accordion-header .fa-minus:before{
+        display: block;
+            }
+
+    .accordion-header .collapsed .fa-minus:before{
+        display: none;
+    }

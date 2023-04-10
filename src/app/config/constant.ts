@@ -11,7 +11,7 @@ export class Constants {
     public readonly API_JUNGLEE_TOKEN: string = environment.JungleeToken;
 
     //example
-    public readonly API_URL_LOGIN: string = '/api/junglee-admin/login';
+    public readonly API_URL_LOGIN: string = 'api/junglee-admin/login';
     public readonly API_URL_SIGNUP: string = 'api/userRegistration';
 
 
@@ -86,6 +86,15 @@ export class Constants {
     //BOOK MANAGEMENT
     public readonly API_URL_GET_BET_DETAILS_FOR_WORK_STATION:string = 'api/junglee-admin/getBetDetailsForWorkStation';
 
+    public readonly API_URL_GET_AMDMIN_BOOK_MGM :string = 'api/junglee-admin/getBooksForAdminBookManagement';
+
     //TEST
     public readonly API_URL_TEST_FUNC:string = 'api/getBetsForSurveilliance';
+
+    public readonly API_URL_GET_WEBSOCKET_URL_BY_DEVICE:string = 'api/registerDeviceToGetOddsData';
+    public readonly API_URL_UNIQUE_DEVICE_KEY:string = 'api/getUniquDeviceId';
+    public readonly API_URL_TOTAL_BOOK:string = 'api/junglee-admin/getUserwiseTotalBooks';
+
+    //pubsub
+    public readonly API_URL_GET_USER_ADMIN_PUB_SUB:string = 'api/getUserAdminPubSub';
 }

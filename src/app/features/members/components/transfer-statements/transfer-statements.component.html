@@ -1,27 +1,53 @@
-<div class="tab-pane fade show active" id="pills-transferstatements" role="tabpanel"
-  aria-labelledby="pills-transferstatements-tab" tabindex="0">
+<div
+  class="tab-pane fade show active"
+  id="pills-transferstatements"
+  role="tabpanel"
+  aria-labelledby="pills-transferstatements-tab"
+  tabindex="0"
+>
   <div class="row" [formGroup]="filterForm">
     <div class="col-md-2">
       <label>From Date</label>
-      <input type="date" formControlName="fromDate" name="fromDate" class="form-control mt-2" id="">
+      <input
+        type="date"
+        formControlName="fromDate"
+        name="fromDate"
+        class="form-control mt-2"
+        id=""
+      />
     </div>
     <div class="col-md-2">
       <label>To Date</label>
-      <input type="date" formControlName="toDate" name="toDate" class="form-control mt-2" id="">
+      <input
+        type="date"
+        formControlName="toDate"
+        name="toDate"
+        class="form-control mt-2"
+        id=""
+      />
     </div>
     <div class="col-md-2 pt-2">
-      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getTransferStatement()">Search</button>
+      <button
+        class="btn btn-pink rounded-pill w-100 mt-4"
+        (click)="getTransferStatement()"
+      >
+        Search
+      </button>
     </div>
     <div class="col-md-6 text-end mt-4">
       <label>
-        <p>Total Net Share <span class="text-success ps-2 pe-2"> 0 </span>
-      </label>
+        <p>
+          Total Net Share <span class="text-success ps-2 pe-2"> 0 </span>
+        </p></label
+      >
     </div>
   </div>
   <div class="col-md-12 mt-3">
-
     <div class="row">
-      <table class="table tableall" *ngIf="transferStatements.length > 0 && !this.isLoading">
+      <table
+        class="table tableall"
+        *ngIf="transferStatements.length > 0 && !this.isLoading"
+      >
         <thead>
           <tr>
             <th scope="col" class="text-dark">Date</th>
@@ -32,23 +58,30 @@
         <tbody>
           <tr *ngFor="let statements of transferStatements">
             <td>{{ statements?.createdDate | date }}</td>
-            <td>{{ statements?.fromUsername }} ({{ statements?.toUsername }})</td>
-            <td [ngClass]="statements?.amount>0?'text-success':'text-danger'">{{ statements?.amount }}</td>
+            <td>
+              {{ statements?.fromUsername }} ({{ statements?.toUsername }})
+            </td>
+            <td
+              [ngClass]="
+                statements?.amount > 0 ? 'text-success' : 'text-danger'
+              "
+            >
+              {{ statements?.amount }}
+            </td>
             <td></td>
           </tr>
         </tbody>
       </table>
     </div>
-
-
   </div>
   <div class="col-md-12 mt-3" *ngIf="transferStatements?.length == 0">
-    <div class="border text-center p-5" >
-      <h4 *ngIf="transferStatements.length == 0 && !isLoading">No data found</h4>
+    <div class="border text-center p-5">
+      <h4 *ngIf="transferStatements.length == 0 && !isLoading">
+        No data found
+      </h4>
       <h4 *ngIf="isLoading">Loading...</h4>
     </div>
   </div>
-
 
   <div *ngIf="transferStatements.length > 0 && !this.isLoading">
     <button
@@ -58,7 +91,7 @@
     >
       Prev
     </button>
-    <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
+    <span class="btn btn-pink rounded-pill ps-4 pe-4"
       >{{ currentPage }} / {{ totalPages }}
     </span>
     <button
@@ -69,5 +102,4 @@
       Next
     </button>
   </div>
-
 </div>

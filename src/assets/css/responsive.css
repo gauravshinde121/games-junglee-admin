@@ -1,64 +1,66 @@
- /* Extra small devices (phones, 600px and down) */
- @media only screen and (max-width: 600px) {
-   .w-30 {
-     width: 85%;
-   }
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .w-30 {
+    width: 85%;
+  }
 
-   .balance {
-     height: 82px;
-     text-align: center;
-   }
+  .balance {
+    height: 82px;
+    text-align: center;
+  }
 
-   .balance p {
-     font-size: 9px;
-     color: #fff;
-     line-height: 12px;
-   }
+  .balance p {
+    font-size: 9px;
+    color: #fff;
+    line-height: 12px;
+  }
 
-   .balance span {
+  .balance span {
+    font-size: 10px;
+    color: #fff;
+  }
 
-     font-size: 10px;
-     color: #fff;
+  #main {
+    padding: 20px 15px;
+    margin-top: 22px;
+    border-top: 1px solid #ffa7a3;
+  }
 
-   }
+  .user p {
+    font-size: 12px;
+    margin: 5px 0;
+  }
 
-   #main {
-     padding: 20px 15px;
-     margin-top: 22px;
-     border-top: 1px solid #ffa7a3;
-   }
+  .header img {
+    display: none;
+  }
 
-   .user p {
-     font-size: 8px;
-     margin: 5px 0;
-   }
+  .disnone {
+    display: none;
+  }
 
-   .header img {
-     display: none;
-   }
+  .header {
+    height: 80px;
+  }
 
-   .disnone {
-     display: none;
-   }
+  .header .toggle-sidebar-btn {
+    padding-left: 0px;
+    position: relative;
+    z-index: 10;
+    font-size: 25px;
+  }
 
-   .header {
-     height: 80px;
-   }
-
-   .header .toggle-sidebar-btn {
-     padding-left: 0px;
-     position: relative;
-    z-index: 10;font-size: 25px;
-   }
-
-   .sidebar {
-     background: #202121;
-     position: absolute;
-     top: 100px;
-     border: 1px solid #71514f;height: 100%;
-   }
-   .changepassword{width: 100%;}
-   #overlay {
+  .sidebar {
+    background: #202121;
+    position: absolute;
+    top: 100px;
+    border: 1px solid #71514f;
+    height: 100%;
+  }
+  .changepassword {
+    width: 100%;
+  }
+  #overlay {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -70,20 +72,43 @@
     z-index: 2;
     cursor: pointer;
   }
+}
 
- }
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
 
- /* Small devices (portrait tablets and large phones, 600px and up) */
- @media only screen and (min-width: 600px) {}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .sidebar .btn {
+    font-size: 8px;
+  }
+}
 
- /* Medium devices (landscape tablets, 768px and up) */
- @media only screen and (min-width: 768px) {}
+@media only screen and (min-width: 960px) {
+  .table {
+    font-size: 5.8px;
+  }
+}
 
- /* Large devices (laptops/desktops, 992px and up) */
- @media only screen and (min-width: 992px) {}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
 
- /* Extra large devices (large laptops and desktops, 1200px and up) */
- @media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1097.14px) {
+  .table {
+    font-size: 7px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .sidebar .btn {
+    font-size: 12px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
   /* #main {
     margin-left: 270px;
   }*/
@@ -91,16 +116,20 @@
     margin-left: 0;
   }
 
-   .toggle-sidebar #main {
-     margin-left: 0;
-   }
+  .toggle-sidebar #main {
+    margin-left: 0;
+  }
 
-   .toggle-sidebar .sidebar {
-     left: -300px;
-   }
- }
+  .toggle-sidebar .sidebar {
+    left: -300px;
+  }
 
- @media (max-width: 1199px) {
+  .sidebar .btn {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 1199px) {
   /* .sidebar {
     left: -300px;
   } */
@@ -111,5 +140,135 @@
   }
 }
 
+.dummy:last-child {
+  width: 100%;
+}
 
-.dummy:last-child { width: 100%; }
+@media only screen and (min-width: 1280px) {
+  .table {
+    font-size: 8px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .sidebar .btn {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width: 1536px) {
+  .table {
+    font-size: 12px;
+  }
+  body {
+    font-size: 0.9rem;
+  }
+  .accordion p,
+  .memberslist,
+  .form-select,
+  .form-control {
+    font-size: 0.75rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  .form-control,
+  .form-select {
+    padding: 3px 10px;
+  }
+
+  .list-unstyled {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .table {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width: 2048px) {
+  .table {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: 2133.33px) {
+  .table {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 2304px) {
+  .table {
+    font-size: 20px;
+  }
+  body,
+  .form-control,
+  .form-select,
+  .btn-pink,
+  h4,
+  .btn,
+  .sidebar .btn {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (min-width: 2400px) {
+  .table {
+    font-size: 19px;
+  }
+}
+
+@media only screen and (min-width: 2560px) {
+  .sidebar .btn {
+    font-size: 1rem;
+  }
+  .table {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 3072px) {
+  .table,
+  body,
+  .form-control,
+  .form-select,
+  .btn-pink,
+  h4,
+  .btn,
+  .sidebar .btn {
+    font-size: 1.7rem;
+  }
+}
+@media only screen and (min-width: 4608px) {
+  .table {
+    font-size: 32px;
+  }
+  body,
+  .form-control,
+  .form-select,
+  .btn-pink,
+  h4,
+  .btn,
+  .sidebar .btn {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 6144px) {
+  .table {
+    font-size: 54px;
+  }
+  body,
+  .form-control,
+  .form-select,
+  .btn-pink,
+  h4,
+  .btn,
+  .sidebar .btn {
+    font-size: 4rem;
+  }
+}

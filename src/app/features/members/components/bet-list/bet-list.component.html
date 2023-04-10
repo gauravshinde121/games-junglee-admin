@@ -1,30 +1,44 @@
-<div [formGroup]="filterForm" class="tab-pane fade show active" id="pills-batlist" role="tabpanel"
-  aria-labelledby="pills-batlist-tab" tabindex="0">
+<div
+  [formGroup]="filterForm"
+  class="tab-pane fade show active"
+  id="pills-batlist"
+  role="tabpanel"
+  aria-labelledby="pills-batlist-tab"
+  tabindex="0"
+>
   <div class="row">
     <div class="col-md-4">
       <label>From Date</label>
-        <input formControlName="fromDate" type="date"
-         name="fromDate"
-        class="form-control mt-2" id="" />
+      <input
+        formControlName="fromDate"
+        type="date"
+        name="fromDate"
+        class="form-control mt-2"
+        id=""
+      />
     </div>
     <div class="col-md-4">
       <label>To Date</label>
-      <input formControlName="toDate" type="date"
-         name="toDate"
-        class="form-control mt-2" id="" />
+      <input
+        formControlName="toDate"
+        type="date"
+        name="toDate"
+        class="form-control mt-2"
+        id=""
+      />
     </div>
 
-    <div class="col-md-4 mb-2  p-2">
+    <div class="col-md-4 mb-2 p-2">
       <label>Select Sport</label>
       <select formControlName="sportsId" id="ab" class="form-select pointer">
         <option value="null">All</option>
-        <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
+        <option *ngFor="let game of games" [value]="game.sportId">
+          {{ game.sportName }}
+        </option>
       </select>
     </div>
   </div>
-  <div class="row mt-3">
-
-
+  <div class="row">
     <div class="col-md-4 mb-2">
       <label>Select Match</label>
       <select
@@ -49,10 +63,7 @@
         (change)="changeMarketType($event)"
       >
         <option value="null">All</option>
-        <option
-          value="{{ market.marketId }}"
-          *ngFor="let market of marketList"
-        >
+        <option value="{{ market.marketId }}" *ngFor="let market of marketList">
           {{ market.marketName }}
         </option>
       </select>
@@ -81,54 +92,83 @@
       />
     </div>
     <div class="col-md-4 pt-2">
-      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getMemberBets()">
+      <button
+        class="btn btn-pink rounded-pill w-100 mt-4"
+        (click)="getMemberBets()"
+      >
         Search
       </button>
     </div>
   </div>
   <div class="row mt-4">
     <nav class="nav ps-4 col-md-12">
-      <a class="nav-link active text-pink cursor-pointer" [class]="btnActive === 'current' ? 'activeLink' : ''"
-       (click)="showMatch('current')">Current</a>
-      <a class="nav-link cursor-pointer" [class]="btnActive === 'past' ? 'activeLink' : ''"
-      (click)="showMatch('past')" >Past</a>
-      <a *ngIf="!isMatch" [class]="btnActive === 'current' ? 'activeLink' : ''"
-      (click)="showMatch('match')" class="nav-link text-pink cursor-pointer">Matched</a>
-      <a *ngIf="!isMatch" [class]="btnActive === 'unmatch' ? 'activeLink' : ''"
-      (click)="showMatch('unmatch')" class="nav-link cursor-pointer">Unmatched</a>
+      <a
+        class="nav-link active text-pink cursor-pointer"
+        [class]="btnActive === 'current' ? 'activeLink' : ''"
+        (click)="showMatch('current')"
+        >Current</a
+      >
+      <a
+        class="nav-link cursor-pointer"
+        [class]="btnActive === 'past' ? 'activeLink' : ''"
+        (click)="showMatch('past')"
+        >Past</a
+      >
+      <a
+        *ngIf="!isMatch"
+        [class]="btnActive === 'current' ? 'activeLink' : ''"
+        (click)="showMatch('match')"
+        class="nav-link text-pink cursor-pointer"
+        >Matched</a
+      >
+      <a
+        *ngIf="!isMatch"
+        [class]="btnActive === 'unmatch' ? 'activeLink' : ''"
+        (click)="showMatch('unmatch')"
+        class="nav-link cursor-pointer"
+        >Unmatched</a
+      >
     </nav>
     <div class="col-md-12 mt-3 overflow-auto">
       <table class="table tableall" *ngIf="betList.length > 0">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col" class="text-dark">Member</th>
-            <th scope="col" class="text-dark">Placed</th>
-            <th scope="col" class="text-dark">Matched Date</th>
-            <th scope="col" class="text-dark">Event</th>
-            <th scope="col" class="text-dark">Market</th>
-            <th scope="col" class="text-dark">Selection</th>
-            <th scope="col" class="text-dark">Odds Placed</th>
-            <th scope="col" class="text-dark">Odds Matched</th>
-            <th scope="col" class="text-dark">Matched</th>
-            <th scope="col" class="text-dark">Unmatched</th>
-            <th scope="col" class="text-dark">Profit Liability</th>
-            <th scope="col" class="text-dark text-center">IP</th>
+            <th scope="col" class="first">#</th>
+            <th scope="col" class="">Member</th>
+            <th scope="col" class="">Placed</th>
+            <th scope="col" class="">Matched Date</th>
+            <th scope="col" class="">Event</th>
+            <th scope="col" class="">Market</th>
+            <th scope="col" class="">Selection</th>
+            <th scope="col" class="">Odds Placed</th>
+            <th scope="col" class="">Odds Matched</th>
+            <th scope="col" class="">Matched</th>
+            <th scope="col" class="">Unmatched</th>
+            <th scope="col" class="">Profit Liability</th>
+            <th scope="col" class="last text-center">IP</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let bet of betList; let i = index">
             <td>
-              <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
-              <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+              <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+              <span *ngIf="currentPage > 1">{{
+                i + 1 + (currentPage - 1) * limit
+              }}</span>
             </td>
             <td>{{ bet.username }}</td>
             <td>{{ bet.placedDate | date : "medium" }}</td>
             <td>{{ bet.createdAt | date : "medium" }}</td>
             <td>{{ bet.event }}</td>
             <td>
-              <span *ngIf="!bet.isBack" class="border border-2 bg-danger text-danger border-danger me-2"></span>
-              <span *ngIf="bet.isBack" class="border border-2 bg-primary text-primary border-primary me-2"></span>
+              <span
+                *ngIf="!bet.isBack"
+                class="border bg-danger text-danger border-danger me-2"
+              ></span>
+              <span
+                *ngIf="bet.isBack"
+                class="border bg-primary text-primary border-primary me-2"
+              ></span>
               {{ bet.betCategory }}
             </td>
             <td>{{ bet.selectionName }}</td>
@@ -139,7 +179,7 @@
             <td [ngClass]="bet.isBack ? 'text-success' : 'text-danger'">
               {{ bet.profitLiability }}
             </td>
-            <td>{{bet.ip}}</td>
+            <td>{{ bet.ip }}</td>
           </tr>
         </tbody>
       </table>
@@ -153,8 +193,8 @@
       >
         Prev
       </button>
-      <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
-        >{{ currentPage}} / {{totalPages }}
+      <span class="btn btn-pink rounded-pill ps-4 pe-4"
+        >{{ currentPage }} / {{ totalPages }}
       </span>
       <button
         class="btn rounded-pill text-white"

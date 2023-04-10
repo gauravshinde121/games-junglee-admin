@@ -1,6 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { SharedService } from '../../../../shared/services/shared.service';
@@ -13,6 +13,8 @@ import { SettingsService } from '../services/settings.service';
 })
 export class BetSettingsComponent implements OnInit {
 
+  bets_data:any;
+  display:any = '';
   betList:any = [];
   isLoading = false;
   games:any = [];
@@ -27,6 +29,7 @@ export class BetSettingsComponent implements OnInit {
   marketTypeId: any = null;
 
   betTickerForm: FormGroup;
+  deleteBetForm: FormGroup;
 
   searchTerm: string = '';
   currentPage: number = 1;
@@ -35,6 +38,7 @@ export class BetSettingsComponent implements OnInit {
   allMembers:any;
   marketList:any = [];
   sportsId: any = null;
+  betRemark:any;
 
   constructor(private _sharedService: SharedService,
     private _settingService: SettingsService,
@@ -100,12 +104,15 @@ export class BetSettingsComponent implements OnInit {
       stakesFromValue : [null],
       stakesToValue : [null]
     });
+
+    this.deleteBetForm = this._fb.group({
+      remarks: ['',Validators.required]
+    });
   }
 
   formatFormDate(date: Date) {
     return formatDate(date, this.dateFormat,this.language);
   }
-
 
   _getGames(){
     this._sharedService._getSports().subscribe((data:any)=>{
@@ -146,7 +153,7 @@ export class BetSettingsComponent implements OnInit {
 
     let body = {
       memberId: null,
-      sportsId: null,
+      sportId: null,
       matchId: null,
       userId: null,
       marketId : null,
@@ -187,12 +194,24 @@ export class BetSettingsComponent implements OnInit {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
 
+    if(this.sportsId == 'null'){
+      this.sportsId = null;
+    }
+    if(this.matchId == 'null'){
+      this.matchId = null;
+    }
+    if(this.marketTypeId == 'null'){
+      this.marketTypeId = null;
+    }
+    if(this.betTickerForm.value.memberId == 'null'){
+      this.betTickerForm.patchValue( {'memberId':null} );
+    }
     let payload = {
       memberId: this.betTickerForm.value.memberId,
-      sportsId: this.sportsId,
+      sportId: this.sportsId,
       matchId: this.matchId,
       marketId: this.marketTypeId,
-      userId: null,
+      userId: this.betTickerForm.value.memberId,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
       fromDate : fromDate,
@@ -212,14 +231,32 @@ export class BetSettingsComponent implements OnInit {
     this.betTickerForm.controls['memberId'].setValue(null);
   }
 
+  confirmDeleteBet(){
+    this.betRemark = this.deleteBetForm.value.remarks;
+    this.deleteBet(this.bets_data);
+    console.log('this.deleteBetForm.value.remarks',this.deleteBetForm.value.remarks);
+  }
+
+  closeModal(){
+    this.display = 'none';
+  }
+
+  openModal(bets){
+    this.bets_data = bets;
+    this.display = 'block';
+  }
+
   deleteBet(user) {
     let body = {
       "userId": user.userId,
-      "betId": user.betId
+      "betId": user.betId,
+      "remarks": this.betRemark
     }
     this._settingService._deleteBetApi(body).subscribe(res=>{
-      this._sharedService.getToastPopup(res['message'],"","success");
+      this._sharedService.getToastPopup('done',"","success");
       this.getAllUserBets();
+      console.log('deleted');
+      this.display = 'none';
     })
   }
 }

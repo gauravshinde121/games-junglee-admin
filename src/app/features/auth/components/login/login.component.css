@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .busy {
   -webkit-animation: spin 1s infinite linear;
-          animation: spin 1s infinite linear;
+  animation: spin 1s infinite linear;
   display: inline-block;
   font-weight: bold;
   font-family: sans-serif;
@@ -30,4 +30,4 @@
   100% {
     transform: rotate(359deg);
   }
-}/*# sourceMappingURL=login.component.css.map */
+} /*# sourceMappingURL=login.component.css.map */

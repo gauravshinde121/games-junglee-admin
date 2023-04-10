@@ -1,11 +1,11 @@
 <main id="main" class="main">
-  <section class="section gamedetails">
-    <div class="row" [formGroup]="filterForm">
+  <section class="gamedetails">
+    <div class="row pb-2" [formGroup]="filterForm">
       <div class="col-md-12">
         <!--your code will come here start-->
         <i class="fa"></i>
-        <h4 class="text-pink">
-          <img src="../../../../../assets/images/master_dashboard.png" alt="" /> My P/L Statement</h4>
+        <h3 class="text-pink">
+          <img src="../../../../../assets/images/master_dashboard.png" alt="" /> My P/L Statement</h3>
         <hr />
         <div class="col-md-12">
           <div class="row">
@@ -53,7 +53,7 @@
       </div>
     </div>
   </section>
-  <div class="row mt-5">
+  <div class="row mt-3">
     <div class="col-md-12 tablescroll overflow-auto">
       <div *ngIf="plStatement.length == 0" class="border text-center p-5">
         <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
@@ -62,7 +62,7 @@
       <table class="table tableall pointer" *ngIf="plStatement.length > 0">
         <thead>
           <tr>
-            <th scope="col" class="text-dark">Date</th>
+            <th scope="col" class="first text-dark">Date</th>
             <th scope="col" class="text-dark">Game</th>
             <th scope="col" class="text-dark">Sub Game</th>
             <th scope="col" class="text-dark">Event</th>
@@ -72,7 +72,7 @@
             <!-- <th scope="col" class="text-dark">U/L Commission</th>
             <th scope="col" class="text-dark">D/L Commission</th> -->
             <th scope="col" class="text-dark">User Count</th>
-            <th scope="col" class="text-dark">Bet Count</th>
+            <th scope="col" class="last text-dark">Bet Count</th>
           </tr>
         </thead>
         <tbody>

@@ -1,12 +1,13 @@
 <main id="main" class="main">
   <section class="section gamedetails">
     <div [formGroup]="betTickerForm" class="tab-pane fade show active" id="pills-batlist" role="tabpanel" aria-labelledby="pills-batlist-tab" tabindex="0">
-      <div class="row">
+      <div class="row pb-2">
         <div class="col-md-3">
           <h3 class="text-pink">Bet Ticker</h3>
         </div>
+        <hr />
       </div>
-      <div class="row">
+      <div class="row pb-2">
         <div class="col-md-3 mb-2">
           <label>Select Member</label>
           <select formControlName="memberName" id="ab" class="form-select">
@@ -29,7 +30,7 @@
           <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month" />
         </div>
       </div>
-      <div class="row">
+      <div class="row pb-2">
         <div class="col-md-4 mb-2">
           <label>Select Sport</label>
           <select formControlName="sportsId" id="ab" class="form-select pointer" (change)="changeGame($event)">
@@ -70,23 +71,24 @@
         </div>
       </div>
     </div>
-    <div class="row">
+  </section>
+    <div class="row mt-3">
       <div class="col-md-12 overflow-auto">
-        <table class="table table-dark" *ngIf="allBets.length > 0 && !this.isLoading">
+        <table class="table tableall table-dark" *ngIf="allBets.length > 0 && !this.isLoading">
           <thead>
             <tr>
-              <th scope="col" class="first">#</th>
-              <th scope="col">Member</th>
-              <th scope="col">Place time</th>
-              <th scope="col">Events</th>
-              <th scope="col">Market</th>
-              <th scope="col">Selection</th>
-              <th scope="col">Odds Placed</th>
-              <th scope="col">Odds Matched</th>
-              <th scope="col">Matched</th>
-              <th scope="col">Unmatched</th>
-              <th scope="col" class="last">Profit/Liability</th>
-              <th scope="col" class="last">IP</th>
+              <th scope="col" class="first text-dark">#</th>
+              <th scope="col" class="text-dark">Member</th>
+              <th scope="col"class="text-dark">Place time</th>
+              <th scope="col"class="text-dark">Events</th>
+              <th scope="col"class="text-dark">Market</th>
+              <th scope="col"class="text-dark">Selection</th>
+              <th scope="col"class="text-dark">Odds Placed</th>
+              <th scope="col"class="text-dark">Odds Matched</th>
+              <th scope="col"class="text-dark">Matched</th>
+              <th scope="col"class="text-dark">Unmatched</th>
+              <th scope="col" class="text-dark">Profit/Liability</th>
+              <th scope="col" class="last text-dark">IP</th>
             </tr>
           </thead>
           <tbody>
@@ -151,5 +153,5 @@
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
     </div>
-  </section>
+
 </main>

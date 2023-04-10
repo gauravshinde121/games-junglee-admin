@@ -3,9 +3,9 @@
     <div class="row" [formGroup]="filterForm">
       <div class="col-md-12">
         <!--your code will come here start-->
-        <h4 class="text-pink">
+        <h3 class="text-pink">
           <img src="../../../../../assets/images/pnl.png" alt="" /> Player P/L Statement
-        </h4>
+        </h3>
         <hr />
         <div class="row">
           <div class="col-md-6">
@@ -80,9 +80,9 @@
     <table class="table tableall" *ngIf="plStatement.length > 0">
       <thead class="text-dark">
         <tr>
-          <th scope="col"></th>
+          <th scope="col" class="first">Sl.No</th>
           <th scope="col">
-            <i class="fa fa-"></i> Date
+           Date
           </th>
           <th scope="col">Sport</th>
           <!--<th scope="col">Sub Game</th>-->
@@ -90,7 +90,7 @@
           <th scope="col">Username</th>
           <th scope="col">Amount</th>
           <!-- <th scope="col">Master</th><th scope="col">Multiplier</th> -->
-          <th scope="col">Details</th>
+          <th scope="col" class="last">Details</th>
         </tr>
       </thead>
       <tbody>

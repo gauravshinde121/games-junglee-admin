@@ -3,9 +3,9 @@
     <div class="row" [formGroup]="filterForm">
       <div class="col-md-12">
         <!--your code will come here start-->
-        <h4 class="text-pink">
+        <h3 class="text-pink">
           <img src="../../../../../assets/images/pnl.png" alt="" /> Credit Limit Transfer
-        </h4>
+        </h3>
         <hr />
         <div class="row">
           <div class="col-md-3 mb-3">
@@ -18,7 +18,7 @@
           </div>
           <div class="col-md-3 mb-3">
             <label>Select Member</label>
-            <select formControlName="memberName" id="ab" class="form-select bg-dgrey pointer">
+            <select formControlName="memberName" id="ab" class="form-select bg-dgrey pointer pt-2">
               <option value="null">All</option>
               <option *ngFor="let member of allMembers" [value]="member.userId">{{member.username}}</option>
             </select>
@@ -29,22 +29,25 @@
           <!--your code will come here end-->
         </div>
       </div>
-      <div class="col-md-12 mt-3 overflow-auto">
+    </div>
+  </section>
+  <div class="row mt-3">
+      <div class="col-md-12 tablescroll overflow-auto">
         <div *ngIf="clTransfers.length==0" class="border text-center p-5">
           <h4 *ngIf="clTransfers.length==0 && !isLoading">No data found </h4>
           <h4 *ngIf="isLoading">Loading... </h4>
         </div>
-        <table class="table tableall" *ngIf="clTransfers.length>0">
+        <table class="table tableall text-center" *ngIf="clTransfers.length>0">
           <thead class="text-dark">
             <tr>
-              <th scope="col">#</th>
+              <th scope="col" class="first">#</th>
               <th scope="col"> Creation Date</th>
               <th scope="col">From </th>
               <th scope="col">To</th>
               <th scope="col">Credit Limit</th>
               <th scope="col">Balance</th>
               <th scope="col">Old Balance</th>
-              <th scope="col">IP</th>
+              <th scope="col" class="last">IP</th>
             </tr>
           </thead>
           <tbody>
@@ -81,5 +84,4 @@
         </div>
       </div>
     </div>
-  </section>
 </main>

@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-4 btnmargin">
         <label>Select Sport</label>
-        <select formControlName="sportsId" id="ab" class="form-select pointer">
+        <select formControlName="sportsId" id="ab" class="form-select pointer pt-2">
           <option value="null">All</option>
           <option *ngFor="let game of games" [value]="game.sportId">
             {{ game.sportName }}
@@ -46,74 +46,74 @@
       <!--your code will come here end-->
     </div>
   </section>
-  <div class="col-md-12 mt-3">
-    <div class="col-md-12 mt-3">
-      <div *ngIf="plStatement.length == 0" class="border text-center p-5">
-        <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
-        <h4 *ngIf="isLoading">Loading...</h4>
-      </div>
-      <table class="table tableall" *ngIf="plStatement.length > 0">
-        <thead>
-          <tr>
-            <th scope="col" class="text-dark">#</th>
-            <th scope="col" class="text-dark">Event</th>
-            <th scope="col" class="text-dark">Date</th>
-            <th scope="col" class="text-dark">Detail</th>
-            <th scope="col" class="text-dark">Bet Detail</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let pl of plStatement; let i = index">
-            <td>
-              <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
-              <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
-            </td>
-            <td>{{ pl.matchName }}</td>
-            <td>{{ pl.matchTime | date : "medium" }}</td>
-            <td>
-              <a (click)="getTOForMatch(pl.matchId)"
-                ><i
-                  class="fa-sharp fa-solid fa-eye text-pink pointer"
+  <div class="row mt-3">
+      <div class="col-md-12">
+        <div *ngIf="plStatement.length == 0" class="border text-center p-5">
+          <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
+          <h4 *ngIf="isLoading">Loading...</h4>
+        </div>
+        <table class="table tableall text-center" *ngIf="plStatement.length > 0">
+          <thead>
+            <tr>
+              <th scope="col" class="text-dark first">#</th>
+              <th scope="col" class="text-dark">Event</th>
+              <th scope="col" class="text-dark">Date</th>
+              <th scope="col" class="text-dark">Detail</th>
+              <th scope="col" class="text-dark last">Bet Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pl of plStatement; let i = index">
+              <td>
+                <span *ngIf="currentPage == 1" >{{ i + 1 }}</span>
+                <span *ngIf="currentPage > 1" >{{ (i+1) + ((currentPage - 1) * limit) }}</span>
+              </td>
+              <td>{{ pl.matchName }}</td>
+              <td>{{ pl.matchTime | date : "medium" }}</td>
+              <td>
+                <a (click)="getTOForMatch(pl.matchId)"
+                  ><i
+                    class="fa-sharp fa-solid fa-eye text-pink pointer"
+                    aria-hidden="true"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                  ></i
+                ></a>
+              </td>
+              <td>
+                <a (click)="getBetDetailsForMatch(pl.matchId)">
+                  <i class="fa-sharp fa-solid fa-eye text-pink pointer"
                   aria-hidden="true"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
-                ></i
-              ></a>
-            </td>
-            <td>
-              <a (click)="getBetDetailsForMatch(pl.matchId)">
-                <i class="fa-sharp fa-solid fa-eye text-pink pointer"
-                aria-hidden="true"
-                  data-bs-toggle="modal"
-                  data-bs-target="#betDetailBackdrop"
-                >
+                    data-bs-toggle="modal"
+                    data-bs-target="#betDetailBackdrop"
+                  >
 
-                </i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div *ngIf="plStatement.length > 0 && !this.isLoading" class="mt-3">
-      <button
-        class="btn rounded-pill text-white"
-        [disabled]="currentPage === 1"
-        (click)="prev()"
-      >
-        Prev
-      </button>
-      <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
-        >{{ currentPage }} / {{ totalPages }}
-      </span>
-      <button
-        class="btn rounded-pill text-white"
-        [disabled]="currentPage === totalPages"
-        (click)="next()"
-      >
-        Next
-      </button>
-    </div>
+                  </i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="plStatement.length > 0 && !this.isLoading" class="mt-3">
+        <button
+          class="btn rounded-pill text-white"
+          [disabled]="currentPage === 1"
+          (click)="prev()"
+        >
+          Prev
+        </button>
+        <span class="btn btn-pink rounded-pill text-dark ps-4 pe-4"
+          >{{ currentPage }} / {{ totalPages }}
+        </span>
+        <button
+          class="btn rounded-pill text-white"
+          [disabled]="currentPage === totalPages"
+          (click)="next()"
+        >
+          Next
+        </button>
+      </div>
   </div>
 </main>
 

@@ -437,8 +437,8 @@
           <div class="col-md-3"><label >Creadit Limit:</label><br>{{userDetails.creditLimit}}</div>
           <div *ngIf="isGiven" class="col-md-3"><label >Give Amount:</label><br>{{userDetails.give}}</div>
           <div *ngIf="!isGiven" class="col-md-3"><label >Take Amount:</label><br>{{userDetails.take}}</div>
-          <div class="col-md-3"><label >NetExposure:</label><br>{{userDetails.partnerShipPercent}}</div>
-          <div class="col-md-3"><label >Difference:</label><br>{{userDetails.availableCredit - userDetails.partnerShipPercent}}</div>
+          <div class="col-md-3"><label >NetExposure:</label><br>{{userDetails.exposure}}</div>
+          <div class="col-md-3"><label >Difference:</label><br>{{(userDetails.availableCredit - userDetails.exposure).toFixed(1)}}</div>
           <div class="col-md-12">
           <section class="section  m-auto ">
             <form [formGroup]="adjustWinningsForSingleUserForm">

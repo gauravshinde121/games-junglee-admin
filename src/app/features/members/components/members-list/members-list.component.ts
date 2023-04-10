@@ -151,6 +151,7 @@ export class MembersListComponent implements OnInit {
     console.log('body', body);
     this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
       this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
+      this._getAllUserInfo(this.selectedRoleId);
       this.closeModal();
     });
   }

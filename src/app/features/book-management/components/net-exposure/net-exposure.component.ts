@@ -19,13 +19,15 @@ export class NetExposureComponent implements OnInit {
   matchList:any = [];
   sport:any;
   realDataWebSocket:any;
-  MyPT:boolean;
+  MyPT:boolean = false;
 
   currentMatchId:any;
   currentSportId:any;
   currentClicked:any;
 
   loggedInUser:any;
+  refreshCount:number =8;
+  resetTimerInterval:any;
 
   constructor(
     private _bookManagementService:BookManagementService,
@@ -40,15 +42,28 @@ export class NetExposureComponent implements OnInit {
   _preConfig(){
     this._getGames();
     this._initForm();
-    this.onFilterChange({MyPT: true, matchId:null,sportId:null, clicked:'firstTime' });
-    this.getPubSubUrl();
+    this.onFilterChange({MyPT: this.MyPT, matchId:null,sportId:null, clicked:'firstTime',refreshCallVar:false });
+    // this.getPubSubUrl();
     this.loggedInUser = this._sharedService.getUserDetails();
+
+    this.resetTimerInterval = setInterval(()=>{
+      if(this.refreshCount == 0){
+        this.refreshCall();
+        this.refreshCount = 9;
+      }
+      this.refreshCount--;
+    },1000)
+    this.isLoading = true;
     //console.log('loggedInUser', this.loggedInUser);
+  }
+
+  refreshCall(){
+    this.onFilterChange({MyPT: this.MyPT,matchId:this.currentMatchId,sportId:this.currentSportId, clicked:this.currentClicked ,refreshCallVar:true});
   }
 
   _initForm(){
     this.filterForm = new FormGroup({
-      selectedType: new FormControl('MyPT'),
+      selectedType: new FormControl('TotalBook'),
       sport: new FormControl(null),
       matchId: new FormControl(null)
     });
@@ -56,14 +71,15 @@ export class NetExposureComponent implements OnInit {
 
   onFilterChangeDropDown(event){
     this.isLoading = true;
-    let body = {};
 
     if(this.filterForm.value.matchId == 'null'){
       this.filterForm.patchValue( {'matchId':null} );
     }
-    body = {
-      sportId: this.filterForm.value.matchId,
-      matchId: event.value
+    this.currentMatchId = this.filterForm.value.matchId;
+    let body = {
+      matchId: this.currentMatchId,
+      sportId: this.currentSportId,
+      myPT: this.MyPT
     }
     this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
       this.alterData(res);
@@ -102,65 +118,24 @@ export class NetExposureComponent implements OnInit {
   }
 
   onFilterChange(filterObj){
-    this.isLoading = true;
-    let body = {};
-    let sport_value = this.filterForm.value.sport;
-    console.log('this.filterForm',this.filterForm.value);
-    console.log('this.filterForm.value.selectedType',filterObj.selectedType);
-    if(filterObj.selectedType == 'TotalBook'){
-      this.MyPT = false;
-    } else{
-      this.MyPT = true;
+    this.MyPT = filterObj.selectedType == 'MyPT' ? true: false;
+    this.currentMatchId = this.filterForm.value.matchId;
+    this.currentSportId = filterObj.sportId;
+    this.currentClicked = filterObj.clicked;
+    if(this.currentSportId && !filterObj.refreshCallVar){
+      this._getMatchBySportId(this.currentSportId);
+    }
+    if(!this.currentSportId){
+      this.currentMatchId = null;
+      this.currentSportId = null;
     }
 
-    if(filterObj.clicked == 'type'){
-      console.log('1');
-      this.currentClicked = 'type';
-      this.currentMatchId = this.filterForm.value.matchId;
-      this.currentSportId = sport_value;
-      body = {
-        matchId: this.filterForm.value.matchId,
-        sportId: sport_value,
-        myPT: this.MyPT
-      }
+    let body = {
+      matchId: this.currentMatchId,
+      sportId: this.currentSportId,
+      myPT: this.MyPT
     }
-    if(filterObj.clicked == 'sport'){
-      console.log('2');
-      this.currentClicked = 'sport';
-      this.currentMatchId = null;
-      this.currentSportId = filterObj.sport;
-      if(filterObj.sport){
-      this._getMatchBySportId(filterObj.sport);
-      }
-      body = {
-        sportId: filterObj.sport,
-        matchId: null,
-        myPT: this.MyPT
-      }
-    }
-    if(filterObj.clicked == 'match'){
-      console.log('3');
-      this.currentClicked = 'match';
-      this.currentMatchId = filterObj.matchId;
-      this.currentSportId = this.filterForm.value.matchId;
-      body = {
-        sportId: this.filterForm.value.matchId,
-        matchId: filterObj.matchId,
-        myPT: this.MyPT
-      }
-    }
-    if(filterObj.clicked == 'firstTime'){
-      console.log('4');
-      this.currentClicked = 'firstTime';
-      this.currentMatchId = filterObj.matchId;
-      this.currentSportId = filterObj.sportId;
-      body = {
-        sportId: filterObj.sportId,
-        matchId: filterObj.matchId,
-        myPT: this.MyPT
-      }
-    }
-    console.log('body',body);
+
     this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
       // this.alterData(res);
       this.booksForBackend = res.booksForBackend;

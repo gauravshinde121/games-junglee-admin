@@ -149,10 +149,10 @@ export class MembersListComponent implements OnInit {
       "isGiven":this.isGiven
     }
     console.log('body', body);
-    /*this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
+    this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
       this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
       this.closeModal();
-    });*/
+    });
   }
 
   resetForm() {

@@ -434,19 +434,16 @@
       </div>
       <div class="modal-body bg-dark_new text-white">
         <div class="row">
-          <section class="section w-75 m-auto mt-4">
-            <table>
-              <tr>
-                <th>Credit Limit:</th>
-                <th>Give Amount:</th>
-                <th>NetExposure:</th>
-                <th>Difference:</th>
-              </tr>
-            </table>
+          <div class="col-md-3"><label >Creadit Limit :</label><br>1234</div>
+          <div class="col-md-3"><label >Creadit Limit :</label><br>1234</div>
+          <div class="col-md-3"><label >Creadit Limit :</label><br>1234</div>
+          <div class="col-md-3"><label >Creadit Limit :</label><br>1234</div>
+          <div class="col-md-12">
+          <section class="section  m-auto ">
             <form [formGroup]="changePasswordForm">
               <div class="row mb-4 align-items-center">
-                <div class="col-md-5">You Can Transfer 372 Amount</div>
-                <div class="col-md-7">
+                <div class="col-md-12 pt-3">You Can Transfer 372 Amount</div>
+                <div class="col-md-12 pt-2">
                   <input
                     type="password"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
@@ -456,19 +453,19 @@
                 </div>
               </div>
 
-              <div class="row mt-5">
+              <div class="row">
                 <div class="col-md-6 text-end">
                   <button
                     (click)="postChangePassword()"
                     [disabled]="changePasswordForm.invalid"
-                    class="btn btn-danger rounded-pill w-80 mt-4"
+                    class="btn btn-danger rounded-pill w-80 "
                   >
                     Save
                   </button>
                 </div>
                 <div class="col-md-6">
                   <button
-                    class="btn btn-danger rounded-pill w-80 mt-4"
+                    class="btn btn-danger rounded-pill w-80 "
                     (click)="resetForm()"
                   >
                     Cancel
@@ -476,7 +473,7 @@
                 </div>
               </div>
             </form>
-          </section>
+          </section></div>
         </div>
       </div>
     </div>

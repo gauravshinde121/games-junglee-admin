@@ -11,6 +11,7 @@ import { MembersService } from '../../services/members.service';
 })
 export class MembersListComponent implements OnInit {
 
+  sizes:any;
   userList: any = [];
   isLoading = false;
   selectedUserForAdjustment: any = [];
@@ -191,6 +192,14 @@ export class MembersListComponent implements OnInit {
     ];
   }
 
+  checkAll(ev) {
+    this.checkUserForAdjustment(ev.target.value);
+    this.userList.forEach(x => x.state = ev.target.checked)
+  }
+
+  isAllChecked() {
+    return this.userList.every(_ => _.state);
+  }
   _preConfig() {
     this.createPasswordForm();
     this._getRoles();
@@ -236,7 +245,7 @@ export class MembersListComponent implements OnInit {
       this.isLoading = false;
       console.log(users.memberData.memberList)
       this.userList = users.memberData.memberList;
-
+      this.sizes = this.userList;
       this.totalPages = Math.ceil(this.userList.length / this.pageSize);
     });
   }

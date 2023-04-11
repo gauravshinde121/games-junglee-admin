@@ -277,6 +277,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   search(): void {
     if(this.searchTerm.length > 2 || this.searchTerm.length == 0){
       this._getNetExposureViewTotal();
+      this._getWebSocketUrl();
     }
   }
 

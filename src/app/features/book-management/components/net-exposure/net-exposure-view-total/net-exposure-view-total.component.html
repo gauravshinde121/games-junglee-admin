@@ -511,12 +511,7 @@
             <th scope="col">Unmatched</th>
             <th scope="col">Profit/Liability</th>
             <th scope="col" class="last text-center">
-                <!--Tooltip start-->
-                <div class="tooltipnk">
-                  <i class="fa fa-info-circle fa-2x"></i>
-                  <span class="tooltiptext px-5 w-auto"><strong>IP</strong></span>
-                </div>
-                <!--Tooltip end-->
+                IP
             </th>
           </tr>
         </thead>
@@ -560,8 +555,10 @@
             >
               <strong>{{ viewTotalEach.profitLiability }}</strong>
             </td>
-            <td class="col">
-              <small>{{ viewTotalEach.IP }}</small>
+            <td class="col tooltipnk" (mouseenter) ="mouseEnterToolTip(viewTotalEach.IP) "  (mouseleave) ="mouseLeaveToolTip(viewTotalEach.IP)">
+              <i class="fa fa-info-circle fa-1x"></i>
+                <span class="tooltiptext px-5 w-auto">
+                  <small>{{ viewTotalEach.IP }}</small></span>
             </td>
           </tr>
         </tbody>

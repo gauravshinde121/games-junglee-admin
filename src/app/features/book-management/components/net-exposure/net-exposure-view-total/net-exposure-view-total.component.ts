@@ -38,13 +38,13 @@ export class NetExposureViewTotalComponent implements OnInit {
   ngOnInit(): void {
     this.matchName = localStorage.getItem('matchName');
     this._initConfig();
-    /*this.resetTimerInterval = setInterval(()=>{
+    this.resetTimerInterval = setInterval(()=>{
       if(this.refreshCount == 0){
         this.refreshCall();
         this.refreshCount = 9;
       }
       this.refreshCount--;
-    },1000)*/
+    },1000)
   }
 
   _initConfig(){

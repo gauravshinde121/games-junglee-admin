@@ -130,7 +130,7 @@
                 Confirm password doesn't match
               </div>
             </div>
-            <div class="col-md-3 mb-2">
+            <!--<div class="col-md-3 mb-2">
               <label>Max Credit Limit</label>
               <input
                 type="number"
@@ -138,8 +138,8 @@
                 formControlName="playerMaxCreditLimit"
                 placeholder="Player Max Credit Limit*"
               />
-            </div>
-            <!-- <div class="col-md-3 mb-2">
+            </div>-->
+            <div class="col-md-3 mb-2">
               <label>Available Credit</label>
               <input
                 type="number"
@@ -147,7 +147,7 @@
                 formControlName="playerAvailableCredit"
                 placeholder="Player Max Credit Limit*"
               />
-            </div> -->
+            </div>
             <div
               class="text-danger"
               *ngIf="memberForm.controls['minBet'].errors?.required"

@@ -4,7 +4,7 @@
 .align_thead thead tr th:nth-child(2),
 .align_thead thead tr th:nth-child(3),
 .align_thead thead tr th:nth-child(4),
-.align_thead thead tr th:nth-child(5), 
+.align_thead thead tr th:nth-child(5),
 .align_thead thead tr th:nth-child(6),
 .align_thead tbody tr td:nth-child(2),
 .align_thead tbody tr td:nth-child(3),
@@ -20,7 +20,7 @@ font-size: 14px;}
         margin: 0;
         font-size: 12px;
         font-weight: 600;
-        
+
     }
 
     .border-5{
@@ -47,3 +47,6 @@ font-size: 14px;}
     .accordion-header .collapsed .fa-minus:before{
         display: none;
     }
+  .table{
+    margin-bottom: 0px;
+  }

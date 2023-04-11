@@ -56,7 +56,7 @@
             <div
               class="accordion"
               id="accordionExample"
-              *ngFor="let singleAdminBook of adminBooksList"
+              *ngFor="let singleAdminBook of adminBooksList; let i=index"
             >
               <div class="accordion-item bg-transparent border-0">
                 <h2 class="accordion-header" id="headingOne">
@@ -75,7 +75,7 @@
                       aria-controls="collapseOne"
                     >
                       <div class="col-md-6">
-                        <p>
+                        <p class="mt-3 mb-1">
                           <i class="fa fa-minus"></i>
                           <i class="fa fa-plus"></i>
                           {{ singleAdminBook["marketName"] }}

@@ -261,14 +261,6 @@ export class NetExposureViewTotalComponent implements OnInit {
     );
   }
 
-  mouseEnterToolTip(ip){
-    console.log('enter');
-  }
-
-  mouseLeaveToolTip(ip){
-    console.log('leave');
-  }
-
   next(): void {
     this.currentPage++;
     this._getNetExposureViewTotal();

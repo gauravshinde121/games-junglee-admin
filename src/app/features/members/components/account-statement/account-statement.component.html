@@ -241,14 +241,7 @@
                 <th scope="col" class="text-dark">Stake</th>
                 <th scope="col" class="text-dark">Matched Stake</th>
                 <th scope="col" class="text-dark">Profit/Loss (In INR)</th>
-                <th scope="col" class="text-dark">
-                    <!--Tooltip start-->
-                    <div class="tooltipnk">
-                      <i class="fa fa-info-circle fa-lg"></i>
-                      <span class="tooltiptext px-5 w-auto"><strong>IP</strong></span>
-                    </div>
-                    <!--Tooltip end-->
-                </th>
+                <th scope="col" class="text-dark">IP</th>
               </tr>
             </thead>
             <tbody>
@@ -267,7 +260,12 @@
                 >
                   {{ bet.netAmount | number }}
                 </td>
-                <td>49.36.104.151</td>
+                <td><div class="tooltipnk">
+                  <i class="fa-sharp fa-solid fa-info"></i>
+                  <span class="tooltiptext px-5 w-auto">
+                    <small>{{ bet.ipAddress }}</small>
+                  </span>
+                </div></td>
               </tr>
             </tbody>
           </table>

@@ -66,14 +66,7 @@
             <th class="thts">
               <i class="fa-solid fa-text-width text-pink"></i> Transaction Type
             </th>
-            <th class=" last">
-              <!-- <i class="fa-solid fa-grip-vertical text-pink"></i> IP -->
-              <!--Tooltip start-->
-              <div class="tooltipnk">
-                <i class="fa fa-info-circle fa-2x"></i>
-                <span class="tooltiptext px-5 w-auto"><strong>IP</strong></span>
-              </div>
-              <!--Tooltip end-->
+            <th class=" last">IP
             </th>
           </tr>
 
@@ -100,7 +93,12 @@
               {{ user.isGiven ? "Given" : "Taken" }}
             </td>
             <td class="tds tdts">
-              <i class="fa-sharp fa-solid fa-info text-pink"></i> &nbsp; --
+              <div class="tooltipnk">
+              <i class="fa-sharp fa-solid fa-info"></i>
+              <span class="tooltiptext px-5 w-auto">
+                <small>{{ user.ipAddress }}</small>
+              </span>
+            </div>
             </td>
           </tr>
         </tbody>

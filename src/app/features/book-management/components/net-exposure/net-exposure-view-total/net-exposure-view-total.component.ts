@@ -38,13 +38,13 @@ export class NetExposureViewTotalComponent implements OnInit {
   ngOnInit(): void {
     this.matchName = localStorage.getItem('matchName');
     this._initConfig();
-    this.resetTimerInterval = setInterval(()=>{
+    /*this.resetTimerInterval = setInterval(()=>{
       if(this.refreshCount == 0){
         this.refreshCall();
         this.refreshCount = 9;
       }
       this.refreshCount--;
-    },1000)
+    },1000)*/
   }
 
   _initConfig(){
@@ -120,7 +120,7 @@ export class NetExposureViewTotalComponent implements OnInit {
       }
     });
   }
-  
+
 
   onFilterChange(params){
     this.myPT = params;
@@ -146,7 +146,7 @@ export class NetExposureViewTotalComponent implements OnInit {
           if(totalBookMarket != undefined){
             singleBook['totalBook'] = totalBookMarket['totalBook']
             singleBook['isTotaltotalBookView'] = totalBookMarket['isTotaltotalBookView']
-          } 
+          }
           return singleBook['adminBook'].map(runnerRes=>{
             switch(singleBook['marketTypName']){
               case 'Match Odds':

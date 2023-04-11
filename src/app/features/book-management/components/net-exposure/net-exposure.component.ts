@@ -13,55 +13,63 @@ import { webSocket } from 'rxjs/webSocket';
 export class NetExposureComponent implements OnInit {
 
   filterForm: FormGroup;
-  booksForBackend:any = [];
+  booksForBackend: any = [];
   isLoading = false;
-  games:any;
-  matchList:any = [];
-  sport:any;
-  realDataWebSocket:any;
-  MyPT:boolean = false;
+  games: any;
+  matchList: any = [];
+  sport: any;
+  realDataWebSocket: any;
+  MyPT: boolean = false;
 
-  currentMatchId:any;
-  currentSportId:any;
-  currentClicked:any;
+  currentMatchId: any;
+  currentSportId: any;
+  currentClicked: any;
 
-  loggedInUser:any;
-  refreshCount:number =8;
-  resetTimerInterval:any;
+  loggedInUser: any;
+  refreshCount: number = 8;
+  resetTimerInterval: any;
 
   constructor(
-    private _bookManagementService:BookManagementService,
-    private _sharedService:SharedService,
-    private _router:Router
+    private _bookManagementService: BookManagementService,
+    private _sharedService: SharedService,
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
     this._preConfig();
   }
 
-  _preConfig(){
+  _preConfig() {
     this._getGames();
     this._initForm();
-    this.onFilterChange({MyPT: this.MyPT, matchId:null,sportId:null, clicked:'firstTime',refreshCallVar:false });
+    this.onFilterChange({ MyPT: this.MyPT, matchId: null, sportId: null, clicked: 'firstTime', refreshCallVar: false });
     // this.getPubSubUrl();
     this.loggedInUser = this._sharedService.getUserDetails();
 
-    this.resetTimerInterval = setInterval(()=>{
-      if(this.refreshCount == 0){
+    this.resetTimerInterval = setInterval(() => {
+      if (this.refreshCount == 0) {
         this.refreshCall();
         this.refreshCount = 9;
       }
       this.refreshCount--;
-    },1000)
+    }, 1000)
     this.isLoading = true;
     //console.log('loggedInUser', this.loggedInUser);
   }
 
-  refreshCall(){
-    this.onFilterChange({MyPT: this.MyPT,matchId:this.currentMatchId,sportId:this.currentSportId, clicked:this.currentClicked ,refreshCallVar:true});
+  refreshCall() {
+    var myPTonRefresh:any;
+    if(this.filterForm.value.selectedType == 'TotalBook'){
+      console.log(1);
+      myPTonRefresh = false;
+    } else if(this.filterForm.value.selectedType == 'MyPT'){
+      console.log(2);
+      myPTonRefresh = true;
+    }
+    this.onFilterChange({ selectedType: this.filterForm.value.selectedType, matchId: this.currentMatchId, sportId: this.currentSportId, clicked: this.currentClicked, refreshCallVar: true });
   }
 
-  _initForm(){
+  _initForm() {
     this.filterForm = new FormGroup({
       selectedType: new FormControl('TotalBook'),
       sport: new FormControl(null),
@@ -69,11 +77,11 @@ export class NetExposureComponent implements OnInit {
     });
   }
 
-  onFilterChangeDropDown(event){
+  onFilterChangeDropDown(event) {
     this.isLoading = true;
 
-    if(this.filterForm.value.matchId == 'null'){
-      this.filterForm.patchValue( {'matchId':null} );
+    if (this.filterForm.value.matchId == 'null') {
+      this.filterForm.patchValue({ 'matchId': null });
     }
     this.currentMatchId = this.filterForm.value.matchId;
     let body = {
@@ -81,18 +89,18 @@ export class NetExposureComponent implements OnInit {
       sportId: this.currentSportId,
       myPT: this.MyPT
     }
-    this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
+    this._bookManagementService._getBookForBackendApi(body).subscribe((res: any) => {
       this.alterData(res);
     })
   }
 
-  getPubSubUrl(){
+  getPubSubUrl() {
     this._sharedService.getUserAdminPubSubApi().subscribe(
       (res: any) => {
-        console.log('url',res);
-        if(res){
+        console.log('url', res);
+        if (res) {
           this.realDataWebSocket = webSocket(res['url']);
-          console.log('webSocket',this.realDataWebSocket);
+          console.log('webSocket', this.realDataWebSocket);
           /*this.getInPlayUpcomingData(); //in-play
           this.getBookMakerData() //bookmaker
           this.getFancyData() //fancy*/
@@ -100,11 +108,11 @@ export class NetExposureComponent implements OnInit {
             data => {
               //if(typeof data == 'string') this._updateMarketData(data);
               // if(typeof data == 'string')
-              console.log('sub',data);
-              if(data.message == "BET_PLACED"){
-                if(data.uplineIds.indexOf(this.loggedInUser.userId) != -1){
+              console.log('sub', data);
+              if (data.message == "BET_PLACED") {
+                if (data.uplineIds.indexOf(this.loggedInUser.userId) != -1) {
                   console.log('refresh');
-                  this.onFilterChange({MyPT: this.MyPT,matchId:this.currentMatchId,sportId:this.currentSportId, clicked:this.currentClicked });
+                  this.onFilterChange({ MyPT: this.MyPT, matchId: this.currentMatchId, sportId: this.currentSportId, clicked: this.currentClicked });
                 } else {
                   console.log('no refresh');
                 }
@@ -117,15 +125,15 @@ export class NetExposureComponent implements OnInit {
       });
   }
 
-  onFilterChange(filterObj){
-    this.MyPT = filterObj.selectedType == 'MyPT' ? true: false;
+  onFilterChange(filterObj) {
+    this.MyPT = filterObj.selectedType == 'MyPT' ? true : false;
     this.currentMatchId = this.filterForm.value.matchId;
     this.currentSportId = filterObj.sportId;
     this.currentClicked = filterObj.clicked;
-    if(this.currentSportId && !filterObj.refreshCallVar){
+    if (this.currentSportId && !filterObj.refreshCallVar) {
       this._getMatchBySportId(this.currentSportId);
     }
-    if(!this.currentSportId){
+    if (!this.currentSportId) {
       this.currentMatchId = null;
       this.currentSportId = null;
     }
@@ -136,46 +144,47 @@ export class NetExposureComponent implements OnInit {
       myPT: this.MyPT
     }
 
-    this._bookManagementService._getBookForBackendApi(body).subscribe((res:any)=>{
+    this._bookManagementService._getBookForBackendApi(body).subscribe((res: any) => {
+      //console.log('_getBookForBackendApi', res);
       // this.alterData(res);
       this.booksForBackend = res.booksForBackend;
-     this.isLoading = false;
+      this.isLoading = false;
     },
-    ()=>this.isLoading = false,
-    ()=>this.isLoading = false
+      () => this.isLoading = false,
+      () => this.isLoading = false
     )
 
   }
 
-  alterData(res){
+  alterData(res) {
     this.isLoading = true;
     for (let index = 0; index < res.booksForBackend.length; index++) {
       if (res.booksForBackend[index].data.length > 1) {
-       let obj = res.booksForBackend[index].data.find(
-        (obj) => obj.fancyFlag == true
+        let obj = res.booksForBackend[index].data.find(
+          (obj) => obj.fancyFlag == true
         );
-         if (obj)
-         res.booksForBackend[index].data[0].fancyExposure = obj.netExposure;
-       }
-       res.booksForBackend[index].data = res.booksForBackend[index].data.filter(obj => obj.fancyFlag == false)
-     }
-     this.booksForBackend = res.booksForBackend;
-     this.isLoading = false;
+        if (obj)
+          res.booksForBackend[index].data[0].fancyExposure = obj.netExposure;
+      }
+      res.booksForBackend[index].data = res.booksForBackend[index].data.filter(obj => obj.fancyFlag == false)
+    }
+    this.booksForBackend = res.booksForBackend;
+    this.isLoading = false;
   }
 
-  _getGames(){
-    this.isLoading=true;
-    this._sharedService._getSports().subscribe((data:any)=>{
-      if(data){
+  _getGames() {
+    this.isLoading = true;
+    this._sharedService._getSports().subscribe((data: any) => {
+      if (data) {
         this.games = data;
       }
-    //this.isLoading = false;
+      //this.isLoading = false;
     });
   }
 
-  _getMatchBySportId(sportId){
-    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
-      if(data.matchList){
+  _getMatchBySportId(sportId) {
+    this._sharedService.getMatchBySportId(sportId).subscribe((data: any) => {
+      if (data.matchList) {
         this.matchList = data.matchList;
       }
     });
@@ -186,16 +195,16 @@ export class NetExposureComponent implements OnInit {
   //   this._router.navigate(['/book-management/advance-workstation/'+type+'/'+id]);
   // }
 
-  redirectUrl(data){
+  redirectUrl(data) {
     console.log(data)
-    let marketIds = data.map(id=>`${id.marketId}`).join(",");
+    let marketIds = data.map(id => `${id.marketId}`).join(",");
     console.log(marketIds)
 
-    this._router.navigate(['/book-management/advance-workstation/'+marketIds]);
+    this._router.navigate(['/book-management/advance-workstation/' + marketIds]);
   }
 
   ngOnDestroy(): void {
-    if(this.realDataWebSocket) this.realDataWebSocket.complete();
+    if (this.realDataWebSocket) this.realDataWebSocket.complete();
     clearInterval(this.resetTimerInterval)
   }
 

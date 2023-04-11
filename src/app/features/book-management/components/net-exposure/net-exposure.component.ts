@@ -194,4 +194,9 @@ export class NetExposureComponent implements OnInit {
     this._router.navigate(['/book-management/advance-workstation/'+marketIds]);
   }
 
+  ngOnDestroy(): void {
+    if(this.realDataWebSocket) this.realDataWebSocket.complete();
+    clearInterval(this.resetTimerInterval)
+  }
+
 }

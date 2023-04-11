@@ -493,7 +493,7 @@
       aria-describedby="addon-wrapping"
       [(ngModel)]="searchTerm"
       (ngModelChange)="search()"
-    />
+    /><br>
     <div class="col-md-12 text-end">Bet Count : {{ viewTotal.length }}</div>
     <div class="col-md-12 overflow-auto">
       <table class="table tableall m-0">
@@ -510,7 +510,14 @@
             <th scope="col">Matched</th>
             <th scope="col">Unmatched</th>
             <th scope="col">Profit/Liability</th>
-            <th scope="col" class="last text-center">IP</th>
+            <th scope="col" class="last text-center">
+                <!--Tooltip start-->
+                <div class="tooltipnk">
+                  <i class="fa fa-info-circle fa-2x"></i>
+                  <span class="tooltiptext px-5 w-auto"><strong>IP</strong></span>
+                </div>
+                <!--Tooltip end-->
+            </th>
           </tr>
         </thead>
         <tbody>

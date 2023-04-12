@@ -23,6 +23,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   payload:any;
   adminBooksList:any = [];
   setOrUnsetWebSocketParamsObj:any =[];
+  prevSetOrUnsetWebSocketParamsObj:any =[];
   realDataWebSocket:any;
   myPT:boolean = false;
   refreshCount:number =8;
@@ -138,7 +139,9 @@ export class NetExposureViewTotalComponent implements OnInit {
       myPT:this.myPT
     };
     this._bookMgmService._postBooksForAdminBookMgmApi(bookMgmParams).subscribe((res:any)=>{
+      this.matchName = res['matchName']
       if(res['book'].length >0){
+        this.setOrUnsetWebSocketParamsObj = [];
         res['book'].map((singleBook)=>{
           singleBook['isExpand'] = true;
           this.setOrUnsetWebSocketParamsObj.push(singleBook.centralId);
@@ -189,13 +192,21 @@ export class NetExposureViewTotalComponent implements OnInit {
           })
         })
         this.adminBooksList = res['book'];
-        let setObj = {
-          set:{
-            deviceId:sessionStorage.getItem('deviceId'),
-            centralIdList:this.setOrUnsetWebSocketParamsObj
+
+
+        if(this.prevSetOrUnsetWebSocketParamsObj.length !== this.setOrUnsetWebSocketParamsObj.length){
+          let setObj = {
+            set:{
+              deviceId:sessionStorage.getItem('deviceId'),
+              centralIdList:this.setOrUnsetWebSocketParamsObj
+              }
             }
-          }
-        this._setOrUnsetWebSocketData(setObj);
+            let unsetObj = {};
+            unsetObj['unset'] = setObj['set']; 
+            this._setOrUnsetWebSocketData(unsetObj);
+            this._setOrUnsetWebSocketData(setObj);
+        }
+        this.prevSetOrUnsetWebSocketParamsObj = this.setOrUnsetWebSocketParamsObj;
       }
     })
   }

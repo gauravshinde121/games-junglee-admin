@@ -114,19 +114,14 @@
                                       >{{ runner["RunnerName"] }} <br />
                                       <p class="mb-0 mt-1">
                                         <span
-                                          *ngIf="runner['amount'] > 0"
+                                          [ngClass]="runner['amount'] <= 0 ? 'text-danger':'text-success'"
                                           class="text-success"
-                                          >Rs. {{ runner["amount"] }}</span
-                                        >
-                                        <span
-                                          *ngIf="runner['amount'] <= 0"
-                                          class="text-danger"
                                           >Rs. {{ runner["amount"] }}</span
                                         >
                                       </p>
                                     </a>
                                   </td>
-                                  <td class="colblue light">
+                                  <td class="colblue" [boxHighlight]="runner['back2']" [boxHighlight]="runner['vback2']">
                                     <a
                                       ><strong>{{ runner["back2"] }}</strong>
                                       <br />{{
@@ -134,7 +129,7 @@
                                       }}</a
                                     >
                                   </td>
-                                  <td class="colpink light">
+                                  <td class="colblue" [boxHighlight]="runner['back1']" [boxHighlight]="runner['vback1']">
                                     <a
                                       ><strong>{{ runner["back1"] }}</strong>
                                       <br />{{
@@ -144,7 +139,7 @@
                                   </td>
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
-                                  <td class="colblue light">
+                                  <td class="colblue" [boxHighlight]="runner['back0']" [boxHighlight]="runner['vback0']">
                                     <a
                                       ><strong>{{ runner["back0"] }}</strong>
                                       <br />{{
@@ -152,7 +147,7 @@
                                       }}</a
                                     >
                                   </td>
-                                  <td class="colpink light">
+                                  <td class="colpink" [boxHighlight]="runner['lay0']" [boxHighlight]="runner['vlay0']">
                                     <a
                                       ><strong>{{ runner["lay0"] }}</strong>
                                       <br />{{
@@ -161,7 +156,7 @@
                                     >
                                   </td>
 
-                                  <td class="colblue light">
+                                  <td class="colpink" [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']">
                                     <a
                                       ><strong>{{ runner["lay1"] }}</strong>
                                       <br />{{
@@ -170,7 +165,7 @@
                                     >
                                   </td>
 
-                                  <td class="colpink light">
+                                  <td class="colpink" [boxHighlight]="runner['lay2']" [boxHighlight]="runner['vlay2']">
                                     <a
                                       ><strong>{{ runner["lay2"] }}</strong>
                                       <br />{{
@@ -198,18 +193,7 @@
                                       >{{ runner["RunnerName"] }} <br />
                                       <strong
                                         ><span
-                                          *ngIf="runner['amount'] >= 0"
-                                          class="text-success"
-                                          >Rs.
-                                          {{
-                                            runner["amount"] | number : "1.2-2"
-                                          }}</span
-                                        ></strong
-                                      >
-                                      <strong
-                                        ><span
-                                          *ngIf="runner['amount'] < 0"
-                                          class="text-danger"
+                                        [ngClass]="runner['amount'] <= 0 ? 'text-danger':'text-success'"
                                           >Rs.
                                           {{
                                             runner["amount"] | number : "1.2-2"
@@ -226,7 +210,7 @@
                                   </td>
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
-                                  <td class="colblue light">
+                                  <td class="colblue" [boxHighlight]="runner['back0']" [boxHighlight]="runner['vback0']">
                                     <a
                                       ><strong>{{ runner["back0"] }}</strong>
                                       <br />{{
@@ -234,7 +218,7 @@
                                       }}</a
                                     >
                                   </td>
-                                  <td class="colpink light">
+                                  <td class="colpink" [boxHighlight]="runner['lay0']" [boxHighlight]="runner['vlay0']">
                                     <a
                                       ><strong>{{ runner["lay0"] }}</strong>
                                       <br />{{
@@ -268,24 +252,14 @@
                                       >{{ runner["RunnerName"] }} <br />
                                       <strong
                                         ><span
-                                          *ngIf="runner['amount'] >= 0"
-                                          class="text-success"
+                                          [ngClass]="runner['amount'] <= 0 ? 'text-danger':'text-success'"
                                           >Rs.
                                           {{
                                             runner["amount"] | number : "1.2-2"
                                           }}</span
                                         ></strong
                                       >
-                                      <strong
-                                        ><span
-                                          *ngIf="runner['amount'] < 0"
-                                          class="text-danger"
-                                          >Rs.
-                                          {{
-                                            runner["amount"] | number : "1.2-2"
-                                          }}</span
-                                        ></strong
-                                      >
+                                      
                                     </a>
                                   </td>
                                   <td>
@@ -297,7 +271,7 @@
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
 
-                                  <td class="colpink light">
+                                  <td class="colpink" [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']">
                                     <a
                                       ><strong>{{ runner["lay1"] }}</strong>
                                       <br />{{
@@ -305,7 +279,7 @@
                                       }}</a
                                     >
                                   </td>
-                                  <td class="colblue light">
+                                  <td class="colblue" [boxHighlight]="runner['back1']" [boxHighlight]="runner['vback1']">
                                     <a
                                       ><strong>{{ runner["back1"] }}</strong>
                                       <br />{{
@@ -543,7 +517,7 @@
               </ng-container>
               <ng-template #notMatched> -- </ng-template>
             </td>
-            <td class="text-danger col">
+            <td class="col">
               <ng-container *ngIf="!viewTotalEach.isMatched; else notMatched">
                 {{ viewTotalEach.stake }}
               </ng-container>

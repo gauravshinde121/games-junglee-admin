@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main m-0">
   <section class="section gamedetails mb-3">
     <div class="row">
       <div class="col-md-12">
@@ -38,16 +38,14 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
-
-          </div>
+          <div class="col-md-6"></div>
           <div class="col-md-6 text-end">
-            {{refreshCount}} &nbsp;
+            {{ refreshCount }} &nbsp;
             <button
               class="btn btn-pink rounded-pill ps-4 pe-4"
               (click)="refreshCall()"
             >
-            <i class="fa fa-redo-alt disnone"></i> Refresh
+              <i class="fa fa-redo-alt disnone"></i> Refresh
             </button>
           </div>
         </div>
@@ -56,7 +54,7 @@
             <div
               class="accordion"
               id="accordionExample"
-              *ngFor="let singleAdminBook of adminBooksList; let i=index"
+              *ngFor="let singleAdminBook of adminBooksList; let i = index"
             >
               <div class="accordion-item bg-transparent border-0">
                 <h2 class="accordion-header" id="headingOne">
@@ -114,14 +112,22 @@
                                       >{{ runner["RunnerName"] }} <br />
                                       <p class="mb-0 mt-1">
                                         <span
-                                          [ngClass]="runner['amount'] <= 0 ? 'text-danger':'text-success'"
+                                          [ngClass]="
+                                            runner['amount'] <= 0
+                                              ? 'text-danger'
+                                              : 'text-success'
+                                          "
                                           class="text-success"
                                           >Rs. {{ runner["amount"] }}</span
                                         >
                                       </p>
                                     </a>
                                   </td>
-                                  <td class="colblue" [boxHighlight]="runner['back2']" [boxHighlight]="runner['vback2']">
+                                  <td
+                                    class="colblue"
+                                    [boxHighlight]="runner['back2']"
+                                    [boxHighlight]="runner['vback2']"
+                                  >
                                     <a
                                       ><strong>{{ runner["back2"] }}</strong>
                                       <br />{{
@@ -129,7 +135,11 @@
                                       }}</a
                                     >
                                   </td>
-                                  <td class="colblue" [boxHighlight]="runner['back1']" [boxHighlight]="runner['vback1']">
+                                  <td
+                                    class="colblue"
+                                    [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']"
+                                  >
                                     <a
                                       ><strong>{{ runner["back1"] }}</strong>
                                       <br />{{
@@ -139,7 +149,11 @@
                                   </td>
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
-                                  <td class="colblue" [boxHighlight]="runner['back0']" [boxHighlight]="runner['vback0']">
+                                  <td
+                                    class="colblue"
+                                    [boxHighlight]="runner['back0']"
+                                    [boxHighlight]="runner['vback0']"
+                                  >
                                     <a
                                       ><strong>{{ runner["back0"] }}</strong>
                                       <br />{{
@@ -147,7 +161,11 @@
                                       }}</a
                                     >
                                   </td>
-                                  <td class="colpink" [boxHighlight]="runner['lay0']" [boxHighlight]="runner['vlay0']">
+                                  <td
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay0']"
+                                    [boxHighlight]="runner['vlay0']"
+                                  >
                                     <a
                                       ><strong>{{ runner["lay0"] }}</strong>
                                       <br />{{
@@ -156,7 +174,11 @@
                                     >
                                   </td>
 
-                                  <td class="colpink" [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']">
+                                  <td
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay1']"
+                                    [boxHighlight]="runner['vlay1']"
+                                  >
                                     <a
                                       ><strong>{{ runner["lay1"] }}</strong>
                                       <br />{{
@@ -165,7 +187,11 @@
                                     >
                                   </td>
 
-                                  <td class="colpink" [boxHighlight]="runner['lay2']" [boxHighlight]="runner['vlay2']">
+                                  <td
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay2']"
+                                    [boxHighlight]="runner['vlay2']"
+                                  >
                                     <a
                                       ><strong>{{ runner["lay2"] }}</strong>
                                       <br />{{
@@ -193,7 +219,11 @@
                                       >{{ runner["RunnerName"] }} <br />
                                       <strong
                                         ><span
-                                        [ngClass]="runner['amount'] <= 0 ? 'text-danger':'text-success'"
+                                          [ngClass]="
+                                            runner['amount'] <= 0
+                                              ? 'text-danger'
+                                              : 'text-success'
+                                          "
                                           >Rs.
                                           {{
                                             runner["amount"] | number : "1.2-2"
@@ -210,7 +240,11 @@
                                   </td>
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
-                                  <td class="colblue" [boxHighlight]="runner['back0']" [boxHighlight]="runner['vback0']">
+                                  <td
+                                    class="colblue"
+                                    [boxHighlight]="runner['back0']"
+                                    [boxHighlight]="runner['vback0']"
+                                  >
                                     <a
                                       ><strong>{{ runner["back0"] }}</strong>
                                       <br />{{
@@ -218,7 +252,11 @@
                                       }}</a
                                     >
                                   </td>
-                                  <td class="colpink" [boxHighlight]="runner['lay0']" [boxHighlight]="runner['vlay0']">
+                                  <td
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay0']"
+                                    [boxHighlight]="runner['vlay0']"
+                                  >
                                     <a
                                       ><strong>{{ runner["lay0"] }}</strong>
                                       <br />{{
@@ -252,14 +290,17 @@
                                       >{{ runner["RunnerName"] }} <br />
                                       <strong
                                         ><span
-                                          [ngClass]="runner['amount'] <= 0 ? 'text-danger':'text-success'"
+                                          [ngClass]="
+                                            runner['amount'] <= 0
+                                              ? 'text-danger'
+                                              : 'text-success'
+                                          "
                                           >Rs.
                                           {{
                                             runner["amount"] | number : "1.2-2"
                                           }}</span
                                         ></strong
                                       >
-                                      
                                     </a>
                                   </td>
                                   <td>
@@ -271,7 +312,11 @@
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
 
-                                  <td class="colpink" [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']">
+                                  <td
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay1']"
+                                    [boxHighlight]="runner['vlay1']"
+                                  >
                                     <a
                                       ><strong>{{ runner["lay1"] }}</strong>
                                       <br />{{
@@ -279,7 +324,11 @@
                                       }}</a
                                     >
                                   </td>
-                                  <td class="colblue" [boxHighlight]="runner['back1']" [boxHighlight]="runner['vback1']">
+                                  <td
+                                    class="colblue"
+                                    [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']"
+                                  >
                                     <a
                                       ><strong>{{ runner["back1"] }}</strong>
                                       <br />{{
@@ -325,7 +374,12 @@
                                   <img
                                     src="/assets/images/net_expo.png"
                                     width="12"
-                                    (click)="getTotalBookViewTotal(singleAdminBook['marketId'],singleAdminBook['isTotaltotalBookView'])"
+                                    (click)="
+                                      getTotalBookViewTotal(
+                                        singleAdminBook['marketId'],
+                                        singleAdminBook['isTotaltotalBookView']
+                                      )
+                                    "
                                   />
                                 </td>
                                 <td class="border-top">
@@ -388,9 +442,7 @@
                                 <td class="border-top">
                                   {{ totalBook["username"] }}
                                 </td>
-                                <td class="border-top">
-
-                                </td>
+                                <td class="border-top"></td>
                                 <td class="border-top">
                                   <strong>{{ totalBook["stake"] }}</strong>
                                 </td>
@@ -467,7 +519,7 @@
       aria-describedby="addon-wrapping"
       [(ngModel)]="searchTerm"
       (ngModelChange)="search()"
-    /><br>
+    /><br />
     <div class="col-md-12 text-end">Bet Count : {{ viewTotal.length }}</div>
     <div class="col-md-12 overflow-auto">
       <table class="table tableall m-0">
@@ -484,9 +536,7 @@
             <th scope="col">Matched</th>
             <th scope="col">Unmatched</th>
             <th scope="col">Profit/Liability</th>
-            <th scope="col" class="last text-center">
-                IP
-            </th>
+            <th scope="col" class="last text-center">IP</th>
           </tr>
         </thead>
         <tbody>

@@ -1,5 +1,4 @@
 @media only screen and (max-width: 425px) {
-
   .sidebar .btn,
   .sidebar ul li a {
     font-size: 14px !important;
@@ -21,6 +20,7 @@
     font-size: 9px;
     color: #fff;
     line-height: 12px;
+    margin: 0;
   }
 
   .balance span {
@@ -48,7 +48,7 @@
   }
 
   .header {
-    height: 80px;
+    height: auto;
   }
 
   .header .toggle-sidebar-btn {
@@ -86,9 +86,9 @@
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  .head_logo{
+  .head_logo {
     width: 65px;
-    margin: 0 0 0 16px;
+    /* margin: 0 0 0 16px; */
   }
 }
 
@@ -96,6 +96,15 @@
 @media only screen and (min-width: 768px) {
   .sidebar .btn {
     font-size: 8px;
+  }
+  .toggle-sidebar-btn a:nth-child(2) {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 767.9px) {
+  .toggle-sidebar-btn a:nth-child(2) {
+    display: none;
   }
 }
 
@@ -106,16 +115,15 @@
 }
 
 @media only screen and (max-width: 960px) {
-
   .sidebar .btn,
   .sidebar ul li a {
     font-size: 10px;
   }
 }
 
-
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) {
+}
 
 @media only screen and (min-width: 1097.14px) {
   .table {
@@ -133,14 +141,13 @@
     font-size: 12px;
   }
 
-  .head_logo{
-    width: 100px;
+  .head_logo {
+    width: 85px;
   }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-
   /* #main {
     margin-left: 270px;
   }*/
@@ -176,12 +183,23 @@
 .dummy:last-child {
   width: 100%;
 }
+@media only screen and (min-width: 1280.8px) {
+  .head_logo {
+    width: 100px;
+  }
+}
+
+@media only screen and (min-width: 1396.36px) {
+  .head_logo {
+    width: 97px;
+  }
+}
 
 @media only screen and (min-width: 1280px) {
   .table {
     font-size: 8px;
   }
-  .head_logo{
+  .head_logo {
     width: 100px;
   }
 }
@@ -220,13 +238,16 @@
   .list-unstyled {
     font-size: 14px;
   }
-  .head_logo{
-    width: 100px;
+  .head_logo {
+    width: 97px;
+  }
+  .sidebar ul li a {
+    font-size: 12px;
   }
 }
 
 @media only screen and (min-width: 1745.45px) {
-  .head_logo{
+  .head_logo {
     width: 125px;
   }
 }
@@ -241,7 +262,7 @@
     font-size: 18px;
   }
 
-  .head_logo{
+  .head_logo {
     width: 125px;
   }
 }
@@ -291,7 +312,6 @@
 }
 
 @media only screen and (min-width: 3072px) {
-
   .table,
   body,
   .form-control,

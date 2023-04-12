@@ -5,7 +5,7 @@
   aria-labelledby="pills-transferstatements-tab"
   tabindex="0"
 >
-  <div class="row" [formGroup]="filterForm">
+  <div class="row align-items-end" [formGroup]="filterForm">
     <div class="col-md-2">
       <label>From Date</label>
       <input
@@ -26,15 +26,15 @@
         id=""
       />
     </div>
-    <div class="col-md-2 pt-2">
+    <div class="col-md-2">
       <button
-        class="btn btn-pink rounded-pill w-100 mt-4"
+        class="btn btn-pink rounded-pill w-100"
         (click)="getTransferStatement()"
       >
         Search
       </button>
     </div>
-    <div class="col-md-6 text-end mt-4">
+    <div class="col-md-6 text-end">
       <label>
         <p>
           Total Net Share <span class="text-success ps-2 pe-2"> 0 </span>
@@ -74,7 +74,7 @@
       </table>
     </div>
   </div>
-  <div class="col-md-12 mt-3" *ngIf="transferStatements?.length == 0">
+  <div class="col-md-12" *ngIf="transferStatements?.length == 0">
     <div class="border text-center p-5">
       <h4 *ngIf="transferStatements.length == 0 && !isLoading">
         No data found

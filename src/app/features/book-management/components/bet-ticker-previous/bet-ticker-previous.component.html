@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main m-0">
   <section class="section gamedetails">
     <div
       [formGroup]="filterForm"
@@ -62,11 +62,7 @@
         </div>
         <div class="col-md-3 mb-3">
           <label>Select Match</label>
-          <select
-            formControlName="matchId"
-            id="ab"
-            class="form-select"
-          >
+          <select formControlName="matchId" id="ab" class="form-select">
             <option value="null">All</option>
             <option value="{{ match.matchId }}" *ngFor="let match of matchList">
               {{ match.matchName }}

@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main m-0">
   <section class="section gamedetails">
     <div class="row">
       <div class="col-md-12">
@@ -37,7 +37,13 @@
             <span class="me-3 pt-2"><strong>Filter by Sport</strong></span>
             <a class="text-decoration-none text-white">
               <input
-                (click)="onFilterChange({ clicked: 'sport', sportId: null,refreshCallVar:false })"
+                (click)="
+                  onFilterChange({
+                    clicked: 'sport',
+                    sportId: null,
+                    refreshCallVar: false
+                  })
+                "
                 type="radio"
                 checked="true"
                 class="radioselected pointerr"
@@ -52,7 +58,11 @@
             >
               <input
                 (click)="
-                  onFilterChange({ clicked: 'sport', sportId: game.sportId,refreshCallVar:false })
+                  onFilterChange({
+                    clicked: 'sport',
+                    sportId: game.sportId,
+                    refreshCallVar: false
+                  })
                 "
                 type="radio"
                 class="radioselected pointer"
@@ -83,16 +93,14 @@
             </select>
           </div>
           <div class="row">
-            <div class="col-md-6">
-  
-            </div>
+            <div class="col-md-6"></div>
             <div class="col-md-6 text-end">
-              {{refreshCount}} &nbsp;
+              {{ refreshCount }} &nbsp;
               <button
                 class="btn btn-pink rounded-pill ps-4 pe-4"
                 (click)="refreshCall()"
               >
-              <i class="fa fa-redo-alt disnone"></i> Refresh
+                <i class="fa fa-redo-alt disnone"></i> Refresh
               </button>
             </div>
           </div>

@@ -76,8 +76,9 @@ export class TurnoverComponent implements OnInit {
     }
     this._accountStatementService._getCategoryForTO(body).subscribe((res:any)=>{
       this.plStatement = res.finalList;
+      console.log('res.totalNoOfRecords',res);
       this.isLoading = false;
-      this.totalPages = Math.ceil(res.totalNoOfRecords / this.pageSize);
+      this.totalPages = Math.ceil(res.finalList.length / this.pageSize);
     })
   }
 

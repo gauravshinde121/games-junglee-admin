@@ -179,7 +179,12 @@
             <td [ngClass]="bet.isBack ? 'text-success' : 'text-danger'">
               {{ bet.profitLiability }}
             </td>
-            <td>{{ bet.ip }}</td>
+            <td class="tooltipnk">
+              <i class="fa-sharp fa-solid fa-info"></i>
+              <span class="tooltiptext px-5 w-auto">
+                <small>{{ bet.ip }}</small>
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>

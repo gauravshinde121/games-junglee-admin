@@ -121,7 +121,7 @@ export class NetExposureViewTotalComponent implements OnInit {
       }
     });
   }
-  
+
 
   onFilterChange(params){
     this.myPT = params;
@@ -149,7 +149,7 @@ export class NetExposureViewTotalComponent implements OnInit {
           if(totalBookMarket != undefined){
             singleBook['totalBook'] = totalBookMarket['totalBook']
             singleBook['isTotaltotalBookView'] = totalBookMarket['isTotaltotalBookView']
-          } 
+          }
           return singleBook['adminBook'].map(runnerRes=>{
             switch(singleBook['marketTypName']){
               case 'Match Odds':
@@ -272,9 +272,6 @@ export class NetExposureViewTotalComponent implements OnInit {
     );
   }
 
-
-
-
   next(): void {
     this.currentPage++;
     this._getNetExposureViewTotal();
@@ -288,6 +285,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   search(): void {
     if(this.searchTerm.length > 2 || this.searchTerm.length == 0){
       this._getNetExposureViewTotal();
+      this._getWebSocketUrl();
     }
   }
 

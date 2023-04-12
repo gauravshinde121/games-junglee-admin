@@ -260,7 +260,12 @@
                 >
                   {{ bet.netAmount | number }}
                 </td>
-                <td>49.36.104.151</td>
+                <td><div class="tooltipnk">
+                  <i class="fa-sharp fa-solid fa-info"></i>
+                  <span class="tooltiptext px-5 w-auto">
+                    <small>{{ bet.ipAddress }}</small>
+                  </span>
+                </div></td>
               </tr>
             </tbody>
           </table>

@@ -31,3 +31,8 @@
     transform: rotate(359deg);
   }
 } /*# sourceMappingURL=login.component.css.map */
+
+
+.form-signin h3{
+  color: #d35862;
+}

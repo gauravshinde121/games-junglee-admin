@@ -12,6 +12,7 @@
         <div class="col-md-3">
           <h3 class="text-pink">Bet Ticker</h3>
         </div>
+        <hr />
       </div>
       <div class="row mb-3">
         <div class="col-md-3 mb-2">
@@ -151,7 +152,14 @@
               <th scope="col">Matched</th>
               <th scope="col">Unmatched</th>
               <th scope="col">Profit/Liability</th>
-              <th scope="col" class="last">IP</th>
+              <th scope="col" class="last">
+                  <!--Tooltip start-->
+                  <div class="tooltipnk">
+                    <i class="fa fa-info-circle fa-2x"></i>
+                    <span class="tooltiptext px-5 w-auto"><strong>IP</strong></span>
+                  </div>
+                  <!--Tooltip end-->
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -223,5 +231,5 @@
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
     </div>
-  </section>
+</section>
 </main>

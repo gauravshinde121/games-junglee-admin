@@ -89,4 +89,9 @@ export class MembersService {
     return this._apiHttpService
     .post(this._apiEndpointsService.changePasswordEndpoint(),paramObj);
   }
+
+  _adjustWinningsForSingleUserApi(paramObj){
+    return this._apiHttpService
+    .post(this._apiEndpointsService.adjustWinningsForSingleUserEndpoint(),paramObj);
+  }
 }

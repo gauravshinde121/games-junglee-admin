@@ -6,11 +6,12 @@
   font-size: 14px;
 }
 .align_thead thead tr th a.btn {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   padding: 3px 24px;
   background: linear-gradient(246deg, #cd212f 0, #e76f26);
   color: #fff;
+  letter-spacing: 1px;
 }
 
 .align_thead thead tr th:nth-child(2),
@@ -38,4 +39,9 @@
 
 .bookmatch th:nth-child(1) {
   width: 20rem;
+}
+
+.table > :not(caption) > * > * {
+  padding: 5px 10px !important;
+ 
 }

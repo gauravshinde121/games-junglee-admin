@@ -1,6 +1,6 @@
 <main id="main" class="main">
-  <section class="section gamedetails">
-    <div class="row" [formGroup]="filterForm">
+  <section class="gamedetails">
+    <div class="row pb-2" [formGroup]="filterForm">
       <div class="col-md-12">
         <!--your code will come here start-->
 
@@ -90,7 +90,7 @@
       </div>
     </div>
   </section>
-  <div class="row mt-5">
+  <div class="row mt-3">
     <div class="col-md-12 tablescroll overflow-auto">
       <div *ngIf="plStatement.length == 0" class="border text-center p-5">
         <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>

@@ -94,6 +94,7 @@ export class Constants {
     public readonly API_URL_GET_WEBSOCKET_URL_BY_DEVICE:string = 'api/registerDeviceToGetOddsData';
     public readonly API_URL_UNIQUE_DEVICE_KEY:string = 'api/getUniquDeviceId';
     public readonly API_URL_TOTAL_BOOK:string = 'api/junglee-admin/getUserwiseTotalBooks';
+    public readonly API_URL_ADJUST_WINNING_FOR_SINGLE_USER:string = 'api/junglee-admin/adjustWinningsForSingleUser';
 
     //pubsub
     public readonly API_URL_GET_USER_ADMIN_PUB_SUB:string = 'api/getUserAdminPubSub';

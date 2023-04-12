@@ -56,7 +56,7 @@
             <div
               class="accordion"
               id="accordionExample"
-              *ngFor="let singleAdminBook of adminBooksList"
+              *ngFor="let singleAdminBook of adminBooksList; let i=index"
             >
               <div class="accordion-item bg-transparent border-0">
                 <h2 class="accordion-header" id="headingOne">
@@ -75,7 +75,7 @@
                       aria-controls="collapseOne"
                     >
                       <div class="col-md-6">
-                        <p>
+                        <p class="mt-3 mb-1">
                           <i class="fa fa-minus"></i>
                           <i class="fa fa-plus"></i>
                           {{ singleAdminBook["marketName"] }}
@@ -93,7 +93,7 @@
                   <div class="accordion-body p-0">
                     <div class="row">
                       <div class="col-md-6">
-                        <div class="bg-white h-100 border-5 overflow-auto">
+                        <div class="bg-white border-5 overflow-auto">
                           <table class="table tablematchodds bg-transparent">
                             <tbody>
                               <ng-container
@@ -300,7 +300,7 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <div class="bg-white h-100 border-5 overflow-auto">
+                        <div class="bg-white border-5 overflow-auto">
                           <table class="table bg-transparent align_thead">
                             <thead>
                               <tr>
@@ -389,7 +389,7 @@
                                   {{ totalBook["username"] }}
                                 </td>
                                 <td class="border-top">
-                                  
+
                                 </td>
                                 <td class="border-top">
                                   <strong>{{ totalBook["stake"] }}</strong>
@@ -467,7 +467,7 @@
       aria-describedby="addon-wrapping"
       [(ngModel)]="searchTerm"
       (ngModelChange)="search()"
-    />
+    /><br>
     <div class="col-md-12 text-end">Bet Count : {{ viewTotal.length }}</div>
     <div class="col-md-12 overflow-auto">
       <table class="table tableall m-0">
@@ -484,7 +484,9 @@
             <th scope="col">Matched</th>
             <th scope="col">Unmatched</th>
             <th scope="col">Profit/Liability</th>
-            <th scope="col" class="last text-center">IP</th>
+            <th scope="col" class="last text-center">
+                IP
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -527,8 +529,11 @@
             >
               <strong>{{ viewTotalEach.profitLiability }}</strong>
             </td>
-            <td class="col">
-              <small>{{ viewTotalEach.IP }}</small>
+            <td class="col tooltipnk">
+              <i class="fa-sharp fa-solid fa-info"></i>
+              <span class="tooltiptext px-5 w-auto">
+                <small>{{ viewTotalEach.IP }}</small>
+              </span>
             </td>
           </tr>
         </tbody>

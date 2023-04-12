@@ -346,7 +346,12 @@
                   >
                     {{ bet.profitLoss | number }}
                   </td>
-                  <td>{{ bet.ipAddress }}</td>
+                  <td class="tooltipnk">
+                    <i class="fa-sharp fa-solid fa-info"></i>
+              <span class="tooltiptext px-5 w-auto">
+                <small>{{ bet.ipAddress }}</small>
+              </span>
+                  </td>
                 </tr>
               </tbody>
             </table>

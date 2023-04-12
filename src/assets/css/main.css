@@ -19,7 +19,8 @@ body {
 }
 
 .border-pink {
-  border: 1px solid #ffa7a3;
+  /* border: 1px solid #ffa7a3; */
+  border: 1px solid #d35862 ;
 }
 
 .btn-pink {
@@ -301,7 +302,8 @@ body {
 /********** table pro end ************/
 /********** inner page pro start ************/
 .gamedetails {
-  border: 1px solid rgba(255, 167, 163, 0.3411764706);
+  /* border: 1px solid rgba(255, 167, 163, 0.3411764706); */
+  border: 1px solid #d35862;
   border-radius: 15px;
   padding: 15px;
   /* background: rgba(60, 62, 62, 0.7215686275); */
@@ -345,6 +347,7 @@ select:-webkit-autofill:focus {
   position: relative;
   display: inline-block;
   border-bottom: 1px dotted black;
+  cursor: pointer;
 }
 
 .tooltipnk .tooltiptext {
@@ -356,9 +359,9 @@ select:-webkit-autofill:focus {
   padding: 10px 0;
   position: absolute;
   z-index: 1;
-  top: 100%;
-  left: 50%;
-  margin-left: -60px;
+  top: -30px;
+  top: -10px;
+  right: 24px;
   background-image: radial-gradient(rgb(56, 56, 56), rgb(0, 0, 0));
   border: 1px solid #a6a6a6;
 }
@@ -652,7 +655,7 @@ select:-webkit-autofill:focus {
   animation: color var(--d) var(--e) infinite,
     position var(--d) var(--e) infinite;
   background-color: #000;
-  padding-top: 4%;
+  padding-top: 2%;
   height: 100vh;
   /* position: fixed;
   left: 0;

@@ -152,14 +152,7 @@
               <th scope="col">Matched</th>
               <th scope="col">Unmatched</th>
               <th scope="col">Profit/Liability</th>
-              <th scope="col" class="last">
-                  <!--Tooltip start-->
-                  <div class="tooltipnk">
-                    <i class="fa fa-info-circle fa-2x"></i>
-                    <span class="tooltiptext px-5 w-auto"><strong>IP</strong></span>
-                  </div>
-                  <!--Tooltip end-->
-              </th>
+              <th scope="col" class="last">IP</th>
             </tr>
           </thead>
           <tbody>
@@ -193,7 +186,7 @@
                 </ng-container>
                 <ng-template #notMatched> -- </ng-template>
               </td>
-              <td class="text-danger col">
+              <td class="col">
                 <ng-container *ngIf="!bets.isMatched; else notMatched">
                   {{ bets.stake }}
                 </ng-container>
@@ -204,7 +197,12 @@
                   <strong>{{ bets.profitLiability }}</strong>
                 </span>
               </td>
-              <td class="col">{{ bets.ip }}</td>
+              <td class="col tooltipnk">
+                <i class="fa-sharp fa-solid fa-info"></i>
+                <span class="tooltiptext px-5 w-auto">
+                  <small>{{ bets.ip }}</small>
+                </span>
+              </td>
             </tr>
           </tbody>
         </table>

@@ -123,7 +123,7 @@ body {
 }
 .login .btn {
   font-size: 20px;
-  padding: 10px 10px;
+  padding: 4px 4px;
 }
 .login .form-control {
   line-height: 2.5;
@@ -156,7 +156,7 @@ body {
   transform-origin: 0 0;
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
   color: #fff;
-  padding: 0px 0px 0 12px;
+  /* padding: 0px 0px 0 12px; */
 }
 
 .form-signin .form-floating span {
@@ -175,7 +175,8 @@ body {
 /********** Login end ************/
 /********** main start ************/
 #main {
-  padding: 20px 10px;
+  /* padding: 20px 10px; */
+  padding: 0 0;
   transition: all 0.3s;
   color: #fff;
 }
@@ -690,4 +691,9 @@ select:-webkit-autofill:focus {
 
 .icon-pink {
   color: #d35862 !important;
+}
+
+.form-floating > .form-control:focus ~ label, .form-floating > .form-control:not(:placeholder-shown) ~ label, .form-floating > .form-select ~ label {
+  opacity: 0.65;
+  transform: scale(0.85) translateY(-1rem) translateX(0.15rem) !important;
 }

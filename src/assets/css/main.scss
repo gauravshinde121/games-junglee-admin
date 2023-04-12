@@ -167,7 +167,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   transform-origin: 0 0;
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
   color: $color_2;
-  padding: 0px 0px 0 12px;
+  // padding: 0px 0px 0 12px;
 }
 .form-signin .form-floating span {
   margin-top: -30px;
@@ -183,7 +183,8 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 /********** Login end ************/
 /********** main start ************/
 #main {
-  padding: 20px 10px;
+  // padding: 20px 10px;
+  padding: 20px 0;
   transition: all 0.3s;
   color: $color_2;
 }

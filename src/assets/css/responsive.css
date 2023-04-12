@@ -85,7 +85,12 @@
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
+@media only screen and (min-width: 600px) {
+  .head_logo{
+    width: 65px;
+    margin: 0 0 0 16px;
+  }
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
@@ -126,6 +131,10 @@
 @media only screen and (min-width: 1024px) {
   .sidebar .btn {
     font-size: 12px;
+  }
+
+  .head_logo{
+    width: 100px;
   }
 }
 
@@ -172,6 +181,9 @@
   .table {
     font-size: 8px;
   }
+  .head_logo{
+    width: 100px;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -208,6 +220,15 @@
   .list-unstyled {
     font-size: 14px;
   }
+  .head_logo{
+    width: 100px;
+  }
+}
+
+@media only screen and (min-width: 1745.45px) {
+  .head_logo{
+    width: 125px;
+  }
 }
 
 @media only screen and (min-width: 1920px) {
@@ -218,6 +239,10 @@
   .sidebar .btn,
   .sidebar ul li a {
     font-size: 18px;
+  }
+
+  .head_logo{
+    width: 125px;
   }
 }
 

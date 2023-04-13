@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main m-0">
   <section class="section gamedetails">
     <div class="row" [formGroup]="filterForm">
       <div class="col-md-12">
@@ -8,8 +8,8 @@
           Transfer
         </h4>
         <hr />
-        <div class="row">
-          <div class="col-md-3 mb-3">
+        <div class="row align-items-end">
+          <div class="col-md-3">
             <label>From Date</label>
             <input
               type="date"
@@ -20,7 +20,7 @@
               placeholder="Month"
             />
           </div>
-          <div class="col-md-3 mb-3">
+          <div class="col-md-3">
             <label>To Date</label>
             <input
               type="date"
@@ -31,7 +31,7 @@
               placeholder="Month"
             />
           </div>
-          <div class="col-md-3 mb-3">
+          <div class="col-md-3">
             <label>Select Member</label>
             <select
               formControlName="memberName"
@@ -44,7 +44,7 @@
               </option>
             </select>
           </div>
-          <div class="col-md-3 mb-3">
+          <div class="col-md-3">
             <button
               type="button"
               class="btn btn-pink rounded-pill mt-4"
@@ -124,5 +124,5 @@
         </div>
       </div>
     </div>
-    </section>
+  </section>
 </main>

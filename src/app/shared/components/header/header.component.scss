@@ -23,3 +23,12 @@
 .balance-down {
   background: linear-gradient(0deg, #cd212f 0, #e76f26);
 }
+
+.toggle-sidebar-btn {
+  position: relative;
+  z-index: 10;
+}
+
+.toggle-sidebar-btn a:nth-child(1) {
+  font-size: 2rem;
+}

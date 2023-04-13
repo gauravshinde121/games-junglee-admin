@@ -5,8 +5,8 @@
   aria-labelledby="pills-accountstatement-tab"
   tabindex="0"
 >
-  <div class="row" [formGroup]="filterForm">
-    <div class="col-md-3 mb-3">
+  <div class="row align-items-end" [formGroup]="filterForm">
+    <div class="col-md-3">
       <label>Select Sport</label>
       <select formControlName="sportsId" id="ab" class="form-select pointer">
         <option value="null">All</option>
@@ -15,7 +15,7 @@
         </option>
       </select>
     </div>
-    <div class="col-md-3 mb-3">
+    <div class="col-md-3">
       <label>From Date</label>
       <input
         formControlName="fromDate"
@@ -27,7 +27,7 @@
         id=""
       />
     </div>
-    <div class="col-md-3 mb-3">
+    <div class="col-md-3">
       <label>To Date</label>
       <input
         formControlName="toDate"
@@ -39,7 +39,7 @@
         id=""
       />
     </div>
-    <div class="col-md-3 mb-3">
+    <div class="col-md-3">
       <button
         class="btn btn-pink rounded-pill w-100 mt-4"
         (click)="getAccountStatement()"
@@ -260,12 +260,14 @@
                 >
                   {{ bet.netAmount | number }}
                 </td>
-                <td><div class="tooltipnk">
-                  <i class="fa-sharp fa-solid fa-info"></i>
-                  <span class="tooltiptext px-5 w-auto">
-                    <small>{{ bet.ipAddress }}</small>
-                  </span>
-                </div></td>
+                <td>
+                  <div class="tooltipnk">
+                    <i class="fa-sharp fa-solid fa-info"></i>
+                    <span class="tooltiptext px-5 w-auto">
+                      <small>{{ bet.ipAddress }}</small>
+                    </span>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>

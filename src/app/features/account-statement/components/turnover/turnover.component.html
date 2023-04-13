@@ -1,9 +1,9 @@
-<main id="main" class="main">
+<main id="main" class="main m-0">
   <section class="section gamedetails">
-    <div class="row" [formGroup]="filterForm">
+    <div class="row align-items-end" [formGroup]="filterForm">
       <h4 class="text-pink">Turn Over</h4>
       <hr />
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label>From Date</label>
         <input
           type="date"
@@ -14,7 +14,7 @@
           placeholder="Month"
         />
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <label>To Date</label>
         <input
           type="date"
@@ -25,16 +25,20 @@
           placeholder="Month"
         />
       </div>
-      <div class="col-md-4 btnmargin">
+      <div class="col-md-3 btnmargin">
         <label>Select Sport</label>
-        <select formControlName="sportsId" id="ab" class="form-select pointer pt-2">
+        <select
+          formControlName="sportsId"
+          id="ab"
+          class="form-select pointer pt-2"
+        >
           <option value="null">All</option>
           <option *ngFor="let game of games" [value]="game.sportId">
             {{ game.sportName }}
           </option>
         </select>
       </div>
-      <div class="col-md-2 btnmarginauto">
+      <div class="col-md-3 btnmarginauto">
         <button
           type="button"
           class="btn btn-pink rounded-pill mt-4"
@@ -296,8 +300,7 @@
                 <th scope="col" class="">Matched</th>
                 <th scope="col" class="">Unmatched</th>
                 <!-- <th scope="col" class="">Profit Liability</th> -->
-                <th scope="col" class="last">  IP
-                 </th>
+                <th scope="col" class="last">IP</th>
               </tr>
             </thead>
             <tbody>

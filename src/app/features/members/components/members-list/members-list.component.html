@@ -1,7 +1,7 @@
-<main id="main" class="main">
+<main id="main" class="main m-0">
   <section class="section dashboard">
-    <div class="row">
-      <div class="col-md-6 col-lg-6 col-xl-6 mb-3">
+    <div class="row mb-3 align-items-end">
+      <div class="col-md-6 col-lg-6 col-xl-6">
         <div class="row text-white">
           <div class="input-group flex-nowrap">
             <span
@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-lg-3 col-xl-2">
+      <div class="col-md-3 col-lg-3 col-xl-2 mt-2">
         <button
           routerLink="/member/create-member"
           class="btn btn-pink radius-all"
@@ -30,7 +30,7 @@
           <i class="fa fa-pen"></i> Create New
         </button>
       </div>
-      <div class="col-md-3 col-lg-3 col-xl-2">
+      <div class="col-md-3 col-lg-3 col-xl-2 mt-2">
         <button
           *ngIf="selectedUserForAdjustment.length > 0"
           (click)="openBulkTransferModal()"
@@ -47,7 +47,7 @@
     <div class="row">
       <!-- nav tab -->
       <ul
-        class="nav nav-pills ps-3 mt-3 p-1 memberslist"
+        class="nav nav-pills ps-3 p-1 memberslist"
         id="pills-tab"
         role="tablist"
       >
@@ -87,7 +87,12 @@
           <thead>
             <tr>
               <th scope="col" class="first pointer">
-                <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)"/>
+                <input
+                  type="checkbox"
+                  name="all"
+                  [checked]="isAllChecked()"
+                  (change)="checkAll($event)"
+                />
               </th>
               <th scope="col" class="">
                 <i class="fa-sharp fa-regular fa-address-card"></i>
@@ -145,14 +150,24 @@
                 [ngClass]="user.take > 0 ? 'text-success' : ''"
                 class="text-center"
               >
-                <a class="pointer text-success text-decoration-none" *ngIf="user.take > 0" (click)="adjustWinningsForSingleUser(user,false)">{{ user.take | number }}</a>
+                <a
+                  class="pointer text-success text-decoration-none"
+                  *ngIf="user.take > 0"
+                  (click)="adjustWinningsForSingleUser(user, false)"
+                  >{{ user.take | number }}</a
+                >
                 <span *ngIf="user.take <= 0">{{ user.take | number }}</span>
               </td>
               <td
                 [ngClass]="user.give > 0 ? 'text-danger' : ''"
                 class="text-center"
               >
-              <a class="pointer text-danger text-decoration-none" *ngIf="user.give > 0" (click)="adjustWinningsForSingleUser(user,true)">{{ user.give | number }}</a>
+                <a
+                  class="pointer text-danger text-decoration-none"
+                  *ngIf="user.give > 0"
+                  (click)="adjustWinningsForSingleUser(user, true)"
+                  >{{ user.give | number }}</a
+                >
                 <span *ngIf="user.give <= 0">{{ user.give | number }}</span>
               </td>
               <td class="text-center">{{ user.availableCredit | number }}</td>
@@ -406,8 +421,6 @@
 </div>
 <!-- Modal end -->
 
-
-
 <div
   *ngIf="modalNumber == 3"
   class="modal"
@@ -435,47 +448,64 @@
       </div>
       <div class="modal-body bg-dark_new text-white">
         <div class="row">
-          <div class="col-md-3"><label >Creadit Limit:</label><br>{{userDetails.creditLimit}}</div>
-          <div *ngIf="isGiven" class="col-md-3"><label >Give Amount:</label><br>{{userDetails.give}}</div>
-          <div *ngIf="!isGiven" class="col-md-3"><label >Take Amount:</label><br>{{userDetails.take}}</div>
-          <div class="col-md-3"><label >NetExposure:</label><br>{{userDetails.exposure}}</div>
-          <div class="col-md-3"><label >Difference:</label><br>{{(userDetails.availableCredit - userDetails.exposure).toFixed(1)}}</div>
+          <div class="col-md-3">
+            <label>Creadit Limit:</label><br />{{ userDetails.creditLimit }}
+          </div>
+          <div *ngIf="isGiven" class="col-md-3">
+            <label>Give Amount:</label><br />{{ userDetails.give }}
+          </div>
+          <div *ngIf="!isGiven" class="col-md-3">
+            <label>Take Amount:</label><br />{{ userDetails.take }}
+          </div>
+          <div class="col-md-3">
+            <label>NetExposure:</label><br />{{ userDetails.exposure }}
+          </div>
+          <div class="col-md-3">
+            <label>Difference:</label><br />{{
+              (userDetails.availableCredit - userDetails.exposure).toFixed(1)
+            }}
+          </div>
           <div class="col-md-12">
-          <section class="section  m-auto ">
-            <form [formGroup]="adjustWinningsForSingleUserForm">
-              <div class="row mb-4 align-items-center">
-                <div *ngIf="isGiven" class="col-md-12 pt-3">You Can Transfer {{userDetails.give}} Amount</div>
-                <div *ngIf="!isGiven" class="col-md-12 pt-3">You Can Transfer {{userDetails.take}} Amount</div>
-                <div class="col-md-12 pt-2">
-                  <input
-                    type="number"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="amount"
-                  />
+            <section class="section m-auto">
+              <form [formGroup]="adjustWinningsForSingleUserForm">
+                <div class="row mb-4 align-items-center">
+                  <div *ngIf="isGiven" class="col-md-12 pt-3">
+                    You Can Transfer {{ userDetails.give }} Amount
+                  </div>
+                  <div *ngIf="!isGiven" class="col-md-12 pt-3">
+                    You Can Transfer {{ userDetails.take }} Amount
+                  </div>
+                  <div class="col-md-12 pt-2">
+                    <input
+                      type="number"
+                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                      formControlName="amount"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div class="row">
-                <div class="col-md-6 text-end">
-                  <button
-                    (click)="postAdjustWinningsForSingleUser()"
-                    [disabled]="adjustWinningsForSingleUserForm.invalid"
-                    class="btn btn-danger rounded-pill w-80 "
-                  >
-                    Save
-                  </button>
+                <div class="row">
+                  <div class="col-md-6 text-end">
+                    <button
+                      (click)="postAdjustWinningsForSingleUser()"
+                      [disabled]="adjustWinningsForSingleUserForm.invalid"
+                      class="btn btn-danger rounded-pill w-80"
+                    >
+                      Save
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button
+                      class="btn btn-danger rounded-pill w-80"
+                      (click)="closeModal()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <button
-                    class="btn btn-danger rounded-pill w-80 "
-                    (click)="closeModal()"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </form>
-          </section></div>
+              </form>
+            </section>
+          </div>
         </div>
       </div>
     </div>

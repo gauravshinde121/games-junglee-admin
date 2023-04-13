@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main m-0">
   <section class="section gamedetails">
     <div class="row" [formGroup]="filterForm">
       <div class="col-md-12">
@@ -8,7 +8,7 @@
           Statement
         </h4>
         <hr />
-        <div class="row">
+        <div class="row align-items-end mb-3">
           <div class="col-md-6">
             <label>Select Member</label>
             <select
@@ -22,16 +22,16 @@
               </option>
             </select>
           </div>
-          <div class="col-md-6 mt-2">
+          <div class="col-md-6">
             <button
-              class="btn btn-outline-pink btn-pink text-white rounded-pill my-2 w-100"
+              class="btn btn-outline-pink btn-pink text-white rounded-pill mt-4 w-100"
               (click)="clearMemberName()"
             >
               <i class="fa fa-user-cog"></i> Clear Members
             </button>
           </div>
         </div>
-        <div class="row">
+        <div class="row align-items-end">
           <div class="col-md-6">
             <label>From Date</label>
             <input

@@ -36,6 +36,8 @@ export class PlayerPlComponent implements OnInit {
   totalPages: number = 0;
   isLoading = false;
 
+  fileName= 'PlayerP/L_Statement.xlsx';
+
   constructor(
     private _memberService:MembersService,
     private _accountStatementService:AccountStatementService,
@@ -133,6 +135,7 @@ export class PlayerPlComponent implements OnInit {
       this.isLoading = false;
       if(res.admin.finalList.length >0){
       this.plStatement = res.admin.finalList;
+      console.log( this.plStatement)
       console.log('this.totalNoOfRecords',res.admin.totalNoOfRecords);
       this.totalPages = Math.ceil(res.admin.totalNoOfRecords/ this.pageSize);
       }
@@ -205,5 +208,9 @@ export class PlayerPlComponent implements OnInit {
   clearMemberName(){
     this.filterForm.controls['memberName'].setValue(null);
   }
+
+  exportExcel(){
+    this._sharedService.exportExcel(this.plStatement,this.fileName);
+ }
 
 }

@@ -467,9 +467,16 @@
       aria-describedby="addon-wrapping"
       [(ngModel)]="searchTerm"
       (ngModelChange)="search()"
-    /><br>
-    <div class="col-md-12 text-end">Bet Count : {{ viewTotal.length }}</div>
-    <div class="col-md-12 overflow-auto">
+    />
+    <div class="col-md-12 mt-1 mb-1">
+      <div class="row">
+        <div class="col-md-6">
+          <button *ngIf ="viewTotal.length >0 " type="button" class="btn btn-pink rounded-pill ms-2 text-white" (click)="exportExcel()">Export</button>
+        </div>
+        <div class="col-md-6 text-end">Bet Count : {{ viewTotal.length }}</div>
+      </div>   
+    </div>
+       <div class="col-md-12 overflow-auto">
       <table class="table tableall m-0">
         <thead>
           <tr>

@@ -32,6 +32,8 @@ export class BetTickerComponent implements OnInit {
   allMembers:any;
   limit:number = 50;
 
+  fileName= 'BetTicker.xlsx';
+
   constructor(
     private _sharedService:SharedService,
     private _memberService:MembersService,
@@ -245,5 +247,9 @@ export class BetTickerComponent implements OnInit {
   clearMemberName(){
     this.betTickerForm.controls['memberName'].setValue(null);
   }
+
+  exportExcel(){
+    this._sharedService.exportExcel(this.allBets,this.fileName);
+ }
 
 }

@@ -115,15 +115,19 @@
   </section>
   <br />
   <div class="col-md-12 text-right font">
-    <span>
-      <img
-        src="../../../../../assets/images/dollaricon.png"
-        alt=""
-        class="doneLoading"
-      />
-    </span>
-    <strong> NET Total Amount</strong>&nbsp;&nbsp;
-    <span class="text-danger">{{ plStatement.length }}</span>
+      <span>
+        <img
+          src="../../../../../assets/images/dollaricon.png"
+          alt=""
+          class="doneLoading"
+        />
+      </span>
+      <strong> NET Total Amount</strong>&nbsp;&nbsp;
+      <span class="text-danger">{{ plStatement.length }}</span>
+   
+      
+      <button *ngIf ="plStatement.length >0 " type="button" class="btn btn-pink  rounded-pill ms-2 text-white float-end" (click)="exportExcel()">Export</button>
+   
   </div>
   <br />
   <div class="col-md-12 overflow-auto">
@@ -262,7 +266,7 @@
                       gameData?.netAmt > 0 ? 'text-success' : 'text-danger'
                     "
                   >
-                    {{ gameData?.netAmt }}
+                    {{ gameData?.netAmt | number }}
                   </td>
                 </tr>
                 <tr>

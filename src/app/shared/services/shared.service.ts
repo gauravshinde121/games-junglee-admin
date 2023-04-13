@@ -5,6 +5,7 @@ import { ApiEndpointsService } from 'src/app/core/services/api-endpoint.service'
 import { ApiHttpService } from 'src/app/core/services/api-http.service';
 import { Isports } from '../models/shared';
 import { Location } from '@angular/common';
+import * as XLSX from 'xlsx';
 
 @Injectable({
   providedIn: 'root'
@@ -189,6 +190,18 @@ export class SharedService {
   _getUniqueDeviceKeyApi() {
     return this._apiHttpService
       .get(this._apiEndpointsService.getUniqueDeviceKey());
+  }
+
+  public exportExcel(fileData,fileName){
+    /* pass here the table id */
+    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(fileData);
+  
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, fileName);
   }
 
 }

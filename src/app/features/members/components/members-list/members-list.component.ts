@@ -32,6 +32,9 @@ export class MembersListComponent implements OnInit {
   gameStatus: any = [];
   roles: any = [];
   selectedRoleId = 7;
+  refreshCount: number = 8;
+  resetTimerInterval: any;
+
 
   //dtOptions: DataTables.Settings = {};
 
@@ -143,13 +146,13 @@ export class MembersListComponent implements OnInit {
   }
 
   postAdjustWinningsForSingleUser() {
-    console.log('adjustWinningsForSingleUserForm', this.adjustWinningsForSingleUserForm.value);
+    //console.log('adjustWinningsForSingleUserForm', this.adjustWinningsForSingleUserForm.value);
     let body = {
       "userId": this.userId,
       "amount": this.adjustWinningsForSingleUserForm.value.amount,
       "isGiven":this.isGiven
     }
-    console.log('body', body);
+    //console.log('body', body);
     this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
       this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
       this._getAllUserInfo(this.selectedRoleId);
@@ -204,11 +207,26 @@ export class MembersListComponent implements OnInit {
     this.createPasswordForm();
     this._getRoles();
     this._getAllUserInfo(this.selectedRoleId);
+
+    this.resetTimerInterval = setInterval(() => {
+      if (this.refreshCount == 0) {
+        this.refreshCall();
+        this.refreshCount = 9;
+      }
+      this.refreshCount--;
+    }, 1000)
+  }
+
+  refreshCall() {
+    this.search();
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.resetTimerInterval)
   }
 
   fetchListByCategory(category) {
     this.selectedRoleId = category.roleId;
-
     this._getAllUserInfo(this.selectedRoleId);
   }
 
@@ -221,13 +239,13 @@ export class MembersListComponent implements OnInit {
 
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
-      console.log(roles);
+      //console.log(roles);
       this.roles = roles.data;
     });
   }
 
   _getAllUserInfo(roleId) {
-    console.log('_getAllUserInfo called', roleId);
+    //console.log('_getAllUserInfo called', roleId);
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });
@@ -243,7 +261,7 @@ export class MembersListComponent implements OnInit {
 
     this._sharedService._getAllUsersApi(body).subscribe((users: any) => {
       this.isLoading = false;
-      console.log(users.memberData.memberList)
+      //console.log(users.memberData.memberList)
       this.userList = users.memberData.memberList;
       this.sizes = this.userList;
       this.totalPages = Math.ceil(this.userList.length / this.pageSize);
@@ -322,16 +340,16 @@ export class MembersListComponent implements OnInit {
         isActive: !status,
       })
       .subscribe((data: any) => {
-        console.log(data);
-        console.log('Updated.');
+        //console.log(data);
+        //console.log('Updated.');
         this.closeModal();
         this._getAllUserInfo(this.selectedRoleId);
       });
   }
 
   updateSportsControl(status: any, eventControlId: any) {
-    console.log(eventControlId);
-    console.log(!status);
+    //console.log(eventControlId);
+    //console.log(!status);
     this._memberService
       ._updateSportsControlApi({
         refUserId: this.userId,
@@ -339,14 +357,14 @@ export class MembersListComponent implements OnInit {
         isActive: !status,
       })
       .subscribe((data: any) => {
-        console.log('Updated.');
+        //console.log('Updated.');
         this.closeModal();
         this._getAllUserInfo(this.selectedRoleId);
       });
   }
 
   navigateToDownline(user) {
-    console.log(user);
+    //console.log(user);
     this._router.navigate([
       `/member/member-details/Player/${user.username}/${user.createdDate}/${user.userId}`,
     ]);
@@ -354,8 +372,8 @@ export class MembersListComponent implements OnInit {
 
   changeStatus(evt, user) {
     // this.selectedColor =
-    console.log("Evt", user);
-    console.log("Value", evt.target.value);
+    //console.log("Evt", user);
+    //console.log("Value", evt.target.value);
     let status = evt.target.value;
     let body = {
       "userId": user.userId,
@@ -363,7 +381,7 @@ export class MembersListComponent implements OnInit {
     }
 
     this._memberService._changeMemberStatusApi(body).subscribe(res => {
-      console.log("Res", res);
+      //console.log("Res", res);
       this._sharedService.getToastPopup(res['message'], '', 'success');
     })
   }

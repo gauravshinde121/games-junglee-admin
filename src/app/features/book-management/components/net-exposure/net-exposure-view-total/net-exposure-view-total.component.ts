@@ -304,7 +304,24 @@ export class NetExposureViewTotalComponent implements OnInit {
   }
 
   exportExcel(){
-    this._sharedService.exportExcel(this.viewTotal,this.fileName);
+    console.log(this.viewTotal)
+    let viewtotal : any = []
+    this.viewTotal.forEach(element => {
+      viewtotal.push({
+        username:element.username,
+        date : new Date(element.placedDate),
+        event: element.event,
+        market:element.marketName,
+        OrderPlace:element.oddsPlaced,
+        selection : element.selectionName,
+        OrderPlaced:element.betRate,
+        OrderMatched:element.betRate,
+        // mathedStake:element.stake,
+        // umatchedStake:element.stake,
+        profit_Liablity:element.profitLiability
+      })
+    });
+    this._sharedService.exportExcel(viewtotal,this.fileName);
  }
 
 }

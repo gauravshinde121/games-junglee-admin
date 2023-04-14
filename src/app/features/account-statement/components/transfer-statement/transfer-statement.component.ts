@@ -91,7 +91,19 @@ export class TransferStatementComponent implements OnInit {
   }
 
   exportExcel(){
-    this._sharedService.exportExcel(this.transferStatements,this.fileName);
+    console.log(this.transferStatements)
+    let transfetStatemnt : any = []
+    this.transferStatements.forEach(element => {
+      transfetStatemnt.push({
+        date : new Date(element.createdDate),
+        fromUser: element.fromUsername,
+        touser:element.toUsername,
+        amount : element.amount,
+        isGiven :element.isGiven,
+      })
+    });
+    this._sharedService.exportExcel(transfetStatemnt,this.fileName);
+    // this._sharedService.exportExcel(this.transferStatements,this.fileName);
  }
 
 }

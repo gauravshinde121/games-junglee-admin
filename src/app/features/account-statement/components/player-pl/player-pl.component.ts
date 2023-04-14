@@ -210,7 +210,35 @@ export class PlayerPlComponent implements OnInit {
   }
 
   exportExcel(){
-    this._sharedService.exportExcel(this.plStatement,this.fileName);
+    console.log(this.plStatement)
+    let profitLoss : any = []
+    this.plStatement.forEach(element => {
+      profitLoss.push({
+        date : new Date(element.createDateTime),
+        sport: element.gameData.subGame,
+        match : element.gameData.eventName,
+        user : element.playerData.name,
+        amount :element.gameData.netAmt,
+      })
+    });
+
+    this._sharedService.exportExcel(profitLoss,this.fileName);
  }
+
+ exportExcel1(){
+  // console.log(this.oneAccount)
+  // let oneaccnt : any = []
+  // this.oneAccount.forEach(element => {
+  //   oneaccnt.push({
+  //     date : new Date(element.createDateTime),
+  //     sport: element.gameData.subGame,
+  //     match : element.gameData.eventName,
+  //     user : element.playerData.name,
+  //     amount :element.gameData.netAmt,
+  //   })
+  // });
+
+  this._sharedService.exportExcel(this.oneAccount,this.fileName);
+}
 
 }

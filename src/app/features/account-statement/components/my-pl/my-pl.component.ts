@@ -158,7 +158,22 @@ export class MyPlComponent implements OnInit {
   }
 
   exportExcel(){
-    this._sharedService.exportExcel(this.plStatement,this.fileName);
+    console.log(this.plStatement)
+    let pL : any = []
+    this.plStatement.forEach(element => {
+      pL.push({
+        date : new Date(element.createdAt),
+        game: element.gameName,
+        subGame:element.subGame,
+        event : element.eventName,
+        winLoss :element.win,
+        commision:element.commission,
+        netAmount:element.netAmount,
+        userCount:element.userCount,
+        BetCount:element.userBetCount
+      })
+    });
+    this._sharedService.exportExcel(pL,this.fileName);
  }
 
 }

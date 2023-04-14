@@ -145,11 +145,13 @@
                   <div class="col-md-4 mb-2 mt-4">
                     <button
                       type="button"
-                      class="btn btn-pink rounded-pill w-100"
+                      class="btn btn-pink rounded-pill"
                       (click)="searchList()"
                     >
                       Search
                     </button>
+                    <button *ngIf ="allBets.length >0 " type="button" class="btn btn-pink rounded-pill ms-2 text-white" (click)="exportExcel()">Export</button>
+
                   </div>
                 </div>
               </div>

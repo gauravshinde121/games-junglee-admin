@@ -26,6 +26,9 @@ export class MyPlComponent implements OnInit {
   marketList: any;
   //currentTotalPage:any;
 
+  fileName= 'P/L Statement.xlsx';
+
+
   constructor(
     private _accountStatementService: AccountStatementService,
     private _sharedService: SharedService
@@ -153,5 +156,9 @@ export class MyPlComponent implements OnInit {
     this.currentPage--;
     this.getPlStatement();
   }
+
+  exportExcel(){
+    this._sharedService.exportExcel(this.plStatement,this.fileName);
+ }
 
 }

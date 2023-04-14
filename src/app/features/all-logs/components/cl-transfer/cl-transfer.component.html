@@ -47,11 +47,12 @@
           <div class="col-md-3">
             <button
               type="button"
-              class="btn btn-pink rounded-pill mt-4 w-100"
+              class="btn btn-pink rounded-pill mt-4"
               (click)="getClTransfers()"
             >
               Search
             </button>
+            <button *ngIf ="clTransfers.length >0 " type="button" class="btn btn-pink rounded-pill ms-2  mt-4 text-white" (click)="exportExcel()">Export</button>
           </div>
           <!--your code will come here end-->
         </div>
@@ -71,16 +72,7 @@
               <th scope="col">Amount</th>
               <th scope="col">Available Credit</th>
               <th scope="col">Old Available Credit</th>
-              <th scope="col" class="last">
-                <!--Tooltip start-->
-                <div class="tooltipnk">
-                  <i class="fa fa-info-circle fa-2x"></i>
-                  <span class="tooltiptext px-5 w-auto"
-                    ><strong>IP</strong></span
-                  >
-                </div>
-                <!--Tooltip end-->
-              </th>
+              <th scope="col" class="last">IP</th>
             </tr>
           </thead>
           <tbody>

@@ -24,8 +24,11 @@ export class TransferStatementComponent implements OnInit {
   pageSize:number = 10;
   limit:number = 50;
 
+  fileName= 'TransferStatement.xlsx';
+
   constructor(
-    private _accountsService:AccountStatementService
+    private _accountsService:AccountStatementService,
+    private _sharedService:SharedService,
   ) { }
 
   ngOnInit(): void {
@@ -87,5 +90,8 @@ export class TransferStatementComponent implements OnInit {
     this.getTransferStatement();
   }
 
+  exportExcel(){
+    this._sharedService.exportExcel(this.transferStatements,this.fileName);
+ }
 
 }

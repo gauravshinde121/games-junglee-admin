@@ -45,6 +45,8 @@ export class SurveillanceMainComponent implements OnInit {
   sportsId: any = null;
   memberId: any = null;
 
+  fileName= 'Surveillance.xlsx';
+
   constructor(
     private _sharedService: SharedService,
     private _settingService: SettingsService,
@@ -285,5 +287,10 @@ export class SurveillanceMainComponent implements OnInit {
   clearMemberName(){
     this.betTickerForm.controls['memberId'].setValue(null);
   }
+
+  exportExcel(){
+    this._sharedService.exportExcel(this.allBets,this.fileName);
+ }
+
 
 }

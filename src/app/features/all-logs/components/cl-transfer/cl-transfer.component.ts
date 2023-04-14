@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AllLogsService } from '../../services/all-logs.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { formatDate } from '@angular/common';
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-cl-transfer',
@@ -23,9 +24,13 @@ export class ClTransferComponent implements OnInit {
   memberId:any = null;
   limit:number = 50;
 
+  fileName= 'CLTransfer.xlsx';
+
+
   constructor(
     private allLogService:AllLogsService,
-    private _memberService:MembersService
+    private _memberService:MembersService,
+    private _sharedService:SharedService,
   ) { }
 
   ngOnInit(): void {
@@ -99,5 +104,9 @@ export class ClTransferComponent implements OnInit {
     this.currentPage--;
     this.getClTransfers();
   }
+
+  exportExcel(){
+    this._sharedService.exportExcel(this.clTransfers,this.fileName);
+ }
 
 }

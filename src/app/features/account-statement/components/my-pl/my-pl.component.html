@@ -83,6 +83,8 @@
               >
                 Search
               </button>
+                <button *ngIf ="plStatement.length >0 " type="button" class="btn btn-pink rounded-pill ms-2 text-white" (click)="exportExcel()">Export</button>
+             
             </div>
           </div>
         </div>

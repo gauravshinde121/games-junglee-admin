@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SharedService } from '@shared/services/shared.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 
 @Component({
@@ -23,8 +24,11 @@ export class InvalidBetComponent implements OnInit {
   isLoading = false;
   limit:number = 50;
 
+  fileName= 'InvalidBet.xlsx';
+
   constructor(
-    private _memberService: MembersService
+    private _memberService: MembersService,
+    private _sharedService:SharedService,
   ) { }
 
   ngOnInit(): void {
@@ -108,5 +112,9 @@ export class InvalidBetComponent implements OnInit {
     // this.invalidBetForm.value.fromDate = this.formatFormDate(new Date());
     // this.invalidBetForm.value.toDate = this.formatFormDate(new Date();
   }
+
+  exportExcel(){
+    this._sharedService.exportExcel(this.allBets,this.fileName);
+ }
 
 }

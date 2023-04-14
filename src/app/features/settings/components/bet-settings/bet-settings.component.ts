@@ -40,6 +40,9 @@ export class BetSettingsComponent implements OnInit {
   sportsId: any = null;
   betRemark:any;
 
+  fileName= 'BetSettings.xlsx';
+
+
   constructor(private _sharedService: SharedService,
     private _settingService: SettingsService,
     private _memberService : MembersService,
@@ -259,4 +262,8 @@ export class BetSettingsComponent implements OnInit {
       this.display = 'none';
     })
   }
+
+  exportExcel(){
+    this._sharedService.exportExcel(this.allBets,this.fileName);
+ }
 }

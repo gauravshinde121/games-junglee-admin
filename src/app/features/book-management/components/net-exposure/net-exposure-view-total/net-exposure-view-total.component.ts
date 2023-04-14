@@ -30,6 +30,8 @@ export class NetExposureViewTotalComponent implements OnInit {
   resetTimerInterval:any;
   totalBooks:any = [];
 
+  fileName= 'NetExposureViewTotal.xlsx';
+
   constructor(
     private _sharedService:SharedService,
     private _bookMgmService:BookManagementService,
@@ -300,5 +302,9 @@ export class NetExposureViewTotalComponent implements OnInit {
     if(this.realDataWebSocket) this.realDataWebSocket.complete();
     clearInterval(this.resetTimerInterval)
   }
+
+  exportExcel(){
+    this._sharedService.exportExcel(this.viewTotal,this.fileName);
+ }
 
 }

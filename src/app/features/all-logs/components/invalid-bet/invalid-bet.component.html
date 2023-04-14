@@ -3,7 +3,7 @@
     <div class="row align-items-end" [formGroup]="invalidBetForm">
       <!-- <div class="col-md-12"> -->
       <!--your code will come here start-->
-      <h4 class="text-pink">Invalid Bet</h4>
+      <h4 class="text-pink">Void Bet</h4>
       <hr />
 
       <div class="col-md-4">
@@ -83,7 +83,7 @@
             <tr>
               <th scope="col" class="first">#</th>
               <th scope="col">Member</th>
-              <th scope="col">Place time</th>
+              <th scope="col">Placed Date Time</th>
               <th scope="col">Events</th>
               <th scope="col">Market</th>
               <th scope="col">Selection</th>
@@ -103,7 +103,7 @@
                 }}</span>
               </td>
               <td>{{ bets.member }}</td>
-              <td>{{ bets.placedTime | date }}</td>
+              <td>{{ bets.placedTime | date : "medium"}}</td>
               <td>{{ bets.event }}</td>
               <td>{{ bets.market }}</td>
               <td>{{ bets.selection }}</td>

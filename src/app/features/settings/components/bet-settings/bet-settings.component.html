@@ -238,7 +238,14 @@
           >
             Search
           </button>
-          <button *ngIf ="allBets.length >0 " type="button" class="btn btn-pink rounded-pill w-25 ms-2 text-white" (click)="exportExcel()">Export</button>
+          <button
+            *ngIf="allBets.length > 0"
+            type="button"
+            class="btn btn-pink rounded-pill w-25 ms-2 text-white"
+            (click)="exportExcel()"
+          >
+            Export
+          </button>
         </div>
       </div>
     </div>
@@ -313,7 +320,7 @@
               </td>
               <td>
                 <button
-                  class="btn btn-danger rounded-pill w-80"
+                  class="btn btn-pink rounded-pill w-80"
                   (click)="openModal(bets)"
                 >
                   Delete
@@ -406,21 +413,21 @@
               </div>
 
               <div class="row mt-5">
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                    (click)="closeModal()"
+                  >
+                    Cancel
+                  </button>
+                </div>
                 <div class="col-md-6 text-end">
                   <button
                     (click)="confirmDeleteBet()"
                     [disabled]="deleteBetForm.invalid"
-                    class="btn btn-danger rounded-pill w-80 mt-4"
+                    class="btn btn-pink rounded-pill w-80 mt-4"
                   >
                     Save Remark and Delete
-                  </button>
-                </div>
-                <div class="col-md-6">
-                  <button
-                    class="btn btn-danger rounded-pill w-80 mt-4"
-                    (click)="closeModal()"
-                  >
-                    Cancel
                   </button>
                 </div>
               </div>

@@ -223,7 +223,7 @@ export class CreateMemberComponent implements OnInit {
       memberObs = this._memberService._getCreateNewUserApi(memberData);
     } else {
       msg = 'Updated';
-      memberData["userId"] = this.route.snapshot.params['id'];
+      memberData["userId"] = Number(this.route.snapshot.params['id']);
       memberObs = this._memberService._getEditUserApi(memberData);
       console.log(memberObs)
     }

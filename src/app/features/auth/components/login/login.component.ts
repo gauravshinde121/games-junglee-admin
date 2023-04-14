@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   signInForm: FormGroup;
   show: boolean = false;
-  isLoading:boolean = false;
+  isLoading: boolean = false;
   button = 'Sign In';
 
   constructor(
@@ -32,39 +32,34 @@ export class LoginComponent implements OnInit {
     this._createSignInForm();
   }
 
-  _createSignInForm(){
+  _createSignInForm() {
     this.signInForm = this._fb.group({
-      username:['',Validators.required],
-      password:['',Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     })
   }
 
-  onSubmitSignIn(){
-
+  onSubmitSignIn() {
     this.isLoading = true;
-    let loginData = {
-      username: this.signInForm.value['username'],
-      pwd: this.signInForm.value['password'],
-      userIp:'111:111:111:111',
-      rememberme: true
-    }
-    //this._sharedService.getIPApi().subscribe(res=>{
-      //loginData['userIp'] = res['ip'];
-      console.log('loginData',loginData);
+    this._sharedService.getIPApi().subscribe(res => {
+      let loginData = {
+        username: this.signInForm.value['username'],
+        pwd: this.signInForm.value['password'],
+        userIp: res['ip'],
+        rememberme: true
+      }
       this._authService._postLoginApi(loginData).subscribe(
         (res: any) => {
           this._sharedService.setJWTToken(res['token']);
           this._sharedService.setUserDetails(jwt_decode(res['token']));
-            this.isLoading = false;
-            this._router.navigate(['/member/list'])
+          this.isLoading = false;
+          this._sharedService.currentUserIp.next(res['ip']);
+          this._router.navigate(['/member/list']);
         },
-        ()=> this.isLoading = false,
-        ()=> this.isLoading = false
+        () => this.isLoading = false,
+        () => this.isLoading = false
       )
-   // })
-    }
-    }
+    });
+  }
 
-
-
-
+}

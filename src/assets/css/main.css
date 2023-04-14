@@ -123,8 +123,8 @@ body {
   text-decoration: none;
 }
 .login .btn {
-  font-size: 20px;
-  padding: 4px 4px;
+  font-size: 16px;
+  padding: 3px 4px;
 }
 .login .form-control {
   line-height: 2.5;

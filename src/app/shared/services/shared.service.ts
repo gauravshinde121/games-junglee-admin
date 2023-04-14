@@ -12,26 +12,27 @@ import * as XLSX from 'xlsx';
 })
 export class SharedService {
 
-  sharedSubject=new Subject();
+  currentUserIp = new Subject();
+  sharedSubject = new Subject();
   getUserBalance = new Subject();
-  selectedUserRoleId = new BehaviorSubject( {'createUserWithRoleId': 7} );
-  maxBetMinValue = new BehaviorSubject( {'value': 100} );
-  leftMenuStatus = new BehaviorSubject( {'leftMenuOpen': true} );
-  refreshHeader = new BehaviorSubject( {'value': false} );
+  selectedUserRoleId = new BehaviorSubject({ 'createUserWithRoleId': 7 });
+  maxBetMinValue = new BehaviorSubject({ 'value': 100 });
+  leftMenuStatus = new BehaviorSubject({ 'leftMenuOpen': true });
+  refreshHeader = new BehaviorSubject({ 'value': false });
   private currentAdmin = null;
 
-  sportsList:Isports[];
+  sportsList: Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
   router: any;
   constructor(
     private _toastr: ToastrService,
     private _apiHttpService: ApiHttpService,
     private _apiEndpointsService: ApiEndpointsService,
-    private _location:Location
+    private _location: Location
   ) {
   }
 
-   public getPreviousUrl(){
+  public getPreviousUrl() {
     return this._location.back();
   }
 
@@ -40,34 +41,34 @@ export class SharedService {
       .get(this._apiEndpointsService.getAdminDetailEndpoint());
   }
 
-  _getAllUsersApi(body){
+  _getAllUsersApi(body) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getAllUserEndpoint(),body);
+      .post(this._apiEndpointsService.getAllUserEndpoint(), body);
   }
 
-  testFunc(body){
+  testFunc(body) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.testFuncEndpoint(),body);
+      .post(this._apiEndpointsService.testFuncEndpoint(), body);
   }
 
-  _getSingleUsersApi(user){
+  _getSingleUsersApi(user) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getSingleUserEndpoint(),user);
+      .post(this._apiEndpointsService.getSingleUserEndpoint(), user);
   }
 
-  _getGames(){
+  _getGames() {
     return this._apiHttpService
-    .get(this._apiEndpointsService.getGames());
+      .get(this._apiEndpointsService.getGames());
   }
 
-  _getSports(){
+  _getSports() {
     return this._apiHttpService
-    .get(this._apiEndpointsService.getSports());
+      .get(this._apiEndpointsService.getSports());
   }
 
-  _adjustWinningsApi(userList){
+  _adjustWinningsApi(userList) {
     return this._apiHttpService
-    .post(this._apiEndpointsService.getAdjustWinningsEndpoint(),userList);
+      .post(this._apiEndpointsService.getAdjustWinningsEndpoint(), userList);
   }
 
   getToastPopup(errorMsg: string, errorModule: string, errorType: string) {
@@ -90,39 +91,39 @@ export class SharedService {
     }
   }
 
-  isLoggedIn(){
-    return sessionStorage.getItem('GJA_jwtToken') ? true: false;
+  isLoggedIn() {
+    return sessionStorage.getItem('GJA_jwtToken') ? true : false;
   }
 
   getJWTToken() {
     return sessionStorage.getItem('GJA_jwtToken');
   }
 
-  setJWTToken(jwtToken:string){
-    sessionStorage.setItem('GJA_jwtToken',jwtToken)
+  setJWTToken(jwtToken: string) {
+    sessionStorage.setItem('GJA_jwtToken', jwtToken)
   }
 
-  getIPApi(){
+  getIPApi() {
     return this._apiHttpService.get('https://jsonip.com');
   }
 
-  removeJWTToken(){
+  removeJWTToken() {
     sessionStorage.removeItem('GJA_jwtToken');
   }
 
-  rtnSingleObjFromArrObj(arrObjParams:any, obj:any) {
+  rtnSingleObjFromArrObj(arrObjParams: any, obj: any) {
     let key = Object.keys(obj)[0];
     return arrObjParams.filter(arrObjParam => arrObjParam[key] == obj[key])[0];
   }
 
-  _replaceArrayObject(arr1, arr2,objKey) {
+  _replaceArrayObject(arr1, arr2, objKey) {
     return arr1.map(obj => arr2.find(o => o[objKey] === obj[objKey]) || obj);
   }
 
-  _removeObjectFromArray(arr1,data){
+  _removeObjectFromArray(arr1, data) {
     return arr1.filter(obj => obj.key != data.key);
   }
-  removeToken(){
+  removeToken() {
     sessionStorage.removeItem('GJA_jwtToken');
   }
 
@@ -130,57 +131,57 @@ export class SharedService {
     return JSON.parse(sessionStorage.getItem('GJA_adminDetails') || '{}');
   }
 
-  setUserDetails(adminDetails){
-    sessionStorage.setItem('GJA_adminDetails',JSON.stringify(adminDetails['admin']));
+  setUserDetails(adminDetails) {
+    sessionStorage.setItem('GJA_adminDetails', JSON.stringify(adminDetails['admin']));
   }
 
-  _addBalance(balanceData){
+  _addBalance(balanceData) {
     return this._apiHttpService
-    .post(this._apiEndpointsService.addBalanceDataEndpoint(),balanceData);
+      .post(this._apiEndpointsService.addBalanceDataEndpoint(), balanceData);
   }
 
-  removeUserDetails(){
+  removeUserDetails() {
     sessionStorage.removeItem('GJA_adminDetails');
   }
 
-  getUserAdminPubSubApi(){
+  getUserAdminPubSubApi() {
     return this._apiHttpService
       .get(this._apiEndpointsService.getUserAdminPubSubEndPoint());
   }
 
-  getMatchBySportId(sportId){
+  getMatchBySportId(sportId) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getMatchBySportIdEndpoint(),{sportId:sportId});
+      .post(this._apiEndpointsService.getMatchBySportIdEndpoint(), { sportId: sportId });
   }
 
-  getOneAccount(body){
+  getOneAccount(body) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getOneAccountEndpoint(),body);
+      .post(this._apiEndpointsService.getOneAccountEndpoint(), body);
   }
 
-  _getBetDetailsForWorkStationApi(body){
+  _getBetDetailsForWorkStationApi(body) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getBetDetailsForWorkStationEndpoint(),body);
+      .post(this._apiEndpointsService.getBetDetailsForWorkStationEndpoint(), body);
   }
 
-  _getSurveillanceDataApi(body){
+  _getSurveillanceDataApi(body) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getSurveillanceDataEndpoint(),body);
+      .post(this._apiEndpointsService.getSurveillanceDataEndpoint(), body);
   }
 
-  getMarketsByMatchId(matchId){
+  getMarketsByMatchId(matchId) {
     return this._apiHttpService
-      .post(this._apiEndpointsService.getMarketsByMatchIdEndpoint(),{matchId:matchId});
+      .post(this._apiEndpointsService.getMarketsByMatchIdEndpoint(), { matchId: matchId });
   }
 
-  getAllMarketTypeList(){
+  getAllMarketTypeList() {
     return this._apiHttpService
-    .post(this._apiEndpointsService.getAllMarketTypeEndpoint(),{});
+      .post(this._apiEndpointsService.getAllMarketTypeEndpoint(), {});
   }
 
-  getMarketBySportId(sportId){
+  getMarketBySportId(sportId) {
     return this._apiHttpService
-    .post(this._apiEndpointsService.getMarketBySportIdEndpoint(),{sportId:sportId});
+      .post(this._apiEndpointsService.getMarketBySportIdEndpoint(), { sportId: sportId });
   }
 
   _getWebSocketURLByDeviceApi(liveStreamMatchObj: any) {
@@ -193,9 +194,9 @@ export class SharedService {
       .get(this._apiEndpointsService.getUniqueDeviceKey());
   }
 
-  public exportExcel(fileData,fileName){
+  public exportExcel(fileData, fileName) {
     /* pass here the table id */
-    const ws: XLSX.WorkSheet =XLSX.utils.json_to_sheet(fileData);
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(fileData);
 
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();

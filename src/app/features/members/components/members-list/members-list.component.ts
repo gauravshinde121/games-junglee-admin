@@ -204,6 +204,15 @@ export class MembersListComponent implements OnInit {
     return this.userList.every(_ => _.state);
   }
   _preConfig() {
+
+    console.log('user ip value:1');
+    this._sharedService.currentUserIp.subscribe(
+      data =>
+      {
+        console.log('user ip value: ' + data);
+      }
+    );
+
     this.createPasswordForm();
     this._getRoles();
     this._getAllUserInfo(this.selectedRoleId);

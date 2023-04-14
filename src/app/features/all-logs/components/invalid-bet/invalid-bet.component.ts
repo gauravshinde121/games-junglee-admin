@@ -114,7 +114,23 @@ export class InvalidBetComponent implements OnInit {
   }
 
   exportExcel(){
-    this._sharedService.exportExcel(this.allBets,this.fileName);
+    console.log(this.allBets)
+    let allBet : any = []
+    this.allBets.forEach(element => {
+      allBet.push({
+        member:element.member,
+        date : new Date(element.createdDate),
+        event: element.event,
+        market:element.market,
+        OrderPlace:element.oddsPlaced,
+        selection : element.selection,
+        matched:element.isMatched,
+        Unmatched:element.stake,
+        Profit_Liability:element.profitLiability,
+        remark:element.remarks
+      })
+    });
+    this._sharedService.exportExcel(allBet,this.fileName);
  }
 
 }

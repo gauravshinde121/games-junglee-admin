@@ -264,6 +264,22 @@ export class BetSettingsComponent implements OnInit {
   }
 
   exportExcel(){
-    this._sharedService.exportExcel(this.allBets,this.fileName);
+    console.log(this.allBets)
+    let allBet : any = []
+    this.allBets.forEach(element => {
+      allBet.push({
+        username:element.username,
+        date : new Date(element.placedDate),
+        event: element.event,
+        market:element.betCategory,
+        OrderPlace:element.oddsPlaced,
+        selection : element.selectionName,
+        OrderPlaced:element.betRate,
+        OrderMatched:element.betRate,
+        // mathedStake:element.stake,
+        // umatchedStake:element.stake
+      })
+    });
+    this._sharedService.exportExcel(allBet,this.fileName);
  }
 }

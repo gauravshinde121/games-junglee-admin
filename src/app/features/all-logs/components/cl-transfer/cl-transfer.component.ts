@@ -106,7 +106,19 @@ export class ClTransferComponent implements OnInit {
   }
 
   exportExcel(){
-    this._sharedService.exportExcel(this.clTransfers,this.fileName);
+    console.log(this.clTransfers)
+    let clTransfer : any = []
+    this.clTransfers.forEach(element => {
+      clTransfer.push({
+        date : new Date(element.createdDate),
+        fromUser: element.fromRefUserName,
+        touser:element.toRefUserName,
+        amount:element.amount,
+        availableCredit : element.balance,
+        OladBalance:element.oldBalance
+      })
+    });
+    this._sharedService.exportExcel(clTransfer,this.fileName);
  }
 
 }

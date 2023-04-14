@@ -32,7 +32,7 @@ export class MembersListComponent implements OnInit {
   gameStatus: any = [];
   roles: any = [];
   selectedRoleId = 7;
-  refreshCount: number = 8;
+  refreshCount: number = 30;
   resetTimerInterval: any;
 
 
@@ -40,7 +40,7 @@ export class MembersListComponent implements OnInit {
 
   searchTerm: string = '';
   currentPage: number = 1;
-  pageSize: number = 25;
+  pageSize: number = 50;
   totalPages: number = 0;
 
   statusList: any = [];
@@ -211,14 +211,10 @@ export class MembersListComponent implements OnInit {
     this.resetTimerInterval = setInterval(() => {
       if (this.refreshCount == 0) {
         this.refreshCall();
-        this.refreshCount = 9;
+        this.refreshCount = 31;
       }
       this.refreshCount--;
     }, 1000)
-  }
-
-  refreshCall() {
-    this.search();
   }
 
   ngOnDestroy(): void {
@@ -244,14 +240,18 @@ export class MembersListComponent implements OnInit {
     });
   }
 
-  _getAllUserInfo(roleId) {
-    //console.log('_getAllUserInfo called', roleId);
+  refreshCall() {
+    this._getAllUserInfo(this.selectedRoleId, true);
+  }
+
+  _getAllUserInfo(roleId, autoRefresh = false) {
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });
-    this.isLoading = true;
-    this.userList = [];
-
+    if(!autoRefresh){
+      this.isLoading = true;
+      this.userList = [];
+    }
     let body = {
       roleId: roleId,
       pageNo: this.currentPage,
@@ -260,8 +260,9 @@ export class MembersListComponent implements OnInit {
     };
 
     this._sharedService._getAllUsersApi(body).subscribe((users: any) => {
-      this.isLoading = false;
-      //console.log(users.memberData.memberList)
+      if(!autoRefresh){
+        this.isLoading = false;
+      }
       this.userList = users.memberData.memberList;
       this.sizes = this.userList;
       this.totalPages = Math.ceil(this.userList.length / this.pageSize);

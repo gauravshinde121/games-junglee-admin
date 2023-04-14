@@ -142,7 +142,7 @@
                       (keypress)="numberOnly($event)"
                     />
                   </div>
-                  <div class="col-md-4 mb-2 mt-4">
+                  <div class="col-md-2 mb-1 mt-4">
                     <button
                       type="button"
                       class="btn btn-pink rounded-pill"
@@ -150,8 +150,24 @@
                     >
                       Search
                     </button>
-                    <button *ngIf ="allBets.length >0 " type="button" class="btn btn-pink rounded-pill ms-2 text-white" (click)="exportExcel()">Export</button>
+                    <button
+                      *ngIf="allBets.length > 0"
+                      type="button"
+                      class="btn btn-pink rounded-pill ms-2 text-white"
+                      (click)="exportExcel()"
+                    >
+                      Export
+                    </button>
+                  </div>
 
+                  <div class="col-md-2 mb-1 text-end">
+                    {{ refreshCount }} &nbsp;
+                    <button
+                      class="btn btn-pink rounded-pill ps-2 pe-2"
+                      (click)="refreshCall()"
+                    >
+                      <i class="fa fa-redo-alt disnone"></i> Refresh
+                    </button>
                   </div>
                 </div>
               </div>

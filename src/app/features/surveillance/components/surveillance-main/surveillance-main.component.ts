@@ -44,6 +44,8 @@ export class SurveillanceMainComponent implements OnInit {
   totalPages: number = 0;
   sportsId: any = null;
   memberId: any = null;
+  refreshCount: number = 30;
+  resetTimerInterval: any;
 
   fileName= 'Surveillance.xlsx';
 
@@ -94,11 +96,16 @@ export class SurveillanceMainComponent implements OnInit {
   }
 
   _preConfig(){
-
     this._initForm();
     this._getGames();
     this._getAllMembers();
-
+    this.resetTimerInterval = setInterval(() => {
+      if (this.refreshCount == 0) {
+        this.refreshCall();
+        this.refreshCount = 31;
+      }
+      this.refreshCount--;
+    }, 1000)
   }
 
   _initForm(){
@@ -225,7 +232,11 @@ export class SurveillanceMainComponent implements OnInit {
     this.getAllUserBets();
   }
 
-  searchList() {
+  refreshCall() {
+    this.searchList(true);
+  }
+
+  searchList(autoRefrsh = false) {
     let fromDate = new Date(this.betTickerForm.value.fromDate);
     fromDate.setHours(0)
     fromDate.setMinutes(0);
@@ -268,6 +279,10 @@ export class SurveillanceMainComponent implements OnInit {
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.resetTimerInterval)
   }
 
   clearMember(){

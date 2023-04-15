@@ -205,9 +205,9 @@ export class MembersListComponent implements OnInit {
   }
   _preConfig() {
 
-    console.log('user ip value:1');
+    console.log('user ip value: member list');
     this._sharedService.currentUserIp.subscribe((data: any) => {
-        console.log('user ip value: member ' + data);
+        console.log('user ip value: member ' , data);
     });
 
     this.createPasswordForm();

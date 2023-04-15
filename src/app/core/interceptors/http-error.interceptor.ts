@@ -4,7 +4,8 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse
+  HttpErrorResponse,
+  HttpContextToken
 } from '@angular/common/http';
 import { EMPTY, Observable } from 'rxjs';
 //for catch:
@@ -14,6 +15,8 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Constants } from '@config/constant';
 import * as _ from "lodash";
 import { Router } from '@angular/router';
+
+export const IGNORED_STATUSES = new HttpContextToken<number[]>(() => [600]);
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {

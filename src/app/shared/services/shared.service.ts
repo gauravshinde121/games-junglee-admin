@@ -12,7 +12,7 @@ import * as XLSX from 'xlsx';
 })
 export class SharedService {
 
-  currentUserIp = new Subject();
+  currentUserIp = new BehaviorSubject({'userIp':''});
   sharedSubject = new Subject();
   getUserBalance = new Subject();
   selectedUserRoleId = new BehaviorSubject({ 'createUserWithRoleId': 7 });

@@ -17,12 +17,17 @@ export class AppComponent  implements OnInit {
   ngOnInit(): void {
 
     this._sharedService.getIPApi().subscribe(res => {
-      this._sharedService.currentUserIp.next(res['ip']);
+      this._sharedService.currentUserIp.next({
+        'userIp': res['ip']
+      });
       console.log('res',res);
+      this._sharedService.currentUserIp.subscribe((data: any) => {
+        console.log('user ip value: app ' , data);
+    });
     });
     this._sharedService.sharedSubject.subscribe((res:any)=>{
        this.isblur=res['isShowRightSideBar'];
-       console.log(res['isShowRightSideBar'])
+       console.log('sharedt',res['isShowRightSideBar'])
     })
 
   }

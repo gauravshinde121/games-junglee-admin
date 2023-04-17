@@ -220,7 +220,7 @@
 >
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content modal-size border-danger modal-width">
-      <div class="modal-header bg-pink">
+      <div class="modal-header bg-pink p-2">
         <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
           Game Detail
         </h5>
@@ -248,7 +248,7 @@
                   <td>{{ pl?.createDateTime | date : "medium" }}</td>
                 </tr>
                 <tr>
-                  <td>Player Name :</td>
+                  <td>Player&nbsp;Name&nbsp;:</td>
                   <td>{{ oneAccount?.playerName }}</td>
                 </tr>
                 <tr>
@@ -257,24 +257,24 @@
                 </tr>
                 <tr>
                   <td>Win/Loss:</td>
-                  <td>-</td>
+                  <td>{{oneAccount?.status }}</td>
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
                   <td
                     [ngClass]="
-                      gameData?.netAmt > 0 ? 'text-success' : 'text-danger'
+                    oneAccount?.winAmt > 0 ? 'text-success' : 'text-danger'
                     "
                   >
-                    {{ gameData?.netAmt | number }}
+                    {{ oneAccount?.winAmt | number }}
                   </td>
                 </tr>
                 <tr>
-                  <td>Commission Amt:</td>
-                  <td>{{ gameData?.commission }}</td>
+                  <td>Commission&nbsp;Amt&nbsp;:</td>
+                  <td>{{ oneAccount?.commissionAmt | number}}</td>
                 </tr>
                 <tr>
-                  <td>Win Amt:</td>
+                  <td>Net Amt:</td>
                   <td
                     [ngClass]="
                       gameData?.netAmt > 0 ? 'text-success' : 'text-danger'
@@ -283,10 +283,10 @@
                     {{ gameData?.netAmt }}
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td>Round Id:</td>
                   <td>{{ gameData?.marketId }}</td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
@@ -300,11 +300,11 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Winner Name :</td>
+                  <td>Winner&nbsp;Name&nbsp;:</td>
                   <td>{{ gameData?.winningHorseName }}</td>
                 </tr>
                 <tr>
-                  <td>Match :</td>
+                  <td>Match&nbsp;:</td>
                   <td>{{ gameData?.eventName }}</td>
                 </tr>
               </tbody>
@@ -317,10 +317,10 @@
         
         <div class="row">
           <div class="col-md-12">
-            <table class="table tableall">
+            <table class="table tableall text-center">
               <thead>
                 <tr>
-                  <th scope="col" class="first">Place Date</th>
+                  <th scope="col" class="first w-auto">Place Date</th>
                   <th scope="col" class="">Matched Date</th>
                   <th scope="col" class="">Type</th>
                   <th scope="col" class="">Status</th>
@@ -340,7 +340,17 @@
                 <tr *ngFor="let bet of oneAccount?.bets">
                   <td>{{ bet.placedDate | date : "medium" }}</td>
                   <td>{{ bet.matchedDate | date : "medium" }}</td>
-                  <td>{{ bet.type }}</td>
+                  <td>
+                    <span
+                      *ngIf="bet.isBack == false"
+                      class="border r-2 bg-danger text-danger border-danger me-2"
+                    ></span>
+                    <span
+                      *ngIf="bet.isBack == true"
+                      class="border bg-primary text-primary border-primary me-2"
+                    ></span>
+                    {{ bet.type }}
+                  </td>
                   <td>{{ bet.status }}</td>
                   <td>{{ bet.horseName }}</td>
                   <td>{{ bet.avgOdds | number }}</td>
@@ -354,7 +364,7 @@
                   >
                     {{ bet.profitLoss | number }}
                   </td>
-                  <td class="tooltipnk mt-4">
+                  <td class="tooltipnk ms-0  mt-1">
                     <i class="fa-sharp fa-solid fa-info"></i>
                     <span class="tooltiptext px-5 w-auto">
                       <small>{{ bet.ipAddress }}</small>

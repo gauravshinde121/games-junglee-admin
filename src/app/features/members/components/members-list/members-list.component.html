@@ -79,6 +79,17 @@
           <i class="fa fa-redo-alt disnone"></i> Refresh
         </button>
       </div>
+      <div class="text-end">
+        <button
+        *ngIf="userList.length > 0"
+        type="button"
+        class="btn-sm btn-pink rounded-pill ms-2 text-white"
+        (click)="exportExcel()"
+        >
+        Export
+        </button>
+      </div>
+      
     </div>
     <div class="row mt-3">
       <div class="col-md-12 overflow-auto">
@@ -88,7 +99,7 @@
         </div>
         <table
           #myTable
-          class="table tableall"
+          class="table tableall fs"
           *ngIf="userList.length > 0 && !this.isLoading"
         >
           <thead>

@@ -53,7 +53,9 @@ export class MembersListComponent implements OnInit {
   //   newPassword: "",
   //   retypePassword: ""
   // }
-
+  
+  fileName= 'MemberList.xlsx';
+ 
   createPasswordForm() {
     this.changePasswordForm = this.formbuilder.group({
       password: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
@@ -392,6 +394,23 @@ export class MembersListComponent implements OnInit {
       this._sharedService.getToastPopup(res['message'], '', 'success');
     })
   }
+
+  exportExcel(){
+    console.log(this.userList)
+    let memberList : any = []
+    this.userList.forEach(element => {
+      memberList.push({
+        username:element.username,
+        creditLimit :element.creditLimit,
+        exposure: element.exposure,
+        take:element.take,
+        give:element.give,
+        availableCredit : element.availableCredit,
+        isActive:element.isActive,
+      })
+    });
+    this._sharedService.exportExcel(memberList,this.fileName);
+ }
 
 
 }

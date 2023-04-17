@@ -304,6 +304,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_TRANSFER_STATEMENT_FOR_USER)
   }
 
+  public getLiveStreamMatch():string{
+    return this.createUrl(this._constants.API_URL_LIVE_STREAM_MATCH)
+  }
 
   public getMemberLoginHistoryEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_MEMBER_LOGIN_HISTORY)
@@ -352,6 +355,10 @@ export class ApiEndpointsService {
 
   public getUserAdminPubSubEndPoint(){
     return this.createUrl(this._constants.API_URL_GET_USER_ADMIN_PUB_SUB)
+  }
+
+  public getWebSocketURLEndpoint(): string {
+    return this.createUrl(this._constants.API_URL_GET_WEBSOCKET_URL);
   }
 
 }

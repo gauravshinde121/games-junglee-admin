@@ -206,5 +206,15 @@ export class SharedService {
     XLSX.writeFile(wb, fileName);
   }
 
+  getWebSocketURLApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getWebSocketURLEndpoint());
+  }
+
+  postLiveStreamForMarket(liveStreamMatchObj: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getLiveStreamMatch(), liveStreamMatchObj);
+  }
+
 }
 

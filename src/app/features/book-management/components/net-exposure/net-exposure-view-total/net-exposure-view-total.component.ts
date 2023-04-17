@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookManagementService } from '../../../services/book-management.service';
 import * as _ from "lodash";
 import { webSocket } from 'rxjs/webSocket';
+import {DomSanitizer} from '@angular/platform-browser'
 
 @Component({
   selector: 'app-net-exposure-view-total',
@@ -29,18 +30,23 @@ export class NetExposureViewTotalComponent implements OnInit {
   refreshCount:number =8;
   resetTimerInterval:any;
   totalBooks:any = [];
+  isTVEnable:boolean = false;
+  liveStreamingTVUrl:any;
+  matchId:any;
 
   fileName= 'NetExposureViewTotal.xlsx';
 
   constructor(
     private _sharedService:SharedService,
     private _bookMgmService:BookManagementService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
     this.matchName = localStorage.getItem('matchName');
-    this._initConfig();
+    // this._initConfig();
+    this._getWebSocketUrl();
     this.resetTimerInterval = setInterval(()=>{
       if(this.refreshCount == 0){
         this.refreshCall();
@@ -61,18 +67,29 @@ export class NetExposureViewTotalComponent implements OnInit {
     })
   }
 
-  _getWebSocketUrl(){
-    this.route.params.subscribe((routeParams)=>{
-      let marketIdArr = routeParams['marketIds'].split(',');
-      this._postBooksForAdminBookMgmApi(marketIdArr);
-      this.payload = {
-        marketIds:marketIdArr,
-        pageNo:this.currentPage,
-        limit:this.pageSize,
-        searchText:this.searchTerm
-      }
-      this._getNetExposureViewTotal();
-    })
+  _getWebSocketUrl(isComplete = false){
+    this._sharedService.getWebSocketURLApi().subscribe(
+      (res: any) => {
+        console.log('url',res);
+        if(res){
+          this.realDataWebSocket = webSocket(res['url']);
+          if(!isComplete){
+            this.route.params.subscribe((routeParams)=>{
+              let marketIdArr = routeParams['marketIds'].split(',');
+              this._postBooksForAdminBookMgmApi(marketIdArr);
+              this.payload = {
+                marketIds:marketIdArr,
+                pageNo:this.currentPage,
+                limit:this.pageSize,
+                searchText:this.searchTerm
+              }
+              this._getNetExposureViewTotal();
+              this._subscribeWebSocket()
+            })
+          }
+        }
+      });
+   
   }
 
 
@@ -145,6 +162,7 @@ export class NetExposureViewTotalComponent implements OnInit {
       if(res['book'].length >0){
         this.setOrUnsetWebSocketParamsObj = [];
         res['book'].map((singleBook)=>{
+          this.matchId = singleBook['marketId'];
           singleBook['isExpand'] = true;
           this.setOrUnsetWebSocketParamsObj.push(singleBook.centralId);
           let totalBookMarket = _.find(this.totalBooks, ['marketId', singleBook['marketId']]);
@@ -253,14 +271,14 @@ export class NetExposureViewTotalComponent implements OnInit {
 
 
   _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj){
-    this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
-      (res: any) => {
-        console.log('market',res);
-        if(res?.token?.url){
-          this.realDataWebSocket = webSocket(res?.token?.url);
-          this._subscribeWebSocket()
-        }
-      });
+    // this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
+    //   (res: any) => {
+    //     console.log('market',res);
+    //     if(res?.token?.url){
+    //       this.realDataWebSocket = webSocket(res?.token?.url);
+    //       this._subscribeWebSocket()
+    //     }
+    //   });
   }
 
   _subscribeWebSocket(){
@@ -291,6 +309,22 @@ export class NetExposureViewTotalComponent implements OnInit {
     }
   }
 
+  hideShowTV(){
+    this.isTVEnable = !this.isTVEnable;
+    if(this.isTVEnable){
+      this.startStreamingLiveTV();
+    }else{
+      this.liveStreamingTVUrl = undefined;
+    }
+  }
+
+  startStreamingLiveTV(){
+    this._sharedService.postLiveStreamForMarket({domain:window.location.hostname,matchId:this.matchId}).subscribe((res:any)=>{
+      this.liveStreamingTVUrl = res?.streamObj?.data?.streamingUrl;
+      console.log("tv",res);
+    })
+  }
+
   ngOnDestroy(): void {
     let unSetObj = {
       unset:{
@@ -299,7 +333,8 @@ export class NetExposureViewTotalComponent implements OnInit {
         }
     }
     this._setOrUnsetWebSocketData(unSetObj);
-    if(this.realDataWebSocket) this.realDataWebSocket.complete();
+    // if(this.realDataWebSocket) this.realDataWebSocket.complete();
+    if(this.realDataWebSocket) this.realDataWebSocket.unsubscribe();
     clearInterval(this.resetTimerInterval)
   }
 

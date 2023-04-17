@@ -73,8 +73,15 @@
 <div class="row align-items-center my-2">
   <div class="col-md-2 col-1">
     <div class="toggle-sidebar-btn d-flex align-items-center">
-      <a (click)="toggleMenu()">
-        <i class="fa fa-bars fa-1x text-white"></i>
+      <a (click)="toggleMenu()"
+          class="navbar-toggler bg-color text-white px-1"
+          type="button"
+          
+        >
+          <!-- <span class="navbar-toggler-icon"></span> -->
+          <i class="fa fa-bars-staggered"></i>
+          <!-- <app-left-navigation *ngIf="false"></app-left-navigation> -->
+
       </a>
 
       <a

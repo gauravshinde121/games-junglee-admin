@@ -29,6 +29,10 @@
   z-index: 10;
 }
 
-.toggle-sidebar-btn a:nth-child(1) {
-  font-size: 2rem;
+// .toggle-sidebar-btn a:nth-child(1) {
+//   font-size: 2rem;
+// }
+
+.navbar-toggler{
+  background: linear-gradient(0deg, #cd212f 0, #e76f26);
 }

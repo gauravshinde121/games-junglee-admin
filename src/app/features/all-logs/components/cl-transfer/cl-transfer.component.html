@@ -86,7 +86,16 @@
               <td>{{ stmt.createdDate | date : "medium" }}</td>
               <td>{{ stmt.fromRefUserName }}</td>
               <td>{{ stmt.toRefUserName }}</td>
-              <td>{{ stmt.amount }}</td>
+              <td>
+                <span
+                *ngIf="stmt.isGiven == false"
+                class="text-primary"
+              >{{ stmt.amount }}</span>
+              <span
+                *ngIf="stmt.isGiven == true"
+                class="text-danger"
+              >{{ stmt.amount }}</span>
+              </td>
               <td>{{ stmt.balance }}</td>
               <td>{{ stmt.oldBalance }}</td>
               <!-- <td>{{stmt.}} -->

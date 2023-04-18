@@ -84,7 +84,7 @@
                 Search
               </button>
                 <button *ngIf ="plStatement.length >0 " type="button" class="btn btn-pink rounded-pill ms-2 text-white" (click)="exportExcel()">Export</button>
-             
+
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let pl of plStatement">
+          <tr *ngFor="let pl of plStatement" (click)="openAllBets(pl.matchId)">
             <td>{{ pl.createdAt | date : "medium" }}</td>
             <td>{{ pl.gameName }}</td>
             <td>{{ pl.subGame }}</td>

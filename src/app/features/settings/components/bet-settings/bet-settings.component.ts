@@ -149,6 +149,9 @@ export class BetSettingsComponent implements OnInit {
     this.marketTypeId = evt.target.value;
   }
 
+  submitForm(){
+    this.confirmDeleteBet();
+  }
 
   getAllUserBets(){
     this.isLoading = true;

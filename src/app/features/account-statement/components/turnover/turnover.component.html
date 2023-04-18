@@ -166,7 +166,7 @@
                       ? 'text-success'
                       : 'text-danger'
                   "
-                  >{{ marketInfo?.stakes?.totalStake }}</span
+                  >{{ marketInfo?.stakes?.totalStake | number }}</span
                 >
               </p>
             </div>
@@ -189,7 +189,7 @@
                   class="ng-binding"
                   [ngClass]="info.stake > 0 ? 'text-success' : 'text-danger'"
                 >
-                  {{ info.stake }}
+                  {{ info.stake | number }}
                 </td>
               </tr>
               <!-- end ngRepeat: stake in stakes.detail -->
@@ -211,7 +211,7 @@
                       ? 'text-success'
                       : 'text-danger'
                   "
-                  >{{ marketInfo?.winLose?.totalWinLose }}</span
+                  >{{ marketInfo?.winLose?.totalWinLose | number }}</span
                 >
               </p>
             </div>
@@ -235,13 +235,13 @@
                   class="ng-binding"
                   [ngClass]="info.win > 0 ? 'text-success' : 'text-danger'"
                 >
-                  {{ info.win }}
+                  {{ info.win | number }}
                 </td>
                 <td
                   class="ng-binding"
                   [ngClass]="info.lose > 0 ? 'text-success' : 'text-danger'"
                 >
-                  {{ info.lose }}
+                  {{ info.lose | number }}
                 </td>
               </tr>
               <!-- end ngRepeat: stake in stakes.detail -->

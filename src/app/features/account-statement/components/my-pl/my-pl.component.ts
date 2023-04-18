@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AccountStatementService } from '../../services/account-statement.service';
 import { SharedService } from '@shared/services/shared.service';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-pl',
@@ -31,7 +32,8 @@ export class MyPlComponent implements OnInit {
 
   constructor(
     private _accountStatementService: AccountStatementService,
-    private _sharedService: SharedService
+    private _sharedService: SharedService,
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -133,6 +135,12 @@ export class MyPlComponent implements OnInit {
         this.games = data;
       }
     });
+  }
+
+  openAllBets(matchId){
+    if(matchId){
+      this._router.navigate(['/account-statement/my-pl/all-bets/'+matchId]);
+    }
   }
 
   _getMatchBySportId(sportId) {

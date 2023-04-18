@@ -10,6 +10,7 @@ import { MyPlComponent } from './components/my-pl/my-pl.component';
 import { PlayerPlComponent } from './components/player-pl/player-pl.component';
 import { TurnoverComponent } from './components/turnover/turnover.component';
 import { CommissionComponent } from './components/commission/commission.component';
+import { AllBetsComponent } from './components/all-bets/all-bets.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CommissionComponent } from './components/commission/commission.componen
     MyPlComponent,
     PlayerPlComponent,
     TurnoverComponent,
-    CommissionComponent
+    CommissionComponent,
+    AllBetsComponent
   ],
   imports: [
     CommonModule,

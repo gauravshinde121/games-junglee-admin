@@ -124,10 +124,10 @@
       </span>
       <strong> NET Total Amount</strong>&nbsp;&nbsp;
       <span class="text-danger">{{ plStatement.length }}</span>
-   
-      
+
+
       <button *ngIf ="plStatement.length >0 " type="button" class="btn btn-pink  rounded-pill ms-2 text-white float-end" (click)="exportExcel()">Export</button>
-   
+
   </div>
   <br />
   <div class="col-md-12 overflow-auto">
@@ -277,10 +277,10 @@
                   <td>Net Amt:</td>
                   <td
                     [ngClass]="
-                      gameData?.netAmt > 0 ? 'text-success' : 'text-danger'
+                    oneAccount?.netAmt > 0 ? 'text-success' : 'text-danger'
                     "
                   >
-                    {{ gameData?.netAmt }}
+                    {{ oneAccount?.netAmt }}
                   </td>
                 </tr>
                 <!-- <tr>
@@ -314,7 +314,7 @@
             <!-- <button *ngIf ="oneAccount.length >0 " type="button" class="btn btn-pink  rounded-pill ms-2 text-white float-end" (click)="exportExcel1()">Export</button> -->
           </div>
         </div>
-        
+
         <div class="row">
           <div class="col-md-12">
             <table class="table tableall text-center">

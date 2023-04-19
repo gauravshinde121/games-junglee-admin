@@ -266,10 +266,15 @@ export class BetSettingsComponent implements OnInit {
   }
 
   deleteBet(user) {
+    var currentUserIp:any;
+    this._sharedService.currentUserIp.subscribe((data: any) => {
+      currentUserIp = data.userIp;
+    });
     let body = {
       "userId": user.userId,
       "betId": user.betId,
-      "remarks": this.betRemark
+      "remarks": this.betRemark,
+      "ip": currentUserIp
     }
     this._settingService._deleteBetApi(body).subscribe(res=>{
       this._sharedService.getToastPopup('done',"","success");

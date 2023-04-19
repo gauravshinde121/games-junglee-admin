@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { AccountStatementService } from '../../services/account-statement.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-all-bets',
@@ -16,10 +18,26 @@ export class AllBetsComponent implements OnInit {
   pageSize: number = 50;
   totalPages: number = 0;
   limit: number = 50;
+  searchText:any = null;
 
-  constructor() { }
+  constructor(
+    private _accountStatementService : AccountStatementService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this._preConfig();
+  }
+
+  _preConfig(){
+    this.__initForm();
+    this.getMemberBets();
+  }
+
+  __initForm() {
+    this.filterForm = new FormGroup({
+      searchText: new FormControl(null)
+    })
   }
 
   next(): void {
@@ -33,7 +51,15 @@ export class AllBetsComponent implements OnInit {
   }
 
   getMemberBets() {
+    var body = {
+      "matchId":this.route.snapshot.params['matchId'],
+      "limit":50,
+      "pageNo":1,
+      "searchText":this.searchText
+     };
+    this._accountStatementService._getUserBetsForAdminMyPLApi(body).subscribe((res)=>{
 
+    });
   }
 
 }

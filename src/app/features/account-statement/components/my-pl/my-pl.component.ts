@@ -138,9 +138,9 @@ export class MyPlComponent implements OnInit {
   }
 
   openAllBets(matchId){
-    //if(matchId){
-      this._router.navigate(['/account-statement/my-pl/all-bets/'+matchId]);
-    //}
+    if(matchId){
+      this._router.navigate(['/account-statement/all-bets/'+matchId]);
+    }
   }
 
   _getMatchBySportId(sportId) {

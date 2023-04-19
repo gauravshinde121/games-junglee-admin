@@ -232,6 +232,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_BETS_FOR_TO)
   }
 
+  public getUserBetsForAdminMyPLEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_USER_BETS_FOR_ADMIN_MYPL)
+  }
+
   public getGames(){
     return this.createUrl(this._constants.API_GET_GAMES)
   }

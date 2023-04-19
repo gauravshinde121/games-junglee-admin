@@ -38,6 +38,9 @@ export class AccountStatementService {
     return this._apiHttpService.post(this._apiEndpointsService.getBetsForMatch(),filterObj)
   }
 
+  _getUserBetsForAdminMyPLApi(filterObj){
+    return this._apiHttpService.post(this._apiEndpointsService.getUserBetsForAdminMyPLEndpoint(),filterObj)
+  }
 
   _getDownlineAccountsData(paramObj){
     return this._apiHttpService.post(this._apiEndpointsService.getDownlineAccountsDataEndpoint(),paramObj)

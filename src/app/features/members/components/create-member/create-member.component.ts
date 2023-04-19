@@ -178,6 +178,11 @@ export class CreateMemberComponent implements OnInit {
   }
 
   onSubmitMemberForm() {
+
+    var currentUserIp:any;
+    this._sharedService.currentUserIp.subscribe((data: any) => {
+      currentUserIp = data.userIp;
+    });
     this.isLoading = true;
     console.log('this.memberForm.value', this.memberForm.value);
     let memberData = {};
@@ -195,7 +200,8 @@ export class CreateMemberComponent implements OnInit {
         "maxExposure": this.memberForm.value['maxExposure'],
         "gameStatus": this.gamesList,
         "roleId": this.memberForm.value['roleId'],
-        "partnerShipPercent": this.memberForm.value['partnerShipPercent']
+        "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
+        "ip": currentUserIp
       }
     } else {
       memberData = {
@@ -212,7 +218,8 @@ export class CreateMemberComponent implements OnInit {
         //"isActive": this.memberForm.value['status'],
         "gameStatus": this.gamesList,
         "roleId": this.memberForm.value['roleId'],
-        "partnerShipPercent": this.memberForm.value['partnerShipPercent']
+        "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
+        "ip": currentUserIp
       }
     }
 

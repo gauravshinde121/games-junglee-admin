@@ -56,6 +56,7 @@ export class Constants {
     public readonly API_URL_GET_TO_FOR_MATCH: string = 'api/junglee-admin/getTurnOverForMatch';
     public readonly API_URL_GET_ONE_ACCOUNT: string = 'api/junglee-admin/getOneAccount';
     public readonly API_URL_GET_BETS_FOR_TO: string = 'api/junglee-admin/getBetsForTO';
+    public readonly API_URL_GET_USER_BETS_FOR_ADMIN_MYPL: string = 'api/junglee-admin/getUserBetsForAdminMyPL';
 
 
     //change password

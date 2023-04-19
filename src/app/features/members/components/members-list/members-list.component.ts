@@ -11,7 +11,7 @@ import { MembersService } from '../../services/members.service';
 })
 export class MembersListComponent implements OnInit {
 
-  sizes:any;
+  sizes: any;
   userList: any = [];
   isLoading = false;
   selectedUserForAdjustment: any = [];
@@ -35,7 +35,6 @@ export class MembersListComponent implements OnInit {
   refreshCount: number = 30;
   resetTimerInterval: any;
 
-
   //dtOptions: DataTables.Settings = {};
 
   searchTerm: string = '';
@@ -53,9 +52,9 @@ export class MembersListComponent implements OnInit {
   //   newPassword: "",
   //   retypePassword: ""
   // }
-  
-  fileName= 'MemberList.xlsx';
- 
+
+  fileName = 'MemberList.xlsx';
+
   createPasswordForm() {
     this.changePasswordForm = this.formbuilder.group({
       password: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
@@ -64,7 +63,6 @@ export class MembersListComponent implements OnInit {
       confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     },
       {
-
         validators: this.Mustmatch('password', 'confirmPassword')
       }
     )
@@ -125,15 +123,15 @@ export class MembersListComponent implements OnInit {
 
   adjustWinningsForSingleUser(user, isGiven) {
     this.userId = user.userId;
-    var adjustWinningsForSingleUserValue:number;
-    if(isGiven){
+    var adjustWinningsForSingleUserValue: number;
+    if (isGiven) {
       adjustWinningsForSingleUserValue = user.give;
       this.createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue);
-      this.adjustWinningsForSingleUserForm.patchValue( {'amount':user.give} );
+      this.adjustWinningsForSingleUserForm.patchValue({ 'amount': user.give });
     } else {
       adjustWinningsForSingleUserValue = user.take;
       this.createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue);
-      this.adjustWinningsForSingleUserForm.patchValue( {'amount':user.take} );
+      this.adjustWinningsForSingleUserForm.patchValue({ 'amount': user.take });
     }
     this.modalNumber = 3;
     this.userDetails = user;
@@ -152,7 +150,7 @@ export class MembersListComponent implements OnInit {
     let body = {
       "userId": this.userId,
       "amount": this.adjustWinningsForSingleUserForm.value.amount,
-      "isGiven":this.isGiven
+      "isGiven": this.isGiven
     }
     //console.log('body', body);
     this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
@@ -206,12 +204,6 @@ export class MembersListComponent implements OnInit {
     return this.userList.every(_ => _.state);
   }
   _preConfig() {
-
-    console.log('user ip value: member list');
-    this._sharedService.currentUserIp.subscribe((data: any) => {
-        console.log('user ip value: member ' , data);
-    });
-
     this.createPasswordForm();
     this._getRoles();
     this._getAllUserInfo(this.selectedRoleId);
@@ -256,7 +248,7 @@ export class MembersListComponent implements OnInit {
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });
-    if(!autoRefresh){
+    if (!autoRefresh) {
       this.isLoading = true;
       this.userList = [];
     }
@@ -268,7 +260,7 @@ export class MembersListComponent implements OnInit {
     };
 
     this._sharedService._getAllUsersApi(body).subscribe((users: any) => {
-      if(!autoRefresh){
+      if (!autoRefresh) {
         this.isLoading = false;
       }
       this.userList = users.memberData.memberList;
@@ -306,9 +298,13 @@ export class MembersListComponent implements OnInit {
   }
 
   adjustWinnings() {
+    var currentUserIp:any;
+    this._sharedService.currentUserIp.subscribe((data: any) => {
+      currentUserIp = data.userIp;
+    });
     //if (confirm('Do you want bulk transfer ?')) {
     this._sharedService
-      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment })
+      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, 'ip':currentUserIp })
       .subscribe((res: any) => {
         this._sharedService.getToastPopup(
           'Adjusted Successfully',
@@ -395,22 +391,22 @@ export class MembersListComponent implements OnInit {
     })
   }
 
-  exportExcel(){
+  exportExcel() {
     console.log(this.userList)
-    let memberList : any = []
+    let memberList: any = []
     this.userList.forEach(element => {
       memberList.push({
-        username:element.username,
-        creditLimit :element.creditLimit,
+        username: element.username,
+        creditLimit: element.creditLimit,
         exposure: element.exposure,
-        take:element.take,
-        give:element.give,
-        availableCredit : element.availableCredit,
-        isActive:element.isActive,
+        take: element.take,
+        give: element.give,
+        availableCredit: element.availableCredit,
+        isActive: element.isActive,
       })
     });
-    this._sharedService.exportExcel(memberList,this.fileName);
- }
+    this._sharedService.exportExcel(memberList, this.fileName);
+  }
 
 
 }

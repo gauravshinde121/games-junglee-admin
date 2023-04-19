@@ -9,13 +9,13 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 export class AllBetsComponent implements OnInit {
 
   filterForm: FormGroup;
-  isLoading:boolean = false;
-  betList:any = [];
+  isLoading: boolean = false;
+  betList: any = [];
 
   currentPage: number = 1;
   pageSize: number = 50;
   totalPages: number = 0;
-  limit:number = 50;
+  limit: number = 50;
 
   constructor() { }
 
@@ -32,7 +32,7 @@ export class AllBetsComponent implements OnInit {
     this.getMemberBets();
   }
 
-  getMemberBets(){
+  getMemberBets() {
 
   }
 

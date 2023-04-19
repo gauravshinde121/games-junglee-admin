@@ -9,17 +9,21 @@ import { CommissionComponent } from './components/commission/commission.componen
 import { AllBetsComponent } from './components/all-bets/all-bets.component';
 
 const routes: Routes = [
-  {path:'account-statement',component:AccountStatementMainComponent,
-children:[
-  {path:'transfer-statement',component:TransferStatementComponent},
-  {path:'my-pl',component:MyPlComponent,
-    children:[{path:'/account-statement/my-pl/all-bets/:matchId',component:AllBetsComponent}]
-  },
-  {path:'player-pl',component:PlayerPlComponent},
-  {path:'turnover',component:TurnoverComponent},
-  {path:'commission',component:CommissionComponent},
-
-]}
+  {
+    path: 'account-statement', component: AccountStatementMainComponent,
+    children: [
+      { path: 'transfer-statement', component: TransferStatementComponent },
+      {
+        path: 'my-pl', component: MyPlComponent,
+        children: [
+          { path: 'all-bets/:matchId', component: AllBetsComponent }
+        ]
+      },
+      { path: 'player-pl', component: PlayerPlComponent },
+      { path: 'turnover', component: TurnoverComponent },
+      { path: 'commission', component: CommissionComponent },
+    ]
+  }
 ];
 
 @NgModule({

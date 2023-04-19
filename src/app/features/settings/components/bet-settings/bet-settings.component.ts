@@ -221,10 +221,12 @@ export class BetSettingsComponent implements OnInit {
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
       fromDate : fromDate,
-      toDate : toDate
+      toDate : toDate,
+      pageNo: this.currentPage,
+      limit: 50,
     }
 
-    this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{
+    this._settingService._getBetsApi(payload).subscribe((res:any)=>{
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{

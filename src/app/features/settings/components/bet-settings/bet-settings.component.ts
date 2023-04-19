@@ -157,6 +157,15 @@ export class BetSettingsComponent implements OnInit {
     this.isLoading = true;
     this.allBets = [];
 
+    let fromDate = new Date(this.formatFormDate(new Date()));
+    fromDate.setHours(0)
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(this.formatFormDate(new Date()));
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
     let body = {
       memberId: null,
       sportId: null,
@@ -167,6 +176,8 @@ export class BetSettingsComponent implements OnInit {
       stakesTo :null,
       pageNo: this.currentPage,
       limit: 50,
+      fromDate: fromDate,
+      toDate: toDate,
     };
 
     this._settingService._getBetsApi(body).subscribe((res:any)=>{

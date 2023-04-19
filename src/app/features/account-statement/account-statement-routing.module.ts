@@ -6,25 +6,19 @@ import { MyPlComponent } from './components/my-pl/my-pl.component';
 import { PlayerPlComponent } from './components/player-pl/player-pl.component';
 import { TurnoverComponent } from './components/turnover/turnover.component';
 import { CommissionComponent } from './components/commission/commission.component';
-import { AllBetsComponent } from './components/all-bets/all-bets.component';
+import { AllBetsComponent } from './components/all-bets/all-bets.component'
 
-const routes: Routes = [
-  {
+const routes: Routes = [{
     path: 'account-statement', component: AccountStatementMainComponent,
     children: [
       { path: 'transfer-statement', component: TransferStatementComponent },
-      {
-        path: 'my-pl', component: MyPlComponent,
-        children: [
-          { path: 'all-bets/:matchId', component: AllBetsComponent }
-        ]
-      },
+      { path: 'my-pl', component: MyPlComponent, },
+      { path: 'all-bets/:matchId', component: AllBetsComponent },
       { path: 'player-pl', component: PlayerPlComponent },
       { path: 'turnover', component: TurnoverComponent },
       { path: 'commission', component: CommissionComponent },
     ]
-  }
-];
+}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

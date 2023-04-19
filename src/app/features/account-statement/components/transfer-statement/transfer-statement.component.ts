@@ -73,7 +73,6 @@ export class TransferStatementComponent implements OnInit {
     }
 
     this._accountsService._getTransferStatementApi(payload).subscribe((res:any)=>{
-      console.log('res',res);
       this.isLoading = false;
       this.transferStatements = res.transferStatement;
       this.totalPages = Math.ceil(this.transferStatements.length / this.pageSize);
@@ -91,7 +90,6 @@ export class TransferStatementComponent implements OnInit {
   }
 
   exportExcel(){
-    console.log(this.transferStatements)
     let transfetStatemnt : any = []
     this.transferStatements.forEach(element => {
       transfetStatemnt.push({

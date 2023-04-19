@@ -76,7 +76,6 @@ export class TurnoverComponent implements OnInit {
     }
     this._accountStatementService._getCategoryForTO(body).subscribe((res:any)=>{
       this.plStatement = res.finalList;
-      console.log('res.totalNoOfRecords',res);
       this.isLoading = false;
       this.totalPages = Math.ceil(res.finalList.length / this.pageSize);
     })
@@ -94,14 +93,12 @@ export class TurnoverComponent implements OnInit {
   getTOForMatch(matchId){
       this._accountStatementService._getTOForMatch({matchId:matchId}).subscribe((res:any)=>{
         this.marketInfo = res;
-        console.log('marketInfo',this.marketInfo);
       });
   }
 
   getBetDetailsForMatch(matchId){
     this._accountStatementService._getBetDetailForMatch({matchId:matchId}).subscribe((res:any)=>{
       this.betInfo = res.betsForTO;
-      console.log('marketInfo',this.betInfo);
     });
   }
 

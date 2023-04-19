@@ -106,7 +106,6 @@ export class ClTransferComponent implements OnInit {
   }
 
   exportExcel(){
-    console.log(this.clTransfers)
     let clTransfer : any = []
     this.clTransfers.forEach(element => {
       clTransfer.push({

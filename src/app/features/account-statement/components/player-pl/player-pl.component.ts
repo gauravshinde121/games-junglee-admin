@@ -135,8 +135,6 @@ export class PlayerPlComponent implements OnInit {
       this.isLoading = false;
       if (res.admin.finalList.length > 0) {
         this.plStatement = res.admin.finalList;
-        console.log(this.plStatement)
-        console.log('this.totalNoOfRecords', res.admin.totalNoOfRecords);
         this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
       }
     }, (err) => {
@@ -163,14 +161,11 @@ export class PlayerPlComponent implements OnInit {
 
   getOneAccount(pl) {
     this.isLoading = true;
-    console.log('pl', pl);
     let body = {
       "userId": pl.userId,
       "matchId": pl.matchId
     }
-    console.log('one account body', body);
     this._sharedService.getOneAccount(body).subscribe((data: any) => {
-      console.log('getOneAccount',data);
       this.isLoading = false;
       if (data.oneAccount) {
         this.oneAccount = data.oneAccount;
@@ -212,7 +207,6 @@ export class PlayerPlComponent implements OnInit {
   }
 
   exportExcel() {
-    console.log(this.plStatement)
     let profitLoss: any = []
     this.plStatement.forEach(element => {
       profitLoss.push({
@@ -228,7 +222,6 @@ export class PlayerPlComponent implements OnInit {
   }
 
   exportExcel1() {
-    // console.log(this.oneAccount)
     // let oneaccnt : any = []
     // this.oneAccount.forEach(element => {
     //   oneaccnt.push({

@@ -105,8 +105,6 @@ export class MyPlComponent implements OnInit {
       this.isLoading = false;
       if (res.admin.finalResult.length > 0) {
         this.plStatement = res.admin.finalResult;
-        console.log('this.plStatement.length', this.plStatement.length);
-        console.log('this.pageSize', this.pageSize);
         this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
       }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
@@ -166,7 +164,6 @@ export class MyPlComponent implements OnInit {
   }
 
   exportExcel(){
-    console.log(this.plStatement)
     let pL : any = []
     this.plStatement.forEach(element => {
       pL.push({

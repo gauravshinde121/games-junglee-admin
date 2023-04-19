@@ -58,10 +58,9 @@ export class BetTickerComponent implements OnInit {
   }
 
   _preConfig(){
-    /*alert();console.log('rerrsrr');
+    /*
     this._sharedService._getGames().subscribe((res:any)=>{
       this.games = res.gamesList;
-      console.log('this.games',this.games);
     });*/
     this._initForm();
     this._getGames();
@@ -184,8 +183,6 @@ export class BetTickerComponent implements OnInit {
     };
 
     this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
-      console.log('res',res.userBetList.betList[0]);
-
       this.isLoading = false;
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
@@ -249,7 +246,6 @@ export class BetTickerComponent implements OnInit {
   }
 
   exportExcel(){
-    console.log(this.allBets)
     let allBet : any = []
     this.allBets.forEach(element => {
       allBet.push({

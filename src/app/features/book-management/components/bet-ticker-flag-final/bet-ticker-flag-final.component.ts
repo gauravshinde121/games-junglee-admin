@@ -21,7 +21,6 @@ export class BetTickerFlagFinalComponent implements OnInit {
 
     this._preconfig();
     this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
 
@@ -31,7 +30,6 @@ export class BetTickerFlagFinalComponent implements OnInit {
   _preconfig(){
     this._sharedService._getGames().subscribe((res:any)=>{
       this.games = res.gamesList;
-      console.log('res.gamesList',res.gamesList);
     });
     this._initForm();
     this._getGames();
@@ -56,7 +54,6 @@ export class BetTickerFlagFinalComponent implements OnInit {
     this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
       if(data.matchList){
         this.matchList = data.matchList;
-        //console.log('data.matchList',data.matchList);
       }
     });
   }

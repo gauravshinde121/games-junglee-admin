@@ -35,6 +35,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   matchId:any;
 
   fileName= 'NetExposureViewTotal.xlsx';
+  newAdminBooksList:any;
 
   constructor(
     private _sharedService:SharedService,
@@ -44,7 +45,6 @@ export class NetExposureViewTotalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.matchName = localStorage.getItem('matchName');
     // this._initConfig();
     this._getWebSocketUrl();
     this.resetTimerInterval = setInterval(()=>{
@@ -75,14 +75,21 @@ export class NetExposureViewTotalComponent implements OnInit {
           this.realDataWebSocket = webSocket(res['url']);
           if(!isComplete){
             this.route.params.subscribe((routeParams)=>{
-              let marketIdArr = routeParams['marketIds'].split(',');
-              this._postBooksForAdminBookMgmApi(marketIdArr);
+              let bookMgmParams = {};
               this.payload = {
-                marketIds:marketIdArr,
                 pageNo:this.currentPage,
                 limit:this.pageSize,
                 searchText:this.searchTerm
+              };
+              if(routeParams['marketIds']){
+                bookMgmParams['marketIds'] = routeParams['marketIds'].split(',');
+                this.payload['marketIds'] = routeParams['marketIds'].split(',');
+              }else{
+                bookMgmParams['matchId'] = routeParams['matchId'];
+                this.payload['matchId'] = routeParams['matchId'];
               }
+              bookMgmParams['myPT'] = this.myPT
+              this._postBooksForAdminBookMgmApi(bookMgmParams);
               this._getNetExposureViewTotal();
               this._subscribeWebSocket()
             })
@@ -143,21 +150,37 @@ export class NetExposureViewTotalComponent implements OnInit {
 
 
   onFilterChange(params){
-    this.myPT = params;
-    this._postBooksForAdminBookMgmApi(this.payload['marketIds']);
+    let bookMgmParams = {};
+    if(this.payload['marketIds']){
+      bookMgmParams['marketIds'] = this.payload['marketIds'];
+    }else{
+      bookMgmParams['matchId'] = this.payload['matchId'];
+    }
+    this.myPT = bookMgmParams['myPT'] = params;
+    this._postBooksForAdminBookMgmApi(bookMgmParams);
   }
 
   refreshCall(){
+    let bookMgmParams = {};
+    if(this.payload['marketIds']){
+      bookMgmParams['marketIds'] = this.payload['marketIds'];
+    }else{
+      bookMgmParams['matchId'] = this.payload['matchId'];
+    }
+    bookMgmParams['myPT'] = this.myPT;
+
     this._getNetExposureViewTotal();
-    this._postBooksForAdminBookMgmRefreshApi(this.payload['marketIds']);
+    if(_.differenceBy(this.newAdminBooksList,this.adminBooksList,'marketName').length > 0){
+      this._postBooksForAdminBookMgmApi(bookMgmParams);
+    }else{
+      this._postBooksForAdminBookMgmRefreshApi(bookMgmParams);
+      
+    }
   }
 
-  _postBooksForAdminBookMgmRefreshApi(marketIdArr){
-    let bookMgmParams = {
-      marketIds: marketIdArr,
-      myPT:this.myPT
-    };
+  _postBooksForAdminBookMgmRefreshApi(bookMgmParams){
     this._bookMgmService._postBooksForAdminBookMgmApi(bookMgmParams).subscribe((res:any)=>{
+      this.newAdminBooksList = res['book']
       if(res['book'].length >0){
         this.setOrUnsetWebSocketParamsObj = [];
         res['book'].map((singleBook)=>{
@@ -177,11 +200,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     })
   }
 
-  _postBooksForAdminBookMgmApi(marketIdArr){
-    let bookMgmParams = {
-      marketIds: marketIdArr,
-      myPT:this.myPT
-    };
+  _postBooksForAdminBookMgmApi(bookMgmParams){
     this._bookMgmService._postBooksForAdminBookMgmApi(bookMgmParams).subscribe((res:any)=>{
       this.matchName = res['matchName']
       if(res['book'].length >0){

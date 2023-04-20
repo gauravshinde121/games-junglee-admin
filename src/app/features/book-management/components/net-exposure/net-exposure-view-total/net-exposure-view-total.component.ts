@@ -149,7 +149,32 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   refreshCall(){
     this._getNetExposureViewTotal();
-    this._postBooksForAdminBookMgmApi(this.payload['marketIds']);
+    this._postBooksForAdminBookMgmRefreshApi(this.payload['marketIds']);
+  }
+
+  _postBooksForAdminBookMgmRefreshApi(marketIdArr){
+    let bookMgmParams = {
+      marketIds: marketIdArr,
+      myPT:this.myPT
+    };
+    this._bookMgmService._postBooksForAdminBookMgmApi(bookMgmParams).subscribe((res:any)=>{
+      if(res['book'].length >0){
+        this.setOrUnsetWebSocketParamsObj = [];
+        res['book'].map((singleBook)=>{
+            this.adminBooksList.map((adminSingleBook)=>{
+              if(+singleBook['marketId'] == +adminSingleBook['marketId']){
+                adminSingleBook['userBook'] = singleBook['userBook'];
+                adminSingleBook['adminBook'].map(sinlgeRunner=>{
+                  let runnerRes = _.filter(singleBook['adminBook'], ['SelectionId', sinlgeRunner['SelectionId']]);
+                  if(runnerRes.length >0 ) sinlgeRunner['amount'] = runnerRes[0]['amount'];
+                  return sinlgeRunner;
+                })
+              }
+              return adminSingleBook;
+            })
+        })
+      }
+    })
   }
 
   _postBooksForAdminBookMgmApi(marketIdArr){
@@ -173,6 +198,26 @@ export class NetExposureViewTotalComponent implements OnInit {
           return singleBook['adminBook'].map(runnerRes=>{
             switch(singleBook['marketTypName']){
               case 'Match Odds':
+                if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
+                  runnerRes['back0'] ='';
+                  runnerRes['vback0'] ='';
+    
+                  runnerRes['back1'] =  '';
+                  runnerRes['vback1'] = '';
+    
+                  runnerRes['back2'] ='';
+                  runnerRes['vback2'] = '';
+    
+                  runnerRes['lay0'] = '';
+                  runnerRes['vlay0'] = '';
+    
+                  runnerRes['lay1'] =  '';
+                  runnerRes['vlay1'] = '';
+    
+                  runnerRes['lay2'] = '';
+                  runnerRes['vlay2'] = '';
+    
+                }else{
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
@@ -190,22 +235,39 @@ export class NetExposureViewTotalComponent implements OnInit {
 
                 runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds']: '';
                 runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+                }
               break;
 
               case 'Bookmaker':
+                if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
+                  runnerRes['back0'] = '';
+                  runnerRes['vback0'] = '';
+    
+                  runnerRes['lay0'] = '';
+                  runnerRes['vlay0'] = '';
+                }else{
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
                 runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
                 runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
+                }
               break;
 
               case 'Fancy':
+                if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
+                  runnerRes['back1'] = '';
+                  runnerRes['vback1'] = '';
+    
+                  runnerRes['lay1'] = '';
+                  runnerRes['vlay1'] = '';
+                }else{
                 runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
                 runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv']:'';
 
                 runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds']: '';
                 runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+                }
               break;
             }
             return runnerRes;
@@ -236,6 +298,13 @@ export class NetExposureViewTotalComponent implements OnInit {
     if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
       // console.log('data', JSON.parse(data));
         let webSocketData = parseData['data'];
+        if(webSocketData.length >0){
+          webSocketData = webSocketData.map((singleItem)=>{
+            singleItem['bmi'] = +singleItem['bmi'];
+            return singleItem;
+          })
+        }
+        
         this.adminBooksList.map((singleBook)=>{
           let singleWebSocketMarketData = _.find(webSocketData, ['bmi', +singleBook['marketId']]);
           if(singleWebSocketMarketData != undefined){

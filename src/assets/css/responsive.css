@@ -93,7 +93,7 @@
 
   .toggle-sidebar-btn a:nth-child(1) {
     font-size: 2rem;
-}
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -171,8 +171,8 @@
     font-size: 14px;
   }
   .sidebar ul li a {
-    font-size: 12px;
-}
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 1199px) {
@@ -205,12 +205,10 @@
   }
 }
 
-
-
-@media only screen and (min-width: 1366px){
-.table {
+@media only screen and (min-width: 1366px) {
+  .table {
     font-size: 16px !important;
-}
+  }
 }
 
 @media only screen and (min-width: 1396.36px) {
@@ -218,8 +216,6 @@
     width: 97px;
   }
 }
-
-
 
 @media only screen and (min-width: 1440px) {
   .sidebar .btn {
@@ -258,9 +254,9 @@
   .head_logo {
     width: 97px;
   }
-  .sidebar ul li a {
+  /* .sidebar ul li a {
     font-size: 12px;
-  }
+  } */
 }
 
 @media only screen and (min-width: 1745.45px) {

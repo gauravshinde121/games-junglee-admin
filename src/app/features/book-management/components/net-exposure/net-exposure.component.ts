@@ -187,9 +187,16 @@ export class NetExposureComponent implements OnInit {
   //   this._router.navigate(['/book-management/advance-workstation/'+type+'/'+id]);
   // }
 
-  redirectUrl(data) {
+  redirectUrlByMarket(data) {
+    console.log(data)
     let marketIds = data.map(id => `${id.marketId}`).join(",");
-    this._router.navigate(['/book-management/advance-workstation/' + marketIds]);
+    console.log(marketIds)
+
+    this._router.navigate(['/book-management/advance-workstation-market/' + marketIds]);
+  }
+
+  redirectUrlByMatch(data) {
+    this._router.navigate(['/book-management/advance-workstation-match/' + data['matchId']]);
   }
 
   ngOnDestroy(): void {

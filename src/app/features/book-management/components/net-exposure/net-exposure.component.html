@@ -149,7 +149,7 @@
                   </th>
                   <th>
                     <a
-                      (click)="redirectUrl(book.data)"
+                      (click)="redirectUrlByMatch(book)"
                       class="btn btn-warning rounded-pill"
                     >
                       View total</a
@@ -167,7 +167,7 @@
                     <span>{{ data.marketName }}</span>
                   </td>
                   <td>
-                    <a (click)="redirectUrl([data])" class="pointer">
+                    <a (click)="redirectUrlByMarket([data])" class="pointer">
                       <img
                         src="../../../../../assets/images/net_exposure.png"
                         width="22px"

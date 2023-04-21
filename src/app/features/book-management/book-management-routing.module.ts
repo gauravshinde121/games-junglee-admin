@@ -14,7 +14,8 @@ const routes: Routes = [{
   component:BookManagementMainComponent,
   children:[
     {path:'net-exposure', component:NetExposureComponent},
-    {path:'advance-workstation/:marketIds',component:NetExposureViewTotalComponent},
+    {path:'advance-workstation-market/:marketIds',component:NetExposureViewTotalComponent},
+    {path:'advance-workstation-match/:matchId',component:NetExposureViewTotalComponent},
     {path:'net-exposure-racing', component:NetExposureRacingComponent},
     {path:'bet-ticker', component:BetTickerComponent},
     {path:'bet-ticker-flag-final', component:BetTickerFlagFinalComponent},

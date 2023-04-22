@@ -4,7 +4,7 @@
     <ul class="nav">
       <li>
         <a
-          class="btn text-white collapsed"
+          class="btn collapsed"
           data-bs-toggle="collapse"
           data-bs-target="#home-collapse"
           aria-expanded="false"
@@ -13,7 +13,7 @@
         </a>
         <div class="collapse" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li>
+            <li routerLinkActive="active">
               <a routerLink="/member/list" class="nav-link small ps-5"
                 >Member List</a
               >
@@ -24,7 +24,7 @@
       </li>
       <li>
         <a
-          class="btn text-white collapsed"
+          class="btn collapsed"
           data-bs-toggle="collapse"
           data-bs-target="#dashboard-collapse"
           aria-expanded="false"
@@ -33,7 +33,7 @@
         </a>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li>
+            <li routerLinkActive="active">
               <a
                 routerLink="/book-management/net-exposure"
                 class="nav-link small ps-5"
@@ -41,7 +41,7 @@
               >
             </li>
             <!-- <li><a routerLink="/book-management/net-exposure-racing" class="nav-link small ps-5">Net Exposure Racing</a></li> -->
-            <li>
+            <li routerLinkActive="active">
               <a
                 routerLink="/book-management/bet-ticker"
                 class="nav-link small ps-5"
@@ -56,7 +56,7 @@
       </li>
       <li>
         <a
-          class="btn text-white collapsed"
+          class="btn collapsed"
           data-bs-toggle="collapse"
           data-bs-target="#orders-collapse"
           aria-expanded="false"
@@ -65,28 +65,28 @@
         </a>
         <div class="collapse" id="orders-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li>
+            <li routerLinkActive="active">
               <a
                 routerLink="/account-statement/my-pl"
                 class="nav-link small ps-5"
                 >My P/L</a
               >
             </li>
-            <li>
+            <li routerLinkActive="active">
               <a
                 routerLink="/account-statement/player-pl"
                 class="nav-link small ps-5"
                 >Player P/L</a
               >
             </li>
-            <li>
+            <li routerLinkActive="active">
               <a
                 routerLink="/account-statement/transfer-statement"
                 class="nav-link small ps-5"
                 >Transfer Statement</a
               >
             </li>
-            <li>
+            <li routerLinkActive="active">
               <a
                 routerLink="/account-statement/turnover"
                 class="nav-link small ps-5"
@@ -99,7 +99,7 @@
       </li>
       <li>
         <a
-          class="btn text-white collapsed"
+          class="btn collapsed"
           data-bs-toggle="collapse"
           data-bs-target="#allLog-collapse"
           aria-expanded="false"
@@ -110,13 +110,13 @@
           <ul class="btn-toggle-nav list-unstyled fw-normal">
             <!-- <li><a routerLink="/all-logs/analytics" class="nav-link small ps-5">Analytics</a></li> -->
             <!-- <li><a routerLink="/all-logs/reports" class="nav-link small ps-5">Reports</a></li> -->
-            <li>
+            <li routerLinkActive="active">
               <a routerLink="/all-logs/cl-transfer" class="nav-link small ps-5"
                 >Credit Transfers</a
               >
             </li>
             <!-- <li><a routerLink="/all-logs/betfair-rate-log" class="nav-link small ps-5">BetfairRates Log</a></li> -->
-            <li>
+            <li routerLinkActive="active">
               <a routerLink="/all-logs/invalid-bet" class="nav-link small ps-5"
                 >Void Bets</a
               >
@@ -126,10 +126,10 @@
         </div>
       </li>
       <br />
-      <li>
+      <li routerLinkActive="active">
         <a
           routerLink="/surveillance"
-          class="btn text-white collapsed"
+          class="btn collapsed"
           routerLink="/surveillance"
           data-bs-toggle="collapse"
           data-bs-target="#surv-collapse"
@@ -139,10 +139,10 @@
           Surveillance
         </a>
       </li>
-      <li>
+      <li routerLinkActive="active">
         <a
           routerLink="/change-password"
-          class="btn text-white collapsed"
+          class="btn collapsed"
           data-bs-toggle="collapse"
           data-bs-target="#pwd-collapse"
           aria-expanded="false"
@@ -150,14 +150,14 @@
           <i class="fa-solid fa-lock icon-pink me-2"></i> Change Password
         </a>
       </li>
-      <li>
-        <a routerLink="/google-authentication" class="btn text-white collapsed">
+      <li routerLinkActive="active">
+        <a routerLink="/google-authentication" class="btn collapsed">
           <i class="fa fa-key icon-pink me-2"></i> Google Authentication
         </a>
       </li>
       <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN'">
         <a
-          class="btn text-white collapsed"
+          class="btn collapsed"
           data-bs-toggle="collapse"
           data-bs-target="#settings-collapse"
           aria-expanded="false"
@@ -166,12 +166,12 @@
         </a>
         <div class="collapse" id="settings-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li>
+            <li routerLinkActive="active">
               <a routerLink="/settings/balance" class="nav-link small ps-5"
                 >Balance</a
               >
             </li>
-            <li>
+            <li routerLinkActive="active">
               <a routerLink="/settings/bet-settings" class="nav-link small ps-5"
                 >Bet Settings</a
               >
@@ -181,7 +181,7 @@
       </li>
       <li>
         <a
-          class="btn text-white collapsed"
+          class="btn collapsed"
           (click)="onLogout()"
           data-bs-toggle="collapse"
           data-bs-target="#pwd-collapse"

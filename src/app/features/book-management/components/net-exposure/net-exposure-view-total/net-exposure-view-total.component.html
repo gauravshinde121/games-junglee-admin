@@ -407,14 +407,14 @@
                                 </td>
                                 <td class="border-top">
                                   Rs.<strong
-                                    class="text-danger"
+                                    class="text-success"
                                     *ngIf="userBook['runner1'] > 0"
                                     >{{
                                       userBook["runner1"] | number : "1.2-2"
                                     }}</strong
                                   >
                                   <strong
-                                    class="text-success"
+                                    class="text-danger"
                                     *ngIf="userBook['runner1'] <= 0"
                                     >{{
                                       userBook["runner1"] | number : "1.2-2"
@@ -423,14 +423,14 @@
                                 </td>
                                 <td class="border-top">
                                   Rs.<strong
-                                    class="text-danger"
+                                    class="text-success"
                                     *ngIf="userBook['runner3'] > 0"
                                     >{{
                                       userBook["runner3"] | number : "1.2-2"
                                     }}</strong
                                   >
                                   <strong
-                                    class="text-success"
+                                    class="text-danger"
                                     *ngIf="userBook['runner3'] <= 0"
                                     >{{
                                       userBook["runner3"] | number : "1.2-2"
@@ -439,14 +439,14 @@
                                 </td>
                                 <td class="border-top">
                                   Rs.<strong
-                                    class="text-danger"
+                                    class="text-success"
                                     *ngIf="userBook['runner2'] > 0"
                                     >{{
                                       userBook["runner2"] | number : "1.2-2"
                                     }}</strong
                                   >
                                   <strong
-                                    class="text-success"
+                                    class="text-danger"
                                     *ngIf="userBook['runner2'] <= 0"
                                     >{{
                                       userBook["runner2"] | number : "1.2-2"
@@ -546,7 +546,7 @@
           <button *ngIf ="viewTotal.length >0 " type="button" class="btn btn-pink rounded-pill ms-2 text-white" (click)="exportExcel()">Export</button>
         </div>
         <div class="col-md-6 text-end">Bet Count : {{ viewTotal.length }}</div>
-      </div>   
+      </div>
     </div>
        <div class="col-md-12 overflow-auto">
       <table class="table tableall m-0">

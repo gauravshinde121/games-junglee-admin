@@ -114,7 +114,7 @@ body {
 
   border: 1px solid rgba(255, 255, 255, 0.3215686275);
   border-radius: 25px;
-  padding: 10px ;
+  padding: 10px;
   /*background: rgba(108, 108, 108, 0.5098039216);*/
   background: rgb(0 0 0 / 8%);
   margin-top: 30px;
@@ -478,11 +478,13 @@ select:-webkit-autofill:focus {
   color: #000;
   text-decoration: none;
   display: block;
-  font-size: 14px;
+  /* font-size: 14px; */
+  font-size: 12px;
   line-height: 13px;
 }
 .tablematchodds span {
-  font-size: 13px;
+  /* font-size: 13px; */
+  font-size: 10px;
 }
 .tablematchodds th {
   border-color: #ffa7a3;
@@ -529,7 +531,7 @@ select:-webkit-autofill:focus {
   background-color: hsla(205.2deg, 29%, 58%, 0.86) !important;
 }
 .tablematchodds .colpink {
-  background-color: #ffb9b5 !important;
+  background-color: #fba2b6 !important;
   border-left: 1px solid #fff;
 }
 .tablematchodds .colpink.light {

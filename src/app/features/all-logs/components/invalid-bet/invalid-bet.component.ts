@@ -53,7 +53,6 @@ export class InvalidBetComponent implements OnInit {
 
   _getAllMembers() {
     this._memberService._getAllMembers().subscribe((data: any) => {
-      console.log('data',data);
       if (data.memberData) {
         this.allMembers = data.memberData;
       }
@@ -114,7 +113,6 @@ export class InvalidBetComponent implements OnInit {
   }
 
   exportExcel(){
-    console.log(this.allBets)
     let allBet : any = []
     this.allBets.forEach(element => {
       allBet.push({

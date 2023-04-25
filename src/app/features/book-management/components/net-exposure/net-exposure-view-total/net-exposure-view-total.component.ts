@@ -70,7 +70,6 @@ export class NetExposureViewTotalComponent implements OnInit {
   _getWebSocketUrl(isComplete = false){
     this._sharedService.getWebSocketURLApi().subscribe(
       (res: any) => {
-        console.log('url',res);
         if(res){
           this.realDataWebSocket = webSocket(res['url']);
           if(!isComplete){
@@ -96,7 +95,7 @@ export class NetExposureViewTotalComponent implements OnInit {
           }
         }
       });
-   
+
   }
 
 
@@ -303,7 +302,7 @@ export class NetExposureViewTotalComponent implements OnInit {
               }
             }
             let unsetObj = {};
-            unsetObj['unset'] = setObj['set']; 
+            unsetObj['unset'] = setObj['set'];
             this._setOrUnsetWebSocketData(unsetObj);
             this._setOrUnsetWebSocketData(setObj);
         }

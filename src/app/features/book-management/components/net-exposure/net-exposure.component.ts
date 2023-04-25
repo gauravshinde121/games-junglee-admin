@@ -54,16 +54,13 @@ export class NetExposureComponent implements OnInit {
       this.refreshCount--;
     }, 1000)
     this.isLoading = true;
-    //console.log('loggedInUser', this.loggedInUser);
   }
 
   refreshCall() {
     var myPTonRefresh:any;
     if(this.filterForm.value.selectedType == 'TotalBook'){
-      console.log(1);
       myPTonRefresh = false;
     } else if(this.filterForm.value.selectedType == 'MyPT'){
-      console.log(2);
       myPTonRefresh = true;
     }
     this.onFilterChange({ selectedType: this.filterForm.value.selectedType, matchId: this.currentMatchId, sportId: this.currentSportId, clicked: this.currentClicked, refreshCallVar: true });
@@ -97,10 +94,8 @@ export class NetExposureComponent implements OnInit {
   getPubSubUrl() {
     this._sharedService.getUserAdminPubSubApi().subscribe(
       (res: any) => {
-        console.log('url', res);
         if (res) {
           this.realDataWebSocket = webSocket(res['url']);
-          console.log('webSocket', this.realDataWebSocket);
           /*this.getInPlayUpcomingData(); //in-play
           this.getBookMakerData() //bookmaker
           this.getFancyData() //fancy*/
@@ -108,13 +103,11 @@ export class NetExposureComponent implements OnInit {
             data => {
               //if(typeof data == 'string') this._updateMarketData(data);
               // if(typeof data == 'string')
-              console.log('sub', data);
               if (data.message == "BET_PLACED") {
                 if (data.uplineIds.indexOf(this.loggedInUser.userId) != -1) {
-                  console.log('refresh');
                   this.onFilterChange({ MyPT: this.MyPT, matchId: this.currentMatchId, sportId: this.currentSportId, clicked: this.currentClicked });
                 } else {
-                  console.log('no refresh');
+                  //console.log('no refresh');
                 }
               }
             }, // Called whenever there is a message from the server.
@@ -145,7 +138,6 @@ export class NetExposureComponent implements OnInit {
     }
 
     this._bookManagementService._getBookForBackendApi(body).subscribe((res: any) => {
-      //console.log('_getBookForBackendApi', res);
       // this.alterData(res);
       this.booksForBackend = res.booksForBackend;
       this.isLoading = false;

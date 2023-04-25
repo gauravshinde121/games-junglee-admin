@@ -146,13 +146,11 @@ export class MembersListComponent implements OnInit {
   }
 
   postAdjustWinningsForSingleUser() {
-    //console.log('adjustWinningsForSingleUserForm', this.adjustWinningsForSingleUserForm.value);
     let body = {
       "userId": this.userId,
       "amount": this.adjustWinningsForSingleUserForm.value.amount,
       "isGiven": this.isGiven
     }
-    //console.log('body', body);
     this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
       this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
       this._getAllUserInfo(this.selectedRoleId);
@@ -173,7 +171,6 @@ export class MembersListComponent implements OnInit {
       this._sharedService
         ._getSingleUsersApi({ userId: index })
         .subscribe((users: any) => {
-          //console.log(users);
         });
     }
   }
@@ -235,7 +232,6 @@ export class MembersListComponent implements OnInit {
 
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
-      //console.log(roles);
       this.roles = roles.data;
     });
   }
@@ -345,16 +341,12 @@ export class MembersListComponent implements OnInit {
         isActive: !status,
       })
       .subscribe((data: any) => {
-        //console.log(data);
-        //console.log('Updated.');
         this.closeModal();
         this._getAllUserInfo(this.selectedRoleId);
       });
   }
 
   updateSportsControl(status: any, eventControlId: any) {
-    //console.log(eventControlId);
-    //console.log(!status);
     this._memberService
       ._updateSportsControlApi({
         refUserId: this.userId,
@@ -362,23 +354,18 @@ export class MembersListComponent implements OnInit {
         isActive: !status,
       })
       .subscribe((data: any) => {
-        //console.log('Updated.');
         this.closeModal();
         this._getAllUserInfo(this.selectedRoleId);
       });
   }
 
   navigateToDownline(user) {
-    //console.log(user);
     this._router.navigate([
       `/member/member-details/Player/${user.username}/${user.createdDate}/${user.userId}`,
     ]);
   }
 
   changeStatus(evt, user) {
-    // this.selectedColor =
-    //console.log("Evt", user);
-    //console.log("Value", evt.target.value);
     let status = evt.target.value;
     let body = {
       "userId": user.userId,
@@ -386,13 +373,11 @@ export class MembersListComponent implements OnInit {
     }
 
     this._memberService._changeMemberStatusApi(body).subscribe(res => {
-      //console.log("Res", res);
       this._sharedService.getToastPopup(res['message'], '', 'success');
     })
   }
 
   exportExcel() {
-    console.log(this.userList)
     let memberList: any = []
     this.userList.forEach(element => {
       memberList.push({

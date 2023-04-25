@@ -148,6 +148,10 @@
   .head_logo {
     width: 85px;
   }
+
+  .table {
+    font-size: 10px;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */

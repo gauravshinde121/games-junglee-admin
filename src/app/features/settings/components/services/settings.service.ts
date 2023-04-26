@@ -24,6 +24,18 @@ export class SettingsService {
       return this._apiHttpService.post(this._apiEndpointsService.deleteBetEndpoint(),paramsObj)
     }
 
+    _getMatchSettingsListApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.getMatchSettingsListEndpoint(),filterObj)
+    }
+
+    _setBetLimitForMatchApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.setBetLimitForMatchEndpoint(),filterObj)
+    }
+
+    _setMatchActiveStatusApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.setMatchActiveStatusEndpoint(),filterObj)
+    }
+
     _getBetsApi(filterObj){
       return this._apiHttpService.post(this._apiEndpointsService.getBetsForBetSettingsEndpoint(),filterObj)
     }

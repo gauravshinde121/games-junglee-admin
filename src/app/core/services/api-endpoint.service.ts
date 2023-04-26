@@ -324,6 +324,18 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_ALL_USER_BETS)
   }
 
+  public getMatchSettingsListEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_MATCH_SETTINGS_LIST)
+  }
+
+  public setBetLimitForMatchEndpoint(){
+    return this.createUrl(this._constants.API_URL_SET_BET_LIMIT_FOR_MATCH)
+  }
+
+  public setMatchActiveStatusEndpoint(){
+    return this.createUrl(this._constants.API_URL_SET_MATCH_ACTIVE_STATUS)
+  }
+
   public getBetsForBetSettingsEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_BETS_FOR_BET_SETTINGS)
   }

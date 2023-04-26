@@ -76,6 +76,9 @@ export class Constants {
     public readonly API_URL_GET_CL_TRANSFERS: string = 'api/junglee-admin/getClTransferStatement';
     public readonly API_URL_DELETE_BET: string = 'api/junglee-admin/deleteBetByAdmin';
     public readonly API_URL_GET_BETS_FOR_BET_SETTINGS: string = 'api/junglee-admin/getBetsForBetSettings';
+    public readonly API_URL_GET_MATCH_SETTINGS_LIST: string = 'api/junglee-admin/getMatchesForAdminSetting';
+    public readonly API_URL_SET_BET_LIMIT_FOR_MATCH:string = 'api/junglee-admin/setBetLimitForMatch';
+    public readonly API_URL_SET_MATCH_ACTIVE_STATUS:string = 'api/junglee-admin/setMatchActiveStatus';
 
     //all logs
     // public readonly API_URL_INVALID_BETS:string = 'api/getVARBets';

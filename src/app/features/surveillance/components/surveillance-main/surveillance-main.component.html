@@ -24,8 +24,8 @@
                     <h3 class="text-pink">Surveillance</h3>
                   </div>
                 </div>
-                <div class="row mb-3 align-items-end">
-                  <div class="col-md-3">
+                <div class="row mb-3 align-items-center">
+                  <div class="col-md-3 col-6">
                     <label>Select Member</label>
                     <select
                       formControlName="memberId"
@@ -41,7 +41,7 @@
                       </option>
                     </select>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-3 col-6">
                     <button
                       class="btn rounded-pill btn-pink mt-4 w-100 text-white"
                       (click)="clearMemberName()"
@@ -50,7 +50,7 @@
                     </button>
                   </div>
 
-                  <div class="col-md-3">
+                  <div class="col-md-3 col-6">
                     <label>From Date</label>
                     <input
                       type="date"
@@ -61,7 +61,7 @@
                       placeholder="Month"
                     />
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-3 col-6">
                     <label>To Date</label>
                     <input
                       type="date"
@@ -73,7 +73,7 @@
                     />
                   </div>
                 </div>
-                <div class="row mb-3 align-items-end">
+                <div class="row mb-3 align-items-center">
                   <div class="col-md-4 mb-2">
                     <label>Select Sport</label>
                     <select
@@ -142,7 +142,7 @@
                       (keypress)="numberOnly($event)"
                     />
                   </div>
-                  <div class="col-md-2 mb-1 mt-4">
+                  <div class="col-md-2 mb-1 col-6 mt-3">
                     <button
                       type="button"
                       class="btn btn-pink rounded-pill"
@@ -159,8 +159,7 @@
                       Export
                     </button>
                   </div>
-
-                  <div class="col-md-2 mb-1 text-end">
+                  <div class="col-md-2 mb-1 text-end col-6 mt-3">
                     {{ refreshCount }} &nbsp;
                     <button
                       class="btn btn-pink rounded-pill ps-2 pe-2"

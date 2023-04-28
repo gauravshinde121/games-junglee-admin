@@ -154,6 +154,16 @@ export class SharedService {
       .post(this._apiEndpointsService.getMatchBySportIdEndpoint(), { sportId: sportId });
   }
 
+  getTournamentBySportIdApi(sportId) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getTournamentBySportIdEndpoint(), { sportId: sportId });
+  }
+
+  getMatchByTournamentIdApi(id) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getMatchByTournamentIdEndpoint(), { tourId: id });
+  }
+
   getOneAccount(body) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getOneAccountEndpoint(), body);

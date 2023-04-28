@@ -10,52 +10,59 @@ import { SharedService } from '@shared/services/shared.service';
 })
 export class MatchSettingsComponent implements OnInit {
 
-  filterForm:FormGroup;
+  filterForm: FormGroup;
   matchSettingsForm: FormGroup;
-  display:any = 'none';
-  matchSettingsList:any = [];
+  display: any = 'none';
+  matchSettingsList: any = [];
   isLoading = false;
   language = "en";
-  sports:any;
-  toggleValue:boolean = false;
-  selectedMatchSettings:any;
+  sports: any;
+  toggleValue: boolean = false;
+  selectedMatchSettings: any;
   constructor(
-    private settingsService : SettingsService,
-    private _sharedService : SharedService
+    private settingsService: SettingsService,
+    private _sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
     this._preConfig()
   }
 
-  _preConfig(){
+  _preConfig() {
     this._initForm();
     this._getAllSports();
     this.getMatchSettingsList();
   }
 
-  _initForm(){
+  _initForm() {
     this.filterForm = new FormGroup({
-      status:new FormControl(null),
+      status: new FormControl(null),
       sportName: new FormControl(null),
       matchName: new FormControl()
     })
 
     this.matchSettingsForm = new FormGroup({
-      minBet:new FormControl(null),
-      maxBet: new FormControl(null)
+      matchOddsMaxBet: new FormControl(null),
+      matchOddsMinBet: new FormControl(null),
+      bookmakerMaxBet: new FormControl(null),
+      bookmakerMinBet: new FormControl(null),
+      fancyMaxBet: new FormControl(null),
+      fancyMinBet: new FormControl(null),
+      matchOddDelay: new FormControl(null),
+      bookmakerDelay: new FormControl(null),
+      fancyDelay: new FormControl(null),
     })
   }
 
-  getMatchSettingsList(){
+  getMatchSettingsList() {
     this.isLoading = true;
     this.matchSettingsList = [];
-    if(this.filterForm.value.memberName == null){
-      this.filterForm.patchValue( {'memberName':null} );
+    if (this.filterForm.value.memberName == null) {
+      this.filterForm.patchValue({ 'memberName': null });
     }
-    var status:any;
-    if(this.filterForm.value.status){
-      if(this.filterForm.value.status == 1 ){
+    var status: any;
+    if (this.filterForm.value.status) {
+      if (this.filterForm.value.status == 1) {
         status = true;
       } else {
         status = false;
@@ -68,13 +75,13 @@ export class MatchSettingsComponent implements OnInit {
       sportId: this.filterForm.value.sportName,
       matchName: this.filterForm.value.matchName
     }
-    this.settingsService._getMatchSettingsListApi(body).subscribe((data:any)=>{
+    this.settingsService._getMatchSettingsListApi(body).subscribe((data: any) => {
       this.isLoading = false;
       this.matchSettingsList = data.matches;
     })
   }
 
-  _getAllSports(){
+  _getAllSports() {
     this._sharedService._getSports().subscribe((data: any) => {
       if (data) {
         this.sports = data;
@@ -82,28 +89,42 @@ export class MatchSettingsComponent implements OnInit {
     });
   }
 
-  openSettingModal(matchSettings){
+  openSettingModal(matchSettings) {
     this.matchSettingsForm.reset();
     this.selectedMatchSettings = matchSettings;
     this.matchSettingsForm.patchValue({
-      minBet: matchSettings.minBet,
-      maxBet: matchSettings.maxBet
+      matchOddsMaxBet: matchSettings.matchOddsMaxBet,
+      matchOddsMinBet: matchSettings.matchOddsMinBet,
+      bookmakerMaxBet: matchSettings.bookmakerMaxBet,
+      bookmakerMinBet: matchSettings.bookmakerMinBet,
+      fancyMaxBet: matchSettings.fancyMaxBet,
+      fancyMinBet: matchSettings.fancyMinBet,
+      matchOddDelay: matchSettings.matchOddDelay,
+      bookmakerDelay: matchSettings.bookmakerDelay,
+      fancyDelay: matchSettings.fancyDelay
     });
     this.display = 'block';
   }
 
-  closeModal(){
+  closeModal() {
     this.display = 'none';
   }
 
-  saveMatchSettings(){
+  saveMatchSettings() {
     this.display = 'none';
     let body = {
       matchId: this.selectedMatchSettings.matchId,
-      minBet: this.matchSettingsForm.value.minBet,
-      maxBet: this.matchSettingsForm.value.maxBet
+      matchOddsMaxBet: this.matchSettingsForm.value.matchOddsMaxBet,
+      matchOddsMinBet: this.matchSettingsForm.value.matchOddsMinBet,
+      bookmakerMaxBet: this.matchSettingsForm.value.bookmakerMaxBet,
+      bookmakerMinBet: this.matchSettingsForm.value.bookmakerMinBet,
+      fancyMaxBet: this.matchSettingsForm.value.fancyMaxBet,
+      fancyMinBet: this.matchSettingsForm.value.fancyMinBet,
+      matchOddDelay: this.matchSettingsForm.value.matchOddDelay,
+      bookmakerDelay: this.matchSettingsForm.value.bookmakerDelay,
+      fancyDelay: this.matchSettingsForm.value.fancyDelay
     }
-    this.settingsService._setBetLimitForMatchApi(body).subscribe((data:any)=>{
+    this.settingsService._setBetLimitForMatchApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Match Settings', 'success');
       this.getMatchSettingsList();
     })
@@ -116,7 +137,7 @@ export class MatchSettingsComponent implements OnInit {
       matchId: matchId,
       matchIsActive: checkbox.checked
     }
-    this.settingsService._setMatchActiveStatusApi(body).subscribe((data:any)=>{
+    this.settingsService._setMatchActiveStatusApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Match Settings', 'success');
     })
   }

@@ -132,45 +132,100 @@
       </div>
       <div class="modal-body bg-dark_new text-white">
         <div class="row">
-          <section class="section w-75 m-auto mt-4">
+          <section class="section w-100 m-auto">
             <form [formGroup]="matchSettingsForm">
-              <div class="row mb-4 align-items-center">
-                <div class="col-md-5">Min Bet*</div>
-                <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  Match Odds Min Bet*
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="minBet"
+                    formControlName="matchOddsMinBet"
                   />
                 </div>
-              </div>
-              <div class="row mb-4 align-items-center">
-                <div class="col-md-5">Max Bet*</div>
-                <div class="col-md-7">
+                <div class="col-md-6 mb-2">
+                  Match Odds Max Bet*
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="maxBet"
+                    formControlName="matchOddsMaxBet"
                   />
                 </div>
-              </div>
-              <div class="row mt-5">
-                <div class="col-md-6 text-end">
-                  <button
-                    (click)="saveMatchSettings()"
-                    [disabled]="!matchSettingsForm.dirty"
-                    class="btn btn-danger rounded-pill w-80 mt-4"
-                  >
-                    Save
-                  </button>
+                <div class="col-md-6 mb-2">
+                  Bookmaker Min Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="bookmakerMinBet"
+                  />
                 </div>
-                <div class="col-md-6">
-                  <button
-                    class="btn btn-danger rounded-pill w-80 mt-4"
-                    (click)="closeModal()"
-                  >
-                    Cancel
-                  </button>
+                <div class="col-md-6 mb-2">
+                  Bookmaker Max Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="bookmakerMaxBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Fancy Min Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="fancyMinBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Fancy Max Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="fancyMaxBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Match Odds Delay*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="matchOddDelay"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Bookmaker Delay*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="bookmakerDelay"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Fancy Delay*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="fancyDelay"
+                  />
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 text-end">
+                    <button
+                      (click)="saveMatchSettings()"
+                      [disabled]="!matchSettingsForm.dirty"
+                      class="btn btn-danger rounded-pill w-80 mt-2"
+                    >
+                      Save
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button
+                      class="btn btn-danger rounded-pill w-80 mt-2"
+                      (click)="closeModal()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               </div>
             </form>

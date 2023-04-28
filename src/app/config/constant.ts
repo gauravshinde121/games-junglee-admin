@@ -67,6 +67,8 @@ export class Constants {
     public readonly API_GET_EVENTS: string = 'api/junglee-admin/getEvents';
     public readonly API_GET_MATCHES_BY_SPORT_ID: string = 'api/getMatchBySportId';
     public readonly API_GET_MARKETS_BY_MATCH_ID: string = 'api/getMarketByMatchId';
+    public readonly API_GET_TOURNAMENT_BY_SPORT_ID: string = 'api/getTournamentBySportId';
+    public readonly API_GET_MATCH_BY_TOURNAMENT_ID: string = 'api/getMatchByTournamentId';
     public readonly API_GET_GAMES: string = 'api/junglee-admin/getGames';
     public readonly API_GET_MARKET_ALL_TYPE: string = 'api/getMarketTypes';
     public readonly API_GET_SPORTS: string = 'api/betfairSports';
@@ -77,8 +79,10 @@ export class Constants {
     public readonly API_URL_DELETE_BET: string = 'api/junglee-admin/deleteBetByAdmin';
     public readonly API_URL_GET_BETS_FOR_BET_SETTINGS: string = 'api/junglee-admin/getBetsForBetSettings';
     public readonly API_URL_GET_MATCH_SETTINGS_LIST: string = 'api/junglee-admin/getMatchesForAdminSetting';
+    public readonly API_URL_GET_MARKET_SETTINGS_LIST: string = 'api/junglee-admin/getMarketForAdminMarketSettings';
     public readonly API_URL_SET_BET_LIMIT_FOR_MATCH:string = 'api/junglee-admin/setBetLimitForMatch';
     public readonly API_URL_SET_MATCH_ACTIVE_STATUS:string = 'api/junglee-admin/setMatchActiveStatus';
+    public readonly API_URL_SET_MARKET_ACTIVE_STATUS:string = 'api/junglee-admin/setMarketStatusForMarketSettings';
 
     //all logs
     // public readonly API_URL_INVALID_BETS:string = 'api/getVARBets';

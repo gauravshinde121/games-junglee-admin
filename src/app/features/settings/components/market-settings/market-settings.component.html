@@ -1,0 +1,109 @@
+<main id="main" class="main m-0">
+  <section class="section gamedetails">
+    <div class="row" [formGroup]="filterForm">
+      <div class="col-md-12">
+        <!--your code will come here start-->
+        <h4 class="text-pink">
+          <img src="../../../../../assets/images/pnl.png" alt="" /> Market
+          Settings
+        </h4>
+        <hr />
+        <div class="row align-items-end">
+          <div class="col-md-3">
+            <label>Sport Name</label>
+            <select
+              formControlName="sportName"
+              id="ab"
+              class="form-select bg-dgrey pointer"
+              (change)="_onSportSelect()"
+            >
+              <option value="null">All</option>
+              <option *ngFor="let game of sports" [value]="game.sportId">
+                {{ game.sportName }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>Tournament Name</label>
+            <select
+              formControlName="tournamentId"
+              id="ab"
+              class="form-select bg-dgrey pointer"
+              (change)="_onTournamentSelect()"
+            >
+              <option value="null">All</option>
+              <option *ngFor="let game of tournamentList" [value]="game.tournamentId">
+                {{ game.tournamentName }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>Match Name</label>
+            <select
+              formControlName="matchName"
+              id="ab"
+              class="form-select bg-dgrey pointer"
+            >
+              <option value="null">All</option>
+              <option *ngFor="let game of matchList" [value]="game.matchId">
+                {{ game.matchName }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-pink rounded-pill mt-4"
+              (click)="getMarketSettingsList()"
+            >
+              Search
+            </button>
+          </div>
+          <!--your code will come here end-->
+        </div>
+      </div>
+      <div class="col-md-12 mt-3 overflow-auto">
+        <div
+          *ngIf="marketSettingsList.length == 0"
+          class="border text-center p-5"
+        >
+          <h4 *ngIf="marketSettingsList.length == 0 && !isLoading">
+            No data found
+          </h4>
+          <h4 *ngIf="isLoading">Loading...</h4>
+        </div>
+        <table class="table tableall" *ngIf="marketSettingsList.length > 0">
+          <thead class="text-dark">
+            <tr>
+              <th scope="col" class="first">#</th>
+              <th scope="col">Market Name</th>
+              <th scope="col">Match Name</th>
+              <th scope="col" class="last">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stmt of marketSettingsList; let i = index">
+              <td>
+                {{ i + 1 }}
+              </td>
+              <td>{{ stmt.marketName }}</td>
+              <td>{{ stmt.refMatchName }}</td>
+              <td>
+                <label class="toggle-container">
+                  <input
+                    [checked]="stmt.marketIsActive"
+                    type="checkbox"
+                    id="toggle-button"
+                    class="toggle-class active"
+                    (change)="onToggleChange($event, stmt.marketId)"
+                  />
+                  <span class="toggle-class-slider"></span>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>

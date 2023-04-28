@@ -28,12 +28,20 @@ export class SettingsService {
       return this._apiHttpService.post(this._apiEndpointsService.getMatchSettingsListEndpoint(),filterObj)
     }
 
+    _getMarketForAdminMarketSettingsListApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.getMarketForAdminMarketSettingsListEndpoint(),filterObj)
+    }
+
     _setBetLimitForMatchApi(filterObj){
       return this._apiHttpService.post(this._apiEndpointsService.setBetLimitForMatchEndpoint(),filterObj)
     }
 
     _setMatchActiveStatusApi(filterObj){
       return this._apiHttpService.post(this._apiEndpointsService.setMatchActiveStatusEndpoint(),filterObj)
+    }
+
+    _setMarketStatusForMarketSettingsApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.setMarketStatusForMarketSettingsEndpoint(),filterObj)
     }
 
     _getBetsApi(filterObj){

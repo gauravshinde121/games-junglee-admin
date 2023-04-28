@@ -276,6 +276,14 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_GET_MATCHES_BY_SPORT_ID)
   }
 
+  public getTournamentBySportIdEndpoint(){
+    return this.createUrl(this._constants.API_GET_TOURNAMENT_BY_SPORT_ID)
+  }
+
+  public getMatchByTournamentIdEndpoint(){
+    return this.createUrl(this._constants.API_GET_MATCH_BY_TOURNAMENT_ID)
+  }
+
   public getSurveillanceDataEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_SURVEILLANCE_DATA)
   }
@@ -328,12 +336,20 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_MATCH_SETTINGS_LIST)
   }
 
+  public getMarketForAdminMarketSettingsListEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_MARKET_SETTINGS_LIST)
+  }
+
   public setBetLimitForMatchEndpoint(){
     return this.createUrl(this._constants.API_URL_SET_BET_LIMIT_FOR_MATCH)
   }
 
   public setMatchActiveStatusEndpoint(){
     return this.createUrl(this._constants.API_URL_SET_MATCH_ACTIVE_STATUS)
+  }
+
+  public setMarketStatusForMarketSettingsEndpoint(){
+    return this.createUrl(this._constants.API_URL_SET_MARKET_ACTIVE_STATUS)
   }
 
   public getBetsForBetSettingsEndpoint(){

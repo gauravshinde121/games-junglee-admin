@@ -148,6 +148,10 @@
   .head_logo {
     width: 85px;
   }
+
+  .table {
+    font-size: 12px;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -176,12 +180,6 @@
 }
 
 @media (max-width: 1199px) {
-  /* .sidebar {
-    left: -300px;
-  } */
-}
-
-@media (max-width: 1199px) {
   .toggle-sidebar .sidebar {
     left: 0;
   }
@@ -193,7 +191,7 @@
 
 @media only screen and (min-width: 1280px) {
   .table {
-    font-size: 8px;
+    font-size: 14px;
   }
   .head_logo {
     width: 100px;
@@ -207,7 +205,7 @@
 
 @media only screen and (min-width: 1366px) {
   .table {
-    font-size: 16px !important;
+    font-size: 14px;
   }
 }
 
@@ -225,7 +223,7 @@
 
 @media only screen and (min-width: 1536px) {
   .table {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   body {
@@ -236,7 +234,7 @@
   .memberslist,
   .form-select,
   .form-control {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
   }
 
   h4 {
@@ -254,9 +252,10 @@
   .head_logo {
     width: 97px;
   }
-  /* .sidebar ul li a {
+  .align_thead thead tr th,
+  .align_thead tbody tr td {
     font-size: 12px;
-  } */
+  }
 }
 
 @media only screen and (min-width: 1745.45px) {
@@ -267,16 +266,35 @@
 
 @media only screen and (min-width: 1920px) {
   .table {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .sidebar .btn,
   .sidebar ul li a {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .head_logo {
     width: 125px;
+  }
+
+  .accordion p,
+  .memberslist,
+  .form-select,
+  .form-control {
+    font-size: 1.2rem;
+  }
+
+  .tablematchodds a {
+    font-size: 16px;
+  }
+  .tablematchodds span {
+    font-size: 14px;
+  }
+
+  .align_thead thead tr th,
+  .align_thead tbody tr td {
+    font-size: 14px;
   }
 }
 
@@ -315,12 +333,25 @@
 }
 
 @media only screen and (min-width: 2560px) {
-  .sidebar .btn {
-    font-size: 1rem;
+  .sidebar .btn,
+  .sidebar ul li a {
+    font-size: 1.5rem;
   }
 
   .table {
-    font-size: 20px;
+    font-size: 24px;
+  }
+
+  .tablematchodds a {
+    font-size: 18px;
+  }
+  .tablematchodds span {
+    font-size: 16px;
+  }
+
+  .align_thead thead tr th,
+  .align_thead tbody tr td {
+    font-size: 16px;
   }
 }
 

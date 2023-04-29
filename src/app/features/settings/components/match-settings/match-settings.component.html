@@ -1,0 +1,238 @@
+<main id="main" class="main m-0">
+  <section class="section gamedetails">
+    <div class="row" [formGroup]="filterForm">
+      <div class="col-md-12">
+        <!--your code will come here start-->
+        <h4 class="text-pink">
+          <img src="../../../../../assets/images/pnl.png" alt="" /> Match
+          Settings
+        </h4>
+        <hr />
+        <div class="row align-items-end">
+          <div class="col-md-3">
+            <label>Status</label>
+            <select
+              formControlName="status"
+              id="ab"
+              class="form-select bg-dgrey pointer"
+            >
+              <option value="null">All</option>
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>Sport Name</label>
+            <select
+              formControlName="sportName"
+              id="ab"
+              class="form-select bg-dgrey pointer"
+            >
+              <option value="null">All</option>
+              <option *ngFor="let game of sports" [value]="game.sportId">
+                {{ game.sportName }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>Match Name</label>
+            <input
+              type="text"
+              formControlName="matchName"
+              class="form-control bg-dark text-white border-pink"
+              placeholder="enter match name.."
+            />
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-pink rounded-pill mt-4"
+              (click)="getMatchSettingsList()"
+            >
+              Search
+            </button>
+          </div>
+          <!--your code will come here end-->
+        </div>
+      </div>
+      <div class="col-md-12 mt-3 overflow-auto">
+        <div
+          *ngIf="matchSettingsList.length == 0"
+          class="border text-center p-5"
+        >
+          <h4 *ngIf="matchSettingsList.length == 0 && !isLoading">
+            No data found
+          </h4>
+          <h4 *ngIf="isLoading">Loading...</h4>
+        </div>
+        <table class="table tableall" *ngIf="matchSettingsList.length > 0">
+          <thead class="text-dark">
+            <tr>
+              <th scope="col" class="first">#</th>
+              <th scope="col">Match Name</th>
+              <th scope="col">Date</th>
+              <th scope="col">Setting</th>
+              <th scope="col" class="last">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stmt of matchSettingsList; let i = index">
+              <td>
+                {{ i + 1 }}
+              </td>
+              <td>{{ stmt.matchName }}</td>
+              <td>{{ stmt.openDate | date : "medium" }}</td>
+              <td (click)="openSettingModal(stmt)">
+                <i class="fa fa-cog cursor-pointer" aria-hidden="true"></i>
+              </td>
+              <td>
+                <label class="toggle-container">
+                  <input
+                    [checked]="stmt.matchIsActive"
+                    type="checkbox"
+                    id="toggle-button"
+                    class="toggle-class active"
+                    (change)="onToggleChange($event, stmt.matchId)"
+                  />
+                  <span class="toggle-class-slider"></span>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Modal start-->
+<div
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          Match Settings
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark_new text-white">
+        <div class="row">
+          <section class="section w-100 m-auto">
+            <form [formGroup]="matchSettingsForm">
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  Match Odds Min Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="matchOddsMinBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Match Odds Max Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="matchOddsMaxBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Bookmaker Min Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="bookmakerMinBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Bookmaker Max Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="bookmakerMaxBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Fancy Min Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="fancyMinBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Fancy Max Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="fancyMaxBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Match Odds Delay*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="matchOddDelay"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Bookmaker Delay*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="bookmakerDelay"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Fancy Delay*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="fancyDelay"
+                  />
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 text-end">
+                    <button
+                      (click)="saveMatchSettings()"
+                      [disabled]="!matchSettingsForm.dirty"
+                      class="btn btn-danger rounded-pill w-80 mt-2"
+                    >
+                      Save
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button
+                      class="btn btn-danger rounded-pill w-80 mt-2"
+                      (click)="closeModal()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

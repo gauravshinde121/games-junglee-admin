@@ -7,6 +7,8 @@ import { BetSettingsComponent } from './components/bet-settings/bet-settings.com
 import { SettingsMainComponent } from './components/settings-main/settings-main.component';
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatchSettingsComponent } from './components/match-settings/match-settings.component';
+import { MarketSettingsComponent } from './components/market-settings/market-settings.component';
 
 
 
@@ -14,7 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     BalanceComponent,
     BetSettingsComponent,
-    SettingsMainComponent
+    SettingsMainComponent,
+    MatchSettingsComponent,
+    MarketSettingsComponent
   ],
   imports: [
     CommonModule,

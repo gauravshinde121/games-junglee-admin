@@ -1,14 +1,26 @@
-
 input.ng-invalid.ng-dirty {
-    border: solid #dc3545 !important;
-  }
-  
+  border: solid #dc3545 !important;
+}
+
 .modal-size {
   width: 160%;
   right: 30%;
 }
 
-.pointer {cursor: pointer;}
-table thead tr th:nth-child(1){
+.pointer {
+  cursor: pointer;
+}
+table thead tr th:nth-child(1) {
   width: 1rem;
+}
+
+.modal table {
+  font-size: 16px;
+}
+
+@media (max-width: 1024px) {
+  .modal-size {
+    width: 120%;
+    right: 10%;
+  }
 }

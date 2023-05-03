@@ -163,6 +163,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_TEST_FUNC);
   }
 
+  public getUplineSummaryEndpoint():string{
+    return this.createUrl(this._constants.API_URL_GET_UPLINE_MEMBERS);
+  }
+
   public getSingleUserEndpoint():string{
     return this.createUrl(this._constants.API_URL_SINGLE_USERS);
   }

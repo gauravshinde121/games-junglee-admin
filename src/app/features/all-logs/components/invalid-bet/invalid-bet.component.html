@@ -105,7 +105,17 @@
               <td>{{ bets.member }}</td>
               <td>{{ bets.placedTime | date : "medium"}}</td>
               <td>{{ bets.event }}</td>
-              <td>{{ bets.market }}</td>
+              <td>
+                <span
+                      *ngIf="bets.isBack == false"
+                      class="border r-2 bg-danger text-danger border-danger me-2 border-3"
+                    ></span>
+                    <span
+                      *ngIf="bets.isBack == true"
+                      class="border bg-primary text-primary border-primary me-2 border-3"
+                    ></span>
+                {{ bets.market }}
+              </td>
               <td>{{ bets.selection }}</td>
               <td>{{ bets.oddsPlaced }}</td>
               <td>

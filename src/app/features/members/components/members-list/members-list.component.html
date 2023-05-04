@@ -44,12 +44,12 @@
         ( Total : {{ userList.length }} )
       </div>
     </div>
-    <div class="row">
+    <div class="row align-items-center">
       <!-- nav tab -->
-      <div class="col-md-10">
-        <ul class="nav nav-pills p-1 memberslist" id="pills-tab" role="tablist">
+      <div class="col-md-9 col-12">
+        <ul class="nav nav-pills memberslist" id="pills-tab" role="tablist">
           <li
-            class="nav-item mr-5 mb-2"
+            class="nav-item mr-5 mb-md-0 mb-2"
             role="presentation"
             *ngFor="let role of roles"
           >
@@ -70,7 +70,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-2 text-end">
+      <div class="col-md-2 col-10 text-end">
         <!--{{ refreshCount }} &nbsp;-->
         <button
           class="btn btn-pink rounded-pill ps-4 pe-4"
@@ -79,7 +79,7 @@
           <i class="fa fa-redo-alt disnone"></i> Refresh
         </button>
       </div>
-      <div class="text-end">
+      <div class="col-md-1 col-2 text-end">
         <button
           *ngIf="userList.length > 0"
           type="button"

@@ -129,6 +129,7 @@
               <th scope="col" class="text-center">Details</th>
               <th scope="col" class="text-center">Status</th>
               <th scope="col" class="text-center">Change password</th>
+              <th scope="col" class="text-center" *ngIf="isSuperAdmin">Hierarchy</th>
               <th scope="col" class="last text-center">Action</th>
             </tr>
           </thead>
@@ -232,6 +233,11 @@
               <td class="text-center">
                 <a (click)="openModal(user.userId)">
                   <i class="fa-sharp fa fa-lock icon-pink pointer"></i>
+                </a>
+              </td>
+              <td class="text-center" *ngIf="isSuperAdmin">
+                <a (click)="openHierarchyModal(user.userId)">
+                  <img src="/assets/images/net_expo.png" width="12px;"/>
                 </a>
               </td>
               <td class="text-center">
@@ -438,6 +444,7 @@
 </div>
 <!-- Modal end -->
 
+
 <div
   *ngIf="modalNumber == 3"
   class="modal"
@@ -528,3 +535,58 @@
     </div>
   </div>
 </div>
+
+<!-- Modal 4 start -->
+<div
+  *ngIf="modalNumber == 4"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          Member Hierarchy
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark text-white">
+        <div class="row">
+          <section class="section w-75 m-auto">
+            <table width="100%">
+              <tr>
+                <th>
+                  Sr. No.
+                </th>
+                <th>
+                  Role
+                </th>
+                <th>
+                  User Id
+                </th>
+              </tr>
+              <tr *ngFor="let member of memberHierarchy; let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{member.roleName}}</td>
+                <td>{{member.username}}</td>
+              </tr>
+            </table>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

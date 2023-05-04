@@ -20,7 +20,8 @@ export class MembersListComponent implements OnInit {
   modalNumber: number;
   userDetails: any;
   isGiven: boolean;
-
+  memberHierarchy: any;
+  isSuperAdmin: boolean = false;
   limit: number = 50;
   userId: any;
 
@@ -184,7 +185,9 @@ export class MembersListComponent implements OnInit {
 
   ngOnInit(): void {
     this._preConfig();
-
+    if(this._sharedService.getUserDetails().roleId.indexOf(1) != -1){
+      this.isSuperAdmin = true;
+    }
     this.statusList = [
       { id: 1, status: "Active", color: 'green' },
       { id: 2, status: "Inactive", color: 'yellow' },
@@ -321,7 +324,16 @@ export class MembersListComponent implements OnInit {
     this.modalNumber = 2;
     this.userId = userId;
     this.display = 'block';
+  }
 
+  openHierarchyModal(userId) {
+    this._sharedService.getUplineSummaryApi(userId).subscribe((res)=>{
+      this.memberHierarchy = res;
+      console.log('getUplineSummary', res);
+    });
+    this.modalNumber = 4;
+    this.userId = userId;
+    this.display = 'block';
   }
 
   openBulkTransferModal() {

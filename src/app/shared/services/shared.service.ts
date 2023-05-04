@@ -51,6 +51,11 @@ export class SharedService {
       .post(this._apiEndpointsService.testFuncEndpoint(), body);
   }
 
+  getUplineSummaryApi(userId) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getUplineSummaryEndpoint(), {"userId":userId});
+  }
+
   _getSingleUsersApi(user) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getSingleUserEndpoint(), user);

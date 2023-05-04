@@ -34,6 +34,10 @@ export class MembersService {
     return this._apiHttpService.post(this._apiEndpointsService.getMemberBetsEndpoint(),betsObj)
   }
 
+  _searchMembersApi(betsObj){
+    return this._apiHttpService.post(this._apiEndpointsService.searchMembersEndpoint(),betsObj)
+  }
+
   _getTransferStatementApi(paramObj){
     return this._apiHttpService.post(this._apiEndpointsService.getTransferStatementEndpoint(),paramObj)
   }

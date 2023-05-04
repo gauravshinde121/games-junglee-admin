@@ -18,6 +18,7 @@ import { CommissionComponent } from './components/commission/commission.componen
 import { NetExposureComponent } from './components/net-exposure/net-exposure.component';
 import { UserAccessComponent } from './components/user-access/user-access.component';
 import { WorkstationComponent } from './components/workstation/workstation.component';
+import { SearchMemberComponent } from './components/search-member/search-member.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { WorkstationComponent } from './components/workstation/workstation.compo
     NetExposureComponent,
     UserAccessComponent,
     WorkstationComponent,
+    SearchMemberComponent,
   ],
   imports: [
     CommonModule,

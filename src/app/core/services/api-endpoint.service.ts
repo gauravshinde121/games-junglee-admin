@@ -203,6 +203,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_MEMBER_BETS);
   }
 
+  public searchMembersEndpoint(){
+    return this.createUrl(this._constants.API_URL_SEARCH_MEMBERS);
+  }
+
   public getChangePasswordEndpoint(){
     return this.createUrl(this._constants.API_CHANGE_PASSWORD);
   }

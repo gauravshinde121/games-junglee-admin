@@ -16,6 +16,7 @@ table thead tr th:nth-child(1) {
 
 .modal table {
   font-size: 16px;
+  white-space: pre;
 }
 
 @media (max-width: 1024px) {
@@ -23,4 +24,14 @@ table thead tr th:nth-child(1) {
     width: 120%;
     right: 10%;
   }
+}
+
+@media (max-width: 767px){
+  .modal-dialog-scrollable .modal-body {
+    overflow-x: hidden; 
+}
+.modal-size {
+    width: 100%;
+    right: 0;
+}
 }

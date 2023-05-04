@@ -15,6 +15,7 @@ import { NetExposureComponent } from './components/net-exposure/net-exposure.com
 import { UserAccessComponent } from './components/user-access/user-access.component';
 import { AuthGuard } from '@core/guards/auth.guard';
 import { WorkstationComponent } from './components/workstation/workstation.component';
+import { SearchMemberComponent } from './components/search-member/search-member.component';
 
 const routes: Routes = [{
   path: 'member',
@@ -22,6 +23,7 @@ const routes: Routes = [{
   canActivate: [AuthGuard],
   children: [
     { path: 'list', component: MembersListComponent },
+    { path: 'search-member', component: SearchMemberComponent },
     { path: 'create-member', component: CreateMemberComponent },
     { path: 'edit-member/:id', component: CreateMemberComponent },
     { path: 'user-access', component: UserAccessComponent },

@@ -26,6 +26,7 @@ export class Constants {
     public readonly API_URL_SINGLE_USERS: string = 'api/junglee-admin/getUserById';
     public readonly API_URL_CREATE_USER: string = 'api/junglee-admin/createNewUser';
     public readonly API_URL_EDIT_USER: string = 'api/junglee-admin/edit-user';
+    public readonly API_URL_SEARCH_MEMBERS: string = 'api/junglee-admin/searchMembers';
     public readonly API_URL_ADJUST_WINNINGS: string = 'api/junglee-admin/adjustWinnings';
     public readonly API_URL_UPDATE_GAME_CONTROL: string = 'api/junglee-admin/updateGameControl';
     public readonly API_URL_UPDATE_SPORTS_CONTROL: string = 'api/junglee-admin/updateSportsControl';

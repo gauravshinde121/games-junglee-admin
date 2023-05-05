@@ -98,7 +98,7 @@
         <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
-      <table class="table tableall pointer" *ngIf="plStatement.length > 0">
+      <table class="table tableall " *ngIf="plStatement.length > 0">
         <thead>
           <tr>
             <th scope="col" class="first">Date</th>
@@ -151,7 +151,7 @@
     <!-- <div class="col-md-12"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
     <div *ngIf="plStatement.length > 0 && !this.isLoading">
       <button
-        class="btn rounded-pill text-white"
+        class="btn rounded-pill text-white pointer"
         [disabled]="currentPage === 1"
         (click)="prev()"
       >
@@ -161,7 +161,7 @@
         >{{ currentPage }} / {{ totalPages }}
       </span>
       <button
-        class="btn rounded-pill text-white"
+        class="btn rounded-pill text-white pointer"
         [disabled]="currentPage === totalPages"
         (click)="next()"
       >

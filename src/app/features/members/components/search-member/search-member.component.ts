@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MembersService } from '../../services/members.service';
+import { SharedService } from '../../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-search-member',
@@ -8,12 +9,14 @@ import { MembersService } from '../../services/members.service';
 })
 export class SearchMemberComponent implements OnInit {
 
-  userList: any = [];
+  memberList: any = [];
   isLoading = false;
   searchTerm: string = '';
+  memberHierarchy:any = [];
 
   constructor(
     private _membersService: MembersService,
+    private _sharedService:SharedService
   ) { }
 
   ngOnInit(): void {
@@ -25,15 +28,20 @@ export class SearchMemberComponent implements OnInit {
 
   search(): void {
     if(this.searchTerm.length > 2){
-      console.log('searchTerm',this.searchTerm);
       let body = {
-        searchName: this.searchTerm,
+        searchText: this.searchTerm,
       };
       this._membersService._searchMembersApi(body).subscribe((users: any) => {
         this.isLoading = false;
-        this.userList = users.memberData.memberList;
+        this.memberList = users.memberList;
       });
     }
+  }
+
+  searchMember(userId){
+    this._sharedService.getUplineSummaryApi(userId).subscribe((res)=>{
+      this.memberHierarchy = res;
+    });
   }
 
 }

@@ -20,6 +20,11 @@
               (ngModelChange)="search()"
             />
           </div>
+          <div *ngIf="memberList">
+            <ul>
+              <li *ngFor="let member of memberList"><a (click)="searchMember(member.userId)">{{member.displayName}}</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -27,11 +32,30 @@
     <div class="row mt-3">
       <div class="col-md-12 overflow-auto">
         <div class="border text-center p-5">
-          <h4 *ngIf="userList.length == 0 && !isLoading">No data found</h4>
-          <h4 *ngIf="isLoading">Loading...</h4>
+          <table width="100%" *ngIf="memberHierarchy.length>0">
+            <tr>
+              <th>
+                Sr. No.
+              </th>
+              <th>
+                Role
+              </th>
+              <th>
+                User Id
+              </th>
+            </tr>
+            <tr *ngFor="let member of memberHierarchy; let i = index;">
+              <td>{{i+1}}</td>
+              <td>{{member.roleName}}</td>
+              <td>{{member.username}}</td>
+            </tr>
+          </table>
+
         </div>
+
+
+
       </div>
     </div>
-
   </section>
 </main>

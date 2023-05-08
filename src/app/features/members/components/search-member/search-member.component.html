@@ -44,9 +44,9 @@
             <tr *ngFor="let member of memberHierarchy; let i = index;">
               <!-- <td>{{i+1}}</td> -->
               <td>
-                {{member.username}} <br>
-                <img src="assets/images/arrowDown.gif" alt="" width="20px"> <br>
-                ({{member.roleName}})
+                <span>{{member.username}} ({{member.roleName}})</span> <br>
+                <img src="assets/images/arrowDown.gif" alt="" class="my-md-3" width="20px">
+                
               </td>
             </tr>
           </table>

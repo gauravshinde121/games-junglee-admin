@@ -1,6 +1,14 @@
 
-
+.dashboard .border{
+    border: 1px solid #d35862 !important;
+}
 .searchList ul{
     border: 1px solid #d35862;
     padding: 0 60px 0;
+}
+
+table td  span{
+    border: 1px solid #d35862;
+    padding: 5px 10px;
+    border-radius: 20px;
 }

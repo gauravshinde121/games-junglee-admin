@@ -33,21 +33,17 @@
       <div class="col-md-12 overflow-auto">
         <div class="border text-center p-5">
           <table width="100%" *ngIf="memberHierarchy.length>0">
-            <tr>
+            <!-- <tr>
               <th>
                 Sr. No.
               </th>
               <th>
                 Role
               </th>
-              <th>
-                User Id
-              </th>
-            </tr>
+            </tr> -->
             <tr *ngFor="let member of memberHierarchy; let i = index;">
-              <td>{{i+1}}</td>
-              <td>{{member.roleName}}</td>
-              <td>{{member.username}}</td>
+              <!-- <td>{{i+1}}</td> -->
+              <td>{{member.username}}({{member.roleName}})</td>
             </tr>
           </table>
 

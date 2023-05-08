@@ -20,7 +20,7 @@
               (ngModelChange)="search()"
             />
           </div>
-          <div *ngIf="memberList">
+          <div class="searchList px-md-4" *ngIf="memberList">
             <ul>
               <li *ngFor="let member of memberList"><a (click)="searchMember(member.userId)">{{member.displayName}}</a></li>
             </ul>
@@ -43,7 +43,11 @@
             </tr> -->
             <tr *ngFor="let member of memberHierarchy; let i = index;">
               <!-- <td>{{i+1}}</td> -->
-              <td>{{member.username}}({{member.roleName}})</td>
+              <td>
+                {{member.username}} <br>
+                <img src="assets/images/arrowDown.gif" alt="" width="20px"> <br>
+                ({{member.roleName}})
+              </td>
             </tr>
           </table>
 

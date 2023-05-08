@@ -4,6 +4,7 @@ import { AccountStatementService } from '../../services/account-statement.servic
 import { SharedService } from '@shared/services/shared.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { formatDate } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-player-pl',
@@ -210,7 +211,7 @@ export class PlayerPlComponent implements OnInit {
     let profitLoss: any = []
     this.plStatement.forEach(element => {
       profitLoss.push({
-        date: new Date(element.createDateTime),
+        date: moment(element.createDateTime).format("MMM d, y, h:mm:ss a"),
         sport: element.gameData.subGame,
         match: element.gameData.eventName,
         user: element.playerData.name,
@@ -237,3 +238,5 @@ export class PlayerPlComponent implements OnInit {
   }
 
 }
+
+

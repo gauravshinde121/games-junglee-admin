@@ -5,7 +5,7 @@ import { BookManagementService } from 'src/app/features/book-management/services
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { SettingsService } from '../services/settings.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-bet-settings',
   templateUrl: './bet-settings.component.html',
@@ -290,7 +290,7 @@ export class BetSettingsComponent implements OnInit {
     this.allBets.forEach(element => {
       allBet.push({
         username:element.username,
-        date : new Date(element.placedDate),
+        date : moment(element.placedDate).format("MMM d, y, h:mm:ss a"),
         event: element.event,
         market:element.betCategory,
         OrderPlace:element.oddsPlaced,

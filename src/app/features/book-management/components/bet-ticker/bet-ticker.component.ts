@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import { BookManagementService } from '../../services/book-management.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-bet-ticker',
   templateUrl: './bet-ticker.component.html',
@@ -250,7 +250,7 @@ export class BetTickerComponent implements OnInit {
     this.allBets.forEach(element => {
       allBet.push({
         username:element.username,
-        date : new Date(element.placedDate),
+        date :moment(element.placedDate).format("MMM d, y, h:mm:ss a"),
         event: element.event,
         market:element.betCategory,
         OrderPlace:element.oddsPlaced,

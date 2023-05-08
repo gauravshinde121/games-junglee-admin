@@ -48,26 +48,26 @@
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
 
-      <table class="table text-white b-0" *ngIf="transferStatements.length > 0">
+      <table class="table text-white tableall b-0" *ngIf="transferStatements.length > 0">
         <tbody>
           <tr>
-            <th class="thts">#</th>
+            <th class="thts first">#</th>
             <th class="thts">
-              <i class="fa-regular fa-calendar-days text-pink"></i>&nbsp;
+              <i class="fa-regular fa-calendar-days"></i>&nbsp;
               Creation Date
             </th>
             <th class="thts">
-              <i class="fa-solid fa-user text-pink"></i> From User
+              <i class="fa-solid fa-user text-white"></i> From User
             </th>
             <th class="thts">
-              <i class="fa-solid fa-user text-pink"></i> To User
+              <i class="fa-solid fa-user"></i> To User
             </th>
             <th class="thts">
-              <i class="fa-sharp fa-solid fa-indian-rupee-sign text-pink"></i>
+              <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
               Amount
             </th>
             <th class="thts">
-              <i class="fa-solid fa-text-width text-pink"></i> Transaction Type
+              <i class="fa-solid fa-text-width"></i> Transaction Type
             </th>
             <th class="last">IP</th>
           </tr>

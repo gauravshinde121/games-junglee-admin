@@ -4,7 +4,7 @@ import { AllLogsService } from '../../services/all-logs.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { formatDate } from '@angular/common';
 import { SharedService } from '@shared/services/shared.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-cl-transfer',
   templateUrl: './cl-transfer.component.html',
@@ -109,7 +109,7 @@ export class ClTransferComponent implements OnInit {
     let clTransfer : any = []
     this.clTransfers.forEach(element => {
       clTransfer.push({
-        date : new Date(element.createdDate),
+        date1 :  moment(element.createdDate).format("MMM d, y, h:mm:ss a"),
         fromUser: element.fromRefUserName,
         touser:element.toRefUserName,
         amount:element.amount,

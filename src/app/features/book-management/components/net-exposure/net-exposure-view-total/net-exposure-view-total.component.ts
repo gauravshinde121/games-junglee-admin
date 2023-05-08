@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { BookManagementService } from '../../../services/book-management.service';
 import * as _ from "lodash";
 import { webSocket } from 'rxjs/webSocket';
-import {DomSanitizer} from '@angular/platform-browser'
+import {DomSanitizer} from '@angular/platform-browser';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-net-exposure-view-total',
@@ -431,7 +432,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     this.viewTotal.forEach(element => {
       viewtotal.push({
         username:element.username,
-        date : new Date(element.placedDate),
+        date : moment(element.placedDate).format("MMM d, y, h:mm:ss a"),
         event: element.event,
         market:element.marketName,
         OrderPlace:element.oddsPlaced,

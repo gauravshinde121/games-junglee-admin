@@ -129,7 +129,7 @@
               <th scope="col" class="text-center">Details</th>
               <th scope="col" class="text-center">Status</th>
               <th scope="col" class="text-center">Change password</th>
-              <th scope="col" class="text-center" *ngIf="isSuperAdmin">Hierarchy</th>
+              <!-- <th scope="col" class="text-center" *ngIf="isSuperAdmin">Hierarchy</th> -->
               <th scope="col" class="last text-center">Action</th>
             </tr>
           </thead>
@@ -235,11 +235,11 @@
                   <i class="fa-sharp fa fa-lock icon-pink pointer"></i>
                 </a>
               </td>
-              <td class="text-center" *ngIf="isSuperAdmin">
+              <!-- <td class="text-center" *ngIf="isSuperAdmin">
                 <a (click)="openHierarchyModal(user.userId)">
                   <img src="/assets/images/net_expo.png" width="12px;"/>
                 </a>
-              </td>
+              </td> -->
               <td class="text-center">
                 <a routerLink="/member/edit-member/{{ user.userId }}">
                   <i class="fa-sharp fa-solid fa-pen icon-pink pointer"></i>

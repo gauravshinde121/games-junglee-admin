@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-invalid-bet',
   templateUrl: './invalid-bet.component.html',
@@ -117,7 +117,7 @@ export class InvalidBetComponent implements OnInit {
     this.allBets.forEach(element => {
       allBet.push({
         member:element.member,
-        date : new Date(element.createdDate),
+        date : moment(element.placedTime).format("MMM d, y, h:mm:ss a"),
         event: element.event,
         market:element.market,
         OrderPlace:element.oddsPlaced,

@@ -5,6 +5,7 @@ import { SharedService } from '@shared/services/shared.service';
 import { formatDate } from '@angular/common';
 import { SettingsService } from 'src/app/features/settings/components/services/settings.service';
 import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-surveillance-main',
@@ -309,7 +310,7 @@ export class SurveillanceMainComponent implements OnInit {
     this.allBets.forEach(element => {
       allBet.push({
         username:element.username,
-        date : new Date(element.placedDate),
+        date : moment(element.placedDate).format("MMM d, y, h:mm:ss a"),
         event: element.event,
         market:element.betCategory,
         OrderPlace:element.oddsPlaced,

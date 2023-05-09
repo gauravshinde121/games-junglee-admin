@@ -4,6 +4,7 @@ import { AccountStatementService } from '../../services/account-statement.servic
 import { SharedService } from '@shared/services/shared.service';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-my-pl',
@@ -167,7 +168,7 @@ export class MyPlComponent implements OnInit {
     let pL : any = []
     this.plStatement.forEach(element => {
       pL.push({
-        date : new Date(element.createdAt),
+        date :  moment(element.createdAt).format("MMM d, y, h:mm:ss a"),
         game: element.gameName,
         subGame:element.subGame,
         event : element.eventName,

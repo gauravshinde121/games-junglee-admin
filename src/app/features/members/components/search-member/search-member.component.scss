@@ -4,11 +4,40 @@
 }
 .searchList ul{
     border: 1px solid #d35862;
-    padding: 0 60px 0;
+    padding: 15px 0 0;
+    list-style: none;
+    border-top: none;
+    position: relative;
+    top: -16px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin: 0;
+}
+
+.searchList ul li:hover{
+    background-color: #d35862;;
+}
+
+.searchList ul li a{
+    padding: 0 50px 0;
 }
 
 table td  span{
     border: 1px solid #d35862;
     padding: 5px 10px;
     border-radius: 20px;
+}
+input:focus{
+    box-shadow: none;
+    outline: none !important;
+    border: 1px solid #d35862;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
+table tr:nth-child(3) td img{
+    display: none;
 }

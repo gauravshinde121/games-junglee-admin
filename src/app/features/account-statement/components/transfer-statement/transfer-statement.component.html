@@ -37,7 +37,7 @@
 
   <!-- <section class="section gamedetails mt-3"> -->
   <div class="row mt-3">
-    <div class="col-md-12 tablescroll overflow-auto">
+    <div class="col-md-12 tablescroll ">
       <div
         *ngIf="transferStatements.length == 0"
         class="border text-center p-5"
@@ -48,6 +48,7 @@
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
 
+      <div class="table-responsive">
       <table class="table text-white tableall b-0" *ngIf="transferStatements.length > 0">
         <tbody>
           <tr>
@@ -107,7 +108,7 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table></div>
 
       <div
         *ngIf="transferStatements.length > 0 && !this.isLoading"

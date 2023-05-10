@@ -5,114 +5,74 @@
         <!--your code will come here start-->
         <h4 class="text-pink">Net Exposure</h4>
         <div class="row" [formGroup]="filterForm">
-          <div class="col-md-8 col-12 mt-2">
-            <a class="text-decoration-none text-white">
-              <input
-                type="radio"
-                (click)="
-                  onFilterChange({ clicked: 'type', selectedType: 'MyPT' })
-                "
-                formControlName="selectedType"
-                class="radioselected pointer"
-                id="html"
-                name="selectedType"
-                value="MyPT"
-              /><span class="rounded-pill p-2 m-2">My PT</span>
-            </a>
-            <a class="text-decoration-none text-white">
-              <input
-                value="totalBook"
-                (click)="
-                  onFilterChange({ clicked: 'type', selectedType: 'TotalBook' })
-                "
-                formControlName="selectedType"
-                type="radio"
-                id="html"
-                checked
-                name="selectedType"
-                value="TotalBook"
-                class="pointer radioselected"
-              /><span class="rounded-pill p-2 m-2">Total Book</span>
-            </a>
-            <span class="me-3 pt-2"><strong>Filter by Sport</strong></span>
-            <a class="text-decoration-none text-white">
-              <input
-                (click)="
-                  onFilterChange({
-                    clicked: 'sport',
-                    sportId: null,
-                    refreshCallVar: false
-                  })
-                "
-                type="radio"
-                checked="true"
-                class="radioselected pointerr"
-                id="html"
-                name="sport"
-                value="All"
-              /><span class="rounded-pill p-2 m-2">All</span>
-            </a>
-            <a
-              *ngFor="let game of games"
-              class="text-decoration-none text-white"
-            >
-              <input
-                (click)="
-                  onFilterChange({
-                    clicked: 'sport',
-                    sportId: game.sportId,
-                    refreshCallVar: false
-                  })
-                "
-                type="radio"
-                class="radioselected pointer"
-                id="html"
-                name="sport"
-                [value]="game.sportId"
-              /><span class="rounded-pill p-2 m-2">{{ game.sportName }}</span>
-            </a>
+          <div class="col-md-8 col-12  net_exposure">
+            <div class="row">
+              <div class="col-md-4">
+                <a class="text-decoration-none text-white">
+                  <input type="radio" (click)="
+                      onFilterChange({ clicked: 'type', selectedType: 'MyPT' })
+                    " formControlName="selectedType" class="radioselected pointer" id="html" name="selectedType"
+                    value="MyPT" /><span class="rounded-pill p-2">My PT</span>
+                </a>
+                <a class="text-decoration-none text-white">
+                  <input value="totalBook" (click)="
+                      onFilterChange({ clicked: 'type', selectedType: 'TotalBook' })
+                    " formControlName="selectedType" type="radio" id="html" checked name="selectedType"
+                    value="TotalBook" class="pointer radioselected" /><span class="rounded-pill p-2">Total
+                    Book</span>
+                </a>
+              </div>
+
+              <div class="col-md-8 my-3 my-md-0">
+                <div class="row">
+                  
+                  <div class="col-md-12">
+                    <span class=" pt-2 me-3"><strong>Filter by Sport :</strong></span>
+                    <a class="text-decoration-none text-white">
+                      <input (click)="
+                      onFilterChange({
+                        clicked: 'sport',
+                        sportId: null,
+                        refreshCallVar: false
+                      })
+                    " type="radio" checked="true" class="radioselected pointerr" id="html" name="sport"
+                        value="All" /><span class="rounded-pill p-2">All</span>
+                    </a>
+                    <a *ngFor="let game of games" class="text-decoration-none text-white">
+                      <input (click)="
+                      onFilterChange({
+                        clicked: 'sport',
+                        sportId: game.sportId,
+                        refreshCallVar: false
+                      })
+                    " type="radio" class="radioselected pointer" id="html" name="sport" [value]="game.sportId" /><span
+                        class="rounded-pill p-2">{{ game.sportName }}</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="col-md-2 col-6 pointer">
-            <select
-              name="matchId"
-              formControlName="matchId"
-              id="ab"
-              class="form-select pointer"
-              (change)="onFilterChangeDropDown($event)"
-              data-clicked="match"
-            >
-              <option value="null" class="pointer">All</option>
-              <option
-                class="pointer"
-                value="{{ match.matchId }}"
-                *ngFor="let match of matchList"
-              >
-                {{ match.matchName }}
-              </option>
-            </select>
-          </div>
-          <div class="col-md-2 col-6 text-end">
-            {{ refreshCount }} &nbsp;
-            <button
-              class="btn btn-pink rounded-pill ps-4 pe-4"
-              (click)="refreshCall()"
-            >
-              <i class="fa fa-redo-alt disnone"></i> Refresh
-            </button>
-          </div>
-          <!-- <div class="row">
-            <div class="col-md-6"></div>
-            <div class="col-md-6 text-end">
-              {{ refreshCount }} &nbsp;
-              <button
-                class="btn btn-pink rounded-pill ps-4 pe-4"
-                (click)="refreshCall()"
-              >
-                <i class="fa fa-redo-alt disnone"></i> Refresh
-              </button>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-6 col-6 pointer">
+                <select name="matchId" formControlName="matchId" id="ab" class="form-select pointer p-0"
+                  (change)="onFilterChangeDropDown($event)" data-clicked="match">
+                  <option value="null" class="pointer">All</option>
+                  <option class="pointer" value="{{ match.matchId }}" *ngFor="let match of matchList">
+                    {{ match.matchName }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6 col-6 text-end">
+                {{ refreshCount }} &nbsp;
+                <button class="btn btn-pink rounded-pill " (click)="refreshCall()">
+                  <i class="fa fa-redo-alt disnone"></i> Refresh
+                </button>
+              </div>
             </div>
-          </div> -->
+          </div>
 
           <div class="col-md-12 mt-3" *ngIf="booksForBackend.length == 0">
             <div class="border text-center p-5">
@@ -125,14 +85,8 @@
         </div>
 
         <div class="row">
-          <div
-            *ngIf="booksForBackend.length > 0"
-            class="col-md-12 overflow-auto"
-          >
-            <table
-              class="table tableall mt-3 align_thead mb-0"
-              *ngFor="let book of booksForBackend"
-            >
+          <div *ngIf="booksForBackend.length > 0" class="col-md-12 overflow-auto">
+            <table class="table tableall mt-3 align_thead mb-0" *ngFor="let book of booksForBackend">
               <thead>
                 <!-- <tr>
                   <th width="30%" class="text-start">{{ book.matchName }}</th>
@@ -157,12 +111,8 @@
                     <span>{{ book.matchName }}</span>
                   </th>
                   <th>
-                    <a
-                      (click)="redirectUrlByMatch(book)"
-                      class="btn btn-warning rounded-pill"
-                    >
-                      View total</a
-                    >
+                    <a (click)="redirectUrlByMatch(book)" class="btn btn-warning rounded-pill">
+                      View total</a>
                   </th>
                   <th>Net Exposure</th>
                   <th>1</th>
@@ -177,117 +127,87 @@
                   </td>
                   <td>
                     <a (click)="redirectUrlByMarket([data])" class="pointer">
-                      <img
-                        src="../../../../../assets/images/net_exposure.png"
-                        width="22px"
-                        alt=""
-                    /></a>
+                      <img src="../../../../../assets/images/net_exposure.png" width="22px" alt="" /></a>
                   </td>
                   <td>
-                    <a
-                      class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100 text-danger"
-                    >
-                      <span
-                        [ngClass]="
+                    <a class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100 text-danger">
+                      <span [ngClass]="
                           data.netExposure > 0 ? 'text-success' : 'text-danger'
-                        "
-                        >{{ data.netExposure | number : "1.2-2" }}</span
-                      >
+                        ">{{ data.netExposure | number : "1.2-2" }}</span>
                     </a>
                   </td>
                   <td>
-                    <a
-                      *ngIf="data.horses[0]?.finalAmount > 0"
-                      class="btn rounded-pill alert alert-success pt-2 pb-2 w-100"
-                    >
+                    <a *ngIf="data.horses[0]?.finalAmount > 0"
+                      class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
                       <span class="text-success">
                         {{
-                          data.horses[0]?.finalAmount
-                            ? (data.horses[0]?.finalAmount | number : "1.2-2")
-                            : 0
+                        data.horses[0]?.finalAmount
+                        ? (data.horses[0]?.finalAmount | number : "1.2-2")
+                        : 0
                         }}
                       </span>
                     </a>
-                    <a
-                      *ngIf="data.horses[0]?.finalAmount < 0"
-                      class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100"
-                    >
+                    <a *ngIf="data.horses[0]?.finalAmount < 0"
+                      class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
                       <span class="text-danger">
                         {{
-                          data.horses[0]?.finalAmount
-                            ? (data.horses[0]?.finalAmount | number : "1.2-2")
-                            : 0
+                        data.horses[0]?.finalAmount
+                        ? (data.horses[0]?.finalAmount | number : "1.2-2")
+                        : 0
                         }}
                       </span>
                     </a>
-                    <a
-                      *ngIf="data.horses[0]?.finalAmount == 0"
-                      class="btn rounded-pill alert pt-2 pb-2 w-100"
-                    >
+                    <a *ngIf="data.horses[0]?.finalAmount == 0" class="btn rounded-pill alert pt-2 pb-2 w-100">
                       <span> 0 </span>
                     </a>
                   </td>
                   <td>
                     <ng-container *ngIf="data.horses[2]">
-                      <a
-                        *ngIf="data.horses[2].finalAmount > 0"
-                        class="btn rounded-pill alert alert-success pt-2 pb-2 w-100"
-                      >
+                      <a *ngIf="data.horses[2].finalAmount > 0"
+                        class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
                         <span class="text-success">
                           {{
-                            data.horses[2]?.finalAmount
-                              ? (data.horses[2]?.finalAmount | number : "1.2-2")
-                              : 0
+                          data.horses[2]?.finalAmount
+                          ? (data.horses[2]?.finalAmount | number : "1.2-2")
+                          : 0
                           }}
                         </span>
                       </a>
-                      <a
-                        *ngIf="data.horses[2].finalAmount < 0"
-                        class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100"
-                      >
+                      <a *ngIf="data.horses[2].finalAmount < 0"
+                        class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
                         <span class="text-danger">
                           {{
-                            data.horses[2]?.finalAmount
-                              ? (data.horses[2]?.finalAmount | number : "1.2-2")
-                              : 0
+                          data.horses[2]?.finalAmount
+                          ? (data.horses[2]?.finalAmount | number : "1.2-2")
+                          : 0
                           }}
                         </span>
                       </a>
-                      <a
-                        *ngIf="data.horses[2].finalAmount == 0"
-                        class="btn rounded-pill alert pt-2 pb-2 w-100"
-                      >
+                      <a *ngIf="data.horses[2].finalAmount == 0" class="btn rounded-pill alert pt-2 pb-2 w-100">
                         <span> 0 </span>
                       </a>
                     </ng-container>
                   </td>
                   <td>
-                    <a
-                      *ngIf="data.horses[1]?.finalAmount < 0"
-                      class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100"
-                    >
+                    <a *ngIf="data.horses[1]?.finalAmount < 0"
+                      class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
                       <span class="text-danger">{{
                         data.horses[1]?.finalAmount
-                          ? (data.horses[1]?.finalAmount | number : "1.2-2")
-                          : 0
-                      }}</span>
+                        ? (data.horses[1]?.finalAmount | number : "1.2-2")
+                        : 0
+                        }}</span>
                     </a>
 
-                    <a
-                      *ngIf="data.horses[1]?.finalAmount > 0"
-                      class="btn rounded-pill alert alert-success pt-2 pb-2 w-100"
-                    >
+                    <a *ngIf="data.horses[1]?.finalAmount > 0"
+                      class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
                       <span class="text-success">{{
                         data.horses[1]?.finalAmount
-                          ? (data.horses[1]?.finalAmount | number : "1.2-2")
-                          : 0
-                      }}</span>
+                        ? (data.horses[1]?.finalAmount | number : "1.2-2")
+                        : 0
+                        }}</span>
                     </a>
 
-                    <a
-                      *ngIf="data.horses[1]?.finalAmount == 0"
-                      class="btn rounded-pill alert pt-2 pb-2 w-100"
-                    >
+                    <a *ngIf="data.horses[1]?.finalAmount == 0" class="btn rounded-pill alert pt-2 pb-2 w-100">
                       <span>0</span>
                     </a>
                   </td>

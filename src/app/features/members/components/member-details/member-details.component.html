@@ -53,8 +53,9 @@
       <!--your code will come here start-->
       <section class="content">
         <div class="card gamedetails">
+          <div class="col-md-12">
           <div class="row mb-3">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <p class="text-pink">
                 <a class="text-pink" routerLink="/member/list">
                   <i class="fa fa-1x fa-circle-chevron-left text-pink"></i>
@@ -64,7 +65,7 @@
                 <span class="text-white p-2">{{ username }}</span>
               </p>
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
               <div class="input-group flex-nowrap">
                 <span
                   class="input-group-text bg-dark text-white radius-left-tb border-secondary"
@@ -80,10 +81,12 @@
                   aria-describedby="addon-wrapping"
                 />
               </div>
-            </div>
-            <div class="col-md-2 offset-md-2">
+            </div> -->
+            <div class="col-md-4 offset-md-2">
               <p class="flot-right">Created On : {{ createdDate | date }}</p>
             </div>
+          
+          </div>
           </div>
           <div class="row">
             <!-- nav tab -->

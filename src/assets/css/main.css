@@ -703,3 +703,33 @@ select:-webkit-autofill:focus {
   opacity: 0.65;
   transform: scale(0.85) translateY(-1rem) translateX(0.15rem) !important;
 }
+
+
+.tableFixHead {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: auto;
+  max-height: 70vh;
+}
+.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+.tableFixHead::-webkit-scrollbar{
+  width: 3px;
+  height: 3px;
+}
+
+.tableFixHead::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.tableFixHead::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: linear-gradient(0deg, #cd212f 0, #e76f26) !important; 
+}
+
+.btn.disabled, .btn:disabled, fieldset:disabled .btn{
+  opacity: 0.3;
+}

@@ -267,7 +267,8 @@
   aria-labelledby="betDetailLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+<!-- modal-dialog-scrollable -->
+  <div class="modal-dialog  modal-lg">
     <div class="modal-content border-danger modal-size">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-white" id="betDetailLabel">
@@ -285,7 +286,8 @@
         Loading...
       </div>
       <div class="modal-body bg-dark text-white" *ngIf="betInfo">
-        <div class="col-md-12 overflow-auto mb-4">
+        <div class="col-md-12 mb-4">
+          <div class="tableFixHead">
           <table class="table tableall" *ngIf="betInfo.length > 0">
             <thead>
               <tr>
@@ -353,6 +355,7 @@
               </tr>
             </tbody>
           </table>
+        </div>
         </div>
       </div>
     </div>

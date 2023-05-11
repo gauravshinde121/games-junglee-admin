@@ -174,7 +174,7 @@ export class NetExposureViewTotalComponent implements OnInit {
       this._postBooksForAdminBookMgmApi(bookMgmParams);
     }else{
       this._postBooksForAdminBookMgmRefreshApi(bookMgmParams);
-      
+
     }
   }
 
@@ -220,22 +220,22 @@ export class NetExposureViewTotalComponent implements OnInit {
                 if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
                   runnerRes['back0'] ='';
                   runnerRes['vback0'] ='';
-    
+
                   runnerRes['back1'] =  '';
                   runnerRes['vback1'] = '';
-    
+
                   runnerRes['back2'] ='';
                   runnerRes['vback2'] = '';
-    
+
                   runnerRes['lay0'] = '';
                   runnerRes['vlay0'] = '';
-    
+
                   runnerRes['lay1'] =  '';
                   runnerRes['vlay1'] = '';
-    
+
                   runnerRes['lay2'] = '';
                   runnerRes['vlay2'] = '';
-    
+
                 }else{
                 runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
                 runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
@@ -261,7 +261,7 @@ export class NetExposureViewTotalComponent implements OnInit {
                 if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
                   runnerRes['back0'] = '';
                   runnerRes['vback0'] = '';
-    
+
                   runnerRes['lay0'] = '';
                   runnerRes['vlay0'] = '';
                 }else{
@@ -277,7 +277,7 @@ export class NetExposureViewTotalComponent implements OnInit {
                 if((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)){
                   runnerRes['back1'] = '';
                   runnerRes['vback1'] = '';
-    
+
                   runnerRes['lay1'] = '';
                   runnerRes['vlay1'] = '';
                 }else{
@@ -323,7 +323,7 @@ export class NetExposureViewTotalComponent implements OnInit {
             return singleItem;
           })
         }
-        
+
         this.adminBooksList.map((singleBook)=>{
           let singleWebSocketMarketData = _.find(webSocketData, ['bmi', +singleBook['marketId']]);
           if(singleWebSocketMarketData != undefined){
@@ -432,7 +432,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     this.viewTotal.forEach(element => {
       viewtotal.push({
         username:element.username,
-        date : moment(element.placedDate).format("MMM d, y, h:mm:ss a"),
+        date : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
         event: element.event,
         market:element.marketName,
         OrderPlace:element.oddsPlaced,

@@ -109,7 +109,7 @@ export class ClTransferComponent implements OnInit {
     let clTransfer : any = []
     this.clTransfers.forEach(element => {
       clTransfer.push({
-        date1 :  moment(element.createdDate).format("MMM d, y, h:mm:ss a"),
+        date1 :  moment(element.createdDate).format("MMM D, YYYY, h:mm:ss a"),
         fromUser: element.fromRefUserName,
         touser:element.toRefUserName,
         amount:element.amount,

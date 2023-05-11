@@ -93,7 +93,7 @@ export class TransferStatementComponent implements OnInit {
     let transfetStatemnt : any = []
     this.transferStatements.forEach(element => {
       transfetStatemnt.push({
-        date :  moment(element.createdDate).format("MMM d, y, h:mm:ss a"),
+        date :  moment(element.createdDate).format("MMM D, YYYY, h:mm:ss a"),
         fromUser: element.fromUsername,
         touser:element.toUsername,
         amount : element.amount,

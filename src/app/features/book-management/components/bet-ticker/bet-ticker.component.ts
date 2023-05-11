@@ -250,7 +250,7 @@ export class BetTickerComponent implements OnInit {
     this.allBets.forEach(element => {
       allBet.push({
         username:element.username,
-        date :moment(element.placedDate).format("MMM d, y, h:mm:ss a"),
+        date :moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
         event: element.event,
         market:element.betCategory,
         OrderPlace:element.oddsPlaced,

@@ -44,7 +44,7 @@
                 placeholder="Username*"
               />
               <div
-                class="text-danger"
+                class="small text-danger"
                 *ngIf="
                   memberForm.controls['username'].errors?.required &&
                   memberForm.controls['username'].touched
@@ -63,7 +63,7 @@
                 placeholder="Display Name*"
               />
               <div
-                class="text-danger"
+                class="small text-danger"
                 *ngIf="
                   memberForm.controls['displayName'].errors?.required &&
                   memberForm.controls['displayName'].touched
@@ -73,15 +73,20 @@
               </div>
             </div>
             <div class="col-md-3 mb-2" *ngIf="!editMode">
-              <label>Password</label>
+                <label>Password</label>
+              <div class="input-group">
               <input
-                type="password"
+                [type]="show ? 'text' : 'password'"
                 class="form-control"
                 formControlName="password"
                 placeholder="Password*"
+                id="password"
+                name="password"
               />
+                <span (click)="show=!show" class="input-group-text fa fa-eye text-dark"  id="Password" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
+              </div>
               <div
-                class="text-danger"
+                class="small text-danger"
                 *ngIf="
                   memberForm.controls['password'].errors?.required &&
                   memberForm.controls['password'].touched
@@ -90,7 +95,7 @@
                 <small>Password is required</small>
               </div>
               <div
-                class="text-danger"
+                class="small text-danger"
                 *ngIf="
                   memberForm.controls['password'].touched &&
                   memberForm.controls['password'].errors?.pattern
@@ -108,27 +113,32 @@
             </div>
             <div class="col-md-3 mb-2" *ngIf="!editMode">
               <label>Confirm Password</label>
+              <div class="input-group">
               <input
-                type="password"
+                [type]="show1 ? 'text' : 'password'"
                 class="form-control"
                 formControlName="confirmPassword"
                 placeholder="Confirm Password*"
+                id="password"
+                name="password"
               />
+              <span (click)="show1=!show1" class="input-group-text fa fa-eye text-dark"  id="Password" [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"></span>
               <div
                 *ngIf="
                   memberForm.controls['confirmPassword'].errors?.required &&
                   memberForm.controls['confirmPassword'].touched
                 "
-                class="text-danger"
+                class="small text-danger"
               >
                 Confirm Password is required
               </div>
               <div
                 *ngIf="f['confirmPassword'].getError('Mustmatch') != null"
-                class="small text-danger col-md-12 ps-5"
+                class="small text-danger col-md-12"
               >
                 Confirm password doesn't match
               </div>
+            </div>
             </div>
             <!--<div class="col-md-3 mb-2">
               <label>Max Credit Limit</label>
@@ -149,7 +159,7 @@
               />
             </div>
             <div
-              class="text-danger"
+              class="small text-danger"
               *ngIf="memberForm.controls['minBet'].errors?.required"
             >
               Please enter credit limit
@@ -267,13 +277,13 @@
             "
           >
             <div
-              class="text-danger"
+              class="small text-danger"
               *ngIf="memberForm.controls['minBet'].errors?.required"
             >
               Please enter valid Min Rate
             </div>
             <div
-              class="text-danger"
+              class="small text-danger"
               *ngIf="memberForm.controls['minBet'].errors?.['min']"
             >
               Please enter valid Min Rate
@@ -301,19 +311,19 @@
             "
           >
             <div
-              class="text-danger"
+              class="small text-danger"
               *ngIf="memberForm.controls['maxBet'].errors?.required"
             >
               Please enter valid Bet Amount
             </div>
             <div
-              class="text-danger"
+              class="small text-danger"
               *ngIf="memberForm.controls['maxBet'].errors?.['max']"
             >
               Please enter valid Bet Amount
             </div>
             <div
-              class="text-danger"
+              class="small text-danger"
               *ngIf="memberForm.controls['maxBet'].errors?.['min']"
             >
               Please enter valid Bet Amount
@@ -338,19 +348,19 @@
             "
           >
             <div
-              class="text-danger"
+              class="small text-danger"
               *ngIf="memberForm.controls['maxExposure'].errors?.required"
             >
               Please enter valid Bet Amount
             </div>
             <div
-              class="text-danger"
+              class="small text-danger"
               *ngIf="memberForm.controls['maxExposure'].errors?.['max']"
             >
               Please enter valid Bet Amount
             </div>
             <div
-              class="text-danger"
+              class="small text-danger"
               *ngIf="memberForm.controls['maxExposure'].errors?.['min']"
             >
               Please enter valid Bet Amount

@@ -28,6 +28,8 @@ export class CreateMemberComponent implements OnInit {
   uplineInfo;
   maxBetMinValue: number;
   memberPercentage:any = '--';
+  show:boolean = false;
+  show1:boolean = false;
 
   constructor(
     private _fb: FormBuilder,

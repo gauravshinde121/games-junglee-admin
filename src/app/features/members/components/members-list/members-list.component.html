@@ -312,12 +312,17 @@
               <div class="row mb-4 align-items-center">
                 <div class="col-md-5">Password*</div>
                 <div class="col-md-7">
+                  <div class="input-group mw-100">
                   <input
-                    type="password"
+                    [type]="show ? 'text' : 'password'"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
                     formControlName="password"
                     placeholder="Enter password"
+                    id="password"
+                    name="password"
                   />
+                  <span (click)="show=!show" class="input-group-text fa fa-eye bg-dark text-pink border-0 pointer"  id="Password" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
+                  </div>
                   <div
                     class="text-danger"
                     *ngIf="
@@ -339,12 +344,17 @@
               <div class="row mb-4 align-items-center">
                 <div class="col-md-5">Confirm&nbsp;Password*</div>
                 <div class="col-md-7">
-                  <input
-                    type="password"
+                  <div class="input-group mw-100">
+                    <input
+                    [type]="show1 ? 'text' : 'password'"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
                     formControlName="confirmPassword"
                     placeholder="Enter confirm password"
+                    id="password"
+                    name="password"
                   />
+                  <span (click)="show1=!show1" class="input-group-text fa fa-eye bg-dark text-pink border-0 pointer"  id="Password" [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"></span>
+                  </div>
                   <div
                     *ngIf="
                       confirmPasswordVail &&

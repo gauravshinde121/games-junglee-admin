@@ -173,75 +173,77 @@ export class CreateMemberComponent implements OnInit {
   }
 
   createMember(){
-
-    var currentUserIp:any;
-    this._sharedService.currentUserIp.subscribe((data: any) => {
-      currentUserIp = data.userIp;
-    });
-    this.isLoading = true;
-    console.log('this.memberForm.value', this.memberForm.value);
-    let memberData = {};
-    if (!this.editMode) {
-      memberData = {
-        "displayName": this.memberForm.value['displayName'],
-        "username": this.memberForm.value['username'],
-        "pwd": this.memberForm.value['password'],
-        //"creditLimit": this.memberForm.value['playerMaxCreditLimit'],
-        "availableCredit": this.memberForm.value['playerAvailableCredit'],
-        "sportsBookRate": this.memberForm.value['sportsBookRate'],
-        "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
-        "minimumBet": this.memberForm.value['minBet'],
-        "maxBet": this.memberForm.value['maxBet'],
-        "maxExposure": this.memberForm.value['maxExposure'],
-        "gameStatus": this.gamesList,
-        "roleId": this.memberForm.value['roleId'],
-        "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
-        "ip": currentUserIp
+      var currentUserIp:any;
+      this._sharedService.currentUserIp.subscribe((data: any) => {
+        currentUserIp = data.userIp;
+      });
+      this.isLoading = true;
+      console.log('this.memberForm.value', this.memberForm.value);
+      let memberData = {};
+      if (!this.editMode) {
+        memberData = {
+          "displayName": this.memberForm.value['displayName'],
+          "username": this.memberForm.value['username'],
+          "pwd": this.memberForm.value['password'],
+          //"creditLimit": this.memberForm.value['playerMaxCreditLimit'],
+          "availableCredit": this.memberForm.value['playerAvailableCredit'],
+          "sportsBookRate": this.memberForm.value['sportsBookRate'],
+          "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
+          "minimumBet": this.memberForm.value['minBet'],
+          "maxBet": this.memberForm.value['maxBet'],
+          "maxExposure": this.memberForm.value['maxExposure'],
+          "gameStatus": this.gamesList,
+          "roleId": this.memberForm.value['roleId'],
+          "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
+          "ip": currentUserIp,
+          "uplinePwd": this.uplinePwd
+        }
+      } else {
+        memberData = {
+          "displayName": this.memberForm.value['displayName'],
+          "username": this.memberForm.value['username'],
+          //"comments": this.memberForm.value['comments'],
+          //"creditLimit": this.memberForm.value['playerMaxCreditLimit'],
+          "availableCredit": this.memberForm.value['playerAvailableCredit'],
+          "sportsBookRate": this.memberForm.value['sportsBookRate'],
+          "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
+          "minimumBet": this.memberForm.value['minBet'],
+          "maxBet": this.memberForm.value['maxBet'],
+          "maxExposure": this.memberForm.value['maxExposure'],
+          //"isActive": this.memberForm.value['status'],
+          "gameStatus": this.gamesList,
+          "roleId": this.memberForm.value['roleId'],
+          "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
+          "ip": currentUserIp,
+          "uplinePwd": this.uplinePwd
+        }
       }
-    } else {
-      memberData = {
-        "displayName": this.memberForm.value['displayName'],
-        "username": this.memberForm.value['username'],
-        //"comments": this.memberForm.value['comments'],
-        //"creditLimit": this.memberForm.value['playerMaxCreditLimit'],
-        "availableCredit": this.memberForm.value['playerAvailableCredit'],
-        "sportsBookRate": this.memberForm.value['sportsBookRate'],
-        "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
-        "minimumBet": this.memberForm.value['minBet'],
-        "maxBet": this.memberForm.value['maxBet'],
-        "maxExposure": this.memberForm.value['maxExposure'],
-        //"isActive": this.memberForm.value['status'],
-        "gameStatus": this.gamesList,
-        "roleId": this.memberForm.value['roleId'],
-        "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
-        "ip": currentUserIp
-      }
-    }
 
-    let memberObs: Observable<any>;
-    let msg = "";
-    if (!this.editMode) {
-      msg = 'Created';
-      memberObs = this._memberService._getCreateNewUserApi(memberData);
-    } else {
-      msg = 'Updated';
-      memberData["userId"] = Number(this.route.snapshot.params['id']);
-      memberObs = this._memberService._getEditUserApi(memberData);
-      console.log(memberObs)
-    }
-
-    memberObs.subscribe(
-      (res: any) => {
-        this._sharedService.getToastPopup(`User ${msg} Successfully`, 'Member', 'success');
-        this._router.navigate(['/member/list'])
-        this._sharedService.sharedSubject.next({
-          'updateAdminDetails': true
-        });
-      }, (error) => {
-        this.isLoading = false;
-        this._sharedService.getToastPopup(`Error while creating the member.`, 'Member', 'error');
+      let memberObs: Observable<any>;
+      let msg = "";
+      if (!this.editMode) {
+        msg = 'Created';
+        memberObs = this._memberService._getCreateNewUserApi(memberData);
+      } else {
+        msg = 'Updated';
+        memberData["userId"] = Number(this.route.snapshot.params['id']);
+        memberObs = this._memberService._getEditUserApi(memberData);
+        console.log(memberObs)
       }
-    )
+
+      memberObs.subscribe(
+        (res: any) => {
+          this._sharedService.getToastPopup(`User ${msg} Successfully`, 'Member', 'success');
+          this._router.navigate(['/member/list'])
+          this._sharedService.sharedSubject.next({
+            'updateAdminDetails': true
+          });
+        }, (error) => {
+          this.isLoading = false;
+          this._sharedService.getToastPopup(`Error while creating the member.`, 'Member', 'error');
+        }
+      )
+
   }
 
   onMinBetChange(e){
@@ -258,7 +260,6 @@ export class CreateMemberComponent implements OnInit {
   }
 
   onSubmitMemberForm() {
-    console.log('uplinePwd',this.uplinePwd);
     this.display = 'block';
   }
 

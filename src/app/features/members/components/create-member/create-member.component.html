@@ -440,6 +440,7 @@
       <div class="modal-body bg-dark text-white">
         <div class="row">
           <section class="section w-75 m-auto">
+
             <input
               type="password"
               class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
@@ -448,6 +449,7 @@
             <button
               class="btn btn-success rounded-pill w-80 mt-3"
               (click)="createMember()"
+              [disabled]="!uplinePwd"
             >
               Yes
             </button>

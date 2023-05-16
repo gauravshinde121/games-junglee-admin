@@ -171,7 +171,8 @@
                 </div>
               </div>
               <div class="row mt-3">
-                <div class="col-md-12 overflow-auto">
+                <div class="col-md-12 ">
+                  <div class="table-responsive tableRes tableFixHead">
                   <table
                     class="table tableall"
                     *ngIf="allBets.length > 0 && !this.isLoading"
@@ -233,6 +234,7 @@
                       </tr>
                     </tbody>
                   </table>
+                  </div>
                 </div>
               </div>
               <div *ngIf="allBets.length > 0 && !this.isLoading">

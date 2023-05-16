@@ -56,7 +56,7 @@
         <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
-      <div class="table-responsive">
+      <div class="table-responsive tableRes tableFixHead">
       <table class="table tableall" *ngIf="plStatement.length > 0">
         <thead>
           <tr>

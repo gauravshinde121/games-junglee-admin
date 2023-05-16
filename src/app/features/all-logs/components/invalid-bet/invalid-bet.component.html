@@ -74,7 +74,8 @@
       <!--your code will come here end-->
     </div>
     <div class="row pt-5">
-      <div class="col-md-12 overflow-auto">
+      <div class="col-md-12 ">
+        <div class="table-responsive tableRes tableFixHead">
         <table
           class="table table tableall"
           *ngIf="allBets.length > 0 && !this.isLoading"
@@ -143,6 +144,7 @@
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   </section>

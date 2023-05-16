@@ -719,7 +719,7 @@ select:-webkit-autofill:focus {
 }
 
 .tableFixHead::-webkit-scrollbar-track {
-  background-color: #ebebeb;
+  /* background-color: #ebebeb; */
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
@@ -733,3 +733,18 @@ select:-webkit-autofill:focus {
 .btn.disabled, .btn:disabled, fieldset:disabled .btn{
   opacity: 0.3;
 }
+
+::-webkit-scrollbar{
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ff0015 0, #e76f26);
+}
+
+::-webkit-scrollbar-track{
+  background-color: #000;
+}
+

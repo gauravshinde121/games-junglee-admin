@@ -30,6 +30,8 @@ export class CreateMemberComponent implements OnInit {
   memberPercentage:any = '--';
   show:boolean = false;
   show1:boolean = false;
+  display:string = 'none';
+  uplinePwd:string = '';
 
   constructor(
     private _fb: FormBuilder,
@@ -57,6 +59,10 @@ export class CreateMemberComponent implements OnInit {
       this.editUserId = this.route.snapshot.params['id'];
     }
 
+  }
+
+  closeModal() {
+    this.display = 'none';
   }
 
   private _preConfig() {
@@ -166,20 +172,7 @@ export class CreateMemberComponent implements OnInit {
     }
   }
 
-  onMinBetChange(e){
-    this._sharedService.maxBetMinValue.next({
-      'value' : e.target.value
-    });
-    /*this.memberForm = this._fb.group({
-      maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(e.target.value)]],
-    });*/
-  }
-
-  get f() {
-    return this.memberForm.controls;
-  }
-
-  onSubmitMemberForm() {
+  createMember(){
 
     var currentUserIp:any;
     this._sharedService.currentUserIp.subscribe((data: any) => {
@@ -249,7 +242,24 @@ export class CreateMemberComponent implements OnInit {
         this._sharedService.getToastPopup(`Error while creating the member.`, 'Member', 'error');
       }
     )
+  }
 
+  onMinBetChange(e){
+    this._sharedService.maxBetMinValue.next({
+      'value' : e.target.value
+    });
+    /*this.memberForm = this._fb.group({
+      maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(e.target.value)]],
+    });*/
+  }
+
+  get f() {
+    return this.memberForm.controls;
+  }
+
+  onSubmitMemberForm() {
+    console.log('uplinePwd',this.uplinePwd);
+    this.display = 'block';
   }
 
 

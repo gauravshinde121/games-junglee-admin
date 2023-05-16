@@ -73,7 +73,7 @@
               </div>
             </div>
             <div class="col-md-3 mb-2" *ngIf="!editMode">
-                <label>Password</label>
+              <label>Password</label>
               <div class="input-group">
               <input
                 [type]="show ? 'text' : 'password'"
@@ -132,14 +132,9 @@
               >
                 Confirm Password is required
               </div>
-              <div
-                *ngIf="f['confirmPassword'].getError('Mustmatch') != null"
-                class="small text-danger col-md-12"
-              >
-                Confirm password doesn't match
-              </div>
             </div>
-            </div>
+
+      </div>
             <!--<div class="col-md-3 mb-2">
               <label>Max Credit Limit</label>
               <input
@@ -401,3 +396,61 @@
     <!--your code will come here end-->
   </form>
 </main>
+
+<!-- Modal end -->
+<div
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          Please enter your Password
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark text-white">
+        <div class="row">
+          <section class="section w-75 m-auto">
+
+            <input
+              type="password"
+              class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+              [(ngModel)]="uplinePwd"
+            />
+            <button
+              class="btn btn-success rounded-pill w-80 mt-3"
+              (click)="createMember()"
+              [disabled]="!uplinePwd"
+            >
+              Yes
+            </button>
+            <button
+              class="btn btn-danger rounded-pill w-80 mt-3 float-right"
+              (click)="closeModal()"
+            >
+              Cancel
+            </button>
+            <!--your code will come here end-->
+            <!-- </div> -->
+            <!-- </div> -->
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

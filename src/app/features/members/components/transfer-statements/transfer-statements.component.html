@@ -43,16 +43,16 @@
     </div>
   </div>
   <div class="col-md-12 mt-3">
-    <div class="row">
+    <div class="table-responsive tableFixHead tableRes">
       <table
         class="table tableall"
         *ngIf="transferStatements.length > 0 && !this.isLoading"
       >
         <thead>
           <tr>
-            <th scope="col" class="text-dark">Date</th>
-            <th scope="col" class="text-dark">Payer/Payee</th>
-            <th scope="col" class="text-dark">Amount</th>
+            <th scope="col" class="text-white first">Date</th>
+            <th scope="col" class="text-white">Payer/Payee</th>
+            <th scope="col" class="text-white last">Amount</th>
           </tr>
         </thead>
         <tbody>
@@ -68,7 +68,6 @@
             >
               {{ statements?.amount }}
             </td>
-            <td></td>
           </tr>
         </tbody>
       </table>

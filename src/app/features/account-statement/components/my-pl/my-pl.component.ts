@@ -96,7 +96,7 @@ export class MyPlComponent implements OnInit {
     let body = {
       fromDate: fromDate,
       toDate: toDate,
-      sportId:+ this.filterForm.value.sportsId,
+      sportId:this.filterForm.value.sportsId?+this.filterForm.value.sportsId:this.filterForm.value.sportsId,
       matchId: this.filterForm.value.matchId,
       marketId: this.filterForm.value.marketId,
       pageNo: this.currentPage,
@@ -143,7 +143,7 @@ export class MyPlComponent implements OnInit {
   }
 
   _getMatchBySportId(sportId) {
-    this._sharedService.getMatchBySportId(+sportId).subscribe((data: any) => {
+    this._sharedService.getMatchBySportId(sportId).subscribe((data: any) => {
       if (data.matchList) {
         this.matchList = data.matchList;
       }

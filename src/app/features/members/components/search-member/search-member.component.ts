@@ -44,4 +44,16 @@ export class SearchMemberComponent implements OnInit {
     });
   }
 
+  clearSearch(){
+    this.searchTerm = '';
+    let body = {
+      searchText: this.searchTerm,
+    };
+    this._membersService._searchMembersApi(body).subscribe((users: any) => {
+      this.isLoading = false;
+      this.memberList = users.memberList;
+      this.memberHierarchy = [];
+    });
+  }
+
 }

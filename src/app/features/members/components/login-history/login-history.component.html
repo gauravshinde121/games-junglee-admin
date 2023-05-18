@@ -43,20 +43,20 @@
     <!-- <div class="border text-center p-5">
    <h4>No data found </h4>
  </div> -->
-
+<div class="table-responsive tableFixHead tableRes">
     <table
       class="table tableall"
       *ngIf="loginHistory.length > 0 && !this.isLoading"
     >
       <thead>
         <tr>
-          <th>#</th>
-          <th scope="col" class="text-dark">Name</th>
-          <th scope="col" class="text-dark">Date</th>
-          <th scope="col" class="text-dark">IP</th>
-          <th scope="col" class="text-dark">Device</th>
-          <th scope="col" class="text-dark">Browser</th>
-          <th scope="col" class="text-dark">OS</th>
+          <th scope="col" class="first">#</th>
+          <th scope="col" class="">Name</th>
+          <th scope="col" class="">Date</th>
+          <th scope="col" class="">IP</th>
+          <th scope="col" class="">Device</th>
+          <th scope="col" class="">Browser</th>
+          <th scope="col" class="last">OS</th>
         </tr>
       </thead>
       <tbody>
@@ -81,6 +81,7 @@
         </tr>
       </tbody>
     </table>
+  </div>
   </div>
 
   <div *ngIf="loginHistory.length > 0 && !this.isLoading">

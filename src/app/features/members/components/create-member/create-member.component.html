@@ -14,7 +14,7 @@
             <div class="col-md-6 text-pink">
               <h4>
                 <i class="fa fa-solid fa-user text-pink me-2"></i>
-                <i class="fa fa-bars text-pink me-2"></i>
+                <!-- <i class="fa fa-bars text-pink me-2"></i> -->
                 {{ editMode ? "Update Member" : "Create Member" }}
               </h4>
             </div>
@@ -73,7 +73,7 @@
               </div>
             </div>
             <div class="col-md-3 mb-2" *ngIf="!editMode">
-                <label>Password</label>
+              <label>Password</label>
               <div class="input-group">
               <input
                 [type]="show ? 'text' : 'password'"
@@ -83,7 +83,7 @@
                 id="password"
                 name="password"
               />
-                <span (click)="show=!show" class="input-group-text fa fa-eye text-dark"  id="Password" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
+                <span (click)="show=!show" class="input-group-text fa fa-eye text-dark p-0"  id="Password" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
               </div>
               <div
                 class="small text-danger"
@@ -122,7 +122,7 @@
                 id="password"
                 name="password"
               />
-              <span (click)="show1=!show1" class="input-group-text fa fa-eye text-dark"  id="Password" [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"></span>
+              <span (click)="show1=!show1" class="input-group-text fa fa-eye text-dark p-0"  id="Password" [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"></span>
               <div
                 *ngIf="
                   memberForm.controls['confirmPassword'].errors?.required &&
@@ -132,14 +132,9 @@
               >
                 Confirm Password is required
               </div>
-              <div
-                *ngIf="f['confirmPassword'].getError('Mustmatch') != null"
-                class="small text-danger col-md-12"
-              >
-                Confirm password doesn't match
-              </div>
             </div>
-            </div>
+
+      </div>
             <!--<div class="col-md-3 mb-2">
               <label>Max Credit Limit</label>
               <input
@@ -369,11 +364,11 @@
         </div>
       </div>
     </section>
-    <div class="row mt-3">
+    <div class="row my-3">
       <div class="col-md-6 col-6 text-end">
         <button
           type="button"
-          class="btn btn-pink rounded-pill ps-5 pe-5 pt-3 pb-3"
+          class="btn btn-pink rounded-pill ps-5 pe-5 py-2"
           routerLink="member/list"
         >
           Cancel
@@ -383,7 +378,7 @@
         <button
           *ngIf="!editMode"
           type="submit"
-          class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3"
+          class="btn btn-pink rounded-pill ps-5 pe-5 py-2"
           [disabled]="!memberForm.valid"
         >
           Save
@@ -391,7 +386,7 @@
         <button
           *ngIf="editMode"
           type="submit"
-          class="btn btn-danger rounded-pill ps-5 pe-5 pt-3 pb-3"
+          class="btn btn-pink rounded-pill ps-5 pe-5 py-2"
           [disabled]="memberForm.invalid || memberForm.pristine"
         >
           Update
@@ -401,3 +396,62 @@
     <!--your code will come here end-->
   </form>
 </main>
+
+<!-- Modal end -->
+<div
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
+          Please enter your Password
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark text-white">
+        <div class="row">
+          <section class="section  m-auto">
+
+            <input
+              type="password"
+              class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+              placeholder="Enter your password"
+              [(ngModel)]="uplinePwd"
+            />
+            <button
+              class="btn rounded-pill w-30 mt-3 btn-pink"
+              (click)="createMember()"
+              [disabled]="!uplinePwd"
+            >
+              Yes
+            </button>
+            <button
+              class="btn  rounded-pill w-30 mt-3 ms-3 float-right btn-pink"
+              (click)="closeModal()"
+            >
+              Cancel
+            </button>
+            <!--your code will come here end-->
+            <!-- </div> -->
+            <!-- </div> -->
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

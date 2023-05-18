@@ -56,7 +56,7 @@
         <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
-      <div class="table-responsive">
+      <div class="table-responsive tableRes tableFixHead">
       <table class="table tableall" *ngIf="plStatement.length > 0">
         <thead>
           <tr>
@@ -135,7 +135,7 @@
   aria-labelledby="staticBackdropLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+  <div class="modal-dialog modal-dialog-scrollable ">
     <div class="modal-content border-danger">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
@@ -267,8 +267,9 @@
   aria-labelledby="betDetailLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-scrollable modal-lg">
-    <div class="modal-content border-danger modal-size">
+<!-- modal-dialog-scrollable -->
+  <div class="modal-dialog  modal-xl">
+    <div class="modal-content border-danger ">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-white" id="betDetailLabel">
           Detail
@@ -285,7 +286,8 @@
         Loading...
       </div>
       <div class="modal-body bg-dark text-white" *ngIf="betInfo">
-        <div class="col-md-12 overflow-auto mb-4">
+        <div class="col-md-12 mb-4">
+          <div class="tableFixHead">
           <table class="table tableall" *ngIf="betInfo.length > 0">
             <thead>
               <tr>
@@ -353,6 +355,7 @@
               </tr>
             </tbody>
           </table>
+        </div>
         </div>
       </div>
     </div>

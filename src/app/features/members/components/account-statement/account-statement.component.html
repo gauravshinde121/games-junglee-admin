@@ -53,7 +53,7 @@
       <!-- <div class="border text-center p-5" *ngIf="accountStatement.length == 0">
         <h4 >No data found</h4>
       </div> -->
-
+<div class="table-responsive tableFixHead tableRes">
       <table class="table tableall" *ngIf="accountStatement.length > 0">
         <thead>
           <tr>
@@ -88,7 +88,7 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table></div>
     </div>
   </div>
   <div class="col-md-12 mt-3" *ngIf="accountStatement.length == 0">
@@ -130,11 +130,11 @@
   aria-labelledby="staticBackdropLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog modal-lg">
-    <div class="modal-content modal-size">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content ">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino text-dark" id="staticBackdropLabel">
-          Game Detail &nbsp; <i class="fa fa-lock text-pink"></i>
+        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
+          Game Detail &nbsp; <i class="fa fa-lock text-white"></i>
         </h5>
         <button
           type="button"
@@ -150,8 +150,8 @@
             <table class="table tableall">
               <thead>
                 <tr>
-                  <th scope="col" class="text-dark">Game Info</th>
-                  <th scope="col"></th>
+                  <th scope="col" class="text-white first">Game Info</th>
+                  <th scope="col" class="last"></th>
                 </tr>
               </thead>
               <tbody>
@@ -210,8 +210,8 @@
             <table class="table tableall">
               <thead>
                 <tr>
-                  <th scope="col" class="text-dark">Winner</th>
-                  <th scope="col" class="text-dark"></th>
+                  <th scope="col" class="text-white first">Winner</th>
+                  <th scope="col" class="text-white last"></th>
                 </tr>
               </thead>
               <tbody>
@@ -228,20 +228,21 @@
           </div>
         </div>
         <div class="row">
+          <div class="table-responsive tableRes tableFixHead">
           <table class="table tableall" *ngIf="accountStatement.length > 0">
             <thead>
               <tr>
-                <th scope="col" class="text-dark">Place Date</th>
-                <th scope="col" class="text-dark">Matched Date</th>
-                <th scope="col" class="text-dark">Type</th>
-                <th scope="col" class="text-dark">Status</th>
-                <th scope="col" class="text-dark">Horse Name</th>
-                <th scope="col" class="text-dark">Avg. Odds</th>
-                <th scope="col" class="text-dark">Odds</th>
-                <th scope="col" class="text-dark">Stake</th>
-                <th scope="col" class="text-dark">Matched Stake</th>
-                <th scope="col" class="text-dark">Profit/Loss (In INR)</th>
-                <th scope="col" class="text-dark">IP</th>
+                <th scope="col" class="text-white first">Place Date</th>
+                <th scope="col" class="text-white">Matched Date</th>
+                <th scope="col" class="text-white">Type</th>
+                <th scope="col" class="text-white">Status</th>
+                <th scope="col" class="text-white">Horse Name</th>
+                <th scope="col" class="text-white">Avg. Odds</th>
+                <th scope="col" class="text-white">Odds</th>
+                <th scope="col" class="text-white">Stake</th>
+                <th scope="col" class="text-white">Matched Stake</th>
+                <th scope="col" class="text-white">Profit/Loss (In INR)</th>
+                <th scope="col" class="text-white last">IP</th>
               </tr>
             </thead>
             <tbody>
@@ -270,7 +271,7 @@
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
       </div>
     </div>

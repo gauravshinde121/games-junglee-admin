@@ -96,6 +96,7 @@
           <h4 *ngIf="userList.length == 0 && !isLoading">No data found</h4>
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
+        <div class="table-responsive tableRes tableFixHead">
         <table
           #myTable
           class="table tableall"
@@ -247,7 +248,7 @@
               </td>
             </tr>
           </tbody>
-        </table>
+        </table></div>
         <div *ngIf="userList.length > 0 && !this.isLoading">
           <button
             class="btn rounded-pill text-white"

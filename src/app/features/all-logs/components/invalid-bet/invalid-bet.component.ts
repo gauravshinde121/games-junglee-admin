@@ -75,7 +75,7 @@ export class InvalidBetComponent implements OnInit {
       this.invalidBetForm.patchValue( {'memberName':null} );
     }
     let body = {
-      fromDate : fromDate, 
+      fromDate : fromDate,
       toDate : toDate,
       userId :this.invalidBetForm.value.memberName,
       limit:this.limit,
@@ -117,7 +117,7 @@ export class InvalidBetComponent implements OnInit {
     this.allBets.forEach(element => {
       allBet.push({
         member:element.member,
-        date : moment(element.placedTime).format("MMM d, y, h:mm:ss a"),
+        date : moment(element.placedTime).format("MMM D, YYYY, h:mm:ss a"),
         event: element.event,
         market:element.market,
         OrderPlace:element.oddsPlaced,

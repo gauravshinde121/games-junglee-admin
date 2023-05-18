@@ -168,7 +168,7 @@ export class MyPlComponent implements OnInit {
     let pL : any = []
     this.plStatement.forEach(element => {
       pL.push({
-        date :  moment(element.createdAt).format("MMM d, y, h:mm:ss a"),
+        date :  moment(element.createdAt).format("MMM D, YYYY, h:mm:ss a"),
         game: element.gameName,
         subGame:element.subGame,
         event : element.eventName,

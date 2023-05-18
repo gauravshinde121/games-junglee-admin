@@ -19,6 +19,7 @@
               [(ngModel)]="searchTerm"
               (ngModelChange)="search()"
             />
+            <span class="input-group-text bg-dark text-white border-pink cursor-pointer radius-right-tb" (click)="clearSearch()">Clear search</span>
           </div>
           <div class="searchList" *ngIf="memberList">
             <ul>
@@ -45,7 +46,7 @@
               <!-- <td>{{i+1}}</td> -->
               <td>
                 <img src="assets/images/arrowDown2.gif" alt="" class="my-md-3" width="30px"><br>
-                <span>{{member.username}} ({{member.roleName}})</span> 
+                <span>{{member.username}} ({{member.roleName}})</span>
               </td>
             </tr>
           </table>

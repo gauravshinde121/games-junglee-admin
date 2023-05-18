@@ -288,8 +288,31 @@ export class BetSettingsComponent implements OnInit {
     console.log(this.allBets)
     let allBet : any = []
     this.allBets.forEach(element => {
-      allBet.push({
-        username:element.username,
+      // allBet.push({
+      //   username:element.username,
+      //   date : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
+      //   event: element.event,
+      //   market:element.betCategory,
+      //   OrderPlace:element.oddsPlaced,
+      //   selection : element.selectionName,
+      //   OrderPlaced:element.betRate,
+      //   OrderMatched:element.betRate,
+      //   //mathedStake:element.stake,
+      //   //umatchedStake:element.stake
+      // })
+      if(element.isMatched){
+        allBet.push({username:element.username,
+          date : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
+          event: element.event,
+          market:element.betCategory,
+          OrderPlace:element.oddsPlaced,
+          selection : element.selectionName,
+          OrderPlaced:element.betRate,
+          OrderMatched:element.betRate,
+          mathedStake:element.stake});
+      }else {
+        allBet.push({
+          username:element.username,
         date : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
         event: element.event,
         market:element.betCategory,
@@ -297,9 +320,8 @@ export class BetSettingsComponent implements OnInit {
         selection : element.selectionName,
         OrderPlaced:element.betRate,
         OrderMatched:element.betRate,
-        // mathedStake:element.stake,
-        // umatchedStake:element.stake
-      })
+        umatchedStake:element.stake});
+      }
     });
     this._sharedService.exportExcel(allBet,this.fileName);
  }

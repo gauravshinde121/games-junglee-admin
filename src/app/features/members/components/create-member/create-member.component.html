@@ -411,7 +411,7 @@
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino" id="staticBackdropLabel">
+        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
           Please enter your Password
         </h5>
         <button
@@ -424,22 +424,23 @@
       </div>
       <div class="modal-body bg-dark text-white">
         <div class="row">
-          <section class="section w-75 m-auto">
+          <section class="section  m-auto">
 
             <input
               type="password"
               class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+              placeholder="Enter your password"
               [(ngModel)]="uplinePwd"
             />
             <button
-              class="btn btn-success rounded-pill w-80 mt-3"
+              class="btn rounded-pill w-30 mt-3 btn-pink"
               (click)="createMember()"
               [disabled]="!uplinePwd"
             >
               Yes
             </button>
             <button
-              class="btn btn-danger rounded-pill w-80 mt-3 float-right"
+              class="btn  rounded-pill w-30 mt-3 ms-3 float-right btn-pink"
               (click)="closeModal()"
             >
               Cancel

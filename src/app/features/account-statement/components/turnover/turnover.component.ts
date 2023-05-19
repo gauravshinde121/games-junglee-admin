@@ -70,7 +70,7 @@ export class TurnoverComponent implements OnInit {
     let body = {
       fromDate: fromDate,
       toDate: toDate,
-      sportsId:this.filterForm.value.sportsId,
+      sportId:this.filterForm.value.sportsId?+this.filterForm.value.sportsId:null,
       pageNo: this.currentPage,
       limit: this.limit,
     }

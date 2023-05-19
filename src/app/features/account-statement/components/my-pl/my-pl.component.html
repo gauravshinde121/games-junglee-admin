@@ -39,8 +39,9 @@
                 formControlName="sportsId"
                 id="ab"
                 class="form-select pointer"
+                (change)="changeGame($event)"
               >
-                <option value="null">All</option>
+                <option [value]="null">All</option>
                 <option *ngFor="let game of games" [value]="game.sportId">
                   {{ game.sportName }}
                 </option>
@@ -52,8 +53,9 @@
                 formControlName="matchId"
                 id="ab"
                 class="form-select pointer"
+                (change)="changeMatch($event)"
               >
-                <option value="null">All</option>
+                <option [value]="null">All</option>
                 <option [value]="match.matchId" *ngFor="let match of matchList">
                   {{ match.matchName }}
                 </option>
@@ -65,8 +67,9 @@
                 formControlName="marketId"
                 id="ab"
                 class="form-select pointer"
+                (change)="changeMarketType($event)"
               >
-                <option value="null">All</option>
+                <option [value]="null">All</option>
                 <option
                   [value]="market.marketId"
                   *ngFor="let market of marketList"
@@ -78,7 +81,7 @@
             <div class="col-md-3 d-flex align-items-end">
               <button
                 type="button"
-                (click)="getPlStatement()"
+                (click)="searchList()"
                 class="btn btn-pink rounded-pill mt-4"
               >
                 Search

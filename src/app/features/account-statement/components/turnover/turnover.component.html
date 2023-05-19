@@ -32,7 +32,7 @@
           id="ab"
           class="form-select pointer pt-2"
         >
-          <option value="null">All</option>
+          <option [value]="null">All</option>
           <option *ngFor="let game of games" [value]="game.sportId">
             {{ game.sportName }}
           </option>

@@ -431,7 +431,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     let viewtotal : any = []
     this.viewTotal.forEach(element => {
       viewtotal.push({
-        username:element.username,
+        username:element.userName,
         date : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
         event: element.event,
         market:element.marketName,

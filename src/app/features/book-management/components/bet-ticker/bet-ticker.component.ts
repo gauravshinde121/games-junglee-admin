@@ -15,9 +15,9 @@ export class BetTickerComponent implements OnInit {
   betTickerForm: FormGroup;
   fromDate = new Date().toString();
   toDate = new Date().toString();
-  games:any;
-  matchList:any = [];
-  marketList:any = [];
+  games: any;
+  matchList: any = [];
+  marketList: any = [];
   dateFormat = "yyyy-MM-dd";
   language = "en";
   allBets: any;
@@ -29,18 +29,18 @@ export class BetTickerComponent implements OnInit {
   pageSize: number = 50;
   totalPages: number = 0;
   isLoading = false;
-  allMembers:any;
-  limit:number = 50;
+  allMembers: any;
+  limit: number = 50;
 
-  fileName= 'BetTicker.xlsx';
+  fileName = 'BetTicker.xlsx';
 
   constructor(
-    private _sharedService:SharedService,
-    private _memberService:MembersService,
-    private bookManagementService:BookManagementService,
+    private _sharedService: SharedService,
+    private _memberService: MembersService,
+    private bookManagementService: BookManagementService,
     private _fb: FormBuilder,
   ) { }
-  get f(){
+  get f() {
     return this.betTickerForm.controls;
   }
 
@@ -57,7 +57,7 @@ export class BetTickerComponent implements OnInit {
     this.getAllUserBets();
   }
 
-  _preConfig(){
+  _preConfig() {
     /*
     this._sharedService._getGames().subscribe((res:any)=>{
       this.games = res.gamesList;
@@ -81,7 +81,7 @@ export class BetTickerComponent implements OnInit {
   //   });
   // }
 
-  _initForm(){
+  _initForm() {
     this.betTickerForm = this._fb.group({
       memberName: null,
       sportsId: null,
@@ -89,54 +89,54 @@ export class BetTickerComponent implements OnInit {
       marketId: null,
       tms: ['All'],
       type: ['All'],
-      typeName:['All'],
-      betType:["Matched"],
+      typeName: ['All'],
+      betType: ["Matched"],
       time: ["All"],
-      fromDate : this.formatFormDate(new Date()),
-      toDate : this.formatFormDate(new Date()),
-      stakesFromValue : [null],
-      stakesToValue : [null]
+      fromDate: this.formatFormDate(new Date()),
+      toDate: this.formatFormDate(new Date()),
+      stakesFromValue: [null],
+      stakesToValue: [null]
     });
   }
 
   formatFormDate(date: Date) {
-    return formatDate(date, this.dateFormat,this.language);
+    return formatDate(date, this.dateFormat, this.language);
   }
 
-  _getGames(){
-    this._sharedService._getSports().subscribe((data:any)=>{
-      if(data){
+  _getGames() {
+    this._sharedService._getSports().subscribe((data: any) => {
+      if (data) {
         this.games = data;
       }
     });
   }
 
-  _getMatchBySportId(sportId){
-    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
-      if(data.matchList){
+  _getMatchBySportId(sportId) {
+    this._sharedService.getMatchBySportId(sportId).subscribe((data: any) => {
+      if (data.matchList) {
         this.matchList = data.matchList;
       }
     });
   }
 
 
-  _getAllMembers(){
-    this._memberService._getAllMembers().subscribe((data:any)=>{
-      if(data.memberData){
+  _getAllMembers() {
+    this._memberService._getAllMembers().subscribe((data: any) => {
+      if (data.memberData) {
         this.allMembers = data.memberData;
       }
     });
   }
 
-  _getMarketsByMatchId(matchId){
-    this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
-      if(data.marketList){
+  _getMarketsByMatchId(matchId) {
+    this._sharedService.getMarketsByMatchId(matchId).subscribe((data: any) => {
+      if (data.marketList) {
         this.marketList = data.marketList;
       }
     });
   }
 
-  onGameSelected(sportId){
+  onGameSelected(sportId) {
     this._getMatchBySportId(sportId);
   }
 
@@ -154,7 +154,7 @@ export class BetTickerComponent implements OnInit {
 
 
 
-  getAllUserBets(){
+  getAllUserBets() {
 
     this.isLoading = true;
     this.allBets = [];
@@ -169,26 +169,26 @@ export class BetTickerComponent implements OnInit {
     toDate.setSeconds(59);
 
     let body = {
-      fromDate:fromDate,
-      toDate:toDate,
+      fromDate: fromDate,
+      toDate: toDate,
       sportId: null,
       matchId: null,
       // userId: null,
-      marketId : null,
-      stakesFrom :null,
-      stakesTo :null,
+      marketId: null,
+      stakesFrom: null,
+      stakesTo: null,
       pageNo: this.currentPage,
       limit: this.limit,
       userId: null
     };
 
-    this.bookManagementService._getAllUserBetsApi(body).subscribe((res:any)=>{
+    this.bookManagementService._getAllUserBetsApi(body).subscribe((res: any) => {
       this.isLoading = false;
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
-    },(err)=>{
+    }, (err) => {
       console.log(err);
-      this._sharedService.getToastPopup("Internal server error","","error")
+      this._sharedService.getToastPopup("Internal server error", "", "error")
     });
   }
 
@@ -213,10 +213,10 @@ export class BetTickerComponent implements OnInit {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
 
-    if(this.sportsId == 'null'){
+    if (this.sportsId == 'null') {
       this.sportsId = null;
     }
-    if(this.matchId == 'null'){
+    if (this.matchId == 'null') {
       this.matchId = null;
     }
 
@@ -225,44 +225,61 @@ export class BetTickerComponent implements OnInit {
       matchId: this.matchId,
       marketId: this.marketTypeId,
       // userId: +this.betTickerForm.value.userId,
-      stakesFrom :this.betTickerForm.value.stakesFromValue,
-      stakesTo : this.betTickerForm.value.stakesToValue,
-      fromDate : fromDate,
-      toDate : toDate,
+      stakesFrom: this.betTickerForm.value.stakesFromValue,
+      stakesTo: this.betTickerForm.value.stakesToValue,
+      fromDate: fromDate,
+      toDate: toDate,
       userId: +this.betTickerForm.value.memberName
     }
 
-    this.bookManagementService._getAllUserBetsApi(payload).subscribe((res:any)=>{
+    this.bookManagementService._getAllUserBetsApi(payload).subscribe((res: any) => {
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
-    },(err)=>{
+    }, (err) => {
       console.log(err);
-      this._sharedService.getToastPopup("Internal server error","","error")
+      this._sharedService.getToastPopup("Internal server error", "", "error")
     });
   }
 
-  clearMemberName(){
+  clearMemberName() {
     this.betTickerForm.controls['memberName'].setValue(null);
   }
 
-  exportExcel(){
-    let allBet : any = []
+  exportExcel() {
+    console.log(this.allBets)
+    let allBet: any = []
     this.allBets.forEach(element => {
-      allBet.push({
-        username:element.username,
-        date :moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
-        event: element.event,
-        market:element.betCategory,
-        OrderPlace:element.oddsPlaced,
-        selection : element.selectionName,
-        OrderPlaced:element.betRate,
-        OrderMatched:element.betRate,
-        // mathedStake:element.stake,
-        // umatchedStake:element.stake,
-        profit_Liablity:element.profitLiability
-      })
+      if (element.isMatched) {
+        allBet.push({
+          username: element.username,
+          date: moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
+          event: element.event,
+          market: element.betCategory,
+          OrderPlace: element.oddsPlaced,
+          selection: element.selectionName,
+          OrderPlaced: element.betRate,
+          OrderMatched: element.betRate,
+          mathedStake:element.stake,
+          // umatchedStake:element.stake,
+          profit_Liablity: element.profitLiability
+        })
+      } else {
+        allBet.push({
+          username: element.username,
+          date: moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
+          event: element.event,
+          market: element.betCategory,
+          OrderPlace: element.oddsPlaced,
+          selection: element.selectionName,
+          OrderPlaced: element.betRate,
+          OrderMatched: element.betRate,
+          //mathedStake:element.stake,
+           umatchedStake:element.stake,
+          profit_Liablity: element.profitLiability
+        });
+      }
     });
-    this._sharedService.exportExcel(allBet,this.fileName);
- }
+    this._sharedService.exportExcel(allBet, this.fileName);
+  }
 
 }

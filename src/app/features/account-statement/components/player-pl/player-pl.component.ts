@@ -127,7 +127,7 @@ export class PlayerPlComponent implements OnInit {
       sportId: this.filterForm.value.sportsId,
       matchId: this.filterForm.value.matchId,
       marketId: this.filterForm.value.marketId,
-      memberId: this.filterForm.value.memberName,
+      memberId: this.filterForm.value.memberName?+this.filterForm.value.memberName:null,
       pageNo: this.currentPage,
       limit: this.limit,
     };

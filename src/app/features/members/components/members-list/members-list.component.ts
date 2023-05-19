@@ -35,7 +35,8 @@ export class MembersListComponent implements OnInit {
   selectedRoleId = 7;
   refreshCount: number = 30;
   resetTimerInterval: any;
-
+  show:boolean = false;
+  show1:boolean = false;
   //dtOptions: DataTables.Settings = {};
 
   searchTerm: string = '';
@@ -343,6 +344,7 @@ export class MembersListComponent implements OnInit {
 
   closeModal() {
     this.display = 'none';
+    this.changePasswordForm.reset();
   }
 
   updateGameControl(status: any, sportsId) {

@@ -96,7 +96,7 @@ export class MyPlComponent implements OnInit {
     let body = {
       fromDate: fromDate,
       toDate: toDate,
-      sportId: this.filterForm.value.sportsId,
+      sportId:this.filterForm.value.sportsId?+this.filterForm.value.sportsId:this.filterForm.value.sportsId,
       matchId: this.filterForm.value.matchId,
       marketId: this.filterForm.value.marketId,
       pageNo: this.currentPage,
@@ -151,7 +151,7 @@ export class MyPlComponent implements OnInit {
   }
 
   onGameSelected(sportId) {
-    this._getMatchBySportId(sportId);
+    this._getMatchBySportId(+sportId);
   }
 
   next(): void {

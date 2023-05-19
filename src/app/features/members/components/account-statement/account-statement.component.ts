@@ -113,7 +113,7 @@ export class AccountStatementComponent implements OnInit {
     let body = {
       fromDate : fromDate,
       toDate : toDate,
-      sportId : this.filterForm.value.sportsId,
+      sportId : +this.filterForm.value.sportsId,
       userId: this.userId,
       pageNo: this.currentPage,
       limit: this.limit,
@@ -149,7 +149,7 @@ export class AccountStatementComponent implements OnInit {
   }
 
   _getMatchBySportId(sportId){
-    this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
+    this._sharedService.getMatchBySportId(+sportId).subscribe((data:any)=>{
       if(data.matchList){
         this.matchList = data.matchList;
         //console.log('data.matchList',data.matchList);

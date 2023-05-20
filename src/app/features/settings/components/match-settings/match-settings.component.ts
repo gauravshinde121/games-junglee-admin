@@ -72,7 +72,7 @@ export class MatchSettingsComponent implements OnInit {
     }
     let body = {
       matchIsActive: status,
-      sportId: this.filterForm.value.sportName,
+      sportId: this.filterForm.value.sportName?+this.filterForm.value.sportName:null,
       matchName: this.filterForm.value.matchName
     }
     this.settingsService._getMatchSettingsListApi(body).subscribe((data: any) => {

@@ -21,6 +21,8 @@ export class MarketSettingsComponent implements OnInit {
   selectedMatchSettings: any;
   tournamentList:any;
   matchList: any;
+  sportId:any;
+  
   constructor(
     private settingsService: SettingsService,
     private _sharedService: SharedService
@@ -58,6 +60,9 @@ export class MarketSettingsComponent implements OnInit {
   }
 
   getMarketSettingsList() {
+    if(this.filterForm.value.sportId == null || this.filterForm.value.sportId== "null"){
+      this.filterForm.value.tournamentId = null;
+    }
     this.isLoading = true;
     this.marketSettingsList = [];
     if (this.filterForm.value.memberName == null) {
@@ -73,12 +78,20 @@ export class MarketSettingsComponent implements OnInit {
     } else {
       status = this.filterForm.value.status;
     }
+
+    if(this.filterForm.value.sportsId == 'null'){
+      this.filterForm.value.sportsId = null;
+    }
+    if(this.filterForm.value.tournamentId == 'null'){
+      this.filterForm.value.tournamentId = null;
+    }
     let body = {
       marketIsActive: status,
-      sportId: this.filterForm.value.sportName,
+      sportId: this.filterForm.value.sportName?+this.filterForm.value.sportName:null,
       matchId: this.filterForm.value.matchName,
-      tournamentId: this.filterForm.value.tournamentId
+      tournamentId: this.filterForm.value.tournamentId?+this.filterForm.value.tournamentId:null
     }
+    
     this.settingsService._getMarketForAdminMarketSettingsListApi(body).subscribe((data: any) => {
       this.isLoading = false;
       this.marketSettingsList = data.markets;
@@ -94,6 +107,10 @@ export class MarketSettingsComponent implements OnInit {
   }
 
   _onSportSelect(){
+    if(this.sportId == null ||this.sportId == 'null' ) {
+      this.filterForm.value.tournamentId = null;
+    }
+
     var sportId = this.filterForm.value.sportName;
     if(!sportId) return
     this._sharedService.getTournamentBySportIdApi(sportId).subscribe((data:any)=>{
@@ -101,6 +118,7 @@ export class MarketSettingsComponent implements OnInit {
         this.tournamentList = data;
       }
     });
+    
   }
 
   _onTournamentSelect(){
@@ -124,5 +142,14 @@ export class MarketSettingsComponent implements OnInit {
       this._sharedService.getToastPopup("Settings updated.", 'Market Settings', 'success');
     })
   }
+
+  // changeGame(evt) {
+  //   // this.sportsId = evt.target.value;
+  //   console.log("changegame",evt.target.value);
+  //   this.filterForm.value.sportsId = evt.target.value;
+  //   if(evt.target.value == null) {
+  //     this.filterForm.value.tournamentId = null;
+  //   }
+  // }
 
 }

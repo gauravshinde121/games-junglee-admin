@@ -101,9 +101,12 @@
               <td>{{ stmt.balance }}</td>
               <td>{{ stmt.oldBalance }}</td>
               <!-- <td>{{stmt.}} -->
-              <td>
+              <td class="tooltipnk ms-0  mt-1">
                 <ng-container *ngIf="stmt.ipAddress; else notMatched">
-                  {{ stmt.ipAddress }}
+                  <i class="fa-sharp fa-solid fa-info"></i>
+                  <span class="tooltiptext px-5 w-auto">
+                    <small>{{ stmt.ipAddress }}</small>
+                  </span>
                 </ng-container>
                 <ng-template #notMatched> -- </ng-template>
               </td>

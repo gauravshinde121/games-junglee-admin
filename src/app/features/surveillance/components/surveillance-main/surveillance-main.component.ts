@@ -309,16 +309,16 @@ export class SurveillanceMainComponent implements OnInit {
     let allBet : any = []
     this.allBets.forEach(element => {
       allBet.push({
-        username:element.username,
-        date : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
-        event: element.event,
-        market:element.betCategory,
+        Member:element.username,
+        PlaceTime : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
+        Events: element.event,
+        Market:element.betCategory,
+        Selection : element.selectionName,
         OrderPlace:element.oddsPlaced,
-        selection : element.selectionName,
         OrderPlaced:element.betRate,
         OrderMatched:element.betRate,
-        mathedStake:element.stake,
-        umatchedStake:element.stake
+        MatchedStake:element.stake,
+        UnmatchedStake:element.stake
       })
     });
     this._sharedService.exportExcel(allBet,this.fileName);

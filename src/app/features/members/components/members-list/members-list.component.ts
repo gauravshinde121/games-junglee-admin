@@ -395,13 +395,14 @@ export class MembersListComponent implements OnInit {
     let memberList: any = []
     this.userList.forEach(element => {
       memberList.push({
-        username: element.username,
-        creditLimit: element.creditLimit,
-        exposure: element.exposure,
-        take: element.take,
-        give: element.give,
-        availableCredit: element.availableCredit,
-        isActive: element.isActive,
+        
+        Username: element.username,
+        CreditLimit: element.creditLimit,
+        NetExposure: element.exposure,
+        Take: element.take,
+        Give: element.give,
+        AvailableCredit: element.availableCredit,
+        Status: element.isActive,
       })
     });
     this._sharedService.exportExcel(memberList, this.fileName);

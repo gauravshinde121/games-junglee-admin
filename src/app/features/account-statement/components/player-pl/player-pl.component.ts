@@ -314,11 +314,11 @@ export class PlayerPlComponent implements OnInit {
     let profitLoss: any = []
     this.plStatement.forEach(element => {
       profitLoss.push({
-        date: moment(element.createDateTime).format("MMM D, YYYY, h:mm:ss a"),
-        sport: element.gameData.subGame,
-        match: element.gameData.eventName,
-        user: element.playerData.name,
-        amount: element.gameData.netAmt,
+        Date: moment(element.createDateTime).format("MMM D, YYYY, h:mm:ss a"),
+        Sport: element.gameData.subGame,
+        Match: element.gameData.eventName,
+        Username: element.playerData.name,
+        Amount: element.gameData.netAmt,
       })
     });
 

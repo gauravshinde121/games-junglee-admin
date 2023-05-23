@@ -116,16 +116,16 @@ export class InvalidBetComponent implements OnInit {
     let allBet : any = []
     this.allBets.forEach(element => {
       allBet.push({
-        member:element.member,
-        date : moment(element.placedTime).format("MMM D, YYYY, h:mm:ss a"),
-        event: element.event,
-        market:element.market,
+        Member:element.member,
+        PlacedDateTime : moment(element.placedTime).format("MMM D, YYYY, h:mm:ss a"),
+        Events: element.event,
+        Market:element.market,
+        Selection : element.selection,
         OrderPlace:element.oddsPlaced,
-        selection : element.selection,
-        matched:element.isMatched,
+        Matched:element.isMatched,
         Unmatched:element.stake,
         Profit_Liability:element.profitLiability,
-        remark:element.remarks
+        Remark:element.remarks
       })
     });
     this._sharedService.exportExcel(allBet,this.fileName);

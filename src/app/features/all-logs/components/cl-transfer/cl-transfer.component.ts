@@ -109,12 +109,12 @@ export class ClTransferComponent implements OnInit {
     let clTransfer : any = []
     this.clTransfers.forEach(element => {
       clTransfer.push({
-        date1 :  moment(element.createdDate).format("MMM D, YYYY, h:mm:ss a"),
-        fromUser: element.fromRefUserName,
-        touser:element.toRefUserName,
-        amount:element.amount,
-        availableCredit : element.balance,
-        OladBalance:element.oldBalance
+        CreationDate :  moment(element.createdDate).format("MMM D, YYYY, h:mm:ss a"),
+        Form: element.fromRefUserName,
+        To:element.toRefUserName,
+        Amount:element.amount,
+        AvailableCredit : element.balance,
+        OldAvailableCredit:element.oldBalance
       })
     });
     this._sharedService.exportExcel(clTransfer,this.fileName);

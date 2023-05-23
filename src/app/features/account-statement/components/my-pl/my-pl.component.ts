@@ -283,14 +283,14 @@ export class MyPlComponent implements OnInit {
     let pL : any = []
     this.plStatement.forEach(element => {
       pL.push({
-        date :  moment(element.createdAt).format("MMM D, YYYY, h:mm:ss a"),
-        game: element.gameName,
-        subGame:element.subGame,
-        event : element.eventName,
-        winLoss :element.win,
-        commision:element.commission,
-        netAmount:element.netAmount,
-        userCount:element.userCount,
+        Date :  moment(element.createdAt).format("MMM D, YYYY, h:mm:ss a"),
+        Game: element.gameName,
+        SubGame:element.subGame,
+        Event : element.eventName,
+        Win_Loss :element.win,
+        Commision:element.commission,
+        NetAmount:element.netAmount,
+        UserCount:element.userCount,
         BetCount:element.userBetCount
       })
     });

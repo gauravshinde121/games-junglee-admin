@@ -93,11 +93,11 @@ export class TransferStatementComponent implements OnInit {
     let transfetStatemnt : any = []
     this.transferStatements.forEach(element => {
       transfetStatemnt.push({
-        date :  moment(element.createdDate).format("MMM D, YYYY, h:mm:ss a"),
-        fromUser: element.fromUsername,
-        touser:element.toUsername,
-        amount : element.amount,
-        isGiven :element.isGiven,
+        Date :  moment(element.createdDate).format("MMM D, YYYY, h:mm:ss a"),
+        FromUser: element.fromUsername,
+        Touser:element.toUsername,
+        Amount : element.amount,
+        TransactionType:element.isGiven,
       })
     });
     this._sharedService.exportExcel(transfetStatemnt,this.fileName);

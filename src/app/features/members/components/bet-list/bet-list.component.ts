@@ -66,13 +66,17 @@ export class BetListComponent implements OnInit {
 
     this._preconfig();
     this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected value: ', selectedValue);
-      this._getMatchBySportId(selectedValue);
+      this.filterForm.patchValue({matchId:null,marketId:null});
+      if(selectedValue){
+        this._getMatchBySportId(selectedValue);
+      }
     });
 
     this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected matchId: ', selectedValue);
-      this._getMarketsByMatchId(selectedValue);
+      this.filterForm.patchValue({marketId:null});
+      if(selectedValue){
+        this._getMarketsByMatchId(selectedValue);
+      }
     });
 
   }

@@ -43,10 +43,10 @@ export class ActivityComponent implements OnInit {
   ngOnInit(): void {
     this._preConfig();
 
-    // this.searchActivityForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-    //   console.log('Selected value: ', selectedValue);
-    //   this._getMatchBySportId(selectedValue);
-    // });
+    this.searchActivityForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
+      this.searchActivityForm.patchValue({marketId:null});
+      this._getAllMarkets(selectedValue)
+    });
   }
 
 
@@ -87,12 +87,9 @@ export class ActivityComponent implements OnInit {
       marketId:this.searchActivityForm.value.marketId,
       sportId:this.searchActivityForm.value.sportsId
     }
-
     this._memberService._getMemberActivityApi(payload).subscribe((res:any)=>{
-      console.log('search',res);
       this.isLoading = false;
       this.activityData = res.data;
-      console.log('activity',this.activityData)
     })
   }
 
@@ -125,6 +122,7 @@ export class ActivityComponent implements OnInit {
 
   _onSportSelect(){
     console.log(this.searchActivityForm.value)
+    this.searchActivityForm.patchValue({marketList:null});
     this._getAllMarkets(this.searchActivityForm.value.sportsId)
   }
 

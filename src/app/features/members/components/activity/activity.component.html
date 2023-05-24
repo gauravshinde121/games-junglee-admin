@@ -23,7 +23,6 @@
             formControlName="sportsId"
             id="ab"
             class="form-select text-white bg-dark pointer"
-            (click)="_onSportSelect()"
           >
             <option class="text-dark bg-white" value="null">All</option>
             <option
@@ -45,7 +44,7 @@
             <option class="text-dark bg-white" value="null">All</option>
             <option
               class="text-dark bg-white"
-              value="market.marketId"
+              [value]="market.marketId"
               *ngFor="let market of marketList"
             >
               {{ market.marketName }}

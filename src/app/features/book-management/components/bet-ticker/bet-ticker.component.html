@@ -79,8 +79,8 @@
             class="form-select pointer"
             (change)="changeMatch($event)"
           >
-            <option value="null">All</option>
-            <option value="{{ match.matchId }}" *ngFor="let match of matchList">
+            <option [value]="null">All</option>
+            <option [value]="match.matchId" *ngFor="let match of matchList">
               {{ match.matchName }}
             </option>
           </select>
@@ -93,9 +93,9 @@
             class="form-select pointer"
             (change)="changeMarketType($event)"
           >
-            <option value="null">All</option>
+            <option [value]="null">All</option>
             <option
-              value="{{ market.marketId }}"
+              [value]="market.marketId"
               *ngFor="let market of marketList"
             >
               {{ market.marketName }}

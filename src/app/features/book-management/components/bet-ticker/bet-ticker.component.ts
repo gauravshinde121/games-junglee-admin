@@ -47,11 +47,18 @@ export class BetTickerComponent implements OnInit {
   ngOnInit(): void {
     this._preConfig();
     this.betTickerForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      this._getMatchBySportId(selectedValue);
+      this.matchId = null;
+      this.marketTypeId = null;
+      if(selectedValue){
+        this._getMatchBySportId(selectedValue);
+      }
     });
 
     this.betTickerForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
-      this._getMarketsByMatchId(selectedValue);
+      this.marketTypeId = null;
+      if(selectedValue){
+        this._getMarketsByMatchId(selectedValue);
+      }
     });
 
     this.getAllUserBets();

@@ -52,7 +52,9 @@ export class PlayerPlComponent implements OnInit {
       this._getMatchBySportId(selectedValue);
     });
     this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
-      this._getMarketsByMatchId(selectedValue);
+      if(selectedValue){
+        this._getMarketsByMatchId(selectedValue);
+      }
     });
     this.getPlStatement();
   }
@@ -121,7 +123,7 @@ export class PlayerPlComponent implements OnInit {
       }
     });
   }
-  
+
   onGameSelected(sportId){
     this._getMatchBySportId(sportId);
   }
@@ -129,6 +131,7 @@ export class PlayerPlComponent implements OnInit {
   changeGame(evt) {
     // this.sportsId = evt.target.value;
     console.log("changegame",evt.target.value);
+    this.filterForm.patchValue({matchId:null,marketId:null});
     this.filterForm.value.sportsId = evt.target.value;
     if(evt.target.value == null) {
       this.filterForm.value.matchId = null;
@@ -137,6 +140,7 @@ export class PlayerPlComponent implements OnInit {
 
   changeMatch(evt) {
     // this.matchId = evt.target.value;
+    this.filterForm.patchValue({marketId:null});
     this.filterForm.value.matchId = evt.target.value;
   }
 
@@ -252,7 +256,7 @@ export class PlayerPlComponent implements OnInit {
     if(this.filterForm.value.memberId == 'null'){
       this.filterForm.patchValue( {'memberId':null} );
     }
-    
+
     let payload = {
       memberId: this.filterForm.value.memberId,
       fromDate:fromDate,
@@ -292,9 +296,9 @@ export class PlayerPlComponent implements OnInit {
     this.playerData = pl.playerData;
   }
 
-  
 
-  
+
+
 
   next(): void {
     this.currentPage++;

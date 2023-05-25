@@ -22,7 +22,7 @@ export class MarketSettingsComponent implements OnInit {
   tournamentList:any;
   matchList: any;
   sportId:any;
-  
+
   constructor(
     private settingsService: SettingsService,
     private _sharedService: SharedService
@@ -91,7 +91,7 @@ export class MarketSettingsComponent implements OnInit {
       matchId: this.filterForm.value.matchName,
       tournamentId: this.filterForm.value.tournamentId?+this.filterForm.value.tournamentId:null
     }
-    
+
     this.settingsService._getMarketForAdminMarketSettingsListApi(body).subscribe((data: any) => {
       this.isLoading = false;
       this.marketSettingsList = data.markets;
@@ -110,7 +110,7 @@ export class MarketSettingsComponent implements OnInit {
     if(this.sportId == null ||this.sportId == 'null' ) {
       this.filterForm.value.tournamentId = null;
     }
-
+    this.filterForm.patchValue({tournamentId:null, matchName:null});
     var sportId = this.filterForm.value.sportName;
     if(!sportId) return
     this._sharedService.getTournamentBySportIdApi(sportId).subscribe((data:any)=>{
@@ -118,12 +118,13 @@ export class MarketSettingsComponent implements OnInit {
         this.tournamentList = data;
       }
     });
-    
+
   }
 
   _onTournamentSelect(){
     var tournamentId = this.filterForm.value.tournamentId;
     if(!tournamentId) return
+    this.filterForm.patchValue({ matchName:null});
     this._sharedService.getMatchByTournamentIdApi(tournamentId).subscribe((data:any)=>{
       if(data){
         this.matchList = data;

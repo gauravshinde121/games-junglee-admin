@@ -32,7 +32,7 @@ export class CreateMemberComponent implements OnInit {
   show1:boolean = false;
   display:string = 'none';
   uplinePwd:string = '';
-
+  ipAdress = null;
   constructor(
     private _fb: FormBuilder,
     private _sharedService: SharedService,
@@ -68,6 +68,7 @@ export class CreateMemberComponent implements OnInit {
   private _preConfig() {
     this.getGames();
     this._getRoles();
+    this.getUserIp();
   }
 
   getGames() {
@@ -173,11 +174,8 @@ export class CreateMemberComponent implements OnInit {
   }
 
   createMember(){
-      var currentUserIp:any;
-      this._sharedService.currentUserIp.subscribe((data: any) => {
-        currentUserIp = data.userIp;
-      });
-      this.isLoading = true;
+      
+        this.isLoading = true;
       console.log('this.memberForm.value', this.memberForm.value);
       let memberData = {};
       if (!this.editMode) {
@@ -185,7 +183,6 @@ export class CreateMemberComponent implements OnInit {
           "displayName": this.memberForm.value['displayName'],
           "username": this.memberForm.value['username'],
           "pwd": this.memberForm.value['password'],
-          //"creditLimit": this.memberForm.value['playerMaxCreditLimit'],
           "availableCredit": this.memberForm.value['playerAvailableCredit'],
           "sportsBookRate": this.memberForm.value['sportsBookRate'],
           "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
@@ -195,26 +192,23 @@ export class CreateMemberComponent implements OnInit {
           "gameStatus": this.gamesList,
           "roleId": this.memberForm.value['roleId'],
           "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
-          "ip": currentUserIp,
+          "ip": this.ipAdress,
           "uplinePwd": this.uplinePwd
         }
       } else {
         memberData = {
           "displayName": this.memberForm.value['displayName'],
           "username": this.memberForm.value['username'],
-          //"comments": this.memberForm.value['comments'],
-          //"creditLimit": this.memberForm.value['playerMaxCreditLimit'],
           "availableCredit": this.memberForm.value['playerAvailableCredit'],
           "sportsBookRate": this.memberForm.value['sportsBookRate'],
           "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
           "minimumBet": this.memberForm.value['minBet'],
           "maxBet": this.memberForm.value['maxBet'],
           "maxExposure": this.memberForm.value['maxExposure'],
-          //"isActive": this.memberForm.value['status'],
           "gameStatus": this.gamesList,
           "roleId": this.memberForm.value['roleId'],
           "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
-          "ip": currentUserIp,
+          "ip": this.ipAdress,
           "uplinePwd": this.uplinePwd
         }
       }
@@ -244,6 +238,9 @@ export class CreateMemberComponent implements OnInit {
         }
       )
 
+
+      
+      
   }
 
   onMinBetChange(e){
@@ -322,4 +319,10 @@ export class CreateMemberComponent implements OnInit {
     return this.memberForm.get('displayName')
   }
 
+  getUserIp(){
+    this._sharedService.getIPApi().subscribe((data: any) => {
+      this.ipAdress = data.ip;
+      console.log(data)  
+    }
+    )}
 }

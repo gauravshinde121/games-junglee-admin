@@ -21,6 +21,7 @@ export class LeftNavigationComponent implements OnInit {
   matchId: any;
 
   adminDetails: any = null;
+  currentPath:any = '';
 
   constructor(
     private _route: ActivatedRoute,
@@ -29,6 +30,7 @@ export class LeftNavigationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.checkPath()
     this.isLoggedIn = this._sharedService.isLoggedIn();
     this.userDetails = this._sharedService.getUserDetails();
     this._sharedService.sharedSubject.subscribe((data: any) => {
@@ -44,6 +46,21 @@ export class LeftNavigationComponent implements OnInit {
     this._sharedService.removeUserDetails();
     localStorage.clear();
     this._router.navigate(['/login']);
+  }
+
+
+  storePath(path:string){
+    console.log('path',path)
+    localStorage.setItem('path',path)
+    this.checkPath();
+  }
+
+
+  checkPath(){
+    this.currentPath = localStorage.getItem('path');
+    console.log("this.currentPath")
+    console.log(this.currentPath)
+    console.log(typeof(this.currentPath))
   }
 
 }

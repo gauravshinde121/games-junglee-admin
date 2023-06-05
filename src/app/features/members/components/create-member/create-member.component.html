@@ -123,7 +123,8 @@
                 name="password"
               />
               <span (click)="show1=!show1" class="input-group-text fa fa-eye text-dark p-0"  id="Password" [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"></span>
-              <div
+            </div>
+            <div
                 *ngIf="
                   memberForm.controls['confirmPassword'].errors?.required &&
                   memberForm.controls['confirmPassword'].touched
@@ -132,32 +133,61 @@
               >
                 Confirm Password is required
               </div>
-            </div>
 
       </div>
-            <!--<div class="col-md-3 mb-2">
-              <label>Max Credit Limit</label>
-              <input
-                type="number"
-                class="form-control"
-                formControlName="playerMaxCreditLimit"
-                placeholder="Player Max Credit Limit*"
-              />
-            </div>-->
+
             <div class="col-md-3 mb-2">
               <label>Available Credit</label>
               <input
                 type="number"
                 class="form-control"
                 formControlName="playerAvailableCredit"
-                placeholder="Player Max Credit Limit*"
+                placeholder="Player Available Credit*"
               />
-            </div>
-            <div
+              <div
               class="small text-danger"
-              *ngIf="memberForm.controls['minBet'].errors?.required"
+              *ngIf="memberForm.controls['playerAvailableCredit'].errors?.required &&
+              memberForm.controls['playerAvailableCredit'].touched"
             >
-              Please enter credit limit
+              Please available credit
+            </div>
+            </div>
+
+            <div class="col-md-3">
+              <label> Member Max Exposure Amt </label>
+              <input
+                [readOnly]="this.isSuperAdmin == -1"
+                formControlName="maxExposure"
+                type="number"
+                class="form-control"
+              />
+              <p>(Min: 1) (Max: 50000000 )</p>
+              <div
+                *ngIf="
+                  (memberForm.controls['maxExposure'].touched ||
+                    memberForm.controls['maxExposure'].dirty) &&
+                  memberForm.controls['maxExposure'].invalid
+                "
+              >
+                <div
+                  class="small text-danger"
+                  *ngIf="memberForm.controls['maxExposure'].errors?.required"
+                >
+                  Please enter valid Bet Amount
+                </div>
+                <div
+                  class="small text-danger"
+                  *ngIf="memberForm.controls['maxExposure'].errors?.['max']"
+                >
+                  Please enter valid Bet Amount
+                </div>
+                <div
+                  class="small text-danger"
+                  *ngIf="memberForm.controls['maxExposure'].errors?.['min']"
+                >
+                  Please enter valid Bet Amount
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -248,9 +278,9 @@
         <div class="col-md-8">{{ memberPercentage }}</div>
       </div>
     </section>
-    <section class="section gamedetails mt-3">
-      <div class="row">
-        <div class="col-md-4">
+    <!-- <section class="section gamedetails mt-3">
+      <div class="row"> -->
+        <!-- <div class="col-md-4">
           <h4 class="text-pink">Min Bet</h4>
           <label>Member Min Bet</label>
           <input
@@ -261,9 +291,6 @@
             (blur)="onMinBetChange($event)"
           />
           <p>(Min: 100)</p>
-          <!-- <div class="text-danger" *ngIf="MinBetVail && MinBetVail.invalid && MinBetVail.touched">
-            Please enter valid Min Rate
-           </div><span class="text-danger" *ngIf="memberForm.controls['minBet'].errors?.min"> Please enter valid Min Rate</span> -->
           <div
             *ngIf="
               (memberForm.controls['minBet'].touched ||
@@ -284,8 +311,8 @@
               Please enter valid Min Rate
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
+        </div> -->
+        <!-- <div class="col-md-4">
           <h4 class="text-pink">Max Bet</h4>
           <label> Member Max Bet Amt </label>
           <input
@@ -295,9 +322,6 @@
             class="form-control"
           />
           <p>(Min: {{ maxBetMinValue }}) (Max: 10000000)</p>
-          <!-- <div class="text-danger" *ngIf="MaxBetVail && MaxBetVail.invalid && MaxBetVail.touched">
-            Please enter valid Bet Amount
-          </div> -->
           <div
             *ngIf="
               (memberForm.controls['maxBet'].touched ||
@@ -324,46 +348,10 @@
               Please enter valid Bet Amount
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <h4 class="text-pink">Max Exposure</h4>
-          <label> Member Max Exposure Amt </label>
-          <input
-            [readOnly]="this.isSuperAdmin == -1"
-            formControlName="maxExposure"
-            type="number"
-            class="form-control"
-          />
-          <p>(Min: 1) (Max: 50000000 )</p>
-          <div
-            *ngIf="
-              (memberForm.controls['maxExposure'].touched ||
-                memberForm.controls['maxExposure'].dirty) &&
-              memberForm.controls['maxExposure'].invalid
-            "
-          >
-            <div
-              class="small text-danger"
-              *ngIf="memberForm.controls['maxExposure'].errors?.required"
-            >
-              Please enter valid Bet Amount
-            </div>
-            <div
-              class="small text-danger"
-              *ngIf="memberForm.controls['maxExposure'].errors?.['max']"
-            >
-              Please enter valid Bet Amount
-            </div>
-            <div
-              class="small text-danger"
-              *ngIf="memberForm.controls['maxExposure'].errors?.['min']"
-            >
-              Please enter valid Bet Amount
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </div> -->
+
+      <!-- </div>
+    </section> -->
     <div class="row my-3">
       <div class="col-md-6 col-6 text-end">
         <button
@@ -432,22 +420,27 @@
               placeholder="Enter your password"
               [(ngModel)]="uplinePwd"
             />
-            <button
-              class="btn rounded-pill w-30 mt-3 btn-pink"
+            <div class="row">
+              <div class="col-md-6">
+                <button
+              class="btn rounded-pill w-100 mt-3 btn-pink"
               (click)="createMember()"
               [disabled]="!uplinePwd"
             >
               Yes
             </button>
-            <button
-              class="btn  rounded-pill w-30 mt-3 ms-3 float-right btn-pink"
+              </div>
+              <div class="col-md-6">
+                <button
+              class="btn  rounded-pill w-100 mt-3 ms-3 float-right btn-pink"
               (click)="closeModal()"
             >
               Cancel
             </button>
-            <!--your code will come here end-->
-            <!-- </div> -->
-            <!-- </div> -->
+              </div>
+            </div>
+
+
           </section>
         </div>
       </div>

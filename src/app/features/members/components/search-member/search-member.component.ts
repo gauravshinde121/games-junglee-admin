@@ -38,9 +38,11 @@ export class SearchMemberComponent implements OnInit {
     }
   }
 
-  searchMember(userId){
-    this._sharedService.getUplineSummaryApi(userId).subscribe((res)=>{
+  searchMember(member){
+    this.memberHierarchy = [];
+    this._sharedService.getUplineSummaryApi(member.userId).subscribe((res)=>{
       this.memberHierarchy = res;
+      this.memberHierarchy.push(member)
     });
   }
 

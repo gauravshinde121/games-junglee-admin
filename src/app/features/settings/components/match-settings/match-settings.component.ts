@@ -61,15 +61,18 @@ export class MatchSettingsComponent implements OnInit {
       this.filterForm.patchValue({ 'memberName': null });
     }
     var status: any;
-    if (this.filterForm.value.status) {
+    console.log('this.filterForm.value.status',this.filterForm.value.status);
+    //if (this.filterForm.value.status) {
       if (this.filterForm.value.status == 1) {
         status = true;
-      } else {
+      } else if (this.filterForm.value.status == 0) {
         status = false;
+      } else {
+        status = null;
       }
-    } else {
-      status = this.filterForm.value.status;
-    }
+    // } else {
+    //   status = this.filterForm.value.status;
+    // }
     let body = {
       matchIsActive: status,
       sportId: this.filterForm.value.sportName?+this.filterForm.value.sportName:null,

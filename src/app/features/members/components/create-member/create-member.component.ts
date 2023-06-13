@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild,Renderer2 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,12 +33,14 @@ export class CreateMemberComponent implements OnInit {
   display:string = 'none';
   uplinePwd:string = '';
   ipAdress = null;
+  @ViewChild('confirm_password') confirm_password: ElementRef;
   constructor(
     private _fb: FormBuilder,
     private _sharedService: SharedService,
     private _memberService: MembersService,
     private _router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private renderer: Renderer2
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -53,12 +55,24 @@ export class CreateMemberComponent implements OnInit {
     });
     this._preConfig();
 
-
     if (this.route.snapshot.params['id']) {
       this.editMode = true;
       this.editUserId = this.route.snapshot.params['id'];
     }
 
+  }
+
+  onSubmitMemberForm() {
+    this.display = 'block';
+    //this.renderer.selectRootElement(this.confirmPassword.nativeElement).focus();
+    setTimeout(()=>{
+      console.log('this.confirm_password.nativeElement',this.confirm_password.nativeElement);
+      this.confirm_password.nativeElement.focus();
+    },500)
+  }
+
+  ngAfterViewInit() {
+    //this.renderer.selectRootElement(this.confirmPassword.nativeElement).focus();
   }
 
   closeModal() {
@@ -174,7 +188,7 @@ export class CreateMemberComponent implements OnInit {
   }
 
   createMember(){
-      
+
         this.isLoading = true;
       console.log('this.memberForm.value', this.memberForm.value);
       let memberData = {};
@@ -239,8 +253,8 @@ export class CreateMemberComponent implements OnInit {
       )
 
 
-      
-      
+
+
   }
 
   onMinBetChange(e){
@@ -255,11 +269,6 @@ export class CreateMemberComponent implements OnInit {
   get f() {
     return this.memberForm.controls;
   }
-
-  onSubmitMemberForm() {
-    this.display = 'block';
-  }
-
 
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
@@ -322,7 +331,7 @@ export class CreateMemberComponent implements OnInit {
   getUserIp(){
     this._sharedService.getIPApi().subscribe((data: any) => {
       this.ipAdress = data.ip;
-      console.log(data)  
+      console.log(data)
     }
     )}
 }

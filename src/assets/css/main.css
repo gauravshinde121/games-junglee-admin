@@ -521,26 +521,26 @@ select:-webkit-autofill:focus {
   color: #ffa7a3;
 }
 .tablematchodds .colblue {
-  background-color: #6abefa !important;
+  background: linear-gradient(0deg, #44a1ff 0, #b4d4f6);
   border-left: 1px solid #fff;
 }
 .tablematchodds .colblue.light {
-  background-color: #a7d8fd !important;
+  background: rgba(106, 190, 250, 0.368627451) !important;
 }
 .tablematchodds .colblue.dis {
-  background-color: hsla(205.2deg, 29%, 58%, 0.86) !important;
+  background: hsla(205.2deg, 29%, 58%, 0.86) !important;
 }
 .tablematchodds .colpink {
-  background-color: #fba2b6 !important;
+  background: linear-gradient(0deg, #ff7768 0, #ededed);
   border-left: 1px solid #fff;
 }
 .tablematchodds .colpink.light {
-  background-color: #f9c9d4 !important;
+  background: rgba(255, 185, 181, 0.3764705882) !important;
 }
 .tablematchodds .colpink.dis {
-  background-color: hsla(3.5deg, 21.3%, 52.2%, 0.78) !important;
+  background: hsla(3.5deg, 21.3%, 52.2%, 0.78) !important;
   font-size: 11px;
-  line-height: 13px;
+  line-height: 11px;
 }
 .tablematchodds .colgray {
   background-color: #d9d9d9 !important;
@@ -727,7 +727,7 @@ select:-webkit-autofill:focus {
 .tableFixHead::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  background: linear-gradient(0deg, #cd212f 0, #e76f26) !important; 
+  background: linear-gradient(0deg, #cd212f 0, #e76f26) !important;
 }
 
 .btn.disabled, .btn:disabled, fieldset:disabled .btn{

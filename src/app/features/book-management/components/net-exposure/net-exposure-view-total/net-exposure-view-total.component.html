@@ -272,7 +272,7 @@
                                     [boxHighlight]="runner['vback0']"
                                   >
                                     <a
-                                      ><strong>{{ runner["back0"] }}</strong>
+                                      ><strong *ngIf='runner["back0"]'>{{ (runner["back0"]-1)*100 | number: '1.0-0' }}</strong>
                                       <br />{{
                                         runner["vback0"] | marketRateFormater
                                       }}</a
@@ -284,7 +284,7 @@
                                     [boxHighlight]="runner['vlay0']"
                                   >
                                     <a
-                                      ><strong>{{ runner["lay0"] }}</strong>
+                                      ><strong *ngIf='runner["lay0"]'>{{ (runner["lay0"]-1)*100 | number: '1.0-0'}}</strong>
                                       <br />{{
                                         runner["vlay0"] | marketRateFormater
                                       }}</a

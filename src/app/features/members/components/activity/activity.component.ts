@@ -78,14 +78,26 @@ export class ActivityComponent implements OnInit {
     toDate.setHours(23)
     toDate.setMinutes(59);
     toDate.setSeconds(59);
-
+    var sport_id:any;
+    if (this.searchActivityForm.value.sportsId == 'null'){
+      sport_id = null;
+    } else {
+      sport_id = this.searchActivityForm.value.sportsId;
+    }
+    var market_id:any;
+    if (this.searchActivityForm.value.marketId == 'null'){
+      market_id = null;
+    } else {
+      market_id = this.searchActivityForm.value.marketId;
+    }
+    console.log('sport_id',sport_id);
     let payload = {
       refUserId:this.userId,
       fromDate: fromDate,
       toDate: toDate,
       agent:this.searchActivityForm.value.agent,
-      marketId:this.searchActivityForm.value.marketId,
-      sportId:this.searchActivityForm.value.sportsId
+      marketId:market_id,
+      sportId:sport_id
     }
     this._memberService._getMemberActivityApi(payload).subscribe((res:any)=>{
       this.isLoading = false;

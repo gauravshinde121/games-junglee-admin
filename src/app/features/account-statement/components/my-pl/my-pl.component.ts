@@ -47,7 +47,10 @@ export class MyPlComponent implements OnInit {
       this._getMatchBySportId(selectedValue);
     });
     this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
+      console.log('testttt');
       this._getMarketsByMatchId(selectedValue);
+      this.filterForm.value.marketId = null;
+      this.filterForm.patchValue( {'marketId':null} );
     });
     this.getPlStatement();
 
@@ -129,12 +132,17 @@ export class MyPlComponent implements OnInit {
     this.filterForm.value.sportsId = evt.target.value;
     if(evt.target.value == null) {
       this.filterForm.value.matchId = null;
+      this.filterForm.value.marketId = null;
     }
   }
 
   changeMatch(evt) {
     // this.matchId = evt.target.value;
     this.filterForm.value.matchId = evt.target.value;
+    if(evt.target.value == null) {
+      this.filterForm.value.marketId = null;
+      this.filterForm.patchValue( {'marketId':null} );
+    }
   }
 
   changeMarketType(evt) {
@@ -232,7 +240,8 @@ export class MyPlComponent implements OnInit {
     if(this.filterForm.value.marketId == 'null'){
       this.filterForm.value.marketId = null;
     }
-    
+
+    console.log('this.filterForm.value.marketId',this.filterForm.value.marketId);
     let payload = {
       fromDate:fromDate,
       toDate:toDate,

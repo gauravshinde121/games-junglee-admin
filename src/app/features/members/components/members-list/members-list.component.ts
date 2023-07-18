@@ -49,11 +49,9 @@ export class MembersListComponent implements OnInit {
   changePasswordForm!: FormGroup;
   adjustWinningsForSingleUserForm: FormGroup;
   selectedColor = "";
-  // authObj = {
-  //   currentPassword: "",
-  //   newPassword: "",
-  //   retypePassword: ""
-  // }
+  disableSubmit = false;
+
+
 
   fileName = 'MemberList.xlsx';
 
@@ -75,6 +73,8 @@ export class MembersListComponent implements OnInit {
   }
 
   postChangePassword() {
+    this.disableSubmit = true;
+
     if (this.changePasswordForm.value.password == "") {
       this._sharedService.getToastPopup("Enter password", 'Password', 'error');
       return;
@@ -92,6 +92,7 @@ export class MembersListComponent implements OnInit {
 
     this._memberService._changeMemberPasswordApi(body).subscribe((res: any) => {
       this._sharedService.getToastPopup(res.message, 'Password', 'success');
+      this.disableSubmit = true;
       this.closeModal();
     })
   }
@@ -391,11 +392,18 @@ export class MembersListComponent implements OnInit {
     })
   }
 
+
+  showDownlineTree(user){
+    if(this.selectedRoleId != 7){
+      this._router.navigate(['/member/downline-list/'+user.userId])
+    }
+  }
+
   exportExcel() {
     let memberList: any = []
     this.userList.forEach(element => {
       memberList.push({
-        
+
         Username: element.username,
         CreditLimit: element.creditLimit,
         NetExposure: element.exposure,

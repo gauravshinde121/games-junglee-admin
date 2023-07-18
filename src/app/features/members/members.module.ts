@@ -19,6 +19,7 @@ import { NetExposureComponent } from './components/net-exposure/net-exposure.com
 import { UserAccessComponent } from './components/user-access/user-access.component';
 import { WorkstationComponent } from './components/workstation/workstation.component';
 import { SearchMemberComponent } from './components/search-member/search-member.component';
+import { DownlineListComponent } from './components/downline-list/downline-list.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { SearchMemberComponent } from './components/search-member/search-member.
     UserAccessComponent,
     WorkstationComponent,
     SearchMemberComponent,
+    DownlineListComponent,
   ],
   imports: [
     CommonModule,

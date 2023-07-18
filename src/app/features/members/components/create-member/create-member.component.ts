@@ -89,6 +89,8 @@ export class CreateMemberComponent implements OnInit {
     this._sharedService._getGames().subscribe((res: any) => {
       if (res.gamesList) {
         this.gamesList = res.gamesList.map(gameId => ({ ...gameId, isActive: true }));
+    console.log(this.gamesList)
+
       }
     })
   }
@@ -106,6 +108,7 @@ export class CreateMemberComponent implements OnInit {
   setGameStatus(status, sportsId) {
     this.gamesList.find(g => g.gameId == sportsId).isActive = !status;
     this.memberForm.markAsDirty();
+    console.log(this.gamesList)
   }
 
 
@@ -118,6 +121,8 @@ export class CreateMemberComponent implements OnInit {
         this.memberData = res.user;
         console.log(this.memberData);
         this.gamesList = res.gameStatus;
+    console.log(this.gamesList)
+
         this.roleId = this.memberData.roleId;
         this.memberForm.patchValue({
           username: this.memberData.username,
@@ -239,6 +244,8 @@ export class CreateMemberComponent implements OnInit {
         console.log(memberObs)
       }
 
+      console.log(this.gamesList)
+
       memberObs.subscribe(
         (res: any) => {
           this._sharedService.getToastPopup(`User ${msg} Successfully`, 'Member', 'success');
@@ -251,10 +258,6 @@ export class CreateMemberComponent implements OnInit {
           this._sharedService.getToastPopup(`Error while creating the member.`, 'Member', 'error');
         }
       )
-
-
-
-
   }
 
   onMinBetChange(e){

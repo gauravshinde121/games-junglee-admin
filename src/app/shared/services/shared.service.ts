@@ -76,6 +76,11 @@ export class SharedService {
       .post(this._apiEndpointsService.getAdjustWinningsEndpoint(), userList);
   }
 
+  getUserByUplineIdApi(reqBody) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getUserByUplineId(), reqBody);
+  }
+
   getToastPopup(errorMsg: string, errorModule: string, errorType: string) {
     switch (errorType) {
       case 'error':

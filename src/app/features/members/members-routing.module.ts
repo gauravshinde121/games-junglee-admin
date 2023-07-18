@@ -16,6 +16,7 @@ import { UserAccessComponent } from './components/user-access/user-access.compon
 import { AuthGuard } from '@core/guards/auth.guard';
 import { WorkstationComponent } from './components/workstation/workstation.component';
 import { SearchMemberComponent } from './components/search-member/search-member.component';
+import { DownlineListComponent } from './components/downline-list/downline-list.component';
 
 const routes: Routes = [{
   path: 'member',
@@ -23,6 +24,7 @@ const routes: Routes = [{
   canActivate: [AuthGuard],
   children: [
     { path: 'list', component: MembersListComponent },
+    { path: 'downline-list/:id', component: DownlineListComponent },
     { path: 'search-member', component: SearchMemberComponent },
     { path: 'create-member', component: CreateMemberComponent },
     { path: 'edit-member/:id', component: CreateMemberComponent },

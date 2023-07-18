@@ -44,6 +44,7 @@ export class Constants {
     public readonly API_URL_CHANGE_MEMBER_STATUS:string = 'api/junglee-admin/setMemberStatus';
     public readonly API_URL_CHANGE_MEMBER_PASSWORD:string = 'api/junglee-admin/changeMemberPassword'
     public readonly API_URL_GET_UPLINE_MEMBERS: string = 'api/junglee-admin/getUplineSummary';
+    public readonly API_URL_GET_USER_BY_UPLINE_ID: string = 'api/junglee-admin/getUserByAdminId';
 
 
     //book management

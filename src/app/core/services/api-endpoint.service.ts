@@ -401,4 +401,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_WEBSOCKET_URL);
   }
 
+
+  public getUserByUplineId(): string {
+    return this.createUrl(this._constants.API_URL_GET_USER_BY_UPLINE_ID);
+  }
+
 }

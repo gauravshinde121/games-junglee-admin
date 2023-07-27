@@ -243,6 +243,9 @@ export class MembersListComponent implements OnInit {
 
   refreshCall() {
     this._getAllUserInfo(this.selectedRoleId, true);
+    this._sharedService.sharedSubject.next({
+      updateAdminDetails: true,
+    });
   }
 
   _getAllUserInfo(roleId, autoRefresh = false) {

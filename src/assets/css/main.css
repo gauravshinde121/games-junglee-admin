@@ -748,3 +748,18 @@ select:-webkit-autofill:focus {
   background-color: #000;
 }
 
+.suspendedm1 {
+  background: rgba(38, 38, 38, 0.63);
+  color: #fff;
+  border-radius: 35px;
+  padding: 14px 5px;
+  top: 5px;
+  text-align: center;
+  border: 0px;
+  width: 196px;
+  font-size: 14px;
+}
+
+.suspendedm1.inplay-o {
+  right: 78px;
+}

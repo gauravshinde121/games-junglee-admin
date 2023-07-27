@@ -637,3 +637,19 @@ select:-webkit-autofill:focus {
 .icon-pink {
   color: $background-color_22 !important;
 }
+
+
+.suspendedm1 {
+  background: $suspended;
+  color: $color_1;
+  border-radius: 35px;
+  padding: 14px 5px;
+  top: 5px;
+  text-align: center;
+  border: 0px;
+  width: 196px;
+  font-size: 14px;
+}
+.suspendedm1.inplay-o {
+  right: 78px;
+}

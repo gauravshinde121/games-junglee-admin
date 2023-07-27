@@ -327,6 +327,38 @@ export class NetExposureViewTotalComponent implements OnInit {
         this.adminBooksList.map((singleBook)=>{
           let singleWebSocketMarketData = _.find(webSocketData, ['bmi', +singleBook['marketId']]);
           if(singleWebSocketMarketData != undefined){
+
+
+            singleBook['appMarketStatus'] = singleWebSocketMarketData['ms'];
+            console.log(singleBook)
+
+            console.log(singleBook['marketTypName'])
+            if(singleBook['marketTypName'] == 'Bookmaker'){
+              for(let rnr of singleBook['adminBook']){
+                rnr['back1'] = null;
+                rnr['lay1'] = null;
+                rnr['vback1'] = null;
+                rnr['vlay1'] = null;
+              }
+            }
+
+            if(singleBook['marketTypName'] == 'Match Odds'){
+              for(let rnr of singleBook['adminBook']){
+                rnr['back0'] = null;
+                rnr['back1'] = null;
+                rnr['back2'] = null;
+                rnr['lay0'] = null;
+                rnr['lay1'] = null;
+                rnr['lay2'] = null;
+                rnr['vback0'] = null;
+                rnr['vback1'] = null;
+                rnr['vback2'] = null;
+                rnr['vlay0'] = null;
+                rnr['vlay1'] = null;
+                rnr['vlay2'] = null;
+              }
+            }
+
               return singleBook['adminBook'].map((runnerRes) => {
                 let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
                 for (let singleWebsocketRunner of webSocketRunners) {

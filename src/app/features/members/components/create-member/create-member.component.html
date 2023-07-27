@@ -137,19 +137,19 @@
       </div>
 
             <div class="col-md-3 mb-2">
-              <label>Available Credit</label>
+              <label>Credit Limit</label>
               <input
                 type="number"
                 class="form-control"
                 formControlName="playerAvailableCredit"
-                placeholder="Player Available Credit*"
+                placeholder="Player Credit Limit*"
               />
               <div
               class="small text-danger"
               *ngIf="memberForm.controls['playerAvailableCredit'].errors?.required &&
               memberForm.controls['playerAvailableCredit'].touched"
             >
-              Please available credit
+              Please enter Credit Limit
             </div>
             </div>
 

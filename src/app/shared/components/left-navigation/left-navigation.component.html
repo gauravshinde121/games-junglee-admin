@@ -201,6 +201,11 @@
                 >Market Settings</a
               >
             </li>
+            <li  [routerLinkActive]="currentPath == '/settings/app-settings'?'active':''" [ngClass]="currentPath == '/settings/app-settings'?'active':''">
+              <a (click)="storePath('/settings/app-settings')" routerLink="/settings/app-settings" class="nav-link small ps-5"
+                >App Setting</a
+              >
+            </li>
           </ul>
         </div>
       </li>

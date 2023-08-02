@@ -406,4 +406,12 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_USER_BY_UPLINE_ID);
   }
 
+  public getWebSettingsEndpoint(): string {
+    return this.createUrl(this._constants.API_GET_WEB_SETTING);
+  }
+
+  public saveWebSettingsEndpoint(): string {
+    return this.createUrl(this._constants.API_SAVE_WEB_SETTING);
+  }
+
 }

@@ -35,7 +35,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   liveStreamingTVUrl:any;
   matchId:any;
 
-  fileName= 'NetExposureViewTotal.xlsx';
+  fileName= 'NetExposureViewTotal'+new Date().toString()+'.xlsx';
   newAdminBooksList:any;
 
   constructor(
@@ -330,9 +330,7 @@ export class NetExposureViewTotalComponent implements OnInit {
 
 
             singleBook['appMarketStatus'] = singleWebSocketMarketData['ms'];
-            console.log(singleBook)
 
-            console.log(singleBook['marketTypName'])
             if(singleBook['marketTypName'] == 'Bookmaker'){
               for(let rnr of singleBook['adminBook']){
                 rnr['back1'] = null;
@@ -463,16 +461,15 @@ export class NetExposureViewTotalComponent implements OnInit {
     let viewtotal : any = []
     this.viewTotal.forEach(element => {
       viewtotal.push({
-        username:element.userName,
+        member:element.userName,
         date : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
         event: element.event,
         market:element.marketName,
-        OrderPlace:element.oddsPlaced,
         selection : element.selectionName,
-        OrderPlaced:element.betRate,
-        OrderMatched:element.betRate,
-        // mathedStake:element.stake,
-        // umatchedStake:element.stake,
+        odds_placed:element.placedOdds,
+        odds_matched:element.betRate,
+        mathedStake:element.isMatched?element.stake:null,
+        umatchedStake:element.isMatched?null:element.stake,
         profit_Liablity:element.profitLiability
       })
     });

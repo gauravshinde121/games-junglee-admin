@@ -236,5 +236,17 @@ export class SharedService {
       .post(this._apiEndpointsService.getLiveStreamMatch(), liveStreamMatchObj);
   }
 
+
+  getWebSettings(){
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getWebSettingsEndpoint());
+  }
+
+
+  saveWebSettings(body){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.saveWebSettingsEndpoint(),body);
+  }
+
 }
 

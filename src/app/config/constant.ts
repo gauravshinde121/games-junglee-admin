@@ -111,4 +111,9 @@ export class Constants {
     public readonly API_URL_GET_USER_ADMIN_PUB_SUB:string = 'api/getUserAdminPubSub';
     public readonly API_URL_GET_WEBSOCKET_URL: string = 'api/pubsuburl';
     public readonly API_URL_LIVE_STREAM_MATCH:string = 'api/getStreamingUrl';
+
+
+    public readonly API_GET_WEB_SETTING:string = 'api/getWebAppSettings';
+    public readonly API_SAVE_WEB_SETTING:string = 'api/junglee-admin/saveWebSettings';
+ 
 }

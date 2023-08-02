@@ -123,7 +123,7 @@
                               >
                                 <tr
                                   *ngFor="
-                                    let runner of singleAdminBook['adminBook']
+                                    let runner of singleAdminBook['adminBook'];let last = last;let first = first
                                   "
                                 >
                                   <td
@@ -131,8 +131,9 @@
                                   >
                                     <a href=""
                                       ><strong
-                                        >{{ runner["RunnerName"] }} </strong
-                                      ><br />
+                                        >{{ runner["RunnerName"] }} </strong>
+                                        
+                                        <br />
                                       <p class="mb-0 mt-1">
                                         <span
                                           [ngClass]="
@@ -173,7 +174,11 @@
                                   </td>
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
-                                  <td
+                                  <td *ngIf="
+                                  singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                        singleAdminBook['appMarketStatus'] != '9'
+                                    "
                                     class="colblue"
                                     [boxHighlight]="runner['back0']"
                                     [boxHighlight]="runner['vback0']"
@@ -185,7 +190,11 @@
                                       }}</span></a
                                     >
                                   </td>
-                                  <td
+                                  <td *ngIf="
+                                  singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                        singleAdminBook['appMarketStatus'] != '9'
+                                    "
                                     class="colpink"
                                     [boxHighlight]="runner['lay0']"
                                     [boxHighlight]="runner['vlay0']"
@@ -198,7 +207,11 @@
                                     >
                                   </td>
 
-                                  <td
+                                  <td *ngIf="
+                                  singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                        singleAdminBook['appMarketStatus'] != '9'
+                                    "
                                     class="colpink"
                                     [boxHighlight]="runner['lay1']"
                                     [boxHighlight]="runner['vlay1']"
@@ -211,7 +224,11 @@
                                     >
                                   </td>
 
-                                  <td
+                                  <td *ngIf="
+                                  singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                        singleAdminBook['appMarketStatus'] != '9'
+                                    "
                                     class="colpink"
                                     [boxHighlight]="runner['lay2']"
                                     [boxHighlight]="runner['vlay2']"
@@ -222,6 +239,22 @@
                                         runner["vlay2"] | marketRateFormater
                                       }}</span></a
                                     >
+                                  </td>
+                                  <td class="border-top" [ngClass]="{ 'border-top': !first }">
+                                    <div class="suspendedbm1" *ngIf="
+                                    singleAdminBook['appMarketStatus'] ==
+                                          '3' ||
+                                          singleAdminBook['appMarketStatus'] == '9'
+                                      ">
+                                      <button type="button" class="suspendedm1" >
+                                        {{
+                                          singleAdminBook["appMarketStatus"] ==
+                                        "3"
+                                        ? "Suspended"
+                                        : "Ball Running"
+                                        }}
+                                      </button>
+                                    </div>
                                   </td>
                                 </tr>
                               </ng-container>
@@ -324,7 +357,7 @@
                               >
                                 <tr
                                   *ngFor="
-                                    let runner of singleAdminBook['adminBook']
+                                    let runner of singleAdminBook['adminBook'];let last = last;let first = first
                                   "
                                 >
                                   <td
@@ -356,7 +389,11 @@
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
 
-                                  <td
+                                  <td *ngIf="
+                                  singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                        singleAdminBook['appMarketStatus'] != '9'
+                                    "
                                     class="colpink"
                                     [boxHighlight]="runner['lay1']"
                                     [boxHighlight]="runner['vlay1']"
@@ -368,7 +405,11 @@
                                       }}</a
                                     >
                                   </td>
-                                  <td
+                                  <td *ngIf="
+                                  singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                        singleAdminBook['appMarketStatus'] != '9'
+                                    "
                                     class="colblue"
                                     [boxHighlight]="runner['back1']"
                                     [boxHighlight]="runner['vback1']"
@@ -381,12 +422,23 @@
                                     >
                                   </td>
 
-                                  <td>
-                                    <a><strong></strong> <br /></a>
+                                  <td class="border-top" [ngClass]="{ 'border-top': !first }">
+                                    <div class="suspendedbm1" *ngIf="
+                                    singleAdminBook['appMarketStatus'] ==
+                                          '3' ||
+                                          singleAdminBook['appMarketStatus'] == '9'
+                                      ">
+                                      <button type="button" class="suspendedm1" >
+                                        {{
+                                          singleAdminBook["appMarketStatus"] ==
+                                        "3"
+                                        ? "Suspended"
+                                        : "Ball Running"
+                                        }}
+                                      </button>
+                                    </div>
                                   </td>
-                                  <td>
-                                    <a><strong></strong> <br /></a>
-                                  </td></tr
+                                  </tr
                               ></ng-container>
                             </tbody>
                           </table>

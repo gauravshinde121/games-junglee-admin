@@ -1,0 +1,30 @@
+
+
+<main id="main" class="main m-0">
+  <section class="section gamedetails">
+    <h3 *ngIf="isLoading" class="text-center">Loading ...</h3>
+    <h3 class="text-center" *ngIf="!isLoading && settingObj">App Settings</h3>
+    <br>
+   <div class="row" *ngIf="!isLoading && settingObj">
+    <div class="col-3">
+      Mobile no.
+    </div>
+    <div class="col-3">
+      Alternate Mobile no.
+    </div>
+   </div>
+   <div class="row" *ngIf="!isLoading && settingObj">
+    <div class="col-3">
+      <input class="form-control" [(ngModel)]="settingObj.mobile1" type="text" name="mobile1" id="">
+    </div>
+    <div class="col-3">
+      <input type="text" class="form-control" [(ngModel)]="settingObj.mobile2" name="mobile2" id="">
+    </div>
+   </div>
+   <div class="row mt-5" *ngIf="!isLoading && settingObj">
+    <div class="col-6 offset-md-3 text-center">
+      <button class="form-control" class="btn btn-pink rounded-pill w-50" [disabled]="submitting" (click)="submit()">{{submitting?'Saving..':'Save'}}</button>
+    </div>
+   </div>
+  </section>
+</main>

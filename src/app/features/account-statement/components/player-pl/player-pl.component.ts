@@ -38,6 +38,7 @@ export class PlayerPlComponent implements OnInit {
   isLoading = false;
 
   fileName = 'PlayerP/L_Statement.xlsx';
+  fileName1 = 'OneAccount.xlsx';
 
   constructor(
     private _memberService: MembersService,
@@ -330,18 +331,26 @@ export class PlayerPlComponent implements OnInit {
   }
 
   exportExcel1() {
-    // let oneaccnt : any = []
-    // this.oneAccount.forEach(element => {
-    //   oneaccnt.push({
-    //     date : new Date(element.createDateTime),
-    //     sport: element.gameData.subGame,
-    //     match : element.gameData.eventName,
-    //     user : element.playerData.name,
-    //     amount :element.gameData.netAmt,
-    //   })
-    // });
+    let oneaccnt : any = []
+    this.oneAccount.bets.forEach(element => {
+      console.log(element)
+      oneaccnt.push({
+        PlaceDate : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
+        MatchedDate:moment(element.matchedDate).format("MMM D, YYYY, h:mm:ss a"),
+        Type:element.type,
+        Status:element.status,
+        HorseName:element.horseName,
+        AvgOdds:element.avgOdds,
+        Odds:element.odds,
+        Stake:element.odds,
+        MatchedStake:element.matchedStake,
+        Profit_Loss:element.profitLoss,
+        Ip:element.ipAddress
 
-    this._sharedService.exportExcel(this.oneAccount, this.fileName);
+      })
+    });
+
+    this._sharedService.exportExcel(oneaccnt, this.fileName1);
   }
 
 }

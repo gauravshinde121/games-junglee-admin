@@ -110,12 +110,12 @@
             <th scope="col">Sub Game</th>
             <th scope="col">Event</th>
             <th scope="col">Win/Loss</th>
-            <th scope="col">Commission</th>
-            <th scope="col">Net Amount</th>
+            <!-- <th scope="col">Commission</th>
+            <th scope="col">Net Amount</th> -->
             <!-- <th scope="col" class="">U/L Commission</th>
             <th scope="col" class="">D/L Commission</th> -->
-            <th scope="col">User Count</th>
-            <th scope="col">Bet Count</th>
+            <!-- <th scope="col">User Count</th>
+            <th scope="col">Bet Count</th> -->
             <th scope="col" class="last"></th>
           </tr>
         </thead>
@@ -128,12 +128,12 @@
             <td [ngClass]="pl.isWon ? 'text-success' : 'text-danger'">
               {{ pl.winINR | number }}
             </td>
-            <td>{{ pl.commission | number }}</td>
-            <td>{{ pl.netAmount | number }}</td>
+            <!-- <td>{{ pl.commission | number }}</td>
+            <td>{{ pl.netAmount | number }}</td> -->
             <!-- <td>0</td>
             <td>0</td> -->
-            <td>{{ pl.userCount }}</td>
-            <td>{{ pl.userBetCount }}</td>
+            <!-- <td>{{ pl.userCount }}</td>
+            <td>{{ pl.userBetCount }}</td> -->
             <!--<td><button
                 class="btn btn-pink rounded-pill w-100 mt-4"
                 (click)="getPlStatement()"

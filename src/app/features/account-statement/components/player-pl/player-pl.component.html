@@ -170,10 +170,10 @@
           <td>
             <div
               [ngClass]="
-                pl.gameData.netAmt > 0 ? 'text-success' : 'text-danger'
+                pl.gameData.finalNetAmount > 0 ? 'text-success' : 'text-danger'
               "
             >
-              {{ pl.gameData.netAmt | number }}
+              {{ pl.gameData.finalNetAmount | number }}
             </div>
           </td>
 

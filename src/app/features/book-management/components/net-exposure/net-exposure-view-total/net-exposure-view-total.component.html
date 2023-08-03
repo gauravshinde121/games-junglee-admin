@@ -147,7 +147,11 @@
                                       </p>
                                     </a>
                                   </td>
-                                  <td
+                                  <td *ngIf="
+                                  singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                        singleAdminBook['appMarketStatus'] != '9'
+                                    "
                                     class="colblue"
                                     [boxHighlight]="runner['back2']"
                                     [boxHighlight]="runner['vback2']"
@@ -160,7 +164,11 @@
                                       }}</span></a
                                     >
                                   </td>
-                                  <td
+                                  <td *ngIf="
+                                  singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                        singleAdminBook['appMarketStatus'] != '9'
+                                    "
                                     class="colblue"
                                     [boxHighlight]="runner['back1']"
                                     [boxHighlight]="runner['vback1']"
@@ -350,11 +358,13 @@
                                  
                                 </tr>
                               </ng-container>
+                              
                               <ng-container
                                 *ngIf="
                                   singleAdminBook['marketTypName'] == 'Fancy'
                                 "
                               >
+
                                 <tr
                                   *ngFor="
                                     let runner of singleAdminBook['adminBook'];let last = last;let first = first
@@ -367,6 +377,7 @@
                                       ><strong
                                         >{{ runner["RunnerName"] }} </strong
                                       ><br />
+                                      
                                       <span
                                         [ngClass]="
                                           runner['amount'] <= 0

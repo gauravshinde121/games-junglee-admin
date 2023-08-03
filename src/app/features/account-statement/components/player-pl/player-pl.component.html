@@ -316,12 +316,17 @@
             </table>
           </div>
           <div>
-            <!-- <button *ngIf ="oneAccount.length >0 " type="button" class="btn btn-pink  rounded-pill ms-2 text-white float-end" (click)="exportExcel1()">Export</button> -->
           </div>
         </div>
 
+
         <div class="row">
+          <div class="col-md-12 mb-2">
+            <button *ngIf="oneAccount?.bets.length > 0" type="button" class="btn btn-pink  rounded-pill ms-2 text-white float-end" (click)="exportExcel1()">Export</button>
+          </div>
+
           <div class="col-md-12">
+
             <div class="tableFixHead">
             <table class="table tableall text-center">
               <thead>

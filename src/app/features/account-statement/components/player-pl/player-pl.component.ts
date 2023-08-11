@@ -323,7 +323,7 @@ export class PlayerPlComponent implements OnInit {
         Sport: element.gameData.subGame,
         Match: element.gameData.eventName,
         Username: element.playerData.name,
-        Amount: element.gameData.netAmt,
+        Amount: +element.gameData.finalNetAmount.toFixed(2),
       })
     });
 

@@ -336,10 +336,10 @@
                   <th scope="col" class="">Type</th>
                   <th scope="col" class="">Status</th>
                   <th scope="col" class="">Horse Name</th>
-                  <th scope="col" class="">Avg. Odds</th>
+                  <!-- <th scope="col" class="">Avg. Odds</th> -->
                   <th scope="col" class="">Odds</th>
+                  
                   <th scope="col" class="">Stake</th>
-                  <th scope="col" class="">Matched Stake</th>
                   <th scope="col" class="">Profit/Loss (In INR)</th>
                   <th scope="col" class="last">IP</th>
                 </tr>
@@ -364,9 +364,9 @@
                   </td>
                   <td>{{ bet.status }}</td>
                   <td>{{ bet.horseName }}</td>
-                  <td>{{ bet.avgOdds | number }}</td>
+                  <!-- <td>{{ bet.avgOdds | number }}</td> -->
                   <td>{{ bet.odds }}</td>
-                  <td>{{ bet.odds }}</td>
+                  
                   <td>{{ bet.matchedStake }}</td>
                   <td
                     [ngClass]="

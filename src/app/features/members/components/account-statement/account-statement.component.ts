@@ -113,11 +113,13 @@ export class AccountStatementComponent implements OnInit {
     let body = {
       fromDate : fromDate,
       toDate : toDate,
-      sportId : +this.filterForm.value.sportsId,
+      sportId : this.filterForm.value.sportsId,
       userId: this.userId,
       pageNo: this.currentPage,
       limit: this.limit,
     }
+
+    console.log(body)
 
     this._memberService._getDownlineAccountsDataForMemberApi(body).subscribe((data:any)=>{
       console.log(data);

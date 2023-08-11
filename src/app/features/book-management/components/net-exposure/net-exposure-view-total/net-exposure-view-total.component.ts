@@ -180,7 +180,17 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   _postBooksForAdminBookMgmRefreshApi(bookMgmParams){
     this._bookMgmService._postBooksForAdminBookMgmApi(bookMgmParams).subscribe((res:any)=>{
-      this.newAdminBooksList = res['book']
+      this.newAdminBooksList = res['book'];
+      if(this.newAdminBooksList){
+        for (let i = this.adminBooksList.length - 1; i >= 0; i--) {
+          let newMarket = res['book'].findIndex(mrkt => mrkt.marketId === this.adminBooksList[i].marketId);
+          if (newMarket === -1) {
+            this.adminBooksList.splice(i, 1);
+          }
+      }
+      }
+      
+
       if(res['book'].length >0){
         this.setOrUnsetWebSocketParamsObj = [];
         res['book'].map((singleBook)=>{
@@ -197,11 +207,14 @@ export class NetExposureViewTotalComponent implements OnInit {
             })
         })
       }
+
+     
     })
   }
 
   _postBooksForAdminBookMgmApi(bookMgmParams){
     this._bookMgmService._postBooksForAdminBookMgmApi(bookMgmParams).subscribe((res:any)=>{
+      // console.log(res['book'])
       this.matchName = res['matchName']
       if(res['book'].length >0){
         this.setOrUnsetWebSocketParamsObj = [];
@@ -293,7 +306,7 @@ export class NetExposureViewTotalComponent implements OnInit {
           })
         })
         this.adminBooksList = res['book'];
-
+        // console.log(this.adminBooksList)
 
         if(this.prevSetOrUnsetWebSocketParamsObj.length !== this.setOrUnsetWebSocketParamsObj.length){
           let setObj = {
@@ -439,7 +452,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   startStreamingLiveTV(){
     this._sharedService.postLiveStreamForMarket({domain:window.location.hostname,matchId:this.matchId}).subscribe((res:any)=>{
       this.liveStreamingTVUrl = res?.streamObj?.data?.streamingUrl;
-      console.log("tv",res);
+      // console.log("tv",res);
     })
   }
 
@@ -457,7 +470,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   }
 
   exportExcel(){
-    console.log(this.viewTotal)
+    // console.log(this.viewTotal)
     let viewtotal : any = []
     this.viewTotal.forEach(element => {
       viewtotal.push({

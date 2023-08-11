@@ -164,11 +164,12 @@
           <i class="fa-solid fa-lock icon-pink me-2"></i> Change Password
         </a>
       </li>
-      <li [routerLinkActive]="currentPath == '/google-authentication'?'active':''" [ngClass]="currentPath == '/google-authentication'?'active':''">
+      <!-- <li [routerLinkActive]="currentPath == '/google-authentication'?'active':''" [ngClass]="currentPath == '/google-authentication'?'active':''">
         <a (click)="storePath('/google-authentication')" routerLink="/google-authentication" class="btn collapsed">
           <i class="fa fa-key icon-pink me-2"></i> Google Authentication
         </a>
-      </li>
+      </li> -->
+      
       <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN'">
         <a
           class="btn collapsed"

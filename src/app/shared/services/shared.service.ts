@@ -19,6 +19,7 @@ export class SharedService {
   maxBetMinValue = new BehaviorSubject({ 'value': 100 });
   leftMenuStatus = new BehaviorSubject({ 'leftMenuOpen': true });
   refreshHeader = new BehaviorSubject({ 'value': false });
+  callAdminDetails = new Subject();
   private currentAdmin = null;
 
   sportsList: Isports[];

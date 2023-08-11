@@ -33,7 +33,6 @@ export class MembersListComponent implements OnInit {
   gameStatus: any = [];
   roles: any = [];
   selectedRoleId = 7;
-  refreshCount: number = 30;
   resetTimerInterval: any;
   show:boolean = false;
   show1:boolean = false;
@@ -154,10 +153,12 @@ export class MembersListComponent implements OnInit {
       "amount": this.adjustWinningsForSingleUserForm.value.amount,
       "isGiven": this.isGiven
     }
+    this.closeModal();
     this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
       this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
+      this._sharedService.callAdminDetails.next(true);
       this._getAllUserInfo(this.selectedRoleId);
-      this.closeModal();
+      
     });
   }
 
@@ -211,12 +212,8 @@ export class MembersListComponent implements OnInit {
     this._getAllUserInfo(this.selectedRoleId);
 
     this.resetTimerInterval = setInterval(() => {
-      if (this.refreshCount == 0) {
         this.refreshCall();
-        this.refreshCount = 31;
-      }
-      this.refreshCount--;
-    }, 1000)
+    }, 30000)
   }
 
   ngOnDestroy(): void {
@@ -242,10 +239,8 @@ export class MembersListComponent implements OnInit {
   }
 
   refreshCall() {
+    
     this._getAllUserInfo(this.selectedRoleId, true);
-    this._sharedService.sharedSubject.next({
-      updateAdminDetails: true,
-    });
   }
 
   _getAllUserInfo(roleId, autoRefresh = false) {
@@ -302,6 +297,7 @@ export class MembersListComponent implements OnInit {
   }
 
   adjustWinnings() {
+    console.log("adjust winning")
     var currentUserIp:any;
     this._sharedService.currentUserIp.subscribe((data: any) => {
       currentUserIp = data.userIp;
@@ -320,6 +316,7 @@ export class MembersListComponent implements OnInit {
         });
         this.selectedUserForAdjustment = [];
         this._getAllUserInfo(this.selectedRoleId);
+        this._sharedService.callAdminDetails.next(true);
         this.closeModal();
       });
     //}

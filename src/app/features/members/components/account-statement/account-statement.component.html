@@ -59,7 +59,7 @@
           <tr>
             <th scope="col" class="first">#</th>
             <th scope="col">Date</th>
-            <th scope="col">Description</th>
+            <th scope="col">Market Description</th>
             <th scope="col">P&L</th>
             <th scope="col">Net Amount</th>
             <th scope="col" class="last">Details</th>
@@ -74,7 +74,7 @@
               }}</span>
             </td>
             <td>{{ acc.settledDate | date : "medium" }}</td>
-            <td>Betting P&L</td>
+            <td>{{acc.marketName}}</td>
             <td>{{ acc.matchName }}</td>
             <td [ngClass]="acc.netAmt > 0 ? 'text-success' : 'text-danger'">
               {{ acc.netAmt | number }}
@@ -134,7 +134,7 @@
     <div class="modal-content ">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
-          Game Detail &nbsp; <i class="fa fa-lock text-white"></i>
+          Game Detail &nbsp; 
         </h5>
         <button
           type="button"
@@ -169,23 +169,23 @@
                 </tr>
                 <tr>
                   <td>Win/Loss:</td>
-                  <td>-</td>
+                  <td>{{selectedAccount?.netAmt>0?'WIN':'LOSS'}}</td>
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
                   <td
                     [ngClass]="
-                      selectedAccount?.netAmt > 0
+                      selectedAccount?.marketSubTotal > 0
                         ? 'text-success'
                         : 'text-danger'
                     "
                   >
-                    {{ selectedAccount?.netAmt }}
+                    {{ selectedAccount?.marketSubTotal | number }}
                   </td>
                 </tr>
                 <tr>
                   <td>Commission Amt:</td>
-                  <td>{{ selectedAccount?.commission }}</td>
+                  <td>{{ selectedAccount?.commission | number }}</td>
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
@@ -196,7 +196,7 @@
                         : 'text-danger'
                     "
                   >
-                    {{ selectedAccount?.netAmt }}
+                    {{ selectedAccount?.netAmt |number }}
                   </td>
                 </tr>
                 <tr>
@@ -237,38 +237,47 @@
                 <th scope="col" class="text-white">Type</th>
                 <th scope="col" class="text-white">Status</th>
                 <th scope="col" class="text-white">Horse Name</th>
-                <th scope="col" class="text-white">Avg. Odds</th>
+                <!-- <th scope="col" class="text-white">Avg. Odds</th> -->
                 <th scope="col" class="text-white">Odds</th>
                 <th scope="col" class="text-white">Stake</th>
-                <th scope="col" class="text-white">Matched Stake</th>
+                <!-- <th scope="col" class="text-white">Matched Stake</th> -->
                 <th scope="col" class="text-white">Profit/Loss (In INR)</th>
-                <th scope="col" class="text-white last">IP</th>
+                <!-- <th scope="col" class="text-white last">IP</th> -->
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let bet of selectedAccount?.bets">
                 <td>{{ bet.createDateTime | date : "medium" }}</td>
                 <td>{{ bet.createDateTime | date : "medium" }}</td>
-                <td>{{ bet.type }}</td>
+                <td>
+                  <span
+                      *ngIf="bet.isBack == false"
+                      class="border r-2 bg-danger text-danger border-danger me-2 border-3"
+                    ></span>
+                    <span
+                      *ngIf="bet.isBack == true"
+                      class="border bg-primary text-primary border-primary me-2 border-3"
+                    ></span>
+                  {{ bet.type }}</td>
                 <td>{{ bet.status }}</td>
                 <td>{{ bet.selectionName }}</td>
-                <td>{{ bet.odds | number }}</td>
+                <!-- <td>{{ bet.odds | number }}</td> -->
                 <td>{{ bet.odds }}</td>
-                <td>{{ bet.stake }}</td>
+                <!-- <td>{{ bet.stake }}</td> -->
                 <td>{{ bet.stake }}</td>
                 <td
                   [ngClass]="bet.netAmount > 0 ? 'text-success' : 'text-danger'"
                 >
                   {{ bet.netAmount | number }}
                 </td>
-                <td>
+                <!-- <td>
                   <div class="tooltipnk">
                     <i class="fa-sharp fa-solid fa-info"></i>
                     <span class="tooltiptext px-5 w-auto">
                       <small>{{ bet.ipAddress }}</small>
                     </span>
                   </div>
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table></div>

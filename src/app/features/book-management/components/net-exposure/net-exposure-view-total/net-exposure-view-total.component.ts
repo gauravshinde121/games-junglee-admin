@@ -219,6 +219,7 @@ export class NetExposureViewTotalComponent implements OnInit {
       if(res['book'].length >0){
         this.setOrUnsetWebSocketParamsObj = [];
         res['book'].map((singleBook)=>{
+          console.log("single book",singleBook)
           this.matchId = singleBook['marketId'];
           singleBook['isExpand'] = true;
           this.setOrUnsetWebSocketParamsObj.push(singleBook.centralId);

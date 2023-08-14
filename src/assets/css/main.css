@@ -763,3 +763,8 @@ select:-webkit-autofill:focus {
 .suspendedm1.inplay-o {
   right: 78px;
 }
+
+
+tfoot td {
+  text-align: center;
+}

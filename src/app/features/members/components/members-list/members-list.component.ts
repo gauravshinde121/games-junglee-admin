@@ -11,7 +11,7 @@ import { MembersService } from '../../services/members.service';
 })
 export class MembersListComponent implements OnInit {
 
-  sizes: any;
+ 
   userList: any = [];
   isLoading = false;
   selectedUserForAdjustment: any = [];
@@ -22,9 +22,10 @@ export class MembersListComponent implements OnInit {
   isGiven: boolean;
   memberHierarchy: any;
   isSuperAdmin: boolean = false;
-  limit: number = 50;
+  limit: number = 25;
   userId: any;
-
+  totalTake = 0;
+  totalGive = 0;
   liveCasinoRate: any;
   sportsBook: any;
   clubCasino: any;
@@ -263,8 +264,9 @@ export class MembersListComponent implements OnInit {
         this.isLoading = false;
       }
       this.userList = users.memberData.memberList;
-      this.sizes = this.userList;
-      this.totalPages = Math.ceil(this.userList.length / this.pageSize);
+      this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
+      this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
+      this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);
     });
   }
 
@@ -294,6 +296,13 @@ export class MembersListComponent implements OnInit {
       return;
     }
     this.selectedUserForAdjustment.push(userId);
+  }
+
+
+  updateLimit(event){
+    this.limit = parseInt(event.target.value);
+    this.pageSize = this.limit;
+    this.refreshCall();
   }
 
   adjustWinnings() {

@@ -46,7 +46,7 @@
     </div>
     <div class="row align-items-center">
       <!-- nav tab -->
-      <div class="col-md-9 col-12">
+      <div class="col-md-8 col-12">
         <ul class="nav nav-pills memberslist" id="pills-tab" role="tablist">
           <li
             class="nav-item mr-5 mb-md-0 mb-2"
@@ -69,6 +69,21 @@
             </button>
           </li>
         </ul>
+      </div>
+      <div class="col-md-1 col-2 ">
+        <div class="row">Show Entries</div>
+        <select
+          (change)="updateLimit($event)"
+          class="form-select-sm border-colour bg-dark text-white rounded-3 "
+        >
+          <option>25</option>
+          <option>50</option>
+          <option>100</option>
+          <option>150</option>
+          <option>200</option>
+          <option>250</option>
+        </select>
+        
       </div>
       <div class="col-md-2 col-10 text-end">
         <!--{{ refreshCount }} &nbsp;-->
@@ -236,11 +251,6 @@
                   <i class="fa-sharp fa fa-lock icon-pink pointer"></i>
                 </a>
               </td>
-              <!-- <td class="text-center" *ngIf="isSuperAdmin">
-                <a (click)="openHierarchyModal(user.userId)">
-                  <img src="/assets/images/net_expo.png" width="12px;"/>
-                </a>
-              </td> -->
               <td class="text-center">
                 <a routerLink="/member/edit-member/{{ user.userId }}">
                   <i class="fa-sharp fa-solid fa-pen icon-pink pointer"></i>
@@ -248,7 +258,24 @@
               </td>
             </tr>
           </tbody>
-        </table></div>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{totalTake}}</td>
+              <td>{{totalGive}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
         <div *ngIf="userList.length > 0 && !this.isLoading">
           <button
             class="btn rounded-pill text-white"

@@ -768,3 +768,8 @@ select:-webkit-autofill:focus {
 tfoot td {
   text-align: center;
 }
+
+
+.exposure-font{
+  font-size: 0.9rem;
+}

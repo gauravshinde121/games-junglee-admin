@@ -134,7 +134,7 @@ export class NetExposureViewTotalComponent implements OnInit {
       marketId:marketId
     };
     this._bookMgmService._postTotalBookApi(totalBookParams).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       if(data['book'].length >0){
         this.totalBooks.push({marketId:marketId,totalBook:data['book'],isTotaltotalBookView:true});
         this.adminBooksList.map((adminBook)=>{
@@ -219,7 +219,7 @@ export class NetExposureViewTotalComponent implements OnInit {
       if(res['book'].length >0){
         this.setOrUnsetWebSocketParamsObj = [];
         res['book'].map((singleBook)=>{
-          console.log("single book",singleBook)
+          // console.log("single book",singleBook)
           this.matchId = singleBook['marketId'];
           singleBook['isExpand'] = true;
           this.setOrUnsetWebSocketParamsObj.push(singleBook.centralId);

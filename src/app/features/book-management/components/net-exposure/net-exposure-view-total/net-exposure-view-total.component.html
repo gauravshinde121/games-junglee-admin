@@ -142,7 +142,9 @@
                                               : 'text-success'
                                           "
                                           class="text-success"
-                                          >Rs. {{ runner["amount"] }}</span
+                                          ><strong class="exposure-font">Rs. {{
+                                            runner["amount"] | number : "1.2-2"
+                                          }}</strong></span
                                         >
                                       </p>
                                     </a>
@@ -292,9 +294,9 @@
                                             : 'text-success'
                                         "
                                         >Rs.
-                                        {{
+                                        <strong class="exposure-font">Rs. {{
                                           runner["amount"] | number : "1.2-2"
-                                        }}</span
+                                        }}</strong></span
                                       >
                                     </a>
                                   </td>
@@ -375,18 +377,19 @@
                                     <a
                                       ><strong
                                         >{{ runner["RunnerName"] }} </strong
-                                      ><br />
+                                      ><br /><br>
                                       <span
                                         [ngClass]="
                                           runner['amount'] <= 0
                                             ? 'text-danger'
                                             : 'text-success'
                                         "
-                                        >Rs.
-                                        {{
+                                        >
+                                        <strong class="exposure-font">Rs. {{
                                           runner["amount"] | number : "1.2-2"
-                                        }}</span
-                                      >
+                                        }}</strong>
+                                      </span>
+                                      
                                     </a>
                                   </td>
                                   <td>

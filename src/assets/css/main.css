@@ -614,10 +614,22 @@ select:-webkit-autofill:focus {
   color: burlywood;
 }
 
+.memberslist{
+  flex-flow: row nowrap;
+  overflow-x: auto;
+}
+
 .memberslist li {
-  border: 1px solid;
+  /* border: 1px solid; */
   border-radius: 5px;
   margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.memberslist .nav-link{
+  border: 1px solid;
+  /* width: 150px; */
 }
 .memberslist .nav-link.active {
   color: #000;
@@ -772,4 +784,16 @@ tfoot td {
 
 .exposure-font{
   font-size: 0.9rem;
+}
+
+tfoot tr{
+  /* border: 1px solid; */
+    position: sticky;
+    bottom: 0;
+    background: black;
+}
+
+.net-exposure_scroll{
+  overflow: scroll;
+  height: 32vh;
 }

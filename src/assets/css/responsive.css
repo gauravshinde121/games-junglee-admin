@@ -82,6 +82,10 @@
     z-index: 2;
     cursor: pointer;
   }
+  .memberslist .nav-link {
+    width: 121px;
+    font-size: 12px;
+}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

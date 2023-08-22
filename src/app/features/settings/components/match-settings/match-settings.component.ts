@@ -51,6 +51,9 @@ export class MatchSettingsComponent implements OnInit {
       matchOddDelay: new FormControl(null),
       bookmakerDelay: new FormControl(null),
       fancyDelay: new FormControl(null),
+      maxMatchOddsSize: new FormControl(null),
+      maxBookmakerSize: new FormControl(null),
+      maxFancySize: new FormControl(null),
     })
   }
 
@@ -104,7 +107,11 @@ export class MatchSettingsComponent implements OnInit {
       fancyMinBet: matchSettings.fancyMinBet,
       matchOddDelay: matchSettings.matchOddDelay,
       bookmakerDelay: matchSettings.bookmakerDelay,
-      fancyDelay: matchSettings.fancyDelay
+      fancyDelay: matchSettings.fancyDelay,
+      maxMatchOddsSize:matchSettings.maxMatchOddsSize,
+      maxBookmakerSize:matchSettings.maxBookmakerSize,
+      maxFancySize:matchSettings.maxFancySize,
+
     });
     this.display = 'block';
   }
@@ -125,7 +132,10 @@ export class MatchSettingsComponent implements OnInit {
       fancyMinBet: this.matchSettingsForm.value.fancyMinBet,
       matchOddDelay: this.matchSettingsForm.value.matchOddDelay,
       bookmakerDelay: this.matchSettingsForm.value.bookmakerDelay,
-      fancyDelay: this.matchSettingsForm.value.fancyDelay
+      fancyDelay: this.matchSettingsForm.value.fancyDelay,
+      maxMatchOddsSize: this.matchSettingsForm.value.maxMatchOddsSize,
+      maxBookmakerSize: this.matchSettingsForm.value.maxBookmakerSize,
+      maxFancySize: this.matchSettingsForm.value.maxFancySize
     }
     this.settingsService._setBetLimitForMatchApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Match Settings', 'success');

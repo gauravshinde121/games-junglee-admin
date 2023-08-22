@@ -136,6 +136,32 @@
           <section class="section w-100 m-auto">
             <form [formGroup]="matchSettingsForm">
               <div class="row">
+                <div class="col-md-4 mb-2">
+                  Max Match Odds Market Size*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="maxMatchOddsSize"
+                  />
+                </div>
+                <div class="col-md-4 mb-2">
+                  Max Bookmaker Market Size*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="maxBookmakerSize"
+                  />
+                </div>
+                <div class="col-md-4 mb-2">
+                  Max Fancy Market Size*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="maxFancySize"
+                  />
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-md-6 mb-2">
                   Match Odds Min Bet*
                   <input
@@ -216,7 +242,7 @@
                       [disabled]="!matchSettingsForm.dirty"
                       class="btn btn-danger rounded-pill w-80 mt-2"
                     >
-                      Save
+                      Apply To All Markets
                     </button>
                   </div>
                   <div class="col-md-6">

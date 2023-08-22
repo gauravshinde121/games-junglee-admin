@@ -47,15 +47,10 @@ export class MarketSettingsComponent implements OnInit {
     })
 
     this.matchSettingsForm = new FormGroup({
-      matchOddsMaxBet: new FormControl(null),
-      matchOddsMinBet: new FormControl(null),
-      bookmakerMaxBet: new FormControl(null),
-      bookmakerMinBet: new FormControl(null),
-      fancyMaxBet: new FormControl(null),
-      fancyMinBet: new FormControl(null),
-      matchOddDelay: new FormControl(null),
-      bookmakerDelay: new FormControl(null),
-      fancyDelay: new FormControl(null),
+      minBet: new FormControl(null),
+      maxBet: new FormControl(null),
+      maxMarketSize: new FormControl(null),
+      marketDelay: new FormControl(null)
     })
   }
 
@@ -153,4 +148,38 @@ export class MarketSettingsComponent implements OnInit {
   //   }
   // }
 
+
+  openSettingModal(matchSettings) {
+    this.matchSettingsForm.reset();
+    this.selectedMatchSettings = matchSettings;
+    this.matchSettingsForm.patchValue({
+      minBet: matchSettings.minBet,
+      maxBet: matchSettings.maxBet,
+      maxMarketSize: matchSettings.maxMarketSize,
+      marketDelay: matchSettings.marketDelay
+    });
+    this.display = 'block';
+  }
+
+  closeModal() {
+    this.display = 'none';
+  }
+
+  saveMatchSettings() {
+
+    this.display = 'none';
+    let body = {
+
+      marketId: this.selectedMatchSettings.marketId,
+      marketDelay: this.matchSettingsForm.value.marketDelay,
+      minBet: this.matchSettingsForm.value.minBet,
+      maxBet: this.matchSettingsForm.value.maxBet,
+      maxMarketSize: this.matchSettingsForm.value.maxMarketSize
+    }
+    
+    this.settingsService._setBetLimitForMarketApi(body).subscribe((data: any) => {
+      this._sharedService.getToastPopup("Settings updated.", 'Market Settings', 'success');
+      this.getMarketSettingsList();
+    })
+  }
 }

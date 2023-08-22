@@ -78,6 +78,7 @@
               <th scope="col" class="first">#</th>
               <th scope="col">Market Name</th>
               <th scope="col">Match Name</th>
+              <th scope="col">Setting</th>
               <th scope="col" class="last">Action</th>
             </tr>
           </thead>
@@ -88,6 +89,9 @@
               </td>
               <td>{{ stmt.marketName }}</td>
               <td>{{ stmt.refMatchName }}</td>
+              <td (click)="openSettingModal(stmt)">
+                <i class="fa fa-cog cursor-pointer" aria-hidden="true"></i>
+              </td>
               <td>
                 <label class="toggle-container">
                   <input
@@ -107,3 +111,97 @@
     </div>
   </section>
 </main>
+
+
+<!-- Modal start-->
+<div
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          Market Settings
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark_new text-white">
+        <div class="row">
+          <section class="section w-100 m-auto">
+            <form [formGroup]="matchSettingsForm">
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  Min Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="minBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Max Bet*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="maxBet"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Max Market Size*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="maxMarketSize"
+                  />
+                </div>
+                <div class="col-md-6 mb-2">
+                  Market Delay*
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="marketDelay"
+                  />
+                </div>
+                
+
+                <div class="row">
+                  <div class="col-md-6 text-end">
+                    <button
+                      (click)="saveMatchSettings()"
+                      [disabled]="!matchSettingsForm.dirty"
+                      class="btn btn-danger rounded-pill w-80 mt-2"
+                    >
+                      Save
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button
+                      class="btn btn-danger rounded-pill w-80 mt-2"
+                      (click)="closeModal()"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

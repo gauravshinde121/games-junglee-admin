@@ -18,6 +18,7 @@
                   type="radio"
                   class="radioselected cursor-pointer"
                   id="html"
+                  
                   name="fav_language"
                   value="HTML"
                   (click)="onFilterChange(true)"
@@ -26,7 +27,7 @@
               <a class="text-decoration-none text-white">
                 <input
                   type="radio"
-                  checked=""
+                  checked
                   class="radioselected cursor-pointer"
                   id="html"
                   name="fav_language"
@@ -142,7 +143,7 @@
                                               : 'text-success'
                                           "
                                           class="text-success"
-                                          ><strong class="exposure-font">Rs. {{
+                                          ><strong class="exposure-font">{{
                                             runner["amount"] | number : "1.2-2"
                                           }}</strong></span
                                         >
@@ -293,8 +294,8 @@
                                             ? 'text-danger'
                                             : 'text-success'
                                         "
-                                        >Rs.
-                                        <strong class="exposure-font">Rs. {{
+                                        >
+                                        <strong class="exposure-font">{{
                                           runner["amount"] | number : "1.2-2"
                                         }}</strong></span
                                       >
@@ -385,7 +386,7 @@
                                             : 'text-success'
                                         "
                                         >
-                                        <strong class="exposure-font">Rs. {{
+                                        <strong class="exposure-font"> {{
                                           runner["amount"] | number : "1.2-2"
                                         }}</strong>
                                       </span>
@@ -494,7 +495,7 @@
                                   <strong>{{ userBook["stake"] }}</strong>
                                 </td>
                                 <td class="border-top">
-                                  Rs.<strong
+                                  <strong
                                     class="text-success"
                                     *ngIf="userBook['runner1'] > 0"
                                     >{{
@@ -510,7 +511,7 @@
                                   >
                                 </td>
                                 <td class="border-top">
-                                  Rs.<strong
+                                  <strong
                                     class="text-success"
                                     *ngIf="userBook['runner3'] > 0"
                                     >{{
@@ -526,7 +527,7 @@
                                   >
                                 </td>
                                 <td class="border-top">
-                                  Rs.<strong
+                                  <strong
                                     class="text-success"
                                     *ngIf="userBook['runner2'] > 0"
                                     >{{
@@ -555,7 +556,7 @@
                                   <strong>{{ totalBook["stake"] }}</strong>
                                 </td>
                                 <td class="border-top">
-                                  Rs.<strong
+                                  <strong
                                     class="text-success"
                                     *ngIf="totalBook['runner1'] > 0"
                                     >{{
@@ -571,7 +572,7 @@
                                   >
                                 </td>
                                 <td class="border-top">
-                                  Rs.<strong
+                                  <strong
                                     class="text-success"
                                     *ngIf="totalBook['runner3'] > 0"
                                     >{{
@@ -587,7 +588,7 @@
                                   >
                                 </td>
                                 <td class="border-top">
-                                  Rs.<strong
+                                  <strong
                                     class="text-success"
                                     *ngIf="totalBook['runner2'] > 0"
                                     >{{

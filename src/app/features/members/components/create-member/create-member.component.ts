@@ -250,9 +250,7 @@ export class CreateMemberComponent implements OnInit {
         (res: any) => {
           this._sharedService.getToastPopup(`User ${msg} Successfully`, 'Member', 'success');
           this._router.navigate(['/member/list'])
-          this._sharedService.sharedSubject.next({
-            'updateAdminDetails': true
-          });
+          this._sharedService.callAdminDetails.next();
         }, (error) => {
           this.isLoading = false;
           this._sharedService.getToastPopup(`Error while creating the member.`, 'Member', 'error');

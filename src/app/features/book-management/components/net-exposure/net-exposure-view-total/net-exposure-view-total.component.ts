@@ -131,7 +131,8 @@ export class NetExposureViewTotalComponent implements OnInit {
       return;
     }
     let totalBookParams = {
-      marketId:marketId
+      marketId:marketId,
+      myPT:this.myPT
     };
     this._bookMgmService._postTotalBookApi(totalBookParams).subscribe((data: any) => {
       // console.log(data);

@@ -41,7 +41,7 @@ export class MembersListComponent implements OnInit {
 
   searchTerm: string = '';
   currentPage: number = 1;
-  pageSize: number = 50;
+  pageSize: number = 25;
   totalPages: number = 0;
 
   statusList: any = [];
@@ -50,7 +50,7 @@ export class MembersListComponent implements OnInit {
   adjustWinningsForSingleUserForm: FormGroup;
   selectedColor = "";
   disableSubmit = false;
-
+  totalMembers = 0;
 
 
   fileName = 'MemberList.xlsx';
@@ -245,6 +245,7 @@ export class MembersListComponent implements OnInit {
   }
 
   _getAllUserInfo(roleId, autoRefresh = false) {
+    console.log("called")
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });
@@ -267,6 +268,7 @@ export class MembersListComponent implements OnInit {
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
       this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);
+      this.totalMembers = users.memberData.totalMembers;
     });
   }
 

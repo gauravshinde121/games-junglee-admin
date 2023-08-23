@@ -8,6 +8,7 @@ import { TruncatePipe } from './pipe/truncate.pipe';
 import { MarketRateFormaterPipe } from './pipe/market-rate-formater.pipe';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { BoxHighlightDirective } from './directives/box-highlight.directive';
+import { SortPipe } from './pipe/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { BoxHighlightDirective } from './directives/box-highlight.directive';
     LeftNavigationComponent,
     TruncatePipe,
     MarketRateFormaterPipe,
-    BoxHighlightDirective
+    BoxHighlightDirective,
+    SortPipe
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { BoxHighlightDirective } from './directives/box-highlight.directive';
     TruncatePipe,
     MarketRateFormaterPipe,
     TooltipModule,
-    BoxHighlightDirective
+    BoxHighlightDirective,
+    SortPipe
   ]
 })
 export class SharedModule { }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SettingsService } from '../services/settings.service';
 import { SharedService } from '@shared/services/shared.service';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-market-settings',
@@ -23,13 +25,27 @@ export class MarketSettingsComponent implements OnInit {
   matchList: any;
   sportId:any;
 
+  sortedData: any[];
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+  searchTerm: string = '';
+
+  searchTermChanged: Subject<string> = new Subject<string>();
+
+
   constructor(
     private settingsService: SettingsService,
     private _sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
-    this._preConfig()
+    this._preConfig();
+
+    this.searchTermChanged
+    .pipe(debounceTime(150), distinctUntilChanged())
+    .subscribe(searchTerm => {
+      this.filterData(searchTerm);
+    });
   }
 
   _preConfig() {
@@ -59,7 +75,7 @@ export class MarketSettingsComponent implements OnInit {
       this.filterForm.value.tournamentId = null;
     }
     this.isLoading = true;
-    this.marketSettingsList = [];
+    // this.marketSettingsList = [];
     if (this.filterForm.value.memberName == null) {
       this.filterForm.patchValue({ 'memberName': null });
     }
@@ -90,8 +106,11 @@ export class MarketSettingsComponent implements OnInit {
     this.settingsService._getMarketForAdminMarketSettingsListApi(body).subscribe((data: any) => {
       this.isLoading = false;
       this.marketSettingsList = data.markets;
+
+      this.sortedData = data.markets.slice();
     })
   }
+
 
   _getAllSports() {
     this._sharedService._getSports().subscribe((data: any) => {
@@ -182,4 +201,43 @@ export class MarketSettingsComponent implements OnInit {
       this.getMarketSettingsList();
     })
   }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
+  }
+
+  filterData(searchTerm: string) {
+
+    if (searchTerm.length === 0) {
+      this.getMarketSettingsList();
+    } else {
+      const searchTermLowerCase = searchTerm.toLowerCase();
+
+      this.marketSettingsList = this.marketSettingsList.filter(item =>
+        item.marketName.toLowerCase().includes(searchTermLowerCase)
+      );
+  
+      // Apply sorting if required
+      if (this.sortColumn) {
+        this.marketSettingsList.sort((a, b) =>
+          a[this.sortColumn].localeCompare(b[this.sortColumn]) * (this.sortAscending ? 1 : -1)
+        );
+      }
+  
+      return this.marketSettingsList;
+    }
+
+  }
+
+  applyFilter() {
+    
+    this.searchTermChanged.next(this.searchTerm);
+
+  }
+ 
 }

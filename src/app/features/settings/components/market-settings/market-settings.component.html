@@ -59,6 +59,31 @@
               Search
             </button>
           </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 pt-3">
+            <div class="row text-white">
+              <div class="input-group flex-nowrap">
+                <span
+                  class="input-group-text bg-dark text-white border-pink radius-left-tb"
+                  id="addon-wrapping"
+                >
+                  <i class="fa fa-search"></i>
+                </span>
+                <input
+                  type="text"
+                  class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="addon-wrapping"
+                  [(ngModel)]="searchTerm"
+                  (ngModelChange)="applyFilter()"
+                  [ngModelOptions]="{standalone: true}"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-md-4">
+            <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="applyFilter()" [ngModelOptions]="{standalone: true}" placeholder="Search...">
+          </div> -->
           <!--your code will come here end-->
         </div>
       </div>
@@ -76,18 +101,20 @@
           <thead class="text-dark">
             <tr>
               <th scope="col" class="first">#</th>
-              <th scope="col">Market Name</th>
-              <th scope="col">Match Name</th>
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('marketName')">Market Name</th>
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('marketType')">Market Type</th>
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('refMatchName')">Match Name</th>
               <th scope="col">Setting</th>
               <th scope="col" class="last">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let stmt of marketSettingsList; let i = index">
+            <tr *ngFor="let stmt of marketSettingsList | sort:sortColumn:sortAscending; let i = index">
               <td>
                 {{ i + 1 }}
               </td>
               <td>{{ stmt.marketName }}</td>
+              <td>{{ stmt.marketType }}</td>
               <td>{{ stmt.refMatchName }}</td>
               <td (click)="openSettingModal(stmt)">
                 <i class="fa fa-cog cursor-pointer" aria-hidden="true"></i>

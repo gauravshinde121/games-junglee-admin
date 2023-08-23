@@ -98,7 +98,7 @@
                         <p class="mt-3 mb-1">
                           <i class="fa fa-minus"></i>
                           <i class="fa fa-plus"></i>
-                          {{ singleAdminBook["marketName"] }}
+                          {{ singleAdminBook["marketName"] }} 
                         </p>
                       </div>
                     </div>
@@ -398,6 +398,17 @@
                                   </td>
                                   <td>
                                     <a><strong></strong> <br /></a>
+                                  </td>
+                                  <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
+                                    <a data-bs-toggle="modal" href="#exampleModalToggle" role="button"
+                                      class="laddericon"  (click)="
+                                        getLadderDataByMarket(
+                                          singleAdminBook['marketId']
+                                        )
+                                      "
+                                      >
+                                      <img src="/assets/images/ladder-icon.png" width="10px" />
+                                    </a>
                                   </td>
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
@@ -744,3 +755,56 @@
     </div>
   </div>
 </main>
+
+<!--modal Start-->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content modalradius">
+      <!-- <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> -->
+      <div class="modal-body text-center p-4 pb-3">
+        <div class="row border-bottom p-2">
+          <div class="col-md-6">Runs</div>
+          <div class="col-md-6">P&L</div>
+        </div>
+        <ng-container *ngIf="ladderObj && ladderObj.length > 0">
+          <div *ngFor="let ldr of ladderObj">
+            <!-- {{ldr?['amount'] | json}} -->
+            <div class="row border-bottom p-2" *ngIf="ldr['position'] != 'last'">
+              <div class="col-md-6" *ngIf="ldr['startScore']!=ldr['endScore']">
+                {{ ldr['startScore'] }}-{{ ldr['endScore'] }}
+              </div>
+              <div class="col-md-6" *ngIf="ldr['startScore'] == ldr['endScore']">
+                {{ ldr['startScore']}}
+              </div>
+              <div class="col-md-6">
+                <span [ngClass]="
+                    ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
+                  ">{{ ldr['amount'] }}</span>
+              </div>
+            </div>
+            <div class="row border-bottom p-2 bg-light" *ngIf="ldr['position'] == 'last'">
+              <ng-container>
+                <div class="col-md-6">{{ ldr['startScore'] }}+</div>
+              </ng-container>
+              <div class="col-md-6">
+                <span [ngClass]="
+                    ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
+                  ">{{ ldr['amount'] }}</span>
+              </div>
+            </div>
+          </div>
+
+        </ng-container>
+        <div class="row">
+          <button class="btn col-md-4 mt-3 btn-outline-pink border-0" data-bs-target="#exampleModalToggle2"
+            data-bs-toggle="modal" data-bs-dismiss="modal">
+            CLOSE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

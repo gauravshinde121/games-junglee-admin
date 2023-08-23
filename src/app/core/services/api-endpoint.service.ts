@@ -418,4 +418,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_SAVE_WEB_SETTING);
   }
 
+
+  public getLadderForAdminEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_LADDER_FOR_ADMIN)
+  }
+
 }

@@ -37,6 +37,7 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   fileName= 'NetExposureViewTotal'+new Date().toString()+'.xlsx';
   newAdminBooksList:any;
+  ladderObj: never[];
 
   constructor(
     private _sharedService:SharedService,
@@ -490,5 +491,15 @@ export class NetExposureViewTotalComponent implements OnInit {
     });
     this._sharedService.exportExcel(viewtotal,this.fileName);
  }
+
+
+ getLadderDataByMarket(marketId:any){
+  this.ladderObj = [];
+  this._bookMgmService._postLadderDataByMarketApi({marketId:marketId}).subscribe((res:any)=>{
+
+    console.log("Res",res);
+    this.ladderObj = res?.ladderDetails;
+  })
+}
 
 }

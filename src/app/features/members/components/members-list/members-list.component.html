@@ -131,6 +131,7 @@
                 <i class="fa-sharp fa-regular fa-address-card"></i>
               </th>
               <th scope="col" class="">UserName</th>
+              <th scope="col" class="text-center">RoleName</th>
               <th scope="col" class="text-center">Credit Limit</th>
               <th scope="col" class="text-center">Net Exposure</th>
               <th scope="col" class="text-center">Take</th>
@@ -173,6 +174,7 @@
                 }}</span>
               </td>
               <td [ngStyle]="selectedRoleId == 7?{'cursor': 'context-menu'} : {'cursor': 'pointer'}"><span (click)="showDownlineTree(user)">{{ user.username }}</span></td>
+              <td class="text-center"><span *ngFor="let role of roles"(click)="showDownlineTree(user)"><span  *ngIf="selectedRoleId == role.roleId">{{ role.userRoleName }}</span></span></td>
               <td class="text-center">{{ user.creditLimit | number }}</td>
               <td
                 class="text-center"

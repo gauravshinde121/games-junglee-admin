@@ -19,6 +19,16 @@ export class MatchSettingsComponent implements OnInit {
   sports: any;
   toggleValue: boolean = false;
   selectedMatchSettings: any;
+
+  sortedData: any[];
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+  searchTerm: string = '';
+
+  sortAction: string = 'isActive';
+  sortDirection: number = 1; // 1: ascending, -1: descending
+  booleanValue: any = false
+
   constructor(
     private settingsService: SettingsService,
     private _sharedService: SharedService
@@ -153,6 +163,15 @@ export class MatchSettingsComponent implements OnInit {
     this.settingsService._setMatchActiveStatusApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Match Settings', 'success');
     })
+  }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
   }
 
 }

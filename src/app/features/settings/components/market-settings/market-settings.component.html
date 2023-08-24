@@ -96,7 +96,7 @@
           </h4>
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
-        <table class="table tableall" *ngIf="marketSettingsList.length > 0">
+        <table class="table tableall marketSetting" *ngIf="marketSettingsList.length > 0">
           <thead class="text-dark">
             <tr>
               <th scope="col" class="first">#</th>
@@ -108,7 +108,7 @@
               <th scope="col" class="cursor-pointer" (click)="toggleSort('maxMarketSize')">Max Market Size</th>
               <th scope="col" class="cursor-pointer" (click)="toggleSort('marketDelay')">Market Delay</th>
               <th scope="col">Setting</th>
-              <th scope="col" class="last" class="cursor-pointer" (click)="toggleSort('marketIsActive')">Action</th>
+              <th scope="col" class="cursor-pointer last" (click)="toggleSort('marketIsActive')">Action</th>
 
               <!-- (click)="toggleSort('marketIsActive')"  (click)="sortByBooleanProperty('marketIsActive')"-->
             </tr>

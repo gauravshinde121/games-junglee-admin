@@ -308,7 +308,7 @@ export class MembersListComponent implements OnInit {
   }
 
   adjustWinnings() {
-    console.log("adjust winning")
+    
     var currentUserIp:any;
     this._sharedService.currentUserIp.subscribe((data: any) => {
       currentUserIp = data.userIp;

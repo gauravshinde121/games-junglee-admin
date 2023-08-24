@@ -32,6 +32,10 @@ export class MarketSettingsComponent implements OnInit {
 
   searchTermChanged: Subject<string> = new Subject<string>();
 
+  sortAction: string = 'isActive';
+  sortDirection: number = 1; // 1: ascending, -1: descending
+  booleanValue: any = false;
+
 
   constructor(
     private settingsService: SettingsService,
@@ -209,6 +213,8 @@ export class MarketSettingsComponent implements OnInit {
       this.sortColumn = columnName;
       this.sortAscending = true;
     }
+
+    
   }
 
   filterData(searchTerm: string) {

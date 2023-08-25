@@ -38,9 +38,10 @@ export class BalanceComponent implements OnInit {
     this.isLoading = true;
     this._settingsService._updateSuperAdminBalanceApi(this.balanceForm.value['balanceAmount']).subscribe((res: any) => {
       if (res) {
-        this._sharedService.sharedSubject.next({
-          'updateAdminDetails': true
-        });
+        // this._sharedService.sharedSubject.next({
+        //   'updateAdminDetails': true
+        // });
+        this._sharedService.callAdminDetails.next(true);
         this._sharedService.getToastPopup(`Balance updated Successfully.`, 'Balance', 'success');
         this.isLoading = false;
         this.balanceForm.patchValue({

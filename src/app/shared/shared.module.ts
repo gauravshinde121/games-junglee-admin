@@ -9,6 +9,7 @@ import { MarketRateFormaterPipe } from './pipe/market-rate-formater.pipe';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { BoxHighlightDirective } from './directives/box-highlight.directive';
 import { SortPipe } from './pipe/sort.pipe';
+import { SearchPipe } from './pipe/search.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SortPipe } from './pipe/sort.pipe';
     TruncatePipe,
     MarketRateFormaterPipe,
     BoxHighlightDirective,
-    SortPipe
+    SortPipe,
+    SearchPipe
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { SortPipe } from './pipe/sort.pipe';
     MarketRateFormaterPipe,
     TooltipModule,
     BoxHighlightDirective,
-    SortPipe
+    SortPipe,
+    SearchPipe
   ]
 })
 export class SharedModule { }

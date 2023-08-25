@@ -797,3 +797,8 @@ tfoot tr{
   overflow: scroll;
   height: 32vh;
 }
+
+.marketSetting{
+  font-size: 11px !important;
+  white-space: normal;
+}

@@ -69,14 +69,14 @@
           <thead class="text-dark">
             <tr>
               <th scope="col" class="first">#</th>
-              <th scope="col">Match Name</th>
-              <th scope="col">Date</th>
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('matchName')">Match Name</th>
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('openDate')">Date</th>
               <th scope="col">Setting</th>
-              <th scope="col" class="last">Action</th>
+              <th scope="col" class="last" class="cursor-pointer" (click)="toggleSort('matchIsActive')">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let stmt of matchSettingsList; let i = index">
+            <tr *ngFor="let stmt of matchSettingsList | sort:sortColumn:sortAscending ; let i = index">
               <td>
                 {{ i + 1 }}
               </td>

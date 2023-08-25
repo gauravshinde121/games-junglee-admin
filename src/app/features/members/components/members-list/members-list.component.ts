@@ -55,6 +55,9 @@ export class MembersListComponent implements OnInit {
 
   fileName = 'MemberList.xlsx';
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   createPasswordForm() {
     this.changePasswordForm = this.formbuilder.group({
       password: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
@@ -197,6 +200,15 @@ export class MembersListComponent implements OnInit {
       { id: 2, status: "Inactive", color: 'yellow' },
       { id: 3, status: "Closed", color: 'red' }
     ];
+  }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
   }
 
   checkAll(ev) {
@@ -426,6 +438,6 @@ export class MembersListComponent implements OnInit {
     });
     this._sharedService.exportExcel(memberList, this.fileName);
   }
-
+  
 
 }

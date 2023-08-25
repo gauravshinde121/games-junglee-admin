@@ -20,14 +20,8 @@ export class MatchSettingsComponent implements OnInit {
   toggleValue: boolean = false;
   selectedMatchSettings: any;
 
-  sortedData: any[];
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
-  searchTerm: string = '';
-
-  sortAction: string = 'isActive';
-  sortDirection: number = 1; // 1: ascending, -1: descending
-  booleanValue: any = false
 
   constructor(
     private settingsService: SettingsService,

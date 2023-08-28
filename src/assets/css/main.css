@@ -803,3 +803,7 @@ tfoot tr{
   font-size: 11px !important;
   white-space: normal;
 }
+
+.smallMobileShow{
+  display: none;
+}

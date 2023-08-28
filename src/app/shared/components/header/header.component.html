@@ -71,7 +71,7 @@
 </header> -->
 
 <div class="row align-items-center mb-2 mt-3">
-  <div class="col-md-2 col-1">
+  <div class="col-md-2 col-6">
     <div class="toggle-sidebar-btn d-flex align-items-center">
       <a
         (click)="toggleMenu()"
@@ -91,7 +91,7 @@
       </a>
     </div>
   </div>
-  <div class="col-md-8 col-8">
+  <div class="col-md-8 col-8 smallMobileHide">
     <div class="row">
       <div class="col-md-4 col-4">
         <div class="balance-first">
@@ -130,12 +130,52 @@
       </div>
     </div>
   </div>
-  <div class="col-md-2 col-3 text-center">
+  <div class="col-md-2 col-6 text-center">
     <div class="user">
       <p>Welcome, {{ adminDetails?.username }}.</p>
       <!--<a (click)="refreshPage()" class="btn btn-pink radius-all">
         <i class="fa fa-redo-alt disnone"></i> Refresh
       </a>-->
+    </div>
+  </div>
+
+  <div class="col-md-12 smallMobileShow mt-3">
+    <div class="row">
+      <div class="col-md-4 col-4">
+        <div class="balance-first">
+          <div class="balance">
+            <p>
+              {{ adminDetails?.availableCredit | number }}
+              <br />
+              <span>AVAILABLE BALANCE</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-4">
+        <div class="balance-up">
+          <div class="balance">
+            <p>
+              {{ adminDetails?.balanceUp | number }}
+              <br />
+              <span>BALANCE UP</span>&nbsp;
+              <i class="fa-regular fa-circle-up"></i>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-4">
+        <div class="balance-down">
+          <div class="balance">
+            <p>
+              {{ adminDetails?.balanceDown | number }}
+              <br />
+              <span>BALANCE DOWN</span>&nbsp;
+              <i class="fa-regular fa-circle-down"></i>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

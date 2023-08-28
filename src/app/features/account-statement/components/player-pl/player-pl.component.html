@@ -142,18 +142,18 @@
       <thead class="text-dark">
         <tr>
           <th scope="col" class="first"></th>
-          <th scope="col"><i class="fa fa-"></i> Date</th>
-          <th scope="col">Sport</th>
+          <th scope="col" class="pointer" (click)="toggleSort('createDateTime')"><i class="fa fa-"></i> Date</th>
+          <th scope="col" class="pointer" (click)="toggleSort('subGame')">Sport</th>
           <!--<th scope="col">Sub Game</th>-->
-          <th scope="col">Match</th>
-          <th scope="col">Username</th>
-          <th scope="col">Amount</th>
+          <th scope="col" class="pointer" (click)="toggleSort('eventName')">Match</th>
+          <th scope="col" class="pointer" (click)="toggleSort('name')">Username</th>
+          <th scope="col" class="pointer" (click)="toggleSort('finalNetAmount')">Amount</th>
           <!-- <th scope="col">Master</th><th scope="col">Multiplier</th> -->
           <th scope="col" class="last text-center">Details</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let pl of plStatement; let i = index">
+        <tr *ngFor="let pl of plStatement | sort:sortColumn:sortAscending ; let i = index">
           <td>
             <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
             <span *ngIf="currentPage > 1">{{

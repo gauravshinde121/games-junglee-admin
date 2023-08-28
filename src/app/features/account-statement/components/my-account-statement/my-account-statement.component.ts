@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccountStatementService } from '../../services/account-statement.service';
 import { SharedService } from '@shared/services/shared.service';
-import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-my-pl',
-  templateUrl: './my-pl.component.html',
-  styleUrls: ['./my-pl.component.scss']
+  selector: 'app-my-account-statement',
+  templateUrl: './my-account-statement.component.html',
+  styleUrls: ['./my-account-statement.component.scss']
 })
-export class MyPlComponent implements OnInit {
+export class MyAccountStatementComponent implements OnInit {
 
   filterForm: FormGroup;
   plStatement: any = [];

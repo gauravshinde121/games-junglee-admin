@@ -130,13 +130,13 @@
               <th scope="col" class="">
                 <i class="fa-sharp fa-regular fa-address-card"></i>
               </th>
-              <th scope="col" class="">UserName</th>
-              <th scope="col" class="text-center">RoleName</th>
-              <th scope="col" class="text-center">Credit Limit</th>
-              <th scope="col" class="text-center">Net Exposure</th>
-              <th scope="col" class="text-center">Take</th>
-              <th scope="col" class="text-center">Give</th>
-              <th scope="col" class="text-center">Available Credit</th>
+              <th scope="col" class="pointer" (click)="toggleSort('username')">UserName</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('userRoleName')">RoleName</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('creditLimit')">Credit Limit</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('exposure')">Net Exposure</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('take')">Take</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('give')">Give</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('availableCredit')">Available Credit</th>
               <!-- <th scope="col" class=""><i class="fa-sharp fa-regular fa-square-check"></i> Status
               </th> -->
               <!-- <th scope="col" class="">Info</th> -->
@@ -157,7 +157,7 @@
             >
               No users Found
             </h1>
-            <tr *ngFor="let user of userList; let i = index">
+            <tr *ngFor="let user of userList | sort:sortColumn:sortAscending  ; let i = index">
               <td>
                 <input
                   type="checkbox"

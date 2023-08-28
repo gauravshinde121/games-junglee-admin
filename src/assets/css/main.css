@@ -216,6 +216,7 @@ body {
   line-height: 26px;
   letter-spacing: 1px;
   font-weight: 600;
+  margin: 0;
 }
 .balance span {
   font-size: 16px;

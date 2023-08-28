@@ -59,9 +59,9 @@ export class LeftNavigationComponent implements OnInit {
 
   checkPath(){
     this.currentPath = localStorage.getItem('path');
-    console.log("this.currentPath")
-    console.log(this.currentPath)
-    console.log(typeof(this.currentPath))
+    // console.log("this.currentPath")
+    // console.log(this.currentPath)
+    // console.log(typeof(this.currentPath))
   }
 
 }

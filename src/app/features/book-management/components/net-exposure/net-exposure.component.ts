@@ -139,6 +139,20 @@ export class NetExposureComponent implements OnInit {
 
     this._bookManagementService._getBookForBackendApi(body).subscribe((res: any) => {
       // this.alterData(res);
+
+      if(res.booksForBackend){
+        for(const book of res.booksForBackend){
+           book.data.forEach(d=>{
+            let amounts:any = [];
+            d.horses.forEach(h=>{
+              amounts.push(h.finalAmount)
+            })
+            let lowestVal = Math.min(...amounts);
+            d.netExposure = lowestVal;
+          })
+        }
+      }
+
       this.booksForBackend = res.booksForBackend;
       this.isLoading = false;
     },

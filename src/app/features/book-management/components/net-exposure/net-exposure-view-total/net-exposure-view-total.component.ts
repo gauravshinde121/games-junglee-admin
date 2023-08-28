@@ -297,11 +297,11 @@ export class NetExposureViewTotalComponent implements OnInit {
                   runnerRes['lay1'] = '';
                   runnerRes['vlay1'] = '';
                 }else{
-                runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds']: '';
-                runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv']:'';
+                runnerRes['back1'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds']: '';
+                runnerRes['vback1'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv']:'';
 
-                runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds']: '';
-                runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv']:'';
+                runnerRes['lay1'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds']: '';
+                runnerRes['vlay1'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv']:'';
                 }
               break;
             }
@@ -375,27 +375,57 @@ export class NetExposureViewTotalComponent implements OnInit {
 
               return singleBook['adminBook'].map((runnerRes) => {
                 let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
-                for (let singleWebsocketRunner of webSocketRunners) {
-                  if (singleWebsocketRunner['ib']) {
-                    //back
-
-                    //Live Rate
-                    runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-
-                    //Volume from Betfair
-                    runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-
-                  } else {
-                    //lay
-
-                    //Live Rate
-                    runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
-
-                    //Volume from Betfair
-                    runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-
+                // console.log(webSocketRunners)
+                if(singleBook['marketTypName'] == 'Match Odds'){
+                  
+                  for (let singleWebsocketRunner of webSocketRunners) {
+                  
+                    if (singleWebsocketRunner['ib']) {
+                      //back
+  
+                      //Live Rate
+                      runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+  
+                      //Volume from Betfair
+                      runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+  
+                    } else {
+                      //lay
+  
+                      //Live Rate
+                      runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+  
+                      //Volume from Betfair
+                      runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+  
+                    }
+                  }
+                }else if(singleBook['marketTypName'] == 'Bookmaker' || singleBook['marketTypName'] == 'Fancy'){
+                  // console.log(webSocketRunners)
+                  for (let singleWebsocketRunner of webSocketRunners) {
+                  
+                    if (singleWebsocketRunner['ib']) {
+                      //back
+  
+                      //Live Rate
+                      runnerRes['back1'] = singleWebsocketRunner['rt'];
+  
+                      //Volume from Betfair
+                      runnerRes['vback1'] = singleWebsocketRunner['bv'];
+  
+                    } else {
+                      //lay
+  
+                      //Live Rate
+                      runnerRes['lay1'] = singleWebsocketRunner['rt'];
+  
+                      //Volume from Betfair
+                      runnerRes['vlay1'] = singleWebsocketRunner['bv'];
+  
+                    }
                   }
                 }
+                
                 return runnerRes;
               })
           }

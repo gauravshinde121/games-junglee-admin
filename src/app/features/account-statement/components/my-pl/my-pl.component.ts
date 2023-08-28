@@ -33,6 +33,9 @@ export class MyPlComponent implements OnInit {
 
   fileName= 'P/L Statement.xlsx';
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
 
   constructor(
     private _accountStatementService: AccountStatementService,
@@ -305,5 +308,14 @@ export class MyPlComponent implements OnInit {
     });
     this._sharedService.exportExcel(pL,this.fileName);
  }
+
+ toggleSort(columnName: string) {
+  if (this.sortColumn === columnName) {
+    this.sortAscending = !this.sortAscending;
+  } else {
+    this.sortColumn = columnName;
+    this.sortAscending = true;
+  }
+}
 
 }

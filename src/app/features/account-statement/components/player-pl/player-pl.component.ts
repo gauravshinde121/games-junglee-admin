@@ -40,6 +40,9 @@ export class PlayerPlComponent implements OnInit {
   fileName = 'PlayerP/L_Statement.xlsx';
   fileName1 = 'OneAccount.xlsx';
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   constructor(
     private _memberService: MembersService,
     private _accountStatementService: AccountStatementService,
@@ -205,6 +208,7 @@ export class PlayerPlComponent implements OnInit {
       // if (res.admin.finalList.length > 0) {
         this.plStatement = res.admin.finalList;
         this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+
       // }
     }, (err)=>{
       console.log(err);
@@ -351,6 +355,20 @@ export class PlayerPlComponent implements OnInit {
     });
 
     this._sharedService.exportExcel(oneaccnt, this.fileName1);
+  }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
+  }
+
+  updateLimit(event){
+    this.limit = parseInt(event.target.value);
+    this.pageSize = this.limit;
   }
 
 }

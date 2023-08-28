@@ -105,11 +105,11 @@
       <table class="table tableall " *ngIf="plStatement.length > 0">
         <thead>
           <tr>
-            <th scope="col" class="first">Date</th>
-            <th scope="col">Game</th>
-            <th scope="col">Sub Game</th>
-            <th scope="col">Event</th>
-            <th scope="col">Win/Loss</th>
+            <th scope="col" class="first pointer" (click)="toggleSort('createdAt')">Date</th>
+            <th scope="col" class="pointer" (click)="toggleSort('gameName')">Game</th>
+            <th scope="col" class="pointer" (click)="toggleSort('subGame')">Sub Game</th>
+            <th scope="col" class="pointer" (click)="toggleSort('eventName')">Event</th>
+            <th scope="col" class="pointer" (click)="toggleSort('winINR')">Win/Loss</th>
             <!-- <th scope="col">Commission</th>
             <th scope="col">Net Amount</th> -->
             <!-- <th scope="col" class="">U/L Commission</th>
@@ -120,7 +120,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let pl of plStatement" (click)="openAllBets(pl.matchId)">
+          <tr *ngFor="let pl of plStatement | sort:sortColumn:sortAscending ;" (click)="openAllBets(pl.matchId)">
             <td>{{ pl.createdAt | date : "medium" }}</td>
             <td>{{ pl.gameName }}</td>
             <td>{{ pl.subGame }}</td>

@@ -1,102 +1,98 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccountStatementService } from '../../services/account-statement.service';
 import { SharedService } from '@shared/services/shared.service';
-import { MembersService } from 'src/app/features/members/services/members.service';
+import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-player-pl',
-  templateUrl: './player-pl.component.html',
-  styleUrls: ['./player-pl.component.scss']
+  selector: 'app-my-account-statement',
+  templateUrl: './my-account-statement.component.html',
+  styleUrls: ['./my-account-statement.component.scss']
 })
-export class PlayerPlComponent implements OnInit {
+export class MyAccountStatementComponent implements OnInit {
 
-  limit: number = 50;
   filterForm: FormGroup;
   plStatement: any = [];
   games: any;
   matchList: any = [];
-  marketList: any = [];
-  allMembersList: any = [];
-  allMembers: any = [];
+  marketTypeList: any = [];
   dateFormat = "yyyy-MM-dd";
   language = "en";
-  marketTypeList: any;
-  selectedAccount: any;
-  accountStatement: any;
-  display = '';
-  gameData: any;
-  playerData: any;
-  pl: any;
-  oneAccount: any;
 
   currentPage: number = 1;
   pageSize: number = 50;
   totalPages: number = 0;
   isLoading = false;
+  marketList: any;
+  sportsId: any = null;
+  matchId: any = null;
+  marketTypeId: any = null;
+  //currentTotalPage:any;
 
-  fileName = 'PlayerP/L_Statement.xlsx';
-  fileName1 = 'OneAccount.xlsx';
+  fileName= 'P/L Statement.xlsx';
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
 
+
   constructor(
-    private _memberService: MembersService,
     private _accountStatementService: AccountStatementService,
     private _sharedService: SharedService,
+    private _router: Router,
     private _fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this._preConfig();
+    this._preconfig();
     this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
       this._getMatchBySportId(selectedValue);
     });
     this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
-      if(selectedValue){
-        this._getMarketsByMatchId(selectedValue);
-      }
+      console.log('testttt');
+      this._getMarketsByMatchId(selectedValue);
+      this.filterForm.value.marketId = null;
+      this.filterForm.patchValue( {'marketId':null} );
     });
     this.getPlStatement();
+
   }
 
-  _preConfig() {
-    this._initForm();
+  _getMarketsByMatchId(sportId){
+    this._sharedService.getMarketsByMatchId(sportId).subscribe((data:any)=>{
+      if(data.marketList){
+        this.marketList = data.marketList;
+      }
+    });
+  }
+
+  _preconfig() {
+    /*this._sharedService._getGames().subscribe((res:any)=>{
+      this.games = res.gamesList;
+    });*/
     this._getGames();
+    this._initForm();
     // this.getPlStatement();
     this._getAllMarketTypeList();
-    this._getAllMembers();
   }
 
-  get f() {
-    return this.filterForm.controls;
-  }
-
-  // _initForm() {
+  // __initForm() {
   //   this.filterForm = new FormGroup({
-  //     memberName: new FormControl(null),
   //     fromDate: new FormControl(this.formatFormDate(new Date())),
   //     toDate: new FormControl(this.formatFormDate(new Date())),
   //     sportsId: new FormControl(null),
   //     matchId: new FormControl(null),
-  //     marketId: new FormControl(null),
-  //     marketTypeId: new FormControl(null)
+  //     marketId: new FormControl(null)
   //   })
   // }
-
   _initForm(){
     this.filterForm = this._fb.group({
-      memberId: null,
       fromDate : this.formatFormDate(new Date()),
       toDate : this.formatFormDate(new Date()),
       sportsId: null,
       matchId: null,
       marketId: null,
-      marketTypeId: null
-
     });
   }
 
@@ -110,9 +106,9 @@ export class PlayerPlComponent implements OnInit {
         this.games = data;
       }
     });
-  }
+   }
 
-  _getMatchBySportId(sportId) {
+   _getMatchBySportId(sportId) {
     this._sharedService.getMatchBySportId(sportId).subscribe((data: any) => {
       if (data.matchList) {
         this.matchList = data.matchList;
@@ -120,13 +116,14 @@ export class PlayerPlComponent implements OnInit {
     });
   }
 
-  _getMarketsByMatchId(sportId) {
-    this._sharedService.getMarketsByMatchId(sportId).subscribe((data: any) => {
-      if (data.marketList) {
+  _getMarketByMatchId(sportId){
+    this._sharedService.getMarketsByMatchId(sportId).subscribe((data:any)=>{
+      if(data.marketList){
         this.marketList = data.marketList;
       }
     });
   }
+
 
   onGameSelected(sportId){
     this._getMatchBySportId(sportId);
@@ -135,17 +132,20 @@ export class PlayerPlComponent implements OnInit {
   changeGame(evt) {
     // this.sportsId = evt.target.value;
     console.log("changegame",evt.target.value);
-    this.filterForm.patchValue({matchId:null,marketId:null});
     this.filterForm.value.sportsId = evt.target.value;
     if(evt.target.value == null) {
       this.filterForm.value.matchId = null;
+      this.filterForm.value.marketId = null;
     }
   }
 
   changeMatch(evt) {
     // this.matchId = evt.target.value;
-    this.filterForm.patchValue({marketId:null});
     this.filterForm.value.matchId = evt.target.value;
+    if(evt.target.value == null) {
+      this.filterForm.value.marketId = null;
+      this.filterForm.patchValue( {'marketId':null} );
+    }
   }
 
   changeMarketType(evt) {
@@ -153,10 +153,6 @@ export class PlayerPlComponent implements OnInit {
     this.filterForm.value.marketId = evt.target.value;
   }
 
-
-  closeModal() {
-    this.display = 'none';
-  }
 
   getPlStatement() {
     this.isLoading = true;
@@ -171,30 +167,26 @@ export class PlayerPlComponent implements OnInit {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
 
-    // if (this.filterForm.value.sportsId == 'null') {
-    //   this.filterForm.patchValue({ 'sportsId': null });
+    // if(this.filterForm.value.sportsId == 'null'){
+    //   this.filterForm.patchValue( {'sportsId':null} );
     // }
-    // if (this.filterForm.value.matchId == 'null') {
-    //   this.filterForm.patchValue({ 'matchId': null });
+    // if(this.filterForm.value.matchId == 'null'){
+    //   this.filterForm.patchValue( {'matchId':null} );
     // }
-    // if (this.filterForm.value.marketId == 'null') {
-    //   this.filterForm.patchValue({ 'marketId': null });
+    // if(this.filterForm.value.marketId == 'null'){
+    //   this.filterForm.patchValue( {'marketId':null} );
     // }
-
     // let body = {
     //   fromDate: fromDate,
     //   toDate: toDate,
-    //   sportId: this.filterForm.value.sportsId?+this.filterForm.value.sportsId:null,
-    //   matchId: this.filterForm.value.matchId?+this.filterForm.value.matchId:null,
-    //   marketId: this.filterForm.value.marketId?+this.filterForm.value.marketId:null,
-    //   memberId: this.filterForm.value.memberName?+this.filterForm.value.memberName:null,
+    //   sportId:this.filterForm.value.sportsId?+this.filterForm.value.sportsId:this.filterForm.value.sportsId,
+    //   matchId: this.filterForm.value.matchId,
+    //   marketId: this.filterForm.value.marketId,
     //   pageNo: this.currentPage,
-    //   limit: this.limit,
+    //   limit: 50,
     // };
 
     let body = {
-      memberId: this.filterForm.value.memberId,
-      // memberId:null,
       fromDate:fromDate,
       toDate:toDate,
       sportId: null,
@@ -204,24 +196,16 @@ export class PlayerPlComponent implements OnInit {
       limit: 50,
     };
 
-    this._accountStatementService._getDownlineAccountsDataApi(body).subscribe((res: any) => {
+    this._accountStatementService._getPlBySubgameAPi(body).subscribe((res: any) => {
       this.isLoading = false;
-      // if (res.admin.finalList.length > 0) {
-        this.plStatement = res.admin.finalList;
+      // if (res.admin.finalResult.length > 0) {
+        this.plStatement = res.admin.finalResult;
         this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
-
       // }
-    }, (err)=>{
+      //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
+    },(err)=>{
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
-    });
-  }
-
-  _getAllMembers() {
-    this._memberService._getAllMembers().subscribe((data: any) => {
-      if (data.memberData) {
-        this.allMembers = data.memberData;
-      }
     });
   }
 
@@ -259,12 +243,9 @@ export class PlayerPlComponent implements OnInit {
     if(this.filterForm.value.marketId == 'null'){
       this.filterForm.value.marketId = null;
     }
-    if(this.filterForm.value.memberId == 'null'){
-      this.filterForm.patchValue( {'memberId':null} );
-    }
 
+    console.log('this.filterForm.value.marketId',this.filterForm.value.marketId);
     let payload = {
-      memberId: this.filterForm.value.memberId,
       fromDate:fromDate,
       toDate:toDate,
       sportId: this.filterForm.value.sportsId,
@@ -273,38 +254,32 @@ export class PlayerPlComponent implements OnInit {
       pageNo: this.currentPage,
       limit: 50,
     };
-    this._accountStatementService._getDownlineAccountsDataApi(payload).subscribe((res: any) => {
+
+    this._accountStatementService._getPlBySubgameAPi(payload).subscribe((res: any) => {
       this.isLoading = false;
-      // if (res.admin.finalList.length > 0) {
-        this.plStatement = res.admin.finalList;
+      // if (res.admin.finalResult.length > 0) {
+        this.plStatement = res.admin.finalResult;
         this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
       // }
-    }, (err)=>{
+      //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
+    },(err)=>{
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
 
-  getOneAccount(pl) {
-    this.isLoading = true;
-    let body = {
-      "userId": pl.userId,
-      "matchId": pl.matchId
+
+  openAllBets(matchId){
+    if(matchId){
+      this._router.navigate(['/account-statement/all-bets/'+matchId]);
     }
-    this._sharedService.getOneAccount(body).subscribe((data: any) => {
-      this.isLoading = false;
-      if (data.oneAccount) {
-        this.oneAccount = data.oneAccount;
-      }
-    });
-    this.pl = pl;
-    this.gameData = pl.gameData;
-    this.playerData = pl.playerData;
   }
 
 
 
-
+  // onGameSelected(sportId) {
+  //   this._getMatchBySportId(+sportId);
+  // }
 
   next(): void {
     this.currentPage++;
@@ -316,62 +291,31 @@ export class PlayerPlComponent implements OnInit {
     this.getPlStatement();
   }
 
-  clearMemberName() {
-    this.filterForm.controls['memberId'].setValue(null);
-  }
-
-  exportExcel() {
-    let profitLoss: any = []
+  exportExcel(){
+    let pL : any = []
     this.plStatement.forEach(element => {
-      profitLoss.push({
-        Date: moment(element.createDateTime).format("MMM D, YYYY, h:mm:ss a"),
-        Sport: element.gameData.subGame,
-        Match: element.gameData.eventName,
-        Username: element.playerData.name,
-        Amount: +element.gameData.finalNetAmount.toFixed(2),
+      pL.push({
+        Date :  moment(element.createdAt).format("MMM D, YYYY, h:mm:ss a"),
+        Game: element.gameName,
+        SubGame:element.subGame,
+        Event : element.eventName,
+        Win_Loss :element.win,
+        Commision:element.commission,
+        NetAmount:element.netAmount,
+        UserCount:element.userCount,
+        BetCount:element.userBetCount
       })
     });
+    this._sharedService.exportExcel(pL,this.fileName);
+ }
 
-    this._sharedService.exportExcel(profitLoss, this.fileName);
+ toggleSort(columnName: string) {
+  if (this.sortColumn === columnName) {
+    this.sortAscending = !this.sortAscending;
+  } else {
+    this.sortColumn = columnName;
+    this.sortAscending = true;
   }
-
-  exportExcel1() {
-    let oneaccnt : any = []
-    this.oneAccount.bets.forEach(element => {
-      console.log(element)
-      oneaccnt.push({
-        PlaceDate : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
-        MatchedDate:moment(element.matchedDate).format("MMM D, YYYY, h:mm:ss a"),
-        Type:element.type,
-        Status:element.status,
-        HorseName:element.horseName,
-        AvgOdds:element.avgOdds,
-        Odds:element.odds,
-        Stake:element.odds,
-        MatchedStake:element.matchedStake,
-        Profit_Loss:element.profitLoss,
-        Ip:element.ipAddress
-
-      })
-    });
-
-    this._sharedService.exportExcel(oneaccnt, this.fileName1);
-  }
-
-  toggleSort(columnName: string) {
-    if (this.sortColumn === columnName) {
-      this.sortAscending = !this.sortAscending;
-    } else {
-      this.sortColumn = columnName;
-      this.sortAscending = true;
-    }
-  }
-
-  updateLimit(event){
-    this.limit = parseInt(event.target.value);
-    this.pageSize = this.limit;
-  }
-
 }
 
-
+}

@@ -98,4 +98,9 @@ export class MembersService {
     return this._apiHttpService
     .post(this._apiEndpointsService.adjustWinningsForSingleUserEndpoint(),paramObj);
   }
+
+  _getCasinoProviderApi(){
+    return this._apiHttpService
+    .get(this._apiEndpointsService.getCasinoProvideEndpoint());
+  }
 }

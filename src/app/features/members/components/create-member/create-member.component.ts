@@ -33,6 +33,8 @@ export class CreateMemberComponent implements OnInit {
   display:string = 'none';
   uplinePwd:string = '';
   ipAdress = null;
+  casinoProviderList: any = [];
+
   @ViewChild('confirm_password') confirm_password: ElementRef;
   constructor(
     private _fb: FormBuilder,
@@ -59,6 +61,8 @@ export class CreateMemberComponent implements OnInit {
       this.editMode = true;
       this.editUserId = this.route.snapshot.params['id'];
     }
+
+    this._getCasinoProvider();
 
   }
 
@@ -111,6 +115,12 @@ export class CreateMemberComponent implements OnInit {
     console.log(this.gamesList)
   }
 
+  setCasinoStatus(status, providerId) {
+    this.casinoProviderList.find(g => g.providerId == providerId).isActive = !status;
+    this.memberForm.markAsDirty();
+    console.log(this.casinoProviderList);
+  }
+
 
   async getMemberInfo() {
     this._sharedService._getSingleUsersApi({
@@ -121,7 +131,21 @@ export class CreateMemberComponent implements OnInit {
         this.memberData = res.user;
         console.log(this.memberData);
         this.gamesList = res.gameStatus;
-    console.log(this.gamesList)
+        // this.casinoProviderList = res.providerStatus;
+        
+        res.providerStatus.forEach(status => {     
+     
+          this.casinoProviderList.forEach(cpl => {
+            if(status.casinoProviderId == cpl.providerId) {
+              cpl.isActive = status.isActive;
+            }
+          });
+        });
+
+
+        
+        
+    console.log("this.casinoProviderList..",this.casinoProviderList);
 
         this.roleId = this.memberData.roleId;
         this.memberForm.patchValue({
@@ -212,7 +236,8 @@ export class CreateMemberComponent implements OnInit {
           "roleId": this.memberForm.value['roleId'],
           "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
           "ip": this.ipAdress,
-          "uplinePwd": this.uplinePwd
+          "uplinePwd": this.uplinePwd,
+          "casinoControl":  this.casinoProviderList
         }
       } else {
         memberData = {
@@ -228,7 +253,8 @@ export class CreateMemberComponent implements OnInit {
           "roleId": this.memberForm.value['roleId'],
           "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
           "ip": this.ipAdress,
-          "uplinePwd": this.uplinePwd
+          "uplinePwd": this.uplinePwd,
+          "casinoControl":  this.casinoProviderList
         }
       }
 
@@ -275,6 +301,15 @@ export class CreateMemberComponent implements OnInit {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
       this._getUplineInfo();
+    })
+  }
+
+  _getCasinoProvider() {
+    this._memberService._getCasinoProviderApi().subscribe((res: any) => {
+      console.log("Res",res);
+      if (res.providerList) {
+        this.casinoProviderList = res.providerList.map(providerId => ({ ...providerId,casinoProviderId : providerId.providerId ,isActive: true }));
+      }
     })
   }
 

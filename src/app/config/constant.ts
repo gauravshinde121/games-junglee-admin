@@ -118,5 +118,7 @@ export class Constants {
 
     public readonly API_GET_WEB_SETTING:string = 'api/getWebAppSettings';
     public readonly API_SAVE_WEB_SETTING:string = 'api/junglee-admin/saveWebSettings';
+
+    public readonly API_GET_CASINO_PROVIDER:string = 'api/junglee-admin/getMemberWiseCasinoProviderList';
  
 }

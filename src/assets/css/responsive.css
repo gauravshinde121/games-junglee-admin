@@ -1,7 +1,9 @@
-@media only screen and (max-width: 425px) {
-  .sidebar .btn,
-  .sidebar ul li a {
-    font-size: 14px !important;
+@media only screen and (max-width: 767.9px) {
+  .smallMobileHide{
+    display: none;
+  }
+  .smallMobileShow{
+    display: block;
   }
 }
 

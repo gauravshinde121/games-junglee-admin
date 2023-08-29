@@ -2,11 +2,7 @@
   <div *ngIf="!memberForm" class="border text-center p-5">
     <h4>Loading...</h4>
   </div>
-  <form
-    *ngIf="memberForm"
-    [formGroup]="memberForm"
-    (ngSubmit)="onSubmitMemberForm()"
-  >
+  <form *ngIf="memberForm" [formGroup]="memberForm" (ngSubmit)="onSubmitMemberForm()">
     <section class="section gamedetails">
       <div class="row">
         <div class="col-md-12">
@@ -22,13 +18,7 @@
           <div class="row mt-3">
             <div class="col-md-3 mb-2 mb-2">
               <label>Select Role</label>
-              <select
-                [attr.disabled]="editMode"
-                formControlName="roleId"
-                name="roleId"
-                id="ab"
-                class="form-select"
-              >
+              <select [attr.disabled]="editMode" formControlName="roleId" name="roleId" id="ab" class="form-select">
                 <option *ngFor="let role of roles" [value]="role.roleId">
                   {{ role.userRoleName }}
                 </option>
@@ -36,155 +26,96 @@
             </div>
             <div class="col-md-3 mb-2">
               <label>Username</label>
-              <input
-                [readOnly]="editMode"
-                formControlName="username"
-                type="text"
-                class="form-control"
-                placeholder="Username*"
-              />
-              <div
-                class="small text-danger"
-                *ngIf="
+              <input [readOnly]="editMode" formControlName="username" type="text" class="form-control"
+                placeholder="Username*" />
+              <div class="small text-danger" *ngIf="
                   memberForm.controls['username'].errors?.required &&
                   memberForm.controls['username'].touched
-                "
-              >
+                ">
                 Username is required
               </div>
             </div>
             <div class="col-md-3 mb-2">
               <label>Display Name</label>
-              <input
-                autocomplete="disabled"
-                formControlName="displayName"
-                type="text"
-                class="form-control"
-                placeholder="Display Name*"
-              />
-              <div
-                class="small text-danger"
-                *ngIf="
+              <input autocomplete="disabled" formControlName="displayName" type="text" class="form-control"
+                placeholder="Display Name*" />
+              <div class="small text-danger" *ngIf="
                   memberForm.controls['displayName'].errors?.required &&
                   memberForm.controls['displayName'].touched
-                "
-              >
+                ">
                 Display Name is required
               </div>
             </div>
             <div class="col-md-3 mb-2" *ngIf="!editMode">
               <label>Password</label>
               <div class="input-group">
-              <input
-                [type]="show ? 'text' : 'password'"
-                class="form-control"
-                formControlName="password"
-                placeholder="Password*"
-                id="password"
-                name="password"
-              />
-                <span (click)="show=!show" class="input-group-text fa fa-eye text-dark p-0"  id="Password" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
+                <input [type]="show ? 'text' : 'password'" class="form-control" formControlName="password"
+                  placeholder="Password*" id="password" name="password" />
+                <span (click)="show=!show" class="input-group-text fa fa-eye text-dark p-0" id="Password"
+                  [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
               </div>
-              <div
-                class="small text-danger"
-                *ngIf="
+              <div class="small text-danger" *ngIf="
                   memberForm.controls['password'].errors?.required &&
                   memberForm.controls['password'].touched
-                "
-              >
+                ">
                 <small>Password is required</small>
               </div>
-              <div
-                class="small text-danger"
-                *ngIf="
+              <div class="small text-danger" *ngIf="
                   memberForm.controls['password'].touched &&
                   memberForm.controls['password'].errors?.pattern
-                "
-              >
-                <small
-                  >Password should be atleast 8 characters long. <br />
+                ">
+                <small>Password should be atleast 8 characters long. <br />
                   It should Contain <br />
                   1 alpha-numeric character <br />
                   1 upper case character <br />
                   1 lower case character <br />
-                  1 specialcharacter</small
-                >
+                  1 specialcharacter</small>
               </div>
             </div>
             <div class="col-md-3 mb-2" *ngIf="!editMode">
               <label>Confirm Password</label>
               <div class="input-group">
-              <input
-                [type]="show1 ? 'text' : 'password'"
-                class="form-control"
-                formControlName="confirmPassword"
-                placeholder="Confirm Password*"
-                id="password"
-                name="password"
-              />
-              <span (click)="show1=!show1" class="input-group-text fa fa-eye text-dark p-0"  id="Password" [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"></span>
-            </div>
-            <div
-                *ngIf="
+                <input [type]="show1 ? 'text' : 'password'" class="form-control" formControlName="confirmPassword"
+                  placeholder="Confirm Password*" id="password" name="password" />
+                <span (click)="show1=!show1" class="input-group-text fa fa-eye text-dark p-0" id="Password"
+                  [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"></span>
+              </div>
+              <div *ngIf="
                   memberForm.controls['confirmPassword'].errors?.required &&
                   memberForm.controls['confirmPassword'].touched
-                "
-                class="small text-danger"
-              >
+                " class="small text-danger">
                 Confirm Password is required
               </div>
 
-      </div>
+            </div>
 
             <div class="col-md-3 mb-2">
               <label>Credit Limit</label>
-              <input
-                type="number"
-                class="form-control"
-                formControlName="playerAvailableCredit"
-                placeholder="Player Credit Limit*"
-              />
-              <div
-              class="small text-danger"
-              *ngIf="memberForm.controls['playerAvailableCredit'].errors?.required &&
-              memberForm.controls['playerAvailableCredit'].touched"
-            >
-              Please enter Credit Limit
-            </div>
+              <input type="number" class="form-control" formControlName="playerAvailableCredit"
+                placeholder="Player Credit Limit*" />
+              <div class="small text-danger" *ngIf="memberForm.controls['playerAvailableCredit'].errors?.required &&
+              memberForm.controls['playerAvailableCredit'].touched">
+                Please enter Credit Limit
+              </div>
             </div>
 
             <div class="col-md-3">
               <label> Member Max Exposure Amt </label>
-              <input
-                [readOnly]="this.isSuperAdmin == -1"
-                formControlName="maxExposure"
-                type="number"
-                class="form-control"
-              />
+              <input [readOnly]="this.isSuperAdmin == -1" formControlName="maxExposure" type="number"
+                class="form-control" />
               <p>(Min: 1) (Max: 50000000 )</p>
-              <div
-                *ngIf="
+              <div *ngIf="
                   (memberForm.controls['maxExposure'].touched ||
                     memberForm.controls['maxExposure'].dirty) &&
                   memberForm.controls['maxExposure'].invalid
-                "
-              >
-                <div
-                  class="small text-danger"
-                  *ngIf="memberForm.controls['maxExposure'].errors?.required"
-                >
+                ">
+                <div class="small text-danger" *ngIf="memberForm.controls['maxExposure'].errors?.required">
                   Please enter valid Bet Amount
                 </div>
-                <div
-                  class="small text-danger"
-                  *ngIf="memberForm.controls['maxExposure'].errors?.['max']"
-                >
+                <div class="small text-danger" *ngIf="memberForm.controls['maxExposure'].errors?.['max']">
                   Please enter valid Bet Amount
                 </div>
-                <div
-                  class="small text-danger"
-                  *ngIf="memberForm.controls['maxExposure'].errors?.['min']"
-                >
+                <div class="small text-danger" *ngIf="memberForm.controls['maxExposure'].errors?.['min']">
                   Please enter valid Bet Amount
                 </div>
               </div>
@@ -204,17 +135,19 @@
           <p class="me-2">{{ game.name }}</p>
           <div class="toggle-button-cover">
             <div class="button1 r" id="button-2">
-              <input
-                (click)="setGameStatus(game.isActive, game.gameId)"
-                type="checkbox"
-                class="checkbox"
-                [checked]="!game.isActive"
-              />
+              <input (click)="setGameStatus(game.isActive, game.gameId)" type="checkbox" class="checkbox"
+                [checked]="!game.isActive" />
               <div class="knobs"></div>
               <div class="layer"></div>
             </div>
           </div>
           <!-- <div class="form-check form-switch"><input (click)="setGameStatus(game.isActive,game.sportsId)" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="game.isActive"></div> -->
+        </div>
+        <div class="col-md-3">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-pink" data-bs-toggle="modal" data-bs-target="#casinoProvider">
+            Casino Provider
+          </button>
         </div>
       </div>
     </section>
@@ -228,14 +161,8 @@
         <div class="col-md-2">Sportsbook (INR)</div>
         <div class="col-md-2">Max Rate (INR) <br />My Share : 1</div>
         <div class="col-md-8">
-          <input
-            [readOnly]="true"
-            formControlName="sportsBookRate"
-            name="sportsBookRate"
-            type="number"
-            id="sportsBookRate"
-            class="form-control pb-2"
-          />
+          <input [readOnly]="true" formControlName="sportsBookRate" name="sportsBookRate" type="number"
+            id="sportsBookRate" class="form-control pb-2" />
           <p>(Min : 1) (Max : 100)</p>
         </div>
       </div>
@@ -243,14 +170,8 @@
         <div class="col-md-2">Live Casino</div>
         <div class="col-md-2">Max Rate (INR) <br />My Share : 1</div>
         <div class="col-md-8">
-          <input
-            [readOnly]="true"
-            formControlName="liveCasinoRate"
-            name="liveCasinoRate"
-            type="number"
-            id=""
-            class="form-control pb-2"
-          />
+          <input [readOnly]="true" formControlName="liveCasinoRate" name="liveCasinoRate" type="number" id=""
+            class="form-control pb-2" />
           <p>(Min : 1) (Max : 100)</p>
         </div>
       </div>
@@ -258,18 +179,10 @@
         <div class="col-md-2">Partnership Percentage</div>
         <div class="col-md-2">(%)</div>
         <div class="col-md-8">
-          <input
-            formControlName="partnerShipPercent"
-            name="partnerShipPercent"
-            type="number"
-            class="form-control pb-2"
-            (keyup)="calculateMemberPercentage($event)"
-          />
+          <input formControlName="partnerShipPercent" name="partnerShipPercent" type="number" class="form-control pb-2"
+            (keyup)="calculateMemberPercentage($event)" />
           <p>(Min : {{ uplineInfo?.partnerShipPercent }} ) (Max : 100)</p>
-          <div
-            *ngIf="f.partnerShipPercent?.errors?.min"
-            class="small text-danger col-md-12 ps-5"
-          >
+          <div *ngIf="f.partnerShipPercent?.errors?.min" class="small text-danger col-md-12 ps-5">
             value cannot be less than {{ uplineInfo?.partnerShipPercent }}
           </div>
         </div>
@@ -280,7 +193,7 @@
     </section>
     <!-- <section class="section gamedetails mt-3">
       <div class="row"> -->
-        <!-- <div class="col-md-4">
+    <!-- <div class="col-md-4">
           <h4 class="text-pink">Min Bet</h4>
           <label>Member Min Bet</label>
           <input
@@ -312,7 +225,7 @@
             </div>
           </div>
         </div> -->
-        <!-- <div class="col-md-4">
+    <!-- <div class="col-md-4">
           <h4 class="text-pink">Max Bet</h4>
           <label> Member Max Bet Amt </label>
           <input
@@ -350,33 +263,21 @@
           </div>
         </div> -->
 
-      <!-- </div>
+    <!-- </div>
     </section> -->
     <div class="row my-3">
       <div class="col-md-6 col-6 text-end">
-        <button
-          type="button"
-          class="btn btn-pink rounded-pill ps-5 pe-5 py-2"
-          routerLink="member/list"
-        >
+        <button type="button" class="btn btn-pink rounded-pill ps-5 pe-5 py-2" routerLink="member/list">
           Cancel
         </button>
       </div>
       <div class="col-md-6 col-6">
-        <button
-          *ngIf="!editMode"
-          type="submit"
-          class="btn btn-pink rounded-pill ps-5 pe-5 py-2"
-          [disabled]="!memberForm.valid"
-        >
+        <button *ngIf="!editMode" type="submit" class="btn btn-pink rounded-pill ps-5 pe-5 py-2"
+          [disabled]="!memberForm.valid">
           Save
         </button>
-        <button
-          *ngIf="editMode"
-          type="submit"
-          class="btn btn-pink rounded-pill ps-5 pe-5 py-2"
-          [disabled]="memberForm.invalid || memberForm.pristine"
-        >
+        <button *ngIf="editMode" type="submit" class="btn btn-pink rounded-pill ps-5 pe-5 py-2"
+          [disabled]="memberForm.invalid || memberForm.pristine">
           Update
         </button>
       </div>
@@ -386,60 +287,34 @@
 </main>
 
 <!-- Modal end -->
-<div
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static"
+  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
           Please enter your Password
         </h5>
-        <button
-          type="button"
-          (click)="closeModal()"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
       <div class="modal-body bg-dark text-white">
         <div class="row">
           <section class="section  m-auto">
             <form (ngSubmit)="createMember()">
-              <input
-              #confirm_password
-                type="password"
+              <input #confirm_password type="password"
                 class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                placeholder="Enter your password"
-                [(ngModel)]="uplinePwd"
-                name="password"
-                autofocus
-              />
+                placeholder="Enter your password" [(ngModel)]="uplinePwd" name="password" autofocus />
               <div class="row">
                 <div class="col-md-6">
-                  <button
-                class="btn rounded-pill w-100 mt-3 btn-pink"
-                [disabled]="!uplinePwd"
-                (click)="closeModal()"
-              >
-                Yes
-              </button>
+                  <button class="btn rounded-pill w-100 mt-3 btn-pink" [disabled]="!uplinePwd" (click)="closeModal()">
+                    Yes
+                  </button>
                 </div>
                 <div class="col-md-6">
-                  <button
-                class="btn  rounded-pill w-100 mt-3 ms-3 float-right btn-pink"
-                (click)="closeModal()"
-              >
-                Cancel
-              </button>
+                  <button class="btn  rounded-pill w-100 mt-3 ms-3 float-right btn-pink" (click)="closeModal()">
+                    Cancel
+                  </button>
                 </div>
               </div>
             </form>
@@ -447,6 +322,33 @@
           </section>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="casinoProvider" tabindex="-1" aria-labelledby="casinoProviderLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg border-pink">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title" id="casinoProviderLabel">Casino Provider</h5>
+      </div>
+      <div class="modal-body bg-dark_new text-white">
+        <div class="row">
+          <div class="col-md-3 mt-3 d-flex" *ngFor="let game of gamesList">
+            <p class="me-2">{{ game.name }}</p>
+            <div class="toggle-button-cover">
+              <div class="button1 r" id="button-2">
+                <input (click)="setGameStatus(game.isActive, game.gameId)" type="checkbox" class="checkbox"
+                  [checked]="!game.isActive" />
+                <div class="knobs"></div>
+                <div class="layer"></div>
+              </div>
+            </div>
+            <!-- <div class="form-check form-switch"><input (click)="setGameStatus(game.isActive,game.sportsId)" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="game.isActive"></div> -->
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

@@ -12,6 +12,9 @@
     <div class="col-3">
       Alternate Mobile no.
     </div>
+    <div class="col-3">
+      Notice Message.
+    </div>
    </div>
    <div class="row" *ngIf="!isLoading && settingObj">
     <div class="col-3">
@@ -19,6 +22,11 @@
     </div>
     <div class="col-3">
       <input type="text" class="form-control" [(ngModel)]="settingObj.mobile2" name="mobile2" id="">
+    </div>
+    <div class="col-3">
+      <textarea id="noticeMessage" name="noticeMessage" class="form-control" [(ngModel)]="settingObj.noticeMessage"  rows="4" cols="50">
+
+      </textarea>
     </div>
    </div>
    <div class="row mt-5" *ngIf="!isLoading && settingObj">

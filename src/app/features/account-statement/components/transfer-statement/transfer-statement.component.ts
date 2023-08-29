@@ -19,15 +19,16 @@ export class TransferStatementComponent implements OnInit {
   transferStmtForm : FormGroup
   dateFormat = "yyyy-MM-dd";
   language = "en";
-  currentPage: number = 1;
-  totalPages: number = 0;
-  pageSize:number = 10;
-  limit:number = 50;
+  // currentPage: number = 1;
+  // totalPages: number = 0;
+  // pageSize:number = 10;
+  // limit:number = 50;
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
 
   fileName= 'TransferStatement.xlsx';
+  totalAmount: any;
 
   constructor(
     private _accountsService:AccountStatementService,
@@ -71,26 +72,30 @@ export class TransferStatementComponent implements OnInit {
     let payload = {
       fromDate : fromDate,
       toDate : toDate,
-      pageNo: this.currentPage,
-      limit: this.limit,
+      // pageNo: this.currentPage,
+      // limit: this.limit,
     }
 
     this._accountsService._getTransferStatementApi(payload).subscribe((res:any)=>{
       this.isLoading = false;
       this.transferStatements = res.transferStatement;
-      this.totalPages = Math.ceil(this.transferStatements.length / this.pageSize);
+      // this.totalPages = Math.ceil(this.transferStatements.length / this.pageSize);
+
+      this.totalAmount = this.transferStatements.reduce((acc, crnt) => acc + crnt.amount, 0);
+
+
     });
   }
 
-  next(): void {
-    this.currentPage++;
-    this.getTransferStatement();
-  }
+  // next(): void {
+  //   this.currentPage++;
+  //   this.getTransferStatement();
+  // }
 
-  prev(): void {
-    this.currentPage--;
-    this.getTransferStatement();
-  }
+  // prev(): void {
+  //   this.currentPage--;
+  //   this.getTransferStatement();
+  // }
 
   exportExcel(){
     let transfetStatemnt : any = []

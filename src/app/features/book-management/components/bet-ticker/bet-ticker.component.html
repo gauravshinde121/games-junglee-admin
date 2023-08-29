@@ -144,21 +144,21 @@
           <thead>
             <tr>
               <th scope="col" class="first">#</th>
-              <th scope="col">Member</th>
-              <th scope="col">Place time</th>
-              <th scope="col">Events</th>
-              <th scope="col">Market</th>
-              <th scope="col">Selection</th>
-              <th scope="col">Odds Placed</th>
-              <th scope="col">Odds Matched</th>
-              <th scope="col">Matched</th>
-              <th scope="col">Unmatched</th>
-              <th scope="col">Profit/Liability</th>
-              <th scope="col" class="last">IP</th>
+              <th scope="col" class="pointer" (click)="toggleSort('username')">Member</th>
+              <th scope="col" class="pointer" (click)="toggleSort('placedDate')">Place time</th>
+              <th scope="col" class="pointer" (click)="toggleSort('event')">Events</th>
+              <th scope="col" class="pointer" (click)="toggleSort('betCategory')">Market</th>
+              <th scope="col" class="pointer" (click)="toggleSort('selectionName')">Selection</th>
+              <th scope="col" class="pointer" (click)="toggleSort('betRate')">Odds Placed</th>
+              <th scope="col" class="pointer" (click)="toggleSort('averagePriceMatched')">Odds Matched</th>
+              <th scope="col" class="pointer" (click)="toggleSort('stake')">Matched</th>
+              <th scope="col" class="pointer" (click)="toggleSort('stake')">Unmatched</th>
+              <th scope="col" class="pointer" (click)="toggleSort('profitLiability')">Profit/Liability</th>
+              <th scope="col" class="pointer" (click)="toggleSort('ip')" class="last">IP</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let bets of allBets; let i = index">
+            <tr *ngFor="let bets of allBets | sort:sortColumn:sortAscending ; let i = index">
               <td class="col">
                 <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                 <span *ngIf="currentPage > 1">{{

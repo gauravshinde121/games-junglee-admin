@@ -234,6 +234,7 @@ export class MembersListComponent implements OnInit {
   }
 
   fetchListByCategory(category) {
+    this.currentPage = 1;
     this.selectedRoleId = category.roleId;
     this._getAllUserInfo(this.selectedRoleId);
   }
@@ -257,7 +258,7 @@ export class MembersListComponent implements OnInit {
   }
 
   _getAllUserInfo(roleId, autoRefresh = false) {
-    console.log("called")
+    console.log("called");
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });

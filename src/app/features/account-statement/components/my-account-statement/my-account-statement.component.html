@@ -6,7 +6,7 @@
   
           <h4 class="text-pink">
             <img src="../../../../../assets/images/master_dashboard.png" alt="" />
-            My P/L Statement
+            My Account Statement
           </h4>
           <hr />
           <div class="col-md-12">
@@ -33,52 +33,10 @@
                   placeholder="Month"
                 />
               </div>
-              <div class="col-md-3 mb-3">
-                <label>Select Sport</label>
-                <select
-                  formControlName="sportsId"
-                  id="ab"
-                  class="form-select pointer"
-                  (change)="changeGame($event)"
-                >
-                  <option [value]="null">All</option>
-                  <option *ngFor="let game of games" [value]="game.sportId">
-                    {{ game.sportName }}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label>Select Match</label>
-                <select
-                  formControlName="matchId"
-                  id="ab"
-                  class="form-select pointer"
-                  (change)="changeMatch($event)"
-                >
-                  <option [value]="null">All</option>
-                  <option [value]="match.matchId" *ngFor="let match of matchList">
-                    {{ match.matchName }}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label>Select Market</label>
-                <select
-                  formControlName="marketId"
-                  id="ab"
-                  class="form-select pointer"
-                  (change)="changeMarketType($event)"
-                >
-                  <option [value]="null">All</option>
-                  <option
-                    [value]="market.marketId"
-                    *ngFor="let market of marketList"
-                  >
-                    {{ market.marketName }}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-3 d-flex align-items-end">
+              
+              
+              
+              <div class="col-md-3 mb-3 d-flex align-items-end">
                 <button
                   type="button"
                   (click)="searchList()"
@@ -97,30 +55,26 @@
     </section>
     <div class="row mt-3">
       <div class="col-md-12 ">
-        <div *ngIf="plStatement.length == 0" class="border text-center p-5">
+        <!-- <div *ngIf="plStatement.length == 0" class="border text-center p-5">
           <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
           <h4 *ngIf="isLoading">Loading...</h4>
-        </div>
+        </div> -->
         <div class="table-responsive tableRes tableFixHead">
-        <table class="table tableall " *ngIf="plStatement.length > 0">
+          <!-- *ngIf="plStatement.length > 0" -->
+        <table class="table tableall " >
           <thead>
             <tr>
               <th scope="col" class="first pointer" (click)="toggleSort('createdAt')">Date</th>
-              <th scope="col" class="pointer" (click)="toggleSort('gameName')">Game</th>
-              <th scope="col" class="pointer" (click)="toggleSort('subGame')">Sub Game</th>
-              <th scope="col" class="pointer" (click)="toggleSort('eventName')">Event</th>
-              <th scope="col" class="pointer" (click)="toggleSort('winINR')">Win/Loss</th>
-              <!-- <th scope="col">Commission</th>
-              <th scope="col">Net Amount</th> -->
-              <!-- <th scope="col" class="">U/L Commission</th>
-              <th scope="col" class="">D/L Commission</th> -->
-              <!-- <th scope="col">User Count</th>
-              <th scope="col">Bet Count</th> -->
+              <th scope="col" class="pointer" (click)="toggleSort('gameName')">Credit</th>
+              <th scope="col" class="pointer" (click)="toggleSort('subGame')">Debit</th>
+              <th scope="col" class="pointer" (click)="toggleSort('eventName')">Balance</th>
+              <th scope="col" class="pointer" (click)="toggleSort('winINR')">Remark</th>
+             
               <th scope="col" class="last"></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let pl of plStatement | sort:sortColumn:sortAscending ;" (click)="openAllBets(pl.matchId)">
+            <!-- <tr *ngFor="let pl of plStatement | sort:sortColumn:sortAscending ;" (click)="openAllBets(pl.matchId)">
               <td>{{ pl.createdAt | date : "medium" }}</td>
               <td>{{ pl.gameName }}</td>
               <td>{{ pl.subGame }}</td>
@@ -128,26 +82,58 @@
               <td [ngClass]="pl.isWon ? 'text-success' : 'text-danger'">
                 {{ pl.winINR | number }}
               </td>
-              <!-- <td>{{ pl.commission | number }}</td>
-              <td>{{ pl.netAmount | number }}</td> -->
-              <!-- <td>0</td>
-              <td>0</td> -->
-              <!-- <td>{{ pl.userCount }}</td>
-              <td>{{ pl.userBetCount }}</td> -->
-              <!--<td><button
-                  class="btn btn-pink rounded-pill w-100 mt-4"
-                  (click)="getPlStatement()"
-                >
-                  Market
-                </button></td><td><button
-                  class="btn btn-pink rounded-pill w-100 mt-4"
-                  (click)="getPlStatement()"
-                >
-                  User
-                </button></td>-->
+             
               <td [ngClass]="pl.type ? 'text-success' : 'text-danger'">
                 {{ pl.profitLiability }}
               </td>
+            </tr> -->
+
+            <tr >
+              <td>Aug 27, 2023, 10:32:00 PM	</td>
+              <td>6,000</td>
+              <td>1,000</td>
+              <td>5,000</td>
+              <td>
+                Transfer OUT.
+              </td>
+             
+              
+            </tr>
+
+            <tr>
+              <td>Aug 24, 2023, 10:32:00 PM	</td>
+              <td>-</td>
+              <td>-985</td>
+              <td>55,001</td>
+              <td>
+                B Love Kandy v Jaffna Kings-699002
+              </td>
+             
+              
+            </tr>
+
+            <tr>
+              <td>Aug 27, 2023, 10:32:00 PM	</td>
+              <td>6,000</td>
+              <td>1,000</td>
+              <td>5,000</td>
+              <td>
+                Transfer OUT.
+              </td>
+             
+              
+            </tr>
+
+            <tr>
+              <td>Aug 24, 2023, 10:32:00 PM	</td>
+              <td>-</td>
+              <td>-985</td>
+              <td>55,001</td>
+              <td>
+                B Love Kandy v Jaffna Kings-699002
+              </td>
+             
+              
             </tr>
           </tbody>
         </table>

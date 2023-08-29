@@ -24,6 +24,9 @@ export class TransferStatementComponent implements OnInit {
   pageSize:number = 10;
   limit:number = 50;
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   fileName= 'TransferStatement.xlsx';
 
   constructor(
@@ -103,5 +106,14 @@ export class TransferStatementComponent implements OnInit {
     this._sharedService.exportExcel(transfetStatemnt,this.fileName);
     // this._sharedService.exportExcel(this.transferStatements,this.fileName);
  }
+
+ toggleSort(columnName: string) {
+  if (this.sortColumn === columnName) {
+    this.sortAscending = !this.sortAscending;
+  } else {
+    this.sortColumn = columnName;
+    this.sortAscending = true;
+  }
+}
 
 }

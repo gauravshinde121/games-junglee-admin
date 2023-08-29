@@ -25,6 +25,8 @@ export class ClTransferComponent implements OnInit {
   limit:number = 50;
 
   fileName= 'CLTransfer.xlsx';
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
 
 
   constructor(
@@ -119,5 +121,14 @@ export class ClTransferComponent implements OnInit {
     });
     this._sharedService.exportExcel(clTransfer,this.fileName);
  }
+
+ toggleSort(columnName: string) {
+  if (this.sortColumn === columnName) {
+    this.sortAscending = !this.sortAscending;
+  } else {
+    this.sortColumn = columnName;
+    this.sortAscending = true;
+  }
+}
 
 }

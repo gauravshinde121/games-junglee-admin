@@ -155,7 +155,7 @@
       <tbody>
         <tr *ngFor="let pl of plStatement | sort:sortColumn:sortAscending ; let i = index">
           <td>
-            <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+            <span>{{ i + 1 }}</span>
             <span *ngIf="currentPage > 1">{{
               i + 1 + (currentPage - 1) * limit
             }}</span>
@@ -188,9 +188,18 @@
           </td>
         </tr>
       </tbody>
+      <tfoot>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="text-success float-left text-center" [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</td>
+        <td></td>
+      </tfoot>
     </table>
   </div>
-    <div *ngIf="plStatement.length > 0 && !this.isLoading">
+    <!-- <div *ngIf="plStatement.length > 0 && !this.isLoading">
       <button
         class="btn rounded-pill text-white"
         [disabled]="currentPage === 1"
@@ -208,7 +217,7 @@
       >
         Next
       </button>
-    </div>
+    </div> -->
   </div>
 </main>
 <!-- Modal start-->

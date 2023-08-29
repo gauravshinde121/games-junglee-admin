@@ -31,10 +31,11 @@ export class MyPlComponent implements OnInit {
   marketTypeId: any = null;
   //currentTotalPage:any;
 
-  fileName= 'P/L Statement.xlsx';
+  fileName= 'P/L Statement '+'_'+new Date()+'.xlsx';
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
+  totalAmount: any;
 
 
   constructor(
@@ -259,7 +260,9 @@ export class MyPlComponent implements OnInit {
       this.isLoading = false;
       // if (res.admin.finalResult.length > 0) {
         this.plStatement = res.admin.finalResult;
-        this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+        // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+
+        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.netAmount, 0);
       // }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     },(err)=>{
@@ -299,11 +302,11 @@ export class MyPlComponent implements OnInit {
         Game: element.gameName,
         SubGame:element.subGame,
         Event : element.eventName,
-        Win_Loss :element.win,
-        Commision:element.commission,
-        NetAmount:element.netAmount,
-        UserCount:element.userCount,
-        BetCount:element.userBetCount
+        Win_Loss :element.netAmount,
+        // Commision:element.commission,
+        // NetAmount:element.netAmount,
+        // UserCount:element.userCount,
+        // BetCount:element.userBetCount
       })
     });
     this._sharedService.exportExcel(pL,this.fileName);

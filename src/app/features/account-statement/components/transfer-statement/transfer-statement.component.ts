@@ -27,7 +27,7 @@ export class TransferStatementComponent implements OnInit {
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
 
-  fileName= 'TransferStatement.xlsx';
+  fileName= 'TransferStatement'+'_'+new Date()+'.xlsx';
   totalAmount: any;
 
   constructor(

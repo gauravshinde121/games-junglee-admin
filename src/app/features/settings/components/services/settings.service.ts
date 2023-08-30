@@ -52,5 +52,7 @@ export class SettingsService {
       return this._apiHttpService.post(this._apiEndpointsService.getBetsForBetSettingsEndpoint(),filterObj)
     }
 
-
+    _setBetLimitForMultipleMarketApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.setBetLimitForMultipleMarketEndpoint(),filterObj)
+    }
 }

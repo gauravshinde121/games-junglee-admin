@@ -67,7 +67,7 @@ export class PlayerPlComponent implements OnInit {
   _preConfig() {
     this._initForm();
     this._getGames();
-    // this.getPlStatement();
+    this.getPlStatement();
     this._getAllMarketTypeList();
     this._getAllMembers();
   }
@@ -211,8 +211,7 @@ export class PlayerPlComponent implements OnInit {
         this.plStatement = res.admin.finalList;
         // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
         this.plStatement.filter((acc, crnt) => console.log("ffff",crnt.finalNetAmount));
-
-        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.finalNetAmount, 0);
+        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.finalNetAmount, 0);
 
       // }
     }, (err)=>{

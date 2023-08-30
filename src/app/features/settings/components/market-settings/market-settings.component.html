@@ -59,6 +59,7 @@
               Search
             </button>
           </div>
+
           <div class="col-md-4 col-lg-4 col-xl-4 pt-3">
             <div class="row text-white">
               <div class="input-group flex-nowrap">
@@ -80,6 +81,95 @@
               </div>
             </div>
           </div>
+          <div class="col-md-3">
+            <button
+              *ngIf="selectedUserForAdjustment.length > 0"
+              (click)="openBulkTransferModal()"
+              type="button"
+              class="btn btn-pink radius-all"
+            >
+            Update Multiple Market
+            </button>
+            <!-- <div class="modal-dialog modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header bg-pink">
+                  <h5 class="modal-title cassino" id="staticBackdropLabel">
+                    Market Settings
+                  </h5>
+                  <button
+                    type="button"
+                    (click)="closeModal()"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body bg-dark_new text-white">
+                  <div class="row">
+                    <section class="section w-100 m-auto">
+                      <form [formGroup]="matchSettingsForm">
+                        <div class="row">
+                          <div class="col-md-6 mb-2">
+                            Min Bet*
+                            <input
+                              type="number"
+                              class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                              formControlName="minBet"
+                            />
+                          </div>
+                          <div class="col-md-6 mb-2">
+                            Max Bet*
+                            <input
+                              type="number"
+                              class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                              formControlName="maxBet"
+                            />
+                          </div>
+                          <div class="col-md-6 mb-2">
+                            Max Market Size*
+                            <input
+                              type="number"
+                              class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                              formControlName="maxMarketSize"
+                            />
+                          </div>
+                          <div class="col-md-6 mb-2">
+                            Market Delay*
+                            <input
+                              type="number"
+                              class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                              formControlName="marketDelay"
+                            />
+                          </div>
+                          
+          
+                          <div class="row">
+                            <div class="col-md-6 text-end">
+                              <button
+                                (click)="saveMatchSettings()"
+                                [disabled]="!matchSettingsForm.dirty"
+                                class="btn btn-danger rounded-pill w-80 mt-2"
+                              >
+                                Save
+                              </button>
+                            </div>
+                            <div class="col-md-6">
+                              <button
+                                class="btn btn-danger rounded-pill w-80 mt-2"
+                                (click)="closeModal()"
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
           <!-- <div class="col-md-4">
             <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="applyFilter()" [ngModelOptions]="{standalone: true}" placeholder="Search...">
           </div> -->
@@ -99,7 +189,16 @@
         <table class="table tableall marketSetting" *ngIf="marketSettingsList.length > 0">
           <thead class="text-dark">
             <tr>
-              <th scope="col" class="first">#</th>
+              <th scope="col" class="first pointer">
+                <input
+                  type="checkbox"
+                  name="all"
+                  class="first cursor-pointer"
+                  [checked]="isAllChecked()"
+                  (change)="checkAll($event)"
+                />
+              </th>
+              <th scope="col">#</th>
               <th scope="col" class="cursor-pointer" (click)="toggleSort('marketName')">Market Name</th>
               <th scope="col" class="cursor-pointer" (click)="toggleSort('marketType')">Market Type</th>
               <th scope="col" class="cursor-pointer" (click)="toggleSort('refMatchName')">Match Name</th>
@@ -115,6 +214,15 @@
           </thead>
           <tbody>
             <tr *ngFor="let stmt of marketSettingsList | sort:sortColumn:sortAscending | search: searchTerm; let i = index">
+              <td>
+                <input
+                  type="checkbox"
+                  class="pointer"
+                  (change)="checkMarketId(stmt.marketId)"
+                  [ngModelOptions]="{standalone: true}"
+                  [(ngModel)]="stmt.state"
+                />
+              </td>
               <td>
                 {{ i + 1 }}
               </td>
@@ -216,8 +324,9 @@
                 <div class="row">
                   <div class="col-md-6 text-end">
                     <button
-                      (click)="saveMatchSettings()"
-                      [disabled]="!matchSettingsForm.dirty"
+
+                      (click)="selectedUserForAdjustment.length> 0?submitBulkMarket() : saveMatchSettings() "
+                      [disabled]="!matchSettingsForm.dirty && selectedUserForAdjustment.length== 0"
                       class="btn btn-danger rounded-pill w-80 mt-2"
                     >
                       Save

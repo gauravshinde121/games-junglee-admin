@@ -110,7 +110,7 @@
             <th scope="col" class="pointer" (click)="toggleSort('gameName')">Game</th>
             <th scope="col" class="pointer" (click)="toggleSort('subGame')">Sub Game</th>
             <th scope="col" class="pointer" (click)="toggleSort('eventName')">Event</th>
-            <th scope="col" class="pointer last" (click)="toggleSort('winINR')">Win/Loss</th>
+            <th scope="col" class="pointer last text-center" (click)="toggleSort('winINR')">Win/Loss</th>
             <!-- <th scope="col">Commission</th>
             <th scope="col">Net Amount</th> -->
             <!-- <th scope="col" class="">U/L Commission</th>
@@ -130,7 +130,7 @@
             <td>{{ pl.gameName }}</td>
             <td>{{ pl.subGame }}</td>
             <td>{{ pl.eventName }}</td>
-            <td [ngClass]="pl.isWon ? 'text-success' : 'text-danger'">
+            <td class="text-center" [ngClass]="pl.isWon ? 'text-success' : 'text-danger'">
               {{ pl.winINR | number }}
             </td>
             <!-- <td>{{ pl.commission | number }}</td>
@@ -150,7 +150,7 @@
               >
                 User
               </button></td>-->
-            <td [ngClass]="pl.type ? 'text-success' : 'text-danger'">
+            <td  class="text-center" [ngClass]="pl.type ? 'text-success' : 'text-danger'">
               {{ pl.profitLiability }}
             </td>
           </tr>
@@ -162,7 +162,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="text-center border-0order-white"><span [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</span></td>
+            <td class="text-center" [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</td>
             <td></td>
           </tr>
         </tfoot>

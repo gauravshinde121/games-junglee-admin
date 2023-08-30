@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ChangePasswordService } from '../../services/change-password.service';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { FormGroup, FormBuilder, FormControl, AbstractControl, Validators } from '@angular/forms';
@@ -20,10 +20,21 @@ export class ChangePasswordComponent implements OnInit {
     newPassword: "",
     retypePassword: ""
   }
+  isMobileView = false;
+
+  
+  onResize() {
+    if (window.innerWidth <= 767) {
+      this.isMobileView = true;
+    } else {
+      this.isMobileView = false;
+    }
+  }
 
   constructor(private _changePasswordService: ChangePasswordService,
     private _sharedService: SharedService,
     private formbuilder: FormBuilder) {
+      this.onResize();
     this.changePasswordForm = this.formbuilder.group({
       oldPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       newPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
@@ -37,6 +48,7 @@ export class ChangePasswordComponent implements OnInit {
       }
     )
   }
+
   get f() {
     return this.changePasswordForm.controls;
   }
@@ -117,5 +129,13 @@ export class ChangePasswordComponent implements OnInit {
   resetForm() {
     this.changePasswordForm.reset();
   }
+
+  toggleMenu(){
+    if(this.isMobileView){
+      this._sharedService.leftMenuStatus.next({
+        'leftMenuOpen': false
+      });
+    }
+   }
 
 }

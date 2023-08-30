@@ -15,14 +15,16 @@ export class HeaderComponent implements OnInit,OnDestroy {
   searchList:any = [];
   userBalance:any;
   adminDetails:any = null;
-  leftMenuOpen:boolean = true;
-  isLeftBarDisplay:boolean = true;
+  leftMenuOpen:boolean = false;
+  isLeftBarDisplay:boolean = false;
   clearInterval;
   subjectSub !:Subscription;
   
   constructor(
     private _sharedService: SharedService
-  ) { }
+  ) {
+    this.onResize();
+   }
 
   ngOnInit(): void {
     this.isLoggedIn = this._sharedService.isLoggedIn();
@@ -46,12 +48,25 @@ export class HeaderComponent implements OnInit,OnDestroy {
     });
   }
 
+  onResize() {
+    if (window.innerWidth <= 767) {
+      
+    } else {
+      this.leftMenuOpen = true;
+      this.isLeftBarDisplay = true;
+    }
+  }
+
   toggleMenu(){
+    console.log(this.leftMenuOpen)
+    
     this.leftMenuOpen=!this.leftMenuOpen;
     this.isLeftBarDisplay=!this.isLeftBarDisplay;
     this._sharedService.leftMenuStatus.next({
       'leftMenuOpen': this.leftMenuOpen
     });
+
+    console.log(this.leftMenuOpen)
   }
 
   // Refresh

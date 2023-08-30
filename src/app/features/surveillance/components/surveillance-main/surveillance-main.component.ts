@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { SharedService } from '@shared/services/shared.service';
@@ -49,6 +49,16 @@ export class SurveillanceMainComponent implements OnInit {
   resetTimerInterval: any;
 
   fileName= 'Surveillance.xlsx';
+  isMobileView = false;
+
+  
+  onResize() {
+    if (window.innerWidth <= 767) {
+      this.isMobileView = true;
+    } else {
+      this.isMobileView = false;
+    }
+  }
 
   constructor(
     private _sharedService: SharedService,
@@ -56,7 +66,9 @@ export class SurveillanceMainComponent implements OnInit {
     private _memberService : MembersService,
     private bookManagementService: BookManagementService,
     private _fb: FormBuilder
-  ) { }
+  ) { 
+    this.onResize()
+  }
 
   get f(){
     return this.betTickerForm.controls;
@@ -303,6 +315,15 @@ export class SurveillanceMainComponent implements OnInit {
   clearMemberName(){
     this.betTickerForm.controls['memberId'].setValue(null);
   }
+
+
+  toggleMenu(){
+    if(this.isMobileView){
+      this._sharedService.leftMenuStatus.next({
+        'leftMenuOpen': false
+      });
+    }
+   }
 
   exportExcel(){
     console.log(this.allBets)

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 
 @Component({
@@ -11,10 +11,22 @@ export class MembersMainComponent implements OnInit {
   isLeftMenuOpen: boolean;
   mainClass:String = 'col-md-10';
   sideBarClass:String = 'mobile-menu';
+  isMobileView = false;
+
+  
+  onResize() {
+    if (window.innerWidth <= 767) {
+      this.isMobileView = true;
+    } else {
+      this.isMobileView = false;
+    }
+  }
 
   constructor(
     private _sharedService:SharedService
-  ) { }
+  ) { 
+    this.onResize();
+  }
 
   ngOnInit(): void {
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
@@ -27,6 +39,15 @@ export class MembersMainComponent implements OnInit {
         this.mainClass = 'col-md-12';
       }
     });
+   }
+
+
+   toggleMenu(){
+    if(this.isMobileView){
+      this._sharedService.leftMenuStatus.next({
+        'leftMenuOpen': false
+      });
+    }
    }
 
 }

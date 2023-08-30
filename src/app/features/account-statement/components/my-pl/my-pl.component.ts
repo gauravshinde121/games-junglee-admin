@@ -35,7 +35,7 @@ export class MyPlComponent implements OnInit {
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
-  totalAmount: any;
+  totalAmount = 0;
 
 
   constructor(
@@ -202,6 +202,8 @@ export class MyPlComponent implements OnInit {
       // if (res.admin.finalResult.length > 0) {
         this.plStatement = res.admin.finalResult;
         this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.netAmount,0);
+
       // }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     },(err)=>{
@@ -262,7 +264,7 @@ export class MyPlComponent implements OnInit {
         this.plStatement = res.admin.finalResult;
         // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
 
-        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.netAmount, 0);
+        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.netAmount,0);
       // }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     },(err)=>{

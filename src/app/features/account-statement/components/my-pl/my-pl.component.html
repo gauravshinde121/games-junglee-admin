@@ -156,13 +156,15 @@
           </tr>
         </tbody>
         <tfoot>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td class="text-success float-left text-center" [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</td>
-          <td></td>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-center border-0order-white"><span [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</span></td>
+            <td></td>
+          </tr>
         </tfoot>
       </table>
     </div>

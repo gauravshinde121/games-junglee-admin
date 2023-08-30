@@ -55,6 +55,9 @@ export class MembersListComponent implements OnInit {
 
   fileName = 'MemberList.xlsx';
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   createPasswordForm() {
     this.changePasswordForm = this.formbuilder.group({
       password: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
@@ -199,6 +202,15 @@ export class MembersListComponent implements OnInit {
     ];
   }
 
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
+  }
+
   checkAll(ev) {
     this.checkUserForAdjustment(ev.target.value);
     this.userList.forEach(x => x.state = ev.target.checked)
@@ -222,6 +234,7 @@ export class MembersListComponent implements OnInit {
   }
 
   fetchListByCategory(category) {
+    this.currentPage = 1;
     this.selectedRoleId = category.roleId;
     this._getAllUserInfo(this.selectedRoleId);
   }
@@ -245,7 +258,7 @@ export class MembersListComponent implements OnInit {
   }
 
   _getAllUserInfo(roleId, autoRefresh = false) {
-    console.log("called")
+    console.log("called");
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });
@@ -426,6 +439,6 @@ export class MembersListComponent implements OnInit {
     });
     this._sharedService.exportExcel(memberList, this.fileName);
   }
-
+  
 
 }

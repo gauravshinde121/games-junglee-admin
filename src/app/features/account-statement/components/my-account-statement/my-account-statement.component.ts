@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccountStatementService } from '../../services/account-statement.service';
 import { SharedService } from '@shared/services/shared.service';
-import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-my-pl',
-  templateUrl: './my-pl.component.html',
-  styleUrls: ['./my-pl.component.scss']
+  selector: 'app-my-account-statement',
+  templateUrl: './my-account-statement.component.html',
+  styleUrls: ['./my-account-statement.component.scss']
 })
-export class MyPlComponent implements OnInit {
+export class MyAccountStatementComponent implements OnInit {
 
   filterForm: FormGroup;
   plStatement: any = [];
@@ -31,11 +31,10 @@ export class MyPlComponent implements OnInit {
   marketTypeId: any = null;
   //currentTotalPage:any;
 
-  fileName= 'P/L Statement '+'_'+new Date()+'.xlsx';
+  fileName= 'P/L Statement.xlsx';
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
-  totalAmount: any;
 
 
   constructor(
@@ -260,9 +259,7 @@ export class MyPlComponent implements OnInit {
       this.isLoading = false;
       // if (res.admin.finalResult.length > 0) {
         this.plStatement = res.admin.finalResult;
-        // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
-
-        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.netAmount, 0);
+        this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
       // }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     },(err)=>{
@@ -302,11 +299,11 @@ export class MyPlComponent implements OnInit {
         Game: element.gameName,
         SubGame:element.subGame,
         Event : element.eventName,
-        Win_Loss :element.netAmount,
-        // Commision:element.commission,
-        // NetAmount:element.netAmount,
-        // UserCount:element.userCount,
-        // BetCount:element.userBetCount
+        Win_Loss :element.win,
+        Commision:element.commission,
+        NetAmount:element.netAmount,
+        UserCount:element.userCount,
+        BetCount:element.userBetCount
       })
     });
     this._sharedService.exportExcel(pL,this.fileName);

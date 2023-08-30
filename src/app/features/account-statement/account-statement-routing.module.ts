@@ -7,6 +7,8 @@ import { PlayerPlComponent } from './components/player-pl/player-pl.component';
 import { TurnoverComponent } from './components/turnover/turnover.component';
 import { CommissionComponent } from './components/commission/commission.component';
 import { AllBetsComponent } from './components/all-bets/all-bets.component'
+import { MyAccountStatementComponent } from './components/my-account-statement/my-account-statement.component';
+import { PlayerAccountStatementComponent } from './components/player-account-statement/player-account-statement.component';
 
 const routes: Routes = [{
     path: 'account-statement', component: AccountStatementMainComponent,
@@ -17,6 +19,8 @@ const routes: Routes = [{
       { path: 'player-pl', component: PlayerPlComponent },
       { path: 'turnover', component: TurnoverComponent },
       { path: 'commission', component: CommissionComponent },
+      { path: 'my-account-statement', component: MyAccountStatementComponent },
+      { path: 'player-account-statement', component: PlayerAccountStatementComponent },
     ]
 }];
 

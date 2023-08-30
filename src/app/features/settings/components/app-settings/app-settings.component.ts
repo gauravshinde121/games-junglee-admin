@@ -11,10 +11,12 @@ export class AppSettingsComponent implements OnInit {
   display:any = '';
   settingObj:any = {
     mobile1:null,
-    mobile2:null
+    mobile2:null,
+    noticeMessage : ""
   }
   mobile1 = null;
   mobile2 = null;
+  noticeMessage = "";
   isLoading = false;
   submitting = false;
 

@@ -46,7 +46,7 @@
     </div>
     <div class="row align-items-center">
       <!-- nav tab -->
-      <div class="col-md-8 col-12 mb-4">
+      <div class="col-lg-8 col-md-12 col-12 mb-4">
         <ul class="nav nav-pills memberslist" id="pills-tab" role="tablist">
           <li
             class="nav-item mr-5 mb-md-0 mb-2"
@@ -70,7 +70,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-1 col-6 ">
+      <div class="col-lg-1 col-md-6 col-6 ">
         <div class="row">Show Entries</div>
         <select
           (change)="updateLimit($event)"
@@ -85,7 +85,7 @@
         </select>
         
       </div>
-      <div class="col-md-2 col-3 text-end">
+      <div class="col-lg-2 col-md-3 col-3 text-end">
         <!--{{ refreshCount }} &nbsp;-->
         <button
           class="btn btn-pink rounded-pill "
@@ -94,7 +94,7 @@
           <i class="fa fa-redo-alt disnone"></i> Refresh
         </button>
       </div>
-      <div class="col-md-1 col-3 text-end">
+      <div class="col-lg-1 col-md-3 col-3 text-end">
         <button
           *ngIf="userList.length > 0"
           type="button"
@@ -130,13 +130,13 @@
               <th scope="col" class="">
                 <i class="fa-sharp fa-regular fa-address-card"></i>
               </th>
-              <th scope="col" class="">UserName</th>
-              <th scope="col" class="text-center">RoleName</th>
-              <th scope="col" class="text-center">Credit Limit</th>
-              <th scope="col" class="text-center">Net Exposure</th>
-              <th scope="col" class="text-center">Take</th>
-              <th scope="col" class="text-center">Give</th>
-              <th scope="col" class="text-center">Available Credit</th>
+              <th scope="col" class="pointer" (click)="toggleSort('username')">UserName</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('userRoleName')">RoleName</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('creditLimit')">Credit Limit</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('exposure')">Net Exposure</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('take')">Take</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('give')">Give</th>
+              <th scope="col" class="text-center pointer" (click)="toggleSort('availableCredit')">Available Credit</th>
               <!-- <th scope="col" class=""><i class="fa-sharp fa-regular fa-square-check"></i> Status
               </th> -->
               <!-- <th scope="col" class="">Info</th> -->
@@ -157,7 +157,7 @@
             >
               No users Found
             </h1>
-            <tr *ngFor="let user of userList; let i = index">
+            <tr *ngFor="let user of userList | sort:sortColumn:sortAscending  ; let i = index">
               <td>
                 <input
                   type="checkbox"

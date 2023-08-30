@@ -142,20 +142,20 @@
       <thead class="text-dark">
         <tr>
           <th scope="col" class="first"></th>
-          <th scope="col"><i class="fa fa-"></i> Date</th>
-          <th scope="col">Sport</th>
+          <th scope="col" class="pointer" (click)="toggleSort('createDateTime')"><i class="fa fa-"></i> Date</th>
+          <th scope="col" class="pointer" (click)="toggleSort('subGame')">Sport</th>
           <!--<th scope="col">Sub Game</th>-->
-          <th scope="col">Match</th>
-          <th scope="col">Username</th>
-          <th scope="col">Amount</th>
+          <th scope="col" class="pointer" (click)="toggleSort('eventName')">Match</th>
+          <th scope="col" class="pointer" (click)="toggleSort('name')">Username</th>
+          <th scope="col" class="pointer" (click)="toggleSort('finalNetAmount')">Amount</th>
           <!-- <th scope="col">Master</th><th scope="col">Multiplier</th> -->
           <th scope="col" class="last text-center">Details</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let pl of plStatement; let i = index">
+        <tr *ngFor="let pl of plStatement | sort:sortColumn:sortAscending ; let i = index">
           <td>
-            <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+            <span>{{ i + 1 }}</span>
             <span *ngIf="currentPage > 1">{{
               i + 1 + (currentPage - 1) * limit
             }}</span>
@@ -188,9 +188,18 @@
           </td>
         </tr>
       </tbody>
+      <tfoot>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="text-success float-left text-center" [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</td>
+        <td></td>
+      </tfoot>
     </table>
   </div>
-    <div *ngIf="plStatement.length > 0 && !this.isLoading">
+    <!-- <div *ngIf="plStatement.length > 0 && !this.isLoading">
       <button
         class="btn rounded-pill text-white"
         [disabled]="currentPage === 1"
@@ -208,7 +217,7 @@
       >
         Next
       </button>
-    </div>
+    </div> -->
   </div>
 </main>
 <!-- Modal start-->

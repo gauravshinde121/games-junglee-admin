@@ -32,6 +32,9 @@ export class BetTickerComponent implements OnInit {
   allMembers: any;
   limit: number = 50;
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   fileName = 'BetTicker.xlsx';
 
   constructor(
@@ -287,6 +290,17 @@ export class BetTickerComponent implements OnInit {
       }
     });
     this._sharedService.exportExcel(allBet, this.fileName);
+  }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
+
+    
   }
 
 }

@@ -19,12 +19,16 @@ export class TransferStatementComponent implements OnInit {
   transferStmtForm : FormGroup
   dateFormat = "yyyy-MM-dd";
   language = "en";
-  currentPage: number = 1;
-  totalPages: number = 0;
-  pageSize:number = 10;
-  limit:number = 50;
+  // currentPage: number = 1;
+  // totalPages: number = 0;
+  // pageSize:number = 10;
+  // limit:number = 50;
 
-  fileName= 'TransferStatement.xlsx';
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
+  fileName= 'TransferStatement'+'_'+new Date()+'.xlsx';
+  totalAmount: any;
 
   constructor(
     private _accountsService:AccountStatementService,
@@ -68,26 +72,30 @@ export class TransferStatementComponent implements OnInit {
     let payload = {
       fromDate : fromDate,
       toDate : toDate,
-      pageNo: this.currentPage,
-      limit: this.limit,
+      // pageNo: this.currentPage,
+      // limit: this.limit,
     }
 
     this._accountsService._getTransferStatementApi(payload).subscribe((res:any)=>{
       this.isLoading = false;
       this.transferStatements = res.transferStatement;
-      this.totalPages = Math.ceil(this.transferStatements.length / this.pageSize);
+      // this.totalPages = Math.ceil(this.transferStatements.length / this.pageSize);
+
+      this.totalAmount = this.transferStatements.reduce((acc, crnt) => acc + crnt.amount, 0);
+
+
     });
   }
 
-  next(): void {
-    this.currentPage++;
-    this.getTransferStatement();
-  }
+  // next(): void {
+  //   this.currentPage++;
+  //   this.getTransferStatement();
+  // }
 
-  prev(): void {
-    this.currentPage--;
-    this.getTransferStatement();
-  }
+  // prev(): void {
+  //   this.currentPage--;
+  //   this.getTransferStatement();
+  // }
 
   exportExcel(){
     let transfetStatemnt : any = []
@@ -103,5 +111,14 @@ export class TransferStatementComponent implements OnInit {
     this._sharedService.exportExcel(transfetStatemnt,this.fileName);
     // this._sharedService.exportExcel(this.transferStatements,this.fileName);
  }
+
+ toggleSort(columnName: string) {
+  if (this.sortColumn === columnName) {
+    this.sortAscending = !this.sortAscending;
+  } else {
+    this.sortColumn = columnName;
+    this.sortAscending = true;
+  }
+}
 
 }

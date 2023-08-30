@@ -37,8 +37,12 @@ export class PlayerPlComponent implements OnInit {
   totalPages: number = 0;
   isLoading = false;
 
-  fileName = 'PlayerP/L_Statement.xlsx';
+  fileName =  'PlayerP/L_Statement'+'_'+new Date()+'.xlsx';
   fileName1 = 'OneAccount.xlsx';
+
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+  totalAmount: any;
 
   constructor(
     private _memberService: MembersService,
@@ -190,7 +194,8 @@ export class PlayerPlComponent implements OnInit {
     // };
 
     let body = {
-      memberId:null,
+      memberId: this.filterForm.value.memberId,
+      // memberId:null,
       fromDate:fromDate,
       toDate:toDate,
       sportId: null,
@@ -204,7 +209,11 @@ export class PlayerPlComponent implements OnInit {
       this.isLoading = false;
       // if (res.admin.finalList.length > 0) {
         this.plStatement = res.admin.finalList;
-        this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+        // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+        this.plStatement.filter((acc, crnt) => console.log("ffff",crnt.finalNetAmount));
+
+        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.finalNetAmount, 0);
+
       // }
     }, (err)=>{
       console.log(err);
@@ -272,7 +281,9 @@ export class PlayerPlComponent implements OnInit {
       this.isLoading = false;
       // if (res.admin.finalList.length > 0) {
         this.plStatement = res.admin.finalList;
-        this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+        // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+
+        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.finalNetAmount, 0);
       // }
     }, (err)=>{
       console.log(err);
@@ -351,6 +362,20 @@ export class PlayerPlComponent implements OnInit {
     });
 
     this._sharedService.exportExcel(oneaccnt, this.fileName1);
+  }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
+  }
+
+  updateLimit(event){
+    this.limit = parseInt(event.target.value);
+    this.pageSize = this.limit;
   }
 
 }

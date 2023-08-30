@@ -68,17 +68,17 @@
           <thead class="text-dark">
             <tr>
               <th scope="col" class="first">#</th>
-              <th scope="col">Creation Date</th>
-              <th scope="col">From</th>
-              <th scope="col">To</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Available Credit</th>
-              <th scope="col">Old Available Credit</th>
-              <th scope="col" class="last">IP</th>
+              <th scope="col" class="pointer" (click)="toggleSort('createdDate')">Creation Date</th>
+              <th scope="col" class="pointer" (click)="toggleSort('fromRefUserName')">From</th>
+              <th scope="col" class="pointer" (click)="toggleSort('toRefUserName')">To</th>
+              <th scope="col" class="pointer" (click)="toggleSort('amount')">Amount</th>
+              <th scope="col" class="pointer" (click)="toggleSort('balance')">Available Credit</th>
+              <th scope="col" class="pointer" (click)="toggleSort('oldBalance')">Old Available Credit</th>
+              <th scope="col" class="last" (click)="toggleSort('ipAddress')">IP</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let stmt of clTransfers; let i = index">
+            <tr *ngFor="let stmt of clTransfers | sort:sortColumn:sortAscending; let i = index">
               <td>
                 <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                 <span *ngIf="currentPage > 1">{{

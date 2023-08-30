@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-5">
             <h6>
               <a routerLink="/book-management/net-exposure"
                 ><i class="fa fa-1x fa-circle-chevron-left"></i
@@ -37,10 +37,7 @@
               </a>
             </p>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6"></div>
-          <div class="col-md-6 text-end">
+          <div class="col-md-3 text-end">
             {{ refreshCount }} &nbsp;
             <button
               class="btn btn-pink rounded-pill ps-4 pe-4"
@@ -57,6 +54,10 @@
             </button>
           </div>
         </div>
+        <!-- <div class="row">
+          <div class="col-md-6"></div>
+          
+        </div> -->
         <div class="row">
           <div class="col-md-4"></div>
           <div class="col-md-4"></div>
@@ -377,7 +378,7 @@
                                   >
                                     <a
                                       ><strong
-                                        >{{ runner["RunnerName"] }} </strong
+                                        >{{ runner["RunnerName"] }}</strong
                                       ><br /><br>
                                       <span
                                         [ngClass]="

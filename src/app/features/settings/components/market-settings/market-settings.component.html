@@ -198,7 +198,7 @@
                   (change)="checkAll($event)"
                 />
               </th>
-              <th scope="col">#</th>
+              <!-- <th scope="col">#</th> -->
               <th scope="col" class="cursor-pointer" (click)="toggleSort('marketName')">Market Name</th>
               <th scope="col" class="cursor-pointer" (click)="toggleSort('marketType')">Market Type</th>
               <th scope="col" class="cursor-pointer" (click)="toggleSort('refMatchName')">Match Name</th>
@@ -223,9 +223,9 @@
                   [(ngModel)]="stmt.state"
                 />
               </td>
-              <td>
+              <!-- <td>
                 {{ i + 1 }}
-              </td>
+              </td> -->
               <td>{{ stmt.marketName }}</td>
               <td>{{ stmt.marketType }}</td>
               <td>{{ stmt.refMatchName }}</td>

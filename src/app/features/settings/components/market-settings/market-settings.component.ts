@@ -26,7 +26,7 @@ export class MarketSettingsComponent implements OnInit {
   sportId:any;
   marketList: any = [];
   modalNumber: number;
-
+  allChecked = false;
   sortedData: any[];
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
@@ -114,8 +114,6 @@ export class MarketSettingsComponent implements OnInit {
     this.settingsService._getMarketForAdminMarketSettingsListApi(body).subscribe((data: any) => {
       this.isLoading = false;
       this.marketSettingsList = data.markets;
-      console.log(this.marketSettingsList)
-
       this.sortedData = data.markets.slice();
     })
   }
@@ -206,7 +204,6 @@ export class MarketSettingsComponent implements OnInit {
       maxBet: this.matchSettingsForm.value.maxBet,
       maxMarketSize: this.matchSettingsForm.value.maxMarketSize
     }
-    console.log(body)
     
     this.settingsService._setBetLimitForMarketApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Market Settings', 'success');
@@ -255,7 +252,6 @@ export class MarketSettingsComponent implements OnInit {
   }
 
   checkMarketId(marketId: any) {
-    console.log( this.selectedUserForAdjustment)
     if (this.selectedUserForAdjustment.includes(marketId)) {
       this.selectedUserForAdjustment.splice(
         this.selectedUserForAdjustment.indexOf(marketId),
@@ -265,13 +261,20 @@ export class MarketSettingsComponent implements OnInit {
     }
 
       this.selectedUserForAdjustment.push(marketId);
-      console.log( this.selectedUserForAdjustment)
-    
   }
 
   checkAll(ev) {
-    this.checkMarketId(ev.target.value);
-    this.marketSettingsList.forEach(x => x.state = ev.target.checked)
+    
+    this.allChecked = !this.allChecked;
+
+    this.marketSettingsList.forEach(x => x.state = ev.target.checked);
+
+    // console.log(this.marketSettingsList)
+
+    for(const market of this.marketSettingsList){
+      this.checkMarketId(market.marketId);
+    }
+
   }
 
   isAllChecked() {
@@ -299,11 +302,13 @@ export class MarketSettingsComponent implements OnInit {
       maxBet: this.matchSettingsForm.value.maxBet,
       maxMarketSize: this.matchSettingsForm.value.maxMarketSize
     }
-    console.log(payload)
+    // console.log(payload)
     
     this.settingsService._setBetLimitForMultipleMarketApi(payload).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Muttiple Markets Settings', 'success');
       this.getMarketSettingsList();
+      this.marketSettingsList.forEach(x => x.state = false);
+      console.log(this.marketSettingsList)
     })
 
     this.selectedUserForAdjustment = []

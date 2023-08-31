@@ -133,7 +133,7 @@
                     <a class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100 text-danger">
                       <span [ngClass]="
                           data.netExposure > 0 ? 'text-success' : 'text-danger'
-                        ">{{ data.netExposure | number : "1.2-2" }}</span>
+                        ">{{ data.netExposure | number: '1.0-0' }}</span>
                     </a>
                   </td>
                   <td>
@@ -142,7 +142,7 @@
                       <span class="text-success">
                         {{
                         data.horses[0]?.finalAmount
-                        ? (data.horses[0]?.finalAmount | number : "1.2-2")
+                        ? (data.horses[0]?.finalAmount | number: '1.0-0')
                         : 0
                         }}
                       </span>
@@ -152,7 +152,7 @@
                       <span class="text-danger">
                         {{
                         data.horses[0]?.finalAmount
-                        ? (data.horses[0]?.finalAmount | number : "1.2-2")
+                        ? (data.horses[0]?.finalAmount | number: '1.0-0')
                         : 0
                         }}
                       </span>
@@ -168,7 +168,7 @@
                         <span class="text-success">
                           {{
                           data.horses[2]?.finalAmount
-                          ? (data.horses[2]?.finalAmount | number : "1.2-2")
+                          ? (data.horses[2]?.finalAmount | number: '1.0-0')
                           : 0
                           }}
                         </span>
@@ -178,7 +178,7 @@
                         <span class="text-danger">
                           {{
                           data.horses[2]?.finalAmount
-                          ? (data.horses[2]?.finalAmount | number : "1.2-2")
+                          ? (data.horses[2]?.finalAmount | number: '1.0-0')
                           : 0
                           }}
                         </span>
@@ -193,7 +193,7 @@
                       class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
                       <span class="text-danger">{{
                         data.horses[1]?.finalAmount
-                        ? (data.horses[1]?.finalAmount | number : "1.2-2")
+                        ? (data.horses[1]?.finalAmount | number: '1.0-0')
                         : 0
                         }}</span>
                     </a>
@@ -202,7 +202,7 @@
                       class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
                       <span class="text-success">{{
                         data.horses[1]?.finalAmount
-                        ? (data.horses[1]?.finalAmount | number : "1.2-2")
+                        ? (data.horses[1]?.finalAmount | number: '1.0-0')
                         : 0
                         }}</span>
                     </a>

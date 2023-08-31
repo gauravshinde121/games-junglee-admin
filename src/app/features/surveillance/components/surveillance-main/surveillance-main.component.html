@@ -8,7 +8,7 @@
         <div class="col-md-2 {{ sideBarClass }} p-md-0" *ngIf="isLeftMenuOpen">
           <app-left-navigation></app-left-navigation>
         </div>
-        <div class="{{ mainClass }}">
+        <div (click)="toggleMenu()" class="{{ mainClass }}">
           <main id="main" class="main w-100">
             <section class="section gamedetails">
               <div

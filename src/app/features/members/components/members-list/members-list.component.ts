@@ -214,6 +214,7 @@ export class MembersListComponent implements OnInit {
   checkAll(ev) {
     this.checkUserForAdjustment(ev.target.value);
     this.userList.forEach(x => x.state = ev.target.checked)
+    console.log(ev.target.checked)
   }
 
   isAllChecked() {
@@ -278,6 +279,7 @@ export class MembersListComponent implements OnInit {
         this.isLoading = false;
       }
       this.userList = users.memberData.memberList;
+      console.log(this.userList)
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
       this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);
@@ -311,6 +313,7 @@ export class MembersListComponent implements OnInit {
       return;
     }
     this.selectedUserForAdjustment.push(userId);
+    console.log(this.selectedUserForAdjustment.push(userId))
   }
 
 
@@ -339,6 +342,7 @@ export class MembersListComponent implements OnInit {
           updateAdminDetails: true,
         });
         this.selectedUserForAdjustment = [];
+        console.log(this.selectedUserForAdjustment)
         this._getAllUserInfo(this.selectedRoleId);
         this._sharedService.callAdminDetails.next(true);
         this.closeModal();

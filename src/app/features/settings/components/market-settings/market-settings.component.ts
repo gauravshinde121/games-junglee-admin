@@ -24,6 +24,8 @@ export class MarketSettingsComponent implements OnInit {
   tournamentList:any;
   matchList: any;
   sportId:any;
+  marketList: any = [];
+  modalNumber: number;
 
   sortedData: any[];
   sortColumn: string = '';
@@ -35,6 +37,7 @@ export class MarketSettingsComponent implements OnInit {
   sortAction: string = 'isActive';
   sortDirection: number = 1; // 1: ascending, -1: descending
   booleanValue: any = false;
+  selectedUserForAdjustment: any = [];
 
 
   constructor(
@@ -67,10 +70,11 @@ export class MarketSettingsComponent implements OnInit {
     })
 
     this.matchSettingsForm = new FormGroup({
+      marketIds:new FormControl(null),
       minBet: new FormControl(null),
       maxBet: new FormControl(null),
       maxMarketSize: new FormControl(null),
-      marketDelay: new FormControl(null)
+      marketDelay: new FormControl(null),
     })
   }
 
@@ -110,6 +114,7 @@ export class MarketSettingsComponent implements OnInit {
     this.settingsService._getMarketForAdminMarketSettingsListApi(body).subscribe((data: any) => {
       this.isLoading = false;
       this.marketSettingsList = data.markets;
+      console.log(this.marketSettingsList)
 
       this.sortedData = data.markets.slice();
     })
@@ -157,6 +162,7 @@ export class MarketSettingsComponent implements OnInit {
       marketId: marketId,
       marketIsActive: checkbox.checked
     }
+      console.log(body)
     this.settingsService._setMarketStatusForMarketSettingsApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Market Settings', 'success');
     })
@@ -175,6 +181,7 @@ export class MarketSettingsComponent implements OnInit {
   openSettingModal(matchSettings) {
     this.matchSettingsForm.reset();
     this.selectedMatchSettings = matchSettings;
+
     this.matchSettingsForm.patchValue({
       minBet: matchSettings.minBet,
       maxBet: matchSettings.maxBet,
@@ -199,6 +206,7 @@ export class MarketSettingsComponent implements OnInit {
       maxBet: this.matchSettingsForm.value.maxBet,
       maxMarketSize: this.matchSettingsForm.value.maxMarketSize
     }
+    console.log(body)
     
     this.settingsService._setBetLimitForMarketApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Market Settings', 'success');
@@ -245,5 +253,61 @@ export class MarketSettingsComponent implements OnInit {
     this.searchTermChanged.next(this.searchTerm);
 
   }
+
+  checkMarketId(marketId: any) {
+    console.log( this.selectedUserForAdjustment)
+    if (this.selectedUserForAdjustment.includes(marketId)) {
+      this.selectedUserForAdjustment.splice(
+        this.selectedUserForAdjustment.indexOf(marketId),
+        1
+      );
+      return;
+    }
+
+      this.selectedUserForAdjustment.push(marketId);
+      console.log( this.selectedUserForAdjustment)
+    
+  }
+
+  checkAll(ev) {
+    this.checkMarketId(ev.target.value);
+    this.marketSettingsList.forEach(x => x.state = ev.target.checked)
+  }
+
+  isAllChecked() {
+    return this.marketSettingsList.every(_ => _.state);
+  }
+
+  openBulkTransferModal() {
+    this.modalNumber = 1;
+    this.matchSettingsForm.patchValue({
+      minBet: 100,
+      maxBet: 50000,
+      maxMarketSize:200000,
+      marketDelay: 0
+    });
+    this.display = 'block';
+  }
+
+  submitBulkMarket(){
+    this.display = 'none';
+    let payload = {
+
+      marketIds: this.selectedUserForAdjustment,
+      marketDelay: this.matchSettingsForm.value.marketDelay,
+      minBet: this.matchSettingsForm.value.minBet,
+      maxBet: this.matchSettingsForm.value.maxBet,
+      maxMarketSize: this.matchSettingsForm.value.maxMarketSize
+    }
+    console.log(payload)
+    
+    this.settingsService._setBetLimitForMultipleMarketApi(payload).subscribe((data: any) => {
+      this._sharedService.getToastPopup("Settings updated.", 'Muttiple Markets Settings', 'success');
+      this.getMarketSettingsList();
+    })
+
+    this.selectedUserForAdjustment = []
+  }
+
  
 }

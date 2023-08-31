@@ -147,7 +147,7 @@
           <!--<th scope="col">Sub Game</th>-->
           <th scope="col" class="pointer" (click)="toggleSort('eventName')">Match</th>
           <th scope="col" class="pointer" (click)="toggleSort('name')">Username</th>
-          <th scope="col" class="pointer" (click)="toggleSort('finalNetAmount')">Amount</th>
+          <th scope="col" class="pointer text-center" (click)="toggleSort('finalNetAmount')">Amount</th>
           <!-- <th scope="col">Master</th><th scope="col">Multiplier</th> -->
           <th scope="col" class="last text-center">Details</th>
         </tr>
@@ -167,7 +167,7 @@
           <td>
             {{ pl.playerData.name }}
           </td>
-          <td>
+          <td class="text-center">
             <div
               [ngClass]="
                 pl.gameData.finalNetAmount > 0 ? 'text-success' : 'text-danger'

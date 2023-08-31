@@ -356,6 +356,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_SET_BET_LIMIT_FOR_MARKET)
   }
 
+  public setBetLimitForMultipleMarketEndpoint(){
+    return this.createUrl(this._constants.API_URL_SET_BET_LIMIT_FOR_MULTIPLE_MARKET)
+  }
+
   public setMatchActiveStatusEndpoint(){
     return this.createUrl(this._constants.API_URL_SET_MATCH_ACTIVE_STATUS)
   }

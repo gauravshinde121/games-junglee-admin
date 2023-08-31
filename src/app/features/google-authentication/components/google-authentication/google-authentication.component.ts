@@ -32,4 +32,10 @@ export class GoogleAuthenticationComponent implements OnInit {
     });
    }
 
+   toggleMenu(){
+    this._sharedService.leftMenuStatus.next({
+      'leftMenuOpen': false
+    });
+   }
+
 }

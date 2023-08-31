@@ -67,7 +67,7 @@ export class PlayerPlComponent implements OnInit {
   _preConfig() {
     this._initForm();
     this._getGames();
-    // this.getPlStatement();
+    this.getPlStatement();
     this._getAllMarketTypeList();
     this._getAllMembers();
   }

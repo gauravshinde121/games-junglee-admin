@@ -47,6 +47,12 @@ export class SharedService {
       .post(this._apiEndpointsService.getAllUserEndpoint(), body);
   }
 
+  _getBankUsersApi(body) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getBankUserEndpoint(), body);
+  }
+  
+
   testFunc(body) {
     return this._apiHttpService
       .post(this._apiEndpointsService.testFuncEndpoint(), body);

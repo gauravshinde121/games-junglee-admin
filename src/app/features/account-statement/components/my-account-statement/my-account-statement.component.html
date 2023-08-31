@@ -33,7 +33,19 @@
                   placeholder="Month"
                 />
               </div>
-              
+              <div class="col-md-6">
+                <label>Select Member</label>
+                <select
+                  formControlName="memberId"
+                  id="ab"
+                  class="form-select bg-dgre pointer"
+                >
+                  <option value="null">All</option>
+                  <option *ngFor="let member of allMembers" [value]="member.userId">
+                    {{ member.username }}
+                  </option>
+                </select>
+              </div>
               
               
               <div class="col-md-3 mb-3 d-flex align-items-end">

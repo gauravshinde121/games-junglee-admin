@@ -159,6 +159,11 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ALL_USERS);
   }
 
+  public getBankUserEndpoint():string{
+    return this.createUrl(this._constants.API_GET_BANK_USERS);
+  }
+  
+
   public testFuncEndpoint():string{
     return this.createUrl(this._constants.API_URL_TEST_FUNC);
   }

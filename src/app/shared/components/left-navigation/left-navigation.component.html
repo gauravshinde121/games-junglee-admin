@@ -113,8 +113,8 @@
                 class="nav-link small ps-5"
                 >My Account Statement</a
               >
-            </li>
-            <li [routerLinkActive]="currentPath == '/account-statement/player-account-statement'?'active':''" [ngClass]="currentPath == '/account-statement/player-account-statement'?'active':''">
+            </li> -->
+            <!-- <li [routerLinkActive]="currentPath == '/account-statement/player-account-statement'?'active':''" [ngClass]="currentPath == '/account-statement/player-account-statement'?'active':''">
               <a
               (click)="storePath('/account-statement/player-account-statement')"
                 routerLink="/account-statement/player-account-statement"
@@ -126,6 +126,20 @@
           </ul>
         </div>
       </li>
+
+      <li [routerLinkActive]="currentPath == '/bank'?'active':''" [ngClass]="currentPath == '/bank'?'active':''">
+        <a
+        (click)="storePath('/bank')"
+          routerLink="/bank"
+          class="btn collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#pwd-collapse"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-bank icon-pink me-2"></i> Bank
+        </a>
+      </li>
+
       <li>
         <a
           data-bs-toggle="collapse"

@@ -5,6 +5,7 @@ import { SharedService } from '@shared/services/shared.service';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import * as moment from 'moment';
+import { MembersService } from 'src/app/features/members/services/members.service';
 
 @Component({
   selector: 'app-my-account-statement',
@@ -35,13 +36,15 @@ export class MyAccountStatementComponent implements OnInit {
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
-
+  allMembers: any = [];
+  memberId
 
   constructor(
     private _accountStatementService: AccountStatementService,
     private _sharedService: SharedService,
     private _router: Router,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _memberService: MembersService,
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +78,7 @@ export class MyAccountStatementComponent implements OnInit {
     this._initForm();
     // this.getPlStatement();
     this._getAllMarketTypeList();
+    this._getAllMembers();
   }
 
   // __initForm() {
@@ -93,6 +97,15 @@ export class MyAccountStatementComponent implements OnInit {
       sportsId: null,
       matchId: null,
       marketId: null,
+      memberId : null
+    });
+  }
+
+  _getAllMembers() {
+    this._memberService._getAllMembers().subscribe((data: any) => {
+      if (data.memberData) {
+        this.allMembers = data.memberData;
+      }
     });
   }
 

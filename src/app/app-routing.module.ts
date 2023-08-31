@@ -30,6 +30,12 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
+    loadChildren: () => import('./features/bank/bank.module').then((m) => m.BankModule)
+  },
+
+  {
+    path: '',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./features/all-logs/all-logs.module').then((m) => m.AllLogsModule)
   },
   {

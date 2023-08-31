@@ -210,10 +210,7 @@ export class PlayerPlComponent implements OnInit {
       // if (res.admin.finalList.length > 0) {
         this.plStatement = res.admin.finalList;
         // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
-        this.plStatement.filter((acc, crnt) => console.log("ffff",crnt.finalNetAmount));
-
-        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.finalNetAmount, 0);
-
+        this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.finalNetAmount, 0);
       // }
     }, (err)=>{
       console.log(err);

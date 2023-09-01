@@ -157,6 +157,7 @@ export class MembersListComponent implements OnInit {
       "amount": this.adjustWinningsForSingleUserForm.value.amount,
       "isGiven": this.isGiven
     }
+   
     this.closeModal();
     this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
       this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');

@@ -87,6 +87,13 @@
                 Confirm Password is required
               </div>
 
+              <!-- Add this div to show a password mismatch error -->
+        <div class="small text-danger" *ngIf="
+          memberForm.controls['confirmPassword'].hasError('confirmPasswordValidator') &&
+          memberForm.controls['confirmPassword'].touched">
+        Password and Confirm password do not match
+      </div>
+
             </div>
 
             <div class="col-md-3 mb-2">
@@ -318,7 +325,7 @@
                 placeholder="Enter your password" [(ngModel)]="uplinePwd" name="password" autofocus />
               <div class="row">
                 <div class="col-md-6">
-                  <button class="btn rounded-pill w-100 mt-3 btn-pink" [disabled]="!uplinePwd" (click)="closeModal()">
+                  <button class="btn rounded-pill w-100 mt-3 btn-pink" type="submit" [disabled]="!uplinePwd">
                     Yes
                   </button>
                 </div>

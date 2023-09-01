@@ -117,11 +117,9 @@
                     i + 1 + (currentPage - 1) * limit
                   }}</span> -->
                           </td>
-                          <td [ngStyle]="selectedRoleId == 7?{'cursor': 'context-menu'} : {'cursor': 'pointer'}"><span
+                          <td><span
                               (click)="showDownlineTree(user)">{{ user.username }}</span></td>
-                          <td class="text-center"><span *ngFor="let role of roles"
-                              (click)="showDownlineTree(user)"><span *ngIf="selectedRoleId == role.roleId">{{
-                                role.userRoleName }}</span></span></td>
+                          <td class="text-center">{{user.userRoleName}}</td>
                           <td class="text-center">{{ user.creditLimit | number }}</td>
                           <td class="text-center" [ngClass]="user.exposure > 0 ? 'text-danger' : ''">
                             {{ user.exposure | number }}

@@ -154,7 +154,7 @@ export class BankDetailsComponent implements OnInit {
     this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
       this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
       this._sharedService.callAdminDetails.next(true);
-      this._getAllUserInfo(this.selectedRoleId);
+      this._getAllUserInfo();
       
     });
   }
@@ -219,11 +219,26 @@ export class BankDetailsComponent implements OnInit {
   }
 
   checkAll(ev) {
-    this.checkUserForAdjustment(ev.target.value);
-    this.userList.forEach(x => x.state = ev.target.checked)
-    console.log(ev.target.checked);
+    
+    if(ev.target.checked){
+      this.selectedUserForAdjustment = [];
+    }
+    
+    this.userList.forEach(element => {
+      if(element.winnings != 0) {
+        element.state = ev.target.checked
+      }
+      
+    });
 
-    console.log("this.userList",this.userList);
+    for(const user of this.userList){
+      if(user.winnings != 0 ) {
+
+        this.checkUserForAdjustment(user.userId);
+      } 
+    }
+
+
   }
 
   isAllChecked() {
@@ -231,7 +246,7 @@ export class BankDetailsComponent implements OnInit {
   }
   _preConfig() {
     this._getRoles();
-    this._getAllUserInfo(this.selectedRoleId);
+    this._getAllUserInfo();
 
     // this.resetTimerInterval = setInterval(() => {
     //     this.refreshCall();
@@ -245,14 +260,14 @@ export class BankDetailsComponent implements OnInit {
   fetchListByCategory(category) {
     this.currentPage = 1;
     this.selectedRoleId = category.roleId;
-    this._getAllUserInfo(this.selectedRoleId);
+    this._getAllUserInfo();
   }
 
   search(): void {
     // implement your search logic here
     // you can filter the data array on the client-side,
     // or send a search term to your server-side API to filter the data
-    this._getAllUserInfo(this.selectedRoleId);
+    this._getAllUserInfo();
   }
 
   _getRoles() {
@@ -261,21 +276,9 @@ export class BankDetailsComponent implements OnInit {
     });
   }
 
-  refreshCall() {
-    
-    this._getAllUserInfo(this.selectedRoleId, true);
-  }
 
-  _getAllUserInfo(roleId, autoRefresh = false) {
+  _getAllUserInfo() {
 
-    console.log("called",roleId);
-    this._sharedService.selectedUserRoleId.next({
-      'createUserWithRoleId': roleId
-    });
-    if (!autoRefresh) {
-      this.isLoading = true;
-      this.userList = [];
-    }
     let body = {
       // roleId: roleId,
       // pageNo: this.currentPage,
@@ -288,9 +291,9 @@ export class BankDetailsComponent implements OnInit {
     };
 
     this._sharedService._getBankUsersApi(body).subscribe((users: any) => {
-      if (!autoRefresh) {
+    
         this.isLoading = false;
-      }
+    
       this.userList = users.memberData.memberList;
       console.log(this.userList)
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
@@ -310,23 +313,24 @@ export class BankDetailsComponent implements OnInit {
   }
 
   checkUserForAdjustment(userId: any) {
+
     if (this.selectedUserForAdjustment.includes(userId)) {
       this.selectedUserForAdjustment.splice(
         this.selectedUserForAdjustment.indexOf(userId),
         1
       );
+
       return;
     }
     this.selectedUserForAdjustment.push(userId);
 
-    console.log("this.selectedUserForAdjustment",this.selectedUserForAdjustment.length);
   }
 
 
   updateLimit(event){
     this.limit = parseInt(event.target.value);
     this.pageSize = this.limit;
-    this.refreshCall();
+  
   }
 
   adjustWinnings() {
@@ -349,7 +353,7 @@ export class BankDetailsComponent implements OnInit {
         });
         this.selectedUserForAdjustment = [];
         console.log(this.selectedUserForAdjustment)
-        this._getAllUserInfo(this.selectedRoleId);
+        this._getAllUserInfo();
         this._sharedService.callAdminDetails.next(true);
         this.closeModal();
       });
@@ -391,7 +395,7 @@ export class BankDetailsComponent implements OnInit {
       })
       .subscribe((data: any) => {
         this.closeModal();
-        this._getAllUserInfo(this.selectedRoleId);
+        this._getAllUserInfo();
       });
   }
 
@@ -404,7 +408,7 @@ export class BankDetailsComponent implements OnInit {
       })
       .subscribe((data: any) => {
         this.closeModal();
-        this._getAllUserInfo(this.selectedRoleId);
+        this._getAllUserInfo();
       });
   }
 
@@ -459,13 +463,15 @@ export class BankDetailsComponent implements OnInit {
    }
 
    next(): void {
+    this.selectedUserForAdjustment = [];
     this.currentPage++;
-    this._getAllUserInfo(this.selectedRoleId);
+    this._getAllUserInfo();
   }
 
   prev(): void {
+    this.selectedUserForAdjustment = [];
     this.currentPage--;
-    this._getAllUserInfo(this.selectedRoleId);
+    this._getAllUserInfo();
   }
    
 

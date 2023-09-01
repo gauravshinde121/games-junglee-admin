@@ -51,6 +51,7 @@ export class MembersListComponent implements OnInit {
   selectedColor = "";
   disableSubmit = false;
   totalMembers = 0;
+  allChecked = false;
 
 
   fileName = 'MemberList.xlsx';
@@ -213,9 +214,43 @@ export class MembersListComponent implements OnInit {
   }
 
   checkAll(ev) {
-    this.checkUserForAdjustment(ev.target.value);
-    this.userList.forEach(x => x.state = ev.target.checked)
-    console.log(ev.target.checked)
+
+    if(ev.target.checked){
+      this.selectedUserForAdjustment = [];
+    }
+    
+    this.allChecked = !this.allChecked;
+
+    // this.userList.forEach(x => x.state = ev.target.checked)
+
+    this.userList.forEach(element => {
+      if(element.winnings != 0) {
+        element.state = ev.target.checked
+      }
+      
+    });
+
+    for(const user of this.userList){
+      if(user.winnings != 0 ) {
+        this.checkUserId(user.userId);
+      } 
+    }
+  }
+
+  checkUserId(userId: any) {
+    
+    if (this.selectedUserForAdjustment.includes(userId)) {
+      this.selectedUserForAdjustment.splice(
+        this.selectedUserForAdjustment.indexOf(userId),
+        1
+      );
+
+      return;
+    }
+
+      this.selectedUserForAdjustment.push(userId);
+
+
   }
 
   isAllChecked() {
@@ -228,7 +263,7 @@ export class MembersListComponent implements OnInit {
 
     this.resetTimerInterval = setInterval(() => {
         this.refreshCall();
-    }, 30000)
+    }, 60000)
   }
 
   ngOnDestroy(): void {
@@ -236,6 +271,7 @@ export class MembersListComponent implements OnInit {
   }
 
   fetchListByCategory(category) {
+    this.selectedUserForAdjustment = [];
     this.currentPage = 1;
     this.selectedRoleId = category.roleId;
     this._getAllUserInfo(this.selectedRoleId);
@@ -255,7 +291,7 @@ export class MembersListComponent implements OnInit {
   }
 
   refreshCall() {
-    
+    // this.selectedUserForAdjustment = [];
     this._getAllUserInfo(this.selectedRoleId, true);
   }
 
@@ -289,11 +325,13 @@ export class MembersListComponent implements OnInit {
   }
 
   next(): void {
+    this.selectedUserForAdjustment = [];
     this.currentPage++;
     this._getAllUserInfo(this.selectedRoleId);
   }
 
   prev(): void {
+    this.selectedUserForAdjustment = [];
     this.currentPage--;
     this._getAllUserInfo(this.selectedRoleId);
   }
@@ -306,15 +344,16 @@ export class MembersListComponent implements OnInit {
   }
 
   checkUserForAdjustment(userId: any) {
+
     if (this.selectedUserForAdjustment.includes(userId)) {
       this.selectedUserForAdjustment.splice(
-        this.selectedUserForAdjustment.indexOf(userId),
-        1
-      );
+        this.selectedUserForAdjustment.indexOf(userId),1);
       return;
     }
     this.selectedUserForAdjustment.push(userId);
-    console.log(this.selectedUserForAdjustment.push(userId))
+
+    this.isAllChecked();
+    // console.log(this.selectedUserForAdjustment.push(userId))
   }
 
 

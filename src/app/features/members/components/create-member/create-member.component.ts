@@ -4,7 +4,7 @@ import { SharedService } from '../../../../shared/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from '../../services/members.service';
 import { Observable } from 'rxjs';
-import { userNameValidator } from '@shared/classes/validator';
+import { ConfirmPasswordValidator } from '@shared/classes/validator';
 import { subscribeOn } from 'rxjs/operators';
 
 @Component({
@@ -80,6 +80,7 @@ export class CreateMemberComponent implements OnInit {
   }
 
   closeModal() {
+    this.uplinePwd = "";
     this.display = 'none';
   }
 
@@ -194,7 +195,8 @@ export class CreateMemberComponent implements OnInit {
         partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]]
       },
         {
-          validators: this.Mustmatch('password', 'confirmPassword')
+          // validators: this.Mustmatch('password', 'confirmPassword'),
+          validators: ConfirmPasswordValidator('password', 'confirmPassword')
         })
     } else {
       this.memberForm = this._fb.group({
@@ -271,7 +273,7 @@ export class CreateMemberComponent implements OnInit {
       }
 
       console.log(this.gamesList)
-
+      this.closeModal();
       memberObs.subscribe(
         (res: any) => {
           this._sharedService.getToastPopup(`User ${msg} Successfully`, 'Member', 'success');

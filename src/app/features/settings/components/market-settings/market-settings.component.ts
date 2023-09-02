@@ -79,6 +79,7 @@ export class MarketSettingsComponent implements OnInit {
   }
 
   getMarketSettingsList() {
+    this.selectedUserForAdjustment = [];
     if(this.filterForm.value.sportId == null || this.filterForm.value.sportId== "null"){
       this.filterForm.value.tournamentId = null;
     }
@@ -265,6 +266,10 @@ export class MarketSettingsComponent implements OnInit {
 
   checkAll(ev) {
     
+    if(ev.target.checked){
+      this.selectedUserForAdjustment = [];
+    }
+
     this.allChecked = !this.allChecked;
 
     this.marketSettingsList.forEach(x => x.state = ev.target.checked);

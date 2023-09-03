@@ -158,7 +158,6 @@ export class CreateMemberComponent implements OnInit {
           liveCasinoRate: this.memberData.liveCasinoRate,
           minBet: 100,
           maxBet: 100000,
-          maxExposure: this.memberData.maxExposure,
           partnerShipPercent: this.memberData.partnerShipPercent,
           roleId: this.memberData.roleId
         });
@@ -190,7 +189,6 @@ export class CreateMemberComponent implements OnInit {
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(this.maxBetMinValue)]],
-        maxExposure: [this.uplineInfo.maxExposure, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
         roleId: [this.createUserWithRoleId, Validators.required],
         partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]]
       },
@@ -209,7 +207,6 @@ export class CreateMemberComponent implements OnInit {
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
-        maxExposure: [50000000, [(c: AbstractControl) => Validators.required(c), Validators.max(50000000), Validators.min(1)]],
         partnerShipPercent: [0, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]]
       },
         {
@@ -233,7 +230,6 @@ export class CreateMemberComponent implements OnInit {
           "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
           "minimumBet": this.memberForm.value['minBet'],
           "maxBet": this.memberForm.value['maxBet'],
-          "maxExposure": this.memberForm.value['maxExposure'],
           "gameStatus": this.gamesList,
           "roleId": this.memberForm.value['roleId'],
           "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
@@ -250,7 +246,6 @@ export class CreateMemberComponent implements OnInit {
           "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
           "minimumBet": 100,
           "maxBet": 100000,
-          "maxExposure": this.memberForm.value['maxExposure'],
           "gameStatus": this.gamesList,
           "roleId": this.memberForm.value['roleId'],
           "partnerShipPercent": this.memberForm.value['partnerShipPercent'],

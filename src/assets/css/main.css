@@ -615,7 +615,7 @@ select:-webkit-autofill:focus {
   color: burlywood;
 }
 
-.memberslist{
+.memberslist {
   flex-flow: row nowrap;
   overflow-x: auto;
 }
@@ -628,7 +628,7 @@ select:-webkit-autofill:focus {
   align-items: center;
 }
 
-.memberslist .nav-link{
+.memberslist .nav-link {
   border: 1px solid;
   /* width: 150px; */
 }
@@ -717,16 +717,19 @@ select:-webkit-autofill:focus {
   transform: scale(0.85) translateY(-1rem) translateX(0.15rem) !important;
 }
 
-
 .tableFixHead {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   min-height: auto;
   max-height: 70vh;
 }
-.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+.tableFixHead thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
 
-.tableFixHead::-webkit-scrollbar{
+.tableFixHead::-webkit-scrollbar {
   width: 3px;
   height: 3px;
 }
@@ -743,21 +746,23 @@ select:-webkit-autofill:focus {
   background: linear-gradient(0deg, #cd212f 0, #e76f26) !important;
 }
 
-.btn.disabled, .btn:disabled, fieldset:disabled .btn{
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
   opacity: 0.3;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 4px;
   height: 4px;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background: linear-gradient(180deg, #ff0015 0, #e76f26);
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   background-color: #000;
 }
 
@@ -777,33 +782,40 @@ select:-webkit-autofill:focus {
   right: 78px;
 }
 
-
 tfoot td {
   text-align: center;
 }
 
-
-.exposure-font{
+.exposure-font {
   font-size: 0.9rem;
 }
 
-tfoot tr{
+tfoot tr {
   /* border: 1px solid; */
-    position: sticky;
-    bottom: 0;
-    background: black;
+  position: sticky;
+  bottom: 0;
+  background: black;
 }
 
-.net-exposure_scroll{
+.net-exposure_scroll {
   overflow: scroll;
   height: 32vh;
 }
 
-.marketSetting{
+.marketSetting {
   font-size: 12px !important;
   white-space: normal;
 }
 
-.smallMobileShow{
+.smallMobileShow {
   display: none;
+}
+
+.bgTransparent th {
+  background: none !important;
+}
+
+.netExposure thead tr th,
+.netExposure tbody tr td {
+  width: 5rem;
 }

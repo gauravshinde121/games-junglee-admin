@@ -25,7 +25,7 @@
 
               <div class="col-md-8 my-3 my-md-0">
                 <div class="row">
-                  
+
                   <div class="col-md-12">
                     <span class=" pt-2 me-3"><strong>Filter by Sport :</strong></span>
                     <a class="text-decoration-none text-white">
@@ -86,59 +86,69 @@
 
         <div class="row">
           <div *ngIf="booksForBackend.length > 0" class="col-md-12 overflow-auto">
-            <table class="table tableall mt-3 align_thead mb-0" *ngFor="let book of booksForBackend">
+            <table class="table tableall mt-3 align_thead mb-0">
               <thead>
-                <!-- <tr>
-                  <th width="30%" class="text-start">{{ book.matchName }}</th>
-                  <th width="20%">
-                    <a
-                      (click)="
-                        redirectUrl(book.data)
-                      "
-                      class="btn btn-warning rounded-pill"
-                    >
-                      View total</a
-                    >
-                  </th>
-                  <th width="20%">Net Exposure</th>
-                  <th width="10%">1</th>
-                  <th width="10%">X</th>
-                  <th width="10%">2</th>
+                <tr class="bgTransparent">
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>Stack</th>
+                  <th>1</th>
+                  <th>X</th>
+                  <th>2</th>
 
-                </tr> -->
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>Stack</th>
+                  <th>Over/Yes</th>
+                  <th>Under/No</th>
+                </tr>
+
+
+              </thead>
+              <tbody *ngFor="let book of booksForBackend">
                 <tr class="bookmatch">
-                  <th class="text-start first">
+                  <th class="text-start " colspan="16">
                     <span>{{ book.matchName }}</span>
                   </th>
-                  <th>
+                  <!--  <th>
                     <a (click)="redirectUrlByMatch(book)" class="btn btn-warning rounded-pill">
                       View total</a>
                   </th>
                   <th>Net Exposure</th>
                   <th>1</th>
                   <th>X</th>
-                  <th class="last">2</th>
+                  <th class="">2</th> -->
                 </tr>
-              </thead>
-              <tbody>
                 <tr *ngFor="let data of book.data">
-                  <td>
-                    <span>{{ data.marketName }}</span>
+                  <td class="text-start">
+                    <span class="p-2">{{ data.marketName }}</span>
                   </td>
                   <td>
                     <a (click)="redirectUrlByMarket([data])" class="pointer">
-                      <img src="../../../../../assets/images/net_exposure.png" width="22px" alt="" /></a>
+                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
                   </td>
                   <td>
-                    <a class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100 text-danger">
+                    <a (click)="redirectUrlByMarket([data])" class="pointer">
+                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
+                  </td>
+                  <td>
+                    <a (click)="redirectUrlByMarket([data])" class="pointer">
+                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
+                  </td>
+                  <td class="bg-white">
+                    <a class="btn  alert alert-danger pt-1 pb-1 w-100 text-danger">
                       <span [ngClass]="
                           data.netExposure > 0 ? 'text-success' : 'text-danger'
                         ">{{ data.netExposure | number: '1.0-0' }}</span>
                     </a>
                   </td>
-                  <td>
-                    <a *ngIf="data.horses[0]?.finalAmount > 0"
-                      class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
+                  <td class="bg-white">
+                    <a *ngIf="data.horses[0]?.finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
                       <span class="text-success">
                         {{
                         data.horses[0]?.finalAmount
@@ -147,8 +157,7 @@
                         }}
                       </span>
                     </a>
-                    <a *ngIf="data.horses[0]?.finalAmount < 0"
-                      class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
+                    <a *ngIf="data.horses[0]?.finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
                       <span class="text-danger">
                         {{
                         data.horses[0]?.finalAmount
@@ -157,14 +166,13 @@
                         }}
                       </span>
                     </a>
-                    <a *ngIf="data.horses[0]?.finalAmount == 0" class="btn rounded-pill alert pt-2 pb-2 w-100">
+                    <a *ngIf="data.horses[0]?.finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
                       <span class="text-white"> 0 </span>
                     </a>
                   </td>
-                  <td>
+                  <td class="bg-white">
                     <ng-container *ngIf="data.horses[2]">
-                      <a *ngIf="data.horses[2].finalAmount > 0"
-                        class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
+                      <a *ngIf="data.horses[2].finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
                         <span class="text-success">
                           {{
                           data.horses[2]?.finalAmount
@@ -173,8 +181,7 @@
                           }}
                         </span>
                       </a>
-                      <a *ngIf="data.horses[2].finalAmount < 0"
-                        class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
+                      <a *ngIf="data.horses[2].finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
                         <span class="text-danger">
                           {{
                           data.horses[2]?.finalAmount
@@ -183,14 +190,13 @@
                           }}
                         </span>
                       </a>
-                      <a *ngIf="data.horses[2].finalAmount == 0" class="btn rounded-pill alert pt-2 pb-2 w-100">
+                      <a *ngIf="data.horses[2].finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
                         <span class="text-white"> 0 </span>
                       </a>
                     </ng-container>
                   </td>
-                  <td>
-                    <a *ngIf="data.horses[1]?.finalAmount < 0"
-                      class="btn rounded-pill alert alert-danger pt-2 pb-2 w-100">
+                  <td class="bg-white">
+                    <a *ngIf="data.horses[1]?.finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
                       <span class="text-danger">{{
                         data.horses[1]?.finalAmount
                         ? (data.horses[1]?.finalAmount | number: '1.0-0')
@@ -198,8 +204,7 @@
                         }}</span>
                     </a>
 
-                    <a *ngIf="data.horses[1]?.finalAmount > 0"
-                      class="btn rounded-pill alert alert-success pt-2 pb-2 w-100">
+                    <a *ngIf="data.horses[1]?.finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
                       <span class="text-success">{{
                         data.horses[1]?.finalAmount
                         ? (data.horses[1]?.finalAmount | number: '1.0-0')
@@ -207,7 +212,94 @@
                         }}</span>
                     </a>
 
-                    <a *ngIf="data.horses[1]?.finalAmount == 0" class="btn rounded-pill alert pt-2 pb-2 w-100">
+                    <a *ngIf="data.horses[1]?.finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
+                      <span class="text-white">0</span>
+                    </a>
+                  </td>
+
+                  <td>10 Overs RSA (Max Win/Exp.)</td>
+                  <td>
+                    <a (click)="redirectUrlByMarket([data])" class="pointer">
+                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
+                  </td>
+                  <td>
+                    <a (click)="redirectUrlByMarket([data])" class="pointer">
+                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
+                  </td>
+                  <td>
+                    <a (click)="redirectUrlByMarket([data])" class="pointer">
+                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
+                  </td>
+                  <td>
+                    <a (click)="redirectUrlByMarket([data])" class="pointer">
+                      <img src="assets/images/net_expo.png" width="22px" alt="" /></a>
+                  </td>
+                  <td class="bg-white">
+                    <a *ngIf="data.horses[0]?.finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
+                      <span class="text-success">
+                        {{
+                        data.horses[0]?.finalAmount
+                        ? (data.horses[0]?.finalAmount | number: '1.0-0')
+                        : 0
+                        }}
+                      </span>
+                    </a>
+                    <a *ngIf="data.horses[0]?.finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
+                      <span class="text-danger">
+                        {{
+                        data.horses[0]?.finalAmount
+                        ? (data.horses[0]?.finalAmount | number: '1.0-0')
+                        : 0
+                        }}
+                      </span>
+                    </a>
+                    <a *ngIf="data.horses[0]?.finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
+                      <span class="text-white"> 0 </span>
+                    </a>
+                  </td>
+                  <td class="bg-white">
+                    <ng-container *ngIf="data.horses[2]">
+                      <a *ngIf="data.horses[2].finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
+                        <span class="text-success">
+                          {{
+                          data.horses[2]?.finalAmount
+                          ? (data.horses[2]?.finalAmount | number: '1.0-0')
+                          : 0
+                          }}
+                        </span>
+                      </a>
+                      <a *ngIf="data.horses[2].finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
+                        <span class="text-danger">
+                          {{
+                          data.horses[2]?.finalAmount
+                          ? (data.horses[2]?.finalAmount | number: '1.0-0')
+                          : 0
+                          }}
+                        </span>
+                      </a>
+                      <a *ngIf="data.horses[2].finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
+                        <span class="text-white"> 0 </span>
+                      </a>
+                    </ng-container>
+                  </td>
+                  <td class="bg-white">
+                    <a *ngIf="data.horses[1]?.finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
+                      <span class="text-danger">{{
+                        data.horses[1]?.finalAmount
+                        ? (data.horses[1]?.finalAmount | number: '1.0-0')
+                        : 0
+                        }}</span>
+                    </a>
+
+                    <a *ngIf="data.horses[1]?.finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
+                      <span class="text-success">{{
+                        data.horses[1]?.finalAmount
+                        ? (data.horses[1]?.finalAmount | number: '1.0-0')
+                        : 0
+                        }}</span>
+                    </a>
+
+                    <a *ngIf="data.horses[1]?.finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
                       <span class="text-white">0</span>
                     </a>
                   </td>

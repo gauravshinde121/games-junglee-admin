@@ -67,3 +67,7 @@
 .tableRes {
   max-height: 30vh;
 }
+
+.table > :not(caption) > * > * {
+  padding: 2px 5px;
+}

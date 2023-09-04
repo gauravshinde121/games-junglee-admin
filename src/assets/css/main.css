@@ -798,8 +798,8 @@ tfoot tr {
 }
 
 .net-exposure_scroll {
-  overflow: scroll;
-  height: 32vh;
+  overflow: auto;
+  max-height: 32vh;
 }
 
 .marketSetting {

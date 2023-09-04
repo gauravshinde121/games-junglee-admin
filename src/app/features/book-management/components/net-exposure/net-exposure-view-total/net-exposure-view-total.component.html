@@ -5,149 +5,91 @@
         <div class="row">
           <div class="col-md-5">
             <h6>
-              <a routerLink="/book-management/net-exposure"
-                ><i class="fa fa-1x fa-circle-chevron-left"></i
-              ></a>
+              <a routerLink="/book-management/net-exposure"><i class="fa fa-1x fa-circle-chevron-left"></i></a>
               {{ matchName }}
             </h6>
           </div>
           <div class="col-md-4 text-end">
             <p>
               <a class="text-decoration-none text-white">
-                <input
-                  type="radio"
-                  class="radioselected cursor-pointer"
-                  id="html"
-                  
-                  name="fav_language"
-                  value="HTML"
-                  (click)="onFilterChange(true)"
-                /><span class="rounded-pill p-2 m-2">My PT</span>
+                <input type="radio" class="radioselected cursor-pointer" id="html" name="fav_language" value="HTML"
+                  (click)="onFilterChange(true)" /><span class="rounded-pill p-2 m-2">My PT</span>
               </a>
               <a class="text-decoration-none text-white">
-                <input
-                  type="radio"
-                  checked
-                  class="radioselected cursor-pointer"
-                  id="html"
-                  name="fav_language"
-                  value="HTML"
-                  (click)="onFilterChange(false)"
-                /><span class="rounded-pill p-2 m-2">Total Book</span>
+                <input type="radio" checked class="radioselected cursor-pointer" id="html" name="fav_language"
+                  value="HTML" (click)="onFilterChange(false)" /><span class="rounded-pill p-2 m-2">Total Book</span>
               </a>
             </p>
           </div>
           <div class="col-md-3 text-end">
             {{ refreshCount }} &nbsp;
-            <button
-              class="btn btn-pink rounded-pill ps-4 pe-4"
-              (click)="refreshCall()"
-            >
+            <button class="btn btn-pink rounded-pill ps-4 pe-4" (click)="refreshCall()">
               <i class="fa fa-redo-alt disnone"></i> Refresh
             </button>
-            <button
-              class="btn btn-pink rounded-pill ps-4 pe-4 ms-2"
-              (click)="hideShowTV()"
-            >
-              <i [ngClass]="isTVEnable ? 'fa fa-xmark' : 'fa fa-play'"></i
-              >&nbsp;{{ isTVEnable ? "HIDE" : "WATCH" }}
+            <button class="btn btn-pink rounded-pill ps-4 pe-4 ms-2" (click)="hideShowTV()">
+              <i [ngClass]="isTVEnable ? 'fa fa-xmark' : 'fa fa-play'"></i>&nbsp;{{ isTVEnable ? "HIDE" : "WATCH" }}
             </button>
+          </div>
+
+          <div class="col-md-12" *ngIf="liveStreamingTVUrl" id="videoplayer">
+
+            <iframe [src]="
+                  sanitizer.bypassSecurityTrustResourceUrl(liveStreamingTVUrl)
+                " scrolling="no"></iframe>
+
           </div>
         </div>
         <!-- <div class="row">
           <div class="col-md-6"></div>
           
         </div> -->
-        <div class="row">
-          <div class="col-md-4"></div>
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
-            <div *ngIf="liveStreamingTVUrl" id="videoplayer">
-              <iframe
-                [src]="
-                  sanitizer.bypassSecurityTrustResourceUrl(liveStreamingTVUrl)
-                "
-                scrolling="no"
-              ></iframe>
-            </div>
-          </div>
-        </div>
+
         <div class="row">
           <div class="col-md-12 net-exposure_scroll">
-            <div
-              class="accordion"
-              id="accordionExample"
-              *ngFor="let singleAdminBook of adminBooksList; let i = index"
-            >
+            <div class="accordion" id="accordionExample" *ngFor="let singleAdminBook of adminBooksList; let i = index">
               <div class="accordion-item bg-transparent border-0">
                 <h2 class="accordion-header" id="headingOne">
-                  <a
-                    class="text-decoration-none text-white w-100"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
-                  >
-                    <div
-                      class="row"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseOne"
-                      aria-expanded="true"
-                      aria-controls="collapseOne"
-                    >
+                  <a class="text-decoration-none text-white w-100" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <div class="row" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                      aria-controls="collapseOne">
                       <div class="col-md-6">
                         <p class="mt-3 mb-1">
                           <i class="fa fa-minus"></i>
                           <i class="fa fa-plus"></i>
-                          {{ singleAdminBook["marketName"] }} 
+                          {{ singleAdminBook["marketName"] }}
                         </p>
                       </div>
                     </div>
                   </a>
                 </h2>
-                <div
-                  id="collapseOne"
-                  class="accordion-collapse collapse show"
-                  aria-labelledby="headingOne"
-                  data-bs-parent="#accordionExample"
-                >
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample">
                   <div class="accordion-body p-0">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="bg-white border-5 overflow-auto">
                           <table class="table tablematchodds bg-transparent">
                             <tbody>
-                              <ng-container
-                                *ngIf="
+                              <ng-container *ngIf="
                                   singleAdminBook['marketTypName'] ==
                                   'Match Odds'
-                                "
-                              >
-                                <tr
-                                  *ngFor="
+                                ">
+                                <tr *ngFor="
                                     let runner of singleAdminBook['adminBook'];let last = last;let first = first
-                                  "
-                                >
-                                  <td
-                                    class="text-start ps-2 heading border-top"
-                                  >
-                                    <a href=""
-                                      ><strong
-                                        >{{ runner["RunnerName"] }} </strong>
-                                        
-                                        <br />
+                                  ">
+                                  <td class="text-start ps-2 heading border-top">
+                                    <a href=""><strong>{{ runner["RunnerName"] }} </strong>
+
+                                      <br />
                                       <p class="mb-0 mt-1">
-                                        <span
-                                          [ngClass]="
+                                        <span [ngClass]="
                                             runner['amount'] <= 0
                                               ? 'text-danger'
                                               : 'text-success'
-                                          "
-                                          class="text-success"
-                                          ><strong class="exposure-font">{{
+                                          " class="text-success"><strong class="exposure-font">{{
                                             runner["amount"] | number: '1.0-0'
-                                          }}</strong></span
-                                        >
+                                          }}</strong></span>
                                       </p>
                                     </a>
                                   </td>
@@ -155,34 +97,24 @@
                                   singleAdminBook['appMarketStatus'] !=
                                         '3' &&
                                         singleAdminBook['appMarketStatus'] != '9'
-                                    "
-                                    class="colblue"
-                                    [boxHighlight]="runner['back2']"
-                                    [boxHighlight]="runner['vback2']"
-                                  >
-                                    <a
-                                      ><strong>{{ runner["back2"] }}</strong>
+                                    " class="colblue" [boxHighlight]="runner['back2']"
+                                    [boxHighlight]="runner['vback2']">
+                                    <a><strong>{{ runner["back2"] }}</strong>
                                       <br />
                                       <span>{{
                                         runner["vback2"] | marketRateFormater
-                                      }}</span></a
-                                    >
+                                      }}</span></a>
                                   </td>
                                   <td *ngIf="
                                   singleAdminBook['appMarketStatus'] !=
                                         '3' &&
                                         singleAdminBook['appMarketStatus'] != '9'
-                                    "
-                                    class="colblue"
-                                    [boxHighlight]="runner['back1']"
-                                    [boxHighlight]="runner['vback1']"
-                                  >
-                                    <a
-                                      ><strong>{{ runner["back1"] }}</strong>
+                                    " class="colblue" [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']">
+                                    <a><strong>{{ runner["back1"] }}</strong>
                                       <br /><span>{{
                                         runner["vback1"] | marketRateFormater
-                                      }}</span></a
-                                    >
+                                      }}</span></a>
                                   </td>
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
@@ -190,67 +122,44 @@
                                   singleAdminBook['appMarketStatus'] !=
                                         '3' &&
                                         singleAdminBook['appMarketStatus'] != '9'
-                                    "
-                                    class="colblue"
-                                    [boxHighlight]="runner['back0']"
-                                    [boxHighlight]="runner['vback0']"
-                                  >
-                                    <a
-                                      ><strong>{{ runner["back0"] }}</strong>
+                                    " class="colblue" [boxHighlight]="runner['back0']"
+                                    [boxHighlight]="runner['vback0']">
+                                    <a><strong>{{ runner["back0"] }}</strong>
                                       <br /><span>{{
                                         runner["vback0"] | marketRateFormater
-                                      }}</span></a
-                                    >
+                                      }}</span></a>
                                   </td>
                                   <td *ngIf="
                                   singleAdminBook['appMarketStatus'] !=
                                         '3' &&
                                         singleAdminBook['appMarketStatus'] != '9'
-                                    "
-                                    class="colpink"
-                                    [boxHighlight]="runner['lay0']"
-                                    [boxHighlight]="runner['vlay0']"
-                                  >
-                                    <a
-                                      ><strong>{{ runner["lay0"] }}</strong>
+                                    " class="colpink" [boxHighlight]="runner['lay0']" [boxHighlight]="runner['vlay0']">
+                                    <a><strong>{{ runner["lay0"] }}</strong>
                                       <br /><span>{{
                                         runner["vlay0"] | marketRateFormater
-                                      }}</span></a
-                                    >
+                                      }}</span></a>
                                   </td>
 
                                   <td *ngIf="
                                   singleAdminBook['appMarketStatus'] !=
                                         '3' &&
                                         singleAdminBook['appMarketStatus'] != '9'
-                                    "
-                                    class="colpink"
-                                    [boxHighlight]="runner['lay1']"
-                                    [boxHighlight]="runner['vlay1']"
-                                  >
-                                    <a
-                                      ><strong>{{ runner["lay1"] }}</strong>
+                                    " class="colpink" [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']">
+                                    <a><strong>{{ runner["lay1"] }}</strong>
                                       <br /><span>{{
                                         runner["vlay1"] | marketRateFormater
-                                      }}</span></a
-                                    >
+                                      }}</span></a>
                                   </td>
 
                                   <td *ngIf="
                                   singleAdminBook['appMarketStatus'] !=
                                         '3' &&
                                         singleAdminBook['appMarketStatus'] != '9'
-                                    "
-                                    class="colpink"
-                                    [boxHighlight]="runner['lay2']"
-                                    [boxHighlight]="runner['vlay2']"
-                                  >
-                                    <a
-                                      ><strong>{{ runner["lay2"] }}</strong>
+                                    " class="colpink" [boxHighlight]="runner['lay2']" [boxHighlight]="runner['vlay2']">
+                                    <a><strong>{{ runner["lay2"] }}</strong>
                                       <br /><span>{{
                                         runner["vlay2"] | marketRateFormater
-                                      }}</span></a
-                                    >
+                                      }}</span></a>
                                   </td>
                                   <td class="border-top" [ngClass]="{ 'border-top': !first }">
                                     <div class="suspendedbm1" *ngIf="
@@ -258,7 +167,7 @@
                                           '3' ||
                                           singleAdminBook['appMarketStatus'] == '9'
                                       ">
-                                      <button type="button" class="suspendedm1" >
+                                      <button type="button" class="suspendedm1">
                                         {{
                                           singleAdminBook["appMarketStatus"] ==
                                         "3"
@@ -270,36 +179,26 @@
                                   </td>
                                 </tr>
                               </ng-container>
-                              <ng-container
-                                *ngIf="
+                              <ng-container *ngIf="
                                   singleAdminBook['marketTypName'] ==
                                   'Bookmaker'
-                                "
-                              >
-                                <tr
-                                  *ngFor="
+                                ">
+                                <tr *ngFor="
                                     let runner of singleAdminBook['adminBook'];let last = last;let first = first
-                                  "
-                                >
-                                  <td
-                                    class="text-start ps-2 heading border-top"
-                                  >
-                                    <a
-                                      ><strong>{{
+                                  ">
+                                  <td class="text-start ps-2 heading border-top">
+                                    <a><strong>{{
                                         runner["RunnerName"]
                                       }}</strong>
                                       <br />
-                                      <span
-                                        [ngClass]="
+                                      <span [ngClass]="
                                           runner['amount'] <= 0
                                             ? 'text-danger'
                                             : 'text-success'
-                                        "
-                                        >
+                                        ">
                                         <strong class="exposure-font">{{
                                           runner["amount"] | number: '1.0-0'
-                                        }}</strong></span
-                                      >
+                                        }}</strong></span>
                                     </a>
                                   </td>
                                   <td class="border-top">
@@ -314,33 +213,24 @@
                                   singleAdminBook['appMarketStatus'] !=
                                         '3' &&
                                         singleAdminBook['appMarketStatus'] != '9'
-                                    "
-                                    class="colblue"
-                                    [boxHighlight]="runner['back1']"
-                                    [boxHighlight]="runner['vback1']"
-                                  >
-                                    <a
-                                      ><strong *ngIf='runner["back1"]'>{{ (runner["back1"]-1)*100 | number: '1.0-0' }}</strong>
+                                    " class="colblue" [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']">
+                                    <a><strong
+                                        *ngIf='runner["back1"]'>{{ (runner["back1"]-1)*100 | number: '1.0-0' }}</strong>
                                       <br /><span *ngIf='runner["vback1"]'>{{
                                         runner["vback1"] | marketRateFormater
-                                      }}</span></a
-                                    >
+                                      }}</span></a>
                                   </td>
                                   <td *ngIf="
                                   singleAdminBook['appMarketStatus'] !=
                                         '3' &&
                                         singleAdminBook['appMarketStatus'] != '9'
-                                    "
-                                    class="colpink"
-                                    [boxHighlight]="runner['lay1']"
-                                    [boxHighlight]="runner['vlay1']"
-                                  >
-                                    <a
-                                      ><strong *ngIf='runner["lay1"]'>{{ (runner["lay1"]-1)*100 | number: '1.0-0'}}</strong>
+                                    " class="colpink" [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']">
+                                    <a><strong
+                                        *ngIf='runner["lay1"]'>{{ (runner["lay1"]-1)*100 | number: '1.0-0'}}</strong>
                                       <br /><span *ngIf='runner["vlay1"]'>{{
                                         runner["vlay1"] | marketRateFormater
-                                      }}</span></a
-                                    >
+                                      }}</span></a>
                                   </td>
                                   <td class="border-top" [ngClass]="{ 'border-top': !first }">
                                     <div class="suspendedbm1" *ngIf="
@@ -348,7 +238,7 @@
                                           '3' ||
                                           singleAdminBook['appMarketStatus'] == '9'
                                       ">
-                                      <button type="button" class="suspendedm1" >
+                                      <button type="button" class="suspendedm1">
                                         {{
                                           singleAdminBook["appMarketStatus"] ==
                                         "3"
@@ -358,40 +248,29 @@
                                       </button>
                                     </div>
                                   </td>
-                                 
+
                                 </tr>
                               </ng-container>
-                              
-                              <ng-container
-                                *ngIf="
-                                  singleAdminBook['marketTypName'] == 'Fancy'
-                                "
-                              >
 
-                                <tr
-                                  *ngFor="
+                              <ng-container *ngIf="
+                                  singleAdminBook['marketTypName'] == 'Fancy'
+                                ">
+
+                                <tr *ngFor="
                                     let runner of singleAdminBook['adminBook'];let last = last;let first = first
-                                  "
-                                >
-                                  <td
-                                    class="text-start ps-2 heading border-top"
-                                  >
-                                    <a
-                                      ><strong
-                                        >{{ runner["RunnerName"] }}</strong
-                                      ><br /><br>
-                                      <span
-                                        [ngClass]="
+                                  ">
+                                  <td class="text-start ps-2 heading border-top">
+                                    <a><strong>{{ runner["RunnerName"] }}</strong><br /><br>
+                                      <span [ngClass]="
                                           runner['amount'] <= 0
                                             ? 'text-danger'
                                             : 'text-success'
-                                        "
-                                        >
+                                        ">
                                         <strong class="exposure-font"> {{
                                           runner["amount"] | number: '1.0-0'
                                         }}</strong>
                                       </span>
-                                      
+
                                     </a>
                                   </td>
                                   <td>
@@ -402,12 +281,11 @@
                                   </td>
                                   <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
                                     <a data-bs-toggle="modal" href="#exampleModalToggle" role="button"
-                                      class="laddericon"  (click)="
+                                      class="laddericon" (click)="
                                         getLadderDataByMarket(
                                           singleAdminBook['marketId']
                                         )
-                                      "
-                                      >
+                                      ">
                                       <img src="/assets/images/ladder-icon.png" width="10px" />
                                     </a>
                                   </td>
@@ -418,33 +296,22 @@
                                   singleAdminBook['appMarketStatus'] !=
                                         '3' &&
                                         singleAdminBook['appMarketStatus'] != '9'
-                                    "
-                                    class="colpink"
-                                    [boxHighlight]="runner['lay1']"
-                                    [boxHighlight]="runner['vlay1']"
-                                  >
-                                    <a
-                                      ><strong>{{ runner["lay1"] }}</strong>
+                                    " class="colpink" [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']">
+                                    <a><strong>{{ runner["lay1"] }}</strong>
                                       <br />{{
                                         runner["vlay1"] | marketRateFormater
-                                      }}</a
-                                    >
+                                      }}</a>
                                   </td>
                                   <td *ngIf="
                                   singleAdminBook['appMarketStatus'] !=
                                         '3' &&
                                         singleAdminBook['appMarketStatus'] != '9'
-                                    "
-                                    class="colblue"
-                                    [boxHighlight]="runner['back1']"
-                                    [boxHighlight]="runner['vback1']"
-                                  >
-                                    <a
-                                      ><strong>{{ runner["back1"] }}</strong>
+                                    " class="colblue" [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']">
+                                    <a><strong>{{ runner["back1"] }}</strong>
                                       <br />{{
                                         runner["vback1"] | marketRateFormater
-                                      }}</a
-                                    >
+                                      }}</a>
                                   </td>
 
                                   <td class="border-top" [ngClass]="{ 'border-top': !first }">
@@ -453,7 +320,7 @@
                                           '3' ||
                                           singleAdminBook['appMarketStatus'] == '9'
                                       ">
-                                      <button type="button" class="suspendedm1" >
+                                      <button type="button" class="suspendedm1">
                                         {{
                                           singleAdminBook["appMarketStatus"] ==
                                         "3"
@@ -463,8 +330,8 @@
                                       </button>
                                     </div>
                                   </td>
-                                  </tr
-                              ></ng-container>
+                                </tr>
+                              </ng-container>
                             </tbody>
                           </table>
                         </div>
@@ -483,83 +350,51 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr
-                                *ngFor="
+                              <tr *ngFor="
                                   let userBook of singleAdminBook['userBook']
-                                "
-                              >
+                                ">
                                 <td class="border-top">
                                   <strong> {{ userBook["username"] }}</strong>
                                 </td>
                                 <td class="border-top" style="cursor: pointer;">
-                                  <img
-                                    src="/assets/images/net_expo.png"
-                                    width="12"
-                                    (click)="
+                                  <img src="/assets/images/net_expo.png" width="12" (click)="
                                       getTotalBookViewTotal(
                                         singleAdminBook['marketId'],
                                         singleAdminBook['isTotaltotalBookView']
                                       )
-                                    "
-                                  />
+                                    " />
                                 </td>
                                 <td class="border-top">
                                   <strong>{{ userBook["stake"] }}</strong>
                                 </td>
                                 <td class="border-top">
-                                  <strong
-                                    class="text-success"
-                                    *ngIf="userBook['runner1'] > 0"
-                                    >{{
+                                  <strong class="text-success" *ngIf="userBook['runner1'] > 0">{{
                                       userBook["runner1"] | number: '1.0-0'
-                                    }}</strong
-                                  >
-                                  <strong
-                                    class="text-danger"
-                                    *ngIf="userBook['runner1'] <= 0"
-                                    >{{
+                                    }}</strong>
+                                  <strong class="text-danger" *ngIf="userBook['runner1'] <= 0">{{
                                       userBook["runner1"] | number: '1.0-0'
-                                    }}</strong
-                                  >
+                                    }}</strong>
                                 </td>
                                 <td class="border-top">
-                                  <strong
-                                    class="text-success"
-                                    *ngIf="userBook['runner3'] > 0"
-                                    >{{
+                                  <strong class="text-success" *ngIf="userBook['runner3'] > 0">{{
                                       userBook["runner3"] | number: '1.0-0'
-                                    }}</strong
-                                  >
-                                  <strong
-                                    class="text-danger"
-                                    *ngIf="userBook['runner3'] <= 0"
-                                    >{{
+                                    }}</strong>
+                                  <strong class="text-danger" *ngIf="userBook['runner3'] <= 0">{{
                                       userBook["runner3"] | number: '1.0-0'
-                                    }}</strong
-                                  >
+                                    }}</strong>
                                 </td>
                                 <td class="border-top">
-                                  <strong
-                                    class="text-success"
-                                    *ngIf="userBook['runner2'] > 0"
-                                    >{{
+                                  <strong class="text-success" *ngIf="userBook['runner2'] > 0">{{
                                       userBook["runner2"] | number: '1.0-0'
-                                    }}</strong
-                                  >
-                                  <strong
-                                    class="text-danger"
-                                    *ngIf="userBook['runner2'] <= 0"
-                                    >{{
+                                    }}</strong>
+                                  <strong class="text-danger" *ngIf="userBook['runner2'] <= 0">{{
                                       userBook["runner2"] | number: '1.0-0'
-                                    }}</strong
-                                  >
+                                    }}</strong>
                                 </td>
                               </tr>
-                              <tr
-                                *ngFor="
+                              <tr *ngFor="
                                   let totalBook of singleAdminBook['totalBook']
-                                "
-                              >
+                                ">
                                 <td class="border-top">
                                   {{ totalBook["username"] }}
                                 </td>
@@ -568,52 +403,28 @@
                                   <strong>{{ totalBook["stake"] }}</strong>
                                 </td>
                                 <td class="border-top">
-                                  <strong
-                                    class="text-success"
-                                    *ngIf="totalBook['runner1'] > 0"
-                                    >{{
+                                  <strong class="text-success" *ngIf="totalBook['runner1'] > 0">{{
                                       totalBook["runner1"] | number: '1.0-0'
-                                    }}</strong
-                                  >
-                                  <strong
-                                    class="text-danger"
-                                    *ngIf="totalBook['runner1'] <= 0"
-                                    >{{
+                                    }}</strong>
+                                  <strong class="text-danger" *ngIf="totalBook['runner1'] <= 0">{{
                                       totalBook["runner1"] | number: '1.0-0'
-                                    }}</strong
-                                  >
+                                    }}</strong>
                                 </td>
                                 <td class="border-top">
-                                  <strong
-                                    class="text-success"
-                                    *ngIf="totalBook['runner3'] > 0"
-                                    >{{
+                                  <strong class="text-success" *ngIf="totalBook['runner3'] > 0">{{
                                       totalBook["runner3"] | number: '1.0-0'
-                                    }}</strong
-                                  >
-                                  <strong
-                                    class="text-danger"
-                                    *ngIf="totalBook['runner3'] <= 0"
-                                    >{{
+                                    }}</strong>
+                                  <strong class="text-danger" *ngIf="totalBook['runner3'] <= 0">{{
                                       totalBook["runner3"] | number: '1.0-0'
-                                    }}</strong
-                                  >
+                                    }}</strong>
                                 </td>
                                 <td class="border-top">
-                                  <strong
-                                    class="text-success"
-                                    *ngIf="totalBook['runner2'] > 0"
-                                    >{{
+                                  <strong class="text-success" *ngIf="totalBook['runner2'] > 0">{{
                                       totalBook["runner2"] | number: '1.0-0'
-                                    }}</strong
-                                  >
-                                  <strong
-                                    class="text-danger"
-                                    *ngIf="totalBook['runner2'] <= 0"
-                                    >{{
+                                    }}</strong>
+                                  <strong class="text-danger" *ngIf="totalBook['runner2'] <= 0">{{
                                       totalBook["runner2"] | number: '1.0-0'
-                                    }}</strong
-                                  >
+                                    }}</strong>
                                 </td>
                               </tr>
                             </tbody>
@@ -632,100 +443,86 @@
   </section>
 
   <section class="section gamedetails mt-3 mb-3">
-    <input
-      type="text"
-      class="form-control bg-dark text-white radius-left-tb border-pink radius-right-tb"
-      placeholder="Search Member Name"
-      aria-label="Search"
-      aria-describedby="addon-wrapping"
-      [(ngModel)]="searchTerm"
-      (ngModelChange)="search()"
-    />
     <div class="col-md-12 mt-1 mb-1">
       <div class="row">
         <div class="col-md-6">
-          <button
-            *ngIf="viewTotal.length > 0"
-            type="button"
-            class="btn btn-pink rounded-pill ms-2 text-white"
-            (click)="exportExcel()"
-          >
+          <input type="text" class="form-control bg-dark text-white radius-left-tb border-pink radius-right-tb"
+            placeholder="Search Member Name" aria-label="Search" aria-describedby="addon-wrapping"
+            [(ngModel)]="searchTerm" (ngModelChange)="search()" />
+        </div>
+        <div class="col-md-6 text-end">
+          <button *ngIf="viewTotal.length > 0" type="button" class="btn btn-pink rounded-pill ms-2 text-white"
+            (click)="exportExcel()">
             Export
           </button>
+          Bet Count : {{ viewTotal.length }}
         </div>
-        <div class="col-md-6 text-end">Bet Count : {{ viewTotal.length }}</div>
+        <!-- <div class="col-md-3 text-end"></div> -->
       </div>
     </div>
     <div class="col-md-12 ">
       <div class="table-responsive tableRes tableFixHead">
-      <table class="table tableall m-0">
-        <thead>
-          <tr>
-            <th scope="col" class="first">#</th>
-            <th scope="col">Member</th>
-            <th scope="col">Place time</th>
-            <th scope="col-2">Events</th>
-            <th scope="col">Market</th>
-            <th scope="col">Selection</th>
-            <th scope="col">Odds Placed</th>
-            <th scope="col">Odds Matched</th>
-            <th scope="col">Matched</th>
-            <th scope="col">Unmatched</th>
-            <th scope="col">Profit/Liability</th>
-            <th scope="col" class="last text-center">IP</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let viewTotalEach of viewTotal; let i = index">
-            <td class="col">{{ i + 1 }}</td>
-            <td class="col">{{ viewTotalEach.userName }}</td>
-            <td class="col">
-              {{ viewTotalEach.placedDate | date : "mediumTime" }}
-            </td>
-            <td class="col">{{ viewTotalEach.event | truncate : 33 }}</td>
-            <td class="col">
-              <span
-                *ngIf="!viewTotalEach.isBack"
-                class="border bg-danger text-danger border-danger me-2 border-3"
-              ></span>
-              <span
-                *ngIf="viewTotalEach.isBack"
-                class="border bg-primary text-primary border-primary me-2 border-3"
-              ></span>
-              {{ viewTotalEach.marketName }}
-            </td>
-            <td class="col">{{ viewTotalEach.selectionName }}</td>
-            <td class="col">{{ viewTotalEach.placedOdds }}</td>
-            <td class="col">{{ viewTotalEach.betRate }}</td>
-            <td class="col">
-              <ng-container *ngIf="viewTotalEach.isMatched; else notMatched">
-                {{ viewTotalEach.stake }}
-              </ng-container>
-              <ng-template #notMatched> -- </ng-template>
-            </td>
-            <td class="col">
-              <ng-container *ngIf="!viewTotalEach.isMatched; else notMatched">
-                {{ viewTotalEach.stake }}
-              </ng-container>
-              <ng-template #notMatched> -- </ng-template>
-            </td>
-            <td
-              class="col"
-              [ngClass]="viewTotalEach.isBack ? 'text-danger' : 'text-success'"
-            >
-              <strong>{{ viewTotalEach.profitLiability }}</strong>
-            </td>
-            <td class="col tooltipnk">
-              <i class="fa-sharp fa-solid fa-info"></i>
-              <span class="tooltiptext px-5 w-auto">
-                <small>{{ viewTotalEach.IP }}</small>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <table class="table tableall m-0">
+          <thead>
+            <tr>
+              <th scope="col" class="first">#</th>
+              <th scope="col">Member</th>
+              <th scope="col">Place time</th>
+              <th scope="col-2">Events</th>
+              <th scope="col">Market</th>
+              <th scope="col">Selection</th>
+              <th scope="col">Odds Placed</th>
+              <th scope="col">Odds Matched</th>
+              <th scope="col">Matched</th>
+              <th scope="col">Unmatched</th>
+              <th scope="col">Profit/Liability</th>
+              <th scope="col" class="last text-center">IP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let viewTotalEach of viewTotal; let i = index">
+              <td class="col">{{ i + 1 }}</td>
+              <td class="col">{{ viewTotalEach.userName }}</td>
+              <td class="col">
+                {{ viewTotalEach.placedDate | date : "mediumTime" }}
+              </td>
+              <td class="col">{{ viewTotalEach.event | truncate : 33 }}</td>
+              <td class="col">
+                <span *ngIf="!viewTotalEach.isBack"
+                  class="border bg-danger text-danger border-danger me-2 border-3"></span>
+                <span *ngIf="viewTotalEach.isBack"
+                  class="border bg-primary text-primary border-primary me-2 border-3"></span>
+                {{ viewTotalEach.marketName }}
+              </td>
+              <td class="col">{{ viewTotalEach.selectionName }}</td>
+              <td class="col">{{ viewTotalEach.placedOdds }}</td>
+              <td class="col">{{ viewTotalEach.betRate }}</td>
+              <td class="col">
+                <ng-container *ngIf="viewTotalEach.isMatched; else notMatched">
+                  {{ viewTotalEach.stake }}
+                </ng-container>
+                <ng-template #notMatched> -- </ng-template>
+              </td>
+              <td class="col">
+                <ng-container *ngIf="!viewTotalEach.isMatched; else notMatched">
+                  {{ viewTotalEach.stake }}
+                </ng-container>
+                <ng-template #notMatched> -- </ng-template>
+              </td>
+              <td class="col" [ngClass]="viewTotalEach.isBack ? 'text-danger' : 'text-success'">
+                <strong>{{ viewTotalEach.profitLiability }}</strong>
+              </td>
+              <td class="col tooltipnk">
+                <i class="fa-sharp fa-solid fa-info"></i>
+                <span class="tooltiptext px-5 w-auto">
+                  <small>{{ viewTotalEach.IP }}</small>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
   </section>
 
   <!-- <div *ngIf="viewTotal.length == 0" class="border text-center p-5">
@@ -735,21 +532,12 @@
   <div class="row">
     <div class="col-md-12">
       <div *ngIf="viewTotal.length > 0">
-        <button
-          class="btn rounded-pill text-white"
-          [disabled]="currentPage === 1"
-          (click)="prev()"
-        >
+        <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
           Prev
         </button>
-        <span class="btn btn-pink rounded-pill ps-4 pe-4"
-          >{{ currentPage }} / {{ totalPages }}
+        <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
         </span>
-        <button
-          class="btn rounded-pill text-white"
-          [disabled]="currentPage === totalPages"
-          (click)="next()"
-        >
+        <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
           Next
         </button>
       </div>

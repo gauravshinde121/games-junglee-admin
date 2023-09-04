@@ -49,7 +49,7 @@ export class NetExposureComponent implements OnInit {
 
     this.resetTimerInterval = setInterval(() => {
       if (this.refreshCount == 0) {
-        this.refreshCall();
+        // this.refreshCall();
         this.refreshCount = 9;
       }
       this.refreshCount--;
@@ -90,13 +90,13 @@ export class NetExposureComponent implements OnInit {
     this._bookManagementService._getBookForBackendApi(body).subscribe((res: any) => {
       this.bookObj = [];
 
-      if(res.booksForBackend) {
+      if (res.booksForBackend) {
         for (let book of res.booksForBackend) {
           this.bookObj.push({
-                matchName : book.matchName,
-                leftMarkets : book.data.filter(b=>b.fancyFlag == false),
-                rightMarkets : book.data.filter(b=>b.fancyFlag == true)
-          }); 
+            matchName: book.matchName,
+            leftMarkets: book.data.filter(b => b.fancyFlag == false),
+            rightMarkets: book.data.filter(b => b.fancyFlag == true)
+          });
         }
       }
 
@@ -150,7 +150,7 @@ export class NetExposureComponent implements OnInit {
       sportId: this.currentSportId,
       myPT: this.MyPT
     }
-    
+
     this._bookManagementService._getBookForBackendApi(body).subscribe((res: any) => {
       // this.alterData(res);
 
@@ -169,15 +169,15 @@ export class NetExposureComponent implements OnInit {
       //   }
       // }
 
-      if(res.booksForBackend) {
+      if (res.booksForBackend) {
         for (let book of res.booksForBackend) {
           this.bookObj.push({
-                matchName : book.matchName,
-                leftMarkets : book.data.filter(b=>b.fancyFlag == false),
-                rightMarkets : book.data.filter(b=>b.fancyFlag == true)
+            matchName: book.matchName,
+            leftMarkets: book.data.filter(b => b.fancyFlag == false),
+            rightMarkets: book.data.filter(b => b.fancyFlag == true)
           })
 
-          
+
         }
       }
 
@@ -248,9 +248,9 @@ export class NetExposureComponent implements OnInit {
     clearInterval(this.resetTimerInterval)
   }
 
-  getViewTotal(book){
-      const market = book.leftMarkets.concat(book.rightMarkets);
-      this.redirectUrlByMarket(market);
+  getViewTotal(book) {
+    const market = book.leftMarkets.concat(book.rightMarkets);
+    this.redirectUrlByMarket(market);
   }
 
 }

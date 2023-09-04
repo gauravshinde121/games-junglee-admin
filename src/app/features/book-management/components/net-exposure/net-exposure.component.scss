@@ -2,6 +2,9 @@
   cursor: pointer;
 }
 
+tbody {
+  border-bottom: 4px solid #000;
+}
 .align_thead thead tr th:nth-child(1) {
   font-size: 14px;
 }
@@ -14,17 +17,18 @@
   letter-spacing: 1px;
 }
 
-.align_thead thead tr th:nth-child(2),
-.align_thead thead tr th:nth-child(3),
-.align_thead thead tr th:nth-child(4),
-.align_thead thead tr th:nth-child(5),
-.align_thead thead tr th:nth-child(6),
-.align_thead tbody tr td:nth-child(2),
-.align_thead tbody tr td:nth-child(3) .align_thead tbody tr td:nth-child(4),
-.align_thead tbody tr td:nth-child(5),
-.align_thead tbody tr td:nth-child(6) {
+// .align_thead thead tr th:nth-child(2),
+// .align_thead thead tr th:nth-child(3),
+// .align_thead thead tr th:nth-child(4),
+// .align_thead thead tr th:nth-child(5),
+// .align_thead thead tr th:nth-child(6),
+// .align_thead tbody tr td:nth-child(2),
+// .align_thead tbody tr td:nth-child(3) .align_thead tbody tr td:nth-child(4),
+// .align_thead tbody tr td:nth-child(5),
+// .align_thead tbody tr td:nth-child(6),
+.align_thead thead tr th {
   text-align: center;
-  width: 9rem;
+  // width: 9rem;
 }
 
 .align_thead tbody tr td {
@@ -35,13 +39,29 @@
   margin: 0;
   font-size: 12px;
   font-weight: 600;
+  border-radius: 0;
 }
 
-.bookmatch th:nth-child(1) {
+// .bookmatch th:nth-child(1) {
+//   width: 20rem;
+// }
+
+th {
   width: 20rem;
+  padding: 2px 5px;
 }
 
-.table > :not(caption) > * > * {
-  padding: 5px 10px !important;
- 
+// .table > :not(caption) > * > * {
+//   padding: 5px 10px !important;
+// }
+
+td {
+  padding: 0 !important;
+  border-bottom: none;
+  text-align: center;
+}
+
+.netExposure .text-danger,
+.netExposure .text-success {
+  font-weight: 600;
 }

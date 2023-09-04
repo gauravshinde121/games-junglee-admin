@@ -57,10 +57,10 @@ export class NetExposureComponent implements OnInit {
   }
 
   refreshCall() {
-    var myPTonRefresh:any;
-    if(this.filterForm.value.selectedType == 'TotalBook'){
+    var myPTonRefresh: any;
+    if (this.filterForm.value.selectedType == 'TotalBook') {
       myPTonRefresh = false;
-    } else if(this.filterForm.value.selectedType == 'MyPT'){
+    } else if (this.filterForm.value.selectedType == 'MyPT') {
       myPTonRefresh = true;
     }
     this.onFilterChange({ selectedType: this.filterForm.value.selectedType, matchId: this.currentMatchId, sportId: this.currentSportId, clicked: this.currentClicked, refreshCallVar: true });
@@ -140,11 +140,11 @@ export class NetExposureComponent implements OnInit {
     this._bookManagementService._getBookForBackendApi(body).subscribe((res: any) => {
       // this.alterData(res);
 
-      if(res.booksForBackend){
-        for(const book of res.booksForBackend){
-           book.data.forEach(d=>{
-            let amounts:any = [];
-            d.horses.forEach(h=>{
+      if (res.booksForBackend) {
+        for (const book of res.booksForBackend) {
+          book.data.forEach(d => {
+            let amounts: any = [];
+            d.horses.forEach(h => {
               amounts.push(h.finalAmount)
             })
             let lowestVal = Math.min(...amounts);

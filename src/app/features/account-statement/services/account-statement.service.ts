@@ -45,4 +45,8 @@ export class AccountStatementService {
   _getDownlineAccountsData(paramObj){
     return this._apiHttpService.post(this._apiEndpointsService.getDownlineAccountsDataEndpoint(),paramObj)
   }
+
+  _getAdminAccountStatement(paramObj){
+    return this._apiHttpService.post(this._apiEndpointsService.getAdminAccountStatementEndpoint(),paramObj)
+  }
 }

@@ -436,4 +436,7 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_GET_CASINO_PROVIDER)
   }
 
+  public getAdminAccountStatementEndpoint(){
+    return this.createUrl(this._constants.API_GET_ADMIN_ACCOUNT_STATEMENT)
+  }
 }

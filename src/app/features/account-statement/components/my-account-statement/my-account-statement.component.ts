@@ -37,7 +37,8 @@ export class MyAccountStatementComponent implements OnInit {
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
   allMembers: any = [];
-  memberId
+  memberId;
+  limit: number = 25;
 
   constructor(
     private _accountStatementService: AccountStatementService,
@@ -202,20 +203,17 @@ export class MyAccountStatementComponent implements OnInit {
     let body = {
       fromDate:fromDate,
       toDate:toDate,
-      sportId: null,
-      matchId: null,
-      marketId : null,
-      pageNo: this.currentPage,
-      limit: 50,
+      userId : null
     };
 
-    this._accountStatementService._getPlBySubgameAPi(body).subscribe((res: any) => {
+    debugger;
+    this._accountStatementService._getAdminAccountStatement(body).subscribe((res: any) => {
       this.isLoading = false;
-      // if (res.admin.finalResult.length > 0) {
-        this.plStatement = res.admin.finalResult;
-        this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
-      // }
-      //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
+      if (res.accountStatement.length > 0) {
+        this.plStatement = res.accountStatement;
+        this.totalPages = Math.ceil(res.totalRecords / this.pageSize);
+      }
+      // this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     },(err)=>{
       console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
@@ -261,14 +259,10 @@ export class MyAccountStatementComponent implements OnInit {
     let payload = {
       fromDate:fromDate,
       toDate:toDate,
-      sportId: this.filterForm.value.sportsId,
-      matchId: this.filterForm.value.matchId,
-      marketId: this.filterForm.value.marketId,
-      pageNo: this.currentPage,
-      limit: 50,
+      userId : this.filterForm.value.memberId
     };
 
-    this._accountStatementService._getPlBySubgameAPi(payload).subscribe((res: any) => {
+    this._accountStatementService._getAdminAccountStatement(payload).subscribe((res: any) => {
       this.isLoading = false;
       // if (res.admin.finalResult.length > 0) {
         this.plStatement = res.admin.finalResult;

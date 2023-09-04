@@ -124,5 +124,9 @@ export class Constants {
     public readonly API_GET_CASINO_PROVIDER:string = 'api/junglee-admin/getMemberWiseCasinoProviderList';
 
     public readonly API_GET_BANK_USERS: string = 'api/junglee-admin/getBankUsers';
+
+    public readonly API_GET_ADMIN_ACCOUNT_STATEMENT: string = 'api/junglee-admin/getAdminAccountStatement';
+
+    
  
 }

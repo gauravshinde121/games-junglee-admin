@@ -301,7 +301,7 @@
             </table>
           </div> -->
 
-          <div class="col-md-6">
+          <div class="col-md-6" *ngIf="bookObj.length != 0">
             <div class="row">
               <div class="col-4"></div>
               <div class="col">
@@ -314,70 +314,78 @@
               <div class="col">2</div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6"  *ngIf="bookObj.length != 0">
             <div class="row">
               <div class="col-4"></div>
               <div class="col"></div>
 
               <div class="col">Stake</div>
-              <div class="col">Over/Yes</div>
-              <div class="col">Under/No</div>
+              <div class="col">Win</div>
+              <div class="col">Lose</div>
             </div>
           </div>
 
-          <div class="col-md-12 " *ngFor="let book of booksForBackend">
+          <div class="col-md-12 " *ngFor="let book of bookObj">
 
 
-            <div class="row mb-1" *ngFor="let data of book.data">
+            <!-- <div class="row mb-1" *ngFor="let data of book.data"> -->
               <div class="col-md-12 bg-pink">
                 <span>{{ book.matchName }}</span>
+                <a class="m-5 btn-warning rounded-pill" (click)="getViewTotal(book)">View total</a>
               </div>
+              <!-- <div class="col-md-2">
+                <a class="">View total</a>
+              </div> -->
               <div class="col-md-6">
-                <div class="row">
-                  <div class="col-4">Match ODDS</div>
+                <div class="row" *ngFor="let market of book.leftMarkets">
+                  <div class="col-4">{{market.marketName}}</div>
                   <div class="col">
-                    <a (click)="redirectUrlByMarket([data])" class="pointer">
+                    
+                    <a (click)="redirectUrlByMarket([market])" class="pointer">
                       <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
                   </div>
                   <div class="col"></div>
                   <div class="col"></div>
-                  <div class="col bg-white text-danger">-1000</div>
-                  <div class="col bg-white text-danger">110</div>
-                  <div class="col bg-white text-danger">-</div>
-                  <div class="col bg-white text-success">200</div>
+                  <div class="col bg-white text-dark">{{market.totalStakes}}</div>
+                  <div class="col bg-white " [ngClass]="market.horses[0]?.finalAmount > 0 ? 'text-success' : 'text-danger'">{{market.horses[0]?.finalAmount}}</div>
+                  <div class="col bg-white " [ngClass]="market.horses[2]?.finalAmount > 0 ? 'text-success' : 'text-danger'">{{market.horses[2]?.finalAmount}}</div>
+                  <div class="col bg-white " [ngClass]="market.horses[1]?.finalAmount > 0 ? 'text-success' : 'text-danger'">{{market.horses[1]?.finalAmount}}</div>
                 </div>
               </div>
-              <div class="col-md-6">
+
+              <div class="col-md-6" *ngFor="let market of book.rightMarkets">
                 <div class="row">
-                  <div class="col-4"></div>
+                  <div class="col-4">{{market.marketName}}</div>
                   <div class="col">
                     <ul class="list-inline d-flex m-0">
                       <li>
-                        <a (click)="redirectUrlByMarket([data])" class="pointer">
+                        <!-- (click)="redirectUrlByMarket([data])" -->
+                        <a (click)="redirectUrlByMarket([market])"  class="pointer">
+                          <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
+                      </li>
+                      <!-- <li>
+                        <a (click)="redirectUrlByMarket(market)" class="pointer">
                           <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
                       </li>
                       <li>
-                        <a (click)="redirectUrlByMarket([data])" class="pointer">
+                        <a  class="pointer">
                           <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
                       </li>
                       <li>
-                        <a (click)="redirectUrlByMarket([data])" class="pointer">
+                        <a  class="pointer">
                           <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
-                      </li>
-                      <li>
-                        <a (click)="redirectUrlByMarket([data])" class="pointer">
-                          <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
-                      </li>
+                      </li> -->
                     </ul>
 
                   </div>
 
-                  <div class="col bg-white text-danger">-110</div>
-                  <div class="col bg-white text-danger">-</div>
-                  <div class="col bg-white text-success">200</div>
+                  <div class="col bg-white text-dark">{{market.totalStakes}}</div>
+                  <div class="col bg-white" [ngClass]="market.maxWin >= 0 ? 'text-success' : 'text-danger'">{{market.maxWin}}</div>
+                  <div class="col bg-white text-danger">{{market.netExposure}}</div>
                 </div>
               </div>
-            </div>
+            <!-- </div> -->
+
           </div>
         </div>
       </div>

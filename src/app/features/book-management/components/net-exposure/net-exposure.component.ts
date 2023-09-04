@@ -28,6 +28,7 @@ export class NetExposureComponent implements OnInit {
   loggedInUser: any;
   refreshCount: number = 8;
   resetTimerInterval: any;
+  bookObj: any = [];
 
   constructor(
     private _bookManagementService: BookManagementService,
@@ -87,7 +88,20 @@ export class NetExposureComponent implements OnInit {
       myPT: this.MyPT
     }
     this._bookManagementService._getBookForBackendApi(body).subscribe((res: any) => {
-      this.alterData(res);
+      this.bookObj = [];
+
+      if(res.booksForBackend) {
+        for (let book of res.booksForBackend) {
+          this.bookObj.push({
+                matchName : book.matchName,
+                leftMarkets : book.data.filter(b=>b.fancyFlag == false),
+                rightMarkets : book.data.filter(b=>b.fancyFlag == true)
+          }); 
+        }
+      }
+
+      // this.alterData(res);
+
     })
   }
 
@@ -136,22 +150,38 @@ export class NetExposureComponent implements OnInit {
       sportId: this.currentSportId,
       myPT: this.MyPT
     }
-
+    
     this._bookManagementService._getBookForBackendApi(body).subscribe((res: any) => {
       // this.alterData(res);
 
-      if (res.booksForBackend) {
-        for (const book of res.booksForBackend) {
-          book.data.forEach(d => {
-            let amounts: any = [];
-            d.horses.forEach(h => {
-              amounts.push(h.finalAmount)
-            })
-            let lowestVal = Math.min(...amounts);
-            d.netExposure = lowestVal;
+      this.bookObj = [];
+
+      // if (res.booksForBackend) {
+      //   for (const book of res.booksForBackend) {
+      //     book.data.forEach(d => {
+      //       let amounts: any = [];
+      //       d.horses.forEach(h => {
+      //         amounts.push(h.finalAmount)
+      //       })
+      //       let lowestVal = Math.min(...amounts);
+      //       d.netExposure = lowestVal;
+      //     })
+      //   }
+      // }
+
+      if(res.booksForBackend) {
+        for (let book of res.booksForBackend) {
+          this.bookObj.push({
+                matchName : book.matchName,
+                leftMarkets : book.data.filter(b=>b.fancyFlag == false),
+                rightMarkets : book.data.filter(b=>b.fancyFlag == true)
           })
+
+          
         }
       }
+
+
 
       this.booksForBackend = res.booksForBackend;
       this.isLoading = false;
@@ -216,6 +246,11 @@ export class NetExposureComponent implements OnInit {
   ngOnDestroy(): void {
     if (this.realDataWebSocket) this.realDataWebSocket.complete();
     clearInterval(this.resetTimerInterval)
+  }
+
+  getViewTotal(book){
+      const market = book.leftMarkets.concat(book.rightMarkets);
+      this.redirectUrlByMarket(market);
   }
 
 }

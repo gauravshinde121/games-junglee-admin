@@ -54,6 +54,7 @@ export class AppSettingsComponent implements OnInit {
       "settingObj":this.settingObj,
       "clientId": this.clientId
     }
+    console.log('this.saveSettingObj',this.saveSettingObj);
     this._sharedService.saveWebSettings(this.saveSettingObj).subscribe((res=>{
       console.log(res);
       this.submitting = false;

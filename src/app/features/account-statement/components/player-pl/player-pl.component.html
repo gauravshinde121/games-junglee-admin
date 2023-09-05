@@ -143,11 +143,11 @@
         <tr>
           <th scope="col" class="first"></th>
           <th scope="col" class="pointer" (click)="toggleSort('createDateTime')"><i class="fa fa-"></i> Date</th>
-          <th scope="col" class="pointer" (click)="toggleSort('subGame')">Sport</th>
+          <th scope="col" class="pointer" (click)="toggleSort('sport')">Sport</th>
           <!--<th scope="col">Sub Game</th>-->
-          <th scope="col" class="pointer" (click)="toggleSort('eventName')">Match</th>
+          <th scope="col" class="pointer" (click)="toggleSort('match')">Match</th>
           <th scope="col" class="pointer" (click)="toggleSort('name')">Username</th>
-          <th scope="col" class="pointer text-center" (click)="toggleSort('finalNetAmount')">Amount</th>
+          <th scope="col" class="pointer text-center" (click)="toggleSort('amount')">Amount</th>
           <!-- <th scope="col">Master</th><th scope="col">Multiplier</th> -->
           <th scope="col" class="last text-center">Details</th>
         </tr>
@@ -342,16 +342,16 @@
             <table class="table tableall text-center">
               <thead>
                 <tr>
-                  <th scope="col" class="first w-auto">Place Date</th>
-                  <th scope="col" class="">Matched Date</th>
-                  <th scope="col" class="">Type</th>
-                  <th scope="col" class="">Status</th>
-                  <th scope="col" class="">Horse Name</th>
+                  <th scope="col" class="first w-auto pointer" (click)="toggleSort1('placedDate')">Place Date</th>
+                  <th scope="col" class="pointer" (click)="toggleSort1('matchedDate')">Matched Date</th>
+                  <th scope="col" class="pointer" (click)="toggleSort1('type')">Type</th>
+                  <th scope="col" class="pointer" (click)="toggleSort1('status')">Status</th>
+                  <th scope="col" class="pointer" (click)="toggleSort1('horseName')">Horse Name</th>
                   <!-- <th scope="col" class="">Avg. Odds</th> -->
-                  <th scope="col" class="">Odds</th>
+                  <th scope="col" class="pointer" (click)="toggleSort1('odds')">Odds</th>
                   
-                  <th scope="col" class="">Stake</th>
-                  <th scope="col" class="">Profit/Loss (In INR)</th>
+                  <th scope="col" class="pointer" (click)="toggleSort1('matchedStake')">Stake</th>
+                  <th scope="col" class="pointer" (click)="toggleSort1('profitLoss')">Profit/Loss (In INR)</th>
                   <th scope="col" class="last">IP</th>
                 </tr>
               </thead>
@@ -359,7 +359,7 @@
                 Loading...
               </table>
               <tbody *ngIf="oneAccount">
-                <tr *ngFor="let bet of oneAccount?.bets">
+                <tr *ngFor="let bet of oneAccount?.bets | sort:sortColumn1:sortAscending1 ;let i = index;">
                   <td>{{ bet.placedDate | date : "medium" }}</td>
                   <td>{{ bet.matchedDate | date : "medium" }}</td>
                   <td>

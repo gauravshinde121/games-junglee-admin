@@ -61,14 +61,14 @@
         <thead>
           <tr>
             <th scope="col" class="first">#</th>
-            <th scope="col" class="">Event</th>
-            <th scope="col" class="">Date</th>
+            <th scope="col" class="pointer" (click)="toggleSort('matchName')">Event</th>
+            <th scope="col" class="pointer"(click)="toggleSort('matchTime')">Date</th>
             <th scope="col" class="">Detail</th>
             <th scope="col" class="last">Bet Detail</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let pl of plStatement; let i = index">
+          <tr *ngFor="let pl of plStatement| sort:sortColumn:sortAscending ; let i = index">
             <td>
               <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
               <span *ngIf="currentPage > 1">{{

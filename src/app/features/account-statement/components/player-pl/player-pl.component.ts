@@ -5,6 +5,7 @@ import { SharedService } from '@shared/services/shared.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { formatDate } from '@angular/common';
 import * as moment from 'moment';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-player-pl',
@@ -44,6 +45,9 @@ export class PlayerPlComponent implements OnInit {
   sortAscending: boolean = true;// 1: ascending, -1: descending
   totalAmount: any;
 
+  sortColumn1: string = '';
+  sortAscending1: boolean = true;// 1: ascending, -1: descending
+
   constructor(
     private _memberService: MembersService,
     private _accountStatementService: AccountStatementService,
@@ -61,7 +65,7 @@ export class PlayerPlComponent implements OnInit {
         this._getMarketsByMatchId(selectedValue);
       }
     });
-    this.getPlStatement();
+    // this.getPlStatement();
   }
 
   _preConfig() {
@@ -210,6 +214,13 @@ export class PlayerPlComponent implements OnInit {
       // if (res.admin.finalList.length > 0) {
         this.plStatement = res.admin.finalList;
         // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+        // this.plStatement.filter((acc, crnt) => console.log("ffff",crnt.finalNetAmount));
+        this.plStatement.map(pl=>pl.sport = pl.gameData.subGame)
+        this.plStatement.map(pl=>pl.match = pl.gameData.eventName)
+        this.plStatement.map(pl=>pl.name = pl.playerData.name)
+        this.plStatement.map(pl=>pl.amount = pl.gameData.finalNetAmount)
+
+        console.log(this.plStatement)
         this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.finalNetAmount, 0);
       // }
     }, (err)=>{
@@ -278,6 +289,12 @@ export class PlayerPlComponent implements OnInit {
       this.isLoading = false;
       // if (res.admin.finalList.length > 0) {
         this.plStatement = res.admin.finalList;
+
+        this.plStatement.map(pl=>pl.sport = pl.gameData.subGame)
+        this.plStatement.map(pl=>pl.match = pl.gameData.eventName)
+        this.plStatement.map(pl=>pl.name = pl.playerData.name)
+        this.plStatement.map(pl=>pl.amount = pl.gameData.finalNetAmount)
+        console.log(this.plStatement)
         // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
 
         this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.finalNetAmount, 0);
@@ -299,7 +316,17 @@ export class PlayerPlComponent implements OnInit {
       if (data.oneAccount) {
         this.oneAccount = data.oneAccount;
       }
+    this.oneAccount.bets.map(bet=>bet.Place = bet.placedDate)
+    this.oneAccount.bets.map(bet=>bet.Matched = bet.matchedDate)
+    this.oneAccount.bets.map(bet=>bet.Type = bet.type)
+    this.oneAccount.bets.map(bet=>bet.Status = bet.status)
+    this.oneAccount.bets.map(bet=>bet.Horse = bet.horseName)
+    this.oneAccount.bets.map(bet=>bet.Odds = bet.odds)
+    this.oneAccount.bets.map(bet=>bet.Stake = bet.matchedStake)
+    this.oneAccount.bets.map(bet=>bet.PL = bet.profitLoss)
+    console.log(this.oneAccount)
     });
+    
     this.pl = pl;
     this.gameData = pl.gameData;
     this.playerData = pl.playerData;
@@ -361,12 +388,25 @@ export class PlayerPlComponent implements OnInit {
     this._sharedService.exportExcel(oneaccnt, this.fileName1);
   }
 
-  toggleSort(columnName: string) {
+  toggleSort(columnName: any) {
+    console.log(columnName)
     if (this.sortColumn === columnName) {
       this.sortAscending = !this.sortAscending;
+      console.log(this.sortColumn,columnName)
     } else {
       this.sortColumn = columnName;
       this.sortAscending = true;
+    }
+  }
+
+  toggleSort1(columnName1: any) {
+    console.log(columnName1)
+    if (this.sortColumn1 === columnName1) {
+      this.sortAscending1 = !this.sortAscending1;
+      console.log(this.sortColumn1,columnName1)
+    } else {
+      this.sortColumn1 = columnName1;
+      this.sortAscending1 = true;
     }
   }
 

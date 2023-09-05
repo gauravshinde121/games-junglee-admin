@@ -26,6 +26,9 @@ export class TurnoverComponent implements OnInit {
   marketInfo:any;
   betInfo:any;
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   constructor(
     private _accountStatementService:AccountStatementService,
     private _sharedService:SharedService
@@ -78,6 +81,9 @@ export class TurnoverComponent implements OnInit {
       this.plStatement = res.finalList;
       this.isLoading = false;
       this.totalPages = Math.ceil(res.finalList.length / this.pageSize);
+      // this.plStatement.map((pl: { event: any; matchName: any; })=>pl.event = pl.matchName)
+      // this.plStatement.map((pl: { date: any; matchTime: any; })=>pl.date = pl.matchTime)
+      // console.log(this.plStatement)
     })
   }
 
@@ -115,6 +121,16 @@ export class TurnoverComponent implements OnInit {
 
   closeModal(){
     this.display = 'none';
+  }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+      console.log(this.sortColumn,columnName)
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
   }
 
 }

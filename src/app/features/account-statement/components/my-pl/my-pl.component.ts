@@ -317,6 +317,7 @@ export class MyPlComponent implements OnInit {
  toggleSort(columnName: string) {
   if (this.sortColumn === columnName) {
     this.sortAscending = !this.sortAscending;
+    console.log(this.sortColumn,columnName)
   } else {
     this.sortColumn = columnName;
     this.sortAscending = true;

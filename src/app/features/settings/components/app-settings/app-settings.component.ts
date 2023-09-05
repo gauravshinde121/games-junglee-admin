@@ -51,7 +51,7 @@ export class AppSettingsComponent implements OnInit {
   saveWebSettings(){
     this.submitting = true;
     this.saveSettingObj = {
-      "settingObj":this.settingObj,
+      "propertyValue":this.settingObj,
       "clientId": this.clientId
     }
     console.log('this.saveSettingObj',this.saveSettingObj);

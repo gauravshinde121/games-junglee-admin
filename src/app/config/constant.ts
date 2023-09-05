@@ -118,7 +118,7 @@ export class Constants {
     public readonly API_URL_LIVE_STREAM_MATCH:string = 'api/getStreamingUrl';
 
 
-    public readonly API_GET_WEB_SETTING:string = 'api/getWebAppSettings/1';
+    public readonly API_GET_WEB_SETTING:string = 'api/getWebAppSettings/'+environment.clientId;
     public readonly API_SAVE_WEB_SETTING:string = 'api/junglee-admin/saveWebSettings';
 
     public readonly API_GET_CASINO_PROVIDER:string = 'api/junglee-admin/getMemberWiseCasinoProviderList';

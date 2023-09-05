@@ -322,7 +322,7 @@
             </div>
           </div>
 
-          <div class="row m-0" *ngFor="let book of bookObj">
+          <div class="row m-0 mb-1" *ngFor="let book of bookObj">
 
 
             <!-- <div class="row mb-1" *ngFor="let data of book.data"> -->
@@ -358,10 +358,10 @@
               </div>
             </div>
 
-            <div class="col-md-6" *ngFor="let market of book.rightMarkets">
-              <div class="row">
+            <div class="col-md-6">
+              <div class="row mb-1" *ngFor="let market of book.rightMarkets">
                 <div class="col-4">{{market.marketName}}</div>
-                <div class="col">
+                <div class="col p-2">
                   <ul class="list-inline d-flex m-0">
                     <li>
                       <!-- (click)="redirectUrlByMarket([data])" -->
@@ -384,10 +384,11 @@
 
                 </div>
 
-                <div class="col bg-white text-dark">{{market.totalStakes}}</div>
-                <div class="col bg-white" [ngClass]="market.maxWin >= 0 ? 'text-success' : 'text-danger'">
-                  {{market.maxWin}}</div>
-                <div class="col bg-white text-danger">{{market.netExposure}}</div>
+                <div class="col bg-white text-dark p-2"><span> {{market.totalStakes}}</span></div>
+                <div class="col bg-white p-2" [ngClass]="market.maxWin >= 0 ? 'text-success' : 'text-danger'">
+                  <span> {{market.maxWin}}</span>
+                </div>
+                <div class="col bg-white text-danger p-2"><span> {{market.netExposure}}</span></div>
               </div>
             </div>
             <!-- </div> -->

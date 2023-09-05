@@ -30,6 +30,10 @@ export class AccountStatementComponent implements OnInit {
   pageSize: number = 25;
   totalPages: number = 0;
 
+  
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
 
   constructor(
     private _memberService:MembersService,
@@ -161,6 +165,15 @@ export class AccountStatementComponent implements OnInit {
 
   onGameSelected(sportId){
     this._getMatchBySportId(sportId);
+  }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
   }
 
 }

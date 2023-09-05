@@ -23,6 +23,9 @@ export class LoginHistoryComponent implements OnInit {
   totalPages: number = 0;
   limit:number = 50;
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   constructor(
     private _memberService: MembersService,
     private _sharedService: SharedService,
@@ -105,6 +108,14 @@ export class LoginHistoryComponent implements OnInit {
     });
   }
 
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
+  }
 
 
 }

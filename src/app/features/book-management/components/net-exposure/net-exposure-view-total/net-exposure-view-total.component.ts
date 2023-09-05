@@ -39,6 +39,9 @@ export class NetExposureViewTotalComponent implements OnInit {
   newAdminBooksList: any;
   ladderObj: never[];
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   constructor(
     private _sharedService: SharedService,
     private _bookMgmService: BookManagementService,
@@ -530,6 +533,15 @@ export class NetExposureViewTotalComponent implements OnInit {
       console.log("Res", res);
       this.ladderObj = res?.ladderDetails;
     })
+  }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
   }
 
 }

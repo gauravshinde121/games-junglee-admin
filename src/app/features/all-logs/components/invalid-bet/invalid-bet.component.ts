@@ -24,6 +24,9 @@ export class InvalidBetComponent implements OnInit {
   isLoading = false;
   limit:number = 50;
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   fileName= 'InvalidBet.xlsx';
 
   constructor(
@@ -130,5 +133,14 @@ export class InvalidBetComponent implements OnInit {
     });
     this._sharedService.exportExcel(allBet,this.fileName);
  }
+
+ toggleSort(columnName: string) {
+  if (this.sortColumn === columnName) {
+    this.sortAscending = !this.sortAscending;
+  } else {
+    this.sortColumn = columnName;
+    this.sortAscending = true;
+  }
+}
 
 }

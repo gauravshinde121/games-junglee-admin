@@ -100,7 +100,7 @@ export class Constants {
     //BOOK MANAGEMENT
     public readonly API_URL_GET_BET_DETAILS_FOR_WORK_STATION:string = 'api/junglee-admin/getBetDetailsForWorkStation';
 
-    public readonly API_URL_GET_AMDMIN_BOOK_MGM :string = 'api/junglee-admin/getBooksForAdminBookManagement';
+    public readonly API_URL_GET_AMDMIN_BOOK_MGM :string = 'api/getBooksForMafiaBookManagement';
 
     public readonly API_URL_GET_LADDER_FOR_ADMIN:string = 'api/junglee-admin/getLadderForAdmin';
 

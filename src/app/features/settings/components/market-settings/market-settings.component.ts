@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SettingsService } from '../services/settings.service';
 import { SharedService } from '@shared/services/shared.service';
 import { Subject } from 'rxjs';
@@ -71,10 +71,10 @@ export class MarketSettingsComponent implements OnInit {
 
     this.matchSettingsForm = new FormGroup({
       marketIds:new FormControl(null),
-      minBet: new FormControl(null),
-      maxBet: new FormControl(null),
-      maxMarketSize: new FormControl(null),
-      marketDelay: new FormControl(null),
+      minBet: new FormControl(null,Validators.required),
+      maxBet: new FormControl(null,Validators.required),
+      maxMarketSize: new FormControl(null,Validators.required),
+      marketDelay: new FormControl(null,Validators.required),
     })
   }
 
@@ -320,4 +320,8 @@ export class MarketSettingsComponent implements OnInit {
   }
 
  
+  preventNegativeKeyPress(event: KeyboardEvent): boolean {
+    return (event.charCode == 8 || event.charCode == 0) ? true : (event.charCode >= 48 && event.charCode <= 57);
+  }
+
 }

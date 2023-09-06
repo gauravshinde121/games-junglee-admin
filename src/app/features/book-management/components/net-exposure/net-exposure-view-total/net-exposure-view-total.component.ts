@@ -38,6 +38,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   fileName = 'NetExposureViewTotal' + new Date().toString() + '.xlsx';
   newAdminBooksList: any;
   ladderObj: never[];
+  downlineBooks:any = [];
 
   constructor(
     private _sharedService: SharedService,
@@ -58,17 +59,9 @@ export class NetExposureViewTotalComponent implements OnInit {
     }, 1000)
   }
 
-  _initConfig() {
-    (sessionStorage.getItem('deviceId') === null) ? this._getUniqueDeviceKeyApi() : this._getWebSocketUrl();
-  }
 
-  _getUniqueDeviceKeyApi() {
-    this._sharedService._getUniqueDeviceKeyApi().subscribe((res: any) => {
-      sessionStorage.setItem('deviceId', res?.deviceId);
-      this._getWebSocketUrl();
-    })
-  }
 
+  
   _getWebSocketUrl(isComplete = false) {
     this._sharedService.getWebSocketURLApi().subscribe(
       (res: any) => {
@@ -103,8 +96,6 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   _getNetExposureViewTotal() {
     this.isLoading = true;
-    // this.viewTotal = [];
-
     this._sharedService._getBetDetailsForWorkStationApi(this.payload).subscribe((data: any) => {
       this.isLoading = false;
       if (data.booksForBackend.length > 0) {
@@ -136,7 +127,26 @@ export class NetExposureViewTotalComponent implements OnInit {
       myPT: this.myPT
     };
     this._bookMgmService._postTotalBookApi(totalBookParams).subscribe((data: any) => {
-      // console.log(data);
+      console.log(data);
+
+      
+      if(data.book.length>0){
+        let finalBook = data.book;
+
+        for(let d of finalBook){
+          const index = this.downlineBooks.findIndex((element) => element.marketId === totalBookParams.marketId&&d.userId == element.userId);
+          if (index !== -1) {
+            this.downlineBooks.splice(index, 1);
+          } else {
+            this.downlineBooks.push(d);
+          }
+        }
+      }
+
+      this.addMarketIdsRecursive(this.downlineBooks,totalBookParams.marketId)
+
+      console.log(this.downlineBooks)
+
       if (data['book'].length > 0) {
         this.totalBooks.push({ marketId: marketId, totalBook: data['book'], isTotaltotalBookView: true });
         this.adminBooksList.map((adminBook) => {
@@ -150,6 +160,16 @@ export class NetExposureViewTotalComponent implements OnInit {
     });
   }
 
+
+  addMarketIdsRecursive(userBook,marketId){
+    for(let book of userBook){
+        book.marketId = marketId;
+        book.isExpanded = false;
+        if(book.downline.length>0){
+          this.addMarketIdsRecursive(book.downline,marketId)
+        }
+    }
+  }
 
   onFilterChange(params) {
     let bookMgmParams = {};
@@ -320,8 +340,6 @@ export class NetExposureViewTotalComponent implements OnInit {
           }
           let unsetObj = {};
           unsetObj['unset'] = setObj['set'];
-          this._setOrUnsetWebSocketData(unsetObj);
-          this._setOrUnsetWebSocketData(setObj);
         }
         this.prevSetOrUnsetWebSocketParamsObj = this.setOrUnsetWebSocketParamsObj;
       }
@@ -434,17 +452,6 @@ export class NetExposureViewTotalComponent implements OnInit {
   }
 
 
-  _setOrUnsetWebSocketData(setOrUnsetWebSocketParamsObj) {
-    // this._sharedService._getWebSocketURLByDeviceApi(setOrUnsetWebSocketParamsObj).subscribe(
-    //   (res: any) => {
-    //     console.log('market',res);
-    //     if(res?.token?.url){
-    //       this.realDataWebSocket = webSocket(res?.token?.url);
-    //       this._subscribeWebSocket()
-    //     }
-    //   });
-  }
-
   _subscribeWebSocket() {
     this.realDataWebSocket.subscribe(
       data => {
@@ -496,7 +503,6 @@ export class NetExposureViewTotalComponent implements OnInit {
         centralIdList: this.setOrUnsetWebSocketParamsObj
       }
     }
-    this._setOrUnsetWebSocketData(unSetObj);
     // if(this.realDataWebSocket) this.realDataWebSocket.complete();
     if (this.realDataWebSocket) this.realDataWebSocket.unsubscribe();
     clearInterval(this.resetTimerInterval)
@@ -526,8 +532,6 @@ export class NetExposureViewTotalComponent implements OnInit {
   getLadderDataByMarket(marketId: any) {
     this.ladderObj = [];
     this._bookMgmService._postLadderDataByMarketApi({ marketId: marketId }).subscribe((res: any) => {
-
-      console.log("Res", res);
       this.ladderObj = res?.ladderDetails;
     })
   }

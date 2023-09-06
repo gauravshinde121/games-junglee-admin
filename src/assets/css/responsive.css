@@ -85,7 +85,9 @@
     z-index: 10;
     font-size: 25px;
   }
-
+  .head_logo {
+    width: 65px;
+  }
   /* .sidebar {
     background: #202121;
     position: absolute;
@@ -98,7 +100,7 @@
     width: 100%;
   }
 
-  
+
   .memberslist .nav-link {
     width: 121px;
     font-size: 12px;
@@ -133,7 +135,7 @@
   .toggle-sidebar-btn a:nth-child(2) {
     display: none;
   }
-  
+
 }
 
 @media only screen and (min-width: 960px) {
@@ -280,7 +282,7 @@
     font-size: 14px;
   }
   .head_logo {
-    width: 97px;
+    width: 130px;
   }
   .align_thead thead tr th,
   .align_thead tbody tr td {

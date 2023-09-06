@@ -133,9 +133,9 @@ export class CreateMemberComponent implements OnInit {
         console.log(this.memberData);
         this.gamesList = res.gameStatus;
         // this.casinoProviderList = res.providerStatus;
-        
-        res.providerStatus.forEach(status => {     
-     
+
+        res.providerStatus.forEach(status => {
+
           this.casinoProviderList.forEach(cpl => {
             if(status.casinoProviderId == cpl.providerId) {
               cpl.isActive = status.isActive;
@@ -144,8 +144,8 @@ export class CreateMemberComponent implements OnInit {
         });
 
 
-        
-        
+
+
     console.log("this.casinoProviderList..",this.casinoProviderList);
 
         this.roleId = this.memberData.roleId;
@@ -156,6 +156,8 @@ export class CreateMemberComponent implements OnInit {
           playerAvailableCredit: this.memberData.creditLimit,
           sportsBookRate: this.memberData.sportsBookRate,
           liveCasinoRate: this.memberData.liveCasinoRate,
+          fancyComission: this.memberData.fancyComission,
+          bookmakerComission: this.memberData.bookmakerComission,
           minBet: 100,
           maxBet: 100000,
           partnerShipPercent: this.memberData.partnerShipPercent,
@@ -190,7 +192,9 @@ export class CreateMemberComponent implements OnInit {
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(this.maxBetMinValue)]],
         roleId: [this.createUserWithRoleId, Validators.required],
-        partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]]
+        partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
+        fancyComission: [0, Validators.min(0)],
+        bookmakerComission: [0, Validators.min(0)]
       },
         {
           // validators: this.Mustmatch('password', 'confirmPassword'),
@@ -207,7 +211,9 @@ export class CreateMemberComponent implements OnInit {
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
-        partnerShipPercent: [0, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]]
+        partnerShipPercent: [0, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
+        fancyComission: [0, Validators.min(0)],
+        bookmakerComission: [0, Validators.min(0)]
       },
         {
           validators: []
@@ -226,6 +232,8 @@ export class CreateMemberComponent implements OnInit {
           "username": this.memberForm.value['username'],
           "pwd": this.memberForm.value['password'],
           "availableCredit": this.memberForm.value['playerAvailableCredit'],
+          "fancyComission": this.memberForm.value['fancyComission'],
+          "bookmakerComission": this.memberForm.value['bookmakerComission'],
           "sportsBookRate": this.memberForm.value['sportsBookRate'],
           "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
           "minimumBet": this.memberForm.value['minBet'],
@@ -242,6 +250,8 @@ export class CreateMemberComponent implements OnInit {
           "displayName": this.memberForm.value['displayName'],
           "username": this.memberForm.value['username'],
           "availableCredit": this.memberForm.value['playerAvailableCredit'],
+          "fancyComission": this.memberForm.value['fancyComission'],
+          "bookmakerComission": this.memberForm.value['bookmakerComission'],
           "sportsBookRate": this.memberForm.value['sportsBookRate'],
           "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
           "minimumBet": 100,

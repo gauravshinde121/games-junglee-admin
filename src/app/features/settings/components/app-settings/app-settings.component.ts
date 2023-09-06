@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-app-settings',
@@ -9,11 +10,13 @@ import { SharedService } from '@shared/services/shared.service';
 export class AppSettingsComponent implements OnInit {
 
   display:any = '';
+  saveSettingObj:any;
   settingObj:any = {
     mobile1:null,
     mobile2:null,
     noticeMessage : ""
   }
+  clientId = environment.clientId;
   mobile1 = null;
   mobile2 = null;
   noticeMessage = "";
@@ -40,14 +43,19 @@ export class AppSettingsComponent implements OnInit {
       console.log(res);
       this.isLoading = false;
       this.settingObj = JSON.parse(res['webAppSetting'][0].propertyValue)
-      
+
     }))
   }
 
 
   saveWebSettings(){
     this.submitting = true;
-    this._sharedService.saveWebSettings(this.settingObj).subscribe((res=>{
+    this.saveSettingObj = {
+      "propertyValue":this.settingObj,
+      "clientId": this.clientId
+    }
+    console.log('this.saveSettingObj',this.saveSettingObj);
+    this._sharedService.saveWebSettings(this.saveSettingObj).subscribe((res=>{
       console.log(res);
       this.submitting = false;
       this._sharedService.getToastPopup('Settings saved!',"","success")

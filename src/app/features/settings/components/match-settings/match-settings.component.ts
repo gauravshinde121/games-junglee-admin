@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SettingsService } from '../services/settings.service';
 import { SharedService } from '@shared/services/shared.service';
 
@@ -26,7 +26,8 @@ export class MatchSettingsComponent implements OnInit {
   constructor(
     private settingsService: SettingsService,
     private _sharedService: SharedService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this._preConfig()
@@ -46,19 +47,24 @@ export class MatchSettingsComponent implements OnInit {
     })
 
     this.matchSettingsForm = new FormGroup({
-      matchOddsMaxBet: new FormControl(null),
-      matchOddsMinBet: new FormControl(null),
-      bookmakerMaxBet: new FormControl(null),
-      bookmakerMinBet: new FormControl(null),
-      fancyMaxBet: new FormControl(null),
-      fancyMinBet: new FormControl(null),
-      matchOddDelay: new FormControl(null),
-      bookmakerDelay: new FormControl(null),
-      fancyDelay: new FormControl(null),
-      maxMatchOddsSize: new FormControl(null),
-      maxBookmakerSize: new FormControl(null),
-      maxFancySize: new FormControl(null),
-    })
+      matchOddsMaxBet: new FormControl(null,Validators.required),
+      matchOddsMinBet: new FormControl(null,Validators.required),
+      bookmakerMaxBet: new FormControl(null,Validators.required),
+      bookmakerMinBet: new FormControl(null,Validators.required),
+      fancyMaxBet: new FormControl(null,Validators.required),
+      fancyMinBet: new FormControl(null,Validators.required),
+      matchOddDelay: new FormControl(null,Validators.required),
+      bookmakerDelay: new FormControl(null,Validators.required),
+      fancyDelay: new FormControl(null,Validators.required),
+      maxMatchOddsSize: new FormControl(null,Validators.required),
+      maxBookmakerSize: new FormControl(null,Validators.required),
+      maxFancySize: new FormControl(null,Validators.required),
+    });
+
+  }
+
+  preventNegativeKeyPress(event: KeyboardEvent): boolean {
+    return (event.charCode == 8 || event.charCode == 0) ? true : (event.charCode >= 48 && event.charCode <= 57);
   }
 
   getMatchSettingsList() {

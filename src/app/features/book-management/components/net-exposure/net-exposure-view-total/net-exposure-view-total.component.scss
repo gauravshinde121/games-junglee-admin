@@ -60,12 +60,12 @@
 .accordion-header .collapsed .fa-minus:before {
   display: none;
 }
-.table {
-  margin-bottom: 0px;
-}
+// .table {
+//   margin-bottom: 0px;
+// }
 
 .tableRes {
-  height: 36vh;
+  max-height: 48vh;
 }
 
 .table > :not(caption) > * > * {

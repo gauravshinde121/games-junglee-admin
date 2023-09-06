@@ -292,7 +292,7 @@
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="minBet"
+                    formControlName="minBet" min="0" (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
                 <div class="col-md-6 mb-2">
@@ -300,7 +300,7 @@
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="maxBet"
+                    formControlName="maxBet" min="0" (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
                 <div class="col-md-6 mb-2">
@@ -308,7 +308,7 @@
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="maxMarketSize"
+                    formControlName="maxMarketSize" min="0" (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
                 <div class="col-md-6 mb-2">
@@ -316,7 +316,7 @@
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="marketDelay"
+                    formControlName="marketDelay" min="0" (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
                 
@@ -324,9 +324,8 @@
                 <div class="row">
                   <div class="col-md-6 text-end">
                     <button
-
                       (click)="selectedUserForAdjustment.length> 0?submitBulkMarket() : saveMatchSettings() "
-                      [disabled]="!matchSettingsForm.dirty && selectedUserForAdjustment.length== 0"
+                      [disabled]="selectedUserForAdjustment.length== 0 && matchSettingsForm.invalid"
                       class="btn btn-danger rounded-pill w-80 mt-2"
                     >
                       Save

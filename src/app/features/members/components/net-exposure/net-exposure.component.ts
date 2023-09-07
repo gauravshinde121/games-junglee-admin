@@ -21,7 +21,6 @@ export class NetExposureComponent implements OnInit {
       this.userId = +params['id'];
     })
     this._preConfig();
-
   }
 
 

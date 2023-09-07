@@ -1,5 +1,5 @@
 <main id="main" class="main m-0">
-  <section class="section gamedetails mb-3">
+  <section class="section  mb-3">
     <div class="row">
       <div class="col-md-12">
         <div class="row">
@@ -41,11 +41,11 @@
         </div>
         <!-- <div class="row">
           <div class="col-md-6"></div>
-          
+
         </div> -->
 
         <div class="row">
-          <div class="col-md-12 net-exposure_scroll">
+          <div class="col-md-12 ">
             <div class="accordion" id="accordionExample" *ngFor="let singleAdminBook of adminBooksList; let i = index">
               <div class="accordion-item bg-transparent border-0">
                 <h2 class="accordion-header" id="headingOne">
@@ -353,10 +353,10 @@
                               <tr *ngFor="
                                   let userBook of singleAdminBook['userBook']
                                 ">
-                                <td class="border-top">
+                                <td class="col-1 border-top">
                                   <strong> {{ userBook["username"] }}</strong>
                                 </td>
-                                <td class="border-top" style="cursor: pointer;">
+                                <td class="col-1 border-top" style="cursor: pointer;">
                                   <img src="/assets/images/net_expo.png" width="12" (click)="
                                       getTotalBookViewTotal(
                                         singleAdminBook['marketId'],
@@ -364,10 +364,10 @@
                                       )
                                     " />
                                 </td>
-                                <td class="border-top">
+                                <td class="col-1 border-top">
                                   <strong>{{ userBook["stake"] }}</strong>
                                 </td>
-                                <td class="border-top">
+                                <td class="col-1 border-top">
                                   <strong class="text-success" *ngIf="userBook['runner1'] > 0">{{
                                       userBook["runner1"] | number: '1.0-0'
                                     }}</strong>
@@ -375,7 +375,7 @@
                                       userBook["runner1"] | number: '1.0-0'
                                     }}</strong>
                                 </td>
-                                <td class="border-top">
+                                <td class="col-1 border-top">
                                   <strong class="text-success" *ngIf="userBook['runner3'] > 0">{{
                                       userBook["runner3"] | number: '1.0-0'
                                     }}</strong>
@@ -383,7 +383,7 @@
                                       userBook["runner3"] | number: '1.0-0'
                                     }}</strong>
                                 </td>
-                                <td class="border-top">
+                                <td class="col-1 border-top">
                                   <strong class="text-success" *ngIf="userBook['runner2'] > 0">{{
                                       userBook["runner2"] | number: '1.0-0'
                                     }}</strong>
@@ -395,199 +395,245 @@
 
                               <tr *ngFor="let downline of downlineBooks">
                                 <td colspan="6">
-                                  <table class="table">
+                                  <table class="">
                                     <tbody>
-                                      <tr>
-                                        <td *ngIf="downline.marketId == singleAdminBook.marketId" class="border-top">{{downline.userName}} ({{downline.role}})</td>
-                                    <td *ngIf="downline.marketId == singleAdminBook.marketId" class="border-top">
-                                      <img *ngIf="downline.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline.isExpanded = !downline.isExpanded" />
-                                    </td>
-                                    <td *ngIf="downline.marketId == singleAdminBook.marketId" class="border-top"></td>
-                                    <td *ngIf="downline.marketId == singleAdminBook.marketId" class="border-top">{{downline.runner1Amount}}</td>
-                                    <td *ngIf="downline.marketId == singleAdminBook.marketId" class="border-top">{{downline.runner3Amount}}</td>
-                                    <td *ngIf="downline.marketId == singleAdminBook.marketId" class="border-top">{{downline.runner2Amount}}</td>
-                                    </tr>
+                                      <tr class="border-top" *ngIf="downline.marketId == singleAdminBook.marketId">
+                                        <td class="col-1">
+                                          {{downline.userName}} ({{downline.role}})</td>
+                                        <td class="col-1">
+                                          <img *ngIf="downline.downline.length>0" src="/assets/images/net_expo.png"
+                                            width="12" (click)="downline.isExpanded = !downline.isExpanded" />
+                                        </td>
+                                        <td class="col-1">
+                                        </td>
+                                        <td class="col-1">
+                                          {{downline.runner1Amount}}</td>
+                                        <td class="col-1">
+                                          {{downline.runner3Amount}}</td>
+                                        <td class="col-1">
+                                          {{downline.runner2Amount}}</td>
+                                      </tr>
 
                                       <ng-container *ngIf="downline.isExpanded">
                                         <tr *ngFor="let downline2 of downline.downline">
                                           <td colspan="6">
-                                            <table class="table">
+                                            <table class="">
                                               <tbody>
-                                                <tr>
-                                                  <td *ngIf="downline2.marketId == singleAdminBook.marketId" class="border-top">{{downline2.userName}} ({{downline2.role}})</td>
-                                              <td *ngIf="downline2.marketId == singleAdminBook.marketId" class="border-top">
-                                                <img *ngIf="downline2.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline2.isExpanded = !downline2.isExpanded" />
-                                              </td>
-                                              <td *ngIf="downline2.marketId == singleAdminBook.marketId" class="border-top"></td>
-                                              <td *ngIf="downline2.marketId == singleAdminBook.marketId" class="border-top">{{downline2.runner1Amount}}</td>
-                                              <td *ngIf="downline2.marketId == singleAdminBook.marketId" class="border-top">{{downline2.runner3Amount}}</td>
-                                              <td *ngIf="downline2.marketId == singleAdminBook.marketId" class="border-top">{{downline2.runner2Amount}}</td>
-                                            </tr>
-  
-                                            <ng-container *ngIf="downline2.isExpanded">
-                                              <tr *ngFor="let downline3 of downline2.downline">
-                                                <td colspan="6">
-                                                  <table class="table">
-                                                    <tbody>
-                                                      <tr>
-                                                        <td *ngIf="downline3.marketId == singleAdminBook.marketId" class="border-top">{{downline3.userName}} ({{downline3.role}})</td>
-                                                    <td *ngIf="downline3.marketId == singleAdminBook.marketId" class="border-top">
-                                                      <img *ngIf="downline3.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline3.isExpanded = !downline3.isExpanded" />
-                                                    </td>
-                                                    <td *ngIf="downline3.marketId == singleAdminBook.marketId" class="border-top"></td>
-                                                    <td *ngIf="downline3.marketId == singleAdminBook.marketId" class="border-top">{{downline3.runner1Amount}}</td>
-                                                    <td *ngIf="downline3.marketId == singleAdminBook.marketId" class="border-top">{{downline3.runner3Amount}}</td>
-                                                    <td *ngIf="downline3.marketId == singleAdminBook.marketId" class="border-top">{{downline3.runner2Amount}}</td>
-                                                      </tr>
-    
-                                                      <ng-container *ngIf="downline3.isExpanded">
-                                                        <tr *ngFor="let downline4 of downline3.downline">
-                                                          <td colspan="6">
-                                                            <table class="table">
-                                                              <tbody>
-                                                                <tr>
-                                                                  <td *ngIf="downline4.marketId == singleAdminBook.marketId" class="border-top">{{downline4.userName}} ({{downline4.role}})</td>
-                                                              <td *ngIf="downline4.marketId == singleAdminBook.marketId" class="border-top">
-                                                                <img *ngIf="downline4.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline4.isExpanded = !downline4.isExpanded" />
-                                                              </td>
-                                                              <td *ngIf="downline4.marketId == singleAdminBook.marketId" class="border-top"></td>
-                                                              <td *ngIf="downline4.marketId == singleAdminBook.marketId" class="border-top">{{downline4.runner1Amount}}</td>
-                                                              <td *ngIf="downline4.marketId == singleAdminBook.marketId" class="border-top">{{downline4.runner3Amount}}</td>
-                                                              <td *ngIf="downline4.marketId == singleAdminBook.marketId" class="border-top">{{downline4.runner2Amount}}</td>
-                                                        </tr>
-      
-                                                                <ng-container *ngIf="downline4.isExpanded">
-                                                                  <tr *ngFor="let downline5 of downline4.downline">
-                                                                    <td colspan="6">
-                                                                      <table class="table">
-                                                                        <tbody>
-                                                                          <tr>
-                                                                            <td *ngIf="downline5.marketId == singleAdminBook.marketId" class="border-top">{{downline5.userName}} ({{downline5.role}})</td>
-                                                                        <td *ngIf="downline5.marketId == singleAdminBook.marketId" class="border-top">
-                                                                          <img *ngIf="downline5.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline5.isExpanded = !downline5.isExpanded" />
-                                                                        </td>
-                                                                        <td *ngIf="downline5.marketId == singleAdminBook.marketId" class="border-top"></td>
-                                                                        <td *ngIf="downline5.marketId == singleAdminBook.marketId" class="border-top">{{downline5.runner1Amount}}</td>
-                                                                        <td *ngIf="downline5.marketId == singleAdminBook.marketId" class="border-top">{{downline5.runner3Amount}}</td>
-                                                                        <td *ngIf="downline5.marketId == singleAdminBook.marketId" class="border-top">{{downline5.runner2Amount}}</td>
-                                                                          </tr>
-        
-                                                                          <ng-container *ngIf="downline5.isExpanded">
-                                                                            <tr *ngFor="let downline6 of downline5.downline">
-                                                                              <td colspan="6">
-                                                                                <table class="table">
-                                                                                  <tbody>
-                                                                                    <tr>
-                                                                                      <td *ngIf="downline6.marketId == singleAdminBook.marketId" class="border-top">{{downline6.userName}} ({{downline6.role}})</td>
-                                                                                  <td *ngIf="downline6.marketId == singleAdminBook.marketId" class="border-top">
-                                                                                    <img *ngIf="downline6.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline6.isExpanded = !downline6.isExpanded" />
+                                                <tr class="border-top"
+                                                  *ngIf="downline2.marketId == singleAdminBook.marketId">
+                                                  <td class="col-1">{{downline2.userName}} <br> ({{downline2.role}})
+                                                  </td>
+                                                  <td class="col-1">
+                                                    <img *ngIf="downline2.downline.length>0"
+                                                      src="/assets/images/net_expo.png" width="12"
+                                                      (click)="downline2.isExpanded = !downline2.isExpanded" />
+                                                  </td>
+                                                  <td class="col-1"></td>
+                                                  <td class="col-1">{{downline2.runner1Amount}}</td>
+                                                  <td class="col-1">{{downline2.runner3Amount}}</td>
+                                                  <td class="col-1">{{downline2.runner2Amount}}</td>
+                                                </tr>
+
+                                                <ng-container *ngIf="downline2.isExpanded">
+                                                  <tr *ngFor="let downline3 of downline2.downline">
+                                                    <td colspan="6">
+                                                      <table class="">
+                                                        <tbody>
+                                                          <tr class="border-top"
+                                                            *ngIf="downline3.marketId == singleAdminBook.marketId">
+                                                            <td class="col-1">{{downline3.userName}}
+                                                              ({{downline3.role}})</td>
+                                                            <td class="col-1">
+                                                              <img *ngIf="downline3.downline.length>0"
+                                                                src="/assets/images/net_expo.png" width="12"
+                                                                (click)="downline3.isExpanded = !downline3.isExpanded" />
+                                                            </td>
+                                                            <td class="col-1"></td>
+                                                            <td class="col-1">{{downline3.runner1Amount}}</td>
+                                                            <td class="col-1">{{downline3.runner3Amount}}</td>
+                                                            <td class="col-1">{{downline3.runner2Amount}}</td>
+                                                          </tr>
+
+                                                          <ng-container *ngIf="downline3.isExpanded">
+                                                            <tr *ngFor="let downline4 of downline3.downline">
+                                                              <td colspan="6">
+                                                                <table class="">
+                                                                  <tbody>
+                                                                    <tr class="border-top"
+                                                                      *ngIf="downline4.marketId == singleAdminBook.marketId">
+                                                                      <td class="col-1">{{downline4.userName}} <br>
+                                                                        ({{downline4.role}})</td>
+                                                                      <td class="col-1">
+                                                                        <img *ngIf="downline4.downline.length>0"
+                                                                          src="/assets/images/net_expo.png" width="12"
+                                                                          (click)="downline4.isExpanded = !downline4.isExpanded" />
+                                                                      </td>
+                                                                      <td class="col-1"></td>
+                                                                      <td class="col-1">{{downline4.runner1Amount}}
+                                                                      </td>
+                                                                      <td class="col-1">{{downline4.runner3Amount}}
+                                                                      </td>
+                                                                      <td class="col-1">{{downline4.runner2Amount}}
+                                                                      </td>
+                                                                    </tr>
+
+                                                                    <ng-container *ngIf="downline4.isExpanded">
+                                                                      <tr *ngFor="let downline5 of downline4.downline">
+                                                                        <td colspan="6">
+                                                                          <table class="">
+                                                                            <tbody>
+                                                                              <tr class="border-top"
+                                                                                *ngIf="downline5.marketId == singleAdminBook.marketId">
+                                                                                <td class="col-1">
+                                                                                  {{downline5.userName}}
+                                                                                  ({{downline5.role}})</td>
+                                                                                <td class="col-1">
+                                                                                  <img
+                                                                                    *ngIf="downline5.downline.length>0"
+                                                                                    src="/assets/images/net_expo.png"
+                                                                                    width="12"
+                                                                                    (click)="downline5.isExpanded = !downline5.isExpanded" />
+                                                                                </td>
+                                                                                <td class="col-1"></td>
+                                                                                <td class="col-1">
+                                                                                  {{downline5.runner1Amount}}</td>
+                                                                                <td class="col-1">
+                                                                                  {{downline5.runner3Amount}}</td>
+                                                                                <td class="col-1">
+                                                                                  {{downline5.runner2Amount}}</td>
+                                                                              </tr>
+
+                                                                              <ng-container
+                                                                                *ngIf="downline5.isExpanded">
+                                                                                <tr class="border-top"
+                                                                                  *ngFor="let downline6 of downline5.downline">
+                                                                                  <td colspan="6">
+                                                                                    <table class="">
+                                                                                      <tbody>
+                                                                                        <tr
+                                                                                          *ngIf="downline6.marketId == singleAdminBook.marketId">
+                                                                                          <td class="col-1">
+                                                                                            {{downline6.userName}} <br>
+                                                                                            ({{downline6.role}})</td>
+                                                                                          <td class="col-1">
+                                                                                            <img
+                                                                                              *ngIf="downline6.downline.length>0"
+                                                                                              src="/assets/images/net_expo.png"
+                                                                                              width="12"
+                                                                                              (click)="downline6.isExpanded = !downline6.isExpanded" />
+                                                                                          </td>
+                                                                                          <td class="col-1"></td>
+                                                                                          <td class="col-1">
+                                                                                            {{downline6.runner1Amount}}
+                                                                                          </td>
+                                                                                          <td class="col-1">
+                                                                                            {{downline6.runner3Amount}}
+                                                                                          </td>
+                                                                                          <td class="col-1">
+                                                                                            {{downline6.runner2Amount}}
+                                                                                          </td>
+                                                                                        </tr>
+                                                                                      </tbody>
+                                                                                    </table>
                                                                                   </td>
-                                                                                  <td *ngIf="downline6.marketId == singleAdminBook.marketId" class="border-top"></td>
-                                                                                  <td *ngIf="downline6.marketId == singleAdminBook.marketId" class="border-top">{{downline6.runner1Amount}}</td>
-                                                                                  <td *ngIf="downline6.marketId == singleAdminBook.marketId" class="border-top">{{downline6.runner3Amount}}</td>
-                                                                                  <td *ngIf="downline6.marketId == singleAdminBook.marketId" class="border-top">{{downline6.runner2Amount}}</td>
-                                                                                    </tr>
-                                                                                  </tbody>
-                                                                                </table>
-                                                                              </td>
-                                                                            </tr>
-                                                                          </ng-container>
-                                                                          
-                                                                        </tbody>
-                                                                      </table>
-                                                                    </td>
-                                                                  </tr>
-                                                                </ng-container>
-                                                                
-                                                              </tbody>
-                                                            </table>
-                                                          </td>
-                                                        </tr>
-                                                      </ng-container>
-                                                      
-                                                    </tbody>
-                                                  </table>
-                                                </td>
-                                              </tr>
-                                            </ng-container>
-                                            
+                                                                                </tr>
+                                                                              </ng-container>
+
+                                                                            </tbody>
+                                                                          </table>
+                                                                        </td>
+                                                                      </tr>
+                                                                    </ng-container>
+
+                                                                  </tbody>
+                                                                </table>
+                                                              </td>
+                                                            </tr>
+                                                          </ng-container>
+
+                                                        </tbody>
+                                                      </table>
+                                                    </td>
+                                                  </tr>
+                                                </ng-container>
+
                                               </tbody>
                                             </table>
                                           </td>
                                         </tr>
                                       </ng-container>
-                                     
+
                                     </tbody>
                                   </table>
                                 </td>
                               </tr>
 
-                             
-                                <!-- <tr>
-                                    
+
+                              <!-- <tr>
+
                                   <div *ngIf="downline.isExpanded">
                                     <div *ngFor="let downline2 of downline.downline">
                                       <tr>
-                                        <td *ngIf="downline2.marketId == singleAdminBook.marketId"  class="border-top">{{downline2.userName}} ({{downline2.role}})</td>
-                                        <td *ngIf="downline2.marketId == singleAdminBook.marketId"  class="border-top">
+                                        <td   class="border-top">{{downline2.userName}} ({{downline2.role}})</td>
+                                        <td   class="border-top">
                                           <img *ngIf="downline2.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline2.isExpanded = !downline2.isExpanded" />
                                         </td>
-                                        <td *ngIf="downline2.marketId == singleAdminBook.marketId"  class="border-top"></td>
-                                        <td *ngIf="downline2.marketId == singleAdminBook.marketId"  class="border-top">{{downline2.runner1Amount}}</td>
-                                        <td *ngIf="downline2.marketId == singleAdminBook.marketId"  class="border-top">{{downline2.runner3Amount}}</td>
-                                        <td *ngIf="downline2.marketId == singleAdminBook.marketId"  class="border-top">{{downline2.runner2Amount}}</td>
+                                        <td   class="border-top"></td>
+                                        <td   class="border-top">{{downline2.runner1Amount}}</td>
+                                        <td   class="border-top">{{downline2.runner3Amount}}</td>
+                                        <td   class="border-top">{{downline2.runner2Amount}}</td>
                                       </tr>
 
                                       <div *ngIf="downline2.isExpanded">
                                         <div *ngFor="let downline3 of downline2.downline">
                                           <tr>
-                                            <td *ngIf="downline3.marketId == singleAdminBook.marketId"  class="border-top">{{downline3.userName}} ({{downline3.role}})</td>
-                                            <td *ngIf="downline3.marketId == singleAdminBook.marketId"  class="border-top">
+                                            <td   class="border-top">{{downline3.userName}} ({{downline3.role}})</td>
+                                            <td   class="border-top">
                                               <img *ngIf="downline3.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline3.isExpanded = !downline3.isExpanded" />
                                             </td>
-                                            <td *ngIf="downline3.marketId == singleAdminBook.marketId"  class="border-top"></td>
-                                            <td *ngIf="downline3.marketId == singleAdminBook.marketId"  class="border-top">{{downline3.runner1Amount}}</td>
-                                            <td *ngIf="downline3.marketId == singleAdminBook.marketId"  class="border-top">{{downline3.runner3Amount}}</td>
-                                            <td *ngIf="downline3.marketId == singleAdminBook.marketId"  class="border-top">{{downline3.runner2Amount}}</td>
+                                            <td   class="border-top"></td>
+                                            <td   class="border-top">{{downline3.runner1Amount}}</td>
+                                            <td   class="border-top">{{downline3.runner3Amount}}</td>
+                                            <td   class="border-top">{{downline3.runner2Amount}}</td>
                                           </tr>
 
                                           <div *ngIf="downline3.isExpanded">
                                             <div *ngFor="let downline4 of downline3.downline">
                                               <tr >
-                                                <td *ngIf="downline4.marketId == singleAdminBook.marketId"  class="border-top">{{downline4.userName}} ({{downline4.role}})</td>
-                                                <td *ngIf="downline4.marketId == singleAdminBook.marketId"  class="border-top">
+                                                <td   class="border-top">{{downline4.userName}} ({{downline4.role}})</td>
+                                                <td   class="border-top">
                                                   <img *ngIf="downline4.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline4.isExpanded = !downline4.isExpanded" />
                                                 </td>
-                                                <td *ngIf="downline4.marketId == singleAdminBook.marketId"  class="border-top"></td>
-                                                <td *ngIf="downline4.marketId == singleAdminBook.marketId"  class="border-top">{{downline4.runner1Amount}}</td>
-                                                <td *ngIf="downline4.marketId == singleAdminBook.marketId"  class="border-top">{{downline4.runner3Amount}}</td>
-                                                <td *ngIf="downline4.marketId == singleAdminBook.marketId"  class="border-top">{{downline4.runner2Amount}}</td>
+                                                <td   class="border-top"></td>
+                                                <td   class="border-top">{{downline4.runner1Amount}}</td>
+                                                <td   class="border-top">{{downline4.runner3Amount}}</td>
+                                                <td   class="border-top">{{downline4.runner2Amount}}</td>
                                               </tr>
 
                                               <div *ngIf="downline4.isExpanded">
                                                 <div *ngFor="let downline5 of downline4.downline">
                                                   <tr >
-                                                    <td *ngIf="downline5.marketId == singleAdminBook.marketId"  class="border-top">{{downline5.userName}} ({{downline5.role}})</td>
-                                                    <td *ngIf="downline5.marketId == singleAdminBook.marketId"  class="border-top">
+                                                    <td   class="border-top">{{downline5.userName}} ({{downline5.role}})</td>
+                                                    <td   class="border-top">
                                                       <img *ngIf="downline5.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline5.isExpanded = !downline5.isExpanded" />
                                                     </td>
-                                                    <td *ngIf="downline5.marketId == singleAdminBook.marketId"  class="border-top"></td>
-                                                    <td *ngIf="downline5.marketId == singleAdminBook.marketId"  class="border-top">{{downline5.runner1Amount}}</td>
-                                                    <td *ngIf="downline5.marketId == singleAdminBook.marketId"  class="border-top">{{downline5.runner3Amount}}</td>
-                                                    <td *ngIf="downline5.marketId == singleAdminBook.marketId"  class="border-top">{{downline5.runner2Amount}}</td>
+                                                    <td   class="border-top"></td>
+                                                    <td   class="border-top">{{downline5.runner1Amount}}</td>
+                                                    <td   class="border-top">{{downline5.runner3Amount}}</td>
+                                                    <td   class="border-top">{{downline5.runner2Amount}}</td>
                                                   </tr>
-      
+
                                                   <div *ngIf="downline5.isExpanded">
                                                     <div *ngFor="let downline6 of downline5.downline">
                                                       <tr>
-                                                        <td *ngIf="downline6.marketId == singleAdminBook.marketId"  class="border-top">{{downline6.userName}} ({{downline6.role}})</td>
-                                                        <td *ngIf="downline6.marketId == singleAdminBook.marketId"  class="border-top">
+                                                        <td   class="border-top">{{downline6.userName}} ({{downline6.role}})</td>
+                                                        <td   class="border-top">
                                                           <img *ngIf="downline6.downline.length>0" src="/assets/images/net_expo.png" width="12" (click)="downline6.isExpanded = !downline6.isExpanded" />
                                                         </td>
-                                                        <td *ngIf="downline6.marketId == singleAdminBook.marketId"  class="border-top"></td>
-                                                        <td *ngIf="downline6.marketId == singleAdminBook.marketId"  class="border-top">{{downline6.runner1Amount}}</td>
-                                                        <td *ngIf="downline6.marketId == singleAdminBook.marketId"  class="border-top">{{downline6.runner3Amount}}</td>
-                                                        <td *ngIf="downline6.marketId == singleAdminBook.marketId"  class="border-top">{{downline6.runner2Amount}}</td>
+                                                        <td   class="border-top"></td>
+                                                        <td   class="border-top">{{downline6.runner1Amount}}</td>
+                                                        <td   class="border-top">{{downline6.runner3Amount}}</td>
+                                                        <td   class="border-top">{{downline6.runner2Amount}}</td>
                                                       </tr>
 
                                                       <div *ngIf="downline6.isExpanded">
@@ -603,31 +649,31 @@
                                                             <td *ngIf="downline7.marketId == singleAdminBook.marketId"  class="border-top">{{downline7.runner2Amount}}</td>
                                                           </tr>
                                                         </div>
-                                                        
+
                                                       </div>
                                                     </div>
-                                                   
-      
-                                                    
+
+
+
                                                   </div>
                                                 </div>
-                                                
+
                                               </div>
                                             </div>
-                                           
-  
-                                            
+
+
+
                                           </div>
                                         </div>
-                                      
 
-                                        
+
+
                                       </div>
                                     </div>
                                   </div>
                                   </tr> -->
 
-                             
+
                               <!-- <tr *ngFor="
                                   let totalBook of singleAdminBook['totalBook']
                                 ">
@@ -678,8 +724,8 @@
     </div>
   </section>
 
-  <section class="section gamedetails mt-3 mb-3">
-    <div class="col-md-12 mt-1 mb-1">
+  <section class="section ">
+    <!-- <div class="col-md-12 mt-1 mb-1">
       <div class="row">
         <div class="col-md-6">
           <input type="text" class="form-control bg-dark text-white radius-left-tb border-pink radius-right-tb"
@@ -693,12 +739,11 @@
           </button>
           Bet Count : {{ viewTotal.length }}
         </div>
-        <!-- <div class="col-md-3 text-end"></div> -->
       </div>
-    </div>
+    </div> -->
     <div class="col-md-12 ">
-      <div class="table-responsive tableRes tableFixHead">
-        <table class="table tableall m-0">
+      <div class="tableRes tableFixHead">
+        <table class="table tableall">
           <thead>
             <tr>
               <th scope="col" class="first">#</th>

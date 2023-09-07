@@ -770,7 +770,8 @@ fieldset:disabled .btn {
   background: rgba(38, 38, 38, 0.63);
   color: #fff;
   border-radius: 35px;
-  padding: 14px 5px;
+  /* padding: 14px 5px; */
+  padding: 7px 5px;
   top: 5px;
   text-align: center;
   border: 0px;

@@ -50,13 +50,13 @@
       >
         <thead>
           <tr>
-            <th scope="col" class="text-white first">Date</th>
-            <th scope="col" class="text-white">Payer/Payee</th>
-            <th scope="col" class="text-white last">Amount</th>
+            <th scope="col" class="text-white pointer first" (click)="toggleSort('createdDate')">Date</th>
+            <th  scope="col" class="text-white pointer" (click)="toggleSort('fromUsername')">Payer/Payee</th>
+            <th scope="col" class="text-white pointer last" (click)="toggleSort('amount')">Amount</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let statements of transferStatements">
+          <tr *ngFor="let statements of transferStatements| sort:sortColumn:sortAscending">
             <td>{{ statements?.createdDate | date }}</td>
             <td>
               {{ statements?.fromUsername }} ({{ statements?.toUsername }})

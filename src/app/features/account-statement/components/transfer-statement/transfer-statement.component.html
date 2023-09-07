@@ -53,24 +53,24 @@
         <tbody>
           <tr>
             <th class="thts first">#</th>
-            <th class="thts"  class="cursor-pointer" (click)="toggleSort('createdDate')">
+            <th class="thts"  class="cursor-pointer pointer" (click)="toggleSort('createdDate')">
               <i class="fa-regular fa-calendar-days"></i>&nbsp;
               Creation Date
             </th>
-            <th class="thts"  class="cursor-pointer" (click)="toggleSort('fromUsername')">
+            <th class="thts"  class="cursor-pointer pointer" (click)="toggleSort('fromUsername')">
               <i class="fa-solid fa-user text-white"></i> From User
             </th>
-            <th class="thts"  class="cursor-pointer" (click)="toggleSort('toUsername')">
+            <th class="thts"  class="cursor-pointer pointer" (click)="toggleSort('toUsername')">
               <i class="fa-solid fa-user"></i> To User
             </th>
-            <th class="thts"  class="cursor-pointer" (click)="toggleSort('amount')">
+            <th class="thts"  class="cursor-pointer pointer" (click)="toggleSort('amount')">
               <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
               Amount
             </th>
-            <th class="thts"  class="cursor-pointer" (click)="toggleSort('isGiven')">
+            <th class="thts"  class="cursor-pointer pointer" (click)="toggleSort('isGiven')">
               <i class="fa-solid fa-text-width"></i> Transaction Type
             </th>
-            <th class="last"  class="cursor-pointer" (click)="toggleSort('currentUserIp')">IP</th>
+            <th class="last"  class="cursor-pointer pointer" (click)="toggleSort('currentUserIp')">IP</th>
           </tr>
 
           <tr *ngFor="let user of transferStatements | sort:sortColumn:sortAscending; let i = index">

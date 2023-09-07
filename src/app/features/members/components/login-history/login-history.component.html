@@ -51,16 +51,16 @@
       <thead>
         <tr>
           <th scope="col" class="first">#</th>
-          <th scope="col" class="">Name</th>
-          <th scope="col" class="">Date</th>
-          <th scope="col" class="">IP</th>
-          <th scope="col" class="">Device</th>
-          <th scope="col" class="">Browser</th>
-          <th scope="col" class="last">OS</th>
+          <th scope="col" class="pointer" (click)="toggleSort('username')">Name</th>
+          <th scope="col" class="pointer" (click)="toggleSort('createdDate')" >Date</th>
+          <th scope="col" class="pointer">IP</th>
+          <th scope="col" class="pointer">Device</th>
+          <th scope="col" class="pointer">Browser</th>
+          <th scope="col" class="pointer last">OS</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let history of loginHistory; let i = index">
+        <tr *ngFor="let history of loginHistory| sort:sortColumn:sortAscending; let i = index">
           <td>
             <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
             <span *ngIf="currentPage > 1">{{

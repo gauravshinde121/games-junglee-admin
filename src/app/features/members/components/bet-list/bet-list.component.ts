@@ -39,6 +39,10 @@ export class BetListComponent implements OnInit {
   marketTypeId: any = null;
   limit:number = 50;
 
+  
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   btnActive: string = 'current';
   isActive : any = false;
   isMatched : any = false;
@@ -271,6 +275,15 @@ export class BetListComponent implements OnInit {
     this.btnActive = linkActive;
 
 
+  }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
   }
 
 

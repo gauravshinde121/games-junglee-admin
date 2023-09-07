@@ -83,20 +83,20 @@
           <thead class="text-dark">
             <tr>
               <th scope="col" class="first">#</th>
-              <th scope="col">Member</th>
-              <th scope="col">Placed Date Time</th>
-              <th scope="col">Events</th>
-              <th scope="col">Market</th>
-              <th scope="col">Selection</th>
-              <th scope="col">Odds Placed</th>
-              <th scope="col">Matched</th>
-              <th scope="col">Unmatched</th>
-              <th scope="col">Profit/Liability</th>
-              <th scope="col" class="last">Remark</th>
+              <th scope="col" class="pointer" (click)="toggleSort('member')">Member</th>
+              <th scope="col" class="pointer" (click)="toggleSort('placedTime')">Placed Date Time</th>
+              <th scope="col" class="pointer" (click)="toggleSort('event')">Events</th>
+              <th scope="col" class="pointer" (click)="toggleSort('market')">Market</th>
+              <th scope="col" class="pointer" (click)="toggleSort('selection')">Selection</th>
+              <th scope="col" class="pointer" (click)="toggleSort('oddsPlaced')">Odds Placed</th>
+              <th scope="col" class="pointer" (click)="toggleSort('stake')">Matched</th>
+              <th scope="col" class="pointer" (click)="toggleSort('stake')">Unmatched</th>
+              <th scope="col" class="pointer" (click)="toggleSort('profitLiability')">Profit/Liability</th>
+              <th scope="col" class="pointer last" (click)="toggleSort('remarks')">Remark</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let bets of allBets; let i = index">
+            <tr *ngFor="let bets of allBets| sort:sortColumn:sortAscending  ; let i = index">
               <td>
                 <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                 <span *ngIf="currentPage > 1">{{

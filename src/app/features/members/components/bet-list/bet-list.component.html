@@ -134,22 +134,22 @@
         <thead>
           <tr>
             <th scope="col" class="first">#</th>
-            <th scope="col" class="">Member</th>
-            <th scope="col" class="">Placed</th>
-            <th scope="col" class="">Matched Date</th>
-            <th scope="col" class="">Event</th>
-            <th scope="col" class="">Market</th>
-            <th scope="col" class="">Selection</th>
-            <th scope="col" class="">Odds Placed</th>
-            <th scope="col" class="">Odds Matched</th>
-            <th scope="col" class="">Matched</th>
-            <th scope="col" class="">Unmatched</th>
-            <th scope="col" class="">Profit Liability</th>
+            <th scope="col" class="pointer" (click)="toggleSort('username')">Member</th>
+            <th scope="col" class="pointer" (click)="toggleSort('placedDate')">Placed</th>
+            <th scope="col" class="pointer" (click)="toggleSort('createdAt')">Matched Date</th>
+            <th scope="col" class="pointer" (click)="toggleSort('event')">Event</th>
+            <th scope="col" class="pointer" (click)="toggleSort('betCategory')">Market</th>
+            <th scope="col" class="pointer" (click)="toggleSort('selectionName')">Selection</th>
+            <th scope="col" class="pointer" (click)="toggleSort('betRate')">Odds Placed</th>
+            <th scope="col" class="pointer" (click)="toggleSort('betRate')">Odds Matched</th>
+            <th scope="col" class="pointer" (click)="toggleSort('stake')">Matched</th>
+            <th scope="col" class="pointer" >Unmatched</th>
+            <th scope="col" class="pointer" (click)="toggleSort('profitLiability')">Profit Liability</th>
             <th scope="col" class="last text-center">IP</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let bet of betList; let i = index">
+          <tr *ngFor="let bet of betList| sort:sortColumn:sortAscending  ; let i = index">
             <td>
               <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
               <span *ngIf="currentPage > 1">{{
@@ -163,11 +163,11 @@
             <td>
               <span
                 *ngIf="!bet.isBack"
-                class="border bg-danger text-danger border-danger me-2"
+                class="border r-2 bg-danger text-danger border-danger me-2 border-3"
               ></span>
               <span
                 *ngIf="bet.isBack"
-                class="border bg-primary text-primary border-primary me-2"
+                class="border bg-primary text-primary border-primary me-2 border-3"
               ></span>
               {{ bet.betCategory }}
             </td>

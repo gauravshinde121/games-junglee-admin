@@ -58,15 +58,15 @@
         <thead>
           <tr>
             <th scope="col" class="first">#</th>
-            <th scope="col">Date</th>
-            <th scope="col">Market Description</th>
-            <th scope="col">P&L</th>
-            <th scope="col">Net Amount</th>
+            <th scope="col"  class="pointer" (click)="toggleSort('settledDate')">Date</th>
+            <th scope="col"  class="pointer" (click)="toggleSort('marketName')">Market Description</th>
+            <th scope="col"  class="pointer" (click)="toggleSort('matchName')">P&L</th>
+            <th scope="col"  class="pointer" (click)="toggleSort('netAmt')">Net Amount</th>
             <th scope="col" class="last">Details</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let acc of accountStatement; let i = index">
+          <tr *ngFor="let acc of accountStatement | sort:sortColumn:sortAscending; let i = index">
             <td>
               <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
               <span *ngIf="currentPage > 1">{{
@@ -232,21 +232,21 @@
           <table class="table tableall" *ngIf="accountStatement.length > 0">
             <thead>
               <tr>
-                <th scope="col" class="text-white first">Place Date</th>
-                <th scope="col" class="text-white">Matched Date</th>
-                <th scope="col" class="text-white">Type</th>
-                <th scope="col" class="text-white">Status</th>
-                <th scope="col" class="text-white">Horse Name</th>
-                <!-- <th scope="col" class="text-white">Avg. Odds</th> -->
-                <th scope="col" class="text-white">Odds</th>
-                <th scope="col" class="text-white">Stake</th>
-                <!-- <th scope="col" class="text-white">Matched Stake</th> -->
-                <th scope="col" class="text-white">Profit/Loss (In INR)</th>
+                <th scope="col" class="text-white pointer first" (click)="toggleSort('createDateTime')">Place Date</th>
+                <th scope="col" class="text-white pointer" (click)="toggleSort('createDateTime')">Matched Date</th>
+                <th class="text-white pointer" (click)="toggleSort('type')">Type</th>
+                <th class="text-white pointer" (click)="toggleSort('status')">Status</th>
+                <th class="text-white pointer" (click)="toggleSort('selectionName')">Horse Name</th>
+                <!-- <th class="text-white pointer" (click)="toggleSort('member')">Avg. Odds</th> -->
+                <th class="text-white pointer" (click)="toggleSort('odds')">Odds</th>
+                <th class="text-white pointer" (click)="toggleSort('stake')">Stake</th>
+                <!-- <th class="text-white pointer" (click)="toggleSort('member')">Matched Stake</th> -->
+                <th class="text-white pointer" (click)="toggleSort('netAmount')">Profit/Loss (In INR)</th>
                 <!-- <th scope="col" class="text-white last">IP</th> -->
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let bet of selectedAccount?.bets">
+              <tr *ngFor="let bet of selectedAccount?.bets | sort:sortColumn:sortAscending">
                 <td>{{ bet.createDateTime | date : "medium" }}</td>
                 <td>{{ bet.createDateTime | date : "medium" }}</td>
                 <td>

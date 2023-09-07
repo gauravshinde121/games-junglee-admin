@@ -40,6 +40,9 @@ export class NetExposureViewTotalComponent implements OnInit {
   ladderObj: never[];
   downlineBooks:any = [];
 
+  sortColumn: string = '';
+  sortAscending: boolean = true;// 1: ascending, -1: descending
+
   constructor(
     private _sharedService: SharedService,
     private _bookMgmService: BookManagementService,
@@ -534,6 +537,15 @@ export class NetExposureViewTotalComponent implements OnInit {
     this._bookMgmService._postLadderDataByMarketApi({ marketId: marketId }).subscribe((res: any) => {
       this.ladderObj = res?.ladderDetails;
     })
+  }
+
+  toggleSort(columnName: string) {
+    if (this.sortColumn === columnName) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = columnName;
+      this.sortAscending = true;
+    }
   }
 
 }

@@ -73,21 +73,13 @@
 <div class="row align-items-center mb-2 mt-3">
   <div class="col-md-2 col-6">
     <div class="toggle-sidebar-btn d-flex align-items-center">
-      <a
-        (click)="toggleMenu()"
-        class="navbar-toggler bg-color text-white px-1 mx-0"
-        type="button"
-      >
+      <a (click)="toggleMenu()" class="navbar-toggler bg-color text-white px-1 mx-0" type="button">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <i class="fa fa-bars-staggered"></i>
       </a>
 
-      <a
-        [routerLink]="['member/list']"
-        routerLinkActive="router-link-active"
-        class=" d-block ms-3"
-      >
-        <img src="/assets/images/logo.svg" alt="" class="col-3 col-lg-7 "/>
+      <a [routerLink]="['member/list']" routerLinkActive="router-link-active" class=" d-block ms-3">
+        <img src="/assets/images/logo.svg" alt="" class="col-3 col-md-12 col-lg-7 " />
       </a>
     </div>
   </div>

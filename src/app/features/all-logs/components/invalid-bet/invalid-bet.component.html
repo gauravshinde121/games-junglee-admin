@@ -8,11 +8,7 @@
 
       <div class="col-md-4">
         <label>Select Member</label>
-        <select
-          formControlName="memberName"
-          id="ab"
-          class="form-select bg-dgrey pointer"
-        >
+        <select formControlName="memberName" id="ab" class="form-select bg-dgrey pointer">
           <option value="null">All</option>
           <option *ngFor="let member of allMembers" [value]="member.userId">
             {{ member.username }}
@@ -22,51 +18,28 @@
 
       <div class="col-md-4">
         <label>From Date</label>
-        <input
-          type="date"
-          name=""
-          class="form-control"
-          id=""
-          formControlName="fromDate"
-        />
+        <input type="date" name="" class="form-control" id="" formControlName="fromDate" />
       </div>
 
       <div class="col-md-4">
         <label>To Date</label>
-        <input
-          type="date"
-          name=""
-          class="form-control"
-          id=""
-          formControlName="toDate"
-        />
+        <input type="date" name="" class="form-control" id="" formControlName="toDate" />
       </div>
 
       <!-- <div class="col-md-12"> -->
 
       <div class="col-md-2 mt-4">
-        <button
-          type="button"
-          class="btn btn-pink rounded-pill w-100"
-          (click)="getLogs()"
-        >
+        <button type="button" class="btn btn-pink rounded-pill w-100" (click)="getLogs()">
           Get Log
         </button>
       </div>
       <div class="col-md-2 mt-4">
-        <button
-          type="button"
-          class="btn btn-pink rounded-pill w-100"
-          (click)="clearFilters()"
-        >
+        <button type="button" class="btn btn-pink rounded-pill w-100" (click)="clearFilters()">
           Clear Filters
         </button>
       </div>
       <div class="col-md-2 mt-4">
-        <button
-          type="button"
-          class="btn btn-pink rounded-pill w-100"
-          (click)="exportExcel()">Export</button>
+        <button type="button" class="btn btn-pink rounded-pill w-100" (click)="exportExcel()">Export</button>
       </div>
       <!-- </div> -->
       <!-- </div> -->
@@ -76,94 +49,76 @@
     <div class="row pt-5">
       <div class="col-md-12 ">
         <div class="table-responsive tableRes tableFixHead">
-        <table
-          class="table table tableall"
-          *ngIf="allBets.length > 0 && !this.isLoading"
-        >
-          <thead class="text-dark">
-            <tr>
-              <th scope="col" class="first">#</th>
-              <th scope="col" class="pointer" (click)="toggleSort('member')">Member</th>
-              <th scope="col" class="pointer" (click)="toggleSort('placedTime')">Placed Date Time</th>
-              <th scope="col" class="pointer" (click)="toggleSort('event')">Events</th>
-              <th scope="col" class="pointer" (click)="toggleSort('market')">Market</th>
-              <th scope="col" class="pointer" (click)="toggleSort('selection')">Selection</th>
-              <th scope="col" class="pointer" (click)="toggleSort('oddsPlaced')">Odds Placed</th>
-              <th scope="col" class="pointer" (click)="toggleSort('stake')">Matched</th>
-              <th scope="col" class="pointer" (click)="toggleSort('stake')">Unmatched</th>
-              <th scope="col" class="pointer" (click)="toggleSort('profitLiability')">Profit/Liability</th>
-              <th scope="col" class="pointer last" (click)="toggleSort('remarks')">Remark</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bets of allBets| sort:sortColumn:sortAscending  ; let i = index">
-              <td>
-                <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
-                <span *ngIf="currentPage > 1">{{
+          <table class="table table tableall" *ngIf="allBets.length > 0 && !this.isLoading">
+            <thead class="text-dark">
+              <tr>
+                <th scope="col" class="first">#</th>
+                <th scope="col" class="pointer" (click)="toggleSort('member')">Member</th>
+                <th scope="col" class="pointer" (click)="toggleSort('placedTime')">Placed Date Time</th>
+                <th scope="col" class="pointer" (click)="toggleSort('event')">Events</th>
+                <th scope="col" class="pointer" (click)="toggleSort('market')">Market</th>
+                <th scope="col" class="pointer" (click)="toggleSort('selection')">Selection</th>
+                <th scope="col" class="pointer" (click)="toggleSort('oddsPlaced')">Odds Placed</th>
+                <th scope="col" class="pointer" (click)="toggleSort('stake')">Matched</th>
+                <th scope="col" class="pointer" (click)="toggleSort('stake')">Unmatched</th>
+                <th scope="col" class="pointer" (click)="toggleSort('profitLiability')">Profit/Liability</th>
+                <th scope="col" class="pointer last" (click)="toggleSort('remarks')">Remark</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bets of allBets| sort:sortColumn:sortAscending  ; let i = index">
+                <td>
+                  <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+                  <span *ngIf="currentPage > 1">{{
                   i + 1 + (currentPage - 1) * limit
                 }}</span>
-              </td>
-              <td>{{ bets.member }}</td>
-              <td>{{ bets.placedTime | date : "medium"}}</td>
-              <td>{{ bets.event }}</td>
-              <td>
-                <span
-                      *ngIf="bets.isBack == false"
-                      class="border r-2 bg-danger text-danger border-danger me-2 border-3"
-                    ></span>
-                    <span
-                      *ngIf="bets.isBack == true"
-                      class="border bg-primary text-primary border-primary me-2 border-3"
-                    ></span>
-                {{ bets.market }}
-              </td>
-              <td>{{ bets.selection }}</td>
-              <td>{{ bets.oddsPlaced }}</td>
-              <td>
-                <ng-container *ngIf="bets.isMatched; else notMatched">
-                  {{ bets.stake }}
-                </ng-container>
-                <ng-template #notMatched> -- </ng-template>
-              </td>
-              <td>
-                <ng-container *ngIf="!bets.isMatched; else notMatched">
-                  {{ bets.stake }}
-                </ng-container>
-                <ng-template #notMatched> -- </ng-template>
-              </td>
-              <td>
-                <span
-                  [ngClass]="
+                </td>
+                <td>{{ bets.member }}</td>
+                <td>{{ bets.placedTime | date : "medium"}}</td>
+                <td>{{ bets.event }}</td>
+                <td>
+                  <span *ngIf="bets.isBack == false"
+                    class="border r-2 bg-danger text-danger border-danger me-2 border-3"></span>
+                  <span *ngIf="bets.isBack == true"
+                    class="border bg-primary text-primary border-primary me-2 border-3"></span>
+                  {{ bets.market }}
+                </td>
+                <td>{{ bets.selection }}</td>
+                <td>{{ bets.oddsPlaced }}</td>
+                <td>
+                  <ng-container *ngIf="bets.isMatched; else notMatched">
+                    {{ bets.stake }}
+                  </ng-container>
+                  <ng-template #notMatched> -- </ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!bets.isMatched; else notMatched">
+                    {{ bets.stake }}
+                  </ng-container>
+                  <ng-template #notMatched> -- </ng-template>
+                </td>
+                <td>
+                  <span [ngClass]="
                     bets.profitLiability > 0 ? 'text-success' : 'text-danger'
-                  "
-                >
-                  {{ bets.profitLiability }}
-                </span>
-              </td>
-              <td>{{ bets.remarks }}</td>
-            </tr>
-          </tbody>
-        </table>
+                  ">
+                    {{ bets.profitLiability }}
+                  </span>
+                </td>
+                <td>{{ bets.remarks }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </section>
   <div *ngIf="allBets.length > 0 && !this.isLoading" class="mt-2">
-    <button
-      class="btn bg-dgrey rounded-pill text-white"
-      [disabled]="currentPage === 1"
-      (click)="prev()"
-    >
+    <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
       Prev
     </button>
-    <span class="btn btn-pink rounded-pill ps-4 pe-4"
-      >{{ currentPage }} / {{ totalPages }}
+    <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
     </span>
-    <button
-      class="btn bg-dgrey rounded-pill text-white"
-      [disabled]="currentPage === totalPages"
-      (click)="next()"
-    >
+    <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
       Next
     </button>
   </div>

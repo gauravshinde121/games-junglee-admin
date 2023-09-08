@@ -2,59 +2,57 @@
 <div id="overlay">
   <aside id="sidebar" class="sidebar flex-shrink-0 fixed-sidebar p-0">
     <ul class="nav">
+      <li class="showInTab px-2 py-4">
+        <div class="toggle-sidebar-btn d-flex align-items-center">
+          <a (click)="toggleMenu()" class="navbar-toggler bg-color text-white px-1 mx-0" type="button">
+            <!-- <span class="navbar-toggler-icon"></span> -->
+            <i class="fa fa-bars-staggered"></i>
+          </a>
+        </div>
+      </li>
       <li>
-        <a
-          class="btn collapsed"
+        <a class="btn collapsed"
           [ngClass]="(currentPath == '/member/list') || (currentPath == '/member/search-member')?'btn collapsed show':'btn collapsed'"
-          data-bs-toggle="collapse"
-          data-bs-target="#home-collapse"
-          aria-expanded="false"
-        >
+          data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
           <i class="fa-solid fa-user icon-pink me-2"></i> Member
         </a>
-        <div [ngClass]="(currentPath == '/member/list') || (currentPath == '/member/search-member')?'collapse show':'collapse'" class="collapse" id="home-collapse">
+        <div
+          [ngClass]="(currentPath == '/member/list') || (currentPath == '/member/search-member')?'collapse show':'collapse'"
+          class="collapse" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li [routerLinkActive]="currentPath == '/member/list'?'active':''" [ngClass]="currentPath == '/member/list'?'active':''">
-              <a (click)="storePath('/member/list')" routerLink="/member/list" class="nav-link small ps-5"
-                >Member List</a
-              >
+            <li [routerLinkActive]="currentPath == '/member/list'?'active':''"
+              [ngClass]="currentPath == '/member/list'?'active':''">
+              <a (click)="storePath('/member/list')" routerLink="/member/list" class="nav-link small ps-5">Member
+                List</a>
             </li>
-            <li [routerLinkActive]="currentPath == '/member/search-member'?'active':''" [ngClass]="currentPath == '/member/search-member'?'active':''">
-              <a (click)="storePath('/member/search-member')" routerLink="/member/search-member" class="nav-link small ps-5"
-                >Search Member</a
-              >
+            <li [routerLinkActive]="currentPath == '/member/search-member'?'active':''"
+              [ngClass]="currentPath == '/member/search-member'?'active':''">
+              <a (click)="storePath('/member/search-member')" routerLink="/member/search-member"
+                class="nav-link small ps-5">Search Member</a>
             </li>
             <!-- <li><a routerLink="/member/user-access" class="nav-link small ps-5">User Access Level</a></li> -->
           </ul>
         </div>
       </li>
       <li>
-        <a
-          [ngClass]="(currentPath == '/book-management/net-exposure') || (currentPath == '/book-management/bet-ticker')?'btn collapsed show':'btn collapsed'"
-          data-bs-toggle="collapse"
-          data-bs-target="#dashboard-collapse"
-          aria-expanded="false"
-        >
+        <a [ngClass]="(currentPath == '/book-management/net-exposure') || (currentPath == '/book-management/bet-ticker')?'btn collapsed show':'btn collapsed'"
+          data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
           <i class="fa-solid fa-bookmark icon-pink me-2"></i> Book Management
         </a>
-        <div [ngClass]="(currentPath == '/book-management/net-exposure') || (currentPath == '/book-management/bet-ticker')?'collapse show':'collapse'" id="dashboard-collapse">
+        <div
+          [ngClass]="(currentPath == '/book-management/net-exposure') || (currentPath == '/book-management/bet-ticker')?'collapse show':'collapse'"
+          id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li [routerLinkActive]="currentPath == '/book-management/net-exposure'?'active':''" [ngClass]="currentPath == '/book-management/net-exposure'?'active':''">
-              <a
-                (click)="storePath('/book-management/net-exposure')"
-                routerLink="/book-management/net-exposure"
-                class="nav-link small ps-5"
-                >Net Exposure</a
-              >
+            <li [routerLinkActive]="currentPath == '/book-management/net-exposure'?'active':''"
+              [ngClass]="currentPath == '/book-management/net-exposure'?'active':''">
+              <a (click)="storePath('/book-management/net-exposure')" routerLink="/book-management/net-exposure"
+                class="nav-link small ps-5">Net Exposure</a>
             </li>
             <!-- <li><a routerLink="/book-management/net-exposure-racing" class="nav-link small ps-5">Net Exposure Racing</a></li> -->
-            <li [routerLinkActive]="currentPath == '/book-management/bet-ticker'?'active':''" [ngClass]="currentPath == '/book-management/bet-ticker'?'active':''">
-              <a
-              (click)="storePath('/book-management/bet-ticker')"
-                routerLink="/book-management/bet-ticker"
-                class="nav-link small ps-5"
-                >Bet Ticker</a
-              >
+            <li [routerLinkActive]="currentPath == '/book-management/bet-ticker'?'active':''"
+              [ngClass]="currentPath == '/book-management/bet-ticker'?'active':''">
+              <a (click)="storePath('/book-management/bet-ticker')" routerLink="/book-management/bet-ticker"
+                class="nav-link small ps-5">Bet Ticker</a>
             </li>
             <!-- <li><a routerLink="/book-management/bet-ticker-flag-final" class="nav-link small ps-5">Bet Ticker Flag Final</a></li> -->
             <!-- <li><a routerLink="/book-management/bet-ticker-previous"  class="nav-link small ps-5">Bet Ticker Previous</a></li> -->
@@ -63,48 +61,34 @@
         </div>
       </li>
       <li>
-        <a
-          class="btn collapsed"
+        <a class="btn collapsed"
           [ngClass]="(currentPath == '/account-statement/my-pl') || (currentPath == '/account-statement/player-pl') || (currentPath == '/account-statement/transfer-statement') || (currentPath == '/account-statement/turnover')?'btn collapsed show':'btn collapsed'"
-          data-bs-toggle="collapse"
-          data-bs-target="#orders-collapse"
-          aria-expanded="false"
-        >
+          data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
           <i class="fa-solid fa-receipt icon-pink me-2"></i> Account Statement
         </a>
-        <div [ngClass]="(currentPath == '/account-statement/my-pl') || (currentPath == '/account-statement/player-pl') || (currentPath == '/account-statement/transfer-statement') || (currentPath == '/account-statement/turnover')?'collapse show':'collapse'" id="orders-collapse">
+        <div
+          [ngClass]="(currentPath == '/account-statement/my-pl') || (currentPath == '/account-statement/player-pl') || (currentPath == '/account-statement/transfer-statement') || (currentPath == '/account-statement/turnover')?'collapse show':'collapse'"
+          id="orders-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li [routerLinkActive]="currentPath == '/account-statement/my-pl'?'active':''" [ngClass]="currentPath == '/account-statement/my-pl'?'active':''">
-              <a
-              (click)="storePath('/account-statement/my-pl')"
-                routerLink="/account-statement/my-pl"
-                class="nav-link small ps-5"
-                >My P/L</a
-              >
+            <li [routerLinkActive]="currentPath == '/account-statement/my-pl'?'active':''"
+              [ngClass]="currentPath == '/account-statement/my-pl'?'active':''">
+              <a (click)="storePath('/account-statement/my-pl')" routerLink="/account-statement/my-pl"
+                class="nav-link small ps-5">My P/L</a>
             </li>
-            <li [routerLinkActive]="currentPath == '/account-statement/player-pl'?'active':''" [ngClass]="currentPath == '/account-statement/player-pl'?'active':''">
-              <a
-              (click)="storePath('/account-statement/player-pl')"
-                routerLink="/account-statement/player-pl"
-                class="nav-link small ps-5"
-                >Player P/L</a
-              >
+            <li [routerLinkActive]="currentPath == '/account-statement/player-pl'?'active':''"
+              [ngClass]="currentPath == '/account-statement/player-pl'?'active':''">
+              <a (click)="storePath('/account-statement/player-pl')" routerLink="/account-statement/player-pl"
+                class="nav-link small ps-5">Player P/L</a>
             </li>
-            <li [routerLinkActive]="currentPath == '/account-statement/transfer-statement'?'active':''" [ngClass]="currentPath == '/account-statement/transfer-statement'?'active':''">
-              <a
-              (click)="storePath('/account-statement/transfer-statement')"
-                routerLink="/account-statement/transfer-statement"
-                class="nav-link small ps-5"
-                >Transfer Statement</a
-              >
+            <li [routerLinkActive]="currentPath == '/account-statement/transfer-statement'?'active':''"
+              [ngClass]="currentPath == '/account-statement/transfer-statement'?'active':''">
+              <a (click)="storePath('/account-statement/transfer-statement')"
+                routerLink="/account-statement/transfer-statement" class="nav-link small ps-5">Transfer Statement</a>
             </li>
-            <li [routerLinkActive]="currentPath == '/account-statement/turnover'?'active':''" [ngClass]="currentPath == '/account-statement/turnover'?'active':''">
-              <a
-              (click)="storePath('/account-statement/turnover')"
-                routerLink="/account-statement/turnover"
-                class="nav-link small ps-5"
-                >Turn Over</a
-              >
+            <li [routerLinkActive]="currentPath == '/account-statement/turnover'?'active':''"
+              [ngClass]="currentPath == '/account-statement/turnover'?'active':''">
+              <a (click)="storePath('/account-statement/turnover')" routerLink="/account-statement/turnover"
+                class="nav-link small ps-5">Turn Over</a>
             </li>
             <!-- <li [routerLinkActive]="currentPath == '/account-statement/my-account-statement'?'active':''" [ngClass]="currentPath == '/account-statement/my-account-statement'?'active':''">
               <a
@@ -128,41 +112,33 @@
       </li>
 
       <li [routerLinkActive]="currentPath == '/bank'?'active':''" [ngClass]="currentPath == '/bank'?'active':''">
-        <a
-        (click)="storePath('/bank')"
-          routerLink="/bank"
-          class="btn collapsed"
-          data-bs-toggle="collapse"
-          data-bs-target="#pwd-collapse"
-          aria-expanded="false"
-        >
+        <a (click)="storePath('/bank')" routerLink="/bank" class="btn collapsed" data-bs-toggle="collapse"
+          data-bs-target="#pwd-collapse" aria-expanded="false">
           <i class="fa-solid fa-bank icon-pink me-2"></i> Bank
         </a>
       </li>
 
       <li>
-        <a
-          data-bs-toggle="collapse"
-          data-bs-target="#allLog-collapse"
-          aria-expanded="false"
-          [ngClass]="(currentPath == '/all-logs/cl-transfer') || (currentPath == '/all-logs/invalid-bet')?'btn collapsed show':'btn collapsed'"
-        >
+        <a data-bs-toggle="collapse" data-bs-target="#allLog-collapse" aria-expanded="false"
+          [ngClass]="(currentPath == '/all-logs/cl-transfer') || (currentPath == '/all-logs/invalid-bet')?'btn collapsed show':'btn collapsed'">
           <i class="fa-solid fa-pen-to-square icon-pink me-2"></i> All Logs
         </a>
-        <div [ngClass]="(currentPath == '/all-logs/cl-transfer') || (currentPath == '/all-logs/invalid-bet')?'collapse show':'collapse'"  id="allLog-collapse">
+        <div
+          [ngClass]="(currentPath == '/all-logs/cl-transfer') || (currentPath == '/all-logs/invalid-bet')?'collapse show':'collapse'"
+          id="allLog-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
             <!-- <li><a routerLink="/all-logs/analytics" class="nav-link small ps-5">Analytics</a></li> -->
             <!-- <li><a routerLink="/all-logs/reports" class="nav-link small ps-5">Reports</a></li> -->
-            <li [routerLinkActive]="currentPath == '/all-logs/cl-transfer'?'active':''" [ngClass]="currentPath == '/all-logs/cl-transfer'?'active':''">
-              <a (click)="storePath('/all-logs/cl-transfer')" routerLink="/all-logs/cl-transfer" class="nav-link small ps-5"
-                >Credit Transfers</a
-              >
+            <li [routerLinkActive]="currentPath == '/all-logs/cl-transfer'?'active':''"
+              [ngClass]="currentPath == '/all-logs/cl-transfer'?'active':''">
+              <a (click)="storePath('/all-logs/cl-transfer')" routerLink="/all-logs/cl-transfer"
+                class="nav-link small ps-5">Credit Transfers</a>
             </li>
             <!-- <li><a routerLink="/all-logs/betfair-rate-log" class="nav-link small ps-5">BetfairRates Log</a></li> -->
-            <li [routerLinkActive]="currentPath == '/all-logs/invalid-bet'?'active':''" [ngClass]="currentPath == '/all-logs/invalid-bet'?'active':''">
-              <a (click)="storePath('/all-logs/invalid-bet')" routerLink="/all-logs/invalid-bet" class="nav-link small ps-5"
-                >Void Bets</a
-              >
+            <li [routerLinkActive]="currentPath == '/all-logs/invalid-bet'?'active':''"
+              [ngClass]="currentPath == '/all-logs/invalid-bet'?'active':''">
+              <a (click)="storePath('/all-logs/invalid-bet')" routerLink="/all-logs/invalid-bet"
+                class="nav-link small ps-5">Void Bets</a>
             </li>
             <!-- <li><a routerLink="/all-logs/multiple-ip" class="nav-link small ps-5">Multiple IP</a></li><li><a routerLink="/all-logs/blocked-ip" class="nav-link small ps-5">Blocked IP</a></li><li><a routerLink="/all-logs/login-from-blocked-ip" class="nav-link small ps-5">Login From Blocked IP</a></li> -->
           </ul>
@@ -182,15 +158,10 @@
           Surveillance
         </a>
       </li> -->
-      <li [routerLinkActive]="currentPath == '/change-password'?'active':''" [ngClass]="currentPath == '/change-password'?'active':''">
-        <a
-        (click)="storePath('/change-password')"
-          routerLink="/change-password"
-          class="btn collapsed"
-          data-bs-toggle="collapse"
-          data-bs-target="#pwd-collapse"
-          aria-expanded="false"
-        >
+      <li [routerLinkActive]="currentPath == '/change-password'?'active':''"
+        [ngClass]="currentPath == '/change-password'?'active':''">
+        <a (click)="storePath('/change-password')" routerLink="/change-password" class="btn collapsed"
+          data-bs-toggle="collapse" data-bs-target="#pwd-collapse" aria-expanded="false">
           <i class="fa-solid fa-lock icon-pink me-2"></i> Change Password
         </a>
       </li>
@@ -199,55 +170,48 @@
           <i class="fa fa-key icon-pink me-2"></i> Google Authentication
         </a>
       </li> -->
-      
+
       <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN'">
-        <a
-          class="btn collapsed"
+        <a class="btn collapsed"
           [ngClass]="(currentPath == '/settings/balance') || (currentPath == '/settings/match-settings') || (currentPath == '/settings/market-settings') || (currentPath == '/settings/bet-settings')?'btn collapsed show':'btn collapsed'"
-          data-bs-toggle="collapse"
-          data-bs-target="#settings-collapse"
-          aria-expanded="false"
-        >
+          data-bs-toggle="collapse" data-bs-target="#settings-collapse" aria-expanded="false">
           <i class="fa-solid fa-pen-to-square icon-pink me-2"></i> Settings
         </a>
-        <div [ngClass]="(currentPath == '/settings/balance') || (currentPath == '/settings/match-settings') || (currentPath == '/settings/market-settings') || (currentPath == '/settings/bet-settings')?'collapse show':'collapse'" class="collapse" id="settings-collapse">
+        <div
+          [ngClass]="(currentPath == '/settings/balance') || (currentPath == '/settings/match-settings') || (currentPath == '/settings/market-settings') || (currentPath == '/settings/bet-settings')?'collapse show':'collapse'"
+          class="collapse" id="settings-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li  [routerLinkActive]="currentPath == '/settings/balance'?'active':''" [ngClass]="currentPath == '/settings/balance'?'active':''">
-              <a (click)="storePath('/settings/balance')" routerLink="/settings/balance" class="nav-link small ps-5"
-                >Balance</a
-              >
+            <li [routerLinkActive]="currentPath == '/settings/balance'?'active':''"
+              [ngClass]="currentPath == '/settings/balance'?'active':''">
+              <a (click)="storePath('/settings/balance')" routerLink="/settings/balance"
+                class="nav-link small ps-5">Balance</a>
             </li>
-            <li  [routerLinkActive]="currentPath == '/settings/bet-settings'?'active':''" [ngClass]="currentPath == '/settings/bet-settings'?'active':''">
-              <a (click)="storePath('/settings/bet-settings')" routerLink="/settings/bet-settings" class="nav-link small ps-5"
-                >Bet Settings</a
-              >
+            <li [routerLinkActive]="currentPath == '/settings/bet-settings'?'active':''"
+              [ngClass]="currentPath == '/settings/bet-settings'?'active':''">
+              <a (click)="storePath('/settings/bet-settings')" routerLink="/settings/bet-settings"
+                class="nav-link small ps-5">Bet Settings</a>
             </li>
-            <li  [routerLinkActive]="currentPath == '/settings/match-settings'?'active':''" [ngClass]="currentPath == '/settings/match-settings'?'active':''">
-              <a (click)="storePath('/settings/match-settings')" routerLink="/settings/match-settings" class="nav-link small ps-5"
-                >Match Settings</a
-              >
+            <li [routerLinkActive]="currentPath == '/settings/match-settings'?'active':''"
+              [ngClass]="currentPath == '/settings/match-settings'?'active':''">
+              <a (click)="storePath('/settings/match-settings')" routerLink="/settings/match-settings"
+                class="nav-link small ps-5">Match Settings</a>
             </li>
-            <li  [routerLinkActive]="currentPath == '/settings/market-settings'?'active':''" [ngClass]="currentPath == '/settings/market-settings'?'active':''">
-              <a (click)="storePath('/settings/market-settings')" routerLink="/settings/market-settings" class="nav-link small ps-5"
-                >Market Settings</a
-              >
+            <li [routerLinkActive]="currentPath == '/settings/market-settings'?'active':''"
+              [ngClass]="currentPath == '/settings/market-settings'?'active':''">
+              <a (click)="storePath('/settings/market-settings')" routerLink="/settings/market-settings"
+                class="nav-link small ps-5">Market Settings</a>
             </li>
-            <li  [routerLinkActive]="currentPath == '/settings/app-settings'?'active':''" [ngClass]="currentPath == '/settings/app-settings'?'active':''">
-              <a (click)="storePath('/settings/app-settings')" routerLink="/settings/app-settings" class="nav-link small ps-5"
-                >App Setting</a
-              >
+            <li [routerLinkActive]="currentPath == '/settings/app-settings'?'active':''"
+              [ngClass]="currentPath == '/settings/app-settings'?'active':''">
+              <a (click)="storePath('/settings/app-settings')" routerLink="/settings/app-settings"
+                class="nav-link small ps-5">App Setting</a>
             </li>
           </ul>
         </div>
       </li>
       <li>
-        <a
-          class="btn collapsed"
-          (click)="onLogout()"
-          data-bs-toggle="collapse"
-          data-bs-target="#pwd-collapse"
-          aria-expanded="false"
-        >
+        <a class="btn collapsed" (click)="onLogout()" data-bs-toggle="collapse" data-bs-target="#pwd-collapse"
+          aria-expanded="false">
           <i class="fa-solid fa-right-from-bracket icon-pink me-2"></i> Logout
         </a>
       </li>

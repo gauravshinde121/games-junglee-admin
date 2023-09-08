@@ -19,12 +19,12 @@ export class LeftNavigationComponent implements OnInit {
   menuList: any;
   tourId: any;
   matchId: any;
-  leftMenuOpen:boolean = true;
+  leftMenuOpen: boolean = true;
   adminDetails: any = null;
-  currentPath:any = '';
+  currentPath: any = '';
   isMobileView = false;
 
-  
+
   onResize() {
     if (window.innerWidth <= 767) {
       this.isMobileView = true;
@@ -37,7 +37,7 @@ export class LeftNavigationComponent implements OnInit {
     private _route: ActivatedRoute,
     public _sharedService: SharedService,
     private _router: Router
-  ) { 
+  ) {
     this.onResize();
   }
 
@@ -67,15 +67,15 @@ export class LeftNavigationComponent implements OnInit {
   }
 
 
-  storePath(path:string){
-    console.log('path',path)
-    localStorage.setItem('path',path)
+  storePath(path: string) {
+    console.log('path', path)
+    localStorage.setItem('path', path)
     this.checkPath();
     this.toggleMenu()
   }
 
 
-  checkPath(){
+  checkPath() {
     this.currentPath = localStorage.getItem('path');
     // console.log("this.currentPath")
     // console.log(this.currentPath)
@@ -83,17 +83,28 @@ export class LeftNavigationComponent implements OnInit {
   }
 
 
-  toggleMenu(){
-    if(this.isMobileView){
-      this.leftMenuOpen=!this.leftMenuOpen;
-    
-         // this.isLeftBarDisplay=!this.isLeftBarDisplay;
+  // toggleMenu() {
+  //   if (this.isMobileView) {
+  //     this.leftMenuOpen = !this.leftMenuOpen;
+
+  //     // this.isLeftBarDisplay=!this.isLeftBarDisplay;
+  //     this._sharedService.leftMenuStatus.next({
+  //       'leftMenuOpen': this.leftMenuOpen
+  //     });
+
+
+  //   }
+  // }
+  toggleMenu() {
+    console.log(this.leftMenuOpen)
+
+    this.leftMenuOpen = !this.leftMenuOpen;
+    // this.isLeftBarDisplay = !this.isLeftBarDisplay;
     this._sharedService.leftMenuStatus.next({
       'leftMenuOpen': this.leftMenuOpen
     });
 
-
-    }
+    console.log(this.leftMenuOpen)
   }
 
 }

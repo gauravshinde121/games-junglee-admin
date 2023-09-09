@@ -49,3 +49,7 @@
 .tooltipnk .tooltiptext {
   margin-left: -190px;
 }
+
+.tableFixHead .table > :not(caption) > * > * {
+  padding: 5px;
+}

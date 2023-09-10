@@ -55,7 +55,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     this._getWebSocketUrl();
     this.resetTimerInterval = setInterval(() => {
       if (this.refreshCount == 0) {
-        // this.refreshCall();
+        this.refreshCall();
         this.refreshCount = 9;
       }
       this.refreshCount--;
@@ -64,7 +64,7 @@ export class NetExposureViewTotalComponent implements OnInit {
 
 
 
-  
+
   _getWebSocketUrl(isComplete = false) {
     this._sharedService.getWebSocketURLApi().subscribe(
       (res: any) => {
@@ -109,8 +109,8 @@ export class NetExposureViewTotalComponent implements OnInit {
   }
 
   getTotalBookViewTotal(marketId, totalBookStatus,adminBook) {
-    
-    
+
+
     if (totalBookStatus) {
 
       this.adminBooksList.map((adminBook) => {
@@ -133,11 +133,11 @@ export class NetExposureViewTotalComponent implements OnInit {
       myPT: this.myPT
     };
 
-    
+
       this._bookMgmService._postTotalBookApi(totalBookParams).subscribe((data: any) => {
-      
+
         this.downlineBooks = [];
-        
+
         if(data.book.length>0){
           data.book = data.book.map((el)=>({...el,marketId:totalBookParams.marketId,isExpanded:false}));
 
@@ -149,10 +149,10 @@ export class NetExposureViewTotalComponent implements OnInit {
         }else{
           this.downlineBooks = [];
         }
-  
-  
+
+
         // console.log(this.downlineBooks)
-  
+
         if (data['book'].length > 0) {
           this.totalBooks.push({ marketId: marketId, totalBook: data['book'], isTotaltotalBookView: true });
           this.adminBooksList.map((adminBook) => {
@@ -166,8 +166,8 @@ export class NetExposureViewTotalComponent implements OnInit {
           })
         }
       });
-  
-    
+
+
   }
 
 
@@ -221,7 +221,7 @@ export class NetExposureViewTotalComponent implements OnInit {
           }
         }
 
-        
+
       }
 
 
@@ -341,7 +341,7 @@ export class NetExposureViewTotalComponent implements OnInit {
           })
         })
         this.adminBooksList = res['book'];
-        
+
 
         if (this.prevSetOrUnsetWebSocketParamsObj.length !== this.setOrUnsetWebSocketParamsObj.length) {
           let setObj = {

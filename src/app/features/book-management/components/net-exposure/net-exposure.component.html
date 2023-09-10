@@ -384,11 +384,11 @@
 
                 </div>
 
-                <div class="col bg-white text-dark p-2"><span> {{market.totalStakes}}</span></div>
+                <div class="col bg-white text-dark p-2"><span> {{market.totalStakes | number:'1.0-0'}}</span></div>
                 <div class="col bg-white p-2" [ngClass]="market.maxWin >= 0 ? 'text-success' : 'text-danger'">
-                  <span> {{market.maxWin}}</span>
+                  <span> {{market.maxWin | number:'1.0-0'}}</span>
                 </div>
-                <div class="col bg-white text-danger p-2"><span> {{market.netExposure}}</span></div>
+                <div class="col bg-white text-danger p-2"><span> {{market.netExposure | number:'1.0-0'}}</span></div>
               </div>
             </div>
             <!-- </div> -->

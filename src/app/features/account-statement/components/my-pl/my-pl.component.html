@@ -13,34 +13,17 @@
           <div class="row align-items-end">
             <div class="col-md-3 mb-3">
               <label>From Date</label>
-              <input
-                type="date"
-                formControlName="fromDate"
-                name="fromDate"
-                class="form-control"
-                id=""
-                placeholder="Month"
-              />
+              <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id=""
+                placeholder="Month" />
             </div>
             <div class="col-md-3 mb-3">
               <label>To Date</label>
-              <input
-                type="date"
-                formControlName="toDate"
-                name="toDate"
-                class="form-control"
-                id=""
-                placeholder="Month"
-              />
+              <input type="date" formControlName="toDate" name="toDate" class="form-control" id=""
+                placeholder="Month" />
             </div>
             <div class="col-md-3 mb-3">
               <label>Select Sport</label>
-              <select
-                formControlName="sportsId"
-                id="ab"
-                class="form-select pointer"
-                (change)="changeGame($event)"
-              >
+              <select formControlName="sportsId" id="ab" class="form-select pointer" (change)="changeGame($event)">
                 <option [value]="null">All</option>
                 <option *ngFor="let game of games" [value]="game.sportId">
                   {{ game.sportName }}
@@ -49,12 +32,7 @@
             </div>
             <div class="col-md-3 mb-3">
               <label>Select Match</label>
-              <select
-                formControlName="matchId"
-                id="ab"
-                class="form-select pointer"
-                (change)="changeMatch($event)"
-              >
+              <select formControlName="matchId" id="ab" class="form-select pointer" (change)="changeMatch($event)">
                 <option [value]="null">All</option>
                 <option [value]="match.matchId" *ngFor="let match of matchList">
                   {{ match.matchName }}
@@ -63,30 +41,20 @@
             </div>
             <div class="col-md-4">
               <label>Select Market</label>
-              <select
-                formControlName="marketId"
-                id="ab"
-                class="form-select pointer"
-                (change)="changeMarketType($event)"
-              >
+              <select formControlName="marketId" id="ab" class="form-select pointer"
+                (change)="changeMarketType($event)">
                 <option [value]="null">All</option>
-                <option
-                  [value]="market.marketId"
-                  *ngFor="let market of marketList"
-                >
+                <option [value]="market.marketId" *ngFor="let market of marketList">
                   {{ market.marketName }}
                 </option>
               </select>
             </div>
             <div class="col-md-3 d-flex align-items-end">
-              <button
-                type="button"
-                (click)="searchList()"
-                class="btn btn-pink rounded-pill mt-4"
-              >
+              <button type="button" (click)="searchList()" class="btn btn-pink rounded-pill mt-4">
                 Search
               </button>
-                <button *ngIf ="plStatement.length >0 " type="button" class="btn btn-pink rounded-pill ms-2 text-white" (click)="exportExcel()">Export</button>
+              <button *ngIf="plStatement.length >0 " type="button" class="btn btn-pink rounded-pill ms-2 text-white"
+                (click)="exportExcel()">Export</button>
 
             </div>
           </div>
@@ -102,44 +70,45 @@
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
       <div class="table-responsive tableRes tableFixHead">
-      <table class="table tableall " *ngIf="plStatement.length > 0">
-        <thead>
-          <tr>
-            <th class="thts first">#</th>
-            <th scope="col" class="pointer" (click)="toggleSort('createdAt')">Date</th>
-            <th scope="col" class="pointer" (click)="toggleSort('gameName')">Game</th>
-            <th scope="col" class="pointer" (click)="toggleSort('subGame')">Sub Game</th>
-            <th scope="col" class="pointer" (click)="toggleSort('eventName')">Event</th>
-            <th scope="col" class="pointer last text-center" (click)="toggleSort('winINR')">Win/Loss</th>
-            <!-- <th scope="col">Commission</th>
+        <table class="table tableall " *ngIf="plStatement.length > 0">
+          <thead>
+            <tr>
+              <th class="thts first">#</th>
+              <th scope="col" class="pointer" (click)="toggleSort('createdAt')">Date</th>
+              <th scope="col" class="pointer" (click)="toggleSort('gameName')">Game</th>
+              <th scope="col" class="pointer" (click)="toggleSort('subGame')">Sub Game</th>
+              <th scope="col" class="pointer" (click)="toggleSort('eventName')">Event</th>
+              <th scope="col" class="pointer  text-center" (click)="toggleSort('winINR')">Win/Loss</th>
+              <!-- <th scope="col">Commission</th>
             <th scope="col">Net Amount</th> -->
-            <!-- <th scope="col" class="">U/L Commission</th>
+              <!-- <th scope="col" class="">U/L Commission</th>
             <th scope="col" class="">D/L Commission</th> -->
-            <!-- <th scope="col">User Count</th>
+              <!-- <th scope="col">User Count</th>
             <th scope="col">Bet Count</th> -->
-            <!-- <th scope="col" class="last"></th> -->
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let pl of plStatement | sort:sortColumn:sortAscending ;let i = index;" (click)="openAllBets(pl.matchId)">
-            <td class="tds tdts">
-              <span >{{ i + 1 }}</span>  
-              
-            </td>
-            <td>{{ pl.createdAt | date : "medium" }}</td>
-            <td>{{ pl.gameName }}</td>
-            <td>{{ pl.subGame }}</td>
-            <td>{{ pl.eventName }}</td>
-            <td class="text-center" [ngClass]="pl.isWon ? 'text-success' : 'text-danger'">
-              {{ pl.winINR | number }}
-            </td>
-            <!-- <td>{{ pl.commission | number }}</td>
+              <th scope="col" class="last"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pl of plStatement | sort:sortColumn:sortAscending ;let i = index;"
+              (click)="openAllBets(pl.matchId)">
+              <td class="tds tdts">
+                <span>{{ i + 1 }}</span>
+
+              </td>
+              <td>{{ pl.createdAt | date : "medium" }}</td>
+              <td>{{ pl.gameName }}</td>
+              <td>{{ pl.subGame }}</td>
+              <td>{{ pl.eventName }}</td>
+              <td class="text-center" [ngClass]="pl.isWon ? 'text-success' : 'text-danger'">
+                {{ pl.winINR | number }}
+              </td>
+              <!-- <td>{{ pl.commission | number }}</td>
             <td>{{ pl.netAmount | number }}</td> -->
-            <!-- <td>0</td>
+              <!-- <td>0</td>
             <td>0</td> -->
-            <!-- <td>{{ pl.userCount }}</td>
+              <!-- <td>{{ pl.userCount }}</td>
             <td>{{ pl.userBetCount }}</td> -->
-            <!--<td><button
+              <!--<td><button
                 class="btn btn-pink rounded-pill w-100 mt-4"
                 (click)="getPlStatement()"
               >
@@ -150,24 +119,25 @@
               >
                 User
               </button></td>-->
-            <td  class="text-center" [ngClass]="pl.type ? 'text-success' : 'text-danger'">
-              {{ pl.profitLiability }}
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td class="text-success float-left text-center" [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</td>
-          <td></td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+              <td class="text-center" [ngClass]="pl.type ? 'text-success' : 'text-danger'">
+                {{ pl.profitLiability }}
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="text-success text-center" [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">
+                {{totalAmount | currency:'INR'}}</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
     <!-- <div class="col-md-12"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
     <!-- <div *ngIf="plStatement.length > 0 && !this.isLoading">

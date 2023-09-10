@@ -1,8 +1,8 @@
 @media only screen and (max-width: 767.9px) {
-  .smallMobileHide{
+  .smallMobileHide {
     display: none;
   }
-  .smallMobileShow{
+  .smallMobileShow {
     display: block;
   }
 }
@@ -26,11 +26,11 @@
     top: 3.5rem;
     border: 1px solid #71514f;
     height: 100%;
-}
+  }
 
-.balance p{
-  font-size: 18px;
-}
+  .balance p {
+    font-size: 18px;
+  }
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -59,7 +59,7 @@
   #main {
     padding: 20px 15px;
     margin-top: 22px;
-    border-top: 1px solid #ffa7a3;
+    border-top: 1px solid #e76f26;
   }
 
   .user p {
@@ -100,14 +100,11 @@
     width: 100%;
   }
 
-
   .memberslist .nav-link {
     width: 121px;
     font-size: 12px;
+  }
 }
-}
-
-
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
@@ -135,7 +132,6 @@
   .toggle-sidebar-btn a:nth-child(2) {
     display: none;
   }
-
 }
 
 @media only screen and (min-width: 960px) {
@@ -152,7 +148,8 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .net_exposure a, .net_exposure strong {
+  .net_exposure a,
+  .net_exposure strong {
     font-size: 12px;
   }
 }

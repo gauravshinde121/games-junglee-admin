@@ -55,7 +55,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     this._getWebSocketUrl();
     this.resetTimerInterval = setInterval(() => {
       if (this.refreshCount == 0) {
-        // this.refreshCall();
+        this.refreshCall();
         this.refreshCount = 9;
       }
       this.refreshCount--;
@@ -64,7 +64,7 @@ export class NetExposureViewTotalComponent implements OnInit {
 
 
 
-  
+
   _getWebSocketUrl(isComplete = false) {
     this._sharedService.getWebSocketURLApi().subscribe(
       (res: any) => {
@@ -108,8 +108,11 @@ export class NetExposureViewTotalComponent implements OnInit {
     });
   }
 
-  getTotalBookViewTotal(marketId, totalBookStatus) {
+  getTotalBookViewTotal(marketId, totalBookStatus,adminBook) {
+
+
     if (totalBookStatus) {
+
       this.adminBooksList.map((adminBook) => {
         if (adminBook['marketId'] == marketId) {
           adminBook['totalBook'] = [];
@@ -129,38 +132,42 @@ export class NetExposureViewTotalComponent implements OnInit {
       marketId: marketId,
       myPT: this.myPT
     };
-    this._bookMgmService._postTotalBookApi(totalBookParams).subscribe((data: any) => {
-      console.log(data);
 
-      
-      if(data.book.length>0){
-        let finalBook = data.book;
 
-        for(let d of finalBook){
-          const index = this.downlineBooks.findIndex((element) => element.marketId === totalBookParams.marketId&&d.userId == element.userId);
-          if (index !== -1) {
-            this.downlineBooks.splice(index, 1);
-          } else {
-            this.downlineBooks.push(d);
+      this._bookMgmService._postTotalBookApi(totalBookParams).subscribe((data: any) => {
+
+        this.downlineBooks = [];
+
+        if(data.book.length>0){
+          data.book = data.book.map((el)=>({...el,marketId:totalBookParams.marketId,isExpanded:false}));
+
+          for(let book of data.book){
+            this.downlineBooks.push(book)
           }
+
+          this.addMarketIdsRecursive(this.downlineBooks,totalBookParams.marketId)
+        }else{
+          this.downlineBooks = [];
         }
-      }
 
-      this.addMarketIdsRecursive(this.downlineBooks,totalBookParams.marketId)
 
-      console.log(this.downlineBooks)
+        // console.log(this.downlineBooks)
 
-      if (data['book'].length > 0) {
-        this.totalBooks.push({ marketId: marketId, totalBook: data['book'], isTotaltotalBookView: true });
-        this.adminBooksList.map((adminBook) => {
-          if (adminBook['marketId'] == marketId) {
-            adminBook['totalBook'] = data['book'];
-            adminBook['isTotaltotalBookView'] = true;
-          }
-          return adminBook;
-        })
-      }
-    });
+        if (data['book'].length > 0) {
+          this.totalBooks.push({ marketId: marketId, totalBook: data['book'], isTotaltotalBookView: true });
+          this.adminBooksList.map((adminBook) => {
+            if (adminBook['marketId'] == marketId) {
+              adminBook['totalBook'] = data['book'];
+              adminBook['isTotaltotalBookView'] = true;
+            }else{
+              adminBook['isTotaltotalBookView'] = false;
+            }
+            return adminBook;
+          })
+        }
+      });
+
+
   }
 
 
@@ -213,6 +220,8 @@ export class NetExposureViewTotalComponent implements OnInit {
             this.adminBooksList.splice(i, 1);
           }
         }
+
+
       }
 
 
@@ -332,7 +341,7 @@ export class NetExposureViewTotalComponent implements OnInit {
           })
         })
         this.adminBooksList = res['book'];
-        // console.log(this.adminBooksList)
+
 
         if (this.prevSetOrUnsetWebSocketParamsObj.length !== this.setOrUnsetWebSocketParamsObj.length) {
           let setObj = {

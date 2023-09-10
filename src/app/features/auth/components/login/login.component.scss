@@ -5,7 +5,6 @@
   font-family: sans-serif;
   font-size: 20px;
   font-style: normal;
-  color: #555;
 }
 
 .busy::before {
@@ -20,8 +19,4 @@
   100% {
     transform: rotate(359deg);
   }
-}
-
-.form-signin h3{
-  color: #d35862;
 }

@@ -83,28 +83,28 @@ export class LeftNavigationComponent implements OnInit {
   }
 
 
-  // toggleMenu() {
-  //   if (this.isMobileView) {
-  //     this.leftMenuOpen = !this.leftMenuOpen;
-
-  //     // this.isLeftBarDisplay=!this.isLeftBarDisplay;
-  //     this._sharedService.leftMenuStatus.next({
-  //       'leftMenuOpen': this.leftMenuOpen
-  //     });
-
-
-  //   }
-  // }
   toggleMenu() {
-    console.log(this.leftMenuOpen)
+    if (this.isMobileView) {
+      this.leftMenuOpen = !this.leftMenuOpen;
 
-    this.leftMenuOpen = !this.leftMenuOpen;
-    // this.isLeftBarDisplay = !this.isLeftBarDisplay;
-    this._sharedService.leftMenuStatus.next({
-      'leftMenuOpen': this.leftMenuOpen
-    });
+      // this.isLeftBarDisplay=!this.isLeftBarDisplay;
+      this._sharedService.leftMenuStatus.next({
+        'leftMenuOpen': this.leftMenuOpen
+      });
 
-    console.log(this.leftMenuOpen)
+
+    }
   }
+  // toggleMenu() {
+  //   console.log(this.leftMenuOpen)
+
+  //   this.leftMenuOpen = !this.leftMenuOpen;
+  //   // this.isLeftBarDisplay = !this.isLeftBarDisplay;
+  //   this._sharedService.leftMenuStatus.next({
+  //     'leftMenuOpen': this.leftMenuOpen
+  //   });
+
+  //   console.log(this.leftMenuOpen)
+  // }
 
 }

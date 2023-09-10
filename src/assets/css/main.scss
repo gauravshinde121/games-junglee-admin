@@ -187,8 +187,8 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   cursor: pointer;
 }
 .form-signin .form-floating input:focus {
-  border-bottom: 1px solid rgb(255, 167, 163) !important;
-  color: $color_3;
+  // border-bottom: 1px solid rgb(255, 167, 163) !important;
+  // color: $color_3;
   box-shadow: none;
 }
 /********** Login end ************/
@@ -862,9 +862,9 @@ tfoot tr {
   float: left;
 }
 
-input.ng-invalid.ng-dirty {
-  border: solid $color_11 !important;
-}
+// input.ng-invalid.ng-dirty {
+//   border: solid $color_11 !important;
+// }
 
 .busy {
   color: $color_48;

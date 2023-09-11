@@ -165,7 +165,7 @@
         </div>
         <div class="col-md-3">
           <!-- Button trigger modal -->
-          
+
         </div>
       </div>
     </section>
@@ -198,7 +198,8 @@
         <div class="col-md-2">(%)</div>
         <div class="col-md-8">
           <input formControlName="partnerShipPercent" name="partnerShipPercent" type="number" class="form-control pb-2"
-            (keyup)="calculateMemberPercentage($event)" />
+          *ngIf="!editMode" (keyup)="calculateMemberPercentage($event)" />
+          <span *ngIf="editMode">{{ memberForm.get('partnerShipPercent')?.value }}</span>
           <p>(Min : {{ uplineInfo?.partnerShipPercent }} ) (Max : 100)</p>
           <div *ngIf="f.partnerShipPercent?.errors?.min" class="small text-danger col-md-12 ps-5">
             value cannot be less than {{ uplineInfo?.partnerShipPercent }}
@@ -364,15 +365,15 @@
                 <div class="layer"></div>
               </div>
             </div>
-            
+
             <!-- <div class="form-check form-switch"><input (click)="setGameStatus(game.isActive,game.sportsId)" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" [checked]="game.isActive"></div> -->
           </div>
         </div>
         <div class="row">
           <div class="col-md-5">
-            
+
           </div>
-              
+
           <div class="col-md-2">
             <button class="btn  rounded-pill w-100 mt-3 ms-3 float-right btn-pink"  data-bs-dismiss="modal" (click)="closeModal()">
               Ok
@@ -380,7 +381,7 @@
           </div>
 
           <div class="col-md-5">
-            
+
           </div>
         </div>
       </div>

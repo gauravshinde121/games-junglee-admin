@@ -111,9 +111,9 @@
               <input type="number" class="form-control" formControlName="fancyComission" *ngIf="!editMode"
                 placeholder="Fancy Commission*" />
                 <span *ngIf="editMode">: {{ memberForm.get('fancyComission')?.value }}%</span>
-              <div class="small text-danger" *ngIf="memberForm.controls['fancyComission'].errors?.required &&
+              <div class="small text-danger" *ngIf="memberForm.get('fancyComission')?.hasError('invalidFancyCommission') || memberForm.controls['fancyComission'].errors?.required &&
               memberForm.controls['fancyComission'].touched">
-                Please enter Fancy Commission
+              Member Fancy Comission cannot be greater than upline fancy comission!
               </div>
             </div>
 
@@ -122,9 +122,9 @@
               <input type="number" class="form-control" formControlName="bookmakerComission"
                 placeholder="Book Maker Commission*" *ngIf="!editMode" />
                 <span *ngIf="editMode">: {{ memberForm.get('bookmakerComission')?.value }}%</span>
-              <div class="small text-danger" *ngIf="memberForm.controls['bookmakerComission'].errors?.required &&
+              <div class="small text-danger" *ngIf="memberForm.get('bookmakerComission')?.hasError('invalidBookmakerCommission') || memberForm.controls['bookmakerComission'].errors?.required &&
               memberForm.controls['bookmakerComission'].touched">
-                Please enter Book Maker Commission
+              Book Maker Fancy Comission cannot be greater than upline fancy comission!
               </div>
             </div>
             <!-- <div class="col-md-3">

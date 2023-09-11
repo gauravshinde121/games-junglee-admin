@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild,Renderer2 } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from '../../services/members.service';
@@ -177,6 +177,13 @@ export class CreateMemberComponent implements OnInit {
 
   _createMemberForm() {
     console.log('this.uplineInfo',this.uplineInfo);
+    /*let memberFancyCom:any;
+    let memberBookmakerCom:any;
+    if(this.uplineInfo.roleId[0] == 1){
+      memberFancyCom = 0;
+    } else {
+
+    }*/
     if (!this.editMode) {
       this.memberForm = this._fb.group({
         username: ['', Validators.required],
@@ -193,8 +200,8 @@ export class CreateMemberComponent implements OnInit {
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(this.maxBetMinValue)]],
         roleId: [this.createUserWithRoleId, Validators.required],
         partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
-        fancyComission: [0,  [(c: AbstractControl) => Validators.max(this.uplineInfo.fancyComission), Validators.min(0)]],
-        bookmakerComission: [0,  [(c: AbstractControl) => Validators.max(this.uplineInfo.bookmakerComission), Validators.min(0)]]
+        fancyComission: [this.uplineInfo.fancyComission,  [(c: AbstractControl) => Validators.max(this.uplineInfo.fancyComission), Validators.min(0), this.customFancyCommissionValidator(this.uplineInfo.fancyComission)]],
+        bookmakerComission: [this.uplineInfo.bookmakerComission,  [(c: AbstractControl) => Validators.max(this.uplineInfo.bookmakerComission), Validators.min(0), this.customBookmakerCommissionValidator(this.uplineInfo.bookmakerComission)]]
       },
         {
           // validators: this.Mustmatch('password', 'confirmPassword'),
@@ -219,6 +226,30 @@ export class CreateMemberComponent implements OnInit {
           validators: []
         })
     }
+  }
+
+  customFancyCommissionValidator(uplineFancyCommission: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const value = control.value;
+      if(this.uplineInfo.roleId[0] !== 1){
+        if (value > uplineFancyCommission) {
+          return { 'invalidFancyCommission': true };
+        }
+      }
+      return null;
+    };
+  }
+
+  customBookmakerCommissionValidator(uplineFancyCommission: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const value = control.value;
+      if(this.uplineInfo.roleId[0] !== 1){
+        if (value > uplineFancyCommission) {
+          return { 'invalidBookmakerCommission': true };
+        }
+      }
+      return null;
+    };
   }
 
   createMember(){

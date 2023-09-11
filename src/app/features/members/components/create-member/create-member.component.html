@@ -108,8 +108,9 @@
 
             <div class="col-md-3 mb-2">
               <label>Fancy Commission</label>
-              <input type="number" class="form-control" formControlName="fancyComission"
+              <input type="number" class="form-control" formControlName="fancyComission" *ngIf="!editMode"
                 placeholder="Fancy Commission*" />
+                <span *ngIf="editMode">: {{ memberForm.get('fancyComission')?.value }}%</span>
               <div class="small text-danger" *ngIf="memberForm.controls['fancyComission'].errors?.required &&
               memberForm.controls['fancyComission'].touched">
                 Please enter Fancy Commission
@@ -119,7 +120,8 @@
             <div class="col-md-3 mb-2">
               <label>Book Maker Commission</label>
               <input type="number" class="form-control" formControlName="bookmakerComission"
-                placeholder="Book Maker Commission*" />
+                placeholder="Book Maker Commission*" *ngIf="!editMode" />
+                <span *ngIf="editMode">: {{ memberForm.get('bookmakerComission')?.value }}%</span>
               <div class="small text-danger" *ngIf="memberForm.controls['bookmakerComission'].errors?.required &&
               memberForm.controls['bookmakerComission'].touched">
                 Please enter Book Maker Commission

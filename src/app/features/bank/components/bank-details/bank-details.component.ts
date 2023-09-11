@@ -286,8 +286,10 @@ export class BankDetailsComponent implements OnInit {
       // searchName: this.searchTerm,
 
       limit:this.limit,
-      searchName:"",
-      pageNo: this.currentPage
+      // searchName:"",
+      pageNo: this.currentPage,
+      searchName: this.searchTerm,
+
     };
 
     this._sharedService._getBankUsersApi(body).subscribe((users: any) => {

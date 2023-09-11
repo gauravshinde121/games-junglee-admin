@@ -217,7 +217,8 @@
         <div class="col-md-2">(%)</div>
         <div class="col-md-8">
           <input formControlName="partnerShipPercent" name="partnerShipPercent" type="number" class="form-control pb-2"
-            (keyup)="calculateMemberPercentage($event)" />
+          *ngIf="!editMode" (keyup)="calculateMemberPercentage($event)" />
+          <span *ngIf="editMode">{{ memberForm.get('partnerShipPercent')?.value }}</span>
           <p>(Min : {{ uplineInfo?.partnerShipPercent }} ) (Max : 100)</p>
           <div *ngIf="f.partnerShipPercent?.errors?.min" class="small text-danger col-md-12 ps-5">
             value cannot be less than {{ uplineInfo?.partnerShipPercent }}

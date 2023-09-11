@@ -11,7 +11,7 @@ import { MembersService } from '../../services/members.service';
 })
 export class MembersListComponent implements OnInit {
 
- 
+
   userList: any = [];
   isLoading = false;
   selectedUserForAdjustment: any = [];
@@ -35,8 +35,8 @@ export class MembersListComponent implements OnInit {
   roles: any = [];
   selectedRoleId = 7;
   resetTimerInterval: any;
-  show:boolean = false;
-  show1:boolean = false;
+  show: boolean = false;
+  show1: boolean = false;
   //dtOptions: DataTables.Settings = {};
 
   searchTerm: string = '';
@@ -52,6 +52,7 @@ export class MembersListComponent implements OnInit {
   disableSubmit = false;
   totalMembers = 0;
   allChecked = false;
+  roleId: any;
 
 
   fileName = 'MemberList.xlsx';
@@ -158,13 +159,13 @@ export class MembersListComponent implements OnInit {
       "amount": this.adjustWinningsForSingleUserForm.value.amount,
       "isGiven": this.isGiven
     }
-   
+
     this.closeModal();
     this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
       this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
       this._sharedService.callAdminDetails.next(true);
       this._getAllUserInfo(this.selectedRoleId);
-      
+
     });
   }
 
@@ -194,7 +195,7 @@ export class MembersListComponent implements OnInit {
 
   ngOnInit(): void {
     this._preConfig();
-    if(this._sharedService.getUserDetails().roleId.indexOf(1) != -1){
+    if (this._sharedService.getUserDetails().roleId.indexOf(1) != -1) {
       this.isSuperAdmin = true;
     }
     this.statusList = [
@@ -215,30 +216,30 @@ export class MembersListComponent implements OnInit {
 
   checkAll(ev) {
 
-    if(ev.target.checked){
+    if (ev.target.checked) {
       this.selectedUserForAdjustment = [];
     }
-    
+
     this.allChecked = !this.allChecked;
 
     // this.userList.forEach(x => x.state = ev.target.checked)
 
     this.userList.forEach(element => {
-      if(element.winnings != 0) {
+      if (element.winnings != 0) {
         element.state = ev.target.checked
       }
-      
+
     });
 
-    for(const user of this.userList){
-      if(user.winnings != 0 ) {
+    for (const user of this.userList) {
+      if (user.winnings != 0) {
         this.checkUserId(user.userId);
-      } 
+      }
     }
   }
 
   checkUserId(userId: any) {
-    
+
     if (this.selectedUserForAdjustment.includes(userId)) {
       this.selectedUserForAdjustment.splice(
         this.selectedUserForAdjustment.indexOf(userId),
@@ -248,7 +249,7 @@ export class MembersListComponent implements OnInit {
       return;
     }
 
-      this.selectedUserForAdjustment.push(userId);
+    this.selectedUserForAdjustment.push(userId);
 
 
   }
@@ -262,7 +263,7 @@ export class MembersListComponent implements OnInit {
     this._getAllUserInfo(this.selectedRoleId);
 
     this.resetTimerInterval = setInterval(() => {
-        this.refreshCall();
+      this.refreshCall();
     }, 60000)
   }
 
@@ -287,7 +288,7 @@ export class MembersListComponent implements OnInit {
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
-      console.log(roles.data)
+      console.log(roles.data)    
     });
   }
 
@@ -296,15 +297,16 @@ export class MembersListComponent implements OnInit {
     this._getAllUserInfo(this.selectedRoleId, true);
   }
 
-  _getAllUserInfo(roleId, autoRefresh = false) {
+  _getAllUserInfo(roleId, autoRefresh = false) {    
     console.log("called");
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });
+    this.roleId = roleId
     if (!autoRefresh) {
       this.isLoading = true;
       this.userList = [];
-    }
+    }    
     let body = {
       roleId: roleId,
       pageNo: this.currentPage,
@@ -348,7 +350,7 @@ export class MembersListComponent implements OnInit {
 
     if (this.selectedUserForAdjustment.includes(userId)) {
       this.selectedUserForAdjustment.splice(
-        this.selectedUserForAdjustment.indexOf(userId),1);
+        this.selectedUserForAdjustment.indexOf(userId), 1);
       return;
     }
     this.selectedUserForAdjustment.push(userId);
@@ -358,21 +360,21 @@ export class MembersListComponent implements OnInit {
   }
 
 
-  updateLimit(event){
+  updateLimit(event) {
     this.limit = parseInt(event.target.value);
     this.pageSize = this.limit;
     this.refreshCall();
   }
 
   adjustWinnings() {
-    
-    var currentUserIp:any;
+
+    var currentUserIp: any;
     this._sharedService.currentUserIp.subscribe((data: any) => {
       currentUserIp = data.userIp;
     });
     //if (confirm('Do you want bulk transfer ?')) {
     this._sharedService
-      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, 'ip':currentUserIp })
+      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, 'ip': currentUserIp })
       .subscribe((res: any) => {
         this._sharedService.getToastPopup(
           'Adjusted Successfully',
@@ -398,7 +400,7 @@ export class MembersListComponent implements OnInit {
   }
 
   openHierarchyModal(userId) {
-    this._sharedService.getUplineSummaryApi(userId).subscribe((res)=>{
+    this._sharedService.getUplineSummaryApi(userId).subscribe((res) => {
       this.memberHierarchy = res;
       console.log('getUplineSummary', res);
     });
@@ -462,14 +464,16 @@ export class MembersListComponent implements OnInit {
   }
 
 
-  showDownlineTree(user){
-    if(this.selectedRoleId != 7){
-      this._router.navigate(['/member/downline-list/'+user.userId])
+  showDownlineTree(user) {
+    if (this.selectedRoleId != 7) {
+      this._router.navigate(['/member/downline-list/' + user.userId])
     }
   }
 
   exportExcel() {
     let memberList: any = []
+    
+    if (this.selectedRoleId == this. roleId ){
     this.userList.forEach(element => {
       memberList.push({
         Username: element.username,
@@ -480,13 +484,17 @@ export class MembersListComponent implements OnInit {
         AvailableCredit: element.availableCredit,
         Status: element.isActive,
       })
-      this.roles.forEach(elements => {
-        memberList.push({
-            RoleName:elements.userRoleName
-        })})
+        this.roles.forEach(elements => {
+          if (this.selectedRoleId === elements.roleId ) {
+          memberList.push({
+            RoleName: elements.userRoleName
+          })
+        }
+        })
     });
     this._sharedService.exportExcel(memberList, this.fileName);
   }
-  
+}
+
 
 }

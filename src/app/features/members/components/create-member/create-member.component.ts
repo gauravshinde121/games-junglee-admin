@@ -193,8 +193,8 @@ export class CreateMemberComponent implements OnInit {
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(this.maxBetMinValue)]],
         roleId: [this.createUserWithRoleId, Validators.required],
         partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
-        fancyComission: [0, Validators.min(0)],
-        bookmakerComission: [0, Validators.min(0)]
+        fancyComission: [0,  [(c: AbstractControl) => Validators.max(this.uplineInfo.fancyComission), Validators.min(0)]],
+        bookmakerComission: [0,  [(c: AbstractControl) => Validators.max(this.uplineInfo.bookmakerComission), Validators.min(0)]]
       },
         {
           // validators: this.Mustmatch('password', 'confirmPassword'),

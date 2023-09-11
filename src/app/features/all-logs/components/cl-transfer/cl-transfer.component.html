@@ -11,33 +11,16 @@
         <div class="row align-items-end">
           <div class="col-md-3">
             <label>From Date</label>
-            <input
-              type="date"
-              formControlName="fromDate"
-              name="fromDate"
-              class="form-control"
-              id=""
-              placeholder="Month"
-            />
+            <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id=""
+              placeholder="Month" />
           </div>
           <div class="col-md-3">
             <label>To Date</label>
-            <input
-              type="date"
-              formControlName="toDate"
-              name="toDate"
-              class="form-control"
-              id=""
-              placeholder="Month"
-            />
+            <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month" />
           </div>
           <div class="col-md-3">
             <label>Select Member</label>
-            <select
-              formControlName="memberName"
-              id="ab"
-              class="form-select bg-dgrey pointer"
-            >
+            <select formControlName="memberName" id="ab" class="form-select bg-dgrey pointer">
               <option value=null>All</option>
               <option *ngFor="let member of allMembers" [value]="member.userId">
                 {{ member.username }}
@@ -45,14 +28,11 @@
             </select>
           </div>
           <div class="col-md-3">
-            <button
-              type="button"
-              class="btn btn-pink rounded-pill mt-4"
-              (click)="getClTransfers()"
-            >
+            <button type="button" class="btn btn-pink rounded-pill mt-4" (click)="getClTransfers()">
               Search
             </button>
-            <button *ngIf ="clTransfers.length >0 " type="button" class="btn btn-pink rounded-pill ms-2  mt-4 text-white" (click)="exportExcel()">Export</button>
+            <button *ngIf="clTransfers.length >0 " type="button" class="btn btn-pink rounded-pill ms-2  mt-4 text-white"
+              (click)="exportExcel()">Export</button>
           </div>
           <!--your code will come here end-->
         </div>
@@ -64,74 +44,60 @@
         </div>
 
         <div class="table-responsive tableRes tableFixHead">
-        <table class="table tableall" *ngIf="clTransfers.length > 0">
-          <thead class="text-dark">
-            <tr>
-              <th scope="col" class="first">#</th>
-              <th scope="col" class="pointer" (click)="toggleSort('createdDate')">Creation Date</th>
-              <th scope="col" class="pointer" (click)="toggleSort('fromRefUserName')">From</th>
-              <th scope="col" class="pointer" (click)="toggleSort('toRefUserName')">To</th>
-              <th scope="col" class="pointer" (click)="toggleSort('amount')">Amount</th>
-              <th scope="col" class="pointer" (click)="toggleSort('balance')">Available Credit</th>
-              <th scope="col" class="pointer" (click)="toggleSort('oldBalance')">Old Available Credit</th>
-              <th scope="col" class="last" (click)="toggleSort('ipAddress')">IP</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let stmt of clTransfers | sort:sortColumn:sortAscending; let i = index">
-              <td>
-                <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
-                <span *ngIf="currentPage > 1">{{
+          <table class="table tableall" *ngIf="clTransfers.length > 0">
+            <thead class="text-dark">
+              <tr>
+                <th scope="col" class="first">#</th>
+                <th scope="col" class="pointer" (click)="toggleSort('createdDate')">Creation Date</th>
+                <th scope="col" class="pointer" (click)="toggleSort('fromRefUserName')">From</th>
+                <th scope="col" class="pointer" (click)="toggleSort('toRefUserName')">To</th>
+                <th scope="col" class="pointer" (click)="toggleSort('amount')">Amount</th>
+                <th scope="col" class="pointer" (click)="toggleSort('balance')">Available Credit</th>
+                <th scope="col" class="pointer" (click)="toggleSort('oldBalance')">Old Available Credit</th>
+                <th scope="col" class="last" (click)="toggleSort('ipAddress')">IP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let stmt of clTransfers | sort:sortColumn:sortAscending; let i = index">
+                <td>
+                  <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+                  <span *ngIf="currentPage > 1">{{
                   i + 1 + (currentPage - 1) * limit
                 }}</span>
-              </td>
-              <td>{{ stmt.createdDate | date : "medium" }}</td>
-              <td>{{ stmt.fromRefUserName }}</td>
-              <td>{{ stmt.toRefUserName }}</td>
-              <td>
-                <span
-                *ngIf="stmt.isGiven == false"
-                class="text-success"
-              >{{ stmt.amount }}</span>
-              <span
-                *ngIf="stmt.isGiven == true"
-                class="text-danger"
-              >{{ stmt.amount }}</span>
-              </td>
-              <td>{{ stmt.balance }}</td>
-              <td>{{ stmt.oldBalance }}</td>
-              <!-- <td>{{stmt.}} -->
-              <td class="tooltipnk ms-0  mt-1">
-                <ng-container *ngIf="stmt.ipAddress; else notMatched">
-                  <i class="fa-sharp fa-solid fa-info"></i>
-                  <span class="tooltiptext px-5 w-auto">
-                    <small>{{ stmt.ipAddress }}</small>
-                  </span>
-                </ng-container>
-                <ng-template #notMatched> -- </ng-template>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                </td>
+                <td>{{ stmt.createdDate | date : "medium" }}</td>
+                <td>{{ stmt.fromRefUserName }}</td>
+                <td>{{ stmt.toRefUserName }}</td>
+                <td>
+                  <span *ngIf="stmt.isGiven == false" class="text-success">{{ stmt.amount }}</span>
+                  <span *ngIf="stmt.isGiven == true" class="text-danger">{{ stmt.amount }}</span>
+                </td>
+                <td>{{ stmt.balance }}</td>
+                <td>{{ stmt.oldBalance }}</td>
+                <!-- <td>{{stmt.}} -->
+                <td class="tooltipnk ms-0  mt-1">
+                  <ng-container *ngIf="stmt.ipAddress; else notMatched">
+                    <i class="fa-sharp fa-solid fa-info"></i>
+                    <span class="tooltiptext tabTooltip px-5 w-auto">
+                      <small>{{ stmt.ipAddress }}</small>
+                    </span>
+                  </ng-container>
+                  <ng-template #notMatched> -- </ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="row">
           <div class="col-md-12">
             <div *ngIf="clTransfers.length > 0 && !this.isLoading">
-              <button
-                class="btn bg-dgrey rounded-pill text-white"
-                [disabled]="currentPage === 1"
-                (click)="prev()"
-              >
+              <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
                 Prev
               </button>
-              <span class="btn btn-pink rounded-pill ps-4 pe-4"
-                >{{ currentPage }} / {{ totalPages }}
+              <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
               </span>
-              <button
-                class="btn bg-dgrey rounded-pill text-white"
-                [disabled]="currentPage === totalPages"
-                (click)="next()"
-              >
+              <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === totalPages"
+                (click)="next()">
                 Next
               </button>
             </div>

@@ -287,6 +287,7 @@ export class MembersListComponent implements OnInit {
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
+      console.log(roles.data)
     });
   }
 
@@ -471,7 +472,6 @@ export class MembersListComponent implements OnInit {
     let memberList: any = []
     this.userList.forEach(element => {
       memberList.push({
-
         Username: element.username,
         CreditLimit: element.creditLimit,
         NetExposure: element.exposure,
@@ -480,6 +480,10 @@ export class MembersListComponent implements OnInit {
         AvailableCredit: element.availableCredit,
         Status: element.isActive,
       })
+      this.roles.forEach(elements => {
+        memberList.push({
+            RoleName:elements.userRoleName
+        })})
     });
     this._sharedService.exportExcel(memberList, this.fileName);
   }

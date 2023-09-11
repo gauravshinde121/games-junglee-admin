@@ -53,6 +53,7 @@ $color_47: #71ff97;
 $color_48: #555;
 $color_49: #ccc;
 $color_50: #dee2e6;
+$color_51: #bd362f;
 
 $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 
@@ -1019,7 +1020,11 @@ a {
   color: #fff;
 }
 .toast-error {
-  background-color: #bd362f;
+  background-color: $color_51;
+}
+
+.toast-success {
+  background-color: $color_5;
 }
 // .ngx-toastr {
 //   background-color: #030303;

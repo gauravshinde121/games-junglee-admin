@@ -231,7 +231,7 @@ export class CreateMemberComponent implements OnInit {
   customFancyCommissionValidator(uplineFancyCommission: number): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const value = control.value;
-      if(this.uplineInfo.roleId[0] !== 1){
+      if (![1, 2].includes(this.uplineInfo.roleId[0])) {
         if (value > uplineFancyCommission) {
           return { 'invalidFancyCommission': true };
         }
@@ -243,7 +243,7 @@ export class CreateMemberComponent implements OnInit {
   customBookmakerCommissionValidator(uplineFancyCommission: number): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const value = control.value;
-      if(this.uplineInfo.roleId[0] !== 1){
+      if (![1, 2].includes(this.uplineInfo.roleId[0])) {
         if (value > uplineFancyCommission) {
           return { 'invalidBookmakerCommission': true };
         }

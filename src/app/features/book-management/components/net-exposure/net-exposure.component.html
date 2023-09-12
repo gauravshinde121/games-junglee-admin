@@ -345,16 +345,16 @@
                   <a (click)="redirectUrlByMarket([market])" class="pointer">
                     <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
                 </div>
-                <div class="col bg-white text-dark">{{market.totalStakes}}</div>
+                <div class="col bg-white text-dark">{{market.totalStakes | number: '1.0-0'}}</div>
                 <div class="col bg-white "
                   [ngClass]="market.horses[0]?.finalAmount > 0 ? 'text-success' : 'text-danger'">
-                  {{market.horses[0]?.finalAmount}}</div>
+                  {{market.horses[0]?.finalAmount | number: '1.0-0'}}</div>
                 <div class="col bg-white "
                   [ngClass]="market.horses[2]?.finalAmount > 0 ? 'text-success' : 'text-danger'">
-                  {{market.horses[2]?.finalAmount}}</div>
+                  {{market.horses[2]?.finalAmount | number: '1.0-0'}}</div>
                 <div class="col bg-white "
                   [ngClass]="market.horses[1]?.finalAmount > 0 ? 'text-success' : 'text-danger'">
-                  {{market.horses[1]?.finalAmount}}</div>
+                  {{market.horses[1]?.finalAmount | number: '1.0-0'}}</div>
               </div>
             </div>
 

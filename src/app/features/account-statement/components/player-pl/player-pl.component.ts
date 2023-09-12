@@ -306,10 +306,11 @@ export class PlayerPlComponent implements OnInit {
   }
 
   getOneAccount(pl) {
+    console.log('plpl',pl);
     this.isLoading = true;
     let body = {
-      "userId": pl.userId,
-      "matchId": pl.matchId
+      "userId": pl.playerData.playerId,
+      "marketId": pl.gameData.marketId
     }
     this._sharedService.getOneAccount(body).subscribe((data: any) => {
       this.isLoading = false;
@@ -326,7 +327,7 @@ export class PlayerPlComponent implements OnInit {
     this.oneAccount.bets.map(bet=>bet.PL = bet.profitLoss)
     console.log(this.oneAccount)
     });
-    
+
     this.pl = pl;
     this.gameData = pl.gameData;
     this.playerData = pl.playerData;

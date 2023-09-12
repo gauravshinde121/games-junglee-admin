@@ -502,7 +502,9 @@ export class NetExposureViewTotalComponent implements OnInit {
   }
 
   startStreamingLiveTV() {
-    this._sharedService.postLiveStreamForMarket({ domain: window.location.hostname, matchId: this.matchId }).subscribe((res: any) => {
+    // sportszone365.org
+    // domain: window.location.hostname
+    this._sharedService.postLiveStreamForMarket({ domain: 'sportszone365.org', matchId: this.matchId }).subscribe((res: any) => {
       this.liveStreamingTVUrl = res?.streamObj?.data?.streamingUrl;
       // console.log("tv",res);
     })

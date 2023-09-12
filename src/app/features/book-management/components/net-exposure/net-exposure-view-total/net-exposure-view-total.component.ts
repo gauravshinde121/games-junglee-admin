@@ -404,9 +404,8 @@ export class NetExposureViewTotalComponent implements OnInit {
           }
 
           return singleBook['adminBook'].map((runnerRes) => {
-            let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
-            // console.log(webSocketRunners)
             if (singleBook['marketTypName'] == 'Match Odds') {
+              let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
 
               for (let singleWebsocketRunner of webSocketRunners) {
 
@@ -431,9 +430,9 @@ export class NetExposureViewTotalComponent implements OnInit {
                 }
               }
             } else if (singleBook['marketTypName'] == 'Bookmaker' || singleBook['marketTypName'] == 'Fancy') {
-              // console.log(webSocketRunners)
-              for (let singleWebsocketRunner of webSocketRunners) {
+              let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId'].toString()]);
 
+              for (let singleWebsocketRunner of webSocketRunners) {
                 if (singleWebsocketRunner['ib']) {
                   //back
 

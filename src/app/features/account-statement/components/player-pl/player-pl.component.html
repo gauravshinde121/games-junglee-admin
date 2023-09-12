@@ -226,6 +226,14 @@
                   <td>{{ oneAccount?.commissionAmt | number}}</td>
                 </tr>
                 <tr>
+                  <td>Fancy Commission&nbsp;Amt&nbsp;:</td>
+                  <td>{{ oneAccount?.totalFancyCommission | number}}</td>
+                </tr>
+                <tr>
+                  <td>Bookmaker Commission&nbsp;Amt&nbsp;:</td>
+                  <td>{{ oneAccount?.totalBookmakerCommission | number}}</td>
+                </tr>
+                <tr>
                   <td>Net Amt:</td>
                   <td [ngClass]="
                     oneAccount?.netAmt > 0 ? 'text-success' : 'text-danger'

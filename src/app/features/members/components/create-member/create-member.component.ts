@@ -111,6 +111,13 @@ export class CreateMemberComponent implements OnInit {
   }
 
   setGameStatus(status, sportsId) {
+    if(sportsId == 4){
+      if(status == true){
+        this.casinoProviderList = [];
+      } else {
+        this._getCasinoProvider();
+      }
+    }
     this.gamesList.find(g => g.gameId == sportsId).isActive = !status;
     this.memberForm.markAsDirty();
     console.log(this.gamesList)
@@ -119,7 +126,6 @@ export class CreateMemberComponent implements OnInit {
   setCasinoStatus(status, providerId) {
     this.casinoProviderList.find(g => g.providerId == providerId).isActive = !status;
     this.memberForm.markAsDirty();
-    console.log(this.casinoProviderList);
   }
 
 
@@ -132,7 +138,6 @@ export class CreateMemberComponent implements OnInit {
         this.memberData = res.user;
         console.log(this.memberData);
         this.gamesList = res.gameStatus;
-        // this.casinoProviderList = res.providerStatus;
 
         res.providerStatus.forEach(status => {
 
@@ -143,10 +148,6 @@ export class CreateMemberComponent implements OnInit {
           });
         });
 
-
-
-
-    console.log("this.casinoProviderList..",this.casinoProviderList);
 
         this.roleId = this.memberData.roleId;
         this.memberForm.patchValue({

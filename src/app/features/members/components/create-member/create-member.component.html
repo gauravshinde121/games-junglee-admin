@@ -102,7 +102,10 @@
                 placeholder="Player Credit Limit*" />
               <div class="small text-danger" *ngIf="memberForm.controls['playerAvailableCredit'].errors?.required &&
               memberForm.controls['playerAvailableCredit'].touched">
-                Please enter Credit Limit
+                Please enter Credit Limit.
+              </div>
+              <div class="small text-danger" *ngIf="memberForm.controls['playerAvailableCredit'].errors?.['min']">
+                Credit Limit cannot be negative.
               </div>
             </div>
 

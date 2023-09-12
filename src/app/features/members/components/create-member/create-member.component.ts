@@ -133,9 +133,9 @@ export class CreateMemberComponent implements OnInit {
         console.log(this.memberData);
         this.gamesList = res.gameStatus;
         // this.casinoProviderList = res.providerStatus;
-        
-        res.providerStatus.forEach(status => {     
-     
+
+        res.providerStatus.forEach(status => {
+
           this.casinoProviderList.forEach(cpl => {
             if(status.casinoProviderId == cpl.providerId) {
               cpl.isActive = status.isActive;
@@ -144,8 +144,8 @@ export class CreateMemberComponent implements OnInit {
         });
 
 
-        
-        
+
+
     console.log("this.casinoProviderList..",this.casinoProviderList);
 
         this.roleId = this.memberData.roleId;
@@ -184,7 +184,7 @@ export class CreateMemberComponent implements OnInit {
         )]),
         confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
         playerMaxCreditLimit: [''],
-        playerAvailableCredit: ['', Validators.required],
+        playerAvailableCredit: ['', [(c: AbstractControl) => Validators.required(c), Validators.min(0)]],
         sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
@@ -201,7 +201,7 @@ export class CreateMemberComponent implements OnInit {
         displayName: [''],
         username: [''],
         playerMaxCreditLimit: [''],
-        playerAvailableCredit: ['', Validators.required],
+        playerAvailableCredit: ['', [(c: AbstractControl) => Validators.required(c), Validators.min(0)]],
         sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         roleId: ['', Validators.required],
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],

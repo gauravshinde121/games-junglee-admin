@@ -1044,3 +1044,63 @@ a {
 .tabTooltip {
   left: -250px !important;
 }
+
+.navbar-brand {
+  color: $color_7 !important;
+  font-family: "FontAwesome";
+  letter-spacing: 2px;
+  font-size: 16px;
+
+  span {
+    color: $color_27;
+  }
+}
+
+.logins {
+  .navbar-brand {
+    font-size: 30px;
+  }
+  form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+}
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 767px;
+
+@media (max-width: $breakpoint-tablet) {
+  .balance {
+    p {
+      font-size: 14px;
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .navbar-brand {
+    font-size: 12px;
+  }
+  .logins {
+    .navbar-brand {
+      font-size: 20px;
+    }
+  }
+
+  .balance {
+    height: 82px;
+    text-align: center;
+    p {
+      font-size: 12px;
+      span {
+        font-size: 10px;
+      }
+    }
+  }
+}

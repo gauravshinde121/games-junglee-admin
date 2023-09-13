@@ -1,31 +1,13 @@
-<div
-  [formGroup]="filterForm"
-  class="tab-pane fade show active"
-  id="pills-batlist"
-  role="tabpanel"
-  aria-labelledby="pills-batlist-tab"
-  tabindex="0"
->
+<div [formGroup]="filterForm" class="tab-pane fade show active" id="pills-batlist" role="tabpanel"
+  aria-labelledby="pills-batlist-tab" tabindex="0">
   <div class="row">
     <div class="col-md-4">
       <label>From Date</label>
-      <input
-        formControlName="fromDate"
-        type="date"
-        name="fromDate"
-        class="form-control mt-2"
-        id=""
-      />
+      <input formControlName="fromDate" type="date" name="fromDate" class="form-control mt-2" id="" />
     </div>
     <div class="col-md-4">
       <label>To Date</label>
-      <input
-        formControlName="toDate"
-        type="date"
-        name="toDate"
-        class="form-control mt-2"
-        id=""
-      />
+      <input formControlName="toDate" type="date" name="toDate" class="form-control mt-2" id="" />
     </div>
 
     <div class="col-md-4 mb-2 p-2">
@@ -41,12 +23,7 @@
   <div class="row align-items-center">
     <div class="col-md-4 mb-2">
       <label>Select Match</label>
-      <select
-        formControlName="matchId"
-        id="ab"
-        class="form-select pointer"
-        (change)="changeMatch($event)"
-      >
+      <select formControlName="matchId" id="ab" class="form-select pointer" (change)="changeMatch($event)">
         <option value="null">All</option>
         <option value="{{ match.matchId }}" *ngFor="let match of matchList">
           {{ match.matchName }}
@@ -56,12 +33,7 @@
 
     <div class="col-md-4 mb-2">
       <label>Select Market Type</label>
-      <select
-        formControlName="marketId"
-        id="ab"
-        class="form-select pointer"
-        (change)="changeMarketType($event)"
-      >
+      <select formControlName="marketId" id="ab" class="form-select pointer" (change)="changeMarketType($event)">
         <option value="null">All</option>
         <option value="{{ market.marketId }}" *ngFor="let market of marketList">
           {{ market.marketName }}
@@ -71,63 +43,30 @@
 
     <div class="col-md-4">
       <label>Stakes From</label>
-      <input
-        formControlName="stakesFrom"
-        type="number"
-        name=""
-        class="form-control mt-2"
-        id=""
-        placeholder="Stakes From Value"
-      />
+      <input formControlName="stakesFrom" type="number" name="" class="form-control mt-2" id=""
+        placeholder="Stakes From Value" />
     </div>
     <div class="col-md-4 mb-2">
       <label>Stakes To </label>
-      <input
-        formControlName="stakesTo"
-        type="number"
-        name=""
-        class="form-control mt-2"
-        id=""
-        placeholder="Stakes To Value"
-      />
+      <input formControlName="stakesTo" type="number" name="" class="form-control mt-2" id=""
+        placeholder="Stakes To Value" />
     </div>
     <div class="col-md-4">
-      <button
-        class="btn btn-pink rounded-pill w-100 mt-4"
-        (click)="getMemberBets()"
-      >
+      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getMemberBets()">
         Search
       </button>
     </div>
   </div>
   <div class="row mt-4">
     <nav class="nav ps-4 col-md-12">
-      <a
-        class="nav-link active text-pink cursor-pointer"
-        [class]="btnActive === 'current' ? 'activeLink' : ''"
-        (click)="showMatch('current')"
-        >Current</a
-      >
-      <a
-        class="nav-link cursor-pointer"
-        [class]="btnActive === 'past' ? 'activeLink' : ''"
-        (click)="showMatch('past')"
-        >Past</a
-      >
-      <a
-        *ngIf="!isMatch"
-        [class]="btnActive === 'current' ? 'activeLink' : ''"
-        (click)="showMatch('match')"
-        class="nav-link text-pink cursor-pointer"
-        >Matched</a
-      >
-      <a
-        *ngIf="!isMatch"
-        [class]="btnActive === 'unmatch' ? 'activeLink' : ''"
-        (click)="showMatch('unmatch')"
-        class="nav-link cursor-pointer"
-        >Unmatched</a
-      >
+      <a class="nav-link active text-pink cursor-pointer" [class]="btnActive === 'current' ? 'activeLink' : ''"
+        (click)="showMatch('current')">Current</a>
+      <a class="nav-link cursor-pointer" [class]="btnActive === 'past' ? 'activeLink' : ''"
+        (click)="showMatch('past')">Past</a>
+      <a *ngIf="!isMatch" [class]="btnActive === 'current' ? 'activeLink' : ''" (click)="showMatch('match')"
+        class="nav-link text-pink cursor-pointer">Matched</a>
+      <a *ngIf="!isMatch" [class]="btnActive === 'unmatch' ? 'activeLink' : ''" (click)="showMatch('unmatch')"
+        class="nav-link cursor-pointer">Unmatched</a>
     </nav>
     <div class="col-md-12 mt-3 overflow-auto">
       <table class="table tableall" *ngIf="betList.length > 0">
@@ -143,7 +82,7 @@
             <th scope="col" class="pointer" (click)="toggleSort('betRate')">Odds Placed</th>
             <th scope="col" class="pointer" (click)="toggleSort('betRate')">Odds Matched</th>
             <th scope="col" class="pointer" (click)="toggleSort('stake')">Matched</th>
-            <th scope="col" class="pointer" >Unmatched</th>
+            <th scope="col" class="pointer">Unmatched</th>
             <th scope="col" class="pointer" (click)="toggleSort('profitLiability')">Profit Liability</th>
             <th scope="col" class="last text-center">IP</th>
           </tr>
@@ -161,14 +100,8 @@
             <td>{{ bet.createdAt | date : "medium" }}</td>
             <td>{{ bet.event }}</td>
             <td>
-              <span
-                *ngIf="!bet.isBack"
-                class="border r-2 bg-danger text-danger border-danger me-2 border-3"
-              ></span>
-              <span
-                *ngIf="bet.isBack"
-                class="border bg-primary text-primary border-primary me-2 border-3"
-              ></span>
+              <span *ngIf="!bet.isBack" class="border r-2 bg-danger text-danger border-danger me-2 border-3"></span>
+              <span *ngIf="bet.isBack" class="border bg-primary text-primary border-primary me-2 border-3"></span>
               {{ bet.betCategory }}
             </td>
             <td>{{ bet.selectionName }}</td>
@@ -181,7 +114,7 @@
             </td>
             <td class="tooltipnk">
               <i class="fa-sharp fa-solid fa-info"></i>
-              <span class="tooltiptext px-5 w-auto">
+              <span class="tooltiptext tabTooltip px-5 w-auto">
                 <small>{{ bet.ip }}</small>
               </span>
             </td>
@@ -191,21 +124,12 @@
     </div>
 
     <div *ngIf="betList.length > 0 && !this.isLoading">
-      <button
-        class="btn rounded-pill text-white"
-        [disabled]="currentPage === 1"
-        (click)="prev()"
-      >
+      <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
         Prev
       </button>
-      <span class="btn btn-pink rounded-pill ps-4 pe-4"
-        >{{ currentPage }} / {{ totalPages }}
+      <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
       </span>
-      <button
-        class="btn rounded-pill text-white"
-        [disabled]="currentPage === totalPages"
-        (click)="next()"
-      >
+      <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
         Next
       </button>
     </div>

@@ -111,6 +111,13 @@ export class CreateMemberComponent implements OnInit {
   }
 
   setGameStatus(status, sportsId) {
+    if(sportsId == 4){
+      if(status == true){
+        this.casinoProviderList = [];
+      } else {
+        this._getCasinoProvider();
+      }
+    }
     this.gamesList.find(g => g.gameId == sportsId).isActive = !status;
     this.memberForm.markAsDirty();
     console.log(this.gamesList)
@@ -119,7 +126,6 @@ export class CreateMemberComponent implements OnInit {
   setCasinoStatus(status, providerId) {
     this.casinoProviderList.find(g => g.providerId == providerId).isActive = !status;
     this.memberForm.markAsDirty();
-    console.log(this.casinoProviderList);
   }
 
 
@@ -132,10 +138,9 @@ export class CreateMemberComponent implements OnInit {
         this.memberData = res.user;
         console.log(this.memberData);
         this.gamesList = res.gameStatus;
-        // this.casinoProviderList = res.providerStatus;
-        
-        res.providerStatus.forEach(status => {     
-     
+
+        res.providerStatus.forEach(status => {
+
           this.casinoProviderList.forEach(cpl => {
             if(status.casinoProviderId == cpl.providerId) {
               cpl.isActive = status.isActive;
@@ -143,10 +148,6 @@ export class CreateMemberComponent implements OnInit {
           });
         });
 
-
-        
-        
-    console.log("this.casinoProviderList..",this.casinoProviderList);
 
         this.roleId = this.memberData.roleId;
         this.memberForm.patchValue({
@@ -184,7 +185,7 @@ export class CreateMemberComponent implements OnInit {
         )]),
         confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
         playerMaxCreditLimit: [''],
-        playerAvailableCredit: ['', Validators.required],
+        playerAvailableCredit: ['', [(c: AbstractControl) => Validators.required(c), Validators.min(0)]],
         sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
@@ -201,7 +202,7 @@ export class CreateMemberComponent implements OnInit {
         displayName: [''],
         username: [''],
         playerMaxCreditLimit: [''],
-        playerAvailableCredit: ['', Validators.required],
+        playerAvailableCredit: ['', [(c: AbstractControl) => Validators.required(c), Validators.min(0)]],
         sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         roleId: ['', Validators.required],
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],

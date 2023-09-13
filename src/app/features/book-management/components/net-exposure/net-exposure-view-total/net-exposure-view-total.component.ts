@@ -38,7 +38,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   fileName = 'NetExposureViewTotal' + new Date().toString() + '.xlsx';
   newAdminBooksList: any;
   ladderObj: never[];
-  downlineBooks:any = [];
+  downlineBooks: any = [];
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
@@ -108,7 +108,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     });
   }
 
-  getTotalBookViewTotal(marketId, totalBookStatus,adminBook) {
+  getTotalBookViewTotal(marketId, totalBookStatus, adminBook) {
 
 
     if (totalBookStatus) {
@@ -134,50 +134,50 @@ export class NetExposureViewTotalComponent implements OnInit {
     };
 
 
-      this._bookMgmService._postTotalBookApi(totalBookParams).subscribe((data: any) => {
+    this._bookMgmService._postTotalBookApi(totalBookParams).subscribe((data: any) => {
 
+      this.downlineBooks = [];
+
+      if (data.book.length > 0) {
+        data.book = data.book.map((el) => ({ ...el, marketId: totalBookParams.marketId, isExpanded: false }));
+
+        for (let book of data.book) {
+          this.downlineBooks.push(book)
+        }
+
+        this.addMarketIdsRecursive(this.downlineBooks, totalBookParams.marketId)
+      } else {
         this.downlineBooks = [];
+      }
 
-        if(data.book.length>0){
-          data.book = data.book.map((el)=>({...el,marketId:totalBookParams.marketId,isExpanded:false}));
 
-          for(let book of data.book){
-            this.downlineBooks.push(book)
+      // console.log(this.downlineBooks)
+
+      if (data['book'].length > 0) {
+        this.totalBooks.push({ marketId: marketId, totalBook: data['book'], isTotaltotalBookView: true });
+        this.adminBooksList.map((adminBook) => {
+          if (adminBook['marketId'] == marketId) {
+            adminBook['totalBook'] = data['book'];
+            adminBook['isTotaltotalBookView'] = true;
+          } else {
+            adminBook['isTotaltotalBookView'] = false;
           }
-
-          this.addMarketIdsRecursive(this.downlineBooks,totalBookParams.marketId)
-        }else{
-          this.downlineBooks = [];
-        }
-
-
-        // console.log(this.downlineBooks)
-
-        if (data['book'].length > 0) {
-          this.totalBooks.push({ marketId: marketId, totalBook: data['book'], isTotaltotalBookView: true });
-          this.adminBooksList.map((adminBook) => {
-            if (adminBook['marketId'] == marketId) {
-              adminBook['totalBook'] = data['book'];
-              adminBook['isTotaltotalBookView'] = true;
-            }else{
-              adminBook['isTotaltotalBookView'] = false;
-            }
-            return adminBook;
-          })
-        }
-      });
+          return adminBook;
+        })
+      }
+    });
 
 
   }
 
 
-  addMarketIdsRecursive(userBook,marketId){
-    for(let book of userBook){
-        book.marketId = marketId;
-        book.isExpanded = false;
-        if(book.downline.length>0){
-          this.addMarketIdsRecursive(book.downline,marketId)
-        }
+  addMarketIdsRecursive(userBook, marketId) {
+    for (let book of userBook) {
+      book.marketId = marketId;
+      book.isExpanded = false;
+      if (book.downline.length > 0) {
+        this.addMarketIdsRecursive(book.downline, marketId)
+      }
     }
   }
 
@@ -404,9 +404,8 @@ export class NetExposureViewTotalComponent implements OnInit {
           }
 
           return singleBook['adminBook'].map((runnerRes) => {
-            let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
-            // console.log(webSocketRunners)
             if (singleBook['marketTypName'] == 'Match Odds') {
+              let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
 
               for (let singleWebsocketRunner of webSocketRunners) {
 
@@ -431,9 +430,9 @@ export class NetExposureViewTotalComponent implements OnInit {
                 }
               }
             } else if (singleBook['marketTypName'] == 'Bookmaker' || singleBook['marketTypName'] == 'Fancy') {
-              // console.log(webSocketRunners)
-              for (let singleWebsocketRunner of webSocketRunners) {
+              let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId'].toString()]);
 
+              for (let singleWebsocketRunner of webSocketRunners) {
                 if (singleWebsocketRunner['ib']) {
                   //back
 
@@ -502,7 +501,9 @@ export class NetExposureViewTotalComponent implements OnInit {
   }
 
   startStreamingLiveTV() {
-    this._sharedService.postLiveStreamForMarket({ domain: window.location.hostname, matchId: this.matchId }).subscribe((res: any) => {
+    // sportszone365.org
+    // domain: window.location.hostname
+    this._sharedService.postLiveStreamForMarket({ domain: 'sportszone365.org', matchId: this.matchId }).subscribe((res: any) => {
       this.liveStreamingTVUrl = res?.streamObj?.data?.streamingUrl;
       // console.log("tv",res);
     })

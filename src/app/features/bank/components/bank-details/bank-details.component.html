@@ -12,9 +12,9 @@
         <div (click)="toggleMenu()" class="{{ mainClass }}">
           <main id="main" class="main m-0">
             <section class="section dashboard">
-              <div class="row mb-3 align-items-end">
-                <div class="col-md-6 col-lg-6 col-xl-6">
-                  <!-- <div class="row text-white">
+              <!-- <div class="row mb-3 align-items-end">
+                 <div class="col-md-6 col-lg-6 col-xl-6">
+                  <div class="row text-white">
                     <div class="input-group flex-nowrap">
                       <span class="input-group-text bg-dark text-white border-pink radius-left-tb" id="addon-wrapping">
                         <i class="fa fa-search"></i>
@@ -24,12 +24,12 @@
                         placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping"
                         [(ngModel)]="searchTerm" (ngModelChange)="search()" />
                     </div>
-                  </div> -->
-                </div>
-                <!-- <div class="col-md-12 col-lg-12 col-xl-2 text-end">
-                  ( Total : {{ userList.length }} )
+                  </div>
                 </div> -->
-              </div>
+              <!-- <div class="col-md-12 col-lg-12 col-xl-2 text-end">
+                  ( Total : {{ userList.length }} )
+                </div> 
+              </div>-->
               <div class="row align-items-center">
                 <h4 class="text-pink">
                   <img src="../../../../../assets/images/pnl.png" alt="" /> Bank Transfer</h4>
@@ -55,7 +55,7 @@
                 <div class="col-md-12 col-lg-12 col-xl-2 text-end">
                   ( Total : {{ userList.length }} )
                 </div>
-               
+
                 <div class="col-lg-1 col-md-3 col-3 text-end">
                   <button *ngIf="userList.length > 0" type="button" class="btn-sm btn-pink rounded-pill ms-2 text-white"
                     (click)="exportExcel()">
@@ -94,7 +94,7 @@
                           <!-- <th scope="col" class="text-center" *ngIf="selectedRoleId != 7">
                             Partnership %
                           </th> -->
-                          <th scope="col" class="text-center pointer">Manage Transfer</th>
+                          <th scope="col" class="text-center pointer last">Manage Transfer</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -106,7 +106,7 @@
                             <input type="checkbox" class="pointer" (change)="checkUserForAdjustment(user.userId)"
                               *ngIf="user.take > 0 || user.give > 0" [(ngModel)]="user.state" />
                           </td>
-                          
+
                           <td>
 
                             <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
@@ -117,21 +117,20 @@
                     i + 1 + (currentPage - 1) * limit
                   }}</span> -->
                           </td>
-                          <td><span
-                              (click)="showDownlineTree(user)">{{ user.username }}</span></td>
+                          <td><span (click)="showDownlineTree(user)">{{ user.username }}</span></td>
                           <td class="text-center">{{user.userRoleName}}</td>
                           <td class="text-center">{{ user.creditLimit | number }}</td>
                           <td class="text-center" [ngClass]="user.exposure > 0 ? 'text-danger' : ''">
                             {{ user.exposure | number }}
                           </td>
                           <td [ngClass]="user.take > 0 ? 'text-success' : ''" class="text-center">
-                            <a class="pointer text-success text-decoration-none" *ngIf="user.take > 0"
-                              >{{ user.take | number }}</a>
+                            <a class="pointer text-success text-decoration-none"
+                              *ngIf="user.take > 0">{{ user.take | number }}</a>
                             <span *ngIf="user.take <= 0">{{ user.take | number }}</span>
                           </td>
                           <td [ngClass]="user.give > 0 ? 'text-danger' : ''" class="text-center">
-                            <a class="pointer text-danger text-decoration-none" *ngIf="user.give > 0"
-                              >{{ user.give | number }}</a>
+                            <a class="pointer text-danger text-decoration-none"
+                              *ngIf="user.give > 0">{{ user.give | number }}</a>
                             <span *ngIf="user.give <= 0">{{ user.give | number }}</span>
                           </td>
                           <td class="text-center">{{ user.availableCredit | number }}</td>
@@ -139,13 +138,15 @@
                             {{ user.partnerShipPercent | number }}
                           </td>
                           <td class="text-center">
-                            <button *ngIf="user.give > 0"  class=" btn btn-sm btn-danger pointer text-decoration-none"
-                              (click)="adjustWinningsForSingleUser(user, true)" [disabled] = "selectedUserForAdjustment.length > 1">Give</button>
+                            <button *ngIf="user.give > 0" class=" btn btn-sm btn-danger pointer text-decoration-none"
+                              (click)="adjustWinningsForSingleUser(user, true)"
+                              [disabled]="selectedUserForAdjustment.length > 1">Give</button>
 
-                              <button *ngIf="user.take > 0"  class="btn btn-sm btn-success pointer text-decoration-none"
-                              (click)="adjustWinningsForSingleUser(user, false)" [disabled] = "selectedUserForAdjustment.length > 1">Take</button>
+                            <button *ngIf="user.take > 0" class="btn btn-sm btn-success pointer text-decoration-none"
+                              (click)="adjustWinningsForSingleUser(user, false)"
+                              [disabled]="selectedUserForAdjustment.length > 1">Take</button>
 
-                              <!-- <button class="btn btn-pink rounded-pill">Test</button> -->
+                            <!-- <button class="btn btn-pink rounded-pill">Test</button> -->
                           </td>
                         </tr>
                       </tbody>
@@ -161,30 +162,19 @@
                           <td class="text-danger text-center">{{totalGive | currency:'INR'}}</td>
                           <td></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
-
                         </tr>
                       </tfoot>
                     </table>
                   </div>
 
                   <div *ngIf="userList.length > 0 && !this.isLoading">
-                    <button
-                      class="btn rounded-pill text-white"
-                      [disabled]="currentPage === 1"
-                      (click)="prev()"
-                    >
+                    <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
                       Prev
                     </button>
-                    <span class="btn btn-pink rounded-pill ps-4 pe-4"
-                      >{{ currentPage }} / {{ totalPages }}
+                    <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
                     </span>
-                    <button
-                      class="btn rounded-pill text-white"
-                      [disabled]="currentPage === totalPages"
-                      (click)="next()"
-                    >
+                    <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages"
+                      (click)="next()">
                       Next
                     </button>
                   </div>
@@ -207,44 +197,25 @@
 
 
 <!-- Modal end -->
-<div
-  *ngIf="modalNumber == 1"
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div *ngIf="modalNumber == 1" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
+  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
           Do you want bulk transfer?
         </h5>
-        <button
-          type="button"
-          (click)="closeModal()"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
       <div class="modal-body bg-dark text-white">
         <div class="row">
           <section class="section w-75 m-auto">
-            <button
-              class="btn btn-success rounded-pill w-80 mt-3"
-              (click)="adjustWinnings()"
-            >
+            <button class="btn btn-success rounded-pill w-80 mt-3" (click)="adjustWinnings()">
               Yes
             </button>
-            <button
-              class="btn btn-danger rounded-pill w-80 mt-3 float-right"
-              (click)="closeModal()"
-            >
+            <button class="btn btn-danger rounded-pill w-80 mt-3 float-right" (click)="closeModal()">
               Cancel
             </button>
             <!--your code will come here end-->
@@ -259,30 +230,17 @@
 <!-- Modal end -->
 
 
-<div
-  *ngIf="modalNumber == 3"
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div *ngIf="modalNumber == 3" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
+  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
           Transaction
         </h5>
-        <button
-          type="button"
-          (click)="closeModal()"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
       <div class="modal-body bg-dark_new text-white">
         <div class="row">
@@ -314,30 +272,20 @@
                     You Can Transfer {{ userDetails.take }} Amount
                   </div>
                   <div class="col-md-12 pt-2">
-                    <input
-                      type="number"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                      formControlName="amount"
-                    />
+                    <input type="number" class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                      formControlName="amount" />
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-md-6 text-end">
-                    <button
-                      (click)="postAdjustWinningsForSingleUser()"
-                      [disabled]="adjustWinningsForSingleUserForm.invalid"
-                      class="btn btn-danger rounded-pill w-80"
-                    >
+                    <button (click)="postAdjustWinningsForSingleUser()"
+                      [disabled]="adjustWinningsForSingleUserForm.invalid" class="btn btn-danger rounded-pill w-80">
                       Save
                     </button>
                   </div>
                   <div class="col-md-6">
-                    <button
-                      class="btn btn-danger rounded-pill w-80"
-                      type="button"
-                      (click)="closeModal()"
-                    >
+                    <button class="btn btn-danger rounded-pill w-80" type="button" (click)="closeModal()">
                       Cancel
                     </button>
                   </div>
@@ -352,30 +300,17 @@
 </div>
 
 <!-- Modal 4 start -->
-<div
-  *ngIf="modalNumber == 4"
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div *ngIf="modalNumber == 4" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
+  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
           Member Hierarchy
         </h5>
-        <button
-          type="button"
-          (click)="closeModal()"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
       <div class="modal-body bg-dark text-white">
         <div class="row">

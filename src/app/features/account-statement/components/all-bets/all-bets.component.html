@@ -1,11 +1,5 @@
-<div
-  [formGroup]="filterForm"
-  class="tab-pane fade show active"
-  id="pills-batlist"
-  role="tabpanel"
-  aria-labelledby="pills-batlist-tab"
-  tabindex="0"
->
+<div [formGroup]="filterForm" class="tab-pane fade show active" id="pills-batlist" role="tabpanel"
+  aria-labelledby="pills-batlist-tab" tabindex="0">
   <div class="row mb-2">
     <div class="col-md-12">
       <h3 class="text-pink">All Bets</h3>
@@ -15,20 +9,12 @@
   <div class="row mb-2 align-items-end">
     <div class="col-md-6">
       <!--<label>Search</label>-->
-      <input
-        formControlName="searchText"
-        type="number"
-        class="form-control input-group-text bg-dark text-white border-pink radius-left-tb radius-right-tb"
-        value=""
-        placeholder="Enter Here..."
-      />
+      <input formControlName="searchText" type="number"
+        class="form-control input-group-text bg-dark text-white border-pink radius-left-tb radius-right-tb" value=""
+        placeholder="Enter Here..." />
     </div>
     <div class="col-md-6">
-      <button
-        type="button"
-        class="btn btn-pink rounded-pill w-25"
-        (click)="getMemberBets()"
-      >
+      <button type="button" class="btn btn-pink rounded-pill w-25" (click)="getMemberBets()">
         Search
       </button>
     </div>
@@ -67,14 +53,8 @@
           <td>{{ bet.createdAt | date : "medium" }}</td>
           <td>{{ bet.event }}</td>
           <td>
-            <span
-              *ngIf="!bet.isBack"
-              class="border bg-danger text-danger border-danger me-2"
-            ></span>
-            <span
-              *ngIf="bet.isBack"
-              class="border bg-primary text-primary border-primary me-2"
-            ></span>
+            <span *ngIf="!bet.isBack" class="border bg-danger text-danger border-danger me-2"></span>
+            <span *ngIf="bet.isBack" class="border bg-primary text-primary border-primary me-2"></span>
             {{ bet.betCategory }}
           </td>
           <td>{{ bet.selectionName }}</td>
@@ -87,7 +67,7 @@
           </td>
           <td class="tooltipnk">
             <i class="fa-sharp fa-solid fa-info"></i>
-            <span class="tooltiptext px-5 w-auto">
+            <span class="tooltiptext tabTooltip px-5 w-auto">
               <small>{{ bet.ip }}</small>
             </span>
           </td>
@@ -97,21 +77,12 @@
   </div>
 
   <div *ngIf="betList.length > 0 && !this.isLoading">
-    <button
-      class="btn rounded-pill text-white"
-      [disabled]="currentPage === 1"
-      (click)="prev()"
-    >
+    <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
       Prev
     </button>
-    <span class="btn btn-pink rounded-pill ps-4 pe-4"
-      >{{ currentPage }} / {{ totalPages }}
+    <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
     </span>
-    <button
-      class="btn rounded-pill text-white"
-      [disabled]="currentPage === totalPages"
-      (click)="next()"
-    >
+    <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
       Next
     </button>
   </div>

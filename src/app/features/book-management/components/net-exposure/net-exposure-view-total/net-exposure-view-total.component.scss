@@ -4,6 +4,7 @@
 }
 .align_thead tbody tr td {
   vertical-align: middle;
+  border: 0;
 }
 
 .align_thead tbody tr td a {
@@ -37,15 +38,26 @@
   display: none;
 }
 
-.tableRes {
-  max-height: 48vh;
-}
+// .tableRes {
+//   max-height: 48vh;
+// }
 
-.table > :not(caption) > * > * {
-  padding: 0;
-  height: auto;
-}
+// .table > :not(caption) > * > * {
+//   padding: 0;
+//   height: auto;
+// }
 
 .tableFixHead .table > :not(caption) > * > * {
   padding: 5px;
+  margin: 5px 0;
 }
+
+.tableFixHead {
+  overflow: hidden;
+  max-height: none;
+}
+
+// td.col {
+//   border-top: 1px solid #000;
+//   border-bottom: 1px solid #000;
+// }

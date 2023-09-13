@@ -220,15 +220,17 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   background-image: url(../images/balance.png);
   width: 100%;
   // height: 158px;
-  height: 120px;
+  height: 70px;
   background-color: $color_22;
   border-radius: 10px;
   color: $color_7;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   p {
-    font-size: 24px;
+    font-size: 20px;
     color: $color_7;
     line-height: 26px;
     letter-spacing: 1px;
@@ -342,7 +344,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 /********** table pro end ************/
 /********** inner page pro start ************/
 .gamedetails {
-  // border: 1px solid $color_27;
+  border: 1px solid $color_27;
   border-radius: 15px;
   padding: 15px;
   background: transparent;
@@ -1094,7 +1096,7 @@ $breakpoint-mobile: 767px;
   }
 
   .balance {
-    height: 82px;
+    // height: 82px;
     text-align: center;
     p {
       font-size: 12px;

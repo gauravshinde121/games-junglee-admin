@@ -49,7 +49,7 @@ export class NetExposureComponent implements OnInit {
 
     this.resetTimerInterval = setInterval(() => {
       if (this.refreshCount == 0) {
-        this.refreshCall();
+        // this.refreshCall();
         this.refreshCount = 9;
       }
       this.refreshCount--;

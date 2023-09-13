@@ -336,6 +336,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   td {
     vertical-align: middle;
     border-bottom: 1px solid $color_2;
+    margin: 2px 0;
   }
   input {
     cursor: pointer;
@@ -344,7 +345,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 /********** table pro end ************/
 /********** inner page pro start ************/
 .gamedetails {
-  border: 1px solid $color_27;
+  // border: 1px solid $color_27;
   border-radius: 15px;
   padding: 15px;
   background: transparent;
@@ -945,9 +946,9 @@ tfoot tr {
 
 // //////////
 
-.dashboard .border {
-  border: 1px solid $color_27 !important;
-}
+// .dashboard .border {
+//   border: 1px solid $color_27 !important;
+// }
 .searchList {
   ul {
     // border: 1px solid $color_22;

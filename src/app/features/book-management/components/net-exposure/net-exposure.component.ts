@@ -232,10 +232,7 @@ export class NetExposureComponent implements OnInit {
   // }
 
   redirectUrlByMarket(data) {
-    console.log(data)
     let marketIds = data.map(id => `${id.marketId}`).join(",");
-    console.log(marketIds)
-
     this._router.navigate(['/book-management/advance-workstation-market/' + marketIds]);
   }
 

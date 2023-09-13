@@ -196,7 +196,6 @@ export class BetSettingsComponent implements OnInit {
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
@@ -252,7 +251,6 @@ export class BetSettingsComponent implements OnInit {
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
@@ -264,7 +262,6 @@ export class BetSettingsComponent implements OnInit {
   confirmDeleteBet(){
     this.betRemark = this.deleteBetForm.value.remarks;
     this.deleteBet(this.bets_data);
-    console.log('this.deleteBetForm.value.remarks',this.deleteBetForm.value.remarks);
   }
 
   closeModal(){
@@ -290,13 +287,11 @@ export class BetSettingsComponent implements OnInit {
     this._settingService._deleteBetApi(body).subscribe(res=>{
       this._sharedService.getToastPopup('done',"","success");
       this.getAllUserBets();
-      console.log('deleted');
       this.display = 'none';
     })
   }
 
   exportExcel(){
-    console.log(this.allBets)
     let allBet : any = []
     this.allBets.forEach(element => {
       // allBet.push({

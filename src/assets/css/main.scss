@@ -131,7 +131,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 /********** Login start ************/
 
 .login {
-  border: 1px solid rgba(255, 255, 255, 0.3215686275);
+  // border: 1px solid rgba(255, 255, 255, 0.3215686275);
   border-radius: 25px;
   padding: 10px;
   background: rgb(0 0 0 / 8%);
@@ -343,7 +343,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 /********** table pro end ************/
 /********** inner page pro start ************/
 .gamedetails {
-  border: 1px solid $color_27;
+  // border: 1px solid $color_27;
   border-radius: 15px;
   padding: 15px;
   background: transparent;
@@ -964,7 +964,7 @@ tfoot tr {
       }
 
       &:hover {
-        background-color: $color_22;
+        background-color: $color_27;
       }
     }
   }

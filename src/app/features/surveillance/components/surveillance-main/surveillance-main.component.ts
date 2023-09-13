@@ -51,7 +51,7 @@ export class SurveillanceMainComponent implements OnInit {
   fileName= 'Surveillance.xlsx';
   isMobileView = false;
 
-  
+
   onResize() {
     if (window.innerWidth <= 767) {
       this.isMobileView = true;
@@ -66,7 +66,7 @@ export class SurveillanceMainComponent implements OnInit {
     private _memberService : MembersService,
     private bookManagementService: BookManagementService,
     private _fb: FormBuilder
-  ) { 
+  ) {
     this.onResize()
   }
 
@@ -87,13 +87,10 @@ export class SurveillanceMainComponent implements OnInit {
     this.getAllUserBets();
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
       this.isLeftMenuOpen = res.leftMenuOpen;
-      console.log(this.sideBarClass);
       if(this.isLeftMenuOpen){
-        console.log('1');
         this.sideBarClass = 'mobile-menu';
         this.mainClass = 'col-md-10';
       } else {
-        console.log('2');
         this.sideBarClass = '';
         this.mainClass = 'col-md-12';
       }
@@ -230,7 +227,6 @@ export class SurveillanceMainComponent implements OnInit {
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(res.userBetList.totalNoOfRecords / this.pageSize);
     },(err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
@@ -289,7 +285,6 @@ export class SurveillanceMainComponent implements OnInit {
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
@@ -326,7 +321,6 @@ export class SurveillanceMainComponent implements OnInit {
    }
 
   exportExcel(){
-    console.log(this.allBets)
     let allBet : any = []
     this.allBets.forEach(element => {
       allBet.push({

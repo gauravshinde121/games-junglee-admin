@@ -40,7 +40,6 @@ export class AppSettingsComponent implements OnInit {
       this.isLoading = true;
     }
     this._sharedService.getWebSettings().subscribe((res=>{
-      console.log(res);
       this.isLoading = false;
       this.settingObj = JSON.parse(res['webAppSetting'][0].propertyValue)
 
@@ -54,9 +53,7 @@ export class AppSettingsComponent implements OnInit {
       "propertyValue":this.settingObj,
       "clientId": this.clientId
     }
-    console.log('this.saveSettingObj',this.saveSettingObj);
     this._sharedService.saveWebSettings(this.saveSettingObj).subscribe((res=>{
-      console.log(res);
       this.submitting = false;
       this._sharedService.getToastPopup('Settings saved!',"","success")
       this.getWebSettings(true);

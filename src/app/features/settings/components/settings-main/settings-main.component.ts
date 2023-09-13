@@ -13,7 +13,7 @@ export class SettingsMainComponent implements OnInit {
   sideBarClass:String = 'mobile-menu';
   isMobileView = false;
 
-  
+
   onResize() {
     if (window.innerWidth <= 767) {
       this.isMobileView = true;
@@ -29,13 +29,10 @@ export class SettingsMainComponent implements OnInit {
   ngOnInit(): void {
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
       this.isLeftMenuOpen = res.leftMenuOpen;
-      console.log(this.sideBarClass);
       if(this.isLeftMenuOpen){
-        console.log('1');
         this.sideBarClass = 'mobile-menu';
         this.mainClass = 'col-md-10';
       } else {
-        console.log('2');
         this.sideBarClass = '';
         this.mainClass = 'col-md-12';
       }

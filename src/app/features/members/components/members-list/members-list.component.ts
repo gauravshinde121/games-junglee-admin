@@ -11,7 +11,7 @@ import { MembersService } from '../../services/members.service';
 })
 export class MembersListComponent implements OnInit {
 
- 
+
   userList: any = [];
   isLoading = false;
   selectedUserForAdjustment: any = [];
@@ -158,13 +158,13 @@ export class MembersListComponent implements OnInit {
       "amount": this.adjustWinningsForSingleUserForm.value.amount,
       "isGiven": this.isGiven
     }
-   
+
     this.closeModal();
     this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
       this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
       this._sharedService.callAdminDetails.next(true);
       this._getAllUserInfo(this.selectedRoleId);
-      
+
     });
   }
 
@@ -218,7 +218,7 @@ export class MembersListComponent implements OnInit {
     if(ev.target.checked){
       this.selectedUserForAdjustment = [];
     }
-    
+
     this.allChecked = !this.allChecked;
 
     // this.userList.forEach(x => x.state = ev.target.checked)
@@ -227,18 +227,18 @@ export class MembersListComponent implements OnInit {
       if(element.winnings != 0) {
         element.state = ev.target.checked
       }
-      
+
     });
 
     for(const user of this.userList){
       if(user.winnings != 0 ) {
         this.checkUserId(user.userId);
-      } 
+      }
     }
   }
 
   checkUserId(userId: any) {
-    
+
     if (this.selectedUserForAdjustment.includes(userId)) {
       this.selectedUserForAdjustment.splice(
         this.selectedUserForAdjustment.indexOf(userId),
@@ -296,7 +296,6 @@ export class MembersListComponent implements OnInit {
   }
 
   _getAllUserInfo(roleId, autoRefresh = false) {
-    console.log("called");
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });
@@ -316,7 +315,6 @@ export class MembersListComponent implements OnInit {
         this.isLoading = false;
       }
       this.userList = users.memberData.memberList;
-      console.log(this.userList)
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
       this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);
@@ -339,7 +337,6 @@ export class MembersListComponent implements OnInit {
   getSingleUserInfo(user) {
     this.isLoading = true;
     this._sharedService._getSingleUsersApi(user).subscribe((users: any) => {
-      console.log(users);
     });
   }
 
@@ -353,7 +350,6 @@ export class MembersListComponent implements OnInit {
     this.selectedUserForAdjustment.push(userId);
 
     this.isAllChecked();
-    // console.log(this.selectedUserForAdjustment.push(userId))
   }
 
 
@@ -364,7 +360,7 @@ export class MembersListComponent implements OnInit {
   }
 
   adjustWinnings() {
-    
+
     var currentUserIp:any;
     this._sharedService.currentUserIp.subscribe((data: any) => {
       currentUserIp = data.userIp;
@@ -382,7 +378,6 @@ export class MembersListComponent implements OnInit {
           updateAdminDetails: true,
         });
         this.selectedUserForAdjustment = [];
-        console.log(this.selectedUserForAdjustment)
         this._getAllUserInfo(this.selectedRoleId);
         this._sharedService.callAdminDetails.next(true);
         this.closeModal();
@@ -399,7 +394,6 @@ export class MembersListComponent implements OnInit {
   openHierarchyModal(userId) {
     this._sharedService.getUplineSummaryApi(userId).subscribe((res)=>{
       this.memberHierarchy = res;
-      console.log('getUplineSummary', res);
     });
     this.modalNumber = 4;
     this.userId = userId;
@@ -483,6 +477,6 @@ export class MembersListComponent implements OnInit {
     });
     this._sharedService.exportExcel(memberList, this.fileName);
   }
-  
+
 
 }

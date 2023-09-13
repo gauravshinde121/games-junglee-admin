@@ -1049,3 +1049,14 @@ a {
 .tabTooltip {
   left: -250px !important;
 }
+
+
+// below CSS is for Mafia specifically
+
+.login {
+  border: 1px solid rgba(255, 255, 255, 0.3215686275);
+}
+
+.gamedetails {
+  border: 1px solid $color_27;
+}

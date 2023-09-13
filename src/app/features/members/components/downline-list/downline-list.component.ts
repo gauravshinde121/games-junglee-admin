@@ -79,7 +79,6 @@ export class DownlineListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(param=>{
       this.uplineUserId =  param['id'];
-      console.log(this.uplineUserId)
 
     })
 
@@ -136,7 +135,6 @@ export class DownlineListComponent implements OnInit {
         this.isLoading = false;
       }
       this.userList = users.memberData.memberList;
-      console.log(this.userList)
       this.sizes = this.userList;
       this.totalPages = Math.ceil(this.userList.length / this.pageSize);
     });
@@ -146,7 +144,6 @@ export class DownlineListComponent implements OnInit {
   getSingleUserInfo(userId) {
     this.isLoading = true;
     this._sharedService._getSingleUsersApi({userId}).subscribe((users: any) => {
-      console.log(users);
       if(users){
         if(users.user){
           this.currentUserName = users.user.username;
@@ -177,10 +174,7 @@ export class DownlineListComponent implements OnInit {
   }
 
   showDownlineTree(user){
-    console.log(user)
-    console.log(this.selectedRoleId)
     if(this.selectedRoleId != 7){
-      console.log('inn')
       this._router.navigate(['/member/downline-list/'+user.userId])
     }
   }

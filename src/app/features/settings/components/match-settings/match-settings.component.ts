@@ -74,7 +74,6 @@ export class MatchSettingsComponent implements OnInit {
       this.filterForm.patchValue({ 'memberName': null });
     }
     var status: any;
-    console.log('this.filterForm.value.status',this.filterForm.value.status);
     //if (this.filterForm.value.status) {
       if (this.filterForm.value.status == 1) {
         status = true;

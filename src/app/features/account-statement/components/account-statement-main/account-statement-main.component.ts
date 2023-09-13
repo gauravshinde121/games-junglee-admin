@@ -13,7 +13,7 @@ export class AccountStatementMainComponent implements OnInit {
   sideBarClass:String = 'mobile-menu';
   isMobileView = false;
 
-  
+
   onResize() {
     if (window.innerWidth <= 767) {
       this.isMobileView = true;
@@ -24,12 +24,12 @@ export class AccountStatementMainComponent implements OnInit {
 
   constructor(
     private _sharedService:SharedService
-  ) { 
+  ) {
     this.onResize();
   }
 
   ngOnInit(): void {
-    
+
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
       this.isLeftMenuOpen = res.leftMenuOpen;
       if(this.isLeftMenuOpen){
@@ -44,7 +44,6 @@ export class AccountStatementMainComponent implements OnInit {
 
 
    toggleMenu(){
-    console.log(this.isMobileView)
     if(this.isMobileView){
       this._sharedService.leftMenuStatus.next({
         'leftMenuOpen': false

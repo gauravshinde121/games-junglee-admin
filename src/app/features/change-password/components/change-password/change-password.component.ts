@@ -22,7 +22,7 @@ export class ChangePasswordComponent implements OnInit {
   }
   isMobileView = false;
 
-  
+
   onResize() {
     if (window.innerWidth <= 767) {
       this.isMobileView = true;
@@ -56,20 +56,16 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit(): void {
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
       this.isLeftMenuOpen = res.leftMenuOpen;
-      console.log(this.sideBarClass);
       if(this.isLeftMenuOpen){
-        console.log('1');
         this.sideBarClass = 'mobile-menu';
         this.mainClass = 'col-md-10';
       } else {
-        console.log('2');
         this.sideBarClass = '';
         this.mainClass = 'col-md-12';
       }
     });
     // var sportId:any;
     // this._sharedService.testFunc(sportId).subscribe((data:any)=>{
-    //   console.log(data);
     // });
   }
 

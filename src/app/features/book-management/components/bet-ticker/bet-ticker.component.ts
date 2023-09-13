@@ -197,7 +197,6 @@ export class BetTickerComponent implements OnInit {
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     }, (err) => {
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error", "", "error")
     });
   }
@@ -246,7 +245,6 @@ export class BetTickerComponent implements OnInit {
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     }, (err) => {
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error", "", "error")
     });
   }
@@ -256,7 +254,6 @@ export class BetTickerComponent implements OnInit {
   }
 
   exportExcel() {
-    console.log(this.allBets)
     let allBet: any = []
     this.allBets.forEach(element => {
       if (element.isMatched) {
@@ -300,7 +297,7 @@ export class BetTickerComponent implements OnInit {
       this.sortAscending = true;
     }
 
-    
+
   }
 
 }

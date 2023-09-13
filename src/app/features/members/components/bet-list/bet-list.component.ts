@@ -39,7 +39,7 @@ export class BetListComponent implements OnInit {
   marketTypeId: any = null;
   limit:number = 50;
 
-  
+
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
 
@@ -169,7 +169,6 @@ export class BetListComponent implements OnInit {
 
     this._memberService._getMemberBetseApi(body)
       .subscribe((res:any)=>{
-      console.log(res);
       this.isLoading = false;
       if(res){
         this.betList = res.data.betList;
@@ -201,7 +200,6 @@ export class BetListComponent implements OnInit {
       this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
         if(data.matchList){
           this.matchList = data.matchList;
-          //console.log('data.matchList',data.matchList);
         }
       });
 
@@ -209,10 +207,8 @@ export class BetListComponent implements OnInit {
 
   _getMarketsByMatchId(matchId){
       this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
-        console.log('match data',data);
         if(data.marketList){
           this.marketList = data.marketList;
-          //console.log('data.matchList',data.matchList);
         }
       });
 
@@ -220,10 +216,8 @@ export class BetListComponent implements OnInit {
 
   _getAllMembers(){
     this._memberService._getAllMembers().subscribe((data:any)=>{
-      console.log('match data',data);
       if(data.memberData){
         this.allMembers = data.memberData;
-        console.log('data.matchList',data.matchList);
       }
     });
   }

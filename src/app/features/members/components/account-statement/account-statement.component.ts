@@ -30,7 +30,7 @@ export class AccountStatementComponent implements OnInit {
   pageSize: number = 25;
   totalPages: number = 0;
 
-  
+
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
 
@@ -50,7 +50,6 @@ export class AccountStatementComponent implements OnInit {
 
     this._preConfig();
     this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('Selected value: ', selectedValue);
       this._getMatchBySportId(selectedValue);
     });
   }
@@ -123,10 +122,8 @@ export class AccountStatementComponent implements OnInit {
       limit: this.limit,
     }
 
-    console.log(body)
 
     this._memberService._getDownlineAccountsDataForMemberApi(body).subscribe((data:any)=>{
-      console.log(data);
       this.isLoading = false;
       this.accountStatement = data.data;
       this.totalPages = Math.ceil(this.accountStatement.length / this.pageSize);
@@ -158,7 +155,6 @@ export class AccountStatementComponent implements OnInit {
     this._sharedService.getMatchBySportId(+sportId).subscribe((data:any)=>{
       if(data.matchList){
         this.matchList = data.matchList;
-        //console.log('data.matchList',data.matchList);
       }
     });
   }

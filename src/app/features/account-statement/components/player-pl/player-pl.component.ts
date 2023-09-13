@@ -139,7 +139,6 @@ export class PlayerPlComponent implements OnInit {
 
   changeGame(evt) {
     // this.sportsId = evt.target.value;
-    console.log("changegame",evt.target.value);
     this.filterForm.patchValue({matchId:null,marketId:null});
     this.filterForm.value.sportsId = evt.target.value;
     if(evt.target.value == null) {
@@ -220,11 +219,9 @@ export class PlayerPlComponent implements OnInit {
         this.plStatement.map(pl=>pl.name = pl.playerData.name)
         this.plStatement.map(pl=>pl.amount = pl.gameData.finalNetAmount)
 
-        console.log(this.plStatement)
         this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.finalNetAmount, 0);
       // }
     }, (err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
@@ -249,7 +246,6 @@ export class PlayerPlComponent implements OnInit {
     if(this.filterForm.value.sportsId == null || this.filterForm.value.sportsId== "null"){
       this.filterForm.value.matchId = null;
     }
-    console.log(this.filterForm.value)
     this.isLoading = true;
     this.plStatement = [];
     let fromDate = new Date(this.filterForm.value.fromDate);
@@ -294,13 +290,11 @@ export class PlayerPlComponent implements OnInit {
         this.plStatement.map(pl=>pl.match = pl.gameData.eventName)
         this.plStatement.map(pl=>pl.name = pl.playerData.name)
         this.plStatement.map(pl=>pl.amount = pl.gameData.finalNetAmount)
-        console.log(this.plStatement)
         // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
 
         this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.finalNetAmount, 0);
       // }
     }, (err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
@@ -308,8 +302,8 @@ export class PlayerPlComponent implements OnInit {
   getOneAccount(pl) {
     this.isLoading = true;
     let body = {
-      "userId": pl.userId,
-      "matchId": pl.matchId
+      "userId": pl.playerData.playerId,
+      "marketId": pl.gameData.marketId
     }
     this._sharedService.getOneAccount(body).subscribe((data: any) => {
       this.isLoading = false;
@@ -324,9 +318,8 @@ export class PlayerPlComponent implements OnInit {
     this.oneAccount.bets.map(bet=>bet.Odds = bet.odds)
     this.oneAccount.bets.map(bet=>bet.Stake = bet.matchedStake)
     this.oneAccount.bets.map(bet=>bet.PL = bet.profitLoss)
-    console.log(this.oneAccount)
     });
-    
+
     this.pl = pl;
     this.gameData = pl.gameData;
     this.playerData = pl.playerData;
@@ -368,7 +361,6 @@ export class PlayerPlComponent implements OnInit {
   exportExcel1() {
     let oneaccnt : any = []
     this.oneAccount.bets.forEach(element => {
-      console.log(element)
       oneaccnt.push({
         PlaceDate : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
         MatchedDate:moment(element.matchedDate).format("MMM D, YYYY, h:mm:ss a"),
@@ -389,10 +381,8 @@ export class PlayerPlComponent implements OnInit {
   }
 
   toggleSort(columnName: any) {
-    console.log(columnName)
     if (this.sortColumn === columnName) {
       this.sortAscending = !this.sortAscending;
-      console.log(this.sortColumn,columnName)
     } else {
       this.sortColumn = columnName;
       this.sortAscending = true;
@@ -400,10 +390,8 @@ export class PlayerPlComponent implements OnInit {
   }
 
   toggleSort1(columnName1: any) {
-    console.log(columnName1)
     if (this.sortColumn1 === columnName1) {
       this.sortAscending1 = !this.sortAscending1;
-      console.log(this.sortColumn1,columnName1)
     } else {
       this.sortColumn1 = columnName1;
       this.sortAscending1 = true;

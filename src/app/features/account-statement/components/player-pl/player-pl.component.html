@@ -100,6 +100,7 @@
             <th scope="col" class="pointer" (click)="toggleSort('sport')">Sport</th>
             <!--<th scope="col">Sub Game</th>-->
             <th scope="col" class="pointer" (click)="toggleSort('match')">Match</th>
+            <th scope="col" class="pointer" (click)="toggleSort('market')">Market</th>
             <th scope="col" class="pointer" (click)="toggleSort('name')">Username</th>
             <th scope="col" class="pointer text-center" (click)="toggleSort('amount')">Amount</th>
             <!-- <th scope="col">Master</th><th scope="col">Multiplier</th> -->
@@ -118,6 +119,7 @@
             <td>{{ pl.gameData.subGame }}</td>
             <!--<td>{{ pl.gameData.gameName }}</td>-->
             <td>{{ pl.gameData.eventName }}</td>
+            <td>{{ pl.gameData.marketName }}</td>
             <td>
               {{ pl.playerData.name }}
             </td>
@@ -137,6 +139,7 @@
         </tbody>
         <tfoot>
           <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -221,6 +224,14 @@
                 <tr>
                   <td>Commission&nbsp;Amt&nbsp;:</td>
                   <td>{{ oneAccount?.commissionAmt | number}}</td>
+                </tr>
+                <tr>
+                  <td>Fancy Commission&nbsp;Amt&nbsp;:</td>
+                  <td>{{ oneAccount?.totalFancyCommission | number}}</td>
+                </tr>
+                <tr>
+                  <td>Bookmaker Commission&nbsp;Amt&nbsp;:</td>
+                  <td>{{ oneAccount?.totalBookmakerCommission | number}}</td>
                 </tr>
                 <tr>
                   <td>Net Amt:</td>

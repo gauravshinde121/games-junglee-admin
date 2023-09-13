@@ -43,14 +43,14 @@ export class PlayerAccountStatementComponent implements OnInit {
 
   ngOnInit(): void {
     this._preconfig();
-    
+
     this.getPlStatement();
 
   }
 
 
   _preconfig() {
- 
+
     this._initForm();
     // this.getPlStatement();
   }
@@ -101,7 +101,6 @@ export class PlayerAccountStatementComponent implements OnInit {
       // }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     },(err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
@@ -153,7 +152,6 @@ export class PlayerAccountStatementComponent implements OnInit {
       // }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     },(err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }

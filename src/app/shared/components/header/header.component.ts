@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   isLeftBarDisplay:boolean = false;
   clearInterval;
   subjectSub !:Subscription;
-  
+
   constructor(
     private _sharedService: SharedService
   ) {
@@ -31,8 +31,6 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.getAdminDetails()
     this.refreshAdminDetailsPeriodically();
     this.subjectSub = this._sharedService.callAdminDetails.subscribe((res)=>{
-      console.log("res called")
-      console.log(res)
       this.getAdminDetails()
     })
   }
@@ -50,7 +48,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
   onResize() {
     if (window.innerWidth <= 767) {
-      
+
     } else {
       this.leftMenuOpen = true;
       this.isLeftBarDisplay = true;
@@ -58,15 +56,12 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
 
   toggleMenu(){
-    console.log(this.leftMenuOpen)
-    
+
     this.leftMenuOpen=!this.leftMenuOpen;
     this.isLeftBarDisplay=!this.isLeftBarDisplay;
     this._sharedService.leftMenuStatus.next({
       'leftMenuOpen': this.leftMenuOpen
     });
-
-    console.log(this.leftMenuOpen)
   }
 
   // Refresh

@@ -87,7 +87,6 @@ export class InvalidBetComponent implements OnInit {
     this.isLoading = true;
     this._memberService._getInvalidBetsApi(body)
       .subscribe((res: any) => {
-        console.log(res)
         if (res) {
           // this.logList = res.data.betList;
           this.isLoading = false;

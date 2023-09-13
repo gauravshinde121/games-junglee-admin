@@ -150,9 +150,6 @@ export class NetExposureViewTotalComponent implements OnInit {
         this.downlineBooks = [];
       }
 
-
-      // console.log(this.downlineBooks)
-
       if (data['book'].length > 0) {
         this.totalBooks.push({ marketId: marketId, totalBook: data['book'], isTotaltotalBookView: true });
         this.adminBooksList.map((adminBook) => {
@@ -248,12 +245,11 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   _postBooksForAdminBookMgmApi(bookMgmParams) {
     this._bookMgmService._postBooksForAdminBookMgmApi(bookMgmParams).subscribe((res: any) => {
-      // console.log(res['book'])
+
       this.matchName = res['matchName']
       if (res['book'].length > 0) {
         this.setOrUnsetWebSocketParamsObj = [];
         res['book'].map((singleBook) => {
-          // console.log("single book",singleBook)
           this.matchId = singleBook['marketId'];
           singleBook['isExpand'] = true;
           this.setOrUnsetWebSocketParamsObj.push(singleBook.centralId);
@@ -361,7 +357,6 @@ export class NetExposureViewTotalComponent implements OnInit {
   private _updateMarketData(data: any) {
     let parseData = JSON.parse(data);
     if (parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string') {
-      // console.log('data', JSON.parse(data));
       let webSocketData = parseData['data'];
       if (webSocketData.length > 0) {
         webSocketData = webSocketData.map((singleItem) => {
@@ -404,9 +399,8 @@ export class NetExposureViewTotalComponent implements OnInit {
           }
 
           return singleBook['adminBook'].map((runnerRes) => {
-            let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
-            // console.log(webSocketRunners)
             if (singleBook['marketTypName'] == 'Match Odds') {
+              let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
 
               for (let singleWebsocketRunner of webSocketRunners) {
 
@@ -431,9 +425,9 @@ export class NetExposureViewTotalComponent implements OnInit {
                 }
               }
             } else if (singleBook['marketTypName'] == 'Bookmaker' || singleBook['marketTypName'] == 'Fancy') {
-              // console.log(webSocketRunners)
-              for (let singleWebsocketRunner of webSocketRunners) {
+              let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId'].toString()]);
 
+              for (let singleWebsocketRunner of webSocketRunners) {
                 if (singleWebsocketRunner['ib']) {
                   //back
 
@@ -468,7 +462,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     this.realDataWebSocket.subscribe(
       data => {
         if (typeof data == 'string') this._updateMarketData(data);
-        // if(typeof data == 'string') console.log('sub',data);
+        // if(typeof data == 'string')
       }, // Called whenever there is a message from the server.
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).
@@ -506,7 +500,6 @@ export class NetExposureViewTotalComponent implements OnInit {
     // domain: window.location.hostname
     this._sharedService.postLiveStreamForMarket({ domain: 'sportszone365.org', matchId: this.matchId }).subscribe((res: any) => {
       this.liveStreamingTVUrl = res?.streamObj?.data?.streamingUrl;
-      // console.log("tv",res);
     })
   }
 
@@ -523,7 +516,6 @@ export class NetExposureViewTotalComponent implements OnInit {
   }
 
   exportExcel() {
-    // console.log(this.viewTotal)
     let viewtotal: any = []
     this.viewTotal.forEach(element => {
       viewtotal.push({

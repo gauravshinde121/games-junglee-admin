@@ -26,9 +26,8 @@ export class BalanceComponent implements OnInit {
 
   getMemberBalance(){
     this.isLoading = true;
-    
+
     this._memberService._getMemberBalanceApi({userId:this.userId}).subscribe((res:any)=>{
-      console.log(res)
       this.isLoading = false;
       if(res){
         this.memberBalance = res.memberBalance

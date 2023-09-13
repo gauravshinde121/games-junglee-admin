@@ -96,14 +96,12 @@ export class LoginHistoryComponent implements OnInit {
     }
 
     this._memberService._getMemberLoginHistoryApi(payload).subscribe((res: any) => {
-      console.log(res);
       this.isLoading = false;
       if(res.userDeviceLogs){
         this.loginHistory = res.userDeviceLogs.loginHistory;
         this.totalPages = Math.ceil(res.userDeviceLogs.totalNoOfRecords / this.pageSize);
       }
     },(err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }

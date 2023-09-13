@@ -83,7 +83,6 @@ export class TurnoverComponent implements OnInit {
       this.totalPages = Math.ceil(res.finalList.length / this.pageSize);
       // this.plStatement.map((pl: { event: any; matchName: any; })=>pl.event = pl.matchName)
       // this.plStatement.map((pl: { date: any; matchTime: any; })=>pl.date = pl.matchTime)
-      // console.log(this.plStatement)
     })
   }
 
@@ -126,7 +125,6 @@ export class TurnoverComponent implements OnInit {
   toggleSort(columnName: string) {
     if (this.sortColumn === columnName) {
       this.sortAscending = !this.sortAscending;
-      console.log(this.sortColumn,columnName)
     } else {
       this.sortColumn = columnName;
       this.sortAscending = true;

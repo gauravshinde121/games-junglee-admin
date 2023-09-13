@@ -327,18 +327,16 @@
 
             <!-- <div class="row mb-1" *ngFor="let data of book.data"> -->
             <div class="col-md-12 bg-pink">
-              <div class="row">
+              <div class="row align-items-center">
                 <div class="col-3"><span>{{ book.matchName }}</span></div>
                 <div class="col"><button class="btn-warning rounded-pill" (click)="getViewTotal(book)">View
                     total</button>
                 </div>
               </div>
-
-
             </div>
 
             <div class="col-md-6">
-              <div class="row" *ngFor="let market of book.leftMarkets">
+              <div class="row mb-2 align-items-center" *ngFor="let market of book.leftMarkets">
                 <div class="col-6">
                   <div class="row">
                     <div class="col-10">{{market.marketName}}</div>
@@ -351,14 +349,14 @@
                 </div>
                 <div class="col-6">
                   <div class="row">
-                    <div class="col-3 bg-white text-dark">{{market.totalStakes}}</div>
-                    <div class="col-3 bg-white "
+                    <div class="col-3 bg-white p-2 text-dark">{{market.totalStakes}}</div>
+                    <div class="col-3 bg-white p-2 "
                       [ngClass]="market.horses[0]?.finalAmount > 0 ? 'text-success' : 'text-danger'">
                       {{market.horses[0]?.finalAmount}}</div>
-                    <div class="col-3 bg-white "
+                    <div class="col-3 bg-white p-2 "
                       [ngClass]="market.horses[2]?.finalAmount > 0 ? 'text-success' : 'text-danger'">
                       {{market.horses[2]?.finalAmount}}</div>
-                    <div class="col-3 bg-white "
+                    <div class="col-3 bg-white p-2 "
                       [ngClass]="market.horses[1]?.finalAmount > 0 ? 'text-success' : 'text-danger'">
                       {{market.horses[1]?.finalAmount}}</div>
                   </div>
@@ -367,9 +365,9 @@
             </div>
 
             <div class="col-md-6">
-              <div class="row mb-2" *ngFor="let market of book.rightMarkets">
+              <div class="row mb-2 align-items-center" *ngFor="let market of book.rightMarkets">
                 <div class="col-6">
-                  <div class="row">
+                  <div class="row align-items-center">
                     <div class="col-10">{{market.marketName}}</div>
                     <div class="col-2 p-2">
                       <ul class="list-inline d-flex m-0">

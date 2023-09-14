@@ -221,15 +221,17 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   background-image: url(../images/balance.png);
   width: 100%;
   // height: 158px;
-  height: 120px;
+  height: 70px;
   background-color: $color_22;
   border-radius: 10px;
   color: $color_7;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   p {
-    font-size: 24px;
+    font-size: 20px;
     color: $color_7;
     line-height: 26px;
     letter-spacing: 1px;
@@ -335,6 +337,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   td {
     vertical-align: middle;
     border-bottom: 1px solid $color_2;
+    margin: 2px 0;
   }
   input {
     cursor: pointer;
@@ -508,7 +511,7 @@ select:-webkit-autofill:focus {
     color: $color_21;
     text-decoration: none;
     display: block;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 13px;
   }
   span {
@@ -944,9 +947,9 @@ tfoot tr {
 
 // //////////
 
-.dashboard .border {
-  border: 1px solid $color_27 !important;
-}
+// .dashboard .border {
+//   border: 1px solid $color_27 !important;
+// }
 .searchList {
   ul {
     // border: 1px solid $color_22;
@@ -1059,4 +1062,63 @@ a {
 
 .gamedetails {
   border: 1px solid $color_27;
+}
+.navbar-brand {
+  color: $color_7 !important;
+  font-family: "FontAwesome";
+  letter-spacing: 2px;
+  font-size: 16px;
+
+  span {
+    color: $color_27;
+  }
+}
+
+.logins {
+  .navbar-brand {
+    font-size: 30px;
+  }
+  form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+}
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 767px;
+
+@media (max-width: $breakpoint-tablet) {
+  .balance {
+    p {
+      font-size: 14px;
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .navbar-brand {
+    font-size: 12px;
+  }
+  .logins {
+    .navbar-brand {
+      font-size: 20px;
+    }
+  }
+
+  .balance {
+    // height: 82px;
+    text-align: center;
+    p {
+      font-size: 12px;
+      span {
+        font-size: 10px;
+      }
+    }
+  }
 }

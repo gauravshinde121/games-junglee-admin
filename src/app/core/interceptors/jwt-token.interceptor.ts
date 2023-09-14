@@ -18,7 +18,7 @@ export class JwtTokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    if(this._sharedService.getJWTToken() !== null && request['url'] !== "https://jsonip.com" && request['url'] !== "https://ipv4.jsonip.com"){
+    if(this._sharedService.getJWTToken() !== null && request['url'] !== "https://api.ipify.org?format=json" && request['url'] !== "https://ipv4.jsonip.com"){
       //if(this._sharedService.getJWTToken() !== null){
       let jwtTokenHeader = {
         'Authorization':'Bearer '+ this._sharedService.getJWTToken()

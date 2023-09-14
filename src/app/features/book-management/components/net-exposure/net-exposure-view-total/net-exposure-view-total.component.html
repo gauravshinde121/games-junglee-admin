@@ -396,7 +396,7 @@
 
                               <ng-container *ngIf="singleAdminBook['isTotaltotalBookView']">
                                 <tr *ngFor="let downline of downlineBooks">
-                                  <td colspan="6">
+                                  <td colspan="6" class="p-0">
                                     <table class="table m-0 border-0">
                                       <tbody>
                                         <tr class="border-top" *ngIf="downline.marketId == singleAdminBook.marketId">
@@ -419,7 +419,7 @@
                                         <ng-container *ngIf="downline.isExpanded">
                                           <tr *ngFor="let downline2 of downline.downline">
                                             <ng-container *ngIf="downline2.marketId == singleAdminBook.marketId">
-                                              <td colspan="6">
+                                              <td colspan="6" class="p-0">
                                                 <table class="table m-0 border-0">
                                                   <tbody>
                                                     <tr class="border-top">
@@ -444,7 +444,7 @@
                                                       <tr *ngFor="let downline3 of downline2.downline">
                                                         <ng-container
                                                           *ngIf="downline3.marketId == singleAdminBook.marketId">
-                                                          <td colspan="6">
+                                                          <td colspan="6" class="p-0">
                                                             <table class="table m-0 border-0">
                                                               <tbody>
                                                                 <tr class="border-top">
@@ -469,7 +469,7 @@
                                                                   <tr *ngFor="let downline4 of downline3.downline">
                                                                     <ng-container
                                                                       *ngIf="downline4.marketId == singleAdminBook.marketId">
-                                                                      <td colspan="6">
+                                                                      <td colspan="6" class="p-0">
                                                                         <table class="">
                                                                           <tbody>
                                                                             <tr class="border-top">
@@ -504,7 +504,7 @@
                                                                                 *ngFor="let downline5 of downline4.downline">
                                                                                 <ng-container
                                                                                   *ngIf="downline5.marketId == singleAdminBook.marketId">
-                                                                                  <td colspan="6">
+                                                                                  <td colspan="6" class="p-0">
                                                                                     <table class="">
                                                                                       <tbody>
                                                                                         <tr class="border-top">
@@ -542,7 +542,8 @@
                                                                                             *ngFor="let downline6 of downline5.downline">
                                                                                             <ng-container
                                                                                               *ngIf="downline6.marketId == singleAdminBook.marketId">
-                                                                                              <td colspan="6">
+                                                                                              <td colspan="6"
+                                                                                                class="p-0">
                                                                                                 <table class="">
                                                                                                   <tbody>
                                                                                                     <tr>

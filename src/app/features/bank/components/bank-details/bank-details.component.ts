@@ -11,7 +11,7 @@ import { MembersService } from 'src/app/features/members/services/members.servic
 })
 export class BankDetailsComponent implements OnInit {
 
-  
+
   userList: any = [];
   isLoading = false;
   selectedUserForAdjustment: any = [];
@@ -155,7 +155,7 @@ export class BankDetailsComponent implements OnInit {
       this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
       this._sharedService.callAdminDetails.next(true);
       this._getAllUserInfo();
-      
+
     });
   }
 
@@ -186,13 +186,10 @@ export class BankDetailsComponent implements OnInit {
   ngOnInit(): void {
     this._sharedService.leftMenuStatus.subscribe((res: any) => {
       this.isLeftMenuOpen = res.leftMenuOpen;
-      console.log(this.sideBarClass);
       if(this.isLeftMenuOpen){
-        console.log('1');
         this.sideBarClass = 'mobile-menu';
         this.mainClass = 'col-md-10';
       } else {
-        console.log('2');
         this.sideBarClass = '';
         this.mainClass = 'col-md-12';
       }
@@ -219,23 +216,23 @@ export class BankDetailsComponent implements OnInit {
   }
 
   checkAll(ev) {
-    
+
     if(ev.target.checked){
       this.selectedUserForAdjustment = [];
     }
-    
+
     this.userList.forEach(element => {
       if(element.winnings != 0) {
         element.state = ev.target.checked
       }
-      
+
     });
 
     for(const user of this.userList){
       if(user.winnings != 0 ) {
 
         this.checkUserForAdjustment(user.userId);
-      } 
+      }
     }
 
 
@@ -293,11 +290,10 @@ export class BankDetailsComponent implements OnInit {
     };
 
     this._sharedService._getBankUsersApi(body).subscribe((users: any) => {
-    
+
         this.isLoading = false;
-    
+
       this.userList = users.memberData.memberList;
-      console.log(this.userList)
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
       this.totalPages = Math.ceil(users.memberData.filteredRecords / this.pageSize);
@@ -305,12 +301,11 @@ export class BankDetailsComponent implements OnInit {
     });
   }
 
-  
+
 
   getSingleUserInfo(user) {
     this.isLoading = true;
     this._sharedService._getSingleUsersApi(user).subscribe((users: any) => {
-      console.log(users);
     });
   }
 
@@ -332,11 +327,11 @@ export class BankDetailsComponent implements OnInit {
   updateLimit(event){
     this.limit = parseInt(event.target.value);
     this.pageSize = this.limit;
-  
+
   }
 
   adjustWinnings() {
-    
+
     var currentUserIp:any;
     this._sharedService.currentUserIp.subscribe((data: any) => {
       currentUserIp = data.userIp;
@@ -354,7 +349,6 @@ export class BankDetailsComponent implements OnInit {
           updateAdminDetails: true,
         });
         this.selectedUserForAdjustment = [];
-        console.log(this.selectedUserForAdjustment)
         this._getAllUserInfo();
         this._sharedService.callAdminDetails.next(true);
         this.closeModal();
@@ -371,7 +365,6 @@ export class BankDetailsComponent implements OnInit {
   openHierarchyModal(userId) {
     this._sharedService.getUplineSummaryApi(userId).subscribe((res)=>{
       this.memberHierarchy = res;
-      console.log('getUplineSummary', res);
     });
     this.modalNumber = 4;
     this.userId = userId;
@@ -455,7 +448,7 @@ export class BankDetailsComponent implements OnInit {
     });
     this._sharedService.exportExcel(memberList, this.fileName);
   }
-  
+
   toggleMenu(){
     if(this.isMobileView){
       this._sharedService.leftMenuStatus.next({
@@ -475,6 +468,6 @@ export class BankDetailsComponent implements OnInit {
     this.currentPage--;
     this._getAllUserInfo();
   }
-   
+
 
 }

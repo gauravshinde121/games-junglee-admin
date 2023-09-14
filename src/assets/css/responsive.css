@@ -1,13 +1,13 @@
 @media only screen and (max-width: 767.9px) {
+}
+
+@media only screen and (max-width: 768px) {
   .smallMobileHide {
     display: none;
   }
   .smallMobileShow {
-    display: block;
+    display: block !important;
   }
-}
-
-@media only screen and (max-width: 768px) {
   #overlay {
     position: fixed;
     width: 57%;
@@ -111,9 +111,9 @@
     /* margin: 0 0 0 16px; */
   }
 
-  .toggle-sidebar-btn a:nth-child(1) {
+  /* .toggle-sidebar-btn a:nth-child(1) {
     font-size: 2rem;
-  }
+  } */
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

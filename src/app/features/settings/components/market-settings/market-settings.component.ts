@@ -161,7 +161,6 @@ export class MarketSettingsComponent implements OnInit {
       marketId: marketId,
       marketIsActive: checkbox.checked
     }
-      console.log(body)
     this.settingsService._setMarketStatusForMarketSettingsApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Market Settings', 'success');
       console.log(data)
@@ -171,7 +170,6 @@ export class MarketSettingsComponent implements OnInit {
 
   // changeGame(evt) {
   //   // this.sportsId = evt.target.value;
-  //   console.log("changegame",evt.target.value);
   //   this.filterForm.value.sportsId = evt.target.value;
   //   if(evt.target.value == null) {
   //     this.filterForm.value.tournamentId = null;
@@ -207,7 +205,7 @@ export class MarketSettingsComponent implements OnInit {
       maxBet: this.matchSettingsForm.value.maxBet,
       maxMarketSize: this.matchSettingsForm.value.maxMarketSize
     }
-    
+
     this.settingsService._setBetLimitForMarketApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Market Settings', 'success');
       this.getMarketSettingsList();
@@ -222,7 +220,7 @@ export class MarketSettingsComponent implements OnInit {
       this.sortAscending = true;
     }
 
-    
+
   }
 
   filterData(searchTerm: string) {
@@ -235,21 +233,21 @@ export class MarketSettingsComponent implements OnInit {
       this.marketSettingsList = this.marketSettingsList.filter(item =>
         item.marketName.toLowerCase().includes(searchTermLowerCase)
       );
-  
+
       // Apply sorting if required
       if (this.sortColumn) {
         this.marketSettingsList.sort((a, b) =>
           a[this.sortColumn].localeCompare(b[this.sortColumn]) * (this.sortAscending ? 1 : -1)
         );
       }
-  
+
       return this.marketSettingsList;
     }
 
   }
 
   applyFilter() {
-    
+
     this.searchTermChanged.next(this.searchTerm);
 
   }
@@ -267,7 +265,7 @@ export class MarketSettingsComponent implements OnInit {
   }
 
   checkAll(ev) {
-    
+
     if(ev.target.checked){
       this.selectedUserForAdjustment = [];
     }
@@ -275,8 +273,6 @@ export class MarketSettingsComponent implements OnInit {
     this.allChecked = !this.allChecked;
 
     this.marketSettingsList.forEach(x => x.state = ev.target.checked);
-
-    // console.log(this.marketSettingsList)
 
     for(const market of this.marketSettingsList){
       this.checkMarketId(market.marketId);
@@ -309,19 +305,17 @@ export class MarketSettingsComponent implements OnInit {
       maxBet: this.matchSettingsForm.value.maxBet,
       maxMarketSize: this.matchSettingsForm.value.maxMarketSize
     }
-    // console.log(payload)
-    
+
     this.settingsService._setBetLimitForMultipleMarketApi(payload).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Muttiple Markets Settings', 'success');
       this.getMarketSettingsList();
       this.marketSettingsList.forEach(x => x.state = false);
-      console.log(this.marketSettingsList)
     })
 
     this.selectedUserForAdjustment = []
   }
 
- 
+
   preventNegativeKeyPress(event: KeyboardEvent): boolean {
     return (event.charCode == 8 || event.charCode == 0) ? true : (event.charCode >= 48 && event.charCode <= 57);
   }

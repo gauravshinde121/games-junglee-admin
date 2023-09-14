@@ -297,8 +297,7 @@ export class MembersListComponent implements OnInit {
     this._getAllUserInfo(this.selectedRoleId, true);
   }
 
-  _getAllUserInfo(roleId, autoRefresh = false) {    
-    console.log("called");
+  _getAllUserInfo(roleId, autoRefresh = false) {
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });
@@ -319,7 +318,6 @@ export class MembersListComponent implements OnInit {
         this.isLoading = false;
       }
       this.userList = users.memberData.memberList;
-      console.log(this.userList)
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
       this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);
@@ -342,7 +340,6 @@ export class MembersListComponent implements OnInit {
   getSingleUserInfo(user) {
     this.isLoading = true;
     this._sharedService._getSingleUsersApi(user).subscribe((users: any) => {
-      console.log(users);
     });
   }
 
@@ -356,7 +353,6 @@ export class MembersListComponent implements OnInit {
     this.selectedUserForAdjustment.push(userId);
 
     this.isAllChecked();
-    // console.log(this.selectedUserForAdjustment.push(userId))
   }
 
 
@@ -368,7 +364,7 @@ export class MembersListComponent implements OnInit {
 
   adjustWinnings() {
 
-    var currentUserIp: any;
+    var currentUserIp:any;
     this._sharedService.currentUserIp.subscribe((data: any) => {
       currentUserIp = data.userIp;
     });
@@ -385,7 +381,6 @@ export class MembersListComponent implements OnInit {
           updateAdminDetails: true,
         });
         this.selectedUserForAdjustment = [];
-        console.log(this.selectedUserForAdjustment)
         this._getAllUserInfo(this.selectedRoleId);
         this._sharedService.callAdminDetails.next(true);
         this.closeModal();
@@ -402,7 +397,6 @@ export class MembersListComponent implements OnInit {
   openHierarchyModal(userId) {
     this._sharedService.getUplineSummaryApi(userId).subscribe((res) => {
       this.memberHierarchy = res;
-      console.log('getUplineSummary', res);
     });
     this.modalNumber = 4;
     this.userId = userId;

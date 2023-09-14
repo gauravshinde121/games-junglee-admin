@@ -54,7 +54,6 @@ export class MyAccountStatementComponent implements OnInit {
       this._getMatchBySportId(selectedValue);
     });
     this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
-      console.log('testttt');
       this._getMarketsByMatchId(selectedValue);
       this.filterForm.value.marketId = null;
       this.filterForm.patchValue( {'marketId':null} );
@@ -145,7 +144,6 @@ export class MyAccountStatementComponent implements OnInit {
 
   changeGame(evt) {
     // this.sportsId = evt.target.value;
-    console.log("changegame",evt.target.value);
     this.filterForm.value.sportsId = evt.target.value;
     if(evt.target.value == null) {
       this.filterForm.value.matchId = null;
@@ -215,7 +213,6 @@ export class MyAccountStatementComponent implements OnInit {
       }
       // this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     },(err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }
@@ -232,7 +229,6 @@ export class MyAccountStatementComponent implements OnInit {
     if(this.filterForm.value.sportsId == null || this.filterForm.value.sportsId== "null"){
       this.filterForm.value.matchId = null;
     }
-    console.log(this.filterForm.value)
     this.isLoading = true;
     this.plStatement = [];
     let fromDate = new Date(this.filterForm.value.fromDate);
@@ -255,7 +251,6 @@ export class MyAccountStatementComponent implements OnInit {
       this.filterForm.value.marketId = null;
     }
 
-    console.log('this.filterForm.value.marketId',this.filterForm.value.marketId);
     let payload = {
       fromDate:fromDate,
       toDate:toDate,
@@ -270,7 +265,6 @@ export class MyAccountStatementComponent implements OnInit {
       // }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
     },(err)=>{
-      console.log(err);
       this._sharedService.getToastPopup("Internal server error","","error")
     });
   }

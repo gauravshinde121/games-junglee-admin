@@ -53,7 +53,7 @@ export class LeftNavigationComponent implements OnInit {
     });
 
     // this._sharedService.leftMenuStatus.subscribe(status=>{
-    //   console.log(status)
+
     //   this.leftMenuOpen = status.leftMenuOpen;
     // })
   }
@@ -68,7 +68,6 @@ export class LeftNavigationComponent implements OnInit {
 
 
   storePath(path: string) {
-    console.log('path', path)
     localStorage.setItem('path', path)
     this.checkPath();
     this.toggleMenu()
@@ -77,9 +76,6 @@ export class LeftNavigationComponent implements OnInit {
 
   checkPath() {
     this.currentPath = localStorage.getItem('path');
-    // console.log("this.currentPath")
-    // console.log(this.currentPath)
-    // console.log(typeof(this.currentPath))
   }
 
 
@@ -96,7 +92,6 @@ export class LeftNavigationComponent implements OnInit {
     }
   }
   // toggleMenu() {
-  //   console.log(this.leftMenuOpen)
 
   //   this.leftMenuOpen = !this.leftMenuOpen;
   //   // this.isLeftBarDisplay = !this.isLeftBarDisplay;
@@ -104,7 +99,6 @@ export class LeftNavigationComponent implements OnInit {
   //     'leftMenuOpen': this.leftMenuOpen
   //   });
 
-  //   console.log(this.leftMenuOpen)
   // }
 
 }

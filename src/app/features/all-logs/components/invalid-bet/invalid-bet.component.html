@@ -77,11 +77,13 @@
                 <td>{{ bets.placedTime | date : "medium"}}</td>
                 <td>{{ bets.event }}</td>
                 <td>
-                  <span *ngIf="bets.isBack == false"
-                    class="border r-2 bg-danger text-danger border-danger me-2 border-3"></span>
-                  <span *ngIf="bets.isBack == true"
-                    class="border bg-primary text-primary border-primary me-2 border-3"></span>
-                  {{ bets.market }}
+                  <div class="my-1">
+                    <span *ngIf="bets.isBack == false"
+                      class="border r-2 bg-danger text-danger border-danger me-2 border-3"></span>
+                    <span *ngIf="bets.isBack == true"
+                      class="border bg-primary text-primary border-primary me-2 border-3"></span>
+                    {{ bets.market }}
+                  </div>
                 </td>
                 <td>{{ bets.selection }}</td>
                 <td>{{ bets.oddsPlaced }}</td>

@@ -90,7 +90,6 @@ export class ActivityComponent implements OnInit {
     } else {
       market_id = this.searchActivityForm.value.marketId;
     }
-    console.log('sport_id',sport_id);
     let payload = {
       refUserId:this.userId,
       fromDate: fromDate,
@@ -113,27 +112,22 @@ export class ActivityComponent implements OnInit {
 
   _getGames(){
     this._sharedService._getSports().subscribe((data:any)=>{
-      console.log(data)
       if(data){
         this.games = data;
-        console.log('this.games',this.games);
       }
     });
   }
 
   // _getMatchBySportId(sportId){
   //   this._sharedService.getMatchBySportId(sportId).subscribe((data:any)=>{
-  //     console.log(data)
   //     if(data.matchList){
   //       this.matchList = data.matchList;
-  //       console.log('matchList',this.matchList)
   //     }
   //   });
   // }
 
 
   _onSportSelect(){
-    console.log(this.searchActivityForm.value)
     this.searchActivityForm.patchValue({marketList:null});
     this._getAllMarkets(this.searchActivityForm.value.sportsId)
   }
@@ -141,17 +135,14 @@ export class ActivityComponent implements OnInit {
   _getAllMarkets(sportId){
     if(!sportId) return
     this._sharedService.getMarketBySportId(sportId).subscribe((data:any)=>{
-      console.log('market types',data.data);
       if(data){
         this.marketList = data.data;
-        //console.log('data.matchList',data.matchList);
       }
     });
   }
 
 
   // onGameSelected(sportId){
-  //   console.log(sportId)
   //   this._getMatchBySportId(sportId);
   // }
 
@@ -185,10 +176,8 @@ export class ActivityComponent implements OnInit {
     }
 
     this._memberService._getMemberActivityApi(payload).subscribe((res:any)=>{
-      console.log('search',res);
       this.isLoading = false;
       this.activityData = res.data;
-      console.log('activity',this.activityData)
     })
   }
 

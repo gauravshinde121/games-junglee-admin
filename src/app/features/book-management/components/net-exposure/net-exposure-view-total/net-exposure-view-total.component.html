@@ -260,7 +260,7 @@
                                     let runner of singleAdminBook['adminBook'];let last = last;let first = first
                                   ">
                                   <td class="text-start ps-2 heading border-top">
-                                    <a><strong>{{ runner["RunnerName"] }}</strong><br /><br>
+                                    <a><strong>{{ runner["RunnerName"] }}</strong><br />
                                       <span [ngClass]="
                                           runner['amount'] <= 0
                                             ? 'text-danger'
@@ -853,11 +853,13 @@
               <td class="col" [ngClass]="viewTotalEach.isBack ? 'text-danger' : 'text-success'">
                 <strong>{{ viewTotalEach.profitLiability }}</strong>
               </td>
-              <td class="col tooltipnk">
-                <i class="fa-sharp fa-solid fa-info"></i>
-                <span class="tooltiptext tabTooltip px-5 w-auto">
-                  <small>{{ viewTotalEach.IP }}</small>
-                </span>
+              <td class="col ">
+                <div class="tooltipnk m-1">
+                  <i class="fa-sharp fa-solid fa-info"></i>
+                  <span class="tooltiptext tabTooltip px-5 w-auto">
+                    <small>{{ viewTotalEach.IP }}</small>
+                  </span>
+                </div>
               </td>
             </tr>
           </tbody>

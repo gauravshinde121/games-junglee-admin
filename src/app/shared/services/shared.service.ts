@@ -51,7 +51,7 @@ export class SharedService {
     return this._apiHttpService
       .post(this._apiEndpointsService.getBankUserEndpoint(), body);
   }
-  
+
 
   testFunc(body) {
     return this._apiHttpService
@@ -121,7 +121,7 @@ export class SharedService {
   }
 
   getIPApi() {
-    return this._apiHttpService.get('https://jsonip.com');
+    return this._apiHttpService.get('https://api.ipify.org?format=json');
   }
 
   removeJWTToken() {

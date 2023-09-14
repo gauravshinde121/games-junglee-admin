@@ -31,14 +31,9 @@
                 </div> 
               </div>-->
               <div class="row align-items-center">
-
-
-                <div class="col-md-3 col-lg-3 col-xl-2 mt-2" *ngIf="selectedUserForAdjustment.length > 0">
-                  <button (click)="openBulkTransferModal()" type="button" class="btn btn-pink radius-all">
-                    <i class="fa fa-pen"></i> Bulk Transfer
-                  </button>
-                </div>
-
+                <h4 class="text-pink">
+                  <img src="../../../../../assets/images/pnl.png" alt="" /> Bank Transfer</h4>
+                  
                 <div class="col-md-6 col-lg-6 col-xl-6 mt-2">
                   <div class="input-group flex-nowrap">
                     <span class="input-group-text bg-dark text-white border-pink radius-left-tb" id="addon-wrapping">
@@ -49,6 +44,12 @@
                       placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping"
                       [(ngModel)]="searchTerm" (ngModelChange)="search()" />
                   </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-2 mt-2">
+                  <button *ngIf="selectedUserForAdjustment.length > 0" (click)="openBulkTransferModal()" type="button"
+                    class="btn btn-pink radius-all">
+                    <i class="fa fa-pen"></i> Bulk Transfer
+                  </button>
                 </div>
 
                 <div class="col-md-12 col-lg-12 col-xl-2 text-end">

@@ -195,7 +195,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 /********** main start ************/
 #main {
   // padding: 20px 10px;
-  padding: 20px 0;
+  // padding: 20px 0;
   transition: all 0.3s;
   color: $color_7;
 }
@@ -347,7 +347,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 .gamedetails {
   // border: 1px solid $color_27;
   border-radius: 15px;
-  padding: 15px;
+  // padding: 15px;
   background: transparent;
   .form-select {
     appearance: button;

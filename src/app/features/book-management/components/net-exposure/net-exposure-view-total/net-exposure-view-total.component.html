@@ -1,42 +1,65 @@
 <main id="main" class="main m-0">
-  <section class="section  mb-3">
+  <section class="section mb-3">
     <div class="row">
       <div class="col-md-12">
         <div class="row">
           <div class="col-md-5">
             <h6>
-              <a routerLink="/book-management/net-exposure"><i class="fa fa-1x fa-circle-chevron-left"></i></a>
+              <a routerLink="/book-management/net-exposure"
+                ><i class="fa fa-1x fa-circle-chevron-left"></i
+              ></a>
               {{ matchName }}
             </h6>
           </div>
           <div class="col-md-4 text-end">
             <p>
               <a class="text-decoration-none text-white">
-                <input type="radio" class="radioselected cursor-pointer" id="html" name="fav_language" value="HTML"
-                  (click)="onFilterChange(true)" /><span class="rounded-pill p-2 m-2">My PT</span>
+                <input
+                  type="radio"
+                  class="radioselected cursor-pointer"
+                  id="html"
+                  name="fav_language"
+                  value="HTML"
+                  (click)="onFilterChange(true)"
+                /><span class="rounded-pill p-2 m-2">My PT</span>
               </a>
               <a class="text-decoration-none text-white">
-                <input type="radio" checked class="radioselected cursor-pointer" id="html" name="fav_language"
-                  value="HTML" (click)="onFilterChange(false)" /><span class="rounded-pill p-2 m-2">Total Book</span>
+                <input
+                  type="radio"
+                  checked
+                  class="radioselected cursor-pointer"
+                  id="html"
+                  name="fav_language"
+                  value="HTML"
+                  (click)="onFilterChange(false)"
+                /><span class="rounded-pill p-2 m-2">Total Book</span>
               </a>
             </p>
           </div>
           <div class="col-md-3 text-end">
             {{ refreshCount }} &nbsp;
-            <button class="btn btn-pink rounded-pill ps-4 pe-4" (click)="refreshCall()">
+            <button
+              class="btn btn-pink rounded-pill ps-4 pe-4"
+              (click)="refreshCall()"
+            >
               <i class="fa fa-redo-alt disnone"></i> Refresh
             </button>
-            <button class="btn btn-pink rounded-pill ps-4 pe-4 ms-2" (click)="hideShowTV()">
-              <i [ngClass]="isTVEnable ? 'fa fa-xmark' : 'fa fa-play'"></i>&nbsp;{{ isTVEnable ? "HIDE" : "WATCH" }}
+            <button
+              class="btn btn-pink rounded-pill ps-4 pe-4 ms-2"
+              (click)="hideShowTV()"
+            >
+              <i [ngClass]="isTVEnable ? 'fa fa-xmark' : 'fa fa-play'"></i
+              >&nbsp;{{ isTVEnable ? "HIDE" : "WATCH" }}
             </button>
           </div>
 
           <div class="col-md-12" *ngIf="liveStreamingTVUrl" id="videoplayer">
-
-            <iframe [src]="
-                  sanitizer.bypassSecurityTrustResourceUrl(liveStreamingTVUrl)
-                " scrolling="no"></iframe>
-
+            <iframe
+              [src]="
+                sanitizer.bypassSecurityTrustResourceUrl(liveStreamingTVUrl)
+              "
+              scrolling="no"
+            ></iframe>
           </div>
         </div>
         <!-- <div class="row">
@@ -45,14 +68,28 @@
         </div> -->
 
         <div class="row">
-          <div class="col-md-12 ">
-            <div class="accordion" id="accordionExample" *ngFor="let singleAdminBook of adminBooksList; let i = index">
+          <div class="col-md-12">
+            <div
+              class="accordion"
+              id="accordionExample"
+              *ngFor="let singleAdminBook of adminBooksList; let i = index"
+            >
               <div class="accordion-item bg-transparent border-0">
                 <h2 class="accordion-header" id="headingOne">
-                  <a class="text-decoration-none text-white w-100" data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <div class="row" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
-                      aria-controls="collapseOne">
+                  <a
+                    class="text-decoration-none text-white w-100"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    <div
+                      class="row"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="true"
+                      aria-controls="collapseOne"
+                    >
                       <div class="col-md-6">
                         <p class="mt-3 mb-1">
                           <i class="fa fa-minus"></i>
@@ -63,142 +100,219 @@
                     </div>
                   </a>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                  data-bs-parent="#accordionExample">
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse show"
+                  aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample"
+                >
                   <div class="accordion-body p-0">
                     <div class="row">
                       <div class="col-md-6">
-                        <div class="bg-white border-5 ">
+                        <div class="bg-white border-5">
                           <table class="table tablematchodds bg-transparent">
                             <tbody>
-                              <ng-container *ngIf="
+                              <ng-container
+                                *ngIf="
                                   singleAdminBook['marketTypName'] ==
                                   'Match Odds'
-                                ">
-                                <tr *ngFor="
-                                    let runner of singleAdminBook['adminBook'];let last = last;let first = first
-                                  ">
-                                  <td class="text-start ps-2 heading border-top">
-                                    <a href=""><strong>{{ runner["RunnerName"] }} </strong>
+                                "
+                              >
+                                <tr
+                                  *ngFor="
+                                    let runner of singleAdminBook['adminBook'];
+                                    let last = last;
+                                    let first = first
+                                  "
+                                >
+                                  <td
+                                    class="text-start ps-2 heading border-top"
+                                  >
+                                    <a href=""
+                                      ><strong
+                                        >{{ runner["RunnerName"] }}
+                                      </strong>
 
                                       <br />
                                       <p class="mb-0 mt-1">
-                                        <span [ngClass]="
+                                        <span
+                                          [ngClass]="
                                             runner['amount'] <= 0
                                               ? 'text-danger'
                                               : 'text-success'
-                                          " class="text-success"><strong class="exposure-font">{{
-                                            runner["amount"] | number: '1.0-0'
-                                          }}</strong></span>
+                                          "
+                                          class="text-success"
+                                          ><strong class="exposure-font">{{
+                                            runner["amount"] | number : "1.0-0"
+                                          }}</strong></span
+                                        >
                                       </p>
                                     </a>
                                   </td>
-                                  <td *ngIf="
-                                  singleAdminBook['appMarketStatus'] !=
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                        singleAdminBook['appMarketStatus'] != '9'
-                                    " class="colblue" [boxHighlight]="runner['back2']"
-                                    [boxHighlight]="runner['vback2']">
-                                    <a><strong>{{ runner["back2"] }}</strong>
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colblue"
+                                    [boxHighlight]="runner['back2']"
+                                    [boxHighlight]="runner['vback2']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["back2"] }}</strong>
                                       <br />
                                       <span>{{
                                         runner["vback2"] | marketRateFormater
-                                      }}</span></a>
+                                      }}</span></a
+                                    >
                                   </td>
-                                  <td *ngIf="
-                                  singleAdminBook['appMarketStatus'] !=
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                        singleAdminBook['appMarketStatus'] != '9'
-                                    " class="colblue" [boxHighlight]="runner['back1']"
-                                    [boxHighlight]="runner['vback1']">
-                                    <a><strong>{{ runner["back1"] }}</strong>
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colblue"
+                                    [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["back1"] }}</strong>
                                       <br /><span>{{
                                         runner["vback1"] | marketRateFormater
-                                      }}</span></a>
+                                      }}</span></a
+                                    >
                                   </td>
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
-                                  <td *ngIf="
-                                  singleAdminBook['appMarketStatus'] !=
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                        singleAdminBook['appMarketStatus'] != '9'
-                                    " class="colblue" [boxHighlight]="runner['back0']"
-                                    [boxHighlight]="runner['vback0']">
-                                    <a><strong>{{ runner["back0"] }}</strong>
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colblue"
+                                    [boxHighlight]="runner['back0']"
+                                    [boxHighlight]="runner['vback0']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["back0"] }}</strong>
                                       <br /><span>{{
                                         runner["vback0"] | marketRateFormater
-                                      }}</span></a>
+                                      }}</span></a
+                                    >
                                   </td>
-                                  <td *ngIf="
-                                  singleAdminBook['appMarketStatus'] !=
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                        singleAdminBook['appMarketStatus'] != '9'
-                                    " class="colpink" [boxHighlight]="runner['lay0']" [boxHighlight]="runner['vlay0']">
-                                    <a><strong>{{ runner["lay0"] }}</strong>
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay0']"
+                                    [boxHighlight]="runner['vlay0']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["lay0"] }}</strong>
                                       <br /><span>{{
                                         runner["vlay0"] | marketRateFormater
-                                      }}</span></a>
+                                      }}</span></a
+                                    >
                                   </td>
 
-                                  <td *ngIf="
-                                  singleAdminBook['appMarketStatus'] !=
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                        singleAdminBook['appMarketStatus'] != '9'
-                                    " class="colpink" [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']">
-                                    <a><strong>{{ runner["lay1"] }}</strong>
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay1']"
+                                    [boxHighlight]="runner['vlay1']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["lay1"] }}</strong>
                                       <br /><span>{{
                                         runner["vlay1"] | marketRateFormater
-                                      }}</span></a>
+                                      }}</span></a
+                                    >
                                   </td>
 
-                                  <td *ngIf="
-                                  singleAdminBook['appMarketStatus'] !=
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                        singleAdminBook['appMarketStatus'] != '9'
-                                    " class="colpink" [boxHighlight]="runner['lay2']" [boxHighlight]="runner['vlay2']">
-                                    <a><strong>{{ runner["lay2"] }}</strong>
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay2']"
+                                    [boxHighlight]="runner['vlay2']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["lay2"] }}</strong>
                                       <br /><span>{{
                                         runner["vlay2"] | marketRateFormater
-                                      }}</span></a>
+                                      }}</span></a
+                                    >
                                   </td>
-                                  <td class="border-top" [ngClass]="{ 'border-top': !first }">
-                                    <div class="suspendedbm1" *ngIf="
-                                    singleAdminBook['appMarketStatus'] ==
+                                  <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <div
+                                      class="suspendedbm1"
+                                      *ngIf="
+                                        singleAdminBook['appMarketStatus'] ==
                                           '3' ||
-                                          singleAdminBook['appMarketStatus'] == '9'
-                                      ">
+                                        singleAdminBook['appMarketStatus'] ==
+                                          '9'
+                                      "
+                                    >
                                       <button type="button" class="suspendedm1">
                                         {{
                                           singleAdminBook["appMarketStatus"] ==
-                                        "3"
-                                        ? "Suspended"
-                                        : "Ball Running"
+                                          "3"
+                                            ? "Suspended"
+                                            : "Ball Running"
                                         }}
                                       </button>
                                     </div>
                                   </td>
                                 </tr>
                               </ng-container>
-                              <ng-container *ngIf="
+                              <ng-container
+                                *ngIf="
                                   singleAdminBook['marketTypName'] ==
                                   'Bookmaker'
-                                ">
-                                <tr *ngFor="
-                                    let runner of singleAdminBook['adminBook'];let last = last;let first = first
-                                  ">
-                                  <td class="text-start ps-2 heading border-top">
-                                    <a><strong>{{
+                                "
+                              >
+                                <tr
+                                  *ngFor="
+                                    let runner of singleAdminBook['adminBook'];
+                                    let last = last;
+                                    let first = first
+                                  "
+                                >
+                                  <td
+                                    class="text-start ps-2 heading border-top"
+                                  >
+                                    <a
+                                      ><strong>{{
                                         runner["RunnerName"]
                                       }}</strong>
                                       <br />
-                                      <span [ngClass]="
+                                      <span
+                                        [ngClass]="
                                           runner['amount'] <= 0
                                             ? 'text-danger'
                                             : 'text-success'
-                                        ">
+                                        "
+                                      >
                                         <strong class="exposure-font">{{
-                                          runner["amount"] | number: '1.0-0'
-                                        }}</strong></span>
+                                          runner["amount"] | number : "1.0-0"
+                                        }}</strong></span
+                                      >
                                     </a>
                                   </td>
                                   <td class="border-top">
@@ -209,68 +323,105 @@
                                   </td>
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
-                                  <td *ngIf="
-                                  singleAdminBook['appMarketStatus'] !=
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                        singleAdminBook['appMarketStatus'] != '9'
-                                    " class="colblue" [boxHighlight]="runner['back1']"
-                                    [boxHighlight]="runner['vback1']">
-                                    <a><strong
-                                        *ngIf='runner["back1"]'>{{ (runner["back1"]-1)*100 | number: '1.0-0' }}</strong>
-                                      <br /><span *ngIf='runner["vback1"]'>{{
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colblue"
+                                    [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']"
+                                  >
+                                    <a
+                                      ><strong *ngIf="runner['back1']">{{
+                                        (runner["back1"] - 1) * 100
+                                          | number : "1.0-0"
+                                      }}</strong>
+                                      <br /><span *ngIf="runner['vback1']">{{
                                         runner["vback1"] | marketRateFormater
-                                      }}</span></a>
+                                      }}</span></a
+                                    >
                                   </td>
-                                  <td *ngIf="
-                                  singleAdminBook['appMarketStatus'] !=
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                        singleAdminBook['appMarketStatus'] != '9'
-                                    " class="colpink" [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']">
-                                    <a><strong
-                                        *ngIf='runner["lay1"]'>{{ (runner["lay1"]-1)*100 | number: '1.0-0'}}</strong>
-                                      <br /><span *ngIf='runner["vlay1"]'>{{
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay1']"
+                                    [boxHighlight]="runner['vlay1']"
+                                  >
+                                    <a
+                                      ><strong *ngIf="runner['lay1']">{{
+                                        (runner["lay1"] - 1) * 100
+                                          | number : "1.0-0"
+                                      }}</strong>
+                                      <br /><span *ngIf="runner['vlay1']">{{
                                         runner["vlay1"] | marketRateFormater
-                                      }}</span></a>
+                                      }}</span></a
+                                    >
                                   </td>
-                                  <td class="border-top" [ngClass]="{ 'border-top': !first }">
-                                    <div class="suspendedbm1" *ngIf="
-                                    singleAdminBook['appMarketStatus'] ==
+                                  <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <div
+                                      class="suspendedbm1"
+                                      *ngIf="
+                                        singleAdminBook['appMarketStatus'] ==
                                           '3' ||
-                                          singleAdminBook['appMarketStatus'] == '9'
-                                      ">
+                                        singleAdminBook['appMarketStatus'] ==
+                                          '9'
+                                      "
+                                    >
                                       <button type="button" class="suspendedm1">
                                         {{
                                           singleAdminBook["appMarketStatus"] ==
-                                        "3"
-                                        ? "Suspended"
-                                        : "Ball Running"
+                                          "3"
+                                            ? "Suspended"
+                                            : "Ball Running"
                                         }}
                                       </button>
                                     </div>
                                   </td>
-
                                 </tr>
                               </ng-container>
 
-                              <ng-container *ngIf="
+                              <ng-container
+                                *ngIf="
                                   singleAdminBook['marketTypName'] == 'Fancy'
-                                ">
-
-                                <tr *ngFor="
-                                    let runner of singleAdminBook['adminBook'];let last = last;let first = first
-                                  ">
-                                  <td class="text-start ps-2 heading border-top">
-                                    <a><strong>{{ runner["RunnerName"] }}</strong><br />
-                                      <span [ngClass]="
+                                "
+                              >
+                                <tr
+                                  *ngFor="
+                                    let runner of singleAdminBook['adminBook'];
+                                    let last = last;
+                                    let first = first
+                                  "
+                                >
+                                  <td
+                                    class="text-start ps-2 heading border-top"
+                                  >
+                                    <a
+                                      ><strong>{{
+                                        runner["RunnerName"]
+                                      }}</strong
+                                      ><br />
+                                      <span
+                                        [ngClass]="
                                           runner['amount'] <= 0
                                             ? 'text-danger'
                                             : 'text-success'
-                                        ">
-                                        <strong class="exposure-font"> {{
-                                          runner["amount"] | number: '1.0-0'
-                                        }}</strong>
+                                        "
+                                      >
+                                        <strong class="exposure-font">
+                                          {{
+                                            runner["amount"] | number : "1.0-0"
+                                          }}</strong
+                                        >
                                       </span>
-
                                     </a>
                                   </td>
                                   <td>
@@ -279,53 +430,85 @@
                                   <td>
                                     <a><strong></strong> <br /></a>
                                   </td>
-                                  <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
-                                    <a data-bs-toggle="modal" href="#exampleModalToggle" role="button"
-                                      class="laddericon" (click)="
+                                  <td
+                                    width="10%"
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <a
+                                      data-bs-toggle="modal"
+                                      href="#exampleModalToggle"
+                                      role="button"
+                                      class="laddericon"
+                                      (click)="
                                         getLadderDataByMarket(
                                           singleAdminBook['marketId']
                                         )
-                                      ">
-                                      <img src="/assets/images/ladder-icon.png" width="10px" />
+                                      "
+                                    >
+                                      <img
+                                        src="/assets/images/ladder-icon.png"
+                                        width="10px"
+                                      />
                                     </a>
                                   </td>
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
 
-                                  <td *ngIf="
-                                  singleAdminBook['appMarketStatus'] !=
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                        singleAdminBook['appMarketStatus'] != '9'
-                                    " class="colpink" [boxHighlight]="runner['lay1']" [boxHighlight]="runner['vlay1']">
-                                    <a><strong>{{ runner["lay1"] }}</strong>
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay1']"
+                                    [boxHighlight]="runner['vlay1']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["lay1"] }}</strong>
                                       <br />{{
                                         runner["vlay1"] | marketRateFormater
-                                      }}</a>
+                                      }}</a
+                                    >
                                   </td>
-                                  <td *ngIf="
-                                  singleAdminBook['appMarketStatus'] !=
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                        singleAdminBook['appMarketStatus'] != '9'
-                                    " class="colblue" [boxHighlight]="runner['back1']"
-                                    [boxHighlight]="runner['vback1']">
-                                    <a><strong>{{ runner["back1"] }}</strong>
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colblue"
+                                    [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["back1"] }}</strong>
                                       <br />{{
                                         runner["vback1"] | marketRateFormater
-                                      }}</a>
+                                      }}</a
+                                    >
                                   </td>
 
-                                  <td class="border-top" [ngClass]="{ 'border-top': !first }">
-                                    <div class="suspendedbm1" *ngIf="
-                                    singleAdminBook['appMarketStatus'] ==
+                                  <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <div
+                                      class="suspendedbm1"
+                                      *ngIf="
+                                        singleAdminBook['appMarketStatus'] ==
                                           '3' ||
-                                          singleAdminBook['appMarketStatus'] == '9'
-                                      ">
+                                        singleAdminBook['appMarketStatus'] ==
+                                          '9'
+                                      "
+                                    >
                                       <button type="button" class="suspendedm1">
                                         {{
                                           singleAdminBook["appMarketStatus"] ==
-                                        "3"
-                                        ? "Suspended"
-                                        : "Ball Running"
+                                          "3"
+                                            ? "Suspended"
+                                            : "Ball Running"
                                         }}
                                       </button>
                                     </div>
@@ -350,285 +533,456 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="
+                              <tr
+                                *ngFor="
                                   let userBook of singleAdminBook['userBook']
-                                ">
-                                <td colspan="1" class="col-1 border-top">
+                                "
+                              >
+                                <td colspan="1" class="border-top">
                                   <strong> {{ userBook["username"] }}</strong>
                                 </td>
-                                <td (click)="
-                                getTotalBookViewTotal(
-                                  singleAdminBook['marketId'],
-                                  singleAdminBook['isTotaltotalBookView'],
-                                  singleAdminBook
-                                )
-                              " colspan="1" class="col-1 text-center border-top" style="cursor: pointer;">
-                                  <img src="/assets/images/net_expo.png" width="12" />
+                                <td
+                                  (click)="
+                                    getTotalBookViewTotal(
+                                      singleAdminBook['marketId'],
+                                      singleAdminBook['isTotaltotalBookView'],
+                                      singleAdminBook
+                                    )
+                                  "
+                                  colspan="1"
+                                  class="text-center border-top"
+                                  style="cursor: pointer"
+                                >
+                                  <img
+                                    src="/assets/images/net_expo.png"
+                                    width="12"
+                                  />
                                 </td>
-                                <td colspan="1" class="col-1 text-center border-top">
+                                <td colspan="1" class="text-center border-top">
                                   <strong>{{ userBook["stake"] }}</strong>
                                 </td>
-                                <td colspan="1" class="col-1 text-center border-top">
-                                  <strong class="text-success" *ngIf="userBook['runner1'] > 0">{{
-                                      userBook["runner1"] | number: '1.0-0'
-                                    }}</strong>
-                                  <strong class="text-danger" *ngIf="userBook['runner1'] <= 0">{{
-                                      userBook["runner1"] | number: '1.0-0'
-                                    }}</strong>
+                                <td colspan="1" class="text-center border-top">
+                                  <strong
+                                    class="text-success"
+                                    *ngIf="userBook['runner1'] > 0"
+                                    >{{
+                                      userBook["runner1"] | number : "1.0-0"
+                                    }}</strong
+                                  >
+                                  <strong
+                                    class="text-danger"
+                                    *ngIf="userBook['runner1'] <= 0"
+                                    >{{
+                                      userBook["runner1"] | number : "1.0-0"
+                                    }}</strong
+                                  >
                                 </td>
-                                <td colspan="1" class="col-1 text-center border-top">
-                                  <strong class="text-success" *ngIf="userBook['runner3'] > 0">{{
-                                      userBook["runner3"] | number: '1.0-0'
-                                    }}</strong>
-                                  <strong class="text-danger" *ngIf="userBook['runner3'] <= 0">{{
-                                      userBook["runner3"] | number: '1.0-0'
-                                    }}</strong>
+                                <td colspan="1" class="text-center border-top">
+                                  <strong
+                                    class="text-success"
+                                    *ngIf="userBook['runner3'] > 0"
+                                    >{{
+                                      userBook["runner3"] | number : "1.0-0"
+                                    }}</strong
+                                  >
+                                  <strong
+                                    class="text-danger"
+                                    *ngIf="userBook['runner3'] <= 0"
+                                    >{{
+                                      userBook["runner3"] | number : "1.0-0"
+                                    }}</strong
+                                  >
                                 </td>
-                                <td colspan="1" class="col-1 text-center border-top">
-                                  <strong class="text-success" *ngIf="userBook['runner2'] > 0">{{
-                                      userBook["runner2"] | number: '1.0-0'
-                                    }}</strong>
-                                  <strong class="text-danger" *ngIf="userBook['runner2'] <= 0">{{
-                                      userBook["runner2"] | number: '1.0-0'
-                                    }}</strong>
+                                <td colspan="1" class="text-center border-top">
+                                  <strong
+                                    class="text-success"
+                                    *ngIf="userBook['runner2'] > 0"
+                                    >{{
+                                      userBook["runner2"] | number : "1.0-0"
+                                    }}</strong
+                                  >
+                                  <strong
+                                    class="text-danger"
+                                    *ngIf="userBook['runner2'] <= 0"
+                                    >{{
+                                      userBook["runner2"] | number : "1.0-0"
+                                    }}</strong
+                                  >
                                 </td>
                               </tr>
 
-                              <ng-container *ngIf="singleAdminBook['isTotaltotalBookView']">
+                              <ng-container
+                                *ngIf="singleAdminBook['isTotaltotalBookView']"
+                              >
                                 <tr *ngFor="let downline of downlineBooks">
-                                  <td colspan="6" class="p-0">
-                                    <table class="table m-0 border-0">
-                                      <tbody>
-                                        <tr class="border-top" *ngIf="downline.marketId == singleAdminBook.marketId">
-                                          <td colspan="1" class="col-1">
-                                            {{downline.userName}} ({{downline.role}})</td>
-                                          <td colspan="1" class="col-1 text-center ps-lg-3">
-                                            <img *ngIf="downline.downline.length>0" src="/assets/images/net_expo.png"
-                                              width="12" (click)="downline.isExpanded = !downline.isExpanded" />
-                                          </td>
-                                          <td colspan="1" class="col-1 text-center">
-                                          </td>
-                                          <td colspan="1" class="col-1 text-center ps-lg-2">
-                                            {{downline.runner1Amount}}</td>
-                                          <td colspan="1" class="col-1 text-center ps-lg-2">
-                                            {{downline.runner3Amount}}</td>
-                                          <td colspan="1" class="col-1 text-center">
-                                            {{downline.runner2Amount}}</td>
-                                        </tr>
+                                  <ng-container
+                                    class="border-top"
+                                    *ngIf="
+                                      downline.marketId ==
+                                      singleAdminBook.marketId
+                                    "
+                                  >
+                                    <td colspan="1" class="">
+                                      {{ downline.userName }} ({{
+                                        downline.role
+                                      }})
+                                    </td>
+                                    <td colspan="1" class="text-center">
+                                      <img
+                                        *ngIf="downline.downline.length > 0"
+                                        src="/assets/images/net_expo.png"
+                                        width="12"
+                                        (click)="
+                                          downline.isExpanded =
+                                            !downline.isExpanded
+                                        "
+                                      />
+                                    </td>
+                                    <td colspan="1" class="text-center"></td>
+                                    <td colspan="1" class="text-center">
+                                      {{ downline.runner1Amount }}
+                                    </td>
+                                    <td colspan="1" class="text-center">
+                                      {{ downline.runner3Amount }}
+                                    </td>
+                                    <td colspan="1" class="text-center">
+                                      {{ downline.runner2Amount }}
+                                    </td>
+                                  </ng-container>
 
-                                        <ng-container *ngIf="downline.isExpanded">
-                                          <tr *ngFor="let downline2 of downline.downline">
-                                            <ng-container *ngIf="downline2.marketId == singleAdminBook.marketId">
-                                              <td colspan="6" class="p-0">
-                                                <table class="table m-0 border-0">
-                                                  <tbody>
-                                                    <tr class="border-top">
-                                                      <td colspan="1" class="col-1 ">{{downline2.userName}}
-                                                        <br> ({{downline2.role}})
-                                                      </td>
-                                                      <td colspan="1" class="col-1 text-center ps-lg-3">
-                                                        <img *ngIf="downline2.downline.length>0"
-                                                          src="/assets/images/net_expo.png" width="12"
-                                                          (click)="downline2.isExpanded = !downline2.isExpanded" />
-                                                      </td>
-                                                      <td colspan="1" class="col-1 text-center"></td>
-                                                      <td colspan="1" class="col-1 text-center ps-lg-3">
-                                                        {{downline2.runner1Amount}}</td>
-                                                      <td colspan="1" class="col-1 text-center ps-lg-1">
-                                                        {{downline2.runner3Amount}}</td>
-                                                      <td colspan="1" class="col-1 text-center">
-                                                        {{downline2.runner2Amount}}</td>
-                                                    </tr>
+                                  <ng-container *ngIf="downline.isExpanded">
+                                    <tr
+                                      *ngFor="
+                                        let downline2 of downline.downline
+                                      "
+                                    >
+                                      <ng-container
+                                        *ngIf="
+                                          downline2.marketId ==
+                                          singleAdminBook.marketId
+                                        "
+                                      >
+                                        <td colspan="1" class=" ">
+                                          {{ downline2.userName }} <br />
+                                          ({{ downline2.role }})
+                                        </td>
+                                        <td colspan="1" class="text-center">
+                                          <img
+                                            *ngIf="
+                                              downline2.downline.length > 0
+                                            "
+                                            src="/assets/images/net_expo.png"
+                                            width="12"
+                                            (click)="
+                                              downline2.isExpanded =
+                                                !downline2.isExpanded
+                                            "
+                                          />
+                                        </td>
+                                        <td
+                                          colspan="1"
+                                          class="text-center"
+                                        ></td>
+                                        <td colspan="1" class="text-center">
+                                          {{ downline2.runner1Amount }}
+                                        </td>
+                                        <td colspan="1" class="text-center">
+                                          {{ downline2.runner3Amount }}
+                                        </td>
+                                        <td colspan="1" class="text-center">
+                                          {{ downline2.runner2Amount }}
+                                        </td>
 
-                                                    <ng-container *ngIf="downline2.isExpanded">
-                                                      <tr *ngFor="let downline3 of downline2.downline">
+                                        <ng-container
+                                          *ngIf="downline2.isExpanded"
+                                        >
+                                          <tr
+                                            *ngFor="
+                                              let downline3 of downline2.downline
+                                            "
+                                          >
+                                            <ng-container
+                                              *ngIf="
+                                                downline3.marketId ==
+                                                singleAdminBook.marketId
+                                              "
+                                            >
+                                              <td colspan="1" class=" ">
+                                                {{ downline3.userName }}
+                                                ({{ downline3.role }})
+                                              </td>
+                                              <td
+                                                colspan="1"
+                                                class="text-center"
+                                              >
+                                                <img
+                                                  *ngIf="
+                                                    downline3.downline.length >
+                                                    0
+                                                  "
+                                                  src="/assets/images/net_expo.png"
+                                                  width="12"
+                                                  (click)="
+                                                    downline3.isExpanded =
+                                                      !downline3.isExpanded
+                                                  "
+                                                />
+                                              </td>
+                                              <td
+                                                colspan="1"
+                                                class="text-center"
+                                              ></td>
+                                              <td
+                                                colspan="1"
+                                                class="text-center"
+                                              >
+                                                {{ downline3.runner1Amount }}
+                                              </td>
+                                              <td
+                                                colspan="1"
+                                                class="text-center"
+                                              >
+                                                {{ downline3.runner3Amount }}
+                                              </td>
+                                              <td
+                                                colspan="1"
+                                                class="text-center"
+                                              >
+                                                {{ downline3.runner2Amount }}
+                                              </td>
+
+                                              <ng-container
+                                                *ngIf="downline3.isExpanded"
+                                              >
+                                                <tr
+                                                  *ngFor="
+                                                    let downline4 of downline3.downline
+                                                  "
+                                                >
+                                                  <ng-container
+                                                    *ngIf="
+                                                      downline4.marketId ==
+                                                      singleAdminBook.marketId
+                                                    "
+                                                  >
+                                                    <td colspan="1" class="">
+                                                      {{ downline4.userName }}
+
+                                                      ({{ downline4.role }})
+                                                    </td>
+                                                    <td
+                                                      colspan="1"
+                                                      class="text-center"
+                                                    >
+                                                      <img
+                                                        *ngIf="
+                                                          downline4.downline
+                                                            .length > 0
+                                                        "
+                                                        src="/assets/images/net_expo.png"
+                                                        width="12"
+                                                        (click)="
+                                                          downline4.isExpanded =
+                                                            !downline4.isExpanded
+                                                        "
+                                                      />
+                                                    </td>
+                                                    <td
+                                                      colspan="1"
+                                                      class="text-center"
+                                                    ></td>
+                                                    <td
+                                                      colspan="1"
+                                                      class="text-center"
+                                                    >
+                                                      {{
+                                                        downline4.runner1Amount
+                                                      }}
+                                                    </td>
+                                                    <td
+                                                      colspan="1"
+                                                      class="text-center"
+                                                    >
+                                                      {{
+                                                        downline4.runner3Amount
+                                                      }}
+                                                    </td>
+                                                    <td
+                                                      colspan="1"
+                                                      class="text-center"
+                                                    >
+                                                      {{
+                                                        downline4.runner2Amount
+                                                      }}
+                                                    </td>
+
+                                                    <ng-container
+                                                      *ngIf="
+                                                        downline4.isExpanded
+                                                      "
+                                                    >
+                                                      <tr
+                                                        *ngFor="
+                                                          let downline5 of downline4.downline
+                                                        "
+                                                      >
                                                         <ng-container
-                                                          *ngIf="downline3.marketId == singleAdminBook.marketId">
-                                                          <td colspan="6" class="p-0">
-                                                            <table class="table m-0 border-0">
-                                                              <tbody>
-                                                                <tr class="border-top">
-                                                                  <td colspan="1" class="col-1 ">
-                                                                    {{downline3.userName}}
-                                                                    ({{downline3.role}})</td>
-                                                                  <td colspan="1" class="col-1 text-center ps-lg-1">
-                                                                    <img *ngIf="downline3.downline.length>0"
-                                                                      src="/assets/images/net_expo.png" width="12"
-                                                                      (click)="downline3.isExpanded = !downline3.isExpanded" />
-                                                                  </td>
-                                                                  <td colspan="1" class="col-1 text-center"></td>
-                                                                  <td colspan="1" class="col-1 text-center ps-lg-2">
-                                                                    {{downline3.runner1Amount}}</td>
-                                                                  <td colspan="1" class="col-1 text-center ps-lg-1">
-                                                                    {{downline3.runner3Amount}}</td>
-                                                                  <td colspan="1" class="col-1 text-center">
-                                                                    {{downline3.runner2Amount}}</td>
-                                                                </tr>
-
-                                                                <ng-container *ngIf="downline3.isExpanded">
-                                                                  <tr *ngFor="let downline4 of downline3.downline">
-                                                                    <ng-container
-                                                                      *ngIf="downline4.marketId == singleAdminBook.marketId">
-                                                                      <td colspan="6" class="p-0">
-                                                                        <table class="">
-                                                                          <tbody>
-                                                                            <tr class="border-top">
-                                                                              <td colspan="1" class="col-1">
-                                                                                {{downline4.userName}}
-
-                                                                                ({{downline4.role}})
-                                                                              </td>
-                                                                              <td colspan="1" class="col-1 text-center">
-                                                                                <img *ngIf="downline4.downline.length>0"
-                                                                                  src="/assets/images/net_expo.png"
-                                                                                  width="12"
-                                                                                  (click)="downline4.isExpanded = !downline4.isExpanded" />
-                                                                              </td>
-                                                                              <td colspan="1" class="col-1 text-center">
-                                                                              </td>
-                                                                              <td colspan="1"
-                                                                                class="col-1 text-center ps-lg-3">
-                                                                                {{downline4.runner1Amount}}
-                                                                              </td>
-                                                                              <td colspan="1"
-                                                                                class="col-1 text-center ps-lg-1">
-                                                                                {{downline4.runner3Amount}}
-                                                                              </td>
-                                                                              <td colspan="1" class="col-1 text-center">
-                                                                                {{downline4.runner2Amount}}
-                                                                              </td>
-                                                                            </tr>
-
-                                                                            <ng-container *ngIf="downline4.isExpanded">
-                                                                              <tr
-                                                                                *ngFor="let downline5 of downline4.downline">
-                                                                                <ng-container
-                                                                                  *ngIf="downline5.marketId == singleAdminBook.marketId">
-                                                                                  <td colspan="6" class="p-0">
-                                                                                    <table class="">
-                                                                                      <tbody>
-                                                                                        <tr class="border-top">
-                                                                                          <td class="col-1 "
-                                                                                            colspan="1">
-                                                                                            {{downline5.userName}}
-                                                                                            ({{downline5.role}})</td>
-                                                                                          <td class="col-1 text-center"
-                                                                                            colspan="1">
-                                                                                            <img
-                                                                                              *ngIf="downline5.downline.length>0"
-                                                                                              src="/assets/images/net_expo.png"
-                                                                                              width="12"
-                                                                                              (click)="downline5.isExpanded = !downline5.isExpanded" />
-                                                                                          </td>
-                                                                                          <td class="col-1 text-center"
-                                                                                            colspan="1"></td>
-                                                                                          <td class="col-1 text-center"
-                                                                                            colspan="1">
-                                                                                            {{downline5.runner1Amount}}
-                                                                                          </td>
-                                                                                          <td class="col-1 text-center"
-                                                                                            colspan="1">
-                                                                                            {{downline5.runner3Amount}}
-                                                                                          </td>
-                                                                                          <td class="col-1 text-center"
-                                                                                            colspan="1">
-                                                                                            {{downline5.runner2Amount}}
-                                                                                          </td>
-                                                                                        </tr>
-
-                                                                                        <ng-container
-                                                                                          *ngIf="downline5.isExpanded">
-                                                                                          <tr class="border-top"
-                                                                                            *ngFor="let downline6 of downline5.downline">
-                                                                                            <ng-container
-                                                                                              *ngIf="downline6.marketId == singleAdminBook.marketId">
-                                                                                              <td colspan="6"
-                                                                                                class="p-0">
-                                                                                                <table class="">
-                                                                                                  <tbody>
-                                                                                                    <tr>
-                                                                                                      <td class="col-1"
-                                                                                                        colspan="1">
-                                                                                                        {{downline6.userName}}
-                                                                                                        <br>
-                                                                                                        ({{downline6.role}})
-                                                                                                      </td>
-                                                                                                      <td
-                                                                                                        class="col-1 text-center"
-                                                                                                        colspan="1">
-                                                                                                        <img
-                                                                                                          *ngIf="downline6.downline.length>0"
-                                                                                                          src="/assets/images/net_expo.png"
-                                                                                                          width="12"
-                                                                                                          (click)="downline6.isExpanded = !downline6.isExpanded" />
-                                                                                                      </td>
-                                                                                                      <td
-                                                                                                        class="col-1 text-center"
-                                                                                                        colspan="1">
-                                                                                                      </td>
-                                                                                                      <td
-                                                                                                        class="col-1 text-center"
-                                                                                                        colspan="1">
-                                                                                                        {{downline6.runner1Amount}}
-                                                                                                      </td>
-                                                                                                      <td
-                                                                                                        class="col-1 text-center"
-                                                                                                        colspan="1">
-                                                                                                        {{downline6.runner3Amount}}
-                                                                                                      </td>
-                                                                                                      <td
-                                                                                                        class="col-1 text-center"
-                                                                                                        colspan="1">
-                                                                                                        {{downline6.runner2Amount}}
-                                                                                                      </td>
-                                                                                                    </tr>
-                                                                                                  </tbody>
-                                                                                                </table>
-                                                                                              </td>
-                                                                                            </ng-container>
-
-                                                                                          </tr>
-                                                                                        </ng-container>
-
-                                                                                      </tbody>
-                                                                                    </table>
-                                                                                  </td>
-                                                                                </ng-container>
-
-                                                                              </tr>
-                                                                            </ng-container>
-
-                                                                          </tbody>
-                                                                        </table>
-                                                                      </td>
-                                                                    </ng-container>
-
-                                                                  </tr>
-                                                                </ng-container>
-
-                                                              </tbody>
-                                                            </table>
+                                                          *ngIf="
+                                                            downline5.marketId ==
+                                                            singleAdminBook.marketId
+                                                          "
+                                                        >
+                                                          <td
+                                                            class=" "
+                                                            colspan="1"
+                                                          >
+                                                            {{
+                                                              downline5.userName
+                                                            }}
+                                                            ({{
+                                                              downline5.role
+                                                            }})
                                                           </td>
-                                                        </ng-container>
+                                                          <td
+                                                            class="text-center"
+                                                            colspan="1"
+                                                          >
+                                                            <img
+                                                              *ngIf="
+                                                                downline5
+                                                                  .downline
+                                                                  .length > 0
+                                                              "
+                                                              src="/assets/images/net_expo.png"
+                                                              width="12"
+                                                              (click)="
+                                                                downline5.isExpanded =
+                                                                  !downline5.isExpanded
+                                                              "
+                                                            />
+                                                          </td>
+                                                          <td
+                                                            class="text-center"
+                                                            colspan="1"
+                                                          ></td>
+                                                          <td
+                                                            class="text-center"
+                                                            colspan="1"
+                                                          >
+                                                            {{
+                                                              downline5.runner1Amount
+                                                            }}
+                                                          </td>
+                                                          <td
+                                                            class="text-center"
+                                                            colspan="1"
+                                                          >
+                                                            {{
+                                                              downline5.runner3Amount
+                                                            }}
+                                                          </td>
+                                                          <td
+                                                            class="text-center"
+                                                            colspan="1"
+                                                          >
+                                                            {{
+                                                              downline5.runner2Amount
+                                                            }}
+                                                          </td>
 
+                                                          <ng-container
+                                                            *ngIf="
+                                                              downline5.isExpanded
+                                                            "
+                                                          >
+                                                            <tr
+                                                              class="border-top"
+                                                              *ngFor="
+                                                                let downline6 of downline5.downline
+                                                              "
+                                                            >
+                                                              <ng-container
+                                                                *ngIf="
+                                                                  downline6.marketId ==
+                                                                  singleAdminBook.marketId
+                                                                "
+                                                              >
+                                                                <td
+                                                                  class=""
+                                                                  colspan="1"
+                                                                >
+                                                                  {{
+                                                                    downline6.userName
+                                                                  }}
+                                                                  <br />
+                                                                  ({{
+                                                                    downline6.role
+                                                                  }})
+                                                                </td>
+                                                                <td
+                                                                  class="text-center"
+                                                                  colspan="1"
+                                                                >
+                                                                  <img
+                                                                    *ngIf="
+                                                                      downline6
+                                                                        .downline
+                                                                        .length >
+                                                                      0
+                                                                    "
+                                                                    src="/assets/images/net_expo.png"
+                                                                    width="12"
+                                                                    (click)="
+                                                                      downline6.isExpanded =
+                                                                        !downline6.isExpanded
+                                                                    "
+                                                                  />
+                                                                </td>
+                                                                <td
+                                                                  class="text-center"
+                                                                  colspan="1"
+                                                                ></td>
+                                                                <td
+                                                                  class="text-center"
+                                                                  colspan="1"
+                                                                >
+                                                                  {{
+                                                                    downline6.runner1Amount
+                                                                  }}
+                                                                </td>
+                                                                <td
+                                                                  class="text-center"
+                                                                  colspan="1"
+                                                                >
+                                                                  {{
+                                                                    downline6.runner3Amount
+                                                                  }}
+                                                                </td>
+                                                                <td
+                                                                  class="text-center"
+                                                                  colspan="1"
+                                                                >
+                                                                  {{
+                                                                    downline6.runner2Amount
+                                                                  }}
+                                                                </td>
+                                                              </ng-container>
+                                                            </tr>
+                                                          </ng-container>
+                                                        </ng-container>
                                                       </tr>
                                                     </ng-container>
-
-                                                  </tbody>
-                                                </table>
-                                              </td>
+                                                  </ng-container>
+                                                </tr>
+                                              </ng-container>
                                             </ng-container>
-
                                           </tr>
                                         </ng-container>
-
-                                      </tbody>
-                                    </table>
-                                  </td>
+                                      </ng-container>
+                                    </tr>
+                                  </ng-container>
                                 </tr>
                               </ng-container>
-
-
 
                               <!-- <tr>
 
@@ -734,7 +1088,6 @@
                                   </div>
                                   </tr> -->
 
-
                               <!-- <tr *ngFor="
                                   let totalBook of singleAdminBook['totalBook']
                                 ">
@@ -785,7 +1138,7 @@
     </div>
   </section>
 
-  <section class="section ">
+  <section class="section">
     <!-- <div class="col-md-12 mt-1 mb-1">
       <div class="row">
         <div class="col-md-6">
@@ -802,27 +1155,73 @@
         </div>
       </div>
     </div> -->
-    <div class="col-md-12 ">
+    <div class="col-md-12">
       <div class="tableRes tableFixHead">
         <table class="table tableall">
           <thead>
             <tr>
               <th scope="col" class="first">#</th>
-              <th scope="col" class="pointer" (click)="toggleSort('userName')">Member</th>
-              <th scope="col" class="pointer" (click)="toggleSort('placedDate')">Place time</th>
-              <th scope="col-2" class="pointer" (click)="toggleSort('event')">Events</th>
-              <th scope="col" class="pointer" (click)="toggleSort('marketName')">Market</th>
-              <th scope="col" class="pointer" (click)="toggleSort('selectionName')">Selection</th>
-              <th scope="col" class="pointer" (click)="toggleSort('placedOdds')">Odds Placed</th>
-              <th scope="col" class="pointer" (click)="toggleSort('betRate')">Odds Matched</th>
-              <th scope="col" class="pointer" (click)="toggleSort('stake')">Matched</th>
-              <th scope="col" class="pointer" (click)="toggleSort('stake')">Unmatched</th>
-              <th scope="col" class="pointer" (click)="toggleSort('profitLiability')">Profit/Liability</th>
+              <th scope="col" class="pointer" (click)="toggleSort('userName')">
+                Member
+              </th>
+              <th
+                scope="col"
+                class="pointer"
+                (click)="toggleSort('placedDate')"
+              >
+                Place time
+              </th>
+              <th scope="col-2" class="pointer" (click)="toggleSort('event')">
+                Events
+              </th>
+              <th
+                scope="col"
+                class="pointer"
+                (click)="toggleSort('marketName')"
+              >
+                Market
+              </th>
+              <th
+                scope="col"
+                class="pointer"
+                (click)="toggleSort('selectionName')"
+              >
+                Selection
+              </th>
+              <th
+                scope="col"
+                class="pointer"
+                (click)="toggleSort('placedOdds')"
+              >
+                Odds Placed
+              </th>
+              <th scope="col" class="pointer" (click)="toggleSort('betRate')">
+                Odds Matched
+              </th>
+              <th scope="col" class="pointer" (click)="toggleSort('stake')">
+                Matched
+              </th>
+              <th scope="col" class="pointer" (click)="toggleSort('stake')">
+                Unmatched
+              </th>
+              <th
+                scope="col"
+                class="pointer"
+                (click)="toggleSort('profitLiability')"
+              >
+                Profit/Liability
+              </th>
               <th scope="col" class="last text-center">IP</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let viewTotalEach of viewTotal| sort:sortColumn:sortAscending; let i = index">
+            <tr
+              *ngFor="
+                let viewTotalEach of viewTotal
+                  | sort : sortColumn : sortAscending;
+                let i = index
+              "
+            >
               <td class="col">{{ i + 1 }}</td>
               <td class="col">{{ viewTotalEach.userName }}</td>
               <td class="col">
@@ -830,10 +1229,14 @@
               </td>
               <td class="col">{{ viewTotalEach.event | truncate : 33 }}</td>
               <td class="col">
-                <span *ngIf="!viewTotalEach.isBack"
-                  class="border bg-danger text-danger border-danger me-2 border-3"></span>
-                <span *ngIf="viewTotalEach.isBack"
-                  class="border bg-primary text-primary border-primary me-2 border-3"></span>
+                <span
+                  *ngIf="!viewTotalEach.isBack"
+                  class="border bg-danger text-danger border-danger me-2 border-3"
+                ></span>
+                <span
+                  *ngIf="viewTotalEach.isBack"
+                  class="border bg-primary text-primary border-primary me-2 border-3"
+                ></span>
                 {{ viewTotalEach.marketName }}
               </td>
               <td class="col">{{ viewTotalEach.selectionName }}</td>
@@ -851,10 +1254,15 @@
                 </ng-container>
                 <ng-template #notMatched> -- </ng-template>
               </td>
-              <td class="col" [ngClass]="viewTotalEach.isBack ? 'text-danger' : 'text-success'">
+              <td
+                class="col"
+                [ngClass]="
+                  viewTotalEach.isBack ? 'text-danger' : 'text-success'
+                "
+              >
                 <strong>{{ viewTotalEach.profitLiability }}</strong>
               </td>
-              <td class="col ">
+              <td class="col">
                 <div class="tooltipnk m-1">
                   <i class="fa-sharp fa-solid fa-info"></i>
                   <span class="tooltiptext tabTooltip px-5 w-auto">
@@ -876,12 +1284,21 @@
   <div class="row">
     <div class="col-md-12">
       <div *ngIf="viewTotal.length > 0">
-        <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
+        <button
+          class="btn rounded-pill text-white"
+          [disabled]="currentPage === 1"
+          (click)="prev()"
+        >
           Prev
         </button>
-        <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
+        <span class="btn btn-pink rounded-pill ps-4 pe-4"
+          >{{ currentPage }} / {{ totalPages }}
         </span>
-        <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
+        <button
+          class="btn rounded-pill text-white"
+          [disabled]="currentPage === totalPages"
+          (click)="next()"
+        >
           Next
         </button>
       </div>
@@ -890,8 +1307,13 @@
 </main>
 
 <!--modal Start-->
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-  tabindex="-1">
+<div
+  class="modal fade"
+  id="exampleModalToggle"
+  aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1"
+>
   <div class="modal-dialog modal-sm">
     <div class="modal-content modalradius">
       <!-- <div class="modal-header">
@@ -905,35 +1327,56 @@
         <ng-container *ngIf="ladderObj && ladderObj.length > 0">
           <div *ngFor="let ldr of ladderObj">
             <!-- {{ldr?['amount'] | json}} -->
-            <div class="row border-bottom p-2" *ngIf="ldr['position'] != 'last'">
-              <div class="col-md-6" *ngIf="ldr['startScore']!=ldr['endScore']">
-                {{ ldr['startScore'] }}-{{ ldr['endScore'] }}
+            <div
+              class="row border-bottom p-2"
+              *ngIf="ldr['position'] != 'last'"
+            >
+              <div
+                class="col-md-6"
+                *ngIf="ldr['startScore'] != ldr['endScore']"
+              >
+                {{ ldr["startScore"] }}-{{ ldr["endScore"] }}
               </div>
-              <div class="col-md-6" *ngIf="ldr['startScore'] == ldr['endScore']">
-                {{ ldr['startScore']}}
+              <div
+                class="col-md-6"
+                *ngIf="ldr['startScore'] == ldr['endScore']"
+              >
+                {{ ldr["startScore"] }}
               </div>
               <div class="col-md-6">
-                <span [ngClass]="
+                <span
+                  [ngClass]="
                     ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
-                  ">{{ ldr['amount'] }}</span>
+                  "
+                  >{{ ldr["amount"] }}</span
+                >
               </div>
             </div>
-            <div class="row border-bottom p-2 bg-light" *ngIf="ldr['position'] == 'last'">
+            <div
+              class="row border-bottom p-2 bg-light"
+              *ngIf="ldr['position'] == 'last'"
+            >
               <ng-container>
-                <div class="col-md-6">{{ ldr['startScore'] }}+</div>
+                <div class="col-md-6">{{ ldr["startScore"] }}+</div>
               </ng-container>
               <div class="col-md-6">
-                <span [ngClass]="
+                <span
+                  [ngClass]="
                     ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
-                  ">{{ ldr['amount'] }}</span>
+                  "
+                  >{{ ldr["amount"] }}</span
+                >
               </div>
             </div>
           </div>
-
         </ng-container>
         <div class="row">
-          <button class="btn col-md-4 mt-3 btn-outline-pink border-0" data-bs-target="#exampleModalToggle2"
-            data-bs-toggle="modal" data-bs-dismiss="modal">
+          <button
+            class="btn col-md-4 mt-3 btn-outline-pink border-0"
+            data-bs-target="#exampleModalToggle2"
+            data-bs-toggle="modal"
+            data-bs-dismiss="modal"
+          >
             CLOSE
           </button>
         </div>

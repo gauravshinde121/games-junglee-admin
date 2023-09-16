@@ -614,15 +614,17 @@
                               <ng-container
                                 *ngIf="singleAdminBook['isTotaltotalBookView']"
                               >
-                                <tr *ngFor="let downline of downlineBooks">
-                                  <ng-container
+                                <ng-container
+                                  *ngFor="let downline of downlineBooks"
+                                >
+                                  <tr
                                     class="border-top"
                                     *ngIf="
                                       downline.marketId ==
                                       singleAdminBook.marketId
                                     "
                                   >
-                                    <td colspan="1" class="">
+                                    <td colspan="1" class="ps-3">
                                       {{ downline.userName }} ({{
                                         downline.role
                                       }})
@@ -648,10 +650,10 @@
                                     <td colspan="1" class="text-center">
                                       {{ downline.runner2Amount }}
                                     </td>
-                                  </ng-container>
+                                  </tr>
 
                                   <ng-container *ngIf="downline.isExpanded">
-                                    <tr
+                                    <ng-container
                                       *ngFor="
                                         let downline2 of downline.downline
                                       "
@@ -662,41 +664,43 @@
                                           singleAdminBook.marketId
                                         "
                                       >
-                                        <td colspan="1" class=" ">
-                                          {{ downline2.userName }} <br />
-                                          ({{ downline2.role }})
-                                        </td>
-                                        <td colspan="1" class="text-center">
-                                          <img
-                                            *ngIf="
-                                              downline2.downline.length > 0
-                                            "
-                                            src="/assets/images/net_expo.png"
-                                            width="12"
-                                            (click)="
-                                              downline2.isExpanded =
-                                                !downline2.isExpanded
-                                            "
-                                          />
-                                        </td>
-                                        <td
-                                          colspan="1"
-                                          class="text-center"
-                                        ></td>
-                                        <td colspan="1" class="text-center">
-                                          {{ downline2.runner1Amount }}
-                                        </td>
-                                        <td colspan="1" class="text-center">
-                                          {{ downline2.runner3Amount }}
-                                        </td>
-                                        <td colspan="1" class="text-center">
-                                          {{ downline2.runner2Amount }}
-                                        </td>
+                                        <tr>
+                                          <td colspan="1" class="ps-4">
+                                            {{ downline2.userName }}
+                                            ({{ downline2.role }})
+                                          </td>
+                                          <td colspan="1" class="text-center">
+                                            <img
+                                              *ngIf="
+                                                downline2.downline.length > 0
+                                              "
+                                              src="/assets/images/net_expo.png"
+                                              width="12"
+                                              (click)="
+                                                downline2.isExpanded =
+                                                  !downline2.isExpanded
+                                              "
+                                            />
+                                          </td>
+                                          <td
+                                            colspan="1"
+                                            class="text-center"
+                                          ></td>
+                                          <td colspan="1" class="text-center">
+                                            {{ downline2.runner1Amount }}
+                                          </td>
+                                          <td colspan="1" class="text-center">
+                                            {{ downline2.runner3Amount }}
+                                          </td>
+                                          <td colspan="1" class="text-center">
+                                            {{ downline2.runner2Amount }}
+                                          </td>
+                                        </tr>
 
                                         <ng-container
                                           *ngIf="downline2.isExpanded"
                                         >
-                                          <tr
+                                          <ng-container
                                             *ngFor="
                                               let downline3 of downline2.downline
                                             "
@@ -707,54 +711,56 @@
                                                 singleAdminBook.marketId
                                               "
                                             >
-                                              <td colspan="1" class=" ">
-                                                {{ downline3.userName }}
-                                                ({{ downline3.role }})
-                                              </td>
-                                              <td
-                                                colspan="1"
-                                                class="text-center"
-                                              >
-                                                <img
-                                                  *ngIf="
-                                                    downline3.downline.length >
-                                                    0
-                                                  "
-                                                  src="/assets/images/net_expo.png"
-                                                  width="12"
-                                                  (click)="
-                                                    downline3.isExpanded =
-                                                      !downline3.isExpanded
-                                                  "
-                                                />
-                                              </td>
-                                              <td
-                                                colspan="1"
-                                                class="text-center"
-                                              ></td>
-                                              <td
-                                                colspan="1"
-                                                class="text-center"
-                                              >
-                                                {{ downline3.runner1Amount }}
-                                              </td>
-                                              <td
-                                                colspan="1"
-                                                class="text-center"
-                                              >
-                                                {{ downline3.runner3Amount }}
-                                              </td>
-                                              <td
-                                                colspan="1"
-                                                class="text-center"
-                                              >
-                                                {{ downline3.runner2Amount }}
-                                              </td>
+                                              <tr>
+                                                <td colspan="1" class=" ">
+                                                  {{ downline3.userName }}
+                                                  ({{ downline3.role }})
+                                                </td>
+                                                <td
+                                                  colspan="1"
+                                                  class="text-center"
+                                                >
+                                                  <img
+                                                    *ngIf="
+                                                      downline3.downline
+                                                        .length > 0
+                                                    "
+                                                    src="/assets/images/net_expo.png"
+                                                    width="12"
+                                                    (click)="
+                                                      downline3.isExpanded =
+                                                        !downline3.isExpanded
+                                                    "
+                                                  />
+                                                </td>
+                                                <td
+                                                  colspan="1"
+                                                  class="text-center"
+                                                ></td>
+                                                <td
+                                                  colspan="1"
+                                                  class="text-center"
+                                                >
+                                                  {{ downline3.runner1Amount }}
+                                                </td>
+                                                <td
+                                                  colspan="1"
+                                                  class="text-center"
+                                                >
+                                                  {{ downline3.runner3Amount }}
+                                                </td>
+                                                <td
+                                                  colspan="1"
+                                                  class="text-center"
+                                                >
+                                                  {{ downline3.runner2Amount }}
+                                                </td>
+                                              </tr>
 
                                               <ng-container
                                                 *ngIf="downline3.isExpanded"
                                               >
-                                                <tr
+                                                <ng-container
                                                   *ngFor="
                                                     let downline4 of downline3.downline
                                                   "
@@ -765,63 +771,64 @@
                                                       singleAdminBook.marketId
                                                     "
                                                   >
-                                                    <td colspan="1" class="">
-                                                      {{ downline4.userName }}
+                                                    <tr>
+                                                      <td colspan="1" class="">
+                                                        {{ downline4.userName }}
 
-                                                      ({{ downline4.role }})
-                                                    </td>
-                                                    <td
-                                                      colspan="1"
-                                                      class="text-center"
-                                                    >
-                                                      <img
-                                                        *ngIf="
-                                                          downline4.downline
-                                                            .length > 0
-                                                        "
-                                                        src="/assets/images/net_expo.png"
-                                                        width="12"
-                                                        (click)="
-                                                          downline4.isExpanded =
-                                                            !downline4.isExpanded
-                                                        "
-                                                      />
-                                                    </td>
-                                                    <td
-                                                      colspan="1"
-                                                      class="text-center"
-                                                    ></td>
-                                                    <td
-                                                      colspan="1"
-                                                      class="text-center"
-                                                    >
-                                                      {{
-                                                        downline4.runner1Amount
-                                                      }}
-                                                    </td>
-                                                    <td
-                                                      colspan="1"
-                                                      class="text-center"
-                                                    >
-                                                      {{
-                                                        downline4.runner3Amount
-                                                      }}
-                                                    </td>
-                                                    <td
-                                                      colspan="1"
-                                                      class="text-center"
-                                                    >
-                                                      {{
-                                                        downline4.runner2Amount
-                                                      }}
-                                                    </td>
-
+                                                        ({{ downline4.role }})
+                                                      </td>
+                                                      <td
+                                                        colspan="1"
+                                                        class="text-center"
+                                                      >
+                                                        <img
+                                                          *ngIf="
+                                                            downline4.downline
+                                                              .length > 0
+                                                          "
+                                                          src="/assets/images/net_expo.png"
+                                                          width="12"
+                                                          (click)="
+                                                            downline4.isExpanded =
+                                                              !downline4.isExpanded
+                                                          "
+                                                        />
+                                                      </td>
+                                                      <td
+                                                        colspan="1"
+                                                        class="text-center"
+                                                      ></td>
+                                                      <td
+                                                        colspan="1"
+                                                        class="text-center"
+                                                      >
+                                                        {{
+                                                          downline4.runner1Amount
+                                                        }}
+                                                      </td>
+                                                      <td
+                                                        colspan="1"
+                                                        class="text-center"
+                                                      >
+                                                        {{
+                                                          downline4.runner3Amount
+                                                        }}
+                                                      </td>
+                                                      <td
+                                                        colspan="1"
+                                                        class="text-center"
+                                                      >
+                                                        {{
+                                                          downline4.runner2Amount
+                                                        }}
+                                                      </td>
+                                                    </tr>
                                                     <ng-container
                                                       *ngIf="
                                                         downline4.isExpanded
                                                       "
                                                     >
-                                                      <tr
+                                                      <ng-container
                                                         *ngFor="
                                                           let downline5 of downline4.downline
                                                         "
@@ -832,70 +839,72 @@
                                                             singleAdminBook.marketId
                                                           "
                                                         >
-                                                          <td
-                                                            class=" "
-                                                            colspan="1"
-                                                          >
-                                                            {{
-                                                              downline5.userName
-                                                            }}
-                                                            ({{
-                                                              downline5.role
-                                                            }})
-                                                          </td>
-                                                          <td
-                                                            class="text-center"
-                                                            colspan="1"
-                                                          >
-                                                            <img
-                                                              *ngIf="
-                                                                downline5
-                                                                  .downline
-                                                                  .length > 0
-                                                              "
-                                                              src="/assets/images/net_expo.png"
-                                                              width="12"
-                                                              (click)="
-                                                                downline5.isExpanded =
-                                                                  !downline5.isExpanded
-                                                              "
-                                                            />
-                                                          </td>
-                                                          <td
-                                                            class="text-center"
-                                                            colspan="1"
-                                                          ></td>
-                                                          <td
-                                                            class="text-center"
-                                                            colspan="1"
-                                                          >
-                                                            {{
-                                                              downline5.runner1Amount
-                                                            }}
-                                                          </td>
-                                                          <td
-                                                            class="text-center"
-                                                            colspan="1"
-                                                          >
-                                                            {{
-                                                              downline5.runner3Amount
-                                                            }}
-                                                          </td>
-                                                          <td
-                                                            class="text-center"
-                                                            colspan="1"
-                                                          >
-                                                            {{
-                                                              downline5.runner2Amount
-                                                            }}
-                                                          </td>
+                                                          <tr>
+                                                            <td
+                                                              class=" "
+                                                              colspan="1"
+                                                            >
+                                                              {{
+                                                                downline5.userName
+                                                              }}
+                                                              ({{
+                                                                downline5.role
+                                                              }})
+                                                            </td>
+                                                            <td
+                                                              class="text-center"
+                                                              colspan="1"
+                                                            >
+                                                              <img
+                                                                *ngIf="
+                                                                  downline5
+                                                                    .downline
+                                                                    .length > 0
+                                                                "
+                                                                src="/assets/images/net_expo.png"
+                                                                width="12"
+                                                                (click)="
+                                                                  downline5.isExpanded =
+                                                                    !downline5.isExpanded
+                                                                "
+                                                              />
+                                                            </td>
+                                                            <td
+                                                              class="text-center"
+                                                              colspan="1"
+                                                            ></td>
+                                                            <td
+                                                              class="text-center"
+                                                              colspan="1"
+                                                            >
+                                                              {{
+                                                                downline5.runner1Amount
+                                                              }}
+                                                            </td>
+                                                            <td
+                                                              class="text-center"
+                                                              colspan="1"
+                                                            >
+                                                              {{
+                                                                downline5.runner3Amount
+                                                              }}
+                                                            </td>
+                                                            <td
+                                                              class="text-center"
+                                                              colspan="1"
+                                                            >
+                                                              {{
+                                                                downline5.runner2Amount
+                                                              }}
+                                                            </td>
+                                                          </tr>
 
                                                           <ng-container
                                                             *ngIf="
                                                               downline5.isExpanded
                                                             "
                                                           >
-                                                            <tr
+                                                            <ng-container
                                                               class="border-top"
                                                               *ngFor="
                                                                 let downline6 of downline5.downline
@@ -907,81 +916,83 @@
                                                                   singleAdminBook.marketId
                                                                 "
                                                               >
-                                                                <td
-                                                                  class=""
-                                                                  colspan="1"
-                                                                >
-                                                                  {{
-                                                                    downline6.userName
-                                                                  }}
-                                                                  <br />
-                                                                  ({{
-                                                                    downline6.role
-                                                                  }})
-                                                                </td>
-                                                                <td
-                                                                  class="text-center"
-                                                                  colspan="1"
-                                                                >
-                                                                  <img
-                                                                    *ngIf="
-                                                                      downline6
-                                                                        .downline
-                                                                        .length >
-                                                                      0
-                                                                    "
-                                                                    src="/assets/images/net_expo.png"
-                                                                    width="12"
-                                                                    (click)="
-                                                                      downline6.isExpanded =
-                                                                        !downline6.isExpanded
-                                                                    "
-                                                                  />
-                                                                </td>
-                                                                <td
-                                                                  class="text-center"
-                                                                  colspan="1"
-                                                                ></td>
-                                                                <td
-                                                                  class="text-center"
-                                                                  colspan="1"
-                                                                >
-                                                                  {{
-                                                                    downline6.runner1Amount
-                                                                  }}
-                                                                </td>
-                                                                <td
-                                                                  class="text-center"
-                                                                  colspan="1"
-                                                                >
-                                                                  {{
-                                                                    downline6.runner3Amount
-                                                                  }}
-                                                                </td>
-                                                                <td
-                                                                  class="text-center"
-                                                                  colspan="1"
-                                                                >
-                                                                  {{
-                                                                    downline6.runner2Amount
-                                                                  }}
-                                                                </td>
+                                                                <tr>
+                                                                  <td
+                                                                    class=""
+                                                                    colspan="1"
+                                                                  >
+                                                                    {{
+                                                                      downline6.userName
+                                                                    }}
+                                                                    <br />
+                                                                    ({{
+                                                                      downline6.role
+                                                                    }})
+                                                                  </td>
+                                                                  <td
+                                                                    class="text-center"
+                                                                    colspan="1"
+                                                                  >
+                                                                    <img
+                                                                      *ngIf="
+                                                                        downline6
+                                                                          .downline
+                                                                          .length >
+                                                                        0
+                                                                      "
+                                                                      src="/assets/images/net_expo.png"
+                                                                      width="12"
+                                                                      (click)="
+                                                                        downline6.isExpanded =
+                                                                          !downline6.isExpanded
+                                                                      "
+                                                                    />
+                                                                  </td>
+                                                                  <td
+                                                                    class="text-center"
+                                                                    colspan="1"
+                                                                  ></td>
+                                                                  <td
+                                                                    class="text-center"
+                                                                    colspan="1"
+                                                                  >
+                                                                    {{
+                                                                      downline6.runner1Amount
+                                                                    }}
+                                                                  </td>
+                                                                  <td
+                                                                    class="text-center"
+                                                                    colspan="1"
+                                                                  >
+                                                                    {{
+                                                                      downline6.runner3Amount
+                                                                    }}
+                                                                  </td>
+                                                                  <td
+                                                                    class="text-center"
+                                                                    colspan="1"
+                                                                  >
+                                                                    {{
+                                                                      downline6.runner2Amount
+                                                                    }}
+                                                                  </td>
+                                                                </tr>
                                                               </ng-container>
-                                                            </tr>
+                                                            </ng-container>
                                                           </ng-container>
                                                         </ng-container>
-                                                      </tr>
+                                                      </ng-container>
                                                     </ng-container>
                                                   </ng-container>
-                                                </tr>
+                                                </ng-container>
                                               </ng-container>
                                             </ng-container>
-                                          </tr>
+                                          </ng-container>
                                         </ng-container>
                                       </ng-container>
-                                    </tr>
+                                    </ng-container>
                                   </ng-container>
-                                </tr>
+                                </ng-container>
                               </ng-container>
 
                               <!-- <tr>

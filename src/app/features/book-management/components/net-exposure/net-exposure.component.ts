@@ -29,12 +29,15 @@ export class NetExposureComponent implements OnInit {
   refreshCount: number = 8;
   resetTimerInterval: any;
   bookObj: any = [];
+  isMobileView = false;
 
   constructor(
     private _bookManagementService: BookManagementService,
     private _sharedService: SharedService,
     private _router: Router
-  ) { }
+  ) {
+    this.onResize();
+  }
 
   ngOnInit(): void {
     this._preConfig();
@@ -226,11 +229,6 @@ export class NetExposureComponent implements OnInit {
     });
   }
 
-  // redirectUrl(type,id,matchName){
-  //   localStorage.setItem('matchName',matchName);
-  //   this._router.navigate(['/book-management/advance-workstation/'+type+'/'+id]);
-  // }
-
   redirectUrlByMarket(data) {
     let marketIds = data.map(id => `${id.marketId}`).join(",");
     this._router.navigate(['/book-management/advance-workstation-market/' + marketIds]);
@@ -248,6 +246,13 @@ export class NetExposureComponent implements OnInit {
   getViewTotal(book) {
     const market = book.leftMarkets.concat(book.rightMarkets);
     this.redirectUrlByMarket(market);
+  }
+  onResize() {
+    if (window.innerWidth <= 767) {
+      this.isMobileView = true;
+    } else {
+      this.isMobileView = false;
+    }
   }
 
 }

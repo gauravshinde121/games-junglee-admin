@@ -5,48 +5,85 @@
         <!--your code will come here start-->
         <h4 class="text-pink">Net Exposure</h4>
         <div class="row" [formGroup]="filterForm">
-          <div class="col-md-8 col-12  net_exposure">
+          <div class="col-md-8 col-12 net_exposure">
             <div class="row">
               <div class="col-md-4">
                 <a class="text-decoration-none text-white">
-                  <input type="radio" (click)="
+                  <input
+                    type="radio"
+                    (click)="
                       onFilterChange({ clicked: 'type', selectedType: 'MyPT' })
-                    " formControlName="selectedType" class="radioselected pointer" id="html" name="selectedType"
-                    value="MyPT" /><span class="rounded-pill p-2">My PT</span>
+                    "
+                    formControlName="selectedType"
+                    class="radioselected pointer"
+                    id="html"
+                    name="selectedType"
+                    value="MyPT"
+                  /><span class="rounded-pill p-2">My PT</span>
                 </a>
                 <a class="text-decoration-none text-white">
-                  <input value="totalBook" (click)="
-                      onFilterChange({ clicked: 'type', selectedType: 'TotalBook' })
-                    " formControlName="selectedType" type="radio" id="html" checked name="selectedType"
-                    value="TotalBook" class="pointer radioselected" /><span class="rounded-pill p-2">Total
-                    Book</span>
+                  <input
+                    value="totalBook"
+                    (click)="
+                      onFilterChange({
+                        clicked: 'type',
+                        selectedType: 'TotalBook'
+                      })
+                    "
+                    formControlName="selectedType"
+                    type="radio"
+                    id="html"
+                    checked
+                    name="selectedType"
+                    value="TotalBook"
+                    class="pointer radioselected"
+                  /><span class="rounded-pill p-2">Total Book</span>
                 </a>
               </div>
 
               <div class="col-md-8 my-3 my-md-0">
                 <div class="row">
-
                   <div class="col-md-12">
-                    <span class=" pt-2 me-3"><strong>Filter by Sport :</strong></span>
+                    <span class="pt-2 me-3"
+                      ><strong>Filter by Sport :</strong></span
+                    >
                     <a class="text-decoration-none text-white">
-                      <input (click)="
-                      onFilterChange({
-                        clicked: 'sport',
-                        sportId: null,
-                        refreshCallVar: false
-                      })
-                    " type="radio" checked="true" class="radioselected pointerr" id="html" name="sport"
-                        value="All" /><span class="rounded-pill p-2">All</span>
+                      <input
+                        (click)="
+                          onFilterChange({
+                            clicked: 'sport',
+                            sportId: null,
+                            refreshCallVar: false
+                          })
+                        "
+                        type="radio"
+                        checked="true"
+                        class="radioselected pointerr"
+                        id="html"
+                        name="sport"
+                        value="All"
+                      /><span class="rounded-pill p-2">All</span>
                     </a>
-                    <a *ngFor="let game of games" class="text-decoration-none text-white">
-                      <input (click)="
-                      onFilterChange({
-                        clicked: 'sport',
-                        sportId: game.sportId,
-                        refreshCallVar: false
-                      })
-                    " type="radio" class="radioselected pointer" id="html" name="sport" [value]="game.sportId" /><span
-                        class="rounded-pill p-2">{{ game.sportName }}</span>
+                    <a
+                      *ngFor="let game of games"
+                      class="text-decoration-none text-white"
+                    >
+                      <input
+                        (click)="
+                          onFilterChange({
+                            clicked: 'sport',
+                            sportId: game.sportId,
+                            refreshCallVar: false
+                          })
+                        "
+                        type="radio"
+                        class="radioselected pointer"
+                        id="html"
+                        name="sport"
+                        [value]="game.sportId"
+                      /><span class="rounded-pill p-2">{{
+                        game.sportName
+                      }}</span>
                     </a>
                   </div>
                 </div>
@@ -57,17 +94,30 @@
           <div class="col-md-4">
             <div class="row">
               <div class="col-md-6 col-6 pointer">
-                <select name="matchId" formControlName="matchId" id="ab" class="form-select pointer p-0"
-                  (change)="onFilterChangeDropDown($event)" data-clicked="match">
+                <select
+                  name="matchId"
+                  formControlName="matchId"
+                  id="ab"
+                  class="form-select pointer p-0"
+                  (change)="onFilterChangeDropDown($event)"
+                  data-clicked="match"
+                >
                   <option value="null" class="pointer">All</option>
-                  <option class="pointer" value="{{ match.matchId }}" *ngFor="let match of matchList">
+                  <option
+                    class="pointer"
+                    value="{{ match.matchId }}"
+                    *ngFor="let match of matchList"
+                  >
                     {{ match.matchName }}
                   </option>
                 </select>
               </div>
               <div class="col-md-6 col-6 text-end">
                 {{ refreshCount }} &nbsp;
-                <button class="btn btn-pink rounded-pill " (click)="refreshCall()">
+                <button
+                  class="btn btn-pink rounded-pill"
+                  (click)="refreshCall()"
+                >
                   <i class="fa fa-redo-alt disnone"></i> Refresh
                 </button>
               </div>
@@ -85,225 +135,9 @@
         </div>
 
         <div class="row netExposure">
-          <!-- <div *ngIf="booksForBackend.length > 0" class="col-md-12 overflow-auto">
-            <table class="table tableall mt-3 align_thead mb-0">
-              <thead>
-                <tr class="bgTransparent">
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th>Stack</th>
-                  <th>1</th>
-                  <th>X</th>
-                  <th>2</th>
-
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th>Stack</th>
-                  <th>Over/Yes</th>
-                  <th>Under/No</th>
-                </tr>
-
-
-              </thead>
-              <tbody *ngFor="let book of booksForBackend">
-                <tr class="bookmatch">
-                  <th class="text-start " colspan="16">
-                    <span>{{ book.matchName }}</span>
-                  </th>
-
-                </tr>
-                <tr *ngFor="let data of book.data">
-                  <td class="text-start">
-                    <span class="p-2">{{ data.marketName }}</span>
-                  </td>
-                  <td>
-                    <a (click)="redirectUrlByMarket([data])" class="pointer">
-                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
-                  </td>
-                  <td>
-                    <a (click)="redirectUrlByMarket([data])" class="pointer">
-                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
-                  </td>
-                  <td>
-                    <a (click)="redirectUrlByMarket([data])" class="pointer">
-                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
-                  </td>
-                  <td class="bg-white">
-                    <a class="btn  alert alert-danger pt-1 pb-1 w-100 text-danger">
-                      <span [ngClass]="
-                          data.netExposure > 0 ? 'text-success' : 'text-danger'
-                        ">{{ data.netExposure | number: '1.0-0' }}</span>
-                    </a>
-                  </td>
-                  <td class="bg-white">
-                    <a *ngIf="data.horses[0]?.finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
-                      <span class="text-success">
-                        {{
-                        data.horses[0]?.finalAmount
-                        ? (data.horses[0]?.finalAmount | number: '1.0-0')
-                        : 0
-                        }}
-                      </span>
-                    </a>
-                    <a *ngIf="data.horses[0]?.finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
-                      <span class="text-danger">
-                        {{
-                        data.horses[0]?.finalAmount
-                        ? (data.horses[0]?.finalAmount | number: '1.0-0')
-                        : 0
-                        }}
-                      </span>
-                    </a>
-                    <a *ngIf="data.horses[0]?.finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
-                      <span class="text-white"> 0 </span>
-                    </a>
-                  </td>
-                  <td class="bg-white">
-                    <ng-container *ngIf="data.horses[2]">
-                      <a *ngIf="data.horses[2].finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
-                        <span class="text-success">
-                          {{
-                          data.horses[2]?.finalAmount
-                          ? (data.horses[2]?.finalAmount | number: '1.0-0')
-                          : 0
-                          }}
-                        </span>
-                      </a>
-                      <a *ngIf="data.horses[2].finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
-                        <span class="text-danger">
-                          {{
-                          data.horses[2]?.finalAmount
-                          ? (data.horses[2]?.finalAmount | number: '1.0-0')
-                          : 0
-                          }}
-                        </span>
-                      </a>
-                      <a *ngIf="data.horses[2].finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
-                        <span class="text-white"> 0 </span>
-                      </a>
-                    </ng-container>
-                  </td>
-                  <td class="bg-white">
-                    <a *ngIf="data.horses[1]?.finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
-                      <span class="text-danger">{{
-                        data.horses[1]?.finalAmount
-                        ? (data.horses[1]?.finalAmount | number: '1.0-0')
-                        : 0
-                        }}</span>
-                    </a>
-
-                    <a *ngIf="data.horses[1]?.finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
-                      <span class="text-success">{{
-                        data.horses[1]?.finalAmount
-                        ? (data.horses[1]?.finalAmount | number: '1.0-0')
-                        : 0
-                        }}</span>
-                    </a>
-
-                    <a *ngIf="data.horses[1]?.finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
-                      <span class="text-white">0</span>
-                    </a>
-                  </td>
-
-                  <td>10 Overs RSA (Max Win/Exp.)</td>
-                  <td>
-                    <a (click)="redirectUrlByMarket([data])" class="pointer">
-                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
-                  </td>
-                  <td>
-                    <a (click)="redirectUrlByMarket([data])" class="pointer">
-                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
-                  </td>
-                  <td>
-                    <a (click)="redirectUrlByMarket([data])" class="pointer">
-                      <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
-                  </td>
-                  <td>
-                    <a (click)="redirectUrlByMarket([data])" class="pointer">
-                      <img src="assets/images/net_expo.png" width="22px" alt="" /></a>
-                  </td>
-                  <td class="bg-white">
-                    <a *ngIf="data.horses[0]?.finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
-                      <span class="text-success">
-                        {{
-                        data.horses[0]?.finalAmount
-                        ? (data.horses[0]?.finalAmount | number: '1.0-0')
-                        : 0
-                        }}
-                      </span>
-                    </a>
-                    <a *ngIf="data.horses[0]?.finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
-                      <span class="text-danger">
-                        {{
-                        data.horses[0]?.finalAmount
-                        ? (data.horses[0]?.finalAmount | number: '1.0-0')
-                        : 0
-                        }}
-                      </span>
-                    </a>
-                    <a *ngIf="data.horses[0]?.finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
-                      <span class="text-white"> 0 </span>
-                    </a>
-                  </td>
-                  <td class="bg-white">
-                    <ng-container *ngIf="data.horses[2]">
-                      <a *ngIf="data.horses[2].finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
-                        <span class="text-success">
-                          {{
-                          data.horses[2]?.finalAmount
-                          ? (data.horses[2]?.finalAmount | number: '1.0-0')
-                          : 0
-                          }}
-                        </span>
-                      </a>
-                      <a *ngIf="data.horses[2].finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
-                        <span class="text-danger">
-                          {{
-                          data.horses[2]?.finalAmount
-                          ? (data.horses[2]?.finalAmount | number: '1.0-0')
-                          : 0
-                          }}
-                        </span>
-                      </a>
-                      <a *ngIf="data.horses[2].finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
-                        <span class="text-white"> 0 </span>
-                      </a>
-                    </ng-container>
-                  </td>
-                  <td class="bg-white">
-                    <a *ngIf="data.horses[1]?.finalAmount < 0" class="btn  alert alert-danger pt-1 pb-1 w-100">
-                      <span class="text-danger">{{
-                        data.horses[1]?.finalAmount
-                        ? (data.horses[1]?.finalAmount | number: '1.0-0')
-                        : 0
-                        }}</span>
-                    </a>
-
-                    <a *ngIf="data.horses[1]?.finalAmount > 0" class="btn  alert alert-success pt-1 pb-1 w-100">
-                      <span class="text-success">{{
-                        data.horses[1]?.finalAmount
-                        ? (data.horses[1]?.finalAmount | number: '1.0-0')
-                        : 0
-                        }}</span>
-                    </a>
-
-                    <a *ngIf="data.horses[1]?.finalAmount == 0" class="btn  alert pt-1 pb-1 w-100">
-                      <span class="text-white">0</span>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div> -->
-
-          <div class="col-md-6" *ngIf="bookObj.length != 0">
+          <div class="col-md-6 col-6" *ngIf="bookObj.length != 0">
             <div class="row">
-              <div class="col-4"></div>
+              <div class="col-md-4 col"></div>
               <div class="col"></div>
               <div class="col text-center">Stake</div>
               <div class="col text-center">1</div>
@@ -311,9 +145,9 @@
               <div class="col text-center">2</div>
             </div>
           </div>
-          <div class="col-md-6" *ngIf="bookObj.length != 0">
+          <div class="col-md-6 col-6" *ngIf="bookObj.length != 0">
             <div class="row">
-              <div class="col-4"></div>
+              <div class="col-md-4 col"></div>
               <div class="col"></div>
 
               <div class="col">Stake</div>
@@ -323,59 +157,105 @@
           </div>
 
           <div class="row m-0 mb-2" *ngFor="let book of bookObj">
-
-
             <!-- <div class="row mb-1" *ngFor="let data of book.data"> -->
             <div class="col-md-12 bg-pink">
               <div class="row align-items-center">
-                <div class="col-3"><span>{{ book.matchName }}</span></div>
-                <div class="col"><button class="btn-warning rounded-pill" (click)="getViewTotal(book)">View
-                    total</button>
+                <div class="col-3">
+                  <span>{{ book.matchName }}</span>
+                </div>
+                <div class="col">
+                  <button
+                    class="btn-warning rounded-pill"
+                    (click)="getViewTotal(book)"
+                  >
+                    View total
+                  </button>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-6">
-              <div class="row mb-2 align-items-center" *ngFor="let market of book.leftMarkets">
-                <div class="col-6">
+            <div class="col-md-6 col-6">
+              <div
+                class="row mb-2 align-items-center"
+                *ngFor="let market of book.leftMarkets"
+              >
+                <div class="col-md-6 col">
                   <div class="row">
-                    <div class="col-10">{{market.marketName}}</div>
-                    <div class="col-2">
-
-                      <a (click)="redirectUrlByMarket([market])" class="pointer">
-                        <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
+                    <div class="col-md-10 col">{{ market.marketName }}</div>
+                    <div class="col-md-2 col">
+                      <a
+                        (click)="redirectUrlByMarket([market])"
+                        class="pointer"
+                      >
+                        <img
+                          src="assets/images/net_exposure.png"
+                          width="22px"
+                          alt=""
+                      /></a>
                     </div>
                   </div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col">
                   <div class="row">
-                    <div class="col-3 p-2 bg-white text-dark">{{market.totalStakes | number: '1.0-0'}}</div>
-                    <div class="col-3 p-2 bg-white "
-                      [ngClass]="market.horses[0]?.finalAmount > 0 ? 'text-success' : 'text-danger'">
-                      {{market.horses[0]?.finalAmount | number: '1.0-0'}}</div>
-                    <div class="col-3 p-2 bg-white "
-                      [ngClass]="market.horses[2]?.finalAmount > 0 ? 'text-success' : 'text-danger'">
-                      {{market.horses[2]?.finalAmount | number: '1.0-0'}}</div>
-                    <div class="col-3 p-2 bg-white "
-                      [ngClass]="market.horses[1]?.finalAmount > 0 ? 'text-success' : 'text-danger'">
-                      {{market.horses[1]?.finalAmount | number: '1.0-0'}}</div>
+                    <div class="col-md-3 col p-2 bg-white text-dark">
+                      {{ market.totalStakes | number : "1.0-0" }}
+                    </div>
+                    <div
+                      class="col-md-3 col p-2 bg-white"
+                      [ngClass]="
+                        market.horses[0]?.finalAmount > 0
+                          ? 'text-success'
+                          : 'text-danger'
+                      "
+                    >
+                      {{ market.horses[0]?.finalAmount | number : "1.0-0" }}
+                    </div>
+                    <div
+                      class="col-md-3 col p-2 bg-white"
+                      [ngClass]="
+                        market.horses[2]?.finalAmount > 0
+                          ? 'text-success'
+                          : 'text-danger'
+                      "
+                    >
+                      {{ market.horses[2]?.finalAmount | number : "1.0-0" }}
+                    </div>
+                    <div
+                      class="col-md-3 col p-2 bg-white"
+                      [ngClass]="
+                        market.horses[1]?.finalAmount > 0
+                          ? 'text-success'
+                          : 'text-danger'
+                      "
+                    >
+                      {{ market.horses[1]?.finalAmount | number : "1.0-0" }}
+                    </div>
                   </div>
                 </div>
-
               </div>
             </div>
 
-            <div class="col-md-6">
-              <div class="row mb-2 align-items-center" *ngFor="let market of book.rightMarkets">
-                <div class="col-6">
+            <div class="col-md-6 col-6">
+              <div
+                class="row mb-2 align-items-center"
+                *ngFor="let market of book.rightMarkets"
+              >
+                <div class="col-md-6 col">
                   <div class="row align-items-center">
-                    <div class="col-10">{{market.marketName}}</div>
-                    <div class="col-2 p-2">
+                    <div class="col-md-10 col">{{ market.marketName }}</div>
+                    <div class="col-md-2 col p-2">
                       <ul class="list-inline d-flex m-0">
                         <li>
                           <!-- (click)="redirectUrlByMarket([data])" -->
-                          <a (click)="redirectUrlByMarket([market])" class="pointer">
-                            <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
+                          <a
+                            (click)="redirectUrlByMarket([market])"
+                            class="pointer"
+                          >
+                            <img
+                              src="assets/images/net_exposure.png"
+                              width="22px"
+                              alt=""
+                          /></a>
                         </li>
                         <!-- <li>
                         <a (click)="redirectUrlByMarket(market)" class="pointer">
@@ -390,28 +270,30 @@
                           <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
                       </li> -->
                       </ul>
-
                     </div>
                   </div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col">
                   <div class="row">
-                    <div class="col-4 bg-white text-dark p-2"><span> {{market.totalStakes | number:'1.0-0'}}</span>
+                    <div class="col-4 bg-white text-dark p-2">
+                      <span> {{ market.totalStakes | number : "1.0-0" }}</span>
                     </div>
-                    <div class="col-4 bg-white p-2" [ngClass]="market.maxWin >= 0 ? 'text-success' : 'text-danger'">
-                      <span> {{market.maxWin | number:'1.0-0'}}</span>
+                    <div
+                      class="col-4 bg-white p-2"
+                      [ngClass]="
+                        market.maxWin >= 0 ? 'text-success' : 'text-danger'
+                      "
+                    >
+                      <span> {{ market.maxWin | number : "1.0-0" }}</span>
                     </div>
-                    <div class="col-4 bg-white text-danger p-2"><span> {{market.netExposure | number:'1.0-0'}}</span>
+                    <div class="col-4 bg-white text-danger p-2">
+                      <span> {{ market.netExposure | number : "1.0-0" }}</span>
                     </div>
                   </div>
                 </div>
-
-
-
               </div>
             </div>
             <!-- </div> -->
-
           </div>
         </div>
       </div>

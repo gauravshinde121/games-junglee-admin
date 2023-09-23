@@ -853,7 +853,10 @@ tfoot tr {
 
 .netExposure thead tr th,
 .netExposure tbody tr td {
-  width: 5rem;
+  // width: 3rem;
+  border: 0;
+  // border-bottom: 1px solid $color_50;
+  padding: 0 0 0.5rem;
 }
 
 .pointer,
@@ -1106,4 +1109,11 @@ $breakpoint-mobile: 767px;
       }
     }
   }
+}
+
+.mobileTable table {
+  font-size: 12px;
+}
+.rgtMarket td tr {
+  width: 100%;
 }

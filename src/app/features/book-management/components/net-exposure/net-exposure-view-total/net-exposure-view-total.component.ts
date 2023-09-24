@@ -43,6 +43,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
   isPageDestroyed = false;
+  isLayBackSame:boolean = false;
 
   constructor(
     private _sharedService: SharedService,
@@ -315,6 +316,11 @@ export class NetExposureViewTotalComponent implements OnInit {
 
                   runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds'] : '';
                   runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv'] : '';
+                }
+                if(runnerRes['back0'] == runnerRes['lay0']){
+                  this.isLayBackSame = true;
+                } else {
+                  this.isLayBackSame = false;
                 }
                 break;
 

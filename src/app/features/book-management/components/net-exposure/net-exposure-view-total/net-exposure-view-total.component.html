@@ -373,13 +373,14 @@
                                         singleAdminBook['appMarketStatus'] ==
                                           '3' ||
                                         singleAdminBook['appMarketStatus'] ==
-                                          '9'
+                                          '9' ||
+                                        isLayBackSame
                                       "
                                     >
                                       <button type="button" class="suspendedm1">
                                         {{
-                                          singleAdminBook["appMarketStatus"] ==
-                                          "3"
+                                          (singleAdminBook["appMarketStatus"] ==
+                                          "3" || isLayBackSame)
                                             ? "Suspended"
                                             : "Ball Running"
                                         }}

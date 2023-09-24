@@ -45,3 +45,14 @@
 .tableRes {
   height: 65vh;
 }
+
+#bannerModal .modal-header {
+  position: absolute;
+  width: 100%;
+  padding: 0;
+  justify-content: end;
+}
+#bannerModal .modal-header button {
+  z-index: 1;
+  color: #fff;
+}

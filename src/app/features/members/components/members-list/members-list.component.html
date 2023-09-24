@@ -706,15 +706,14 @@
   tabindex="-1"
   aria-labelledby="bannerModalLabel"
   class="modal fade show"
-  style="display: block; padding-left: 0px; background: #00000063"
+  style="display: block; padding-left: 0px;background: #00000063"
   aria-modal="true"
   role="dialog"
   (click)="onCloseModal()"
 >
   <div
     _ngcontent-kxa-c63=""
-    class="modal-dialog modal-lg modal-dialog-centered"
-    (click)="onModalClick($event)"
+    class="modal-dialog modal-lg modal-dialog-centered" (click)="onModalClick($event)"
   >
     <div _ngcontent-kxa-c63="" class="modal-content">
       <div _ngcontent-kxa-c63="" class="modal-header">
@@ -731,9 +730,7 @@
       <div _ngcontent-kxa-c63="" class="modal-body p-0">
         <img
           _ngcontent-kxa-c63=""
-          src="https://sportszonegroup9e79.blob.core.windows.net/banners/modalBanner-{{
-            this.clientId
-          }}.jpg"
+          src="https://sportszonegroup9e79.blob.core.windows.net/banners/modalBanner-{{this.clientId}}.jpg"
           alt=""
           width="100%"
         />
@@ -741,3 +738,5 @@
     </div>
   </div>
 </div>
+
+<div class="modal-backdrop fade" *ngIf="showModal"></div>

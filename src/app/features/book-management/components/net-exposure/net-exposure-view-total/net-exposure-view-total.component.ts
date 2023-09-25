@@ -319,6 +319,7 @@ export class NetExposureViewTotalComponent implements OnInit {
                 }
                 if(runnerRes['back0'] == runnerRes['lay0']){
                   this.isLayBackSame = true;
+                  console.log('this.isLayBackSame',this.isLayBackSame);
                 } else {
                   this.isLayBackSame = false;
                 }

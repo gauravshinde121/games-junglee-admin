@@ -318,7 +318,6 @@ export class NetExposureViewTotalComponent implements OnInit {
                   runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv'] : '';
                 }
                 if(runnerRes['back0'] == runnerRes['lay0'] && (runnerRes['back0'] && runnerRes['lay0'])){
-                  //console.log(runnerRes['back0'],' == ',runnerRes['lay0']);
                   this.isLayBackSame = true;
                 } else {
                   this.isLayBackSame = false;

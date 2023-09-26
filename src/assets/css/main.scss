@@ -322,6 +322,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 .tableall {
   border-radius: 15px;
   color: $color_7;
+  white-space: nowrap;
   th {
     background: linear-gradient(0deg, $color_26 0, $color_27);
     border: 0px;

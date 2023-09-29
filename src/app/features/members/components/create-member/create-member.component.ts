@@ -164,7 +164,13 @@ export class CreateMemberComponent implements OnInit {
             minBet: 100,
             maxBet: 100000,
             partnerShipPercent: this.memberData.partnerShipPercent,
-            roleId: this.memberData.roleId
+            roleId: this.memberData.roleId,
+            adminCreationLimit: this.memberData.adminCreationLimit,
+            superMasterCreationLimit: this.memberData.superMasterCreationLimit,
+            masterCreationLimit: this.memberData.masterCreationLimit,
+            agentCreationLimit: this.memberData.agentCreationLimit,
+            dealerCreationLimit: this.memberData.dealerCreationLimit,
+            userCreationLimit: this.memberData.userCreationLimit,
           });
         }
         var memPer:any;

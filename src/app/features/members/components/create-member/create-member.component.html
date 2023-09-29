@@ -142,6 +142,10 @@
           memberForm.controls['superMasterCreationLimit'].touched">
             Please enter Super Master  Creation Limit.
           </div>
+          <div class="small text-danger" *ngIf="memberForm.controls['superMasterCreationLimit'].hasError('superMasterCreationLimit') &&
+            memberForm.controls['superMasterCreationLimit'].touched">
+            Creation Limit cannot exceed Player Credit Limit.
+          </div>
         </div>
         <div class="col-md-3 mb-2" *ngIf="setMasterCreationLimit">
           <label>Master Creation Limit</label>
@@ -150,6 +154,10 @@
           <div class="small text-danger" *ngIf="memberForm.controls['masterCreationLimit'].errors?.required &&
           memberForm.controls['masterCreationLimit'].touched">
             Please enter Master Creation Limit.
+          </div>
+          <div class="small text-danger" *ngIf="memberForm.controls['masterCreationLimit'].hasError('masterCreationLimit') &&
+            memberForm.controls['masterCreationLimit'].touched">
+            Creation Limit cannot exceed Player Credit Limit.
           </div>
         </div>
         <div class="col-md-3 mb-2" *ngIf="setAgentCreationLimit">
@@ -160,6 +168,10 @@
           memberForm.controls['agentCreationLimit'].touched">
             Please enter Agent Creation Limit.
           </div>
+          <div class="small text-danger" *ngIf="memberForm.controls['agentCreationLimit'].hasError('agentCreationLimit') &&
+            memberForm.controls['agentCreationLimit'].touched">
+            Creation Limit cannot exceed Player Credit Limit.
+          </div>
         </div>
         <div class="col-md-3 mb-2" *ngIf="setDealerCreationLimit">
           <label>Dealer Creation Limit</label>
@@ -169,6 +181,10 @@
           memberForm.controls['dealerCreationLimit'].touched">
             Please enter Dealer Creation Limit.
           </div>
+          <div class="small text-danger" *ngIf="memberForm.controls['dealerCreationLimit'].hasError('dealerCreationLimit') &&
+            memberForm.controls['dealerCreationLimit'].touched">
+            Creation Limit cannot exceed Player Credit Limit.
+          </div>
         </div>
         <div class="col-md-3 mb-2" *ngIf="setUserCreationLimit">
           <label>User Creation Limit</label>
@@ -177,6 +193,10 @@
           <div class="small text-danger" *ngIf="memberForm.controls['userCreationLimit'].errors?.required &&
           memberForm.controls['userCreationLimit'].touched">
             Please enter User Creation Limit.
+          </div>
+          <div class="small text-danger" *ngIf="memberForm.controls['userCreationLimit'].hasError('userCreationLimit') &&
+            memberForm.controls['userCreationLimit'].touched">
+            Creation Limit cannot exceed Player Credit Limit.
           </div>
         </div>
       </div>

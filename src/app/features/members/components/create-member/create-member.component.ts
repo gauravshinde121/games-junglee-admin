@@ -215,12 +215,12 @@ export class CreateMemberComponent implements OnInit {
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(this.maxBetMinValue)]],
         roleId: [this.createUserWithRoleId, Validators.required],
         partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
-        adminCreationLimit: [0, Validators.min(0)],
-        superMasterCreationLimit: [0, Validators.min(0)],
-        masterCreationLimit: [0, Validators.min(0)],
-        agentCreationLimit: [0, Validators.min(0)],
-        dealerCreationLimit: [0, Validators.min(0)],
-        userCreationLimit: [0, Validators.min(0)]
+        adminCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        superMasterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.superMasterCreationLimitValidator]],
+        masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.masterCreationLimitValidator]],
+        agentCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.agentCreationLimitValidator]],
+        dealerCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.dealerCreationLimitValidator]],
+        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.userCreationLimitValidator]]
       },
         {
           // validators: this.Mustmatch('password', 'confirmPassword'),
@@ -238,12 +238,12 @@ export class CreateMemberComponent implements OnInit {
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
         partnerShipPercent: [0, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
-        adminCreationLimit: [0, Validators.min(0)],
-        superMasterCreationLimit: [0, Validators.min(0)],
-        masterCreationLimit: [0, Validators.min(0)],
-        agentCreationLimit: [0, Validators.min(0)],
-        dealerCreationLimit: [0, Validators.min(0)],
-        userCreationLimit: [0, Validators.min(0)]
+        adminCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        superMasterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.superMasterCreationLimitValidator]],
+        masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.masterCreationLimitValidator]],
+        agentCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.agentCreationLimitValidator]],
+        dealerCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.dealerCreationLimitValidator]],
+        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.userCreationLimitValidator]]
       },
         {
           validators: []
@@ -363,6 +363,7 @@ export class CreateMemberComponent implements OnInit {
   }
 
   playerAvailableCreditValidator(maxLimit: number): ValidatorFn {
+    console.log('playerAvailableCreditValidator called');
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
       if (value !== null && (isNaN(value) || value < 0 || value > maxLimit)) {
@@ -370,6 +371,47 @@ export class CreateMemberComponent implements OnInit {
       }
       return null;
     };
+  }
+
+  superMasterCreationLimitValidator(control: AbstractControl): ValidationErrors | null {
+    const playerAvailableCreditVal = control.parent?.get('playerAvailableCredit')?.value;
+    if (playerAvailableCreditVal && control.value > playerAvailableCreditVal) {
+      return { superMasterCreationLimit: true, message: 'Admin Creation Limit exceeded' };
+    }
+    return null;
+  }
+
+  masterCreationLimitValidator(control: AbstractControl): ValidationErrors | null {
+    const playerAvailableCreditVal = control.parent?.get('playerAvailableCredit')?.value;
+    if (playerAvailableCreditVal && control.value > playerAvailableCreditVal) {
+      return { masterCreationLimit: true, message: 'Admin Creation Limit exceeded' };
+    }
+    return null;
+  }
+
+
+  agentCreationLimitValidator(control: AbstractControl): ValidationErrors | null {
+    const playerAvailableCreditVal = control.parent?.get('playerAvailableCredit')?.value;
+    if (playerAvailableCreditVal && control.value > playerAvailableCreditVal) {
+      return { agentCreationLimit: true, message: 'Admin Creation Limit exceeded' };
+    }
+    return null;
+  }
+
+  dealerCreationLimitValidator(control: AbstractControl): ValidationErrors | null {
+    const playerAvailableCreditVal = control.parent?.get('playerAvailableCredit')?.value;
+    if (playerAvailableCreditVal && control.value > playerAvailableCreditVal) {
+      return { dealerCreationLimit: true, message: 'Admin Creation Limit exceeded' };
+    }
+    return null;
+  }
+
+  userCreationLimitValidator(control: AbstractControl): ValidationErrors | null {
+    const playerAvailableCreditVal = control.parent?.get('playerAvailableCredit')?.value;
+    if (playerAvailableCreditVal && control.value > playerAvailableCreditVal) {
+      return { userCreationLimit: true, message: 'Admin Creation Limit exceeded' };
+    }
+    return null;
   }
 
   _getRoles() {

@@ -68,7 +68,9 @@
               <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('isGiven')">
                 <i class="fa-solid fa-text-width"></i> Transaction Type
               </th>
-              <th class="last" class="cursor-pointer pointer" (click)="toggleSort('currentUserIp')">IP</th>
+              <!-- <th class="last" class="cursor-pointer pointer" (click)="toggleSort('currentUserIp')">IP</th> -->
+              <th class="last" class="cursor-pointer pointer" (click)="toggleSort('description')">Narration</th>
+              
             </tr>
 
             <tr *ngFor="let user of transferStatements | sort:sortColumn:sortAscending; let i = index">
@@ -95,13 +97,16 @@
                 {{ user.isGiven ? "Given" : "Taken" }}
               </td>
               <td class="tds tdts">
+                {{ user.description }}
+              </td>
+              <!-- <td class="tds tdts">
                 <div class="tooltipnk">
                   <i class="fa-sharp fa-solid fa-info"></i>
                   <span class="tooltiptext tabTooltip px-5 w-auto">
                     <small>{{ user.currentUserIp }}</small>
                   </span>
                 </div>
-              </td>
+              </td> -->
             </tr>
           </tbody>
           <tfoot>

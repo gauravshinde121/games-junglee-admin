@@ -100,12 +100,14 @@ export class TransferStatementComponent implements OnInit {
   exportExcel(){
     let transfetStatemnt : any = []
     this.transferStatements.forEach(element => {
+
       transfetStatemnt.push({
         Date :  moment(element.createdDate).format("MMM D, YYYY, h:mm:ss a"),
         FromUser: element.fromUsername,
         Touser:element.toUsername,
         Amount : element.amount,
         TransactionType:element.isGiven,
+        Narration : element.description
       })
     });
     this._sharedService.exportExcel(transfetStatemnt,this.fileName);

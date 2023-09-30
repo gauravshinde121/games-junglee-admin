@@ -124,6 +124,10 @@ export class SharedService {
     return this._apiHttpService.get('https://api.ipify.org?format=json');
   }
 
+  getIPV2Api(ip: any) {
+    return this._apiHttpService.get('https://geo.ipify.org/api/v2/country,city,vpn?apiKey=at_O9SDuoswBQEZ23Act1whK9doGxRSQ&ipAddress=',ip);
+  }
+
   removeJWTToken() {
     sessionStorage.removeItem('GJA_jwtToken');
   }
@@ -254,6 +258,11 @@ export class SharedService {
     return this._apiHttpService
       .post(this._apiEndpointsService.saveWebSettingsEndpoint(),body);
   }
+
+  getIPData() {
+    return sessionStorage.getItem(('ipdata'));
+  }
+
 
 }
 

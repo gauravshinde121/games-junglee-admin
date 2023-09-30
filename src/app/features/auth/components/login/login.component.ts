@@ -43,6 +43,13 @@ export class LoginComponent implements OnInit {
   onSubmitSignIn() {
     this.isLoading = true;
     this._sharedService.getIPApi().subscribe(res => {
+
+      let ip =  res['ip']
+      this._sharedService.getIPV2Api(ip).subscribe((res: any)=>{
+        sessionStorage.setItem('ipdata',JSON.stringify(res));
+
+      })
+
       let loginData = {
         username: this.signInForm.value['username'],
         pwd: this.signInForm.value['password'],

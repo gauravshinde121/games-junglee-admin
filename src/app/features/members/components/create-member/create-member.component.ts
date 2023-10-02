@@ -168,6 +168,8 @@ export class CreateMemberComponent implements OnInit {
             maxBet: 100000,
             partnerShipPercent: this.memberData.partnerShipPercent,
             roleId: this.memberData.roleId,
+            fancyComission: this.memberData.fancyComission,
+            bookmakerComission: this.memberData.bookmakerComission,
             adminCreationLimit: this.memberData.adminCreationLimit,
             superMasterCreationLimit: this.memberData.superMasterCreationLimit,
             masterCreationLimit: this.memberData.masterCreationLimit,

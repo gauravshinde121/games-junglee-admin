@@ -6,6 +6,7 @@ import { MembersService } from '../../services/members.service';
 import { Observable } from 'rxjs';
 import { ConfirmPasswordValidator } from '@shared/classes/validator';
 import { max, subscribeOn } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-member',
@@ -42,6 +43,8 @@ export class CreateMemberComponent implements OnInit {
   setAgentCreationLimit:boolean = false;
   setDealerCreationLimit:boolean = false;
   setUserCreationLimit:boolean = false;
+  private playerAvailableCreditSubscription: Subscription | undefined;
+  selectedUserRole:string = '';
 
   @ViewChild('confirm_password') confirm_password: ElementRef;
   constructor(
@@ -339,6 +342,7 @@ export class CreateMemberComponent implements OnInit {
 
   onRoleChange(e){
     this.setCreationLimit(e.target.value);
+    this.selectedUserRole = this.roles.find(role => role.roleId === Number(e.target.value)).userRoleName;
     if(e.target.value == 2){
       this.maxLimit = this.uplineInfo.adminCreationLimit;
     } else if(e.target.value == 3){
@@ -366,6 +370,11 @@ export class CreateMemberComponent implements OnInit {
     console.log('playerAvailableCreditValidator called');
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
+      this.memberForm?.get('superMasterCreationLimit')?.setValue(value);
+      this.memberForm?.get('masterCreationLimit')?.setValue(value);
+      this.memberForm?.get('agentCreationLimit')?.setValue(value);
+      this.memberForm?.get('dealerCreationLimit')?.setValue(value);
+      this.memberForm?.get('userCreationLimit')?.setValue(value/10);
       if (value !== null && (isNaN(value) || value < 0 || value > maxLimit)) {
         return { 'creditLimit': true };
       }
@@ -418,7 +427,7 @@ export class CreateMemberComponent implements OnInit {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
       this.setCreationLimit(this.createUserWithRoleId);
-
+      this.selectedUserRole = this.roles.find(role => role.roleId === this.createUserWithRoleId).userRoleName;
       this._getUplineInfo();
     })
   }
@@ -493,6 +502,11 @@ export class CreateMemberComponent implements OnInit {
   getUserIp(){
     this._sharedService.getIPApi().subscribe((data: any) => {
       this.ipAdress = data.ip;
-    }
-    )}
+    })
+  }
+
+  ngOnDestroy() {
+    this.playerAvailableCreditSubscription?.unsubscribe();
+  }
+
 }

@@ -109,7 +109,7 @@
                 Credit Limit cannot be negative.
               </div>
               <div class="small text-danger" *ngIf="memberForm.controls['playerAvailableCredit'].errors?.creditLimit">
-                Credit Limit has been exceeded.
+                {{selectedUserRole}} Creation Limit has been exceeded. Please contact your upline.
               </div>
             </div>
           </div>

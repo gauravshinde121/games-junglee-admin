@@ -153,6 +153,7 @@ export class MembersListComponent implements OnInit {
   createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue) {
     this.adjustWinningsForSingleUserForm = this.formbuilder.group({
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.max(adjustWinningsForSingleUserValue)]),
+      description : new FormControl('Weekly settlement', [(c: AbstractControl) => Validators.required(c)])
     });
   }
 
@@ -160,7 +161,8 @@ export class MembersListComponent implements OnInit {
     let body = {
       "userId": this.userId,
       "amount": this.adjustWinningsForSingleUserForm.value.amount,
-      "isGiven": this.isGiven
+      "isGiven": this.isGiven,
+      "description" : this.adjustWinningsForSingleUserForm.value.description
     }
 
     this.closeModal();

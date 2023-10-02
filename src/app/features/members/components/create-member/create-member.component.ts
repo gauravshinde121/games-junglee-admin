@@ -1,11 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild,Renderer2 } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl,ValidatorFn, ValidationErrors } from '@angular/forms';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MembersService } from '../../services/members.service';
 import { Observable } from 'rxjs';
 import { ConfirmPasswordValidator } from '@shared/classes/validator';
-import { subscribeOn } from 'rxjs/operators';
+import { max, subscribeOn } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-member',
@@ -14,7 +15,7 @@ import { subscribeOn } from 'rxjs/operators';
 })
 export class CreateMemberComponent implements OnInit {
 
-  memberForm: FormGroup;
+  memberForm: FormGroup | null = null;
   isLoading = false;
   editMode: boolean;
   memberData: any;
@@ -34,6 +35,16 @@ export class CreateMemberComponent implements OnInit {
   uplinePwd:string = '';
   ipAdress = null;
   casinoProviderList: any = [];
+  maxLimit:any;
+
+  setAdminCreationLimit:boolean = false;
+  setSuperMasterCreationLimit:boolean = false;
+  setMasterCreationLimit:boolean = false;
+  setAgentCreationLimit:boolean = false;
+  setDealerCreationLimit:boolean = false;
+  setUserCreationLimit:boolean = false;
+  private playerAvailableCreditSubscription: Subscription | undefined;
+  selectedUserRole:string = '';
 
   @ViewChild('confirm_password') confirm_password: ElementRef;
   constructor(
@@ -47,13 +58,11 @@ export class CreateMemberComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this._sharedService.selectedUserRoleId.subscribe((res: any) => {
-      console.log('selectedUserRoleId shared service acalled', res['createUserWithRoleId']);
       this.createUserWithRoleId = res['createUserWithRoleId'];
     });
 
     this._sharedService.maxBetMinValue.subscribe((res: any) => {
       this.maxBetMinValue = res['value'];
-      console.log('this.maxBetMinValue',res['value'],this.maxBetMinValue);
     });
     this._preConfig();
 
@@ -68,9 +77,7 @@ export class CreateMemberComponent implements OnInit {
 
   onSubmitMemberForm() {
     this.display = 'block';
-    //this.renderer.selectRootElement(this.confirmPassword.nativeElement).focus();
     setTimeout(()=>{
-      console.log('this.confirm_password.nativeElement',this.confirm_password.nativeElement);
       this.confirm_password.nativeElement.focus();
     },500)
   }
@@ -94,8 +101,6 @@ export class CreateMemberComponent implements OnInit {
     this._sharedService._getGames().subscribe((res: any) => {
       if (res.gamesList) {
         this.gamesList = res.gamesList.map(gameId => ({ ...gameId, isActive: true }));
-    console.log(this.gamesList)
-
       }
     })
   }
@@ -119,13 +124,16 @@ export class CreateMemberComponent implements OnInit {
       }
     }
     this.gamesList.find(g => g.gameId == sportsId).isActive = !status;
-    this.memberForm.markAsDirty();
-    console.log(this.gamesList)
+    if (this.memberForm) {
+      this.memberForm.markAsDirty();
+    }
   }
 
   setCasinoStatus(status, providerId) {
     this.casinoProviderList.find(g => g.providerId == providerId).isActive = !status;
-    this.memberForm.markAsDirty();
+    if (this.memberForm) {
+      this.memberForm.markAsDirty();
+    }
   }
 
 
@@ -133,10 +141,8 @@ export class CreateMemberComponent implements OnInit {
     this._sharedService._getSingleUsersApi({
       "userId": +this.route.snapshot.params['id']
     }).subscribe(((res: any) => {
-      console.log('res', res)
       if (res) {
         this.memberData = res.user;
-        console.log(this.memberData);
         this.gamesList = res.gameStatus;
 
         res.providerStatus.forEach(status => {
@@ -150,20 +156,26 @@ export class CreateMemberComponent implements OnInit {
 
 
         this.roleId = this.memberData.roleId;
-        this.memberForm.patchValue({
-          username: this.memberData.username,
-          displayName: this.memberData.displayName,
-          playerMaxCreditLimit: this.memberData.creditLimit,
-          playerAvailableCredit: this.memberData.creditLimit,
-          sportsBookRate: this.memberData.sportsBookRate,
-          liveCasinoRate: this.memberData.liveCasinoRate,
-          fancyComission: this.memberData.fancyComission,
-          bookmakerComission: this.memberData.bookmakerComission,
-          minBet: 100,
-          maxBet: 100000,
-          partnerShipPercent: this.memberData.partnerShipPercent,
-          roleId: this.memberData.roleId
-        });
+        if (this.memberForm) {
+          this.memberForm.patchValue({
+            username: this.memberData.username,
+            displayName: this.memberData.displayName,
+            playerMaxCreditLimit: this.memberData.creditLimit,
+            playerAvailableCredit: this.memberData.creditLimit,
+            sportsBookRate: this.memberData.sportsBookRate,
+            liveCasinoRate: this.memberData.liveCasinoRate,
+            minBet: 100,
+            maxBet: 100000,
+            partnerShipPercent: this.memberData.partnerShipPercent,
+            roleId: this.memberData.roleId,
+            adminCreationLimit: this.memberData.adminCreationLimit,
+            superMasterCreationLimit: this.memberData.superMasterCreationLimit,
+            masterCreationLimit: this.memberData.masterCreationLimit,
+            agentCreationLimit: this.memberData.agentCreationLimit,
+            dealerCreationLimit: this.memberData.dealerCreationLimit,
+            userCreationLimit: this.memberData.userCreationLimit,
+          });
+        }
         var memPer:any;
         memPer = this.memberData.partnerShipPercent - this.uplineInfo.partnerShipPercent;
         if(memPer < 1){
@@ -177,14 +189,19 @@ export class CreateMemberComponent implements OnInit {
 
 
   _createMemberForm() {
-    console.log('this.uplineInfo',this.uplineInfo);
-    /*let memberFancyCom:any;
-    let memberBookmakerCom:any;
-    if(this.uplineInfo.roleId[0] == 1){
-      memberFancyCom = 0;
-    } else {
-
-    }*/
+    if(this.createUserWithRoleId == 2){
+      this.maxLimit = this.uplineInfo.adminCreationLimit;
+    } else if(this.createUserWithRoleId == 3){
+      this.maxLimit = this.uplineInfo.superMasterCreationLimit;
+    } else if(this.createUserWithRoleId == 4){
+      this.maxLimit = this.uplineInfo.masterCreationLimit;
+    } else if(this.createUserWithRoleId == 5){
+      this.maxLimit = this.uplineInfo.agentCreationLimit;
+    } else if(this.createUserWithRoleId == 6){
+      this.maxLimit = this.uplineInfo.dealerCreationLimit;
+    } else if(this.createUserWithRoleId == 7){
+      this.maxLimit = this.uplineInfo.userCreationLimit;
+    }
     if (!this.editMode) {
       this.memberForm = this._fb.group({
         username: ['', Validators.required],
@@ -194,7 +211,7 @@ export class CreateMemberComponent implements OnInit {
         )]),
         confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
         playerMaxCreditLimit: [''],
-        playerAvailableCredit: ['', [(c: AbstractControl) => Validators.required(c), Validators.min(0)]],
+        playerAvailableCredit: ['', [(c: AbstractControl) => Validators.required(c), Validators.min(0), this.playerAvailableCreditValidator(this.maxLimit)]],
         sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
@@ -202,7 +219,13 @@ export class CreateMemberComponent implements OnInit {
         roleId: [this.createUserWithRoleId, Validators.required],
         partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
         fancyComission: [this.uplineInfo.fancyComission,  [(c: AbstractControl) => Validators.max(this.uplineInfo.fancyComission), Validators.min(0), this.customFancyCommissionValidator(this.uplineInfo.fancyComission)]],
-        bookmakerComission: [this.uplineInfo.bookmakerComission,  [(c: AbstractControl) => Validators.max(this.uplineInfo.bookmakerComission), Validators.min(0), this.customBookmakerCommissionValidator(this.uplineInfo.bookmakerComission)]]
+        bookmakerComission: [this.uplineInfo.bookmakerComission,  [(c: AbstractControl) => Validators.max(this.uplineInfo.bookmakerComission), Validators.min(0), this.customBookmakerCommissionValidator(this.uplineInfo.bookmakerComission)]],
+        adminCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        superMasterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.superMasterCreationLimitValidator]],
+        masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.masterCreationLimitValidator]],
+        agentCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.agentCreationLimitValidator]],
+        dealerCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.dealerCreationLimitValidator]],
+        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.userCreationLimitValidator]]
       },
         {
           // validators: this.Mustmatch('password', 'confirmPassword'),
@@ -213,7 +236,7 @@ export class CreateMemberComponent implements OnInit {
         displayName: [''],
         username: [''],
         playerMaxCreditLimit: [''],
-        playerAvailableCredit: ['', [(c: AbstractControl) => Validators.required(c), Validators.min(0)]],
+        playerAvailableCredit: ['', [(c: AbstractControl) => Validators.required(c), Validators.min(0), this.playerAvailableCreditValidator(this.maxLimit)]],
         sportsBookRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         roleId: ['', Validators.required],
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
@@ -221,7 +244,13 @@ export class CreateMemberComponent implements OnInit {
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
         partnerShipPercent: [0, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
         fancyComission: [0, Validators.min(0)],
-        bookmakerComission: [0, Validators.min(0)]
+        bookmakerComission: [0, Validators.min(0)],
+        adminCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        superMasterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.superMasterCreationLimitValidator]],
+        masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.masterCreationLimitValidator]],
+        agentCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.agentCreationLimitValidator]],
+        dealerCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.dealerCreationLimitValidator]],
+        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.userCreationLimitValidator]]
       },
         {
           validators: []
@@ -254,9 +283,8 @@ export class CreateMemberComponent implements OnInit {
   }
 
   createMember(){
-
-        this.isLoading = true;
-      console.log('this.memberForm.value', this.memberForm.value);
+    if (this.memberForm) {
+      this.isLoading = true;
       let memberData = {};
       if (!this.editMode) {
         memberData = {
@@ -275,7 +303,13 @@ export class CreateMemberComponent implements OnInit {
           "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
           "ip": this.ipAdress,
           "uplinePwd": this.uplinePwd,
-          "casinoControl":  this.casinoProviderList
+          "casinoControl":  this.casinoProviderList,
+          "adminCreationLimit": this.memberForm.value['adminCreationLimit'],
+          "superMasterCreationLimit": this.memberForm.value['superMasterCreationLimit'],
+          "masterCreationLimit": this.memberForm.value['masterCreationLimit'],
+          "agentCreationLimit": this.memberForm.value['agentCreationLimit'],
+          "dealerCreationLimit": this.memberForm.value['dealerCreationLimit'],
+          "userCreationLimit": this.memberForm.value['userCreationLimit']
         }
       } else {
         memberData = {
@@ -293,7 +327,13 @@ export class CreateMemberComponent implements OnInit {
           "partnerShipPercent": this.memberForm.value['partnerShipPercent'],
           "ip": this.ipAdress,
           "uplinePwd": this.uplinePwd,
-          "casinoControl":  this.casinoProviderList
+          "casinoControl":  this.casinoProviderList,
+          "adminCreationLimit": this.memberForm.value['adminCreationLimit'],
+          "superMasterCreationLimit": this.memberForm.value['superMasterCreationLimit'],
+          "masterCreationLimit": this.memberForm.value['masterCreationLimit'],
+          "agentCreationLimit": this.memberForm.value['agentCreationLimit'],
+          "dealerCreationLimit": this.memberForm.value['dealerCreationLimit'],
+          "userCreationLimit": this.memberForm.value['userCreationLimit']
         }
       }
 
@@ -306,10 +346,8 @@ export class CreateMemberComponent implements OnInit {
         msg = 'Updated';
         memberData["userId"] = Number(this.route.snapshot.params['id']);
         memberObs = this._memberService._getEditUserApi(memberData);
-        console.log(memberObs)
       }
 
-      console.log(this.gamesList)
       this.closeModal();
       memberObs.subscribe(
         (res: any) => {
@@ -321,31 +359,122 @@ export class CreateMemberComponent implements OnInit {
           this._sharedService.getToastPopup(`Error while creating the member.`, 'Member', 'error');
         }
       )
+    }
   }
 
   onMinBetChange(e){
     this._sharedService.maxBetMinValue.next({
       'value' : e.target.value
     });
-    /*this.memberForm = this._fb.group({
-      maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(e.target.value)]],
-    });*/
   }
 
   get f() {
-    return this.memberForm.controls;
+    return this.memberForm?.controls;
+  }
+
+  onRoleChange(e){
+    this.setCreationLimit(e.target.value);
+    this.selectedUserRole = this.roles.find(role => role.roleId === Number(e.target.value)).userRoleName;
+    if(e.target.value == 2){
+      this.maxLimit = this.uplineInfo.adminCreationLimit;
+    } else if(e.target.value == 3){
+      this.maxLimit = this.uplineInfo.superMasterCreationLimit;
+    } else if(e.target.value == 4){
+      this.maxLimit = this.uplineInfo.masterCreationLimit;
+    } else if(e.target.value == 5){
+      this.maxLimit = this.uplineInfo.agentCreationLimit;
+    } else if(e.target.value == 6){
+      this.maxLimit = this.uplineInfo.dealerCreationLimit;
+    } else if(e.target.value == 7){
+      this.maxLimit = this.uplineInfo.userCreationLimit;
+    }
+    if (this.memberForm) {
+      this.memberForm?.get('playerAvailableCredit')?.setValidators([
+        Validators.required,
+        Validators.min(0),
+        this.playerAvailableCreditValidator(this.maxLimit)
+      ]);
+      this.memberForm?.get('playerAvailableCredit')?.updateValueAndValidity();
+    }
+  }
+
+  playerAvailableCreditValidator(maxLimit: number): ValidatorFn {
+    console.log('playerAvailableCreditValidator called');
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      this.memberForm?.get('superMasterCreationLimit')?.setValue(value);
+      this.memberForm?.get('masterCreationLimit')?.setValue(value);
+      this.memberForm?.get('agentCreationLimit')?.setValue(value);
+      this.memberForm?.get('dealerCreationLimit')?.setValue(value);
+      this.memberForm?.get('userCreationLimit')?.setValue(value/10);
+      if (value !== null && (isNaN(value) || value < 0 || value > maxLimit)) {
+        return { 'creditLimit': true };
+      }
+      return null;
+    };
+  }
+
+  superMasterCreationLimitValidator(control: AbstractControl): ValidationErrors | null {
+    const playerAvailableCreditVal = control.parent?.get('playerAvailableCredit')?.value;
+    if (playerAvailableCreditVal && control.value > playerAvailableCreditVal) {
+      return { superMasterCreationLimit: true, message: 'Admin Creation Limit exceeded' };
+    }
+    return null;
+  }
+
+  masterCreationLimitValidator(control: AbstractControl): ValidationErrors | null {
+    const playerAvailableCreditVal = control.parent?.get('playerAvailableCredit')?.value;
+    if (playerAvailableCreditVal && control.value > playerAvailableCreditVal) {
+      return { masterCreationLimit: true, message: 'Admin Creation Limit exceeded' };
+    }
+    return null;
+  }
+
+
+  agentCreationLimitValidator(control: AbstractControl): ValidationErrors | null {
+    const playerAvailableCreditVal = control.parent?.get('playerAvailableCredit')?.value;
+    if (playerAvailableCreditVal && control.value > playerAvailableCreditVal) {
+      return { agentCreationLimit: true, message: 'Admin Creation Limit exceeded' };
+    }
+    return null;
+  }
+
+  dealerCreationLimitValidator(control: AbstractControl): ValidationErrors | null {
+    const playerAvailableCreditVal = control.parent?.get('playerAvailableCredit')?.value;
+    if (playerAvailableCreditVal && control.value > playerAvailableCreditVal) {
+      return { dealerCreationLimit: true, message: 'Admin Creation Limit exceeded' };
+    }
+    return null;
+  }
+
+  userCreationLimitValidator(control: AbstractControl): ValidationErrors | null {
+    const playerAvailableCreditVal = control.parent?.get('playerAvailableCredit')?.value;
+    if (playerAvailableCreditVal && control.value > playerAvailableCreditVal) {
+      return { userCreationLimit: true, message: 'Admin Creation Limit exceeded' };
+    }
+    return null;
   }
 
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
+      this.setCreationLimit(this.createUserWithRoleId);
+      this.selectedUserRole = this.roles.find(role => role.roleId === this.createUserWithRoleId).userRoleName;
       this._getUplineInfo();
     })
   }
 
+  setCreationLimit(selectedRole){
+    this.setAdminCreationLimit = false;
+    this.setSuperMasterCreationLimit = [2].includes(Number(selectedRole));
+    this.setMasterCreationLimit = [2,3].includes(Number(selectedRole));
+    this.setAgentCreationLimit = [2,3,4].includes(Number(selectedRole));
+    this.setDealerCreationLimit = [2,3,4,5].includes(Number(selectedRole));
+    this.setUserCreationLimit = [2,3,4,5,6].includes(Number(selectedRole));
+  }
+
   _getCasinoProvider() {
     this._memberService._getCasinoProviderApi().subscribe((res: any) => {
-      console.log("Res",res);
       if (res.providerList) {
         this.casinoProviderList = res.providerList.map(providerId => ({ ...providerId,casinoProviderId : providerId.providerId ,isActive: true }));
       }
@@ -354,7 +483,6 @@ export class CreateMemberComponent implements OnInit {
 
   _getUplineInfo() {
     this._sharedService._getAdminDetailsApi().subscribe(((info: any) => {
-      console.log('info.admin',info.admin)
       this.uplineInfo = info.admin;
       this._createMemberForm()
       if (this.route.snapshot.params['id']) {
@@ -388,25 +516,29 @@ export class CreateMemberComponent implements OnInit {
   // validation
 
   get passwordVail() {
-    return this.memberForm.get('password')
+    return this.memberForm?.get('password')
   }
 
   get confirmPasswordVail() {
-    return this.memberForm.get('confirmPassword')
+    return this.memberForm?.get('confirmPassword')
   }
 
   get usernameVail() {
-    return this.memberForm.get('username')
+    return this.memberForm?.get('username')
   }
 
   get displaynameVail() {
-    return this.memberForm.get('displayName')
+    return this.memberForm?.get('displayName')
   }
 
   getUserIp(){
     this._sharedService.getIPApi().subscribe((data: any) => {
       this.ipAdress = data.ip;
-      console.log(data)
-    }
-    )}
+    })
+  }
+
+  ngOnDestroy() {
+    this.playerAvailableCreditSubscription?.unsubscribe();
+  }
+
 }

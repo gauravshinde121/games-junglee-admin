@@ -28,8 +28,8 @@ $color_22: #d35862;
 $color_23: #a7d8fd;
 $color_24: #f9c9d4;
 $color_25: rgba(38, 38, 38, 0.63);
-$color_26: #cd212f;
-$color_27: #e76f26;
+$color_26: #000000;
+$color_27: #1c6985;
 $color_28: #a6a6a657;
 $color_29: #a6a6a6;
 $color_30: #ebf7fc;
@@ -48,7 +48,7 @@ $color_42: #ffffff69;
 $color_43: rgba(255, 192, 230, 0.0705882353);
 $color_44: rgba(0, 0, 0, 0.6);
 $color_45: #ff2738;
-$color_46: #cd212f;
+$color_46: #0d84d980;
 $color_47: #71ff97;
 $color_48: #555;
 $color_49: #ccc;
@@ -68,7 +68,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 .btn-pink {
   transition: all 0.2s ease-in;
   transform: scale(1);
-  border: none;
+  border: 1px solid $color_27;
   color: $color_7;
   border-radius: 25px;
   font-size: 0.75rem;
@@ -130,7 +130,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 /********** Login start ************/
 
 .login {
-  // border: 1px solid rgba(255, 255, 255, 0.3215686275);
+  border: 1px solid $color_27;
   border-radius: 25px;
   padding: 10px;
   background: rgb(0 0 0 / 8%);
@@ -346,7 +346,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 /********** table pro end ************/
 /********** inner page pro start ************/
 .gamedetails {
-  // border: 1px solid $color_27;
+  border: 1px solid $color_27;
   border-radius: 15px;
   padding: 15px;
   background: transparent;

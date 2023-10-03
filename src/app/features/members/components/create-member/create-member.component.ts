@@ -33,7 +33,7 @@ export class CreateMemberComponent implements OnInit {
   show1:boolean = false;
   display:string = 'none';
   uplinePwd:string = '';
-  ipAdress = null;
+  ipAdress:any;
   casinoProviderList: any = [];
   maxLimit:any;
 
@@ -500,9 +500,10 @@ export class CreateMemberComponent implements OnInit {
   }
 
   getUserIp(){
-    this._sharedService.getIPApi().subscribe((data: any) => {
+    this.ipAdress = '127.0.0.1';
+    /*this._sharedService.getIPApi().subscribe((data: any) => {
       this.ipAdress = data.ip;
-    })
+    })*/
   }
 
   ngOnDestroy() {

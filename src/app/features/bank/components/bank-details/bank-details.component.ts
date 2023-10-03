@@ -62,6 +62,7 @@ export class BankDetailsComponent implements OnInit {
   isLeftMenuOpen: boolean;
   mainClass:String = 'col-md-10';
   isMobileView = false;
+  description : any = "Weekly settlement";
 
 
   get f() {
@@ -340,7 +341,7 @@ export class BankDetailsComponent implements OnInit {
     });
     //if (confirm('Do you want bulk transfer ?')) {
     this._sharedService
-      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, 'ip':currentUserIp })
+      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, 'ip':currentUserIp, description:this.description})
       .subscribe((res: any) => {
         this._sharedService.getToastPopup(
           'Adjusted Successfully',
@@ -379,6 +380,8 @@ export class BankDetailsComponent implements OnInit {
   }
 
   closeModal() {
+    this.selectedUserForAdjustment = [];
+    this._getAllUserInfo();
     this.display = 'none';
     // this.changePasswordForm.reset();
   }

@@ -62,6 +62,8 @@ export class MembersListComponent implements OnInit {
   sortAscending: boolean = true;// 1: ascending, -1: descending
   showModal: boolean;
   clientId: any = environment.clientId;
+  description : any = "Weekly settlement";
+
 
   createPasswordForm() {
     this.changePasswordForm = this.formbuilder.group({
@@ -266,6 +268,14 @@ export class MembersListComponent implements OnInit {
   isAllChecked() {
     return this.userList.every(_ => _.state);
   }
+
+  isAllUnChecked() {
+    return this.userList.map(item => ({
+      ...item,
+      state: false
+    }));
+  }
+
   _preConfig() {
     this.createPasswordForm();
     this._getRoles();
@@ -379,7 +389,7 @@ export class MembersListComponent implements OnInit {
     });
     //if (confirm('Do you want bulk transfer ?')) {
     this._sharedService
-      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, 'ip': currentUserIp })
+      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, 'ip': currentUserIp , description:this.description })
       .subscribe((res: any) => {
         this._sharedService.getToastPopup(
           'Adjusted Successfully',
@@ -418,6 +428,12 @@ export class MembersListComponent implements OnInit {
   }
 
   closeModal() {
+    this.selectedUserForAdjustment = [];
+    this._getAllUserInfo(this.selectedRoleId);
+    this._sharedService.callAdminDetails.next(true);
+    // // this.allChecked = !this.allChecked;
+    // // this.allChecked = false;
+    // this.isAllUnChecked();
     this.display = 'none';
     this.changePasswordForm.reset();
   }

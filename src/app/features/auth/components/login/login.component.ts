@@ -42,32 +42,35 @@ export class LoginComponent implements OnInit {
 
   onSubmitSignIn() {
     this.isLoading = true;
-    this._sharedService.getIPApi().subscribe(res => {
 
-      let ip =  res['ip']
-      /*this._sharedService.getIPV2Api(ip).subscribe((res: any)=>{
+    let loginData = {
+      username: this.signInForm.value['username'],
+      pwd: this.signInForm.value['password'],
+      userIp: '127.0.0.1',
+      rememberme: true
+    }
+    this._authService._postLoginApi(loginData).subscribe(
+      (res: any) => {
+        this._sharedService.setJWTToken(res['token']);
+        this._sharedService.setUserDetails(jwt_decode(res['token']));
+        this.isLoading = false;
+        this._sharedService.currentUserIp.next(res['ip']);
+        this._router.navigate(['/member/list']);
+      },
+      () => this.isLoading = false,
+      () => this.isLoading = false
+    )
+
+    /*this._sharedService.getIPApi().subscribe(res => {
+
+      let ip =  res['ip'];
+      this._sharedService.getIPV2Api(ip).subscribe((res: any)=>{
         sessionStorage.setItem('ipdata',JSON.stringify(res));
 
-      })*/
+      })
 
-      let loginData = {
-        username: this.signInForm.value['username'],
-        pwd: this.signInForm.value['password'],
-        userIp: res['ip'],
-        rememberme: true
-      }
-      this._authService._postLoginApi(loginData).subscribe(
-        (res: any) => {
-          this._sharedService.setJWTToken(res['token']);
-          this._sharedService.setUserDetails(jwt_decode(res['token']));
-          this.isLoading = false;
-          this._sharedService.currentUserIp.next(res['ip']);
-          this._router.navigate(['/member/list']);
-        },
-        () => this.isLoading = false,
-        () => this.isLoading = false
-      )
-    });
+
+    });*/
   }
 
 }

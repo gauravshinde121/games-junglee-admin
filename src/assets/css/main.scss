@@ -321,6 +321,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 .tableall {
   border-radius: 15px;
   color: $color_7;
+  white-space: nowrap;
   th {
     background: linear-gradient(0deg, $color_26 0, $color_27);
     border: 0px;
@@ -853,7 +854,10 @@ tfoot tr {
 
 .netExposure thead tr th,
 .netExposure tbody tr td {
-  width: 5rem;
+  // width: 3rem;
+  border: 0;
+  // border-bottom: 1px solid $color_50;
+  padding: 0 0 0.5rem;
 }
 
 .pointer,
@@ -1106,4 +1110,11 @@ $breakpoint-mobile: 767px;
       }
     }
   }
+}
+
+.mobileTable table {
+  font-size: 12px;
+}
+.rgtMarket td tr {
+  width: 100%;
 }

@@ -373,13 +373,14 @@
                                         singleAdminBook['appMarketStatus'] ==
                                           '3' ||
                                         singleAdminBook['appMarketStatus'] ==
-                                          '9'
+                                          '9' ||
+                                        isLayBackSame
                                       "
                                     >
                                       <button type="button" class="suspendedm1">
                                         {{
-                                          singleAdminBook["appMarketStatus"] ==
-                                          "3"
+                                          (singleAdminBook["appMarketStatus"] ==
+                                          "3" || isLayBackSame)
                                             ? "Suspended"
                                             : "Ball Running"
                                         }}
@@ -559,7 +560,7 @@
                                   />
                                 </td>
                                 <td colspan="1" class="text-center border-top">
-                                  <strong>{{ userBook["stake"] }}</strong>
+                                  <strong>{{ userBook["stake"] | number : "1.0-0" }}</strong>
                                 </td>
                                 <td colspan="1" class="text-center border-top">
                                   <strong
@@ -642,13 +643,13 @@
                                     </td>
                                     <td colspan="1" class="text-center"></td>
                                     <td colspan="1" class="text-center">
-                                      {{ downline.runner1Amount }}
+                                      {{ downline.runner1Amount | number : "1.0-0" }}
                                     </td>
                                     <td colspan="1" class="text-center">
-                                      {{ downline.runner3Amount }}
+                                      {{ downline.runner3Amount | number : "1.0-0" }}
                                     </td>
                                     <td colspan="1" class="text-center">
-                                      {{ downline.runner2Amount }}
+                                      {{ downline.runner2Amount | number : "1.0-0" }}
                                     </td>
                                   </tr>
 
@@ -687,13 +688,13 @@
                                             class="text-center"
                                           ></td>
                                           <td colspan="1" class="text-center">
-                                            {{ downline2.runner1Amount }}
+                                            {{ downline2.runner1Amount | number : "1.0-0" }}
                                           </td>
                                           <td colspan="1" class="text-center">
-                                            {{ downline2.runner3Amount }}
+                                            {{ downline2.runner3Amount | number : "1.0-0" }}
                                           </td>
                                           <td colspan="1" class="text-center">
-                                            {{ downline2.runner2Amount }}
+                                            {{ downline2.runner2Amount | number : "1.0-0" }}
                                           </td>
                                         </tr>
 
@@ -741,19 +742,19 @@
                                                   colspan="1"
                                                   class="text-center"
                                                 >
-                                                  {{ downline3.runner1Amount }}
+                                                  {{ downline3.runner1Amount | number : "1.0-0" }}
                                                 </td>
                                                 <td
                                                   colspan="1"
                                                   class="text-center"
                                                 >
-                                                  {{ downline3.runner3Amount }}
+                                                  {{ downline3.runner3Amount | number : "1.0-0" }}
                                                 </td>
                                                 <td
                                                   colspan="1"
                                                   class="text-center"
                                                 >
-                                                  {{ downline3.runner2Amount }}
+                                                  {{ downline3.runner2Amount | number : "1.0-0" }}
                                                 </td>
                                               </tr>
 
@@ -803,7 +804,7 @@
                                                         class="text-center"
                                                       >
                                                         {{
-                                                          downline4.runner1Amount
+                                                          downline4.runner1Amount | number : "1.0-0"
                                                         }}
                                                       </td>
                                                       <td
@@ -811,7 +812,7 @@
                                                         class="text-center"
                                                       >
                                                         {{
-                                                          downline4.runner3Amount
+                                                          downline4.runner3Amount | number : "1.0-0"
                                                         }}
                                                       </td>
                                                       <td
@@ -819,7 +820,7 @@
                                                         class="text-center"
                                                       >
                                                         {{
-                                                          downline4.runner2Amount
+                                                          downline4.runner2Amount | number : "1.0-0"
                                                         }}
                                                       </td>
                                                     </tr>
@@ -878,7 +879,7 @@
                                                               colspan="1"
                                                             >
                                                               {{
-                                                                downline5.runner1Amount
+                                                                downline5.runner1Amount | number : "1.0-0"
                                                               }}
                                                             </td>
                                                             <td
@@ -886,7 +887,7 @@
                                                               colspan="1"
                                                             >
                                                               {{
-                                                                downline5.runner3Amount
+                                                                downline5.runner3Amount | number : "1.0-0"
                                                               }}
                                                             </td>
                                                             <td
@@ -894,7 +895,7 @@
                                                               colspan="1"
                                                             >
                                                               {{
-                                                                downline5.runner2Amount
+                                                                downline5.runner2Amount | number : "1.0-0"
                                                               }}
                                                             </td>
                                                           </tr>
@@ -957,7 +958,7 @@
                                                                     colspan="1"
                                                                   >
                                                                     {{
-                                                                      downline6.runner1Amount
+                                                                      downline6.runner1Amount | number : "1.0-0"
                                                                     }}
                                                                   </td>
                                                                   <td
@@ -965,7 +966,7 @@
                                                                     colspan="1"
                                                                   >
                                                                     {{
-                                                                      downline6.runner3Amount
+                                                                      downline6.runner3Amount | number : "1.0-0"
                                                                     }}
                                                                   </td>
                                                                   <td
@@ -973,7 +974,7 @@
                                                                     colspan="1"
                                                                   >
                                                                     {{
-                                                                      downline6.runner2Amount
+                                                                      downline6.runner2Amount | number : "1.0-0"
                                                                     }}
                                                                   </td>
                                                                 </tr>

@@ -42,6 +42,8 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
+  isPageDestroyed = false;
+  isLayBackSame:boolean = false;
 
   constructor(
     private _sharedService: SharedService,
@@ -315,6 +317,12 @@ export class NetExposureViewTotalComponent implements OnInit {
                   runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds'] : '';
                   runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv'] : '';
                 }
+                if(runnerRes['back0'] == runnerRes['lay0'] && (runnerRes['back0'] && runnerRes['lay0'])){
+                  this.isLayBackSame = true;
+                  console.log('this.isLayBackSame',this.isLayBackSame);
+                } else {
+                  this.isLayBackSame = false;
+                }
                 break;
 
               case 'Fancy':
@@ -457,7 +465,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     }
   }
 
-
+/*
   _subscribeWebSocket() {
     this.realDataWebSocket.subscribe(
       data => {
@@ -466,6 +474,22 @@ export class NetExposureViewTotalComponent implements OnInit {
       }, // Called whenever there is a message from the server.
       err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
       () => console.log('complete') // Called when connection is closed (for whatever reason).
+    );
+  }*/
+
+
+  _subscribeWebSocket(){
+    this.realDataWebSocket.subscribe(
+      data => {
+        if(typeof data == 'string') this._updateMarketData(data);
+        // if(typeof data == 'string') console.log('sub',data);
+      }, // Called whenever there is a message from the server.
+      err => {
+        if(!this.isPageDestroyed)this._getWebSocketUrl(true);
+      }, // Called if at any point WebSocket API signals some kind of error.
+      () => {
+        if(!this.isPageDestroyed)this._getWebSocketUrl(true);
+      } // Called when connection is closed (for whatever reason).
     );
   }
 
@@ -511,7 +535,10 @@ export class NetExposureViewTotalComponent implements OnInit {
       }
     }
     // if(this.realDataWebSocket) this.realDataWebSocket.complete();
-    if (this.realDataWebSocket) this.realDataWebSocket.unsubscribe();
+    if (this.realDataWebSocket){
+      this.realDataWebSocket.complete();
+      this.isPageDestroyed = true;
+    }
     clearInterval(this.resetTimerInterval)
   }
 

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { Router } from '@angular/router';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { MembersService } from '../../services/members.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-members-list',
@@ -59,6 +60,8 @@ export class MembersListComponent implements OnInit {
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
+  showModal: boolean;
+  clientId: any = environment.clientId;
 
   createPasswordForm() {
     this.changePasswordForm = this.formbuilder.group({
@@ -150,6 +153,7 @@ export class MembersListComponent implements OnInit {
   createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue) {
     this.adjustWinningsForSingleUserForm = this.formbuilder.group({
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.max(adjustWinningsForSingleUserValue)]),
+      description : new FormControl('Weekly settlement', [(c: AbstractControl) => Validators.required(c)])
     });
   }
 
@@ -157,7 +161,8 @@ export class MembersListComponent implements OnInit {
     let body = {
       "userId": this.userId,
       "amount": this.adjustWinningsForSingleUserForm.value.amount,
-      "isGiven": this.isGiven
+      "isGiven": this.isGiven,
+      "description" : this.adjustWinningsForSingleUserForm.value.description
     }
 
     this.closeModal();
@@ -194,6 +199,10 @@ export class MembersListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const hasSeenModal = localStorage.getItem('hasSeenModal');
+    if (!hasSeenModal) {
+      this.showModal = true;
+    }
     this._preConfig();
     if (this._sharedService.getUserDetails().roleId.indexOf(1) != -1) {
       this.isSuperAdmin = true;
@@ -288,7 +297,7 @@ export class MembersListComponent implements OnInit {
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
-      console.log(roles.data)    
+      console.log(roles.data)
     });
   }
 
@@ -305,7 +314,7 @@ export class MembersListComponent implements OnInit {
     if (!autoRefresh) {
       this.isLoading = true;
       this.userList = [];
-    }    
+    }
     let body = {
       roleId: roleId,
       pageNo: this.currentPage,
@@ -364,7 +373,7 @@ export class MembersListComponent implements OnInit {
 
   adjustWinnings() {
 
-    var currentUserIp:any;
+    var currentUserIp: any;
     this._sharedService.currentUserIp.subscribe((data: any) => {
       currentUserIp = data.userIp;
     });
@@ -466,29 +475,37 @@ export class MembersListComponent implements OnInit {
 
   exportExcel() {
     let memberList: any = []
-    
-    if (this.selectedRoleId == this. roleId ){
-    this.userList.forEach(element => {
-      memberList.push({
-        Username: element.username,
-        CreditLimit: element.creditLimit,
-        NetExposure: element.exposure,
-        Take: element.take,
-        Give: element.give,
-        AvailableCredit: element.availableCredit,
-        Status: element.isActive,
-      })
-        this.roles.forEach(elements => {
-          if (this.selectedRoleId === elements.roleId ) {
-          memberList.push({
-            RoleName: elements.userRoleName
-          })
-        }
-        })
-    });
-    this._sharedService.exportExcel(memberList, this.fileName);
-  }
-}
 
+    if (this.selectedRoleId == this.roleId) {
+      this.userList.forEach(element => {
+        memberList.push({
+          Username: element.username,
+          CreditLimit: element.creditLimit,
+          NetExposure: element.exposure,
+          Take: element.take,
+          Give: element.give,
+          AvailableCredit: element.availableCredit,
+          Status: element.isActive,
+        })
+        this.roles.forEach(elements => {
+          if (this.selectedRoleId === elements.roleId) {
+            memberList.push({
+              RoleName: elements.userRoleName
+            })
+          }
+        })
+      });
+      this._sharedService.exportExcel(memberList, this.fileName);
+    }
+  }
+
+  onCloseModal() {
+    localStorage.setItem('hasSeenModal', 'true');
+    this.showModal = false;
+  }
+
+  onModalClick(event: MouseEvent): void {
+    event.stopPropagation();
+  }
 
 }

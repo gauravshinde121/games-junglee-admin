@@ -198,7 +198,8 @@ export class BankDetailsComponent implements OnInit {
     });
 
     this._preConfig();
-    if(this._sharedService.getUserDetails().roleId.indexOf(1) != -1){
+    //if(this._sharedService.getUserDetails().roleId.indexOf(1) != -1){
+    if (this._sharedService.getUserDetails().roleId === 1) {
       this.isSuperAdmin = true;
     }
     this.statusList = [

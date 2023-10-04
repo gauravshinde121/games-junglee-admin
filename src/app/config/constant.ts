@@ -11,7 +11,7 @@ export class Constants {
     public readonly API_JUNGLEE_TOKEN: string = environment.JungleeToken;
 
     //example
-    public readonly API_URL_LOGIN: string = 'api/mafia-admin-login';
+    public readonly API_URL_LOGIN: string = 'api/junglee-admin/login';
     public readonly API_URL_SIGNUP: string = 'api/userRegistration';
 
 

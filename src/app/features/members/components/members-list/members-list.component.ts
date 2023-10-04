@@ -204,7 +204,8 @@ export class MembersListComponent implements OnInit {
       this.showModal = true;
     }
     this._preConfig();
-    if (this._sharedService.getUserDetails().roleId.indexOf(1) != -1) {
+    //if (this._sharedService.getUserDetails().roleId.indexOf(1) != -1) {
+    if (this._sharedService.getUserDetails().roleId === 1) {
       this.isSuperAdmin = true;
     }
     this.statusList = [
@@ -297,7 +298,6 @@ export class MembersListComponent implements OnInit {
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
-      console.log(roles.data)
     });
   }
 

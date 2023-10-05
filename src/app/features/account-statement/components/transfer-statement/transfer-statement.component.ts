@@ -106,7 +106,7 @@ export class TransferStatementComponent implements OnInit {
         FromUser: element.fromUsername,
         Touser:element.toUsername,
         Amount : element.amount,
-        TransactionType:element.isGiven,
+        TransactionType:element.isGiven === true? 'Given':'Taken',
         Narration : element.description
       })
     });

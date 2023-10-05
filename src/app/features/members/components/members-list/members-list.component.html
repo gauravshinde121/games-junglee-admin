@@ -178,7 +178,7 @@
                 <!-- <th scope="col" class=""><i class="fa-sharp fa-regular fa-square-check"></i> Status
               </th> -->
                 <!-- <th scope="col" class="">Info</th> -->
-                <th scope="col" class="text-center" *ngIf="selectedRoleId != 7">
+                <th scope="col" class="text-center pointer" *ngIf="selectedRoleId != 7"  (click)="toggleSort('partnerShipPercent')">
                   Partnership %
                 </th>
                 <th scope="col" class="text-center">Details</th>

@@ -124,8 +124,8 @@ export class InvalidBetComponent implements OnInit {
         Market:element.market,
         Selection : element.selection,
         OrderPlace:element.oddsPlaced,
-        Matched:element.isMatched,
-        Unmatched:element.stake,
+        Matched:element.isMatched == true? element.stake:'-',
+        Unmatched:element.isMatched == false? element.stake:'-',
         Profit_Liability:element.profitLiability,
         Remark:element.remarks
       })

@@ -53,7 +53,7 @@ export class BankDetailsComponent implements OnInit {
   totalMembers = 0;
 
 
-  fileName = 'MemberList.xlsx';
+  fileName = 'BankTransfer.xlsx';
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending

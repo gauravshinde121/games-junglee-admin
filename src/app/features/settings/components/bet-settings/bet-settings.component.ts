@@ -307,15 +307,18 @@ export class BetSettingsComponent implements OnInit {
       //   //umatchedStake:element.stake
       // })
       if(element.isMatched){
-        allBet.push({username:element.username,
-          date : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
-          event: element.event,
-          market:element.betCategory,
-          OrderPlace:element.oddsPlaced,
-          selection : element.selectionName,
+        allBet.push({
+          Member:element.username,
+          Placetime : moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
+          Event: element.event,
+          Market:element.betCategory,
+          // OrderPlace:element.oddsPlaced,
+          Selection : element.selectionName,
           OrderPlaced:element.betRate,
           OrderMatched:element.betRate,
-          mathedStake:element.stake});
+          MathedStake:element.isMatched == true? element.stake:'-',
+          UnmatchedStake:element.isMatched == false? element.stake:'-'
+        });
       }else {
         allBet.push({
           username:element.username,

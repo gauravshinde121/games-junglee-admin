@@ -29,6 +29,9 @@ export class TurnoverComponent implements OnInit {
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
 
+  fileName= 'Turnover'+'_'+new Date()+'.xlsx';
+
+
   constructor(
     private _accountStatementService:AccountStatementService,
     private _sharedService:SharedService
@@ -121,6 +124,28 @@ export class TurnoverComponent implements OnInit {
   closeModal(){
     this.display = 'none';
   }
+
+  exportExcel(){
+    let transfetStatemnt : any = []
+    this.betInfo.forEach(element => {
+
+      transfetStatemnt.push({
+        Member : element.member,
+        Placed: element.placeTime,
+        MatchedDate:element.placeTime,
+        Event : element.event,
+        Market:element.market,
+        Selection  : element.selection,
+        OrderPlaced:element.oddsPlaced,
+        OrderMatched:element.oddsPlaced,
+        Matched:element.isMatched == true? element.stake:'-',
+        Unmatched:element.isMatched == false? element.stake:'-'
+      })
+    });
+    this._sharedService.exportExcel(transfetStatemnt,this.fileName);
+    // this._sharedService.exportExcel(this.transferStatements,this.fileName);
+ }
+
 
   toggleSort(columnName: string) {
     if (this.sortColumn === columnName) {

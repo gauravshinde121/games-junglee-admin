@@ -473,30 +473,38 @@ export class MembersListComponent implements OnInit {
     }
   }
 
+
   exportExcel() {
     let memberList: any = []
+    let mergedArray = [];
 
     if (this.selectedRoleId == this.roleId) {
-      this.userList.forEach(element => {
+      this.userList.forEach(element => 
+        this.roles.forEach(elements => {
+          if (this.selectedRoleId === elements.roleId){
         memberList.push({
           Username: element.username,
+          RoleName: elements.userRoleName,        
           CreditLimit: element.creditLimit,
           NetExposure: element.exposure,
           Take: element.take,
           Give: element.give,
           AvailableCredit: element.availableCredit,
-          Status: element.isActive,
+          Status: element.isActive, 
         })
-        this.roles.forEach(elements => {
-          if (this.selectedRoleId === elements.roleId) {
-            memberList.push({
-              RoleName: elements.userRoleName
-            })
-          }
-        })
-      });
+        // this.roles.forEach(elements => {
+        //   if (this.selectedRoleId === elements.roleId) {
+        //     memberList.push({
+        //       RoleName: elements.userRoleName
+        //     })
+        //   }
+        // })
+      }}));
+      
       this._sharedService.exportExcel(memberList, this.fileName);
     }
+
+    let result = this.userList.map()
   }
 
   onCloseModal() {

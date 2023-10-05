@@ -195,6 +195,10 @@
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
+      <div class=" col-md-12  bg-dark">
+          <button *ngIf="betInfo?.length > 0" type="button"
+            class="btn btn-pink  rounded-pill ms-2 text-white float-end" (click)="exportExcel()">Export</button>
+      </div>
       <div class="modal-body bg-dark text-white" *ngIf="!betInfo">
         Loading...
       </div>

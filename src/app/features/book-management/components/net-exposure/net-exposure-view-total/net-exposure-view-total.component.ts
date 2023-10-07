@@ -43,7 +43,6 @@ export class NetExposureViewTotalComponent implements OnInit {
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
   isPageDestroyed = false;
-  isLayBackSame:boolean = false;
 
   constructor(
     private _sharedService: SharedService,
@@ -311,18 +310,24 @@ export class NetExposureViewTotalComponent implements OnInit {
                   runnerRes['lay0'] = '';
                   runnerRes['vlay0'] = '';
                 } else {
+                  runnerRes['showSuspended'] = false;
                   runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds'] : '';
                   runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv'] : '';
 
                   runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds'] : '';
                   runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv'] : '';
+
+
+                  if(runnerRes['back0'] == runnerRes['lay0']){
+                    runnerRes['showSuspended'] = true;
+                  } else {
+                    runnerRes['showSuspended'] = false;
+                  }
                 }
-                if(runnerRes['back0'] == runnerRes['lay0'] && (runnerRes['back0'] && runnerRes['lay0'])){
-                  this.isLayBackSame = true;
-                  console.log('this.isLayBackSame',this.isLayBackSame);
-                } else {
-                  this.isLayBackSame = false;
-                }
+
+                
+
+
                 break;
 
               case 'Fancy':
@@ -454,6 +459,14 @@ export class NetExposureViewTotalComponent implements OnInit {
                   //Volume from Betfair
                   runnerRes['vlay1'] = singleWebsocketRunner['bv'];
 
+
+                  if(singleBook['marketTypName'] == 'Bookmaker'){
+                    if(runnerRes['back1'] == runnerRes['lay1']){
+                      runnerRes['showSuspended'] = true;
+                    } else {
+                      runnerRes['showSuspended'] = false;
+                }
+               }
                 }
               }
             }

@@ -327,7 +327,8 @@
                                     *ngIf="
                                       singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                      singleAdminBook['appMarketStatus'] != '9'
+                                      singleAdminBook['appMarketStatus'] != '9' && 
+                                      !runner['showSuspended']
                                     "
                                     class="colblue"
                                     [boxHighlight]="runner['back1']"
@@ -347,7 +348,8 @@
                                     *ngIf="
                                       singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                      singleAdminBook['appMarketStatus'] != '9'
+                                      singleAdminBook['appMarketStatus'] != '9' && 
+                                      !runner['showSuspended']
                                     "
                                     class="colpink"
                                     [boxHighlight]="runner['lay1']"
@@ -373,17 +375,30 @@
                                         singleAdminBook['appMarketStatus'] ==
                                           '3' ||
                                         singleAdminBook['appMarketStatus'] ==
-                                          '9' ||
-                                        isLayBackSame
+                                          '9'
                                       "
                                     >
                                       <button type="button" class="suspendedm1">
                                         {{
                                           (singleAdminBook["appMarketStatus"] ==
-                                          "3" || isLayBackSame)
+                                          "3" || singleAdminBook['appMarketStatus'] ==
+                                          '9')
                                             ? "Suspended"
                                             : "Ball Running"
                                         }}
+                                      </button>
+                                    </div>
+                                    <div
+                                      class="suspendedbm1"
+                                      *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '9' &&
+                                        runner['showSuspended']"
+                                    >
+                                      <button type="button" class="suspendedm1">
+                                       Suspended
                                       </button>
                                     </div>
                                   </td>

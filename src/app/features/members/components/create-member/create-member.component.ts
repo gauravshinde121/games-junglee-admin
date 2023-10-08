@@ -408,7 +408,7 @@ export class CreateMemberComponent implements OnInit {
       this.memberForm?.get('masterCreationLimit')?.setValue(value);
       this.memberForm?.get('agentCreationLimit')?.setValue(value);
       this.memberForm?.get('dealerCreationLimit')?.setValue(value);
-      this.memberForm?.get('userCreationLimit')?.setValue(value/10);
+      this.memberForm?.get('userCreationLimit')?.setValue(value);
       if (value !== null && (isNaN(value) || value < 0 || value > maxLimit)) {
         return { 'creditLimit': true };
       }

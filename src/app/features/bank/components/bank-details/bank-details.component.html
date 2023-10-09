@@ -211,6 +211,17 @@
       </div>
       <div class="modal-body bg-dark text-white">
         <div class="row">
+          <div class="col-md-12 pt-2">
+            <label for="">Narration</label>
+            <input
+             maxlength="150"
+              type="text"
+              class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+              [(ngModel)]="description"
+            />
+          </div>
+        </div>
+        <div class="row">
           <section class="section w-75 m-auto">
             <button class="btn btn-success rounded-pill w-80 mt-3" (click)="adjustWinnings()">
               Yes

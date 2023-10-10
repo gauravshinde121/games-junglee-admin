@@ -226,13 +226,13 @@
                 <td>{{ bets.averagePriceMatched }}</td>
                 <td>
                   <ng-container *ngIf="bets.isMatched; else notMatched">
-                    {{ bets.stake }}
+                    {{ bets.stake | indianCurrency}}
                   </ng-container>
                   <ng-template #notMatched> -- </ng-template>
                 </td>
                 <td>
                   <ng-container *ngIf="!bets.isMatched; else notMatched">
-                    {{ bets.stake }}
+                    {{ bets.stake | indianCurrency}}
                   </ng-container>
                   <ng-template #notMatched> -- </ng-template>
                 </td>

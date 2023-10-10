@@ -10,6 +10,7 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 import { BoxHighlightDirective } from './directives/box-highlight.directive';
 import { SortPipe } from './pipe/sort.pipe';
 import { SearchPipe } from './pipe/search.pipe';
+import { IndianCurrencyPipe } from './pipe/indian-currency.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SearchPipe } from './pipe/search.pipe';
     MarketRateFormaterPipe,
     BoxHighlightDirective,
     SortPipe,
-    SearchPipe
+    SearchPipe,
+    IndianCurrencyPipe
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { SearchPipe } from './pipe/search.pipe';
     TooltipModule,
     BoxHighlightDirective,
     SortPipe,
-    SearchPipe
+    SearchPipe,
+    IndianCurrencyPipe
   ]
 })
 export class SharedModule { }

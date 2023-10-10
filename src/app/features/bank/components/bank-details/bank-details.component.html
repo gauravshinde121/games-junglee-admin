@@ -119,23 +119,23 @@
                           </td>
                           <td><span (click)="showDownlineTree(user)">{{ user.username }}</span></td>
                           <td class="text-center">{{user.userRoleName}}</td>
-                          <td class="text-center">{{ user.creditLimit | number }}</td>
+                          <td class="text-center">{{ user.creditLimit | indianCurrency }}</td>
                           <td class="text-center" [ngClass]="user.exposure > 0 ? 'text-danger' : ''">
-                            {{ user.exposure | number }}
+                            {{ user.exposure | indianCurrency }}
                           </td>
                           <td [ngClass]="user.take > 0 ? 'text-success' : ''" class="text-center">
                             <a class="pointer text-success text-decoration-none"
-                              *ngIf="user.take > 0">{{ user.take | number }}</a>
-                            <span *ngIf="user.take <= 0">{{ user.take | number }}</span>
+                              *ngIf="user.take > 0">{{ user.take | indianCurrency }}</a>
+                            <span *ngIf="user.take <= 0">{{ user.take | indianCurrency }}</span>
                           </td>
                           <td [ngClass]="user.give > 0 ? 'text-danger' : ''" class="text-center">
                             <a class="pointer text-danger text-decoration-none"
-                              *ngIf="user.give > 0">{{ user.give | number }}</a>
-                            <span *ngIf="user.give <= 0">{{ user.give | number }}</span>
+                              *ngIf="user.give > 0">{{ user.give | indianCurrency }}</a>
+                            <span *ngIf="user.give <= 0">{{ user.give | indianCurrency }}</span>
                           </td>
-                          <td class="text-center">{{ user.availableCredit | number }}</td>
+                          <td class="text-center">{{ user.availableCredit | indianCurrency }}</td>
                           <td *ngIf="selectedRoleId != 7" class="text-center">
-                            {{ user.partnerShipPercent | number }}
+                            {{ user.partnerShipPercent | indianCurrency }}
                           </td>
                           <td class="text-center">
                             <button *ngIf="user.give > 0" class=" btn btn-sm btn-danger pointer text-decoration-none"
@@ -158,8 +158,8 @@
                           <td></td>
                           <td></td>
                           <td></td>
-                          <td class="text-success text-center">{{totalTake | currency:'INR'}}</td>
-                          <td class="text-danger text-center">{{totalGive | currency:'INR'}}</td>
+                          <td class="text-success text-center">&#x20b9; {{totalTake | indianCurrency}}</td>
+                          <td class="text-danger text-center">&#x20b9; {{totalGive | indianCurrency}}</td>
                           <td></td>
                           <td></td>
                         </tr>

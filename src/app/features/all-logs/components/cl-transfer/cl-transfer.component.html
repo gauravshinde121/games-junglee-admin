@@ -69,11 +69,11 @@
                 <td>{{ stmt.fromRefUserName }}</td>
                 <td>{{ stmt.toRefUserName }}</td>
                 <td>
-                  <span *ngIf="stmt.isGiven == false" class="text-success">{{ stmt.amount }}</span>
-                  <span *ngIf="stmt.isGiven == true" class="text-danger">{{ stmt.amount }}</span>
+                  <span *ngIf="stmt.isGiven == false" class="text-success">{{ stmt.amount | indianCurrency }}</span>
+                  <span *ngIf="stmt.isGiven == true" class="text-danger">{{ stmt.amount | indianCurrency}}</span>
                 </td>
-                <td>{{ stmt.balance }}</td>
-                <td>{{ stmt.oldBalance }}</td>
+                <td>{{ stmt.balance | indianCurrency}}</td>
+                <td>{{ stmt.oldBalance | indianCurrency}}</td>
                 <!-- <td>{{stmt.}} -->
                 <td class="tooltipnk ms-0  mt-1">
                   <ng-container *ngIf="stmt.ipAddress; else notMatched">

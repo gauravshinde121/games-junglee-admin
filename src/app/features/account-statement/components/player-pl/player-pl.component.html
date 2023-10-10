@@ -127,7 +127,7 @@
               <div [ngClass]="
                 pl.gameData.finalNetAmount > 0 ? 'text-success' : 'text-danger'
               ">
-                {{ pl.gameData.finalNetAmount | number }}
+                {{ pl.gameData.finalNetAmount | indianCurrency }}
               </div>
             </td>
 
@@ -146,7 +146,7 @@
             <td></td>
             <td></td>
             <td class="text-success float-left text-center"
-              [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</td>
+              [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">&#x20b9; {{totalAmount | indianCurrency}}</td>
             <td></td>
           </tr>
         </tfoot>
@@ -218,27 +218,27 @@
                   <td [ngClass]="
                     oneAccount?.winAmt > 0 ? 'text-success' : 'text-danger'
                     ">
-                    {{ oneAccount?.winAmt | number }}
+                    {{ oneAccount?.winAmt | indianCurrency }}
                   </td>
                 </tr>
                 <tr>
                   <td>Commission&nbsp;Amt&nbsp;:</td>
-                  <td>{{ oneAccount?.commissionAmt | number}}</td>
+                  <td>{{ oneAccount?.commissionAmt | indianCurrency}}</td>
                 </tr>
                 <tr>
                   <td>Fancy Commission&nbsp;Amt&nbsp;:</td>
-                  <td>{{ oneAccount?.totalFancyCommission | number}}</td>
+                  <td>{{ oneAccount?.totalFancyCommission | indianCurrency}}</td>
                 </tr>
                 <tr>
                   <td>Bookmaker Commission&nbsp;Amt&nbsp;:</td>
-                  <td>{{ oneAccount?.totalBookmakerCommission | number}}</td>
+                  <td>{{ oneAccount?.totalBookmakerCommission | indianCurrency}}</td>
                 </tr>
                 <tr>
                   <td>Net Amt:</td>
                   <td [ngClass]="
                     oneAccount?.netAmt > 0 ? 'text-success' : 'text-danger'
                     ">
-                    {{ oneAccount?.netAmt }}
+                    {{ oneAccount?.netAmt | indianCurrency }}
                   </td>
                 </tr>
                 <!-- <tr>
@@ -321,7 +321,7 @@
                     <td [ngClass]="
                       bet.profitLoss > 0 ? 'text-success' : 'text-danger'
                     ">
-                      {{ bet.profitLoss | number }}
+                      {{ bet.profitLoss | indianCurrency }}
                     </td>
                     <td class="tooltipnk ms-0  mt-1">
                       <i class="fa-sharp fa-solid fa-info"></i>

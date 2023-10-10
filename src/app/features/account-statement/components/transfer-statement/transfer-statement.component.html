@@ -91,7 +91,7 @@
                 {{ user.toUsername }}
               </td>
               <td [ngClass]="user.isGiven ? 'text-danger' : 'text-success'" class="amountt tds tdts">
-                {{ user.amount | number }}
+                {{ user.amount | indianCurrency }}
               </td>
               <td class="tds tdts">
                 {{ user.isGiven ? "Given" : "Taken" }}
@@ -116,7 +116,7 @@
               <td></td>
               <td></td>
               <td class="text-success float-left text-center"
-                [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</td>
+                [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">&#x20b9; {{totalAmount | indianCurrency}}</td>
               <td></td>
               <td></td>
             </tr>

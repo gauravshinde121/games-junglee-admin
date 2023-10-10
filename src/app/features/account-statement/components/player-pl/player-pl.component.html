@@ -324,9 +324,9 @@
                       {{ bet.profitLoss | number }}
                     </td>
                     <td class="tooltipnk ms-0  mt-1">
-                      <i class="fa-sharp fa-solid fa-info"></i>
+                      <i class="fa-sharp fa-solid fa-info" ngxClipboard [cbContent]="bet.ipAddress" [container]="container"></i>
                       <span class="tooltiptext tabTooltip px-5 w-auto">
-                        <small>{{ bet.ipAddress }}</small>
+                        <small #container>{{ bet.ipAddress }}</small>
                       </span>
                     </td>
                   </tr>

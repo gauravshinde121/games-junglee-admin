@@ -62,7 +62,7 @@
             >
               <option value="0" disabled>--</option>
               <option value="1">Match Odds</option>
-              <option value="2">Bookmaker</option>
+              <option value="12">Bookmaker</option>
               <option value="3">Fancy</option>
             </select>
           </div>
@@ -96,7 +96,7 @@
                   class="bg-pink btn text-white"
                   (click)="toggleMarketStatus(stmt)"
                 >
-                  {{ stmt.isMarketSuspended === 1 ? "Active" : "Suspended" }}
+                  {{ stmt.isMarketSuspended === false ? "Suspend" : "Active" }}
                 </button>
               </td>
               <td colspan="2">
@@ -107,7 +107,7 @@
                       class="bg-pink btn text-white"
                       (click)="toggleRunnerStatus(stmt, runner)"
                     >
-                      {{ runner.isSuspended === 1 ? "Active" : "Suspended" }}
+                      {{ runner.isSuspended === 1 ? "Active" : "Suspend" }}
                     </button>
                   </div>
                 </div>

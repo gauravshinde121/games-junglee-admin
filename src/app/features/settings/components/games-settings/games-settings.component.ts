@@ -52,7 +52,6 @@ export class GamesSettingsComponent implements OnInit {
 
   _getAllSports() {
     this._sharedService._getSports().subscribe((data: any) => {
-      console.log('data',data);
       if (data) {
         this.sports = data;
       }
@@ -101,40 +100,30 @@ export class GamesSettingsComponent implements OnInit {
         return { ...item, runners: parsedRunner };
       });*/
       this.marketList = filteredMarketData;
-      console.log('this.marketList',this.marketList);
     })
   }
 
   toggleRunnerStatus(market, runner) {
-    console.log('runner.isSuspended before',runner.isSuspended, ' ------- ',market,'------',runner);
     runner.isSuspended = runner.isSuspended === 1 ? 0 : 1;
-    console.log('runner.isSuspended',runner.isSuspended);
-
-  }
-
-  toggleMarketStatus(stmt) {
-    stmt.isMarketSuspended = stmt.isMarketSuspended === 1 ? 0 : 1;
-    if (stmt.isMarketSuspended === 0) {
-      // If market is suspended, set all runner statuses to 0
-      stmt.runnerStatus.forEach((runner) => {
-        runner.isSuspended = 0;
-        // Make API call to update runner status here
-        // Use this.http.post() or other appropriate method
-      });
+    if(runner.isSuspended === 0){
+      market.isMarketSuspended = false;
     }
-    // Make API call to update market status here
-    // Use this.http.post() or other appropriate method
+    this.toggleStatusMainFunc(market);
+
   }
 
-  toggleStatus(marketId, isMarketSuspended, runners){
+  toggleMarketStatus(market) {
+    market.isMarketSuspended = !market.isMarketSuspended;
+    this.toggleStatusMainFunc(market);
+  }
+
+  toggleStatusMainFunc(market){
     let body = {
-      marketId: marketId,
-      isMarketSuspended: isMarketSuspended,
-      runners: runners
+      marketId: market.marketId,
+      isMarketSuspended: market.isMarketSuspended,
+      runners: market.runnerStatus
     }
-    this.settingsService._suspendMarketApi(body).subscribe((data: any) => {
-      console.log('_suspendMarketApi called',data);
-    });
+    this.settingsService._suspendMarketApi(body).subscribe();
   }
 
 }

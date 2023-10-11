@@ -102,7 +102,9 @@
             <th scope="col" class="pointer" (click)="toggleSort('match')">Match</th>
             <th scope="col" class="pointer" (click)="toggleSort('market')">Market</th>
             <th scope="col" class="pointer" (click)="toggleSort('name')">Username</th>
-            <th scope="col" class="pointer text-center" (click)="toggleSort('amount')">Amount</th>
+            <th scope="col" class="pointer" (click)="toggleSort('amount')">Amount</th>
+            <th scope="col" class="pointer" (click)="toggleSort('amount')">Fancy Commission</th>
+            <th scope="col" class="pointer" (click)="toggleSort('amount')">Bookmaker Commission</th>
             <!-- <th scope="col">Master</th><th scope="col">Multiplier</th> -->
             <th scope="col" class="last text-center">Details</th>
           </tr>
@@ -123,14 +125,15 @@
             <td>
               {{ pl.playerData.name }}
             </td>
-            <td class="text-center">
+            <td class="">
               <div [ngClass]="
                 pl.gameData.finalNetAmount > 0 ? 'text-success' : 'text-danger'
               ">
                 {{ pl.gameData.finalNetAmount | number }}
               </div>
             </td>
-
+            <td>{{ pl.gameData.totalFancyCommission }}</td>
+            <td>{{ pl.gameData.totalBookmakerCommission }}</td>
             <td class="text-center">
               <i (click)="getOneAccount(pl)" class="fa-sharp fa-solid fa-eye text-pink pointer" aria-hidden="true"
                 data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
@@ -147,6 +150,8 @@
             <td></td>
             <td class="text-success float-left text-center"
               [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</td>
+            <td class="text-start">{{totalFancyCommission | currency:'INR'}}</td>
+            <td class="text-start">{{totalBookmakerCommission | currency:'INR'}}</td>
             <td></td>
           </tr>
         </tfoot>

@@ -44,6 +44,8 @@ export class PlayerPlComponent implements OnInit {
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
   totalAmount: any;
+  totalFancyCommission:any;
+  totalBookmakerCommission:any;
 
   sortColumn1: string = '';
   sortAscending1: boolean = true;// 1: ascending, -1: descending
@@ -220,6 +222,8 @@ export class PlayerPlComponent implements OnInit {
         this.plStatement.map(pl=>pl.amount = pl.gameData.finalNetAmount)
 
         this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.finalNetAmount, 0);
+        this.totalFancyCommission = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.totalFancyCommission, 0);
+        this.totalBookmakerCommission = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.totalBookmakerCommission, 0);
       // }
     }, (err)=>{
       this._sharedService.getToastPopup("Internal server error","","error")
@@ -293,6 +297,8 @@ export class PlayerPlComponent implements OnInit {
         // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
 
         this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.finalNetAmount, 0);
+        this.totalFancyCommission = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.totalFancyCommission, 0);
+        this.totalBookmakerCommission = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.totalBookmakerCommission, 0);
       // }
     }, (err)=>{
       this._sharedService.getToastPopup("Internal server error","","error")

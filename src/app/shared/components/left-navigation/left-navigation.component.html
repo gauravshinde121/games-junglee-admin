@@ -202,7 +202,7 @@
           </ul>
         </div>
       </li>
-      <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN' || 'ADMIN'" [routerLinkActive]="currentPath == '/settings/games-settings'?'active':''"
+      <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN' || adminDetails?.username == 'KASHI'" [routerLinkActive]="currentPath == '/settings/games-settings'?'active':''"
         [ngClass]="currentPath == '/settings/games-settings'?'active':''">
         <a (click)="storePath('/settings/games-settings')" routerLink="/settings/games-settings" class="btn collapsed"
           data-bs-toggle="collapse" data-bs-target="#pwd-collapse" aria-expanded="false">

@@ -202,6 +202,13 @@
           </ul>
         </div>
       </li>
+      <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN' || 'ADMIN'" [routerLinkActive]="currentPath == '/settings/games-settings'?'active':''"
+        [ngClass]="currentPath == '/settings/games-settings'?'active':''">
+        <a (click)="storePath('/settings/games-settings')" routerLink="/settings/games-settings" class="btn collapsed"
+          data-bs-toggle="collapse" data-bs-target="#pwd-collapse" aria-expanded="false">
+          <i class="fa-solid fa-pen-to-square icon-pink me-2"></i> Games Settings
+        </a>
+      </li>
       <li>
         <a class="btn collapsed" (click)="onLogout()" data-bs-toggle="collapse" data-bs-target="#pwd-collapse"
           aria-expanded="false">

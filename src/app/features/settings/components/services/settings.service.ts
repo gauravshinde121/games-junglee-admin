@@ -32,6 +32,10 @@ export class SettingsService {
       return this._apiHttpService.post(this._apiEndpointsService.getMarketForAdminMarketSettingsListEndpoint(),filterObj)
     }
 
+    _suspendMarketApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.suspendMarketEndpoint(),filterObj)
+    }
+
     _setBetLimitForMatchApi(filterObj){
       return this._apiHttpService.post(this._apiEndpointsService.setBetLimitForMatchEndpoint(),filterObj)
     }

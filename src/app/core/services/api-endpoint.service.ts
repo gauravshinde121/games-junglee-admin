@@ -162,7 +162,7 @@ export class ApiEndpointsService {
   public getBankUserEndpoint():string{
     return this.createUrl(this._constants.API_GET_BANK_USERS);
   }
-  
+
 
   public testFuncEndpoint():string{
     return this.createUrl(this._constants.API_URL_TEST_FUNC);
@@ -356,7 +356,11 @@ export class ApiEndpointsService {
   public setBetLimitForMatchEndpoint(){
     return this.createUrl(this._constants.API_URL_SET_BET_LIMIT_FOR_MATCH)
   }
-  
+
+  public suspendMarketEndpoint(){
+    return this.createUrl(this._constants.API_URL_SUSPEND_MARKET)
+  }
+
   public setBetLimitForMarketEndpoint(){
     return this.createUrl(this._constants.API_URL_SET_BET_LIMIT_FOR_MARKET)
   }

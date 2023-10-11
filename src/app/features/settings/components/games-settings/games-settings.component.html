@@ -31,7 +31,10 @@
               (change)="_onTournamentSelect()"
             >
               <option value="null">All</option>
-              <option *ngFor="let game of tournamentList" [value]="game.tournamentId">
+              <option
+                *ngFor="let game of tournamentList"
+                [value]="game.tournamentId"
+              >
                 {{ game.tournamentName }}
               </option>
             </select>
@@ -70,12 +73,13 @@
           *ngIf="marketList && marketList.length == 0"
           class="border text-center p-5"
         >
-          <h4 *ngIf="marketList.length == 0 && !isLoading">
-            No data found
-          </h4>
+          <h4 *ngIf="marketList.length == 0 && !isLoading">No data found</h4>
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
-        <table class="table tableall marketSetting" *ngIf="marketList && marketList.length > 0">
+        <table
+          class="table tableall marketSetting"
+          *ngIf="marketList && marketList.length > 0"
+        >
           <thead class="text-dark">
             <tr>
               <th scope="col" class="cursor-pointer first">Market Name</th>
@@ -88,16 +92,22 @@
             <tr *ngFor="let stmt of marketList; let i = index">
               <td>{{ stmt.marketName }}</td>
               <td>
-                <button (click)="toggleMarketStatus(stmt)">
-                  {{ stmt.isMarketSuspended === 1 ? 'Active' : 'Suspended' }}
+                <button
+                  class="bg-pink btn text-white"
+                  (click)="toggleMarketStatus(stmt)"
+                >
+                  {{ stmt.isMarketSuspended === 1 ? "Active" : "Suspended" }}
                 </button>
               </td>
               <td colspan="2">
                 <div *ngFor="let runner of stmt.runnerStatus">
-                  <div class="d-flex align-items-center">
-                    <div class="mr-2 col-sm-6">{{ runner.RunnerName }}</div>
-                    <button class="col-sm-6" (click)="toggleRunnerStatus(stmt,runner)">
-                      {{ runner.isSuspended === 1 ? 'Active' : 'Suspended' }}
+                  <div class="d-flex">
+                    <div class="mr-2 col-sm-5">{{ runner.RunnerName }}</div>
+                    <button
+                      class="bg-pink btn text-white"
+                      (click)="toggleRunnerStatus(stmt, runner)"
+                    >
+                      {{ runner.isSuspended === 1 ? "Active" : "Suspended" }}
                     </button>
                   </div>
                 </div>

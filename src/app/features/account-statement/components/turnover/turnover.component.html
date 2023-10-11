@@ -112,7 +112,7 @@
                     marketInfo?.stakes?.totalStake > 0
                       ? 'text-success'
                       : 'text-danger'
-                  ">{{ marketInfo?.stakes?.totalStake | number }}</span>
+                  ">{{ marketInfo?.stakes?.totalStake | indianCurrency }}</span>
               </p>
             </div>
           </div>
@@ -128,7 +128,7 @@
               <tr class="ng-scope text-white" *ngFor="let info of marketInfo?.stakes['details']">
                 <td class="ng-binding">{{ info.level }}</td>
                 <td class="ng-binding" [ngClass]="info.stake > 0 ? 'text-success' : 'text-danger'">
-                  {{ info.stake | number }}
+                  {{ info.stake | indianCurrency }}
                 </td>
               </tr>
               <!-- end ngRepeat: stake in stakes.detail -->
@@ -148,7 +148,7 @@
                     marketInfo?.winLose?.totalWinLose > 0
                       ? 'text-success'
                       : 'text-danger'
-                  ">{{ marketInfo?.winLose?.totalWinLose | number }}</span>
+                  ">{{ marketInfo?.winLose?.totalWinLose | indianCurrency }}</span>
               </p>
             </div>
           </div>
@@ -165,10 +165,10 @@
               <tr class="ng-scope text-white" *ngFor="let info of marketInfo?.winLose['details']">
                 <td class="ng-binding">{{ info.level }}</td>
                 <td class="ng-binding" [ngClass]="info.win > 0 ? 'text-success' : 'text-danger'">
-                  {{ info.win | number }}
+                  {{ info.win | indianCurrency }}
                 </td>
                 <td class="ng-binding" [ngClass]="info.lose > 0 ? 'text-success' : 'text-danger'">
-                  {{ info.lose | number }}
+                  {{ info.lose | indianCurrency }}
                 </td>
               </tr>
               <!-- end ngRepeat: stake in stakes.detail -->

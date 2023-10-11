@@ -229,9 +229,9 @@
               <td>{{ stmt.marketName }}</td>
               <td>{{ stmt.marketType }}</td>
               <td>{{ stmt.refMatchName }}</td>
-              <td>{{ stmt.minBet }}</td>
-              <td>{{ stmt.maxBet }}</td>
-              <td>{{ stmt.maxMarketSize }}</td>
+              <td>{{ stmt.minBet | indianCurrency }}</td>
+              <td>{{ stmt.maxBet | indianCurrency}}</td>
+              <td>{{ stmt.maxMarketSize | indianCurrency}}</td>
               <td>{{ stmt.marketDelay }}</td>
               <td (click)="openSettingModal(stmt)">
                 <i class="fa fa-cog cursor-pointer" aria-hidden="true"></i>

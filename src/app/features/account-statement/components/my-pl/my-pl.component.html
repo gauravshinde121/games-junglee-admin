@@ -100,7 +100,7 @@
               <td>{{ pl.subGame }}</td>
               <td>{{ pl.eventName }}</td>
               <td class="text-center" [ngClass]="pl.isWon ? 'text-success' : 'text-danger'">
-                {{ pl.winINR | number }}
+                {{ pl.winINR | indianCurrency }}
               </td>
               <!-- <td>{{ pl.commission | number }}</td>
             <td>{{ pl.netAmount | number }}</td> -->
@@ -120,7 +120,7 @@
                 User
               </button></td>-->
               <td class="text-center" [ngClass]="pl.type ? 'text-success' : 'text-danger'">
-                {{ pl.profitLiability }}
+                {{ pl.profitLiability | indianCurrency }}
               </td>
             </tr>
           </tbody>
@@ -132,7 +132,7 @@
               <td></td>
               <td></td>
               <td class="text-success text-center" [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">
-                {{totalAmount | currency:'INR'}}</td>
+                &#x20b9; {{totalAmount | indianCurrency}}</td>
               <td></td>
             </tr>
           </tfoot>

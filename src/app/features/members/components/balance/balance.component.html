@@ -9,25 +9,25 @@
         <tr>
           <td>Net Exposure (Sports Book)</td>
           <td class=" text-center text-success" [ngClass]="memberBalance.netExposure>0?'text-success':'text-danger'">
-            {{memberBalance.netExposure}}</td>
+            {{memberBalance.netExposure | indianCurrency}}</td>
         </tr>
         <tr>
           <td>Balance Up</td>
           <td class="text-center" [ngClass]="memberBalance.balanceUp>0?'text-success':'text-danger'">
-            {{memberBalance.balanceUp}}</td>
+            {{memberBalance.balanceUp | indianCurrency}}</td>
         </tr>
         <tr>
           <td>Balance Down</td>
           <td class="text-center" [ngClass]="memberBalance.balanceDown>0?'text-success':'text-danger'">
-            {{memberBalance.balanceDown}}</td>
+            {{memberBalance.balanceDown | indianCurrency}}</td>
         </tr>
         <tr>
           <td> Credit Limit</td>
-          <td class="text-center">{{memberBalance.creditLimit}}</td>
+          <td class="text-center">{{memberBalance.creditLimit | indianCurrency}}</td>
         </tr>
         <tr class="bg-pink">
           <td>Available Credit</td>
-          <td class="text-center">{{memberBalance.availableBalance}}</td>
+          <td class="text-center">{{memberBalance.availableBalance | indianCurrency}}</td>
         </tr>
       </tbody>
     </table>

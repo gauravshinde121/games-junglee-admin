@@ -70,7 +70,7 @@
               </th>
               <!-- <th class="last" class="cursor-pointer pointer" (click)="toggleSort('currentUserIp')">IP</th> -->
               <th class="last" class="cursor-pointer pointer" (click)="toggleSort('description')">Narration</th>
-              
+
             </tr>
 
             <tr *ngFor="let user of transferStatements | sort:sortColumn:sortAscending; let i = index">
@@ -91,7 +91,7 @@
                 {{ user.toUsername }}
               </td>
               <td [ngClass]="user.isGiven ? 'text-danger' : 'text-success'" class="amountt tds tdts">
-                {{ user.amount | number }}
+                {{ user.amount | indianCurrency }}
               </td>
               <td class="tds tdts">
                 {{ user.isGiven ? "Given" : "Taken" }}
@@ -116,7 +116,7 @@
               <td></td>
               <td></td>
               <td class="text-success float-left text-center"
-                [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</td>
+                [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | indianCurrency}}</td>
               <td></td>
               <td></td>
             </tr>

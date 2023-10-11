@@ -236,12 +236,12 @@
                     }}</span></span
                   >
                 </td>
-                <td class="text-center">{{ user.creditLimit | number }}</td>
+                <td class="text-center">{{ user.creditLimit | indianCurrency }}</td>
                 <td
                   class="text-center"
                   [ngClass]="user.exposure > 0 ? 'text-danger' : ''"
                 >
-                  {{ user.exposure | number }}
+                  {{ user.exposure | indianCurrency }}
                 </td>
                 <td
                   [ngClass]="user.take > 0 ? 'text-success' : ''"
@@ -251,9 +251,9 @@
                     class="pointer text-success text-decoration-none"
                     *ngIf="user.take > 0"
                     (click)="adjustWinningsForSingleUser(user, false)"
-                    >{{ user.take | number }}</a
+                    >{{ user.take | indianCurrency }}</a
                   >
-                  <span *ngIf="user.take <= 0">{{ user.take | number }}</span>
+                  <span *ngIf="user.take <= 0">{{ user.take | indianCurrency }}</span>
                 </td>
                 <td
                   [ngClass]="user.give > 0 ? 'text-danger' : ''"
@@ -263,13 +263,13 @@
                     class="pointer text-danger text-decoration-none"
                     *ngIf="user.give > 0"
                     (click)="adjustWinningsForSingleUser(user, true)"
-                    >{{ user.give | number }}</a
+                    >{{ user.give | indianCurrency }}</a
                   >
-                  <span *ngIf="user.give <= 0">{{ user.give | number }}</span>
+                  <span *ngIf="user.give <= 0">{{ user.give | indianCurrency }}</span>
                 </td>
-                <td class="text-center">{{ user.availableCredit | number }}</td>
+                <td class="text-center">{{ user.availableCredit | indianCurrency }}</td>
                 <td *ngIf="selectedRoleId != 7" class="text-center">
-                  {{ user.partnerShipPercent | number }}
+                  {{ user.partnerShipPercent | indianCurrency }}
                 </td>
 
                 <td class="text-center">
@@ -330,10 +330,10 @@
                 <td></td>
                 <td></td>
                 <td class="text-success text-center">
-                  {{ totalTake | currency : "INR" }}
+                  {{ totalTake | indianCurrency }}
                 </td>
                 <td class="text-danger text-center">
-                  {{ totalGive | currency : "INR" }}
+                  {{ totalGive | indianCurrency }}
                 </td>
                 <td></td>
                 <td></td>

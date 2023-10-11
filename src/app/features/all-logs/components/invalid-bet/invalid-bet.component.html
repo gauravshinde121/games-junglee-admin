@@ -103,7 +103,7 @@
                   <span [ngClass]="
                     bets.profitLiability > 0 ? 'text-success' : 'text-danger'
                   ">
-                    {{ bets.profitLiability }}
+                    {{ bets.profitLiability  | indianCurrency}}
                   </span>
                 </td>
                 <td>{{ bets.remarks }}</td>

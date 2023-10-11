@@ -143,7 +143,7 @@
                                           "
                                           class="text-success"
                                           ><strong class="exposure-font">{{
-                                            runner["amount"] | number : "1.0-0"
+                                            runner["amount"] | indianCurrency
                                           }}</strong></span
                                         >
                                       </p>
@@ -310,7 +310,7 @@
                                         "
                                       >
                                         <strong class="exposure-font">{{
-                                          runner["amount"] | number : "1.0-0"
+                                          runner["amount"] | indianCurrency
                                         }}</strong></span
                                       >
                                     </a>
@@ -327,7 +327,7 @@
                                     *ngIf="
                                       singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                      singleAdminBook['appMarketStatus'] != '9' && 
+                                      singleAdminBook['appMarketStatus'] != '9' &&
                                       !runner['showSuspended']
                                     "
                                     class="colblue"
@@ -337,7 +337,7 @@
                                     <a
                                       ><strong *ngIf="runner['back1']">{{
                                         (runner["back1"] - 1) * 100
-                                          | number : "1.0-0"
+                                          |  indianCurrency
                                       }}</strong>
                                       <br /><span *ngIf="runner['vback1']">{{
                                         runner["vback1"] | marketRateFormater
@@ -348,7 +348,7 @@
                                     *ngIf="
                                       singleAdminBook['appMarketStatus'] !=
                                         '3' &&
-                                      singleAdminBook['appMarketStatus'] != '9' && 
+                                      singleAdminBook['appMarketStatus'] != '9' &&
                                       !runner['showSuspended']
                                     "
                                     class="colpink"
@@ -434,7 +434,7 @@
                                       >
                                         <strong class="exposure-font">
                                           {{
-                                            runner["amount"] | number : "1.0-0"
+                                            runner["amount"] | indianCurrency
                                           }}</strong
                                         >
                                       </span>
@@ -575,21 +575,21 @@
                                   />
                                 </td>
                                 <td colspan="1" class="text-center border-top">
-                                  <strong>{{ userBook["stake"] | number : "1.0-0" }}</strong>
+                                  <strong>{{ userBook["stake"] | indianCurrency }}</strong>
                                 </td>
                                 <td colspan="1" class="text-center border-top">
                                   <strong
                                     class="text-success"
                                     *ngIf="userBook['runner1'] > 0"
                                     >{{
-                                      userBook["runner1"] | number : "1.0-0"
+                                      userBook["runner1"] | indianCurrency
                                     }}</strong
                                   >
                                   <strong
                                     class="text-danger"
                                     *ngIf="userBook['runner1'] <= 0"
                                     >{{
-                                      userBook["runner1"] | number : "1.0-0"
+                                      userBook["runner1"] | indianCurrency
                                     }}</strong
                                   >
                                 </td>
@@ -598,14 +598,14 @@
                                     class="text-success"
                                     *ngIf="userBook['runner3'] > 0"
                                     >{{
-                                      userBook["runner3"] | number : "1.0-0"
+                                      userBook["runner3"] | indianCurrency
                                     }}</strong
                                   >
                                   <strong
                                     class="text-danger"
                                     *ngIf="userBook['runner3'] <= 0"
                                     >{{
-                                      userBook["runner3"] | number : "1.0-0"
+                                      userBook["runner3"] | indianCurrency
                                     }}</strong
                                   >
                                 </td>
@@ -614,14 +614,14 @@
                                     class="text-success"
                                     *ngIf="userBook['runner2'] > 0"
                                     >{{
-                                      userBook["runner2"] | number : "1.0-0"
+                                      userBook["runner2"] | indianCurrency
                                     }}</strong
                                   >
                                   <strong
                                     class="text-danger"
                                     *ngIf="userBook['runner2'] <= 0"
                                     >{{
-                                      userBook["runner2"] | number : "1.0-0"
+                                      userBook["runner2"] | indianCurrency
                                     }}</strong
                                   >
                                 </td>
@@ -658,13 +658,13 @@
                                     </td>
                                     <td colspan="1" class="text-center"></td>
                                     <td colspan="1" class="text-center">
-                                      {{ downline.runner1Amount | number : "1.0-0" }}
+                                      {{ downline.runner1Amount | indianCurrency }}
                                     </td>
                                     <td colspan="1" class="text-center">
-                                      {{ downline.runner3Amount | number : "1.0-0" }}
+                                      {{ downline.runner3Amount | indianCurrency }}
                                     </td>
                                     <td colspan="1" class="text-center">
-                                      {{ downline.runner2Amount | number : "1.0-0" }}
+                                      {{ downline.runner2Amount | indianCurrency }}
                                     </td>
                                   </tr>
 
@@ -703,13 +703,13 @@
                                             class="text-center"
                                           ></td>
                                           <td colspan="1" class="text-center">
-                                            {{ downline2.runner1Amount | number : "1.0-0" }}
+                                            {{ downline2.runner1Amount | indianCurrency }}
                                           </td>
                                           <td colspan="1" class="text-center">
-                                            {{ downline2.runner3Amount | number : "1.0-0" }}
+                                            {{ downline2.runner3Amount | indianCurrency }}
                                           </td>
                                           <td colspan="1" class="text-center">
-                                            {{ downline2.runner2Amount | number : "1.0-0" }}
+                                            {{ downline2.runner2Amount | indianCurrency }}
                                           </td>
                                         </tr>
 
@@ -757,19 +757,19 @@
                                                   colspan="1"
                                                   class="text-center"
                                                 >
-                                                  {{ downline3.runner1Amount | number : "1.0-0" }}
+                                                  {{ downline3.runner1Amount | indianCurrency }}
                                                 </td>
                                                 <td
                                                   colspan="1"
                                                   class="text-center"
                                                 >
-                                                  {{ downline3.runner3Amount | number : "1.0-0" }}
+                                                  {{ downline3.runner3Amount | indianCurrency }}
                                                 </td>
                                                 <td
                                                   colspan="1"
                                                   class="text-center"
                                                 >
-                                                  {{ downline3.runner2Amount | number : "1.0-0" }}
+                                                  {{ downline3.runner2Amount | indianCurrency }}
                                                 </td>
                                               </tr>
 
@@ -819,7 +819,7 @@
                                                         class="text-center"
                                                       >
                                                         {{
-                                                          downline4.runner1Amount | number : "1.0-0"
+                                                          downline4.runner1Amount | indianCurrency
                                                         }}
                                                       </td>
                                                       <td
@@ -827,7 +827,7 @@
                                                         class="text-center"
                                                       >
                                                         {{
-                                                          downline4.runner3Amount | number : "1.0-0"
+                                                          downline4.runner3Amount | indianCurrency
                                                         }}
                                                       </td>
                                                       <td
@@ -835,7 +835,7 @@
                                                         class="text-center"
                                                       >
                                                         {{
-                                                          downline4.runner2Amount | number : "1.0-0"
+                                                          downline4.runner2Amount | indianCurrency
                                                         }}
                                                       </td>
                                                     </tr>
@@ -894,7 +894,7 @@
                                                               colspan="1"
                                                             >
                                                               {{
-                                                                downline5.runner1Amount | number : "1.0-0"
+                                                                downline5.runner1Amount | indianCurrency
                                                               }}
                                                             </td>
                                                             <td
@@ -902,7 +902,7 @@
                                                               colspan="1"
                                                             >
                                                               {{
-                                                                downline5.runner3Amount | number : "1.0-0"
+                                                                downline5.runner3Amount | indianCurrency
                                                               }}
                                                             </td>
                                                             <td
@@ -910,7 +910,7 @@
                                                               colspan="1"
                                                             >
                                                               {{
-                                                                downline5.runner2Amount | number : "1.0-0"
+                                                                downline5.runner2Amount | indianCurrency
                                                               }}
                                                             </td>
                                                           </tr>
@@ -973,7 +973,7 @@
                                                                     colspan="1"
                                                                   >
                                                                     {{
-                                                                      downline6.runner1Amount | number : "1.0-0"
+                                                                      downline6.runner1Amount | indianCurrency
                                                                     }}
                                                                   </td>
                                                                   <td
@@ -981,7 +981,7 @@
                                                                     colspan="1"
                                                                   >
                                                                     {{
-                                                                      downline6.runner3Amount | number : "1.0-0"
+                                                                      downline6.runner3Amount | indianCurrency
                                                                     }}
                                                                   </td>
                                                                   <td
@@ -989,7 +989,7 @@
                                                                     colspan="1"
                                                                   >
                                                                     {{
-                                                                      downline6.runner2Amount | number : "1.0-0"
+                                                                      downline6.runner2Amount | indianCurrency
                                                                     }}
                                                                   </td>
                                                                 </tr>
@@ -1271,13 +1271,13 @@
               <td class="col">{{ viewTotalEach.betRate }}</td>
               <td class="col">
                 <ng-container *ngIf="viewTotalEach.isMatched; else notMatched">
-                  {{ viewTotalEach.stake }}
+                  {{ viewTotalEach.stake | indianCurrency}}
                 </ng-container>
                 <ng-template #notMatched> -- </ng-template>
               </td>
               <td class="col">
                 <ng-container *ngIf="!viewTotalEach.isMatched; else notMatched">
-                  {{ viewTotalEach.stake }}
+                  {{ viewTotalEach.stake | indianCurrency }}
                 </ng-container>
                 <ng-template #notMatched> -- </ng-template>
               </td>
@@ -1287,13 +1287,15 @@
                   viewTotalEach.isBack ? 'text-danger' : 'text-success'
                 "
               >
-                <strong>{{ viewTotalEach.profitLiability }}</strong>
+                <strong>{{ viewTotalEach.profitLiability | indianCurrency}}</strong>
               </td>
               <td class="col">
                 <div class="tooltipnk m-1">
-                  <i class="fa-sharp fa-solid fa-info"></i>
+                  <i class="fa-sharp fa-solid fa-info" ngxClipboard [cbContent]="viewTotalEach.IP" [container]="container"></i>
                   <span class="tooltiptext tabTooltip px-5 w-auto">
-                    <small>{{ viewTotalEach.IP }}</small>
+                    <small #container>
+                      {{ viewTotalEach.IP }}
+                  </small>
                   </span>
                 </div>
               </td>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ClipboardModule } from 'ngx-clipboard';
 import { AccountStatementRoutingModule } from './account-statement-routing.module';
 import { AccountStatementMainComponent } from './components/account-statement-main/account-statement-main.component';
 import { TransferStatementComponent } from './components/transfer-statement/transfer-statement.component';
@@ -32,7 +32,8 @@ import { PlayerAccountStatementComponent } from './components/player-account-sta
     AccountStatementRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule
   ]
 })
 export class AccountStatementModule { }

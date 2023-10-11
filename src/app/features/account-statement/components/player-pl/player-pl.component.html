@@ -102,7 +102,9 @@
             <th scope="col" class="pointer" (click)="toggleSort('match')">Match</th>
             <th scope="col" class="pointer" (click)="toggleSort('market')">Market</th>
             <th scope="col" class="pointer" (click)="toggleSort('name')">Username</th>
-            <th scope="col" class="pointer text-center" (click)="toggleSort('amount')">Amount</th>
+            <th scope="col" class="pointer" (click)="toggleSort('amount')">Amount</th>
+            <th scope="col" class="pointer" (click)="toggleSort('amount')">Fancy Commission</th>
+            <th scope="col" class="pointer" (click)="toggleSort('amount')">Bookmaker Commission</th>
             <!-- <th scope="col">Master</th><th scope="col">Multiplier</th> -->
             <th scope="col" class="last text-center">Details</th>
           </tr>
@@ -123,14 +125,15 @@
             <td>
               {{ pl.playerData.name }}
             </td>
-            <td class="text-center">
+            <td class="">
               <div [ngClass]="
                 pl.gameData.finalNetAmount > 0 ? 'text-success' : 'text-danger'
               ">
-                {{ pl.gameData.finalNetAmount | number }}
+                {{ pl.gameData.finalNetAmount | indianCurrency }}
               </div>
             </td>
-
+            <td>{{ pl.gameData.totalFancyCommission }}</td>
+            <td>{{ pl.gameData.totalBookmakerCommission }}</td>
             <td class="text-center">
               <i (click)="getOneAccount(pl)" class="fa-sharp fa-solid fa-eye text-pink pointer" aria-hidden="true"
                 data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
@@ -146,7 +149,9 @@
             <td></td>
             <td></td>
             <td class="text-success float-left text-center"
-              [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | currency:'INR'}}</td>
+              [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | indianCurrency}}</td>
+            <td class="text-start">{{totalFancyCommission | indianCurrency}}</td>
+            <td class="text-start">{{totalBookmakerCommission | indianCurrency}}</td>
             <td></td>
           </tr>
         </tfoot>
@@ -218,27 +223,27 @@
                   <td [ngClass]="
                     oneAccount?.winAmt > 0 ? 'text-success' : 'text-danger'
                     ">
-                    {{ oneAccount?.winAmt | number }}
+                    {{ oneAccount?.winAmt | indianCurrency }}
                   </td>
                 </tr>
                 <tr>
                   <td>Commission&nbsp;Amt&nbsp;:</td>
-                  <td>{{ oneAccount?.commissionAmt | number}}</td>
+                  <td>{{ oneAccount?.commissionAmt | indianCurrency}}</td>
                 </tr>
                 <tr>
                   <td>Fancy Commission&nbsp;Amt&nbsp;:</td>
-                  <td>{{ oneAccount?.totalFancyCommission | number}}</td>
+                  <td>{{ oneAccount?.totalFancyCommission | indianCurrency}}</td>
                 </tr>
                 <tr>
                   <td>Bookmaker Commission&nbsp;Amt&nbsp;:</td>
-                  <td>{{ oneAccount?.totalBookmakerCommission | number}}</td>
+                  <td>{{ oneAccount?.totalBookmakerCommission | indianCurrency}}</td>
                 </tr>
                 <tr>
                   <td>Net Amt:</td>
                   <td [ngClass]="
                     oneAccount?.netAmt > 0 ? 'text-success' : 'text-danger'
                     ">
-                    {{ oneAccount?.netAmt }}
+                    {{ oneAccount?.netAmt | indianCurrency }}
                   </td>
                 </tr>
                 <!-- <tr>
@@ -321,12 +326,12 @@
                     <td [ngClass]="
                       bet.profitLoss > 0 ? 'text-success' : 'text-danger'
                     ">
-                      {{ bet.profitLoss | number }}
+                      {{ bet.profitLoss | indianCurrency }}
                     </td>
                     <td class="tooltipnk ms-0  mt-1">
-                      <i class="fa-sharp fa-solid fa-info"></i>
+                      <i class="fa-sharp fa-solid fa-info" ngxClipboard [cbContent]="bet.ipAddress" [container]="container"></i>
                       <span class="tooltiptext tabTooltip px-5 w-auto">
-                        <small>{{ bet.ipAddress }}</small>
+                        <small #container>{{ bet.ipAddress }}</small>
                       </span>
                     </td>
                   </tr>

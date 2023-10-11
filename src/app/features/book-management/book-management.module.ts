@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ClipboardModule } from 'ngx-clipboard';
 import { BookManagementRoutingModule } from './book-management-routing.module';
 import { BookManagementMainComponent } from './components/book-management-main/book-management-main.component';
 import { NetExposureComponent } from './components/net-exposure/net-exposure.component';
@@ -30,7 +30,8 @@ import { NetExposureViewTotalComponent } from './components/net-exposure/net-exp
     BookManagementRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule
   ]
 })
 export class BookManagementModule { }

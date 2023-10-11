@@ -23,7 +23,7 @@
           </div>
           <div class="searchList" *ngIf="memberList">
             <ul>
-              <li *ngFor="let member of memberList"><a class="pointer" (click)="searchMember(member)">{{member.displayName}}</a></li>
+              <li *ngFor="let member of memberList"><a class="pointer" (click)="searchMember(member)">{{member.username}}</a></li>
             </ul>
           </div>
 
@@ -44,7 +44,7 @@
                   <span>{{member.username}} ({{member.roleName}})</span>
                 </div>
                 <div *ngIf="!member.roleName">
-                  <span>{{member.username}}</span>
+                  <span>{{member.username}} ({{member.displayName}})</span>
                 </div>
               </td>
             </tr>

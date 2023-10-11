@@ -93,7 +93,7 @@
         <div class="balance-first">
           <div class="balance">
             <p>
-              {{ adminDetails?.availableCredit | number }}
+              {{ adminDetails?.availableCredit | indianCurrency }}
               <br />
               <span>AVAILABLE BALANCE</span>
             </p>
@@ -104,7 +104,7 @@
         <div class="balance-up">
           <div class="balance">
             <p>
-              {{ adminDetails?.balanceUp | number }}
+              {{ adminDetails?.balanceUp | indianCurrency }}
               <br />
               <span>BALANCE UP</span>&nbsp;
               <i class="fa-regular fa-circle-up"></i>
@@ -116,7 +116,7 @@
         <div class="balance-down">
           <div class="balance">
             <p>
-              {{ adminDetails?.balanceDown | number }}
+              {{ adminDetails?.balanceDown | indianCurrency }}
               <br />
               <span>BALANCE DOWN</span>&nbsp;
               <i class="fa-regular fa-circle-down"></i>

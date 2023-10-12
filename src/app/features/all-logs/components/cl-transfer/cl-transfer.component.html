@@ -77,9 +77,9 @@
                 <!-- <td>{{stmt.}} -->
                 <td class="tooltipnk ms-0  mt-1">
                   <ng-container *ngIf="stmt.ipAddress; else notMatched">
-                    <i class="fa-sharp fa-solid fa-info"></i>
+                    <i class="fa-sharp fa-solid fa-clipboard cursor-pointer" ngxClipboard [cbContent]="stmt.ipAddress" [container]="container"></i>
                     <span class="tooltiptext tabTooltip px-5 w-auto">
-                      <small>{{ stmt.ipAddress }}</small>
+                      <small #container>{{ stmt.ipAddress }}</small>
                     </span>
                   </ng-container>
                   <ng-template #notMatched> -- </ng-template>

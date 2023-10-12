@@ -10,6 +10,7 @@ import { BetfairRateLogComponent } from './components/betfair-rate-log/betfair-r
 import { InvalidBetComponent } from './components/invalid-bet/invalid-bet.component';
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AllLogsRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule
   ]
 })
 export class AllLogsModule { }

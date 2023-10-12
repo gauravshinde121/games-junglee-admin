@@ -31,7 +31,6 @@ export class GamesSettingsComponent implements OnInit {
   _preConfig() {
     this._getAllSports();
     this._initForm();
-    this.getMarketByMatchId(1);
   }
 
   _initForm() {

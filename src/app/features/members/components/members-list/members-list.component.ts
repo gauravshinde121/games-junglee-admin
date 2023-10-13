@@ -164,7 +164,8 @@ export class MembersListComponent implements OnInit {
       "userId": this.userId,
       "amount": this.adjustWinningsForSingleUserForm.value.amount,
       "isGiven": this.isGiven,
-      "description" : this.adjustWinningsForSingleUserForm.value.description
+      "description" : this.adjustWinningsForSingleUserForm.value.description,
+      "ipAddress" : this._sharedService.getIpAddress()
     }
 
     this.closeModal();
@@ -389,7 +390,7 @@ export class MembersListComponent implements OnInit {
     });
     //if (confirm('Do you want bulk transfer ?')) {
     this._sharedService
-      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, 'ip': currentUserIp , description:this.description })
+      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, "ipAddress" : this._sharedService.getIpAddress() , description:this.description })
       .subscribe((res: any) => {
         this._sharedService.getToastPopup(
           'Adjusted Successfully',

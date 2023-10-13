@@ -11,6 +11,8 @@ import { MatchSettingsComponent } from './components/match-settings/match-settin
 import { MarketSettingsComponent } from './components/market-settings/market-settings.component';
 import { AppSettingsComponent } from './components/app-settings/app-settings.component';
 import { GamesSettingsComponent } from './components/games-settings/games-settings.component';
+import { ClipboardModule } from 'ngx-clipboard';
+
 
 
 
@@ -29,7 +31,8 @@ import { GamesSettingsComponent } from './components/games-settings/games-settin
     SettingsRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule
   ]
 })
 export class SettingsModule { }

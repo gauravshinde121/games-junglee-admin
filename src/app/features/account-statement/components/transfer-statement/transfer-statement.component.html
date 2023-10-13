@@ -68,8 +68,9 @@
               <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('isGiven')">
                 <i class="fa-solid fa-text-width"></i> Transaction Type
               </th>
-              <!-- <th class="last" class="cursor-pointer pointer" (click)="toggleSort('currentUserIp')">IP</th> -->
+              
               <th class="last" class="cursor-pointer pointer" (click)="toggleSort('description')">Narration</th>
+              <th class="last" class="cursor-pointer pointer" (click)="toggleSort('ipAddress')">IP</th>
 
             </tr>
 
@@ -99,14 +100,13 @@
               <td class="tds tdts">
                 {{ user.description }}
               </td>
-              <!-- <td class="tds tdts">
-                <div class="tooltipnk">
-                  <i class="fa-sharp fa-solid fa-info"></i>
+              <td class="tds tdts tooltipnk">
+                  <i class="fa-sharp fa-solid fa-clipboard cursor-pointer" ngxClipboard [cbContent]="user.ipAddress" [container]="container"></i>
                   <span class="tooltiptext tabTooltip px-5 w-auto">
-                    <small>{{ user.currentUserIp }}</small>
+                    <small #container>{{ user.ipAddress }}</small>
                   </span>
-                </div>
-              </td> -->
+
+              </td>
             </tr>
           </tbody>
           <tfoot>

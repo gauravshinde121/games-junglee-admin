@@ -243,10 +243,11 @@
               </td> -->
                 <td>
                   <div class="tooltipnk">
-                    <i class="fa-sharp fa-solid fa-info"></i>
+                    <i class="fa-sharp fa-solid fa-clipboard cursor-pointer" ngxClipboard [cbContent]="bets.ip" [container]="container"></i>
                     <span class="tooltiptext tabTooltip px-5 w-auto">
-                      <small>{{ bets.ip }}</small>
+                      <small #container>{{ bets.ip }}</small>
                     </span>
+                   
                   </div>
                 </td>
                 <td>

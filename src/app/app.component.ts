@@ -16,8 +16,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this._sharedService.currentUserIp.next({
-      'userIp': '127.0.0.1'
+      'userIp': this._sharedService.getIpAddress()
     });
+
+    this._sharedService.getIPApiv2();
     /*this._sharedService.getIPApi().subscribe(res => {
       this._sharedService.currentUserIp.next({
         'userIp': res['ip']

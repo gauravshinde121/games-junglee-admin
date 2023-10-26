@@ -38,7 +38,7 @@
     -->
           <label for="floatingInput">Password</label>
           <span
-            class="fa text-white"
+            class="fa "
             (click)="show = !show"
             [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"
           ></span>
@@ -46,7 +46,7 @@
         <div class="input-group">
           <button
             [disabled]="signInForm.invalid || isLoading"
-            class="btn bg-pink w-100 text-white rounded-pill mt-4"
+            class="btn bg-pink w-100  rounded-pill mt-4"
           >
             {{ button }} &nbsp;<i
               class="fa"
@@ -54,8 +54,8 @@
             ></i>
           </button>
         </div>
-        <div class="col mt-4 text-center text-white">
-          <!-- <a href="forgotpassword.html" class="text-white mb-3">Forgot Password</a><br>-->
+        <div class="col mt-4 text-center ">
+          <!-- <a href="forgotpassword.html" class=" mb-3">Forgot Password</a><br>-->
           <span class="small pt-3"> Powered by </span>
           <img src="assets/images/betfair_logo.png" width="150px" />
         </div>

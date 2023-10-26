@@ -2,24 +2,24 @@
   <section class="section dashboard">
     <div class="row mb-3 align-items-end">
       <div class="col-md-6 col-lg-6 col-xl-6">
-        <div class="row text-white">
+        <div class="row ">
           <div class="input-group flex-nowrap">
             <span
-              class="input-group-text bg-dark text-white border-pink radius-left-tb"
+              class="input-group-text bg-dark  border-pink radius-left-tb"
               id="addon-wrapping"
             >
               <i class="fa fa-search"></i>
             </span>
             <input
               type="text"
-              class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
+              class="form-control bg-dark  border-start-0 border-pink radius-right-tb"
               placeholder="Search"
               aria-label="Search"
               aria-describedby="addon-wrapping"
               [(ngModel)]="searchTerm"
               (ngModelChange)="search()"
             />
-            <span class="input-group-text bg-dark text-white border-pink cursor-pointer radius-right-tb" (click)="clearSearch()">Clear search</span>
+            <span class="input-group-text bg-dark  border-pink cursor-pointer radius-right-tb" (click)="clearSearch()">Clear search</span>
           </div>
           <div class="searchList" *ngIf="memberList">
             <ul>

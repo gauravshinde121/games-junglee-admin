@@ -8,23 +8,23 @@
           </a>
           Downline Accounts List for
           <i class="fa fa-1x fa-angle-right colorpink"></i>
-          <span class="text-white p-2">{{currentUserName}}</span>
+          <span class=" p-2">{{currentUserName}}</span>
         </p>
       </div>
     </div>
     <div class="row mb-3 align-items-end">
       <div class="col-md-6 col-lg-6 col-xl-6">
-        <div class="row text-white">
+        <div class="row ">
           <div class="input-group flex-nowrap">
             <span
-              class="input-group-text bg-dark text-white border-pink radius-left-tb"
+              class="input-group-text bg-dark  border-pink radius-left-tb"
               id="addon-wrapping"
             >
               <i class="fa fa-search"></i>
             </span>
             <input
               type="text"
-              class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
+              class="form-control bg-dark  border-start-0 border-pink radius-right-tb"
               placeholder="Search"
               aria-label="Search"
               aria-describedby="addon-wrapping"
@@ -86,7 +86,7 @@
         <button
           *ngIf="userList.length > 0"
           type="button"
-          class="btn-sm btn-pink rounded-pill ms-2 text-white"
+          class="btn-sm btn-pink rounded-pill ms-2 "
           (click)="exportExcel()"
         >
           Export
@@ -194,7 +194,7 @@
                 <span class="text-danger" *ngIf="(user.isActive == 'Inactive') || user.isActive == 'Closed'">{{user.isActive}}</span>
                 <!-- <a (click)="openModal(user.userId)"><i class="fa fa-lock text-pink"></i></a> -->
                 <!-- <select
-                  class="custom-ddl text-white pointer"
+                  class="custom-ddl  pointer"
                   (change)="changeStatus($event, user)"
                 >
                   <option
@@ -243,7 +243,7 @@
         </table></div>
         <div *ngIf="userList.length > 0 && !this.isLoading">
           <button
-            class="btn rounded-pill text-white"
+            class="btn rounded-pill "
             [disabled]="currentPage === 1"
             (click)="prev()"
           >
@@ -253,7 +253,7 @@
             >{{ currentPage }} / {{ totalPages }}
           </span>
           <button
-            class="btn rounded-pill text-white"
+            class="btn rounded-pill "
             [disabled]="currentPage === totalPages"
             (click)="next()"
           >
@@ -264,7 +264,7 @@
         <button [disabled]="currentPage === 1" (click)="prev()">Prev</button><span>{{ currentPage }} / {{ totalPages }}</span><button [disabled]="currentPage === totalPages" (click)="next()">
           Next
         </button> -->
-        <!-- <div *ngIf="userList.length > 0 && !this.isLoading"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn btn-pink rounded-pill ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
+        <!-- <div *ngIf="userList.length > 0 && !this.isLoading"><a class="btn rounded-pill ">First</a><a class="btn rounded-pill ">Previous</a><a class="btn btn-pink rounded-pill ps-4 pe-4">1</a><a class="btn rounded-pill ">Next</a><a class="btn rounded-pill ">Last</a></div> -->
       </div>
     </div>
   </section>
@@ -295,7 +295,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body bg-dark_new ">
         <div class="row">
           <section class="section w-75 m-auto mt-4">
             <!-- <div class="row p-4 pt-5"> -->
@@ -308,7 +308,7 @@
                   <div class="input-group mw-100">
                   <input
                     [type]="show ? 'text' : 'password'"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    class="form-control bg-dark border-pink bg-transparent  rounded-pill"
                     formControlName="password"
                     placeholder="Enter password"
                     id="password"
@@ -340,7 +340,7 @@
                   <div class="input-group mw-100">
                     <input
                     [type]="show1 ? 'text' : 'password'"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    class="form-control bg-dark border-pink bg-transparent  rounded-pill"
                     formControlName="confirmPassword"
                     placeholder="Enter confirm password"
                     id="password"
@@ -422,7 +422,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body bg-dark ">
         <div class="row">
           <section class="section w-75 m-auto">
             <button
@@ -471,7 +471,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body bg-dark_new ">
         <div class="row">
           <div class="col-md-3">
             <label>Credit Limit:</label><br />{{ userDetails.creditLimit }}
@@ -503,7 +503,7 @@
                   <div class="col-md-12 pt-2">
                     <input
                       type="number"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                      class="form-control bg-dark border-pink bg-transparent  rounded-pill"
                       formControlName="amount"
                     />
                   </div>
@@ -565,7 +565,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body bg-dark ">
         <div class="row">
           <section class="section w-75 m-auto">
             <table width="100%">

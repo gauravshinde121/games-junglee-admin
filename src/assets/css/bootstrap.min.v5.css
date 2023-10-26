@@ -8273,7 +8273,7 @@ fieldset:disabled .btn {
   color: #212529 !important;
 }
 
-.text-white {
+. {
   color: #fff !important;
 }
 
@@ -8289,7 +8289,7 @@ fieldset:disabled .btn {
   color: rgba(0, 0, 0, 0.5) !important;
 }
 
-.text-white-50 {
+.-50 {
   color: rgba(255, 255, 255, 0.5) !important;
 }
 

@@ -43,7 +43,7 @@
                   </div>
                   <div class="col-md-3 col-6">
                     <button
-                      class="btn rounded-pill btn-pink mt-4 w-100 text-white"
+                      class="btn rounded-pill btn-pink mt-4 w-100 "
                       (click)="clearMemberName()"
                     >
                       <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
@@ -153,7 +153,7 @@
                     <button
                       *ngIf="allBets.length > 0"
                       type="button"
-                      class="btn btn-pink rounded-pill ms-2 text-white"
+                      class="btn btn-pink rounded-pill ms-2 "
                       (click)="exportExcel()"
                     >
                       Export
@@ -239,7 +239,7 @@
               </div>
               <div *ngIf="allBets.length > 0 && !this.isLoading">
                 <button
-                  class="btn rounded-pill text-white"
+                  class="btn rounded-pill "
                   [disabled]="currentPage === 1"
                   (click)="prev()"
                 >
@@ -249,7 +249,7 @@
                   {{ currentPage }} / {{ totalPages }}
                 </span>
                 <button
-                  class="btn rounded-pill text-white"
+                  class="btn rounded-pill "
                   [disabled]="currentPage === totalPages"
                   (click)="next()"
                 >

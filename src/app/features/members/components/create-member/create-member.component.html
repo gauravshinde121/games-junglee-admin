@@ -223,7 +223,7 @@
             <button
             *ngIf="game.gameId == 4 && game.isActive == true"
               type="button"
-              class="btn-sm btn-pink rounded-pill ms-2 text-white"
+              class="btn-sm btn-pink rounded-pill ms-2 "
               data-bs-toggle="modal" data-bs-target="#casinoProvider"
             >
             Provider
@@ -303,18 +303,18 @@
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
+        <h5 class="modal-title cassino " id="staticBackdropLabel">
           Please enter your Password
         </h5>
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body bg-dark ">
         <div class="row">
           <section class="section  m-auto">
             <form (ngSubmit)="createMember()">
               <input #confirm_password type="password"
-                class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                class="form-control bg-dark border-pink bg-transparent  rounded-pill"
                 placeholder="Enter your password" [(ngModel)]="uplinePwd" name="password" autofocus />
               <div class="row">
                 <div class="col-md-6">
@@ -345,7 +345,7 @@
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body bg-dark_new ">
         <div class="row">
           <div class="col-md-4 mt-3 d-flex" *ngFor="let casino of casinoProviderList">
             <p class="me-2">{{ casino.providerName }}</p>

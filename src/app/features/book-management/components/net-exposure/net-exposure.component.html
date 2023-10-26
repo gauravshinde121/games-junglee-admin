@@ -8,7 +8,7 @@
           <div class="col-md-8 col-12 net_exposure">
             <div class="row">
               <div class="col-md-4">
-                <a class="text-decoration-none text-white">
+                <a class="text-decoration-none ">
                   <input
                     type="radio"
                     (click)="
@@ -21,7 +21,7 @@
                     value="MyPT"
                   /><span class="rounded-pill p-2">My PT</span>
                 </a>
-                <a class="text-decoration-none text-white">
+                <a class="text-decoration-none ">
                   <input
                     value="totalBook"
                     (click)="
@@ -47,7 +47,7 @@
                     <span class="pt-2 me-3"
                       ><strong>Filter by Sport :</strong></span
                     >
-                    <a class="text-decoration-none text-white">
+                    <a class="text-decoration-none ">
                       <input
                         (click)="
                           onFilterChange({
@@ -66,7 +66,7 @@
                     </a>
                     <a
                       *ngFor="let game of games"
-                      class="text-decoration-none text-white"
+                      class="text-decoration-none "
                     >
                       <input
                         (click)="
@@ -301,7 +301,7 @@
         <div class="row" *ngIf="isMobileView">
           <div class="col-md-12">
             <div class="table-responsive mobileTable">
-              <table class="table text-white">
+              <table class="table ">
                 <thead>
                   <tr *ngIf="bookObj.length != 0">
                     <th></th>
@@ -382,7 +382,7 @@
                     <ng-container>
                       <tr class="rgtMarket">
                         <td colspan="6" *ngIf="book.rightMarkets.length != 0">
-                          <table class="table text-white">
+                          <table class="table ">
                             <tr>
                               <th scope="col" class="col-5"></th>
                               <th scope="col"></th>

@@ -227,7 +227,7 @@ export class NetExposureViewTotalComponent implements OnInit {
         this.setOrUnsetWebSocketParamsObj = [];
         res['book'].map((singleBook) => {
           this.adminBooksList.map((adminSingleBook) => {
-            if (+singleBook['marketId'] == +adminSingleBook['marketId']) {
+            if (singleBook['marketId'].toString() == adminSingleBook['marketId'].toString()) {
               adminSingleBook['userBook'] = singleBook['userBook'];
               adminSingleBook['adminBook'].map(sinlgeRunner => {
                 let runnerRes = _.filter(singleBook['adminBook'], ['SelectionId', sinlgeRunner['SelectionId']]);

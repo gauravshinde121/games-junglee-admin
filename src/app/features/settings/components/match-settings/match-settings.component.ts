@@ -161,8 +161,9 @@ export class MatchSettingsComponent implements OnInit {
     }
     this.settingsService._setMatchActiveStatusApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Match Settings', 'success');
+      this.getMatchSettingsList();
     })
-    this.getMatchSettingsList();
+    // this.getMatchSettingsList();
 
   }
 

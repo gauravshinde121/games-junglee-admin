@@ -318,14 +318,14 @@ export class NetExposureViewTotalComponent implements OnInit {
                   runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv'] : '';
 
 
-                  if(runnerRes['back0'] == runnerRes['lay0']){
+                  if(runnerRes['back0'] == runnerRes['lay0'] && runnerRes['back0'] != '' && runnerRes['lay0'] != ''){
                     runnerRes['showSuspended'] = true;
                   } else {
                     runnerRes['showSuspended'] = false;
                   }
                 }
 
-                
+
 
 
                 break;

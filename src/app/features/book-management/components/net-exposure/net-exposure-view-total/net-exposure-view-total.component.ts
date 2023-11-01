@@ -577,7 +577,7 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   getLadderDataByMarket(marketId: any) {
     this.ladderObj = [];
-    this._bookMgmService._postLadderDataByMarketApi({ marketId: marketId }).subscribe((res: any) => {
+    this._bookMgmService._postLadderDataByMarketApi({ marketId: marketId , myPt: this.myPT}).subscribe((res: any) => {
       this.ladderObj = res?.ladderDetails;
     })
   }

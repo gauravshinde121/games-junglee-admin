@@ -163,9 +163,10 @@ export class MarketSettingsComponent implements OnInit {
     }
     this.settingsService._setMarketStatusForMarketSettingsApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Market Settings', 'success');
-      console.log(data)
+    
+      this.getMarketSettingsList();
     })
-    this.getMarketSettingsList()
+    
   }
 
   // changeGame(evt) {

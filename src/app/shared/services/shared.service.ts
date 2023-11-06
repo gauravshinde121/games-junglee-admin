@@ -22,6 +22,7 @@ export class SharedService {
   refreshHeader = new BehaviorSubject({ 'value': false });
   callAdminDetails = new Subject();
   private currentAdmin = null;
+  ipAddress:any;
 
   sportsList: Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
@@ -268,6 +269,16 @@ export class SharedService {
   getIPData() {
     return sessionStorage.getItem(('ipdata'));
   }
+
+  getIPApiv2() {
+    this._apiHttpService.get('https://api.ipgeolocation.io/getip').subscribe(res=>{
+     this.ipAddress = res['ip'];
+    })
+ }
+
+ getIpAddress(){
+   return this.ipAddress || '127.0.0.1';
+ }
 
 
 }

@@ -84,6 +84,7 @@ export class Constants {
     public readonly API_URL_GET_MATCH_SETTINGS_LIST: string = 'api/junglee-admin/getMatchesForAdminSetting';
     public readonly API_URL_GET_MARKET_SETTINGS_LIST: string = 'api/junglee-admin/getMarketForAdminMarketSettings';
     public readonly API_URL_SET_BET_LIMIT_FOR_MATCH:string = 'api/junglee-admin/setBetLimitForMatch';
+    public readonly API_URL_SUSPEND_MARKET:string = 'api/junglee-admin/suspendMarket';
     public readonly API_URL_SET_MATCH_ACTIVE_STATUS:string = 'api/junglee-admin/setMatchActiveStatus';
     public readonly API_URL_SET_MARKET_ACTIVE_STATUS:string = 'api/junglee-admin/setMarketStatusForMarketSettings';
     public readonly API_URL_SET_BET_LIMIT_FOR_MARKET:string = 'api/junglee-admin/setBetLimitForMarket';

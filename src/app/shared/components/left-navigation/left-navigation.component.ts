@@ -50,6 +50,7 @@ export class LeftNavigationComponent implements OnInit {
       if (data.adminDetails) {
         this.adminDetails = data.adminDetails
       }
+      console.log('this.adminDetails',this.adminDetails);
     });
 
     // this._sharedService.leftMenuStatus.subscribe(status=>{

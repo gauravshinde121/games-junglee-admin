@@ -272,9 +272,9 @@
                                       <button type="button" class="suspendedm1">
                                         {{
                                           singleAdminBook["appMarketStatus"] ==
-                                          "3"
-                                            ? "Suspended"
-                                            : "Ball Running"
+                                          "9"
+                                            ? "Ball Running"
+                                            : "Suspended"
                                         }}
                                       </button>
                                     </div>
@@ -381,10 +381,9 @@
                                       <button type="button" class="suspendedm1">
                                         {{
                                           (singleAdminBook["appMarketStatus"] ==
-                                          "3" || singleAdminBook['appMarketStatus'] ==
-                                          '9')
-                                            ? "Suspended"
-                                            : "Ball Running"
+                                          "9")
+                                            ? "Ball Running"
+                                            : "Suspended"
                                         }}
                                       </button>
                                     </div>
@@ -401,6 +400,7 @@
                                        Suspended
                                       </button>
                                     </div>
+
                                   </td>
                                 </tr>
                               </ng-container>
@@ -522,9 +522,9 @@
                                       <button type="button" class="suspendedm1">
                                         {{
                                           singleAdminBook["appMarketStatus"] ==
-                                          "3"
-                                            ? "Suspended"
-                                            : "Ball Running"
+                                          "9"
+                                            ? "Ball Running"
+                                            : "Suspended"
                                         }}
                                       </button>
                                     </div>
@@ -1291,7 +1291,7 @@
               </td>
               <td class="col">
                 <div class="tooltipnk m-1">
-                  <i class="fa-sharp fa-solid fa-info" ngxClipboard [cbContent]="viewTotalEach.IP" [container]="container"></i>
+                  <i class="fa-sharp fa-solid fa-clipboard cursor-pointer" ngxClipboard [cbContent]="viewTotalEach.IP" [container]="container"></i>
                   <span class="tooltiptext tabTooltip px-5 w-auto">
                     <small #container>
                       {{ viewTotalEach.IP }}

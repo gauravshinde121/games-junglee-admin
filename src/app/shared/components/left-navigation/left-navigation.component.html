@@ -83,6 +83,11 @@
               <a (click)="storePath('/account-statement/turnover')" routerLink="/account-statement/turnover"
                 class="nav-link small ps-5">Turn Over</a>
             </li>
+            <li [routerLinkActive]="currentPath == '/account-statement/playerwise-account-statement'?'active':''"
+              [ngClass]="currentPath == '/account-statement/playerwise-account-statement'?'active':''">
+              <a (click)="storePath('/account-statement/playerwise-account-statement')" routerLink="/account-statement/playerwise-account-statement"
+                class="nav-link small ps-5">Player-wise Account Statement</a>
+            </li>
             <!-- <li [routerLinkActive]="currentPath == '/account-statement/my-account-statement'?'active':''" [ngClass]="currentPath == '/account-statement/my-account-statement'?'active':''">
               <a
               (click)="storePath('/account-statement/my-account-statement')"
@@ -201,6 +206,13 @@
             </li>
           </ul>
         </div>
+      </li>
+      <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN' || adminDetails?.username == 'KASHI'" [routerLinkActive]="currentPath == '/settings/games-settings'?'active':''"
+        [ngClass]="currentPath == '/settings/games-settings'?'active':''">
+        <a (click)="storePath('/settings/games-settings')" routerLink="/settings/games-settings" class="btn collapsed"
+          data-bs-toggle="collapse" data-bs-target="#pwd-collapse" aria-expanded="false">
+          <i class="fa-solid fa-pen-to-square icon-pink me-2"></i> Games Settings
+        </a>
       </li>
       <li>
         <a class="btn collapsed" (click)="onLogout()" data-bs-toggle="collapse" data-bs-target="#pwd-collapse"

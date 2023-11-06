@@ -10,6 +10,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatchSettingsComponent } from './components/match-settings/match-settings.component';
 import { MarketSettingsComponent } from './components/market-settings/market-settings.component';
 import { AppSettingsComponent } from './components/app-settings/app-settings.component';
+import { GamesSettingsComponent } from './components/games-settings/games-settings.component';
+import { ClipboardModule } from 'ngx-clipboard';
+
 
 
 
@@ -20,14 +23,16 @@ import { AppSettingsComponent } from './components/app-settings/app-settings.com
     SettingsMainComponent,
     MatchSettingsComponent,
     MarketSettingsComponent,
-    AppSettingsComponent
+    AppSettingsComponent,
+    GamesSettingsComponent
   ],
   imports: [
     CommonModule,
     SettingsRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule
   ]
 })
 export class SettingsModule { }

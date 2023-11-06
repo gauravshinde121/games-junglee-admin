@@ -11,7 +11,7 @@
           </div>
           <div class="col-md-6 text-end">
             <!-- <p>
-              <a class="text-decoration-none text-white">
+              <a class="text-decoration-none ">
                 <input
                   type="radio"
                   checked=""
@@ -21,7 +21,7 @@
                   value="HTML"
                 /><span class="rounded-pill p-2 m-2">My PT</span>
               </a>
-              <a class="text-decoration-none text-white">
+              <a class="text-decoration-none ">
                 <input
                   type="radio"
                   checked=""
@@ -39,7 +39,7 @@
   </section>
 
   <section class="section gamedetails mt-3 mb-3">
-    <input type="text" class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
+    <input type="text" class="form-control bg-dark  border-start-0 border-pink radius-right-tb"
       placeholder="Search Member Name" aria-label="Search" aria-describedby="addon-wrapping" [(ngModel)]="searchTerm"
       (ngModelChange)="search()" />
     <div class="col-md-12 text-end">Bet Count : {{ viewTotal.length }}</div>
@@ -109,12 +109,12 @@
   <div class="row">
     <div class="col-md-12">
       <div *ngIf="viewTotal.length > 0 && !this.isLoading">
-        <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
+        <button class="btn bg-dgrey rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
           Prev
         </button>
         <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
         </span>
-        <button class="btn bg-dgrey rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
+        <button class="btn bg-dgrey rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
           Next
         </button>
       </div>

@@ -50,9 +50,9 @@
       >
         <thead>
           <tr>
-            <th scope="col" class="text-white pointer first" (click)="toggleSort('createdDate')">Date</th>
-            <th  scope="col" class="text-white pointer" (click)="toggleSort('fromUsername')">Payer/Payee</th>
-            <th scope="col" class="text-white pointer last" (click)="toggleSort('amount')">Amount</th>
+            <th scope="col" class=" pointer first" (click)="toggleSort('createdDate')">Date</th>
+            <th  scope="col" class=" pointer" (click)="toggleSort('fromUsername')">Payer/Payee</th>
+            <th scope="col" class=" pointer last" (click)="toggleSort('amount')">Amount</th>
           </tr>
         </thead>
         <tbody>
@@ -84,7 +84,7 @@
 
   <div *ngIf="transferStatements.length > 0 && !this.isLoading">
     <button
-      class="btn rounded-pill text-white"
+      class="btn rounded-pill "
       [disabled]="currentPage === 1"
       (click)="prev()"
     >
@@ -94,7 +94,7 @@
       >{{ currentPage }} / {{ totalPages }}
     </span>
     <button
-      class="btn rounded-pill text-white"
+      class="btn rounded-pill "
       [disabled]="currentPage === totalPages"
       (click)="next()"
     >

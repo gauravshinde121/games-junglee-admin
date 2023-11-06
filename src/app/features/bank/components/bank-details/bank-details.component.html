@@ -14,13 +14,13 @@
             <section class="section dashboard">
               <!-- <div class="row mb-3 align-items-end">
                  <div class="col-md-6 col-lg-6 col-xl-6">
-                  <div class="row text-white">
+                  <div class="row ">
                     <div class="input-group flex-nowrap">
-                      <span class="input-group-text bg-dark text-white border-pink radius-left-tb" id="addon-wrapping">
+                      <span class="input-group-text bg-dark  border-pink radius-left-tb" id="addon-wrapping">
                         <i class="fa fa-search"></i>
                       </span>
                       <input type="text"
-                        class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
+                        class="form-control bg-dark  border-start-0 border-pink radius-right-tb"
                         placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping"
                         [(ngModel)]="searchTerm" (ngModelChange)="search()" />
                     </div>
@@ -36,11 +36,11 @@
 
                 <div class="col-md-6 col-lg-6 col-xl-6 mt-2">
                   <div class="input-group flex-nowrap">
-                    <span class="input-group-text bg-dark text-white border-pink radius-left-tb" id="addon-wrapping">
+                    <span class="input-group-text bg-dark  border-pink radius-left-tb" id="addon-wrapping">
                       <i class="fa fa-search"></i>
                     </span>
                     <input type="text"
-                      class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
+                      class="form-control bg-dark  border-start-0 border-pink radius-right-tb"
                       placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping"
                       [(ngModel)]="searchTerm" (ngModelChange)="search()" />
                   </div>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="col-lg-1 col-md-3 col-3 text-end">
-                  <button *ngIf="userList.length > 0" type="button" class="btn-sm btn-pink rounded-pill ms-2 text-white"
+                  <button *ngIf="userList.length > 0" type="button" class="btn-sm btn-pink rounded-pill ms-2 "
                     (click)="exportExcel()">
                     Export
                   </button>
@@ -168,12 +168,12 @@
                   </div>
 
                   <div *ngIf="userList.length > 0 && !this.isLoading">
-                    <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
+                    <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
                       Prev
                     </button>
                     <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
                     </span>
-                    <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages"
+                    <button class="btn rounded-pill " [disabled]="currentPage === totalPages"
                       (click)="next()">
                       Next
                     </button>
@@ -183,7 +183,7 @@
           <button [disabled]="currentPage === 1" (click)="prev()">Prev</button><span>{{ currentPage }} / {{ totalPages }}</span><button [disabled]="currentPage === totalPages" (click)="next()">
             Next
           </button> -->
-                  <!-- <div *ngIf="userList.length > 0 && !this.isLoading"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn btn-pink rounded-pill ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
+                  <!-- <div *ngIf="userList.length > 0 && !this.isLoading"><a class="btn rounded-pill ">First</a><a class="btn rounded-pill ">Previous</a><a class="btn btn-pink rounded-pill ps-4 pe-4">1</a><a class="btn rounded-pill ">Next</a><a class="btn rounded-pill ">Last</a></div> -->
                 </div>
               </div>
             </section>
@@ -209,14 +209,14 @@
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body bg-dark ">
         <div class="row">
           <div class="col-md-12 pt-2">
             <label for="">Narration</label>
             <input
              maxlength="150"
               type="text"
-              class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+              class="form-control bg-dark border-pink bg-transparent  rounded-pill"
               [(ngModel)]="description"
             />
           </div>
@@ -253,7 +253,7 @@
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body bg-dark_new ">
         <div class="row">
           <div class="col-md-3">
             <label>Credit Limit:</label><br />{{ userDetails.creditLimit }}
@@ -283,7 +283,7 @@
                     You Can Transfer {{ userDetails.take }} Amount
                   </div>
                   <div class="col-md-12 pt-2">
-                    <input type="number" class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    <input type="number" class="form-control bg-dark border-pink bg-transparent  rounded-pill"
                       formControlName="amount" />
                   </div>
                   <div class="col-md-12 pt-2">
@@ -291,13 +291,13 @@
                     <input
                      maxlength="150"
                       type="text"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                      class="form-control bg-dark border-pink bg-transparent  rounded-pill"
                       formControlName="description"
                     />
                   </div>
                   <!-- <div class="col-md-12 pt-2">
                     <label for="">Narration</label>
-                    <input type="text" class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    <input type="text" class="form-control bg-dark border-pink bg-transparent  rounded-pill"
                       formControlName="amount" />
                   </div> -->
                 </div>
@@ -337,7 +337,7 @@
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body bg-dark ">
         <div class="row">
           <section class="section w-75 m-auto">
             <table width="100%">

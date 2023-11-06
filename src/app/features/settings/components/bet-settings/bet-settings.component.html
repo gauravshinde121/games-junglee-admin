@@ -124,7 +124,7 @@
           </select>
         </div>
         <div class="col-md-3">
-          <button class="btn border-pink btn-pink rounded-pill mt-4 w-100 text-white" (click)="clearMember()">
+          <button class="btn border-pink btn-pink rounded-pill mt-4 w-100 " (click)="clearMember()">
             <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
           </button>
         </div>
@@ -181,7 +181,7 @@
           <button type="button" class="btn btn-pink rounded-pill w-25" (click)="searchList()">
             Search
           </button>
-          <button *ngIf="allBets.length > 0" type="button" class="btn btn-pink rounded-pill w-25 ms-2 text-white"
+          <button *ngIf="allBets.length > 0" type="button" class="btn btn-pink rounded-pill w-25 ms-2 "
             (click)="exportExcel()">
             Export
           </button>
@@ -263,12 +263,12 @@
     </div>
 
     <div *ngIf="allBets.length > 0 && !this.isLoading">
-      <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
+      <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
         Prev
       </button>
       <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage / totalPages }}
       </span>
-      <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
+      <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
         Next
       </button>
     </div>
@@ -288,20 +288,20 @@
   <div class="modal-dialog modal-dialog modal-md">
     <div class="modal-content ">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
+        <h5 class="modal-title cassino " id="staticBackdropLabel">
           Add Remark
         </h5>
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body bg-dark ">
         <div class="row">
           <section class="section m-auto mt-4">
             <form [formGroup]="deleteBetForm">
               <div class="row mb-4 align-items-center">
                 <div class="col-md-5">Remark*</div>
                 <div class="col-md-7">
-                  <input type="text" class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                  <input type="text" class="form-control bg-dark border-pink bg-transparent  rounded-pill"
                     formControlName="remarks" placeholder="Enter remarks" (keydown.enter)="submitForm()" />
                   <!--<div
                     class="text-danger"

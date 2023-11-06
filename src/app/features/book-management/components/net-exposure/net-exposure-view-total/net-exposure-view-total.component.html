@@ -13,7 +13,7 @@
           </div>
           <div class="col-md-4 text-end">
             <p>
-              <a class="text-decoration-none text-white">
+              <a class="text-decoration-none ">
                 <input
                   type="radio"
                   class="radioselected cursor-pointer"
@@ -23,7 +23,7 @@
                   (click)="onFilterChange(true)"
                 /><span class="rounded-pill p-2 m-2">My PT</span>
               </a>
-              <a class="text-decoration-none text-white">
+              <a class="text-decoration-none ">
                 <input
                   type="radio"
                   checked
@@ -77,7 +77,7 @@
               <div class="accordion-item bg-transparent border-0">
                 <h2 class="accordion-header" id="headingOne">
                   <a
-                    class="text-decoration-none text-white w-100"
+                    class="text-decoration-none  w-100"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseOne"
                     aria-expanded="true"
@@ -1169,12 +1169,12 @@
     <!-- <div class="col-md-12 mt-1 mb-1">
       <div class="row">
         <div class="col-md-6">
-          <input type="text" class="form-control bg-dark text-white radius-left-tb border-pink radius-right-tb"
+          <input type="text" class="form-control bg-dark  radius-left-tb border-pink radius-right-tb"
             placeholder="Search Member Name" aria-label="Search" aria-describedby="addon-wrapping"
             [(ngModel)]="searchTerm" (ngModelChange)="search()" />
         </div>
         <div class="col-md-6 text-end">
-          <button *ngIf="viewTotal.length > 0" type="button" class="btn btn-pink rounded-pill ms-2 text-white"
+          <button *ngIf="viewTotal.length > 0" type="button" class="btn btn-pink rounded-pill ms-2 "
             (click)="exportExcel()">
             Export
           </button>
@@ -1314,7 +1314,7 @@
     <div class="col-md-12">
       <div *ngIf="viewTotal.length > 0">
         <button
-          class="btn rounded-pill text-white"
+          class="btn rounded-pill "
           [disabled]="currentPage === 1"
           (click)="prev()"
         >
@@ -1324,7 +1324,7 @@
           >{{ currentPage }} / {{ totalPages }}
         </span>
         <button
-          class="btn rounded-pill text-white"
+          class="btn rounded-pill "
           [disabled]="currentPage === totalPages"
           (click)="next()"
         >

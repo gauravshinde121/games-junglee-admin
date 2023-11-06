@@ -28,8 +28,8 @@ $color_22: #d35862;
 $color_23: #a7d8fd;
 $color_24: #f9c9d4;
 $color_25: rgba(38, 38, 38, 0.63);
-$color_26: #000000;
-$color_27: #1c6985;
+$color_26: #975b35;
+$color_27: #975b35;
 $color_28: #a6a6a657;
 $color_29: #a6a6a6;
 $color_30: #ebf7fc;
@@ -48,7 +48,7 @@ $color_42: #ffffff69;
 $color_43: rgba(255, 192, 230, 0.0705882353);
 $color_44: rgba(0, 0, 0, 0.6);
 $color_45: #ff2738;
-$color_46: #0d84d980;
+$color_46: #975b35;
 $color_47: #71ff97;
 $color_48: #555;
 $color_49: #ccc;
@@ -57,7 +57,7 @@ $color_50: #dee2e6;
 $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 
 .browncolor {
-  background-color: $color_21;
+  background-color: $color_7;
 }
 .bg-pink {
   background: linear-gradient(0deg, $color_26 0, $color_27) !important;
@@ -96,12 +96,12 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 }
 
 .btn-outline-pink {
-  color: $color_3;
-  border-color: $color_3;
+  color: $color_7;
+  border-color: $color_26;
   &:hover {
-    color: $color_21;
+    color: $color_7;
     background-color: $color_3;
-    border-color: $color_3;
+    border-color: $color_26;
   }
 }
 
@@ -138,10 +138,13 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 
   a {
     text-decoration: none;
+    
   }
+  
   .btn {
     font-size: 16px;
     padding: 3px 4px;
+    color: $color_7;
   }
   .form-control {
     line-height: 2.5;
@@ -197,7 +200,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   // padding: 20px 10px;
   // padding: 20px 0;
   transition: all 0.3s;
-  color: $color_7;
+  color: $color_21;
 }
 /********** main end ************/
 /********** header start ************/
@@ -271,6 +274,10 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 
 .navbar-toggler {
   background: linear-gradient(0deg, $color_46 0, $color_27);
+  color: $color_7;
+  &:hover{
+    color: $color_7;
+  }
 }
 
 // balance up/Down end
@@ -290,7 +297,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   scrollbar-color: #aab7cf transparent;
 
   .nav-link {
-    color: $color_7;
+    color: $color_21;
   }
   &::-webkit-scrollbar {
     width: 5px;
@@ -320,7 +327,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 /********** table pro start ************/
 .tableall {
   border-radius: 15px;
-  color: $color_7;
+  color: $color_21;
   white-space: nowrap;
   th {
     background: linear-gradient(0deg, $color_26 0, $color_27);
@@ -352,16 +359,16 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   background: transparent;
   .form-select {
     appearance: button;
-    color: $color_7;
+    color: $color_21;
     border: 1px solid $color_28;
-    background: $color_21;
+    background: $color_7;
   }
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
   .form-control {
     background: transparent;
-    color: $color_7;
+    color: $color_21;
     border: 1px solid $color_28;
   }
 }
@@ -650,7 +657,8 @@ select:-webkit-autofill:focus {
     margin-right: 10px;
 
     .nav-link {
-      border: 1px solid $color_7;
+      border: 1px solid $color_27;
+      color: $color_27;
     }
 
     .nav-link:hover {
@@ -669,6 +677,10 @@ select:-webkit-autofill:focus {
 }
 .pointer {
   cursor: pointer;
+}
+
+.nav-pills .nav-link{
+  color: $color_21;
 }
 
 .nav-pills .nav-link.active,
@@ -715,7 +727,7 @@ select:-webkit-autofill:focus {
 .sidebar {
   .btn {
     text-align: start;
-    color: $color_7;
+    color: $color_21;
   }
   .active .nav-link,
   .btn:hover {
@@ -730,7 +742,8 @@ select:-webkit-autofill:focus {
 
 .bg-dark_new,
 .bg-dark {
-  background-color: $color_21 !important;
+  background-color: $color_7 !important;
+  color: $color_21;
 }
 
 .modal {
@@ -831,7 +844,7 @@ tfoot tr {
   /* border: 1px solid; */
   position: sticky;
   bottom: 0;
-  background: $color_21;
+  background: $color_7;
 }
 
 .net-exposure_scroll {
@@ -993,7 +1006,7 @@ input:focus {
 
 a {
   text-decoration: none;
-  color: $color_7;
+  color: $color_21;
 }
 
 @media (min-width: 769px) {

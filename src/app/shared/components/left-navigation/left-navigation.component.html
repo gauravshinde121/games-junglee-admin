@@ -83,6 +83,11 @@
               <a (click)="storePath('/account-statement/turnover')" routerLink="/account-statement/turnover"
                 class="nav-link small ps-5">Turn Over</a>
             </li>
+            <li [routerLinkActive]="currentPath == '/account-statement/playerwise-account-statement'?'active':''"
+              [ngClass]="currentPath == '/account-statement/playerwise-account-statement'?'active':''">
+              <a (click)="storePath('/account-statement/playerwise-account-statement')" routerLink="/account-statement/playerwise-account-statement"
+                class="nav-link small ps-5">Player-wise Account Statement</a>
+            </li>
             <!-- <li [routerLinkActive]="currentPath == '/account-statement/my-account-statement'?'active':''" [ngClass]="currentPath == '/account-statement/my-account-statement'?'active':''">
               <a
               (click)="storePath('/account-statement/my-account-statement')"

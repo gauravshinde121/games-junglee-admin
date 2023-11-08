@@ -45,6 +45,11 @@ export class SharedService {
       .get(this._apiEndpointsService.getAdminDetailEndpoint());
   }
 
+  _getPlayerListApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getPlayerListEndpoint());
+  }
+
   _getAllUsersApi(body) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getAllUserEndpoint(), body);

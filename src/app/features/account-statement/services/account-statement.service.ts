@@ -16,6 +16,10 @@ export class AccountStatementService {
       .post(this._apiEndpointsService.getTransferStatementEndpoint(),filterObj);
   }
 
+  _getPlayerAccountStatementApi(filterObj){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getPlayerAccountStatementEndpoint(),filterObj);
+  }
 
   _getPlBySubgameAPi(filterObj){
     return this._apiHttpService

@@ -188,6 +188,14 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_TRANSFER_STATEMENT);
   }
 
+  public getPlayerAccountStatementEndpoint(){
+    return this.createUrl(this._constants.API_URL_PLAYERWISE_ACCOUNT_STATEMENT);
+  }
+
+  public getPlayerListEndpoint(){
+    return this.createUrl(this._constants.API_URL_PLAYER_LIST);
+  }
+
   public updateGameControlEndpoint(){
     return this.createUrl(this._constants.API_URL_UPDATE_GAME_CONTROL);
   }

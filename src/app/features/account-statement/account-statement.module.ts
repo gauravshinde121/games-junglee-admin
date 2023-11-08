@@ -13,6 +13,7 @@ import { CommissionComponent } from './components/commission/commission.componen
 import { AllBetsComponent } from './components/all-bets/all-bets.component';
 import { MyAccountStatementComponent } from './components/my-account-statement/my-account-statement.component';
 import { PlayerAccountStatementComponent } from './components/player-account-statement/player-account-statement.component';
+import { PlayerwiseAccountStatementComponent } from './components/playerwise-account-statement/playerwise-account-statement.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { PlayerAccountStatementComponent } from './components/player-account-sta
     CommissionComponent,
     AllBetsComponent,
     MyAccountStatementComponent,
-    PlayerAccountStatementComponent
+    PlayerAccountStatementComponent,
+    PlayerwiseAccountStatementComponent
   ],
   imports: [
     CommonModule,

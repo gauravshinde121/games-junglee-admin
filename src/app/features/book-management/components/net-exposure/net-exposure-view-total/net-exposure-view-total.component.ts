@@ -227,7 +227,7 @@ export class NetExposureViewTotalComponent implements OnInit {
         this.setOrUnsetWebSocketParamsObj = [];
         res['book'].map((singleBook) => {
           this.adminBooksList.map((adminSingleBook) => {
-            if (+singleBook['marketId'] == +adminSingleBook['marketId']) {
+            if (singleBook['marketId'].toString() == adminSingleBook['marketId'].toString()) {
               adminSingleBook['userBook'] = singleBook['userBook'];
               adminSingleBook['adminBook'].map(sinlgeRunner => {
                 let runnerRes = _.filter(singleBook['adminBook'], ['SelectionId', sinlgeRunner['SelectionId']]);
@@ -318,7 +318,7 @@ export class NetExposureViewTotalComponent implements OnInit {
                   runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv'] : '';
 
 
-                  if(runnerRes['back0'] == runnerRes['lay0']){
+                  if(runnerRes['back0'] == runnerRes['lay0'] && runnerRes['back0'] != '' && runnerRes['lay0'] != ''){
                     runnerRes['showSuspended'] = true;
                   } else {
                     runnerRes['showSuspended'] = false;
@@ -578,7 +578,7 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   getLadderDataByMarket(marketId: any) {
     this.ladderObj = [];
-    this._bookMgmService._postLadderDataByMarketApi({ marketId: marketId }).subscribe((res: any) => {
+    this._bookMgmService._postLadderDataByMarketApi({ marketId: marketId , myPt: this.myPT}).subscribe((res: any) => {
       this.ladderObj = res?.ladderDetails;
     })
   }

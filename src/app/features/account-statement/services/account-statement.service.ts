@@ -21,6 +21,16 @@ export class AccountStatementService {
       .post(this._apiEndpointsService.getPlayerAccountStatementEndpoint(),filterObj);
   }
 
+  _getCasinoReportDetailForAdminApi(filterObj){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getCasinoReportDetailForAdminEndpoint(),filterObj);
+  }
+
+  _getCasinoReportForAdminApi(filterObj){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getCasinoReportForAdminEndpoint(),filterObj);
+  }
+
   _getPlBySubgameAPi(filterObj){
     return this._apiHttpService
     .post(this._apiEndpointsService.getPlBySubgame(),filterObj);

@@ -50,6 +50,11 @@ export class SharedService {
       .get(this._apiEndpointsService.getPlayerListEndpoint());
   }
 
+  _getCasinoProviderstApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getCasinoProvidersEndpoint());
+  }
+
   _getAllUsersApi(body) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getAllUserEndpoint(), body);

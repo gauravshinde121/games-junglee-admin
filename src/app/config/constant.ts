@@ -62,7 +62,9 @@ export class Constants {
     public readonly API_URL_GET_USER_BETS_FOR_ADMIN_MYPL: string = 'api/junglee-admin/getUserBetsForAdminMyPL';
     public readonly API_URL_PLAYERWISE_ACCOUNT_STATEMENT: string = 'api/junglee-admin/getUserAccountStatementForAdmin';
     public readonly API_URL_PLAYER_LIST: string = 'api/junglee-admin/getAllUserMembers';
-
+    public readonly API_URL_CASINO_PROVIDERS_LIST: string = 'api/getCasinoProvider';
+    public readonly API_URL_GET_CASINO_REPORT: string = 'api/junglee-admin/getCasinoReportForAdmin';
+    public readonly API_URL_GET_CASINO_REPORT_DETAIL: string = '/api/junglee-admin/getCasinoReportForAdminDetail';
     //change password
     public readonly API_CHANGE_PASSWORD: string = 'api/junglee-admin/changePassword';
 

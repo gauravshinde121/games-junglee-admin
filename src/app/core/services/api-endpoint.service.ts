@@ -192,9 +192,22 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_PLAYERWISE_ACCOUNT_STATEMENT);
   }
 
+  public getCasinoReportDetailForAdminEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_CASINO_REPORT_DETAIL);
+  }
+
+  public getCasinoReportForAdminEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_CASINO_REPORT);
+  }
+
   public getPlayerListEndpoint(){
     return this.createUrl(this._constants.API_URL_PLAYER_LIST);
   }
+
+  public getCasinoProvidersEndpoint(){
+    return this.createUrl(this._constants.API_URL_CASINO_PROVIDERS_LIST);
+  }
+
 
   public updateGameControlEndpoint(){
     return this.createUrl(this._constants.API_URL_UPDATE_GAME_CONTROL);

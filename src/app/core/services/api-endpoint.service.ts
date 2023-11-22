@@ -155,6 +155,11 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ADMIN_INFO);
   }
 
+  public getExposureDetailEndpoint(): string {
+    return this.createUrl(this._constants.API_URL_GET_EXPOSURE_DETAILS);
+  }
+
+
   public getAllUserEndpoint():string{
     return this.createUrl(this._constants.API_URL_ALL_USERS);
   }

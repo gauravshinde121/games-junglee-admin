@@ -291,5 +291,11 @@ export class SharedService {
  }
 
 
+ _getExposureDetailsApi(userId) {
+  return this._apiHttpService
+    .post(this._apiEndpointsService.getExposureDetailEndpoint(),{userId});
+}
+
+
 }
 

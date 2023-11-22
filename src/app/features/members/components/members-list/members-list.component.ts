@@ -268,7 +268,7 @@ export class MembersListComponent implements OnInit {
 
   showExposureDetails(user){
     console.log(user)
-
+    this.exposureDataList = [];
     if(user.exposure == 0) return
 
     this._sharedService._getExposureDetailsApi(user.userId).subscribe((data:any)=>{

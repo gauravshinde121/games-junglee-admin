@@ -64,6 +64,13 @@ export class MembersListComponent implements OnInit {
   showModal: boolean;
   clientId: any = environment.clientId;
   description : any = "Weekly settlement";
+  exposureData:any = {
+    matchName:null,
+    fancyMarkets:[],
+    matchOddsMarket:[],
+    bookmakerMarkets:[]
+  };
+  exposureDataList:any = [];
 
 
   createPasswordForm() {
@@ -250,6 +257,42 @@ export class MembersListComponent implements OnInit {
         this.checkUserId(user.userId);
       }
     }
+  }
+
+
+  openExposureViewModal(userId) {
+    this.modalNumber = 5;
+    this.userId = userId;
+    this.display = 'block';
+  }
+
+
+  showExposureDetails(user){
+    console.log(user)
+    this.exposureDataList = [];
+    if(user.exposure == 0) return
+
+    this._sharedService._getExposureDetailsApi(user.userId).subscribe((data:any)=>{
+      console.log(data)
+
+      if(data){
+        for(let d of data.exposureDetails){
+          this.exposureDataList.push(
+            {
+              matchName:d.matchName,
+              fancyMarkets:d.data.filter(mrkt=>mrkt.fancyFlag==true),
+              matchOddsMarket:d.data.filter(mrkt=>mrkt.matchoddsFlag==true),
+              bookmakerMarkets:d.data.filter(mrkt=>mrkt.bookmakerFlag==true)
+            }
+          )
+        }
+      }
+
+      this.exposureData = this.exposureDataList;
+      console.log(this.exposureDataList)
+
+      this.openExposureViewModal(user.userId)
+    })
   }
 
   checkUserId(userId: any) {

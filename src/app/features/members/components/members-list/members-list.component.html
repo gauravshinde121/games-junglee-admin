@@ -238,7 +238,8 @@
                 </td>
                 <td class="text-center">{{ user.creditLimit | indianCurrency }}</td>
                 <td
-                  class="text-center"
+                (click)="showExposureDetails(user)"
+                  class="text-center pointer"
                   [ngClass]="user.exposure > 0 ? 'text-danger' : ''"
                 >
                   {{ user.exposure | indianCurrency }}
@@ -756,6 +757,102 @@
           alt=""
           width="100%"
         />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div
+  *ngIf="modalNumber == 5"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="exposure-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          Exposure Details &nbsp; <i class="fa fa-lock"></i>
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark_new text-white">
+        <div class="row" *ngFor="let expDtl of exposureDataList">
+            <h4>{{expDtl.matchName}}</h4>
+            <div *ngIf="expDtl.matchOddsMarket.length>0">
+              <div class="row" >
+                <div class="col-6">
+                  <strong>MATCH ODDS</strong>
+                </div>
+                <div class="col-3">
+                 <strong>Win/Loss</strong> 
+                </div>
+              </div>
+              <div  class="row" *ngFor="let data of expDtl.matchOddsMarket.horses">
+                  <div class="col-6">
+                    <small class="text-center">{{data.RunnerName}}</small>
+                  </div>
+                  <div class="col-3">
+                    <small class="text-center">{{data.finalAmount}}</small>
+                  </div>
+              </div>
+            </div>
+            <div *ngIf="expDtl.bookmakerMarkets.length>0">
+              <div class="row" >
+                <div class="col-6">
+                  <strong>BOOKMAKER</strong>
+                </div>
+                <div class="col-3">
+                 <strong>Win/Loss</strong> 
+                </div>
+              </div>
+              <div  class="row" *ngFor="let data of expDtl.bookmakerMarkets.horses">
+                  <div class="col-6">
+                    <small class="text-center">{{data.RunnerName}}</small>
+                  </div>
+                  <div class="col-3">
+                    <small class="text-center">{{data.finalAmount}}</small>
+                  </div>
+              </div>
+            </div>
+            <div *ngIf="expDtl.fancyMarkets.length>0">
+              <div class="row" >
+                <div class="col-6">
+                  <strong>Market Name</strong>
+                </div>
+                <div class="col-3">
+                 <strong>Max Win</strong> 
+                </div>
+                <div class="col-3">
+                  <strong>Max Lose</strong>
+                </div>
+              </div>
+              <div  class="row" *ngFor="let data of expDtl.fancyMarkets">
+                  <div class="col-6">
+                    <small class="text-center">{{data.marketName}}</small>
+                  </div>
+                  <div class="col-3">
+                    <small class="text-center">{{data.maxWin}}</small>
+                  </div>
+                  <div class="col-3">
+                    <small class="text-center">{{data.netExposure}}</small>
+                  </div>
+              </div>
+            </div>
+        </div>
       </div>
     </div>
   </div>

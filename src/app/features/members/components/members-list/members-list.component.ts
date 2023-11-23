@@ -26,6 +26,7 @@ export class MembersListComponent implements OnInit {
   limit: number = 25;
   userId: any;
   totalTake = 0;
+  totalExposure = 0;
   totalGive = 0;
   liveCasinoRate: any;
   sportsBook: any;
@@ -338,6 +339,7 @@ export class MembersListComponent implements OnInit {
         this.isLoading = false;
       }
       this.userList = users.memberData.memberList;
+      this.totalExposure = this.userList.reduce((acc, crnt) => acc + crnt.exposure, 0);
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
       this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);
@@ -496,18 +498,18 @@ export class MembersListComponent implements OnInit {
     let mergedArray = [];
 
     if (this.selectedRoleId == this.roleId) {
-      this.userList.forEach(element => 
+      this.userList.forEach(element =>
         this.roles.forEach(elements => {
           if (this.selectedRoleId === elements.roleId){
         memberList.push({
           Username: element.username,
-          RoleName: elements.userRoleName,        
+          RoleName: elements.userRoleName,
           CreditLimit: element.creditLimit,
           NetExposure: element.exposure,
           Take: element.take,
           Give: element.give,
           AvailableCredit: element.availableCredit,
-          Status: element.isActive, 
+          Status: element.isActive,
         })
         // this.roles.forEach(elements => {
         //   if (this.selectedRoleId === elements.roleId) {
@@ -517,7 +519,7 @@ export class MembersListComponent implements OnInit {
         //   }
         // })
       }}));
-      
+
       this._sharedService.exportExcel(memberList, this.fileName);
     }
 

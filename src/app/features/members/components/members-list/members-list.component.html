@@ -801,12 +801,13 @@
                  <strong>Win/Loss</strong> 
                 </div>
               </div>
-              <div  class="row" *ngFor="let data of expDtl.matchOddsMarket.horses">
+              <div  class="row" *ngFor="let data of expDtl.matchOddsMarket[0].horses">
                   <div class="col-6">
-                    <small class="text-center">{{data.RunnerName}}</small>
+                    <strong class="text-center">{{data.RunnerName}}</strong>
                   </div>
                   <div class="col-3">
-                    <small class="text-center">{{data.finalAmount}}</small>
+                    <strong *ngIf="data.finalAmount>0" class="text-center text-success">{{data.finalAmount}}</strong>
+                    <strong *ngIf="data.finalAmount<0" class="text-center text-danger">{{data.finalAmount}}</strong>
                   </div>
               </div>
             </div>
@@ -819,12 +820,13 @@
                  <strong>Win/Loss</strong> 
                 </div>
               </div>
-              <div  class="row" *ngFor="let data of expDtl.bookmakerMarkets.horses">
+              <div  class="row" *ngFor="let data of expDtl.bookmakerMarkets[0].horses">
                   <div class="col-6">
-                    <small class="text-center">{{data.RunnerName}}</small>
+                    <strong class="text-center">{{data.RunnerName}}</strong>
                   </div>
                   <div class="col-3">
-                    <small class="text-center">{{data.finalAmount}}</small>
+                    <strong *ngIf="data.finalAmount>0" class="text-center text-success">{{data.finalAmount}}</strong>
+                    <strong *ngIf="data.finalAmount<0" class="text-center text-danger">{{data.finalAmount}}</strong>
                   </div>
               </div>
             </div>

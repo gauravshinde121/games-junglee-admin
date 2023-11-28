@@ -86,7 +86,7 @@
               <td class="tds tdts">
                 <a class="pointer" (click)="getReportDetails(user.userId, user.gameCode)">{{ user.username }}</a>
               </td>
-              <td class="tds tdts">
+              <td class="tds tdts" [ngClass]="{'text-success': user.amount > 0, 'text-danger': user.amount < 0}">
                 {{ user.amount | indianCurrency }}
               </td>
               <td class="tds tdts">
@@ -99,8 +99,6 @@
           </tbody>
           <tfoot>
             <tr>
-              <td></td>
-              <td></td>
               <td></td>
               <td></td>
               <td class="text-success float-left text-center"

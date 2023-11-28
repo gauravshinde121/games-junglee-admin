@@ -90,6 +90,7 @@ export class CasinoReportComponent implements OnInit {
       this.isLoading = false;
       console.log('res',res);
       this.casinoStatements = res.casinoStatement.finalStatement;
+      this.totalAmount = this.casinoStatements.reduce((acc, crnt) => acc + crnt.amount, 0);
     });
   }
 
@@ -101,6 +102,7 @@ export class CasinoReportComponent implements OnInit {
     this._accountsService._getPlayerAccountStatementApi(payload).subscribe((res:any)=>{
       this.isLoading = false;
       this.casinoStatements = res.accountStatement;
+      this.totalAmount = this.casinoStatements.reduce((acc, crnt) => acc + crnt.amount, 0);
     });
   }
 

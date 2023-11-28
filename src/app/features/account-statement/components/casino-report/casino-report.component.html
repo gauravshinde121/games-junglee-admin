@@ -29,9 +29,19 @@
               <label>To Date</label>
               <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month" />
             </div>
-            <div class="col-md-3 btnmarginauto">
+            <div class="col-md-1 btnmarginauto">
               <button type="button" class="btn btn-pink rounded-pill mt-4" (click)="getCasinoReport()">
                 Search
+              </button>
+            </div>
+            <div class="col-lg-2 col-md-3 col-3 text-end">
+              <button
+                *ngIf="casinoStatements.length > 0"
+                type="button"
+                class="btn-sm btn-pink rounded-pill ms-2 text-white"
+                (click)="exportExcel()"
+              >
+                Export
               </button>
             </div>
           </div>

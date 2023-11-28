@@ -119,4 +119,24 @@ export class CasinoReportComponent implements OnInit {
     }
   }
 
+  exportExcel() {
+    let memberList: any = []
+    let mergedArray = [];
+
+      this.casinoStatements.forEach(element =>
+        //this.roles.forEach(elements => {
+          //if (this.selectedRoleId === elements.roleId){
+        memberList.push({
+          Username: element.username,
+          Amount: element.amount,
+          Status: element.status,
+          Date: element.date,
+        })
+      //}
+    //})
+    );
+
+      this._sharedService.exportExcel(memberList, this.fileName);
+  }
+
 }

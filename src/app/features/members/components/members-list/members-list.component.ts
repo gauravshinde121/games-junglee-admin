@@ -268,12 +268,11 @@ export class MembersListComponent implements OnInit {
 
 
   showExposureDetails(user){
-    console.log(user)
     this.exposureDataList = [];
     if(user.exposure == 0) return
 
     this._sharedService._getExposureDetailsApi(user.userId).subscribe((data:any)=>{
-      console.log(data)
+      // console.log(data)
 
       if(data){
         for(let d of data.exposureDetails){
@@ -289,7 +288,7 @@ export class MembersListComponent implements OnInit {
       }
 
       this.exposureData = this.exposureDataList;
-      console.log(this.exposureDataList)
+      // console.log(this.exposureDataList)
 
       this.openExposureViewModal(user.userId)
     })

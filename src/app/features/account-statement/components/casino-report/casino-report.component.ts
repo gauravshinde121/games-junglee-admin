@@ -88,7 +88,7 @@ export class CasinoReportComponent implements OnInit {
     }
     this._accountsService._getCasinoReportForAdminApi(body).subscribe((res:any)=>{
       this.isLoading = false;
-      console.log('res',res);
+      // console.log('res',res);
       this.casinoStatements = res.casinoStatement.finalStatement;
       this.totalAmount = this.casinoStatements.reduce((acc, crnt) => acc + crnt.amount, 0);
     });

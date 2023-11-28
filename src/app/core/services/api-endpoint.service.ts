@@ -462,6 +462,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_LADDER_FOR_ADMIN)
   }
 
+  public getLadderForAdminMemberListExposureEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_LADDER_FOR_ADMIN_MEMBER_LIST)
+  }
+
   public getCasinoProvideEndpoint(){
     return this.createUrl(this._constants.API_GET_CASINO_PROVIDER)
   }

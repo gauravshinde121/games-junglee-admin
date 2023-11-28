@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { MembersService } from '../../services/members.service';
 import { environment } from 'src/environments/environment';
+import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
 
 @Component({
   selector: 'app-members-list',
@@ -55,6 +56,7 @@ export class MembersListComponent implements OnInit {
   totalMembers = 0;
   allChecked = false;
   roleId: any;
+  ladderObj:any = [];
 
 
   fileName = 'MemberList.xlsx';
@@ -206,7 +208,8 @@ export class MembersListComponent implements OnInit {
     private _router: Router,
     private _sharedService: SharedService,
     private _memberService: MembersService,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private _bookMgmService:BookManagementService
   ) { }
 
   ngOnInit(): void {
@@ -264,6 +267,14 @@ export class MembersListComponent implements OnInit {
     this.modalNumber = 5;
     this.userId = userId;
     this.display = 'block';
+  }
+
+
+  getLadderDataByMarket(marketId){
+    this.ladderObj = [];
+    this._bookMgmService._postLadderMemberListDataByMarketApi({ marketId: marketId , myPt: false,memberId:this.userId}).subscribe((res: any) => {
+      this.ladderObj = res?.ladderDetails;
+    })
   }
 
 

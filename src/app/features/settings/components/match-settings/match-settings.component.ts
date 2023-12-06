@@ -59,6 +59,10 @@ export class MatchSettingsComponent implements OnInit {
       maxMatchOddsSize: new FormControl(null,Validators.required),
       maxBookmakerSize: new FormControl(null,Validators.required),
       maxFancySize: new FormControl(null,Validators.required),
+      maxFancySessionSize: new FormControl(null,Validators.required),
+      maxFancySessionMinBet: new FormControl(null,Validators.required),
+      maxFancySessionMaxBet: new FormControl(null,Validators.required),
+      maxFancySessionDelay: new FormControl(null,Validators.required),
     });
 
   }
@@ -120,6 +124,10 @@ export class MatchSettingsComponent implements OnInit {
       maxMatchOddsSize:matchSettings.maxMatchOddsSize,
       maxBookmakerSize:matchSettings.maxBookmakerSize,
       maxFancySize:matchSettings.maxFancySize,
+      maxFancySessionSize:matchSettings.maxFancySessionSize,
+      maxFancySessionMinBet:matchSettings.maxFancySessionMinBet,
+      maxFancySessionMaxBet:matchSettings.maxFancySessionMaxBet,
+      maxFancySessionDelay:matchSettings.maxFancySessionDelay,
 
     });
     this.display = 'block';
@@ -144,7 +152,11 @@ export class MatchSettingsComponent implements OnInit {
       fancyDelay: this.matchSettingsForm.value.fancyDelay,
       maxMatchOddsSize: this.matchSettingsForm.value.maxMatchOddsSize,
       maxBookmakerSize: this.matchSettingsForm.value.maxBookmakerSize,
-      maxFancySize: this.matchSettingsForm.value.maxFancySize
+      maxFancySize: this.matchSettingsForm.value.maxFancySize,
+      maxFancySessionSize: this.matchSettingsForm.value.maxFancySessionSize,
+      maxFancySessionMinBet: this.matchSettingsForm.value.maxFancySessionMinBet,
+      maxFancySessionMaxBet: this.matchSettingsForm.value.maxFancySessionMaxBet,
+      maxFancySessionDelay: this.matchSettingsForm.value.maxFancySessionDelay
     }
     this.settingsService._setBetLimitForMatchApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Match Settings', 'success');

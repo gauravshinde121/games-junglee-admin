@@ -779,7 +779,7 @@
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
-          Exposure Details &nbsp; <i class="fa fa-lock"></i>
+          Exposure Details 
         </h5>
         <button
           type="button"
@@ -840,16 +840,16 @@
                   <strong>Fancy Market Name</strong>
                 </div>
                 <div class="col-3">
-                 <strong>Max Win</strong> 
+                 <strong>Runs</strong> 
                 </div>
                 <div class="col-3">
-                  <strong>Max Lose</strong>
+                  <strong>P&L</strong>
                 </div>
               </div>
-              <div  class="row" *ngFor="let data of expDtl.fancyMarkets">
+              <div  class="row mb-3" *ngFor="let data of expDtl.fancyMarkets">
                   <div class="col-6">
                     <strong class="text-center">{{data.marketName}}</strong>
-                    <a
+                    <!-- <a
                                       data-bs-toggle="modal"
                                       href="#exampleModalToggle"
                                       role="button"
@@ -864,14 +864,51 @@
                                         src="/assets/images/ladder-icon.png"
                                         width="10px"
                                       />
-                                    </a>
+                                    </a> -->
                   </div>
-                  <div class="col-3">
-                    <strong class="text-center text-success">{{data.horses[0].maxWinAmount}}</strong>
+                  <div class="col-6">
+                   
+                    <div *ngFor="let ldr of data.ladder">
+                      <div class="row">
+                        <ng-container *ngIf="ldr['position'] != 'last'">
+                          <div
+                          class="col-6"
+                          *ngIf="ldr['startScore'] != ldr['endScore']"
+                          >
+                             {{ ldr["startScore"] }}-{{ ldr["endScore"] }}
+                        </div>
+
+                        <div
+                          class="col-6"
+                          *ngIf="ldr['startScore'] == ldr['endScore']">
+                                {{ ldr["startScore"] }}
+                          </div>
+                        </ng-container>
+
+                          <div
+                          *ngIf="ldr['position'] == 'last'"
+                          class="col-6"
+                          >
+                          {{ ldr["startScore"] }}+
+                        </div>
+
+                          <div class="col-6">
+                            <span
+                              [ngClass]="
+                                ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
+                              "
+                              >{{ ldr["amount"] }}</span
+                            >
+                          </div>
+                        
+                       
+                      </div>
+                      
+                    </div>
                   </div>
-                  <div class="col-3">
+                  <!-- <div class="col-3">
                     <strong class="text-center text-danger">{{data.horses[0].finalAmount}}</strong>
-                  </div>
+                  </div> -->
               </div>
             </div>
         </div>
@@ -902,7 +939,6 @@
         </div>
         <ng-container *ngIf="ladderObj && ladderObj.length > 0">
           <div *ngFor="let ldr of ladderObj">
-            <!-- {{ldr?['amount'] | json}} -->
             <div
               class="row border-bottom p-2"
               *ngIf="ldr['position'] != 'last'"

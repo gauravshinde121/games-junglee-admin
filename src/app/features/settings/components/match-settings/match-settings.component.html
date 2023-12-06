@@ -72,7 +72,7 @@
               <th scope="col" class="cursor-pointer" (click)="toggleSort('matchName')">Match Name</th>
               <th scope="col" class="cursor-pointer" (click)="toggleSort('openDate')">Date</th>
               <th scope="col">Setting</th>
-              <th scope="col" class="last" class="cursor-pointer" (click)="toggleSort('matchIsActive')">Action</th>
+              <!-- <th scope="col" class="last" class="cursor-pointer" (click)="toggleSort('matchIsActive')">Action</th> -->
             </tr>
           </thead>
           <tbody>
@@ -86,7 +86,7 @@
               <td (click)="openSettingModal(stmt)">
                 <i class="fa fa-cog cursor-pointer" aria-hidden="true"></i>
               </td>
-              <td>
+              <!-- <td>
                 <label class="toggle-container">
                   <input
                     [checked]="stmt.matchIsActive"
@@ -97,7 +97,7 @@
                   />
                   <span class="toggle-class-slider"></span>
                 </label>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
@@ -136,24 +136,120 @@
           <section class="section w-100 m-auto">
             <form [formGroup]="matchSettingsForm">
               <div class="row">
-                <div class="col-md-4 mb-2">
-                  Max Match Odds Market Size*
+                <div class="col-6 offset-3">
+                  <strong>MATCH ODDS SETTING</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <small>Min Bet*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="matchOddsMinBet" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <small>Max Bet*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="matchOddsMaxBet" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <small>Delay*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="matchOddDelay" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+                <div class="col-md-3 ">
+                 <small>Market Size*</small>
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
                     formControlName="maxMatchOddsSize" min="0" (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
-                <div class="col-md-4 mb-2">
-                  Max Bookmaker Market Size*
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-6 offset-3">
+                  <strong>BOOKMAKER SETTING</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <small>Min Bet*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="bookmakerMinBet" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <small>Max Bet*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="bookmakerMaxBet" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <small>Delay*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="bookmakerDelay" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+                <div class="col-md-3">
+                  <small>Market Size*</small>
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
                     formControlName="maxBookmakerSize" min="0" (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
-                <div class="col-md-4 mb-2">
-                  Max Fancy Market Size*
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-6 offset-3">
+                  <strong>FANCY SETTING (REGULAR)</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                 <small>Min Bet*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="fancyMinBet" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+
+                <div class="col-md-3">
+                 <small>Max Bet*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="fancyMaxBet" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+
+                <div class="col-md-3">
+                  <small>Delay*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="fancyDelay" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+                
+                <div class="col-md-3">
+                  <small>Market Size*</small>
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
@@ -161,88 +257,59 @@
                   />
                 </div>
               </div>
+              <br>
               <div class="row">
-                <div class="col-md-6 mb-2">
-                  Match Odds Min Bet*
-                  <input
-                    type="number"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="matchOddsMinBet" min="0" (keypress)="preventNegativeKeyPress($event)"
-                  />
+                <div class="col-6 offset-3">
+                  <strong>FANCY SETTING (SESSION)</strong>
                 </div>
-                <div class="col-md-6 mb-2">
-                  Match Odds Max Bet*
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                 <small>Min Bet*</small>
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="matchOddsMaxBet" min="0" (keypress)="preventNegativeKeyPress($event)"
-                  />
-                </div>
-                <div class="col-md-6 mb-2">
-                  Bookmaker Min Bet*
-                  <input
-                    type="number"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="bookmakerMinBet" min="0" (keypress)="preventNegativeKeyPress($event)"
-                  />
-                </div>
-                <div class="col-md-6 mb-2">
-                  Bookmaker Max Bet*
-                  <input
-                    type="number"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="bookmakerMaxBet" min="0" (keypress)="preventNegativeKeyPress($event)"
-                  />
-                </div>
-                <div class="col-md-6 mb-2">
-                  Fancy Min Bet*
-                  <input
-                    type="number"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="fancyMinBet" min="0" (keypress)="preventNegativeKeyPress($event)"
-                  />
-                </div>
-                <div class="col-md-6 mb-2">
-                  Fancy Max Bet*
-                  <input
-                    type="number"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="fancyMaxBet" min="0" (keypress)="preventNegativeKeyPress($event)"
-                  />
-                </div>
-                <div class="col-md-6 mb-2">
-                  Match Odds Delay*
-                  <input
-                    type="number"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="matchOddDelay" min="0" (keypress)="preventNegativeKeyPress($event)"
-                  />
-                </div>
-                <div class="col-md-6 mb-2">
-                  Bookmaker Delay*
-                  <input
-                    type="number"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="bookmakerDelay" min="0" (keypress)="preventNegativeKeyPress($event)"
-                  />
-                </div>
-                <div class="col-md-6 mb-2">
-                  Fancy Delay*
-                  <input
-                    type="number"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="fancyDelay" min="0" (keypress)="preventNegativeKeyPress($event)"
+                    formControlName="maxFancySessionMinBet" min="0" (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
 
+                <div class="col-md-3">
+                  <small>Max Bet*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="maxFancySessionMaxBet" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+
+                <div class="col-md-3">
+                 <small>Delay*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="maxFancySessionDelay" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+                
+                <div class="col-md-3">
+                  <small>Market Size*</small>
+                  <input
+                    type="number"
+                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    formControlName="maxFancySessionSize" min="0" (keypress)="preventNegativeKeyPress($event)"
+                  />
+                </div>
+              </div>
+          
+              <br>
                 <div class="row">
                   <div class="col-md-6 text-end">
                     <button
                       (click)="saveMatchSettings()"
                       [disabled]="matchSettingsForm.invalid"
-                      class="btn btn-danger rounded-pill w-80 mt-2"
+                      class="btn btn-success rounded-pill w-80 mt-2"
                     >
-                      Apply To All Markets
+                      Apply
                     </button>
                   </div>
                   <div class="col-md-6">
@@ -254,7 +321,7 @@
                     </button>
                   </div>
                 </div>
-              </div>
+             
             </form>
           </section>
         </div>

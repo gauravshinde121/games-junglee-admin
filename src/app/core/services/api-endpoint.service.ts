@@ -473,4 +473,15 @@ export class ApiEndpointsService {
   public getAdminAccountStatementEndpoint(){
     return this.createUrl(this._constants.API_GET_ADMIN_ACCOUNT_STATEMENT)
   }
+
+
+  public getToggleBetEndpoint(){
+    return this.createUrl(this._constants.API_URL_TOGGLEBET)
+  }
+
+  public getBetStatusEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_BET_STATUS)
+  }
+
+  
 }

@@ -38,6 +38,7 @@ export class CasinoReportDetailsComponent implements OnInit {
   ngOnInit(): void {
     this._preConfig();
   }
+  
 
   _preConfig(){
     this.route.params.subscribe(params => {
@@ -45,7 +46,7 @@ export class CasinoReportDetailsComponent implements OnInit {
       this.gameCode = params['gameCode'];
     });
     this._initForm();
-    this.getCasinoReportDetail();
+    this.getCasinoParams();
   }
 
   _initForm(){
@@ -54,6 +55,29 @@ export class CasinoReportDetailsComponent implements OnInit {
       toDate:new FormControl(this.formatFormDate(new Date())),
       providerId:new FormControl(null)
     })
+  }
+
+
+  getCasinoParams(){
+    const casinoParamsJSON:any = localStorage.getItem('casino-params');
+    const casinoParam = JSON.parse(casinoParamsJSON);
+    console.log(casinoParam)
+
+    let body = {
+      "gameCode":this.gameCode,
+      "memberId":this.userId,
+      "fromDate":casinoParam.fromDate,
+      "toDate":casinoParam.toDate
+    }
+    this._accountsService._getCasinoReportDetailForAdminApi(body).subscribe((res:any)=>{
+      this.isLoading = false;
+      console.log('res',res);
+      this.casinoStatements = res.accountDetails.accountStatement;
+      this.totalAmount = 0;
+      for(let stmt of this.casinoStatements){
+        this.totalAmount += stmt.credit+stmt.debit
+      }
+    });
   }
 
   formatFormDate(date: Date) {

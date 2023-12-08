@@ -115,14 +115,14 @@
           >
             <thead>
               <tr>
-                <th scope="col" class="first pointer">
+                <!-- <th scope="col" class="first pointer">
                   <input
                     type="checkbox"
                     name="all"
                     [checked]="isAllChecked()"
                     (change)="checkAll($event)"
                   />
-                </th>
+                </th> -->
                 <th scope="col" class="">
                   <i class="fa-sharp fa-regular fa-address-card"></i>
                 </th>
@@ -201,7 +201,7 @@
                   let i = index
                 "
               >
-                <td>
+                <!-- <td>
                   <input
                     type="checkbox"
                     class="pointer"
@@ -209,7 +209,7 @@
                     *ngIf="user.take > 0 || user.give > 0"
                     [(ngModel)]="user.state"
                   />
-                </td>
+                </td> -->
                 <td>
                   <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                   <span *ngIf="currentPage > 1">{{
@@ -328,7 +328,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
+                
                 <td>
                   {{ totalExposure | indianCurrency }}
                 </td>
@@ -343,7 +343,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
+              
               </tr>
             </tfoot>
           </table>
@@ -779,11 +779,11 @@
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
-          Exposure Details 
+          Exposure Details (Client Copy)
         </h5>
         <button
           type="button"
-          (click)="closeModal()"
+          (click)="closeExposureModal()"
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
@@ -806,8 +806,8 @@
                     <strong class="text-center">{{data.RunnerName}}</strong>
                   </div>
                   <div class="col-3">
-                    <strong *ngIf="data.finalAmount>0" class="text-center text-success">{{data.finalAmount}}</strong>
-                    <strong *ngIf="data.finalAmount<0" class="text-center text-danger">{{data.finalAmount}}</strong>
+                    <strong *ngIf="data.finalAmount*-1>0" class="text-center text-success">{{data.finalAmount*-1}}</strong>
+                    <strong *ngIf="data.finalAmount*-1<0" class="text-center text-danger">{{data.finalAmount*-1}}</strong>
                     <strong *ngIf="data.finalAmount==0" class="text-center">{{data.finalAmount}}</strong>
                   </div>
               </div>
@@ -827,8 +827,8 @@
                     <strong class="text-center">{{data.RunnerName}}</strong>
                   </div>
                   <div class="col-3">
-                    <strong *ngIf="data.finalAmount>0" class="text-center text-success">{{data.finalAmount}}</strong>
-                    <strong *ngIf="data.finalAmount<0" class="text-center text-danger">{{data.finalAmount}}</strong>
+                    <strong *ngIf="data.finalAmount*-1>0" class="text-center text-success">{{data.finalAmount*-1}}</strong>
+                    <strong *ngIf="data.finalAmount*-1<0" class="text-center text-danger">{{data.finalAmount*-1}}</strong>
                     <strong *ngIf="data.finalAmount==0" class="text-center">{{data.finalAmount}}</strong>
                   </div>
               </div>
@@ -849,22 +849,6 @@
               <div  class="row mb-3" *ngFor="let data of expDtl.fancyMarkets">
                   <div class="col-6">
                     <strong class="text-center">{{data.marketName}}</strong>
-                    <!-- <a
-                                      data-bs-toggle="modal"
-                                      href="#exampleModalToggle"
-                                      role="button"
-                                      class="laddericon"
-                                      (click)="
-                                        getLadderDataByMarket(
-                                          data['marketId']
-                                        )
-                                      "
-                                    >
-                                      <img
-                                        src="/assets/images/ladder-icon.png"
-                                        width="10px"
-                                      />
-                                    </a> -->
                   </div>
                   <div class="col-6">
                    
@@ -895,9 +879,9 @@
                           <div class="col-6">
                             <span
                               [ngClass]="
-                                ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
+                                ldr['amount']*-1 >= 0 ? 'text-success' : 'text-danger'
                               "
-                              >{{ ldr["amount"] }}</span
+                              >{{ ldr["amount"]*-1 }}</span
                             >
                           </div>
                         
@@ -910,6 +894,7 @@
                     <strong class="text-center text-danger">{{data.horses[0].finalAmount}}</strong>
                   </div> -->
               </div>
+              <hr class="text-white">
             </div>
         </div>
       </div>

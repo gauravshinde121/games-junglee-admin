@@ -1,5 +1,15 @@
 <main id="main" class="main m-0">
   <section class="section gamedetails">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p class="text-pink">
+          <a class="text-pink" routerLink="/account-statement/casino-report">
+            <i class="fa fa-1x fa-circle-chevron-left text-pink"></i>
+          </a>
+          Go Back
+        </p>
+      </div>
+      </div>
     <div class="row pb-1">
 
       <div class="col-md-12">
@@ -36,11 +46,11 @@
                 <i class="fa-solid fa-user text-white"></i> Username
               </th>
               <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('credit')">
-                <i class="fa-solid fa-user text-white"></i> Credit
+                <i class="fa-solid fa-user text-white"></i> Win/Loss
               </th>
-              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('debit')">
+              <!-- <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('debit')">
                 <i class="fa-solid fa-user"></i> Debit
-              </th>
+              </th> -->
               <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('remark')">
                 <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
                 Remark
@@ -62,10 +72,8 @@
                 <a class="pointer">{{ user.username }}</a>
               </td>
               <td class="tds tdts">
-                <a class="pointer">{{ user.credit }}</a>
-              </td>
-              <td class="tds tdts">
-                {{ user.debit | indianCurrency }}
+                <strong class="text-danger" *ngIf="user.debit<0">{{ user.debit | indianCurrency }}</strong>
+                <strong class="text-success" *ngIf="user.credit>0">{{ user.credit | indianCurrency }}</strong>
               </td>
               <td class="tds tdts">
                 {{ user.remark }}
@@ -79,9 +87,7 @@
             <tr>
               <td></td>
               <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td style="text-align: left;" [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | indianCurrency}}</td>
               <td></td>
               <td></td>
             </tr>

@@ -498,9 +498,13 @@ export class NetExposureViewTotalComponent implements OnInit {
         // if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
       err => {
+        console.log('err',err)
+        console.log(this.isPageDestroyed)
         if(!this.isPageDestroyed)this._getWebSocketUrl(true);
       }, // Called if at any point WebSocket API signals some kind of error.
       () => {
+        console.log('completed')
+        console.log(this.isPageDestroyed)
         if(!this.isPageDestroyed)this._getWebSocketUrl(true);
       } // Called when connection is closed (for whatever reason).
     );

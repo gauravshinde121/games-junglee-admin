@@ -93,6 +93,8 @@ export class Constants {
     public readonly API_URL_SET_MARKET_ACTIVE_STATUS:string = 'api/junglee-admin/setMarketStatusForMarketSettings';
     public readonly API_URL_SET_BET_LIMIT_FOR_MARKET:string = 'api/junglee-admin/setBetLimitForMarket';
     public readonly API_URL_SET_BET_LIMIT_FOR_MULTIPLE_MARKET:string = '/api/junglee-admin/setBetLimitForMultipleMarket';
+    public readonly API_URL_TOGGLEBET:string = 'api/toggleBet';
+    public readonly API_URL_GET_BET_STATUS:string = 'api/getBetStatus';
 
 
     //all logs

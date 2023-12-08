@@ -145,6 +145,7 @@ export class MembersListComponent implements OnInit {
   };
 
   adjustWinningsForSingleUser(user, isGiven) {
+    return
     this.userId = user.userId;
     var adjustWinningsForSingleUserValue: number;
     if (isGiven) {
@@ -492,6 +493,11 @@ export class MembersListComponent implements OnInit {
     // this.isAllUnChecked();
     this.display = 'none';
     this.changePasswordForm.reset();
+  }
+
+
+  closeExposureModal(){
+    this.display = 'none';
   }
 
   updateGameControl(status: any, sportsId) {

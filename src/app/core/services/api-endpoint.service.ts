@@ -155,6 +155,11 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ADMIN_INFO);
   }
 
+  public getExposureDetailEndpoint(): string {
+    return this.createUrl(this._constants.API_URL_GET_EXPOSURE_DETAILS);
+  }
+
+
   public getAllUserEndpoint():string{
     return this.createUrl(this._constants.API_URL_ALL_USERS);
   }
@@ -192,9 +197,22 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_PLAYERWISE_ACCOUNT_STATEMENT);
   }
 
+  public getCasinoReportDetailForAdminEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_CASINO_REPORT_DETAIL);
+  }
+
+  public getCasinoReportForAdminEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_CASINO_REPORT);
+  }
+
   public getPlayerListEndpoint(){
     return this.createUrl(this._constants.API_URL_PLAYER_LIST);
   }
+
+  public getCasinoProvidersEndpoint(){
+    return this.createUrl(this._constants.API_URL_CASINO_PROVIDERS_LIST);
+  }
+
 
   public updateGameControlEndpoint(){
     return this.createUrl(this._constants.API_URL_UPDATE_GAME_CONTROL);
@@ -444,6 +462,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_LADDER_FOR_ADMIN)
   }
 
+  public getLadderForAdminMemberListExposureEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_LADDER_FOR_ADMIN_MEMBER_LIST)
+  }
+
   public getCasinoProvideEndpoint(){
     return this.createUrl(this._constants.API_GET_CASINO_PROVIDER)
   }
@@ -451,4 +473,15 @@ export class ApiEndpointsService {
   public getAdminAccountStatementEndpoint(){
     return this.createUrl(this._constants.API_GET_ADMIN_ACCOUNT_STATEMENT)
   }
+
+
+  public getToggleBetEndpoint(){
+    return this.createUrl(this._constants.API_URL_TOGGLEBET)
+  }
+
+  public getBetStatusEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_BET_STATUS)
+  }
+
+  
 }

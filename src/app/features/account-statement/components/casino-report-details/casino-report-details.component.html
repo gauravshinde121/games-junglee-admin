@@ -1,0 +1,100 @@
+<main id="main" class="main m-0">
+  <section class="section gamedetails">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <p class="text-pink">
+          <a class="text-pink" routerLink="/account-statement/casino-report">
+            <i class="fa fa-1x fa-circle-chevron-left text-pink"></i>
+          </a>
+          Go Back
+        </p>
+      </div>
+      </div>
+    <div class="row pb-1">
+
+      <div class="col-md-12">
+        <div class="row">
+          <h4 class="text-pink">
+            <img src="/assest/images/list_transfer.png" alt="" /> Casino Report Details
+          </h4>
+          <hr />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- <section class="section gamedetails mt-3"> -->
+  <div class="row mt-3">
+    <div class="col-md-12 tablescroll ">
+      <div *ngIf="casinoStatements.length == 0" class="border text-center p-5">
+        <h4 *ngIf="casinoStatements.length == 0 && !isLoading">
+          No data found
+        </h4>
+        <h4 *ngIf="isLoading">Loading...</h4>
+      </div>
+
+      <div class="table-responsive tableRes tableFixHead">
+        <table class="table text-white tableall b-0" *ngIf="casinoStatements.length > 0">
+          <tbody>
+            <tr>
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('createdDate')">
+                <i class="fa-regular fa-calendar-days"></i>&nbsp;
+                Sr No
+              </th>
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('username')">
+                <i class="fa-solid fa-user text-white"></i> Username
+              </th>
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('credit')">
+                <i class="fa-solid fa-user text-white"></i> Win/Loss
+              </th>
+              <!-- <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('debit')">
+                <i class="fa-solid fa-user"></i> Debit
+              </th> -->
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('remark')">
+                <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
+                Remark
+              </th>
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('date')">
+                <i class="fa-solid fa-text-width"></i> Date
+              </th>
+            </tr>
+
+            <tr *ngFor="let user of casinoStatements | sort:sortColumn:sortAscending; let i = index">
+              <td class="tds tdts">
+                <!-- *ngIf="currentPage == 1" -->
+                <span>{{ i + 1 }}</span>
+                <!-- <span *ngIf="currentPage > 1">{{
+                i + 1 + (currentPage - 1) * limit
+              }}</span> -->
+              </td>
+              <td class="tds tdts">
+                <a class="pointer">{{ user.username }}</a>
+              </td>
+              <td class="tds tdts">
+                <strong class="text-danger" *ngIf="user.debit<0">{{ user.debit | indianCurrency }}</strong>
+                <strong class="text-success" *ngIf="user.credit>0">{{ user.credit | indianCurrency }}</strong>
+              </td>
+              <td class="tds tdts">
+                {{ user.remark }}
+              </td>
+              <td class="tds tdts">
+                {{ user.date | date : "medium" }}
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="text-align: left;" [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | indianCurrency}}</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</main>

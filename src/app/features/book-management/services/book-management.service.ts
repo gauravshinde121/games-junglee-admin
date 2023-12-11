@@ -31,5 +31,9 @@ export class BookManagementService {
     return this._apiHttpService.post(this._apiEndpointsService.getLadderForAdminEndpoint(),bodyObj)
   }
 
+  _postLadderMemberListDataByMarketApi(bodyObj:any){
+    return this._apiHttpService.post(this._apiEndpointsService.getLadderForAdminMemberListExposureEndpoint(),bodyObj)
+  }
+
   
 }

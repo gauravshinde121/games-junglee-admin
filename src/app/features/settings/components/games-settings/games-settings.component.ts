@@ -58,6 +58,7 @@ export class GamesSettingsComponent implements OnInit {
   }
 
   _onSportSelect(){
+    this.marketList = [];
     if(this.sportId == null ||this.sportId == 'null' ) {
       this.filterForm.value.tournamentId = null;
     }
@@ -73,6 +74,7 @@ export class GamesSettingsComponent implements OnInit {
   }
 
   _onTournamentSelect(){
+    this.marketList = [];
     var tournamentId = this.filterForm.value.tournamentId;
     if(!tournamentId) return
     this.filterForm.patchValue({ matchName:null});
@@ -83,7 +85,8 @@ export class GamesSettingsComponent implements OnInit {
     });
   }
 
-  getMarketByMatchId(marketTypeId){
+  getMarketByMatchId(){
+    
     let body = {
       marketIsActive: null,
       sportId: this.filterForm.value.sportName?+this.filterForm.value.sportName:null,
@@ -93,7 +96,7 @@ export class GamesSettingsComponent implements OnInit {
 
     this.settingsService._getMarketForAdminMarketSettingsListApi(body).subscribe((data: any) => {
       this.isLoading = false;
-      const filteredMarketData = data.markets.filter((item) => item.marketTypeId === Number(marketTypeId.value));
+      const filteredMarketData = data.markets.filter((item) => +item.marketTypeId === 12);
       /*const parsedMarketData = filteredMarketData.map(item => {
         const parsedRunner = JSON.parse(item.runners);
         return { ...item, runners: parsedRunner };

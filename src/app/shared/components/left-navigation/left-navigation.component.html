@@ -88,6 +88,11 @@
               <a (click)="storePath('/account-statement/playerwise-account-statement')" routerLink="/account-statement/playerwise-account-statement"
                 class="nav-link small ps-5">Player-wise Account Statement</a>
             </li>
+            <li [routerLinkActive]="currentPath == '/account-statement/casino-report'?'active':''"
+              [ngClass]="currentPath == '/account-statement/casino-report'?'active':''">
+              <a (click)="storePath('/account-statement/casino-report')" routerLink="/account-statement/casino-report"
+                class="nav-link small ps-5">Casino Report</a>
+            </li>
             <!-- <li [routerLinkActive]="currentPath == '/account-statement/my-account-statement'?'active':''" [ngClass]="currentPath == '/account-statement/my-account-statement'?'active':''">
               <a
               (click)="storePath('/account-statement/my-account-statement')"

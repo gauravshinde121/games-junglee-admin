@@ -6139,7 +6139,16 @@ fieldset:disabled .btn {
     margin: 1.75rem auto;
   }
 
+  .exposure-dialog {
+    max-width: 900px;
+    margin: 1.75rem auto;
+  }
+
   .modal-dialog-scrollable {
+    height: calc(100% - 3.5rem);
+  }
+
+  .exposure-dialog-scrollable {
     height: calc(100% - 3.5rem);
   }
 
@@ -6147,7 +6156,15 @@ fieldset:disabled .btn {
     min-height: calc(100% - 3.5rem);
   }
 
+  .exposure-dialog-centered {
+    min-height: calc(100% - 3.5rem);
+  }
+
   .modal-sm {
+    max-width: 300px;
+  }
+
+  .exposure-sm {
     max-width: 300px;
   }
 }

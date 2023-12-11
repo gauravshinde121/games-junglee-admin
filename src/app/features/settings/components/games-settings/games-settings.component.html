@@ -45,6 +45,7 @@
               formControlName="matchName"
               id="ab"
               class="form-select bg-dgrey pointer"
+              (change)="getMarketByMatchId()"
             >
               <option value="null">All</option>
               <option *ngFor="let game of matchList" [value]="game.matchId">
@@ -52,20 +53,21 @@
               </option>
             </select>
           </div>
-          <div class="col-md-3">
+          <!-- <div class="col-md-3">
             <label>Market Type</label>
             <select
               formControlName="marketType"
               id="ab"
+              #marketTypeId
               class="form-select bg-dgrey pointer"
-              (change)="getMarketByMatchId($event.target)"
+              (change)="getMarketByMatchId(marketTypeId.value)"
             >
               <option value="0" disabled>--</option>
               <option value="1">Match Odds</option>
               <option value="12">Bookmaker</option>
-              <option value="12">Fancy</option>
+              <option value="10">Fancy</option>
             </select>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-md-12 mt-3 overflow-auto">

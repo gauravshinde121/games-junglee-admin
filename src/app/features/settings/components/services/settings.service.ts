@@ -59,4 +59,13 @@ export class SettingsService {
     _setBetLimitForMultipleMarketApi(filterObj){
       return this._apiHttpService.post(this._apiEndpointsService.setBetLimitForMultipleMarketEndpoint(),filterObj)
     }
+
+
+    _toggleBetApi(status){
+      return this._apiHttpService.post(this._apiEndpointsService.getToggleBetEndpoint(),status)
+    }
+
+    _getBetStatusApi(){
+      return this._apiHttpService.get(this._apiEndpointsService.getBetStatusEndpoint())
+    }
 }

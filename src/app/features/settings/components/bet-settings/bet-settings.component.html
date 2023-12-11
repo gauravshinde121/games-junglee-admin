@@ -113,6 +113,25 @@
           <h3 class="text-pink">Bet Settings</h3>
         </div>
       </div>
+      <div class="row align-items-end">
+        <div class="col-md-6 mb-3">
+          Turn Bet On/Off
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="toggle-container">
+                  
+            <input
+              [checked]="betStatus"
+              type="checkbox"
+              id="toggle-button"
+              class="toggle-class active"
+              (change)="_toggleBetStatus(betStatus=!betStatus)"
+            />
+            <span class="toggle-class-slider"></span>
+          </label>
+        </div>
+        <hr class="text-white">
+      </div>
       <div class="row mb-3 align-items-end">
         <div class="col-md-3">
           <label>Select Member</label>

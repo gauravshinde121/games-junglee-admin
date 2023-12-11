@@ -10,6 +10,9 @@ import { AllBetsComponent } from './components/all-bets/all-bets.component'
 import { MyAccountStatementComponent } from './components/my-account-statement/my-account-statement.component';
 import { PlayerAccountStatementComponent } from './components/player-account-statement/player-account-statement.component';
 import { PlayerwiseAccountStatementComponent } from './components/playerwise-account-statement/playerwise-account-statement.component';
+import { CasinoReportComponent } from './components/casino-report/casino-report.component';
+import { CasinoReportDetailsComponent } from './components/casino-report-details/casino-report-details.component';
+
 const routes: Routes = [{
     path: 'account-statement', component: AccountStatementMainComponent,
     children: [
@@ -21,7 +24,9 @@ const routes: Routes = [{
       { path: 'commission', component: CommissionComponent },
       { path: 'my-account-statement', component: MyAccountStatementComponent },
       { path: 'player-account-statement', component: PlayerAccountStatementComponent },
-      { path: 'playerwise-account-statement', component: PlayerwiseAccountStatementComponent }
+      { path: 'playerwise-account-statement', component: PlayerwiseAccountStatementComponent },
+      { path: 'casino-report', component: CasinoReportComponent },
+      { path: 'casino-report-details/:userId/:gameCode', component: CasinoReportDetailsComponent }
     ]
 }];
 

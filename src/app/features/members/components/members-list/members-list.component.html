@@ -115,14 +115,14 @@
           >
             <thead>
               <tr>
-                <th scope="col" class="first pointer">
+                <!-- <th scope="col" class="first pointer">
                   <input
                     type="checkbox"
                     name="all"
                     [checked]="isAllChecked()"
                     (change)="checkAll($event)"
                   />
-                </th>
+                </th> -->
                 <th scope="col" class="">
                   <i class="fa-sharp fa-regular fa-address-card"></i>
                 </th>
@@ -201,7 +201,7 @@
                   let i = index
                 "
               >
-                <td>
+                <!-- <td>
                   <input
                     type="checkbox"
                     class="pointer"
@@ -209,7 +209,7 @@
                     *ngIf="user.take > 0 || user.give > 0"
                     [(ngModel)]="user.state"
                   />
-                </td>
+                </td> -->
                 <td>
                   <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                   <span *ngIf="currentPage > 1">{{
@@ -238,7 +238,8 @@
                 </td>
                 <td class="text-center">{{ user.creditLimit | indianCurrency }}</td>
                 <td
-                  class="text-center"
+                (click)="showExposureDetails(user)"
+                  class="text-center pointer"
                   [ngClass]="user.exposure > 0 ? 'text-danger' : ''"
                 >
                   {{ user.exposure | indianCurrency }}
@@ -327,8 +328,10 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
+                
+                <td>
+                  {{ totalExposure | indianCurrency }}
+                </td>
                 <td class="text-success text-center">
                   {{ totalTake | indianCurrency }}
                 </td>
@@ -340,7 +343,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
+              
               </tr>
             </tfoot>
           </table>
@@ -759,4 +762,222 @@
   </div>
 </div>
 
+
+
+<div
+  *ngIf="modalNumber == 5"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="exposure-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          Exposure Details (Client Copy)
+        </h5>
+        <button
+          type="button"
+          (click)="closeExposureModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body bg-dark_new text-white">
+        <div class="row" *ngFor="let expDtl of exposureDataList">
+            <h4>{{expDtl.matchName}}</h4>
+            <div *ngIf="expDtl.matchOddsMarket.length>0">
+              <div class="row" >
+                <div class="col-6">
+                  <strong>MATCH ODDS</strong>
+                </div>
+                <div class="col-3">
+                 <strong>Win/Loss</strong> 
+                </div>
+              </div>
+              <div  class="row" *ngFor="let data of expDtl.matchOddsMarket[0].horses">
+                  <div class="col-6">
+                    <strong class="text-center">{{data.RunnerName}}</strong>
+                  </div>
+                  <div class="col-3">
+                    <strong *ngIf="data.finalAmount*-1>0" class="text-center text-success">{{data.finalAmount*-1}}</strong>
+                    <strong *ngIf="data.finalAmount*-1<0" class="text-center text-danger">{{data.finalAmount*-1}}</strong>
+                    <strong *ngIf="data.finalAmount==0" class="text-center">{{data.finalAmount}}</strong>
+                  </div>
+              </div>
+              <hr class="text-white">
+            </div>
+            <div *ngIf="expDtl.bookmakerMarkets.length>0">
+              <div class="row" >
+                <div class="col-6">
+                  <strong>BOOKMAKER</strong>
+                </div>
+                <div class="col-3">
+                 <strong>Win/Loss</strong> 
+                </div>
+              </div>
+              <div  class="row" *ngFor="let data of expDtl.bookmakerMarkets[0].horses">
+                  <div class="col-6">
+                    <strong class="text-center">{{data.RunnerName}}</strong>
+                  </div>
+                  <div class="col-3">
+                    <strong *ngIf="data.finalAmount*-1>0" class="text-center text-success">{{data.finalAmount*-1}}</strong>
+                    <strong *ngIf="data.finalAmount*-1<0" class="text-center text-danger">{{data.finalAmount*-1}}</strong>
+                    <strong *ngIf="data.finalAmount==0" class="text-center">{{data.finalAmount}}</strong>
+                  </div>
+              </div>
+              <hr class="text-white">
+            </div>
+            <div *ngIf="expDtl.fancyMarkets.length>0">
+              <div class="row" >
+                <div class="col-6">
+                  <strong>Fancy Market Name</strong>
+                </div>
+                <div class="col-3">
+                 <strong>Runs</strong> 
+                </div>
+                <div class="col-3">
+                  <strong>P&L</strong>
+                </div>
+              </div>
+              <div  class="row mb-3" *ngFor="let data of expDtl.fancyMarkets">
+                  <div class="col-6">
+                    <strong class="text-center">{{data.marketName}}</strong>
+                  </div>
+                  <div class="col-6">
+                   
+                    <div *ngFor="let ldr of data.ladder">
+                      <div class="row">
+                        <ng-container *ngIf="ldr['position'] != 'last'">
+                          <div
+                          class="col-6"
+                          *ngIf="ldr['startScore'] != ldr['endScore']"
+                          >
+                             {{ ldr["startScore"] }}-{{ ldr["endScore"] }}
+                        </div>
+
+                        <div
+                          class="col-6"
+                          *ngIf="ldr['startScore'] == ldr['endScore']">
+                                {{ ldr["startScore"] }}
+                          </div>
+                        </ng-container>
+
+                          <div
+                          *ngIf="ldr['position'] == 'last'"
+                          class="col-6"
+                          >
+                          {{ ldr["startScore"] }}+
+                        </div>
+
+                          <div class="col-6">
+                            <span
+                              [ngClass]="
+                                ldr['amount']*-1 >= 0 ? 'text-success' : 'text-danger'
+                              "
+                              >{{ ldr["amount"]*-1 }}</span
+                            >
+                          </div>
+                        
+                       
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <!-- <div class="col-3">
+                    <strong class="text-center text-danger">{{data.horses[0].finalAmount}}</strong>
+                  </div> -->
+              </div>
+              <hr class="text-white">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop fade" *ngIf="showModal"></div>
+
+
+<div
+  class="modal fade"
+  id="exampleModalToggle"
+  aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content modalradius">
+      <!-- <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> -->
+      <div class="modal-body text-center p-4 pb-3">
+        <div class="row border-bottom p-2">
+          <div class="col-md-6">Runs</div>
+          <div class="col-md-6">P&L</div>
+        </div>
+        <ng-container *ngIf="ladderObj && ladderObj.length > 0">
+          <div *ngFor="let ldr of ladderObj">
+            <div
+              class="row border-bottom p-2"
+              *ngIf="ldr['position'] != 'last'"
+            >
+              <div
+                class="col-md-6"
+                *ngIf="ldr['startScore'] != ldr['endScore']"
+              >
+                {{ ldr["startScore"] }}-{{ ldr["endScore"] }}
+              </div>
+              <div
+                class="col-md-6"
+                *ngIf="ldr['startScore'] == ldr['endScore']"
+              >
+                {{ ldr["startScore"] }}
+              </div>
+              <div class="col-md-6">
+                <span
+                  [ngClass]="
+                    ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
+                  "
+                  >{{ ldr["amount"] }}</span
+                >
+              </div>
+            </div>
+            <div
+              class="row border-bottom p-2 bg-light"
+              *ngIf="ldr['position'] == 'last'"
+            >
+              <ng-container>
+                <div class="col-md-6">{{ ldr["startScore"] }}+</div>
+              </ng-container>
+              <div class="col-md-6">
+                <span
+                  [ngClass]="
+                    ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
+                  "
+                  >{{ ldr["amount"] }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <div class="row">
+          <button
+            class="btn col-md-4 mt-3 btn-outline-pink border-0"
+            data-bs-target="#exampleModalToggle2"
+            data-bs-toggle="modal"
+            data-bs-dismiss="modal"
+          >
+            CLOSE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

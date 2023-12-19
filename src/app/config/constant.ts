@@ -136,5 +136,10 @@ export class Constants {
     public readonly API_GET_ADMIN_ACCOUNT_STATEMENT: string = 'api/junglee-admin/getAdminAccountStatement';
 
 
+    //BANK
+    public readonly API_GET_ADJUST_CASINO_AMOUNT: string = 'api/junglee-admin/settleCasinoAmount';
+    public readonly API_GET_CASINO_SUMMARY: string = 'api/junglee-admin/getCasinoWinSummary';
+
+
 
 }

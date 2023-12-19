@@ -6139,6 +6139,12 @@ fieldset:disabled .btn {
     margin: 1.75rem auto;
   }
 
+
+  .casino-summary-modal-dialog {
+    max-width: 70rem;
+    margin: 1.75rem auto;
+  }
+
   .exposure-dialog {
     max-width: 900px;
     margin: 1.75rem auto;

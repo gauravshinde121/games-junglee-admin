@@ -26,10 +26,11 @@ export class BankDetailsComponent implements OnInit {
   userId: any;
   totalTake = 0;
   totalGive = 0;
+  totalCasino = 0;
   liveCasinoRate: any;
   sportsBook: any;
   clubCasino: any;
-
+  casinoSummary:any = [];
   eventStatus: any = [];
   gameStatus: any = [];
   roles: any = [];
@@ -51,7 +52,7 @@ export class BankDetailsComponent implements OnInit {
   selectedColor = "";
   disableSubmit = false;
   totalMembers = 0;
-
+  totalAmount = 0;
 
   fileName = 'BankTransfer.xlsx';
 
@@ -161,6 +162,21 @@ export class BankDetailsComponent implements OnInit {
       this._getAllUserInfo();
 
     });
+  }
+
+
+  openCasinoSummary(user){
+    this.modalNumber = 6;
+    this.userDetails = user;
+    this.display = 'block';
+    this.casinoSummary = [];
+    this.totalAmount = 0;
+    console.log(user.userId)
+    this._sharedService._getCasinoSummaryApi(user.userId).subscribe((res:any)=>{
+      console.log(res)
+      this.casinoSummary = res.casinoSummary.finalStatement;
+      this.totalAmount = this.casinoSummary.reduce((acc, crnt) => acc + crnt.amount, 0);
+    })
   }
 
   resetForm() {
@@ -301,6 +317,7 @@ export class BankDetailsComponent implements OnInit {
       this.userList = users.memberData.memberList;
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
+      this.totalCasino = this.userList.reduce((acc, crnt) => acc + crnt.casinoWinnings, 0);
       this.totalPages = Math.ceil(users.memberData.filteredRecords / this.pageSize);
       this.totalMembers = users.memberData.filteredRecords;
     });
@@ -361,6 +378,41 @@ export class BankDetailsComponent implements OnInit {
     //}
   }
 
+
+  openCasinoSettlement(user, isGiven){
+    this.userId = user.userId;
+    var adjustWinningsForSingleUserValue: number;
+    adjustWinningsForSingleUserValue = user.casinoWinnings;
+    this.createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue);
+    this.adjustWinningsForSingleUserForm.patchValue({ 'amount': user.casinoWinnings });
+    this.modalNumber = 5;
+    this.userDetails = user;
+    this.isGiven = isGiven;
+    this.display = 'block';
+  }
+
+
+
+  postAdjustCasinoWinnings(){
+
+    let body = {
+      "userId": this.userId,
+      "amount": this.adjustWinningsForSingleUserForm.value.amount,
+      "isGiven": this.isGiven,
+      "description" : this.adjustWinningsForSingleUserForm.value.description,
+      "ipAddress" : this._sharedService.getIpAddress()
+    }
+    
+    this.closeModal();
+
+    this._sharedService._adjustCasinoApi(body).subscribe((res)=>{
+      this._sharedService.getToastPopup('Casino amount Adjusted', 'Adjust Winnings', 'success');
+      this._sharedService.callAdminDetails.next(true);
+      this._getAllUserInfo();
+
+    })
+  }
+
   openModal(userId) {
     this.modalNumber = 2;
     this.userId = userId;
@@ -386,6 +438,13 @@ export class BankDetailsComponent implements OnInit {
     this._getAllUserInfo();
     this.display = 'none';
     // this.changePasswordForm.reset();
+  }
+
+
+  closeCasnioSummaryModal() {
+    this.selectedUserForAdjustment = [];
+    this.casinoSummary = [];
+    this.display = 'none';
   }
 
   updateGameControl(status: any, sportsId) {

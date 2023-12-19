@@ -96,6 +96,11 @@ export class SharedService {
       .post(this._apiEndpointsService.getAdjustWinningsEndpoint(), userList);
   }
 
+  _adjustCasinoApi(adjustObj) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getAdjustCasinoEndpoint(), adjustObj);
+  }
+
   copy(text: string){
     this._clipboardService.copy(text)
   }
@@ -294,6 +299,12 @@ export class SharedService {
  _getExposureDetailsApi(userId) {
   return this._apiHttpService
     .post(this._apiEndpointsService.getExposureDetailEndpoint(),{userId});
+}
+
+
+_getCasinoSummaryApi(memberId){
+  return this._apiHttpService
+    .post(this._apiEndpointsService.getCasinoSummaryEndpoint(),{memberId});
 }
 
 

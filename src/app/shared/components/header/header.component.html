@@ -86,7 +86,7 @@
   </div>
   <div class="col-md-8 col-8 smallMobileHide">
     <div class="row">
-      <div class="col-md-4 col-4">
+      <div class="col-md-3 col-3">
         <div class="balance-first">
           <div class="balance">
             <p>
@@ -97,7 +97,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-4">
+      <div class="col-md-3 col-3">
         <div class="balance-up">
           <div class="balance">
             <p>
@@ -109,7 +109,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-4">
+      <div class="col-md-3 col-3">
         <div class="balance-down">
           <div class="balance">
             <p>
@@ -118,6 +118,23 @@
               <span>BALANCE DOWN</span>&nbsp;
               <i class="fa-regular fa-circle-down"></i>
             </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-3">
+        <div class="casino-summary">
+          <div class="balance">
+            <div class="row text-center">
+              <div class="col-12">
+                <small class="ml-2"> BALANCE UP {{ adminDetails?.casinoBalanceUp | number }}</small>
+              </div>
+              <div class="col-12">
+                <small class="ml-2">BALANCE DOWN {{ adminDetails?.casinoBalanceDown | number }}  </small>
+              </div>
+              <div class="col-12 text-center">
+                <span>CASINO SUMMARY</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -134,7 +151,7 @@
 
   <div class="col-md-12 smallMobileShow mt-3">
     <div class="row">
-      <div class="col-md-4 col-4">
+      <div class="col-md-3 col-3">
         <div class="balance-first">
           <div class="balance">
             <p>
@@ -145,7 +162,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-4">
+      <div class="col-md-3 col-3">
         <div class="balance-up">
           <div class="balance">
             <p>
@@ -157,7 +174,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-4">
+      <div class="col-md-3 col-3">
         <div class="balance-down">
           <div class="balance">
             <p>
@@ -166,6 +183,23 @@
               <span>BALANCE DOWN</span>&nbsp;
               <i class="fa-regular fa-circle-down"></i>
             </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-3">
+        <div class="casino-summary">
+          <div class="balance">
+            <div class="row text-center">
+              <div class="col-12">
+                <small class="ml-2"> BALANCE UP {{ adminDetails?.casinoBalanceUp | indianCurrency }}</small>
+              </div>
+              <div class="col-12">
+                <small class="ml-2">BALANCE DOWN {{ adminDetails?.casinoBalanceDown | indianCurrency }}  </small>
+              </div>
+              <div class="col-12 text-center">
+                <span>CASINO SUMMARY</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

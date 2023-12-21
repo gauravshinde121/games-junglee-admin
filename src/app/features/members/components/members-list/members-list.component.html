@@ -271,7 +271,8 @@
                     *ngIf="user.casinoWinnings > 0"
                     >{{ user.casinoWinnings | indianCurrency }}</span
                   >
-                  <span class="text-danger" *ngIf="user.casinoWinnings <= 0">{{ user.casinoWinnings | indianCurrency }}</span>
+                  <span class="pointer text-danger" *ngIf="user.casinoWinnings < 0">{{ user.casinoWinnings | indianCurrency }}</span>
+                  <span *ngIf="user.casinoWinnings == 0">{{ user.casinoWinnings | indianCurrency }}</span>
                 </td>
                 <td class="text-center">{{ user.availableCredit | indianCurrency }}</td>
                 <td *ngIf="selectedRoleId != 7" class="text-center">

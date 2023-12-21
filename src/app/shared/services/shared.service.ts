@@ -308,5 +308,17 @@ _getCasinoSummaryApi(memberId){
 }
 
 
+_getPubSubStatusApi(){
+  return this._apiHttpService
+    .get(this._apiEndpointsService.getPubSubStatusEndpoint());
+}
+
+
+_getStartWebJobApi(status){
+  return this._apiHttpService
+    .post(this._apiEndpointsService.getStartWebJobEndpoint(),{status:status});
+}
+
+
 }
 

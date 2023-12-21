@@ -493,5 +493,13 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_GET_CASINO_SUMMARY)
   }
 
+  public getPubSubStatusEndpoint(){
+    return this.createUrl(this._constants.API_GET_PUBSUB_STATUS)
+  }
+
+  public getStartWebJobEndpoint(){
+    return this.createUrl(this._constants.API_START_WEBJOB)
+  }
+
   
 }

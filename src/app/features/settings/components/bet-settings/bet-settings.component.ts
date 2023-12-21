@@ -27,7 +27,7 @@ export class BetSettingsComponent implements OnInit {
   gameId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
-  betStatus:any = false;
+  
   betTickerForm: FormGroup;
   deleteBetForm: FormGroup;
 
@@ -78,20 +78,7 @@ export class BetSettingsComponent implements OnInit {
   }
 
 
-  _getBetStatus(){
-    this._settingService._getBetStatusApi().subscribe((data:any)=>{
-      console.log(data)
-      this.betStatus = data.betStatus
-    });
-  }
-
-  _toggleBetStatus(status){
-    console.log(this.betStatus)
-    this._settingService._toggleBetApi({allowBet:this.betStatus}).subscribe((res)=>{
-      console.log(res)
-      this._getBetStatus()
-    })
-  }
+ 
 
   _getMarketsByMatchId(matchId){
     this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
@@ -106,7 +93,7 @@ export class BetSettingsComponent implements OnInit {
     this._initForm();
     this._getGames();
     this._getAllMembers();
-    this._getBetStatus();
+    
   }
 
   _getAllMembers(){

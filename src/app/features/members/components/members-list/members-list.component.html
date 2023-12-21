@@ -811,9 +811,9 @@
                     <strong class="text-center">{{data.RunnerName}}</strong>
                   </div>
                   <div class="col-3">
-                    <strong *ngIf="data.finalAmount*-1>0" class="text-center text-success">{{data.finalAmount*-1}}</strong>
-                    <strong *ngIf="data.finalAmount*-1<0" class="text-center text-danger">{{data.finalAmount*-1}}</strong>
-                    <strong *ngIf="data.finalAmount==0" class="text-center">{{data.finalAmount}}</strong>
+                    <strong *ngIf="data.finalAmount*-1>0" class="text-center text-success">{{data.finalAmount*-1 | number}}</strong>
+                    <strong *ngIf="data.finalAmount*-1<0" class="text-center text-danger">{{data.finalAmount*-1 | number}}</strong>
+                    <strong *ngIf="data.finalAmount==0" class="text-center">{{data.finalAmount | number}}</strong>
                   </div>
               </div>
               <hr class="text-white">
@@ -832,9 +832,9 @@
                     <strong class="text-center">{{data.RunnerName}}</strong>
                   </div>
                   <div class="col-3">
-                    <strong *ngIf="data.finalAmount*-1>0" class="text-center text-success">{{data.finalAmount*-1}}</strong>
-                    <strong *ngIf="data.finalAmount*-1<0" class="text-center text-danger">{{data.finalAmount*-1}}</strong>
-                    <strong *ngIf="data.finalAmount==0" class="text-center">{{data.finalAmount}}</strong>
+                    <strong *ngIf="data.finalAmount*-1>0" class="text-center text-success">{{data.finalAmount*-1 | number}}</strong>
+                    <strong *ngIf="data.finalAmount*-1<0" class="text-center text-danger">{{data.finalAmount*-1 | number}}</strong>
+                    <strong *ngIf="data.finalAmount==0" class="text-center">{{data.finalAmount | number}}</strong>
                   </div>
               </div>
               <hr class="text-white">

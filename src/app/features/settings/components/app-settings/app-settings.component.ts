@@ -95,7 +95,8 @@ export class AppSettingsComponent implements OnInit {
 
   _toggleSocketStatus(status){
     console.log(this.betStatus)
-    this._sharedService._getStartWebJobApi(this.betStatus).subscribe((res)=>{
+    console.log(status)
+    this._sharedService._getStartWebJobApi(status).subscribe((res)=>{
       console.log(res)
     })
   }

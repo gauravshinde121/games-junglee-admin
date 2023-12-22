@@ -466,6 +466,14 @@ export class NetExposureViewTotalComponent implements OnInit {
                       runnerRes['showSuspended'] = true;
                     } else {
                       runnerRes['showSuspended'] = false;
+
+                      if(
+                        (Math.ceil((runnerRes['lay1']-1)*100) > 99) || 
+                        (Math.ceil((runnerRes['back1']-1)*100) > 99)
+                        ){
+                        runnerRes['showSuspended'] = true;
+
+                      }
                 }
                }
                 }

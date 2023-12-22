@@ -98,7 +98,7 @@
                   class="bg-pink btn text-white"
                   (click)="toggleMarketStatus(stmt)"
                 >
-                  {{ stmt.isMarketSuspended === false ? "Suspend" : "Active" }}
+                  {{ stmt.isMarketSuspended === false ? "Active" : "Suspend" }}
                 </button>
               </td>
               <td colspan="2">
@@ -109,7 +109,7 @@
                       class="bg-pink btn text-white"
                       (click)="toggleRunnerStatus(stmt, runner)"
                     >
-                      {{ runner.isSuspended === 1 ? "Active" : "Suspend" }}
+                      {{ runner.isSuspended === 1 ? "Suspend" : "Active" }}
                     </button>
                   </div>
                 </div>

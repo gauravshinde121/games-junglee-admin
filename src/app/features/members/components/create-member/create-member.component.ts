@@ -36,6 +36,8 @@ export class CreateMemberComponent implements OnInit {
   ipAdress:any;
   casinoProviderList: any = [];
   maxLimit:any;
+  bookmakerComissionTypes:any = [];
+  fancyComissionTypes:any=[];
 
   setAdminCreationLimit:boolean = false;
   setSuperMasterCreationLimit:boolean = false;
@@ -45,6 +47,10 @@ export class CreateMemberComponent implements OnInit {
   setUserCreationLimit:boolean = false;
   private playerAvailableCreditSubscription: Subscription | undefined;
   selectedUserRole:string = '';
+  isFancyComissionVisible = false;
+  isBookmakerComissionVisible = false;
+  bookmakerComissionTypesValue:any = 'No Comission';
+  fancyComissionTypesValue:any = 'No Comission';
 
   @ViewChild('confirm_password') confirm_password: ElementRef;
   constructor(
@@ -71,6 +77,8 @@ export class CreateMemberComponent implements OnInit {
       this.editUserId = this.route.snapshot.params['id'];
     }
 
+    console.log(this.editMode)
+
     this._getCasinoProvider();
 
   }
@@ -92,6 +100,19 @@ export class CreateMemberComponent implements OnInit {
   }
 
   private _preConfig() {
+    this.bookmakerComissionTypes = [
+      {name:'No Comission'},
+      {name:'Net Loosing Comission'},
+      {name:'Entrywise Loosing Comission'}
+    ]
+
+    this.fancyComissionTypes = [
+      {name:'No Comission'},
+      {name:'Turnover wise Comission'},
+    ]
+
+    
+
     this.getGames();
     this._getRoles();
     this.getUserIp();
@@ -142,8 +163,34 @@ export class CreateMemberComponent implements OnInit {
       "userId": +this.route.snapshot.params['id']
     }).subscribe(((res: any) => {
       if (res) {
+        console.log(res)
         this.memberData = res.user;
         this.gamesList = res.gameStatus;
+
+        console.log('inside else block')
+        console.log(this.memberData)
+  
+        if(this.memberData.bookmakerEntrywiseLoosingComissionEnabled){
+          this.bookmakerComissionTypesValue = 'Entrywise Loosing Comission';
+          this.isBookmakerComissionVisible = true;
+        }else if(this.memberData.bookmakerNetLoosingComissionEnabled){
+          this.bookmakerComissionTypesValue = 'Net Loosing Comission';
+          this.isBookmakerComissionVisible = true;
+        }else{
+          this.bookmakerComissionTypesValue = 'No Comission';
+          this.isBookmakerComissionVisible = false;
+        }
+    
+        if(this.memberData.fancyTurnOverWiseComissionEnabled){
+          this.fancyComissionTypesValue = 'Turnover wise Comission';
+          this.isFancyComissionVisible = true;
+        }else{
+          this.fancyComissionTypesValue = 'No Comission';
+          this.isFancyComissionVisible = false;
+        }
+
+
+       
 
         res.providerStatus.forEach(status => {
 
@@ -204,7 +251,28 @@ export class CreateMemberComponent implements OnInit {
     } else if(this.createUserWithRoleId == 7){
       this.maxLimit = this.uplineInfo.userCreationLimit;
     }
+
     if (!this.editMode) {
+
+      if(this.uplineInfo.bookmakerEntrywiseLoosingComissionEnabled){
+        this.bookmakerComissionTypesValue = 'Entrywise Loosing Comission';
+        this.isBookmakerComissionVisible = true;
+      }else if(this.uplineInfo.bookmakerNetLoosingComissionEnabled){
+        this.bookmakerComissionTypesValue = 'Net Loosing Comission';
+        this.isBookmakerComissionVisible = true;
+      }else{
+        this.bookmakerComissionTypesValue = 'No Comission';
+        this.isBookmakerComissionVisible = false;
+      }
+  
+      if(this.uplineInfo.fancyTurnOverWiseComissionEnabled){
+        this.fancyComissionTypesValue = 'Turnover wise Comission';
+        this.isFancyComissionVisible = true;
+      }else{
+        this.fancyComissionTypesValue = 'No Comission';
+        this.isFancyComissionVisible = false;
+      }
+
       this.memberForm = this._fb.group({
         username: ['', Validators.required],
         displayName: ['', Validators.required],
@@ -234,6 +302,7 @@ export class CreateMemberComponent implements OnInit {
           validators: ConfirmPasswordValidator('password', 'confirmPassword')
         })
     } else {
+
       this.memberForm = this._fb.group({
         displayName: [''],
         username: [''],
@@ -263,7 +332,7 @@ export class CreateMemberComponent implements OnInit {
   customFancyCommissionValidator(uplineFancyCommission: number): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const value = control.value;
-      if (![1, 2].includes(this.uplineInfo.roleId[0])) {
+      if (![1].includes(this.uplineInfo.roleId[0])) {
         if (value > uplineFancyCommission) {
           return { 'invalidFancyCommission': true };
         }
@@ -272,10 +341,16 @@ export class CreateMemberComponent implements OnInit {
     };
   }
 
+  checkValue(event){
+    if (event.target.value < 0) {
+      event.target.value = 0;
+    }
+  }
+
   customBookmakerCommissionValidator(uplineFancyCommission: number): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const value = control.value;
-      if (![1, 2].includes(this.uplineInfo.roleId[0])) {
+      if (![1].includes(this.uplineInfo.roleId[0])) {
         if (value > uplineFancyCommission) {
           return { 'invalidBookmakerCommission': true };
         }
@@ -285,17 +360,47 @@ export class CreateMemberComponent implements OnInit {
   }
 
   createMember(){
+    
     if (this.memberForm) {
       this.isLoading = true;
       let memberData = {};
       if (!this.editMode) {
+
+        let fancyTurnOverWiseComissionEnabled = false;
+        let bookmakerNetLoosingComissionEnabled = false;
+        let bookmakerEntrywiseLoosingComissionEnabled = false;
+        let fancyComission = 0;
+        let bookmakerComission = 0;
+
+        if(this.fancyComissionTypesValue == 'No Comission'){
+          fancyTurnOverWiseComissionEnabled = false;
+          fancyComission = 0;
+        }else if(this.fancyComissionTypesValue == 'Turnover wise Comission'){
+          fancyTurnOverWiseComissionEnabled = true;
+          fancyComission = this.memberForm.value['fancyComission']
+        }
+
+        if(this.bookmakerComissionTypesValue == 'No Comission'){
+          bookmakerNetLoosingComissionEnabled = false;
+          bookmakerEntrywiseLoosingComissionEnabled = false;
+          bookmakerComission = 0;
+        }else if(this.bookmakerComissionTypesValue == 'Net Loosing Comission'){
+          bookmakerNetLoosingComissionEnabled = true;
+          bookmakerEntrywiseLoosingComissionEnabled = false;
+          bookmakerComission = this.memberForm.value['bookmakerComission'];
+        }else if(this.bookmakerComissionTypesValue == 'Entrywise Loosing Comission'){
+          bookmakerNetLoosingComissionEnabled = false;
+          bookmakerEntrywiseLoosingComissionEnabled = true;
+          bookmakerComission = this.memberForm.value['bookmakerComission'];
+        }
+
         memberData = {
           "displayName": this.memberForm.value['displayName'],
           "username": this.memberForm.value['username'],
           "pwd": this.memberForm.value['password'],
           "availableCredit": this.memberForm.value['playerAvailableCredit'],
-          "fancyComission": this.memberForm.value['fancyComission'],
-          "bookmakerComission": this.memberForm.value['bookmakerComission'],
+          "fancyComission": fancyComission,
+          "bookmakerComission": bookmakerComission,
           "sportsBookRate": this.memberForm.value['sportsBookRate'],
           "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
           "minimumBet": this.memberForm.value['minBet'],
@@ -311,7 +416,10 @@ export class CreateMemberComponent implements OnInit {
           "masterCreationLimit": this.memberForm.value['masterCreationLimit'],
           "agentCreationLimit": this.memberForm.value['agentCreationLimit'],
           "dealerCreationLimit": this.memberForm.value['dealerCreationLimit'],
-          "userCreationLimit": this.memberForm.value['userCreationLimit']
+          "userCreationLimit": this.memberForm.value['userCreationLimit'],
+          "fancyTurnOverWiseComissionEnabled":fancyTurnOverWiseComissionEnabled,
+          "bookmakerNetLoosingComissionEnabled":bookmakerNetLoosingComissionEnabled,
+          "bookmakerEntrywiseLoosingComissionEnabled":bookmakerEntrywiseLoosingComissionEnabled
         }
       } else {
         memberData = {
@@ -351,10 +459,16 @@ export class CreateMemberComponent implements OnInit {
       }
 
       this.closeModal();
+      console.log(memberData)
+
       memberObs.subscribe(
         (res: any) => {
           this._sharedService.getToastPopup(`User ${msg} Successfully`, 'Member', 'success');
           this._router.navigate(['/member/list'])
+          this.fancyComissionTypesValue = 'No Comission';
+          this.bookmakerComissionTypesValue = 'No Comission';
+          this.isBookmakerComissionVisible = false;
+          this.isFancyComissionVisible = false;
           this._sharedService.callAdminDetails.next();
         }, (error) => {
           this.isLoading = false;
@@ -538,6 +652,25 @@ export class CreateMemberComponent implements OnInit {
     /*this._sharedService.getIPApi().subscribe((data: any) => {
       this.ipAdress = data.ip;
     })*/
+  }
+
+
+  onBookmakerComissionChange(event){
+    console.log(event.target.value)
+    if(event.target.value != 'No Comission'){
+      this.isBookmakerComissionVisible = true;
+    }else{
+      this.isBookmakerComissionVisible = false;
+    }
+  }
+
+  onFancyComissionChange(event){
+    console.log(event.target.value)
+    if(event.target.value != 'No Comission'){
+      this.isFancyComissionVisible = true;
+    }else{
+      this.isFancyComissionVisible = false;
+    }
   }
 
   ngOnDestroy() {

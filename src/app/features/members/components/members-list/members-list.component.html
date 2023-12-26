@@ -160,7 +160,7 @@
                 >
                   Give
                 </th>
-                <th
+                <th *ngIf="clientId == 1"
                 scope="col"
                 class="text-center pointer"
                 (click)="toggleSort('give')"
@@ -264,7 +264,7 @@
                   <span *ngIf="user.give <= 0">{{ user.give | indianCurrency }}</span>
                 </td>
                 <td
-                  class="text-center"
+                  class="text-center" *ngIf="clientId == 1"
                 >
                   <span
                     class="pointer text-success text-decoration-none"

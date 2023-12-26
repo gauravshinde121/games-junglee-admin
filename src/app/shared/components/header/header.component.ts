@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
   isLeftBarDisplay:boolean = false;
   clearInterval;
   subjectSub !:Subscription;
+  showCasino = false;
+  clientId = null;
 
   constructor(
     private _sharedService: SharedService
@@ -33,6 +35,9 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.subjectSub = this._sharedService.callAdminDetails.subscribe((res)=>{
       this.getAdminDetails()
     })
+
+    const user = this._sharedService.getUserDetails()
+    this.clientId = user.refClientid;
   }
 
   getRightSidebarEvent(eventObj){

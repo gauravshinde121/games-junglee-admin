@@ -207,8 +207,8 @@ export class CreateMemberComponent implements OnInit {
           this.memberForm.patchValue({
             username: this.memberData.username,
             displayName: this.memberData.displayName,
-            playerMaxCreditLimit: this.memberData.creditLimit,
-            playerAvailableCredit: this.memberData.creditLimit,
+            playerMaxCreditLimit: this.memberData.availableCredit,
+            playerAvailableCredit: this.memberData.availableCredit,
             sportsBookRate: this.memberData.sportsBookRate,
             liveCasinoRate: this.memberData.liveCasinoRate,
             minBet: 100,

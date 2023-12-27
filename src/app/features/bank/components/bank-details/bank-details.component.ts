@@ -166,6 +166,7 @@ export class BankDetailsComponent implements OnInit {
 
 
   openCasinoSummary(user){
+    if(user.casinoWinnings == 0) return
     this.modalNumber = 6;
     this.userDetails = user;
     this.display = 'block';
@@ -358,7 +359,9 @@ export class BankDetailsComponent implements OnInit {
     this._sharedService.currentUserIp.subscribe((data: any) => {
       currentUserIp = data.userIp;
     });
-    //if (confirm('Do you want bulk transfer ?')) {
+
+    // console.log(this.selectedUserForAdjustment)
+    
     this._sharedService
       ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, "ipAddress" : this._sharedService.getIpAddress(), description:this.description})
       .subscribe((res: any) => {
@@ -375,7 +378,7 @@ export class BankDetailsComponent implements OnInit {
         this._sharedService.callAdminDetails.next(true);
         this.closeModal();
       });
-    //}
+   
   }
 
 

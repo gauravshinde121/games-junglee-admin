@@ -341,7 +341,39 @@ export class CreateMemberComponent implements OnInit {
     };
   }
 
-  checkValue(event){
+
+  validateFancyCommission(control: any) {
+    const maxFancyCommission = 5; // Set your max value here
+    const value = control.value;
+
+    if (value !== null && value > maxFancyCommission) {
+      return { invalidFancyCommission: true };
+    }
+
+    return null;
+  }
+
+
+  showError() {
+    const fancyComissionControl = this.memberForm?.get('fancyComission');
+    return (
+      (fancyComissionControl?.hasError('invalidFancyCommission') ||
+        (fancyComissionControl?.errors?.required && fancyComissionControl?.touched)) &&
+      fancyComissionControl?.value > 5
+    );
+}
+
+  checkValue(event,from){
+    if (event.target.value < 0) {
+      event.target.value = null;
+    }
+    
+    if (event.target.value > 5) {
+      event.target.value = null;
+    }
+  }
+
+  checkValueCreditLimit(event){
     if (event.target.value < 0) {
       event.target.value = 0;
     }

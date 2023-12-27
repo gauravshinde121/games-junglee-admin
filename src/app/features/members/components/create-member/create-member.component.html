@@ -99,7 +99,7 @@
 
             <div class="col-md-3 mb-2">
               <label>Credit Limit</label>
-              <input type="number" class="form-control" formControlName="playerAvailableCredit" (input)="checkValue($event)"
+              <input type="number" class="form-control" formControlName="playerAvailableCredit" (input)="checkValueCreditLimit($event)"
                 placeholder="Player Credit Limit*" />
               <div class="small text-danger" *ngIf="memberForm.controls['playerAvailableCredit'].errors?.required &&
               memberForm.controls['playerAvailableCredit'].touched">
@@ -160,7 +160,7 @@
 
           </div>
           <div class="col-3" *ngIf="isBookmakerComissionVisible">
-            <input  type="number" class="form-control" formControlName="bookmakerComission" min="0" (input)="checkValue($event)"
+            <input max="5" step="0.50"  type="number" class="form-control" formControlName="bookmakerComission" min="0" (input)="checkValue($event,'Bookmaker')"
               placeholder="Book Maker Commission*" *ngIf="!editMode" />
               <span *ngIf="editMode">: {{ memberForm.get('bookmakerComission')?.value }}%</span>
               <div class="small text-danger" *ngIf="memberForm.get('bookmakerComission')?.hasError('invalidBookmakerCommission') || memberForm.controls['bookmakerComission'].errors?.required &&
@@ -181,18 +181,21 @@
                   name="fancyComissionTypesValue" id="ab"
                   class="form-select" (change)="onFancyComissionChange($event)">
                 <option *ngFor="let comissionType of fancyComissionTypes" [value]="comissionType.name">
-                  {{ comissionType.name }}
+                  {{ comissionType.name == 'Turnover wise Comission' ? 'Bet to Bet Comission':comissionType.name }}
                 </option>
               </select>
-              <label *ngIf="editMode" for="fancyComission">{{fancyComissionTypesValue}}</label>
+              <label *ngIf="editMode" for="fancyComission">{{fancyComissionTypesValue == 'Turnover wise Comission' ? 'Bet to Bet Comission':fancyComissionTypesValue}}</label>
           </div>
           <div class="col-3" *ngIf="isFancyComissionVisible">
-            <input type="number" class="form-control" formControlName="fancyComission" min="0" (input)="checkValue($event)"
+            <input step="0.50" type="number" class="form-control" formControlName="fancyComission" min="0" max="5" (input)="checkValue($event,'Fancy')"
               placeholder="Fancy Commission*" *ngIf="!editMode" />
               <span *ngIf="editMode">: {{ memberForm.get('fancyComission')?.value }}%</span>
               <div class="small text-danger" *ngIf="memberForm.get('fancyComission')?.hasError('invalidFancyCommission') || memberForm.controls['fancyComission'].errors?.required &&
-              memberForm.controls['fancyComission'].touched">
-              Member Fancy Comission cannot be greater than upline fancy comission!
+                          memberForm.controls['fancyComission'].touched">
+                          Member Fancy Comission cannot be greater than upline fancy comission!
+              </div>
+              <div class="small text-danger" *ngIf="showError()">
+                Member Fancy Commission cannot be greater than upline fancy commission!
               </div>
           </div>
         </div>

@@ -74,7 +74,7 @@
                       <thead>
                         <tr>
                           <th scope="col" class="first pointer">
-                            <!-- <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)" /> -->
+                            <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)" />
                           </th>
                           <th scope="col" class="">
                             <i class="fa-sharp fa-regular fa-address-card"></i>
@@ -99,8 +99,8 @@
                         </h1>
                         <tr *ngFor="let user of userList | sort:sortColumn:sortAscending  ; let i = index">
                           <td>
-                            <!-- <input type="checkbox" class="pointer" (change)="checkUserForAdjustment(user.userId)"
-                              *ngIf="user.take > 0 || user.give > 0" [(ngModel)]="user.state" /> -->
+                            <input type="checkbox" class="pointer" (change)="checkUserForAdjustment(user.userId)"
+                              *ngIf="user.take > 0 || user.give > 0" [(ngModel)]="user.state" />
                           </td>
 
                           <td>
@@ -135,8 +135,10 @@
                               (click)="adjustWinningsForSingleUser(user, false)"
                               [disabled]="selectedUserForAdjustment.length > 1">Take</button>
                           </td>
-                          <td (click)="openCasinoSummary(user)" [ngClass]="user.casinoWinnings > 0 ? 'text-success' : 'text-danger'" class="text-center pointer">
-                            {{ user.casinoWinnings | indianCurrency }}
+                          <td (click)="openCasinoSummary(user)" class="text-center pointer">
+                            <span *ngIf="user.casinoWinnings>0" class="text-success">{{ user.casinoWinnings | indianCurrency }}</span>
+                            <span *ngIf="user.casinoWinnings<0" class="text-danger">{{ user.casinoWinnings | indianCurrency }}</span>
+                            <span *ngIf="user.casinoWinnings == 0">{{ user.casinoWinnings | indianCurrency }}</span>
                           </td>
                           <td class="text-center">
                             <button (click)="openCasinoSettlement(user, false)" type="button" *ngIf="user.casinoWinnings > 0" class=" btn btn-sm btn-success pointer text-decoration-none"
@@ -226,17 +228,16 @@
           </div>
         </div>
         <div class="row">
-          <section class="section w-75 m-auto">
-            <button class="btn btn-success rounded-pill w-80 mt-3" (click)="adjustWinnings()">
+          <div class="col-6 text-center">
+            <button class="btn btn-success mt-3" (click)="adjustWinnings()">
               Yes
             </button>
-            <button class="btn btn-danger rounded-pill w-80 mt-3 float-right" (click)="closeModal()">
+          </div>
+          <div class="col-6 text-center">
+            <button class="btn btn-danger mt-3" (click)="closeModal()">
               Cancel
             </button>
-            <!--your code will come here end-->
-            <!-- </div> -->
-            <!-- </div> -->
-          </section>
+          </div>
         </div>
       </div>
     </div>

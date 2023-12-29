@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { environment } from 'src/environments/environment';
+import { SettingsService } from '../services/settings.service';
 
 @Component({
   selector: 'app-app-settings',
@@ -11,6 +12,8 @@ export class AppSettingsComponent implements OnInit {
 
   display:any = '';
   saveSettingObj:any;
+  socketStatus = false;
+  betStatus:any = false;
   settingObj:any = {
     mobile1:null,
     mobile2:null,
@@ -24,10 +27,12 @@ export class AppSettingsComponent implements OnInit {
   submitting = false;
 
 
-  constructor(private _sharedService:SharedService) { }
+  constructor(private _sharedService:SharedService,private _settingService: SettingsService,) { }
 
   ngOnInit(): void {
     this.getWebSettings();
+    this.getSocketStatus()
+    this._getBetStatus();
   }
 
   closeModal(){
@@ -61,6 +66,41 @@ export class AppSettingsComponent implements OnInit {
       this.submitting = false;
     })
   }
+
+
+
+  getSocketStatus(){
+    this._sharedService._getPubSubStatusApi().subscribe((res:any)=>{
+      console.log(res)
+      this.socketStatus = res.status;
+    })
+  }
+
+
+  _getBetStatus(){
+    this._settingService._getBetStatusApi().subscribe((data:any)=>{
+      console.log(data)
+      this.betStatus = data.betStatus
+    });
+  }
+
+  _toggleBetStatus(status){
+    console.log(this.betStatus)
+    this._settingService._toggleBetApi({allowBet:this.betStatus}).subscribe((res)=>{
+      console.log(res)
+      this._getBetStatus()
+    })
+  }
+
+
+  _toggleSocketStatus(status){
+    console.log(this.betStatus)
+    console.log(status)
+    this._sharedService._getStartWebJobApi(status).subscribe((res)=>{
+      console.log(res)
+    })
+  }
+  
 
 
   submit(){

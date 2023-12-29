@@ -45,6 +45,7 @@ export class Constants {
     public readonly API_URL_CHANGE_MEMBER_PASSWORD:string = 'api/junglee-admin/changeMemberPassword'
     public readonly API_URL_GET_UPLINE_MEMBERS: string = 'api/junglee-admin/getUplineSummary';
     public readonly API_URL_GET_USER_BY_UPLINE_ID: string = 'api/junglee-admin/getUserByAdminId';
+    public readonly API_URL_GET_EXPOSURE_DETAILS: string = 'api/junglee-admin/getExposureDetails';
 
 
     //book management
@@ -62,7 +63,9 @@ export class Constants {
     public readonly API_URL_GET_USER_BETS_FOR_ADMIN_MYPL: string = 'api/junglee-admin/getUserBetsForAdminMyPL';
     public readonly API_URL_PLAYERWISE_ACCOUNT_STATEMENT: string = 'api/junglee-admin/getUserAccountStatementForAdmin';
     public readonly API_URL_PLAYER_LIST: string = 'api/junglee-admin/getAllUserMembers';
-
+    public readonly API_URL_CASINO_PROVIDERS_LIST: string = 'api/getCasinoProvider';
+    public readonly API_URL_GET_CASINO_REPORT: string = 'api/junglee-admin/getCasinoReportForAdmin';
+    public readonly API_URL_GET_CASINO_REPORT_DETAIL: string = '/api/junglee-admin/getCasinoReportForAdminDetail';
     //change password
     public readonly API_CHANGE_PASSWORD: string = 'api/junglee-admin/changePassword';
 
@@ -90,6 +93,8 @@ export class Constants {
     public readonly API_URL_SET_MARKET_ACTIVE_STATUS:string = 'api/junglee-admin/setMarketStatusForMarketSettings';
     public readonly API_URL_SET_BET_LIMIT_FOR_MARKET:string = 'api/junglee-admin/setBetLimitForMarket';
     public readonly API_URL_SET_BET_LIMIT_FOR_MULTIPLE_MARKET:string = '/api/junglee-admin/setBetLimitForMultipleMarket';
+    public readonly API_URL_TOGGLEBET:string = 'api/toggleBet';
+    public readonly API_URL_GET_BET_STATUS:string = 'api/getBetStatus';
 
 
     //all logs
@@ -105,6 +110,7 @@ export class Constants {
     public readonly API_URL_GET_AMDMIN_BOOK_MGM :string = 'api/junglee-admin/getBooksForAdminBookManagement';
 
     public readonly API_URL_GET_LADDER_FOR_ADMIN:string = 'api/junglee-admin/getLadderForAdmin';
+    public readonly API_URL_GET_LADDER_FOR_ADMIN_MEMBER_LIST:string = 'api/junglee-admin/getLadderForAdminMemberList';
 
     //TEST
     public readonly API_URL_TEST_FUNC:string = 'api/getBetsForSurveilliance';
@@ -128,6 +134,13 @@ export class Constants {
     public readonly API_GET_BANK_USERS: string = 'api/junglee-admin/getBankUsers';
 
     public readonly API_GET_ADMIN_ACCOUNT_STATEMENT: string = 'api/junglee-admin/getAdminAccountStatement';
+    public readonly API_GET_PUBSUB_STATUS: string = 'api/getPubsubStatus';
+    public readonly API_START_WEBJOB: string = 'api/startAzureSocketAndWebJob';
+
+
+    //BANK
+    public readonly API_GET_ADJUST_CASINO_AMOUNT: string = 'api/junglee-admin/settleCasinoAmount';
+    public readonly API_GET_CASINO_SUMMARY: string = 'api/junglee-admin/getCasinoWinSummary';
 
 
 

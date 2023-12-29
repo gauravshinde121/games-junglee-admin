@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { MembersService } from '../../services/members.service';
 import { environment } from 'src/environments/environment';
+import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
 
 @Component({
   selector: 'app-members-list',
@@ -26,6 +27,7 @@ export class MembersListComponent implements OnInit {
   limit: number = 25;
   userId: any;
   totalTake = 0;
+  totalExposure = 0;
   totalGive = 0;
   liveCasinoRate: any;
   sportsBook: any;
@@ -54,6 +56,7 @@ export class MembersListComponent implements OnInit {
   totalMembers = 0;
   allChecked = false;
   roleId: any;
+  ladderObj:any = [];
 
 
   fileName = 'MemberList.xlsx';
@@ -63,6 +66,13 @@ export class MembersListComponent implements OnInit {
   showModal: boolean;
   clientId: any = environment.clientId;
   description : any = "Weekly settlement";
+  exposureData:any = {
+    matchName:null,
+    fancyMarkets:[],
+    matchOddsMarket:[],
+    bookmakerMarkets:[]
+  };
+  exposureDataList:any = [];
 
 
   createPasswordForm() {
@@ -135,6 +145,7 @@ export class MembersListComponent implements OnInit {
   };
 
   adjustWinningsForSingleUser(user, isGiven) {
+    return
     this.userId = user.userId;
     var adjustWinningsForSingleUserValue: number;
     if (isGiven) {
@@ -198,7 +209,8 @@ export class MembersListComponent implements OnInit {
     private _router: Router,
     private _sharedService: SharedService,
     private _memberService: MembersService,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private _bookMgmService:BookManagementService
   ) { }
 
   ngOnInit(): void {
@@ -249,6 +261,49 @@ export class MembersListComponent implements OnInit {
         this.checkUserId(user.userId);
       }
     }
+  }
+
+
+  openExposureViewModal(userId) {
+    this.modalNumber = 5;
+    this.userId = userId;
+    this.display = 'block';
+  }
+
+
+  getLadderDataByMarket(marketId){
+    this.ladderObj = [];
+    this._bookMgmService._postLadderMemberListDataByMarketApi({ marketId: marketId , myPt: false,memberId:this.userId}).subscribe((res: any) => {
+      this.ladderObj = res?.ladderDetails;
+    })
+  }
+
+
+  showExposureDetails(user){
+    this.exposureDataList = [];
+    if(user.exposure == 0) return
+
+    this._sharedService._getExposureDetailsApi(user.userId).subscribe((data:any)=>{
+      // console.log(data)
+
+      if(data){
+        for(let d of data.exposureDetails){
+          this.exposureDataList.push(
+            {
+              matchName:d.matchName,
+              fancyMarkets:d.data.filter(mrkt=>mrkt.fancyFlag==true),
+              matchOddsMarket:d.data.filter(mrkt=>mrkt.matchoddsFlag==true),
+              bookmakerMarkets:d.data.filter(mrkt=>mrkt.bookmakerFlag==true)
+            }
+          )
+        }
+      }
+
+      this.exposureData = this.exposureDataList;
+      // console.log(this.exposureDataList)
+
+      this.openExposureViewModal(user.userId)
+    })
   }
 
   checkUserId(userId: any) {
@@ -338,6 +393,7 @@ export class MembersListComponent implements OnInit {
         this.isLoading = false;
       }
       this.userList = users.memberData.memberList;
+      this.totalExposure = this.userList.reduce((acc, crnt) => acc + crnt.exposure, 0);
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
       this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);
@@ -439,6 +495,11 @@ export class MembersListComponent implements OnInit {
     this.changePasswordForm.reset();
   }
 
+
+  closeExposureModal(){
+    this.display = 'none';
+  }
+
   updateGameControl(status: any, sportsId) {
     this._memberService
       ._updateGameControlApi({
@@ -496,18 +557,18 @@ export class MembersListComponent implements OnInit {
     let mergedArray = [];
 
     if (this.selectedRoleId == this.roleId) {
-      this.userList.forEach(element => 
+      this.userList.forEach(element =>
         this.roles.forEach(elements => {
           if (this.selectedRoleId === elements.roleId){
         memberList.push({
           Username: element.username,
-          RoleName: elements.userRoleName,        
+          RoleName: elements.userRoleName,
           CreditLimit: element.creditLimit,
           NetExposure: element.exposure,
           Take: element.take,
           Give: element.give,
           AvailableCredit: element.availableCredit,
-          Status: element.isActive, 
+          Status: element.isActive,
         })
         // this.roles.forEach(elements => {
         //   if (this.selectedRoleId === elements.roleId) {
@@ -517,7 +578,7 @@ export class MembersListComponent implements OnInit {
         //   }
         // })
       }}));
-      
+
       this._sharedService.exportExcel(memberList, this.fileName);
     }
 

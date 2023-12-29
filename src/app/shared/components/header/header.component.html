@@ -98,7 +98,7 @@
   </div>
   <div class="col-md-8 col-8 smallMobileHide">
     <div class="row">
-      <div class="col-md-4 col-4">
+      <div class="mb-2 mb-md-2" [ngClass]="clientId == 1?'col-md-3 col-6':'col-md-4 col-6'">
         <div class="balance-first">
           <div class="balance">
             <p>
@@ -109,7 +109,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-4">
+      <div [ngClass]="clientId == 1?'col-md-3 col-6':'col-md-4 col-6'">
         <div class="balance-up">
           <div class="balance">
             <p>
@@ -121,7 +121,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-4">
+      <div  [ngClass]="clientId == 1?'col-md-3 col-6':'col-md-4 col-6'">
         <div class="balance-down">
           <div class="balance">
             <p>
@@ -130,6 +130,21 @@
               <span>BALANCE DOWN</span>&nbsp;
               <i class="fa-regular fa-circle-down"></i>
             </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6" *ngIf="clientId == 1">
+        <div class="casino-summary">
+          <div class="balance">
+            <div class="row text-center">
+              <p>
+                <span> BALANCE UP {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span>
+              </p>
+              <p>
+                <span>BALANCE DOWN {{ adminDetails?.casinoBalanceDown | indianCurrency }}  </span>
+              </p>
+                <small>CASINO SUMMARY</small>
+            </div>
           </div>
         </div>
       </div>
@@ -146,7 +161,7 @@
 
   <div class="col-md-12 smallMobileShow mt-3">
     <div class="row">
-      <div class="col-md-4 col-4">
+      <div class="col-md-3 col-6 mb-2 mb-md-2">
         <div class="balance-first">
           <div class="balance">
             <p>
@@ -157,7 +172,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-4">
+      <div class="col-md-3 col-6">
         <div class="balance-up">
           <div class="balance">
             <p>
@@ -169,7 +184,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-4">
+      <div class="col-md-3 col-6">
         <div class="balance-down">
           <div class="balance">
             <p>
@@ -178,6 +193,23 @@
               <span>BALANCE DOWN</span>&nbsp;
               <i class="fa-regular fa-circle-down"></i>
             </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6" *ngIf="clientId == 1">
+        <div class="casino-summary">
+          <div class="balance">
+            <div class="row text-center">
+              <p>
+                <span> BALANCE UP {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span>
+              </p>
+              <p>
+                <span>BALANCE DOWN {{ adminDetails?.casinoBalanceDown | indianCurrency }}  </span>
+              </p>
+              <p>
+                <span>CASINO SUMMARY</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>

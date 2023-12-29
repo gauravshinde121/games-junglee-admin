@@ -21,6 +21,29 @@ export class AccountStatementService {
       .post(this._apiEndpointsService.getPlayerAccountStatementEndpoint(),filterObj);
   }
 
+  _getCasinoReportDetailForAdminApi(filterObj){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getCasinoReportDetailForAdminEndpoint(),filterObj);
+  }
+
+  _getCasinoReportForAdminApi(filterObj){
+    let fromDate = new Date(filterObj.fromDate);
+    fromDate.setHours(0);
+    fromDate.setMinutes(0);
+    fromDate.setSeconds(0);
+
+    let toDate = new Date(filterObj.toDate);
+    toDate.setHours(23)
+    toDate.setMinutes(59);
+    toDate.setSeconds(59);
+
+    filterObj.fromDate = fromDate;
+    filterObj.toDate = toDate;
+
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getCasinoReportForAdminEndpoint(),filterObj);
+  }
+
   _getPlBySubgameAPi(filterObj){
     return this._apiHttpService
     .post(this._apiEndpointsService.getPlBySubgame(),filterObj);

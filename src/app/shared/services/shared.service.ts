@@ -50,6 +50,11 @@ export class SharedService {
       .get(this._apiEndpointsService.getPlayerListEndpoint());
   }
 
+  _getCasinoProviderstApi() {
+    return this._apiHttpService
+      .get(this._apiEndpointsService.getCasinoProvidersEndpoint());
+  }
+
   _getAllUsersApi(body) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getAllUserEndpoint(), body);
@@ -89,6 +94,11 @@ export class SharedService {
   _adjustWinningsApi(userList) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getAdjustWinningsEndpoint(), userList);
+  }
+
+  _adjustCasinoApi(adjustObj) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getAdjustCasinoEndpoint(), adjustObj);
   }
 
   copy(text: string){
@@ -284,6 +294,30 @@ export class SharedService {
  getIpAddress(){
    return this.ipAddress || '127.0.0.1';
  }
+
+
+ _getExposureDetailsApi(userId) {
+  return this._apiHttpService
+    .post(this._apiEndpointsService.getExposureDetailEndpoint(),{userId});
+}
+
+
+_getCasinoSummaryApi(memberId){
+  return this._apiHttpService
+    .post(this._apiEndpointsService.getCasinoSummaryEndpoint(),{memberId});
+}
+
+
+_getPubSubStatusApi(){
+  return this._apiHttpService
+    .get(this._apiEndpointsService.getPubSubStatusEndpoint());
+}
+
+
+_getStartWebJobApi(status){
+  return this._apiHttpService
+    .post(this._apiEndpointsService.getStartWebJobEndpoint(),{status:status});
+}
 
 
 }

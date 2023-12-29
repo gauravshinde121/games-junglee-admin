@@ -72,6 +72,8 @@ export class LeftNavigationComponent implements OnInit {
     localStorage.setItem('path', path)
     this.checkPath();
     this.toggleMenu()
+    localStorage.removeItem('casino-params')
+ 
   }
 
 

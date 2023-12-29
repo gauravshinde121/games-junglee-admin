@@ -27,7 +27,7 @@ export class BetSettingsComponent implements OnInit {
   gameId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
-
+  
   betTickerForm: FormGroup;
   deleteBetForm: FormGroup;
 
@@ -49,7 +49,6 @@ export class BetSettingsComponent implements OnInit {
   constructor(private _sharedService: SharedService,
     private _settingService: SettingsService,
     private _memberService : MembersService,
-    private bookManagementService: BookManagementService,
     private _fb: FormBuilder) { }
 
 
@@ -78,6 +77,9 @@ export class BetSettingsComponent implements OnInit {
     this.getAllUserBets();
   }
 
+
+ 
+
   _getMarketsByMatchId(matchId){
     this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
       if(data.marketList){
@@ -91,7 +93,7 @@ export class BetSettingsComponent implements OnInit {
     this._initForm();
     this._getGames();
     this._getAllMembers();
-
+    
   }
 
   _getAllMembers(){
@@ -343,4 +345,6 @@ export class BetSettingsComponent implements OnInit {
     this.sortAscending = true;
   }
 }
+
+
 }

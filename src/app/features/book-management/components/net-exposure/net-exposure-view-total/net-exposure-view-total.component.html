@@ -509,16 +509,15 @@
                                   <td
                                     class="border-top"
                                     [ngClass]="{ 'border-top': !first }"
-                                  >
-                                    <div
-                                      class="suspendedbm1"
-                                      *ngIf="
+                                    class="suspendedbm1"
+                                    *ngIf="
                                         singleAdminBook['appMarketStatus'] ==
                                           '3' ||
                                         singleAdminBook['appMarketStatus'] ==
                                           '9'
                                       "
-                                    >
+                                  >
+                                    
                                       <button type="button" class="suspendedm1">
                                         {{
                                           singleAdminBook["appMarketStatus"] ==
@@ -527,7 +526,7 @@
                                             : "Suspended"
                                         }}
                                       </button>
-                                    </div>
+                                    
                                   </td>
                                 </tr>
                               </ng-container>

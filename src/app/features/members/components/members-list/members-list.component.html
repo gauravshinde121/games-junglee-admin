@@ -334,7 +334,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                
+
                 <td>
                   {{ totalExposure | indianCurrency }}
                 </td>
@@ -349,7 +349,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-              
+
               </tr>
             </tfoot>
           </table>
@@ -759,7 +759,7 @@
       <div _ngcontent-kxa-c63="" class="modal-body p-0">
         <img
           _ngcontent-kxa-c63=""
-          src="https://sportszonegroup9e79.blob.core.windows.net/banners/modalBanner-{{this.clientId}}.jpg"
+          src="{{this.modalImage}}"
           alt=""
           width="100%"
         />
@@ -804,7 +804,7 @@
                   <strong>MATCH ODDS</strong>
                 </div>
                 <div class="col-3">
-                 <strong>Win/Loss</strong> 
+                 <strong>Win/Loss</strong>
                 </div>
               </div>
               <div  class="row" *ngFor="let data of expDtl.matchOddsMarket[0].horses">
@@ -825,7 +825,7 @@
                   <strong>BOOKMAKER</strong>
                 </div>
                 <div class="col-3">
-                 <strong>Win/Loss</strong> 
+                 <strong>Win/Loss</strong>
                 </div>
               </div>
               <div  class="row" *ngFor="let data of expDtl.bookmakerMarkets[0].horses">
@@ -846,7 +846,7 @@
                   <strong>Fancy Market Name</strong>
                 </div>
                 <div class="col-3">
-                 <strong>Runs</strong> 
+                 <strong>Runs</strong>
                 </div>
                 <div class="col-3">
                   <strong>P&L</strong>
@@ -857,7 +857,7 @@
                     <strong class="text-center">{{data.marketName}}</strong>
                   </div>
                   <div class="col-6">
-                   
+
                     <div *ngFor="let ldr of data.ladder">
                       <div class="row">
                         <ng-container *ngIf="ldr['position'] != 'last'">
@@ -890,10 +890,10 @@
                               >{{ ldr["amount"]*-1 }}</span
                             >
                           </div>
-                        
-                       
+
+
                       </div>
-                      
+
                     </div>
                   </div>
                   <!-- <div class="col-3">

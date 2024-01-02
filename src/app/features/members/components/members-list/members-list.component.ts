@@ -29,6 +29,7 @@ export class MembersListComponent implements OnInit {
   userId: any;
   totalTake = 0;
   totalExposure = 0;
+  totalCasino = 0;
   totalGive = 0;
   liveCasinoRate: any;
   sportsBook: any;
@@ -405,6 +406,7 @@ export class MembersListComponent implements OnInit {
       }
       this.userList = users.memberData.memberList;
       this.totalExposure = this.userList.reduce((acc, crnt) => acc + crnt.exposure, 0);
+      this.totalCasino = this.userList.reduce((acc, crnt) => acc + crnt.casinoWinnings, 0);
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
       this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);

@@ -165,7 +165,7 @@
                 class="text-center pointer"
                 (click)="toggleSort('give')"
               >
-                Casino Winnings
+                Casino Amount
               </th>
                 <th
                   scope="col"
@@ -336,15 +336,24 @@
                 <td></td>
 
                 <td>
-                  {{ totalExposure | indianCurrency }}
+                  <span *ngIf="totalExposure==0">{{ totalExposure | indianCurrency }}</span>
+                  <span *ngIf="totalExposure!=0" class="text-danger">{{ totalExposure | indianCurrency }}</span>
+
                 </td>
-                <td class="text-success text-center">
-                  {{ totalTake | indianCurrency }}
+                <td class="text-center">
+                  <span *ngIf="totalTake==0">{{ totalTake | indianCurrency }}</span>
+                  <span class="text-success" *ngIf="totalTake!=0">{{ totalTake | indianCurrency }}</span>
+                  
                 </td>
-                <td class="text-danger text-center">
-                  {{ totalGive | indianCurrency }}
+                <td class="text-center">
+                  <span *ngIf="totalGive==0">{{ totalGive | indianCurrency }}</span>
+                  <span *ngIf="totalGive!=0" class="text-danger">{{ totalGive | indianCurrency }}</span>
                 </td>
-                <td></td>
+                <td>
+                  <span *ngIf="totalCasino<0" class="text-danger">{{totalCasino}}</span>
+                  <span *ngIf="totalCasino==0">{{totalCasino}}</span>
+                  <span *ngIf="totalCasino>0" class="text-success">{{totalCasino}}</span>
+                </td>
                 <td></td>
                 <td></td>
                 <td></td>

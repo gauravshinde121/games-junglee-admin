@@ -53,6 +53,7 @@ export class NetExposureViewTotalComponent implements OnInit {
 
   ngOnInit(): void {
     // this._initConfig();
+    this.isPageDestroyed = false;
     this._getWebSocketUrl();
     this.resetTimerInterval = setInterval(() => {
       if (this.refreshCount == 0) {
@@ -448,7 +449,11 @@ export class NetExposureViewTotalComponent implements OnInit {
                   runnerRes['back1'] = singleWebsocketRunner['rt'];
 
                   //Volume from Betfair
-                  runnerRes['vback1'] = singleWebsocketRunner['bv'];
+                  if(singleBook['marketTypName'] == 'Bookmaker'){
+                    runnerRes['vback1'] = singleWebsocketRunner['bv'];
+                  }else{
+                    runnerRes['vback1'] = singleWebsocketRunner['pt'];
+                  }
 
                 } else {
                   //lay
@@ -457,7 +462,11 @@ export class NetExposureViewTotalComponent implements OnInit {
                   runnerRes['lay1'] = singleWebsocketRunner['rt'];
 
                   //Volume from Betfair
-                  runnerRes['vlay1'] = singleWebsocketRunner['bv'];
+                  if(singleBook['marketTypName'] == 'Bookmaker'){
+                    runnerRes['vlay1'] = singleWebsocketRunner['bv'];
+                  }else{
+                    runnerRes['vlay1'] = singleWebsocketRunner['pt'];
+                  }
 
 
                   if(singleBook['marketTypName'] == 'Bookmaker'){
@@ -553,12 +562,6 @@ export class NetExposureViewTotalComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    let unSetObj = {
-      unset: {
-        deviceId: sessionStorage.getItem('deviceId'),
-        centralIdList: this.setOrUnsetWebSocketParamsObj
-      }
-    }
     // if(this.realDataWebSocket) this.realDataWebSocket.complete();
     if (this.realDataWebSocket){
       this.realDataWebSocket.complete();

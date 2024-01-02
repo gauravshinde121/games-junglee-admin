@@ -315,12 +315,7 @@
                                       >
                                     </a>
                                   </td>
-                                  <td class="border-top">
-                                    <a><strong></strong> <br /></a>
-                                  </td>
-                                  <td class="border-top">
-                                    <a><strong></strong> <br /></a>
-                                  </td>
+                                  
                                   <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
                                   <td
@@ -337,7 +332,7 @@
                                     <a
                                       ><strong *ngIf="runner['back1']">{{
                                         (runner["back1"] - 1) * 100
-                                          |  indianCurrency
+                                          | roundToHalf
                                       }}</strong>
                                       <br /><span *ngIf="runner['vback1']">{{
                                         runner["vback1"] | marketRateFormater
@@ -358,7 +353,7 @@
                                     <a
                                       ><strong *ngIf="runner['lay1']">{{
                                         (runner["lay1"] - 1) * 100
-                                          | number : "1.0-0"
+                                        | roundToHalf
                                       }}</strong>
                                       <br /><span *ngIf="runner['vlay1']">{{
                                         runner["vlay1"] | marketRateFormater
@@ -366,8 +361,17 @@
                                     >
                                   </td>
                                   <td
+                                  colspan="4"
                                     class="border-top"
                                     [ngClass]="{ 'border-top': !first }"
+
+                                    *ngIf="
+                                        singleAdminBook['appMarketStatus'] ==
+                                          '3' ||
+                                        singleAdminBook['appMarketStatus'] ==
+                                          '9' ||
+                                          runner['showSuspended']
+                                      "
                                   >
                                     <div
                                       class="suspendedbm1"
@@ -483,9 +487,9 @@
                                   >
                                     <a
                                       ><strong>{{ runner["lay1"] }}</strong>
-                                      <br />{{
+                                      <br /><span>{{
                                         runner["vlay1"] | marketRateFormater
-                                      }}</a
+                                      }}</span></a
                                     >
                                   </td>
                                   <td
@@ -500,9 +504,9 @@
                                   >
                                     <a
                                       ><strong>{{ runner["back1"] }}</strong>
-                                      <br />{{
+                                      <br /><span>{{
                                         runner["vback1"] | marketRateFormater
-                                      }}</a
+                                      }}</span></a
                                     >
                                   </td>
 

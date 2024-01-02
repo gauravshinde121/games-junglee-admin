@@ -41,6 +41,7 @@ export class NetExposureComponent implements OnInit {
 
   ngOnInit(): void {
     this._preConfig();
+    console.log('net view')
   }
 
   _preConfig() {

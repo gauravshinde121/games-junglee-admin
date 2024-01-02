@@ -11,6 +11,7 @@ import { BoxHighlightDirective } from './directives/box-highlight.directive';
 import { SortPipe } from './pipe/sort.pipe';
 import { SearchPipe } from './pipe/search.pipe';
 import { IndianCurrencyPipe } from './pipe/indian-currency.pipe';
+import { RoundToHalfPipe } from './pipe/oddFormat.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { IndianCurrencyPipe } from './pipe/indian-currency.pipe';
     BoxHighlightDirective,
     SortPipe,
     SearchPipe,
-    IndianCurrencyPipe
+    IndianCurrencyPipe,
+    RoundToHalfPipe
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { IndianCurrencyPipe } from './pipe/indian-currency.pipe';
     BoxHighlightDirective,
     SortPipe,
     SearchPipe,
-    IndianCurrencyPipe
+    IndianCurrencyPipe,
+    RoundToHalfPipe
   ]
 })
 export class SharedModule { }

@@ -90,9 +90,9 @@ export class MembersListComponent implements OnInit {
   }
 
   getModalImage(clientId){
-    this.http.get('https://apisimg.freeitstaffing.com/get-modal/'+clientId, {})
+    this.http.get('https://apisimg.cylsys.com/get-modal/'+clientId, {})
       .subscribe(response => {
-        this.modalImage = 'https://apisimg.freeitstaffing.com/'+response[0].image_path;
+        this.modalImage = 'https://apisimg.cylsys.com/'+response[0].image_path;
       }, error => {
         console.error('Error getting modal image:', error);
       });

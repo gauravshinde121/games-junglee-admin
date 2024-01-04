@@ -501,5 +501,13 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_START_WEBJOB)
   }
 
+  public getCommissionReportEndpoint(){
+    return this.createUrl(this._constants.API_GET_COMMISSION_REPORT)
+  }
+
+  public getResetCommissionReportEndpoint(){
+    return this.createUrl(this._constants.API_RESET_COMMISSION_REPORT)
+  }
+
   
 }

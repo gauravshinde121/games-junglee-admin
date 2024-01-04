@@ -1,0 +1,91 @@
+<main id="main" class="main m-0">
+  <section class="gamedetails">
+    <div class="row pb-2">
+      <div class="col-md-12">
+        <h4 class="text-pink">
+          <img src="../../../../../assets/images/master_dashboard.png" alt="" />
+          Commission Lena Dena
+        </h4>
+        <hr />
+        <div class="col-md-12">
+          <div class="row align-items-end">
+            <div class="col-md-3 mb-3">
+              <label>From Date</label>
+              <input [(ngModel)]="fromDate" type="date"  name="fromDate" class="form-control" id=""
+                placeholder="Month" />
+            </div>
+            <div class="col-md-3 mb-3">
+              <label>To Date</label>
+              <input [(ngModel)]="toDate" type="date"  name="toDate" class="form-control" id=""
+                placeholder="Month" />
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="row align-items-end">
+                    <label for="text" class="cassino">Select Client</label><br />
+                    <select [(ngModel)]="clientId" name="clientId" id="clientId" class="form-select pointer">
+                      <option [value]=null>--</option>
+                      <option [value]="client.userId" *ngFor="let client of playerList">
+                        {{ client.username }}
+                      </option>
+                    </select>
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <button (click)="searchCommissionReport()" class="btn btn-sm btn-success">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="row mt-3">
+    <div class="col-md-12 ">
+      <div *ngIf="commissionStatement.length == 0" class="border text-center p-5">
+        <h4 *ngIf="commissionStatement.length == 0 && !isLoading">No data found</h4>
+        <h4 *ngIf="isLoading">Loading...</h4>
+      </div>
+      <div  class="table-responsive tableRes tableFixHead">
+        <table class="table tableall " *ngIf="commissionStatement.length > 0 && !isLoading">
+          <thead>
+            <tr>
+              <th class="thts first">#</th>
+              <th scope="col" class="pointer text-center" (click)="toggleSort('createdAt')">Name</th>
+              <th scope="col" class="pointer"></th>
+              <th scope="col" class="pointer text-center" (click)="toggleSort('gameName')">Fancy Commission (Turnover wise)</th>
+              <th scope="col" class="pointer text-center" (click)="toggleSort('subGame')">Bookmaker (Net Loosing)</th>
+              <th scope="col" class="pointer text-center last" (click)="toggleSort('eventName')">Bookmaker (Entrywise Loosing)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cs of commissionStatement | sort:sortColumn:sortAscending ;let i = index;">
+              <td class="tds tdts">
+                <span>{{ i + 1 }}</span>
+              </td>
+              <td><strong>{{ cs.userName}}</strong></td>
+              <td><button class="btn btn-success btn-sm" (click)="resetCommissionReport(cs)">Reset</button></td>
+              <td class="text-center"><strong>{{ cs.totalFancyTurnOverCommission | indianCurrency}}</strong></td>
+              <td class="text-center"><strong>{{ cs.totalBookmakerNetLoosingCommission | indianCurrency}}</strong></td>
+              <td class="text-center"><strong>{{ cs.totalBookmakerEntrywiseLoosingCommission | indianCurrency }}</strong></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="text-center">
+                <strong>{{totalFancyCommissionAmount | indianCurrency}}</strong>
+              </td>
+              <td class="text-center">
+                <strong>{{totalBookmakerNetLoosingAmount | indianCurrency}}</strong>
+              </td>
+              <td class="text-center">  
+                <strong>{{totalBookmakerEntrywiseLoosing | indianCurrency}}</strong>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>

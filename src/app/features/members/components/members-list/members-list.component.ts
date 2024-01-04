@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { MembersService } from '../../services/members.service';
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
 
 @Component({
@@ -32,6 +33,7 @@ export class MembersListComponent implements OnInit {
   liveCasinoRate: any;
   sportsBook: any;
   clubCasino: any;
+  modalImage:any;
 
   eventStatus: any = [];
   gameStatus: any = [];
@@ -210,7 +212,8 @@ export class MembersListComponent implements OnInit {
     private _sharedService: SharedService,
     private _memberService: MembersService,
     private formbuilder: FormBuilder,
-    private _bookMgmService:BookManagementService
+    private _bookMgmService:BookManagementService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -228,6 +231,16 @@ export class MembersListComponent implements OnInit {
       { id: 2, status: "Inactive", color: 'yellow' },
       { id: 3, status: "Closed", color: 'red' }
     ];
+    this.getModalImage(this.clientId);
+  }
+
+  getModalImage(clientId){
+    this.http.get('https://apisimg.cylsys.com/get-modal/'+clientId, {})
+      .subscribe(response => {
+        this.modalImage = 'https://apisimg.cylsys.com/'+response[0].image_path;
+      }, error => {
+        console.error('Error getting modal image:', error);
+      });
   }
 
   toggleSort(columnName: string) {

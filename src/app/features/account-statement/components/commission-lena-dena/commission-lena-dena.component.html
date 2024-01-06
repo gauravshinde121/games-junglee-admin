@@ -53,7 +53,8 @@
               <th scope="col" class="pointer"></th>
               <th scope="col" class="pointer text-center" (click)="toggleSort('gameName')">Fancy Commission (Turnover wise)</th>
               <th scope="col" class="pointer text-center" (click)="toggleSort('subGame')">Bookmaker (Net Loosing)</th>
-              <th scope="col" class="pointer text-center last" (click)="toggleSort('eventName')">Bookmaker (Entrywise Loosing)</th>
+              <th scope="col" class="pointer text-center" (click)="toggleSort('eventName')">Bookmaker (Entrywise Loosing)</th>
+              <th scope="col" class="pointer text-center last" (click)="toggleSort('eventName')">Total Commission</th>
             </tr>
           </thead>
           <tbody>
@@ -66,6 +67,7 @@
               <td class="text-center"><strong>{{ cs.totalFancyTurnOverCommission | indianCurrency}}</strong></td>
               <td class="text-center"><strong>{{ cs.totalBookmakerNetLoosingCommission | indianCurrency}}</strong></td>
               <td class="text-center"><strong>{{ cs.totalBookmakerEntrywiseLoosingCommission | indianCurrency }}</strong></td>
+              <td class="text-center"><strong>{{ cs.rowTotal | indianCurrency }}</strong></td>
             </tr>
           </tbody>
           <tfoot>
@@ -81,6 +83,9 @@
               </td>
               <td class="text-center">  
                 <strong>{{totalBookmakerEntrywiseLoosing | indianCurrency}}</strong>
+              </td>
+              <td class="text-center">  
+                <strong>{{totalColumSum | indianCurrency}}</strong>
               </td>
             </tr>
           </tfoot>

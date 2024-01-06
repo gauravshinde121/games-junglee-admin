@@ -22,6 +22,7 @@ export class CommissionLenaDenaComponent implements OnInit {
   totalFancyCommissionAmount = 0;
   totalBookmakerNetLoosingAmount = 0;
   totalBookmakerEntrywiseLoosing = 0;
+  totalColumSum = 0;
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
@@ -72,6 +73,11 @@ export class CommissionLenaDenaComponent implements OnInit {
     
     this.isLoading = true;
     
+    this.totalFancyCommissionAmount = 0;
+    this.totalBookmakerEntrywiseLoosing = 0;
+    this.totalBookmakerNetLoosingAmount = 0;
+    this.totalColumSum = 0;
+
     this._accountStatementService._getCommissionReportEndpoint(paramObj).subscribe((res:any)=>{
 
       if(res.commissionReport){
@@ -79,6 +85,8 @@ export class CommissionLenaDenaComponent implements OnInit {
         this.totalFancyCommissionAmount = this.commissionStatement.reduce((acc, crnt) => acc + crnt.totalFancyTurnOverCommission, 0);
         this.totalBookmakerEntrywiseLoosing = this.commissionStatement.reduce((acc, crnt) => acc + crnt.totalBookmakerEntrywiseLoosingCommission, 0);
         this.totalBookmakerNetLoosingAmount = this.commissionStatement.reduce((acc, crnt) => acc + crnt.totalBookmakerNetLoosingCommission, 0);
+        this.commissionStatement.map(cs=>cs.rowTotal = cs.totalFancyTurnOverCommission+cs.totalBookmakerEntrywiseLoosingCommission+cs.totalBookmakerNetLoosingCommission)
+        this.totalColumSum = this.commissionStatement.reduce((acc, crnt) => acc + crnt.rowTotal, 0);
 
       }else{
         this.commissionStatement = []

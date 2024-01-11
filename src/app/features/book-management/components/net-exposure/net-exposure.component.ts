@@ -3,7 +3,6 @@ import { BookManagementService } from '../../services/book-management.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import { Router } from '@angular/router';
-import { webSocket } from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-net-exposure',
@@ -18,7 +17,6 @@ export class NetExposureComponent implements OnInit {
   games: any;
   matchList: any = [];
   sport: any;
-  realDataWebSocket: any;
   MyPT: boolean = false;
 
   currentMatchId: any;
@@ -48,7 +46,6 @@ export class NetExposureComponent implements OnInit {
     this._getGames();
     this._initForm();
     this.onFilterChange({ MyPT: this.MyPT, matchId: null, sportId: null, clicked: 'firstTime', refreshCallVar: false });
-    // this.getPubSubUrl();
     this.loggedInUser = this._sharedService.getUserDetails();
 
     this.resetTimerInterval = setInterval(() => {
@@ -109,32 +106,7 @@ export class NetExposureComponent implements OnInit {
     })
   }
 
-  getPubSubUrl() {
-    this._sharedService.getUserAdminPubSubApi().subscribe(
-      (res: any) => {
-        if (res) {
-          this.realDataWebSocket = webSocket(res['url']);
-          /*this.getInPlayUpcomingData(); //in-play
-          this.getBookMakerData() //bookmaker
-          this.getFancyData() //fancy*/
-          this.realDataWebSocket.subscribe(
-            data => {
-              //if(typeof data == 'string') this._updateMarketData(data);
-              // if(typeof data == 'string')
-              if (data.message == "BET_PLACED") {
-                if (data.uplineIds.indexOf(this.loggedInUser.userId) != -1) {
-                  this.onFilterChange({ MyPT: this.MyPT, matchId: this.currentMatchId, sportId: this.currentSportId, clicked: this.currentClicked });
-                } else {
-                  //console.log('no refresh');
-                }
-              }
-            }, // Called whenever there is a message from the server.
-            err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-            () => console.log('complete') // Called when connection is closed (for whatever reason).
-          );
-        }
-      });
-  }
+ 
 
   onFilterChange(filterObj) {
     this.MyPT = filterObj.selectedType == 'MyPT' ? true : false;
@@ -240,7 +212,6 @@ export class NetExposureComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    if (this.realDataWebSocket) this.realDataWebSocket.complete();
     clearInterval(this.resetTimerInterval)
   }
 

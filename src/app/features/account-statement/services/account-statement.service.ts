@@ -76,4 +76,13 @@ export class AccountStatementService {
   _getAdminAccountStatement(paramObj){
     return this._apiHttpService.post(this._apiEndpointsService.getAdminAccountStatementEndpoint(),paramObj)
   }
+
+
+  _getCommissionReportEndpoint(paramObj){
+    return this._apiHttpService.post(this._apiEndpointsService.getCommissionReportEndpoint(),paramObj)
+  }
+
+  _resetCommissionReportEndpoint(paramObj){
+    return this._apiHttpService.post(this._apiEndpointsService.getResetCommissionReportEndpoint(),paramObj)
+  }
 }

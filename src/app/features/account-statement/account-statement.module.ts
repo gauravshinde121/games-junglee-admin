@@ -9,13 +9,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MyPlComponent } from './components/my-pl/my-pl.component';
 import { PlayerPlComponent } from './components/player-pl/player-pl.component';
 import { TurnoverComponent } from './components/turnover/turnover.component';
-import { CommissionComponent } from './components/commission/commission.component';
 import { AllBetsComponent } from './components/all-bets/all-bets.component';
 import { MyAccountStatementComponent } from './components/my-account-statement/my-account-statement.component';
 import { PlayerAccountStatementComponent } from './components/player-account-statement/player-account-statement.component';
 import { PlayerwiseAccountStatementComponent } from './components/playerwise-account-statement/playerwise-account-statement.component';
 import { CasinoReportComponent } from './components/casino-report/casino-report.component';
 import { CasinoReportDetailsComponent } from './components/casino-report-details/casino-report-details.component';
+import { CommissionLenaDenaComponent } from './components/commission-lena-dena/commission-lena-dena.component';
 
 
 @NgModule({
@@ -25,13 +25,13 @@ import { CasinoReportDetailsComponent } from './components/casino-report-details
     MyPlComponent,
     PlayerPlComponent,
     TurnoverComponent,
-    CommissionComponent,
     AllBetsComponent,
     MyAccountStatementComponent,
     PlayerAccountStatementComponent,
     PlayerwiseAccountStatementComponent,
     CasinoReportComponent,
-    CasinoReportDetailsComponent
+    CasinoReportDetailsComponent,
+    CommissionLenaDenaComponent
   ],
   imports: [
     CommonModule,

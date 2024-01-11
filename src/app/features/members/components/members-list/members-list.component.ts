@@ -29,6 +29,7 @@ export class MembersListComponent implements OnInit {
   userId: any;
   totalTake = 0;
   totalExposure = 0;
+  totalCasino = 0;
   totalGive = 0;
   liveCasinoRate: any;
   sportsBook: any;
@@ -60,7 +61,6 @@ export class MembersListComponent implements OnInit {
   roleId: any;
   ladderObj:any = [];
 
-
   fileName = 'MemberList.xlsx';
 
   sortColumn: string = '';
@@ -90,6 +90,14 @@ export class MembersListComponent implements OnInit {
     )
   }
 
+  getModalImage(clientId){
+    this.http.get('https://apisimg.cylsys.com/get-modal/'+clientId, {})
+      .subscribe(response => {
+        this.modalImage = 'https://apisimg.cylsys.com/'+response[0].image_path;
+      }, error => {
+        console.error('Error getting modal image:', error);
+      });
+  }
   get f() {
     return this.changePasswordForm.controls;
   }
@@ -232,15 +240,6 @@ export class MembersListComponent implements OnInit {
       { id: 3, status: "Closed", color: 'red' }
     ];
     this.getModalImage(this.clientId);
-  }
-
-  getModalImage(clientId){
-    this.http.get('https://apisimg.cylsys.com/get-modal/'+clientId, {})
-      .subscribe(response => {
-        this.modalImage = 'https://apisimg.cylsys.com/'+response[0].image_path;
-      }, error => {
-        console.error('Error getting modal image:', error);
-      });
   }
 
   toggleSort(columnName: string) {
@@ -407,6 +406,7 @@ export class MembersListComponent implements OnInit {
       }
       this.userList = users.memberData.memberList;
       this.totalExposure = this.userList.reduce((acc, crnt) => acc + crnt.exposure, 0);
+      this.totalCasino = this.userList.reduce((acc, crnt) => acc + crnt.casinoWinnings, 0);
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
       this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);

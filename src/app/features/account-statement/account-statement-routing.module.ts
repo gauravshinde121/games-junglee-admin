@@ -5,23 +5,23 @@ import { TransferStatementComponent } from './components/transfer-statement/tran
 import { MyPlComponent } from './components/my-pl/my-pl.component';
 import { PlayerPlComponent } from './components/player-pl/player-pl.component';
 import { TurnoverComponent } from './components/turnover/turnover.component';
-import { CommissionComponent } from './components/commission/commission.component';
 import { AllBetsComponent } from './components/all-bets/all-bets.component'
 import { MyAccountStatementComponent } from './components/my-account-statement/my-account-statement.component';
 import { PlayerAccountStatementComponent } from './components/player-account-statement/player-account-statement.component';
 import { PlayerwiseAccountStatementComponent } from './components/playerwise-account-statement/playerwise-account-statement.component';
 import { CasinoReportComponent } from './components/casino-report/casino-report.component';
 import { CasinoReportDetailsComponent } from './components/casino-report-details/casino-report-details.component';
+import { CommissionLenaDenaComponent } from './components/commission-lena-dena/commission-lena-dena.component';
 
 const routes: Routes = [{
     path: 'account-statement', component: AccountStatementMainComponent,
     children: [
       { path: 'transfer-statement', component: TransferStatementComponent },
-      { path: 'my-pl', component: MyPlComponent, },
+      { path: 'my-pl', component: MyPlComponent },
+      { path: 'commission', component: CommissionLenaDenaComponent },
       { path: 'all-bets/:matchId', component: AllBetsComponent },
       { path: 'player-pl', component: PlayerPlComponent },
       { path: 'turnover', component: TurnoverComponent },
-      { path: 'commission', component: CommissionComponent },
       { path: 'my-account-statement', component: MyAccountStatementComponent },
       { path: 'player-account-statement', component: PlayerAccountStatementComponent },
       { path: 'playerwise-account-statement', component: PlayerwiseAccountStatementComponent },

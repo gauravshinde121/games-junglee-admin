@@ -190,11 +190,13 @@
                 </a>
               </td> -->
               <td class="text-center">
-                <span class="text-success" *ngIf="user.isActive == 'Active'">{{user.isActive}}</span>
-                <span class="text-danger" *ngIf="(user.isActive == 'Inactive') || user.isActive == 'Closed'">{{user.isActive}}</span>
-                <!-- <a (click)="openModal(user.userId)"><i class="fa fa-lock text-pink"></i></a> -->
-                <!-- <select
-                  class="custom-ddl  pointer"
+                <ng-container *ngIf="adminUser.roleId != 1">
+                  <span class="text-success" *ngIf="user.isActive == 'Active'">{{user.isActive}}</span>
+                  <span class="text-danger" *ngIf="(user.isActive == 'Inactive' || user.isActive == 'Closed')">{{user.isActive}}</span>
+                </ng-container>
+
+                <select *ngIf="adminUser.roleId == 1"
+                  class="custom-ddl text-white pointer"
                   (change)="changeStatus($event, user)"
                 >
                   <option
@@ -221,7 +223,7 @@
                       {{ item.status }}
                     </div>
                   </option>
-                </select> -->
+                </select>
               </td>
               <td class="text-center">
                 <a (click)="openModal(user.userId)">

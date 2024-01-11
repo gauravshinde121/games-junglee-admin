@@ -31,6 +31,7 @@ export class DownlineListComponent implements OnInit {
   currentUserName = "";
   disableSubmit = false;
   currentUser:any=null;
+  adminUser:any = null;
 
 
   statusList = [
@@ -82,7 +83,8 @@ export class DownlineListComponent implements OnInit {
 
     })
 
-    this._preConfig()
+    this._preConfig();
+    this.adminUser = this._sharedService.getUserDetails();
   }
 
 

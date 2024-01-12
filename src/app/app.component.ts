@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
+import { Observable, fromEvent, merge, of } from 'rxjs';
+import { mapTo } from 'rxjs/operators';
 
 
 @Component({
@@ -14,12 +16,25 @@ export class AppComponent implements OnInit {
   isblur: any = false;
   realDataWebSocket: any;
   isPageDestroyed = false;
+  online$: Observable<boolean>;
 
 
   constructor(
     private _sharedService: SharedService,
     private _router: Router
-  ) { }
+  ) { 
+
+    this.online$ = merge(
+
+      of(navigator.onLine),
+
+      fromEvent(window, 'online').pipe(mapTo(true)),
+
+      fromEvent(window, 'offline').pipe(mapTo(false))
+
+    );
+
+  }
 
   ngOnInit(): void {
     this._sharedService.currentUserIp.next({
@@ -36,7 +51,19 @@ export class AppComponent implements OnInit {
       this.isblur = res['isShowRightSideBar'];
     })
 
-    this.getPubSubUrl();
+    
+
+    this.online$.subscribe((isOnline) =>{
+      if(isOnline) {
+        // console.log(isOnline);
+        this.isPageDestroyed = false;
+        this.getPubSubUrl();
+        } else {
+          // console.log("you are offline");
+          // console.log(isOnline);
+          this.isPageDestroyed = true;
+        }
+    });
   }
 
 
@@ -64,11 +91,15 @@ export class AppComponent implements OnInit {
             }, 
             err => {
               console.log(err)
-              this.getPubSubUrl();
+              if(!this.isPageDestroyed){
+                this.getPubSubUrl();
+              }
             }, 
             () => {
               console.log('complete')
-              this.getPubSubUrl();
+              if(!this.isPageDestroyed){
+                this.getPubSubUrl();
+              }
             } 
           );
         }

@@ -203,6 +203,21 @@ export class CreateMemberComponent implements OnInit {
       this.maxLimit = this.uplineInfo.userCreationLimit;
     }
     if (!this.editMode) {
+
+      let partnerPercent = this.uplineInfo.partnerShipPercent;
+
+      var memPer:any;
+      memPer = 100 - this.uplineInfo.partnerShipPercent;
+      if(this.createUserWithRoleId == 7){
+         partnerPercent = 100;
+
+         if(memPer < 1){
+          this.memberPercentage = '--';
+        }else {
+          this.memberPercentage = memPer;
+        }
+      }
+
       this.memberForm = this._fb.group({
         username: ['', Validators.required],
         displayName: ['', Validators.required],
@@ -217,7 +232,7 @@ export class CreateMemberComponent implements OnInit {
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(this.maxBetMinValue)]],
         roleId: [this.createUserWithRoleId, Validators.required],
-        partnerShipPercent: [this.uplineInfo.partnerShipPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
+        partnerShipPercent: [partnerPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
         adminCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
         superMasterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.superMasterCreationLimitValidator]],
         masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.masterCreationLimitValidator]],
@@ -356,6 +371,38 @@ export class CreateMemberComponent implements OnInit {
     } else if(e.target.value == 7){
       this.maxLimit = this.uplineInfo.userCreationLimit;
     }
+
+    if(e.target.value == 7){
+      this.memberForm?.patchValue({
+        partnerShipPercent:100
+      })
+
+      var memPer:any;
+      memPer = 100 - this.uplineInfo.partnerShipPercent;
+      if(memPer < 1){
+        this.memberPercentage = '--';
+      }else {
+        this.memberPercentage = memPer;
+      }
+
+      console.log(this.memberPercentage)
+
+    }else{
+      this.memberForm?.patchValue({
+        partnerShipPercent:this.uplineInfo.partnerShipPercent
+      })
+
+      var memPer:any;
+      memPer = this.uplineInfo.partnerShipPercent - this.uplineInfo.partnerShipPercent;
+      if(memPer < 1){
+        this.memberPercentage = '--';
+      }else {
+        this.memberPercentage = memPer;
+      }
+
+    }
+
+
     if (this.memberForm) {
       this.memberForm?.get('playerAvailableCredit')?.setValidators([
         Validators.required,
@@ -364,6 +411,12 @@ export class CreateMemberComponent implements OnInit {
       ]);
       this.memberForm?.get('playerAvailableCredit')?.updateValueAndValidity();
     }
+
+
+    console.log(this.memberForm?.value['partnerShipPercent'])
+
+
+
   }
 
   playerAvailableCreditValidator(maxLimit: number): ValidatorFn {

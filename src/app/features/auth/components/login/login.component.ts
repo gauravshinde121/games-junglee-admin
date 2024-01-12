@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
     }
     this._authService._postLoginApi(loginData).subscribe(
       (res: any) => {
-        console.log("Res",res)
         this._sharedService.setJWTToken(res['token']);
         this._sharedService.setUserDetails(jwt_decode(res['token']));
         this.isLoading = false;

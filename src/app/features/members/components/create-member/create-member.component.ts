@@ -204,11 +204,20 @@ export class CreateMemberComponent implements OnInit {
 
         this.roleId = this.memberData.roleId;
         if (this.memberForm) {
+
+          console.log(this.memberData)
+
+          let creditLimit = this.memberData.availableCredit;
+          
+          if(this.memberData.roleId == 7){
+            creditLimit = this.memberData.creditLimit;
+          }
+
           this.memberForm.patchValue({
             username: this.memberData.username,
             displayName: this.memberData.displayName,
-            playerMaxCreditLimit: this.memberData.availableCredit,
-            playerAvailableCredit: this.memberData.availableCredit,
+            playerMaxCreditLimit: creditLimit,
+            playerAvailableCredit: creditLimit,
             sportsBookRate: this.memberData.sportsBookRate,
             liveCasinoRate: this.memberData.liveCasinoRate,
             minBet: 100,

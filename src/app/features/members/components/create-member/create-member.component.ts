@@ -160,11 +160,11 @@ export class CreateMemberComponent implements OnInit {
 
           console.log(this.memberData)
 
-          let creditLimit = this.memberData.availableCredit;
+          let creditLimit = this.memberData.creditLimit;
           
-          if(this.memberData.roleId == 7){
-            creditLimit = this.memberData.creditLimit;
-          }
+          // if(this.memberData.roleId == 7){
+          //   creditLimit = this.memberData.creditLimit;
+          // }
 
           this.memberForm.patchValue({
             username: this.memberData.username,

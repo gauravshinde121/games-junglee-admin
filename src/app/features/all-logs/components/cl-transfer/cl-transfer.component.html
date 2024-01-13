@@ -52,8 +52,8 @@
                 <th scope="col" class="pointer" (click)="toggleSort('fromRefUserName')">From</th>
                 <th scope="col" class="pointer" (click)="toggleSort('toRefUserName')">To</th>
                 <th scope="col" class="pointer" (click)="toggleSort('amount')">Amount</th>
-                <th scope="col" class="pointer" (click)="toggleSort('balance')">Available Credit</th>
-                <th scope="col" class="pointer" (click)="toggleSort('oldBalance')">Old Available Credit</th>
+                <!-- <th scope="col" class="pointer" (click)="toggleSort('balance')">Available Credit</th> -->
+                <!-- <th scope="col" class="pointer" (click)="toggleSort('oldBalance')">Old Available Credit</th> -->
                 <th scope="col" class="last" (click)="toggleSort('ipAddress')">IP</th>
               </tr>
             </thead>
@@ -72,8 +72,8 @@
                   <span *ngIf="stmt.isGiven == false" class="text-success">{{ stmt.amount | indianCurrency }}</span>
                   <span *ngIf="stmt.isGiven == true" class="text-danger">{{ stmt.amount | indianCurrency}}</span>
                 </td>
-                <td>{{ stmt.balance | indianCurrency}}</td>
-                <td>{{ stmt.oldBalance | indianCurrency}}</td>
+                <!-- <td>{{ stmt.balance | indianCurrency}}</td>
+                <td>{{ stmt.oldBalance | indianCurrency}}</td> -->
                 <!-- <td>{{stmt.}} -->
                 <td class="tooltipnk ms-0  mt-1">
                   <ng-container *ngIf="stmt.ipAddress; else notMatched">

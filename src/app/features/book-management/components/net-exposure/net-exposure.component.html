@@ -7,7 +7,7 @@
         <div class="row" [formGroup]="filterForm">
           <div class="col-md-8 col-12 net_exposure">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <a class="text-decoration-none text-white">
                   <input
                     type="radio"
@@ -19,7 +19,7 @@
                     id="html"
                     name="selectedType"
                     value="MyPT"
-                  /><span class="rounded-pill p-2">My PT</span>
+                  /><small class="rounded-pill p-2">My PT</small>
                 </a>
                 <a class="text-decoration-none text-white">
                   <input
@@ -37,11 +37,11 @@
                     name="selectedType"
                     value="TotalBook"
                     class="pointer radioselected"
-                  /><span class="rounded-pill p-2">Total Book</span>
+                  /><small class="rounded-pill p-2">Total Book</small>
                 </a>
               </div>
 
-              <div class="col-md-8 my-3 my-md-0">
+              <div class="col-md-9 my-3 my-md-0">
                 <div class="row">
                   <div class="col-md-12">
                     <span class="pt-2 me-3"
@@ -62,7 +62,7 @@
                         id="html"
                         name="sport"
                         value="All"
-                      /><span class="rounded-pill p-2">All</span>
+                      /><small class="rounded-pill p-2">All</small>
                     </a>
                     <a
                       *ngFor="let game of games"
@@ -81,9 +81,9 @@
                         id="html"
                         name="sport"
                         [value]="game.sportId"
-                      /><span class="rounded-pill p-2">{{
+                      /><small class="rounded-pill p-2">{{
                         game.sportName
-                      }}</span>
+                      }}</small>
                     </a>
                   </div>
                 </div>
@@ -113,12 +113,12 @@
                 </select>
               </div>
               <div class="col-md-6 col-6 text-end">
-                {{ refreshCount }} &nbsp;
-                <button
+                <small> {{ refreshCount }} </small> &nbsp;
+                <button [disabled]="refreshCount == 0"
                   class="btn btn-pink rounded-pill"
                   (click)="refreshCall()"
                 >
-                  <i class="fa fa-redo-alt disnone"></i> Refresh
+                  <i class="fa fa-redo-alt disnone"></i> <small>Refresh </small> 
                 </button>
               </div>
             </div>

@@ -274,10 +274,14 @@ $gradient-btn: linear-gradient(
 }
 
 .balance-first {
-  background: linear-gradient(0deg, $color_45 0, $color_22);
+  // background: linear-gradient(0deg, $color_45 0, $color_22);
+  background: linear-gradient(0deg, $color_46 0, $color_27);
+
 }
 .balance-up {
-  background: linear-gradient(0deg, $color_5 0, $color_47);
+  // background: linear-gradient(0deg, $color_5 0, $color_47);
+  background: linear-gradient(0deg, $color_46 0, $color_27);
+
 }
 
 .balance-down {

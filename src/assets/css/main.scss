@@ -29,7 +29,7 @@ $color_23: #a7d8fd;
 $color_24: #f9c9d4;
 $color_25: rgba(38, 38, 38, 0.63);
 $color_26: #cd212f;
-$color_27: #e76f26;
+$color_27: #396cbc;
 $color_28: #a6a6a657;
 $color_29: #a6a6a6;
 $color_30: #ebf7fc;
@@ -54,15 +54,26 @@ $color_48: #555;
 $color_49: #ccc;
 $color_50: #dee2e6;
 $color_51: #bd362f;
-
-$gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
+$gradient-btn: linear-gradient(
+  to right top,
+  #396cbc,
+  #366dbd,
+  #326ebe,
+  #2e6fbe,
+  #2a70bf,
+  #2379c6,
+  #1d82cc,
+  #188bd2,
+  #1f9ede,
+  #31b1e9,
+  #47c4f2,
+  #5fd7fb
+);
 
 .browncolor {
   background-color: $color_21;
 }
-.bg-pink {
-  background: linear-gradient(0deg, $color_26 0, $color_27) !important;
-}
+
 .border-pink {
   border: 1px solid $color_28;
 }
@@ -73,7 +84,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   color: $color_7;
   border-radius: 25px;
   font-size: 0.75rem;
-  background-image: linear-gradient(0deg, $color_26 0, $color_27);
+  background-image: $gradient-btn;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   -webkit-transition: all 0.4s ease-in-out;
@@ -276,7 +287,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 }
 
 .navbar-toggler {
-  background: linear-gradient(0deg, $color_46 0, $color_27);
+  background: $gradient-btn;
 }
 
 // balance up/Down end
@@ -328,17 +339,24 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   border-radius: 15px;
   color: $color_7;
   white-space: nowrap;
-  th {
-    background: linear-gradient(0deg, $color_26 0, $color_27);
-    border: 0px;
-    font-weight: 500;
-    color: $color_7;
-  }
-  th.first {
-    border-top-left-radius: 15px;
-  }
-  th.last {
-    border-top-right-radius: 15px;
+  thead {
+    tr {
+      background-image: $gradient-btn;
+      position: sticky;
+      top: 0;
+
+      th {
+        border: 0px;
+        font-weight: 500;
+        color: $color_7;
+      }
+      th:first-child {
+        border-top-left-radius: 15px;
+      }
+      th.last {
+        border-top-right-radius: 15px;
+      }
+    }
   }
   td {
     vertical-align: middle;
@@ -680,7 +698,7 @@ select:-webkit-autofill:focus {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: $color_7;
-  background: linear-gradient(0deg, $color_26 0, $color_27);
+  background: $gradient-btn;
 }
 
 .nav-link:focus,
@@ -801,7 +819,7 @@ select:-webkit-autofill:focus {
   &::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: linear-gradient(0deg, $color_26 0, $color_27) !important;
+    background: $gradient-btn !important;
   }
 }
 
@@ -818,7 +836,7 @@ fieldset:disabled .btn {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: linear-gradient(180deg, $color_26 0, $color_27);
+  background: $color_27;
 }
 
 ::-webkit-scrollbar-track {
@@ -1062,7 +1080,6 @@ a {
   left: -250px !important;
 }
 
-
 // below CSS is for Mafia specifically
 
 .login {
@@ -1139,6 +1156,6 @@ $breakpoint-mobile: 767px;
   width: 100%;
 }
 
-.fa-info{
+.fa-info {
   cursor: copy;
 }

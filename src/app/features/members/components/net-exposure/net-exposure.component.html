@@ -1,7 +1,7 @@
 <section class="section gamedetails">
   <div class="row">
     <div class="col-md-12">
-      <h4 class="text-pink">Net Exposure</h4> 
+      <h4 class="text-pink">Net Exposure</h4>
       <!-- <div class="row">
         <div
           *ngIf="!isLoading && booksForBackend.length > 0"
@@ -29,7 +29,7 @@
                   </td>
                   <td>
                     <a class="btn" (click)="redirectUrl('market', data.marketId, book.matchName)">
-                       <img src="../../../../../assets/images/net_exposure.png" width="22px" alt=""/></a>
+                       <img src="assets/images/net_exposure.png" width="22px" alt=""/></a>
                   </td>
                   <td>
                     <a class="btn btn-pink rounded-pill pt-2 pb-2 w-100 text-danger">
@@ -103,10 +103,7 @@
       </div> -->
 
       <div class="row">
-        <div
-          *ngIf="booksForBackend.length > 0"
-          class="col-md-12 overflow-auto"
-        >
+        <div *ngIf="booksForBackend.length > 0" class="col-md-12 overflow-auto">
           <table
             class="table tableall mt-3 align_thead mb-0"
             *ngFor="let book of booksForBackend"
@@ -156,7 +153,7 @@
                 <!-- <td>
                   <a  class="pointer">
                     <img
-                      src="../../../../../assets/images/net_exposure.png"
+                      src="assets/images/net_exposure.png"
                       width="22px"
                       alt=""
                   /></a>

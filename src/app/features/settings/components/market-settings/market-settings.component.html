@@ -4,8 +4,7 @@
       <div class="col-md-12">
         <!--your code will come here start-->
         <h4 class="text-pink">
-          <img src="../../../../../assets/images/pnl.png" alt="" /> Market
-          Settings
+          <img src="assets/images/pnl.png" alt="" /> Market Settings
         </h4>
         <hr />
         <div class="row align-items-end">
@@ -32,7 +31,10 @@
               (change)="_onTournamentSelect()"
             >
               <option value="null">All</option>
-              <option *ngFor="let game of tournamentList" [value]="game.tournamentId">
+              <option
+                *ngFor="let game of tournamentList"
+                [value]="game.tournamentId"
+              >
                 {{ game.tournamentName }}
               </option>
             </select>
@@ -76,7 +78,7 @@
                   aria-label="Search"
                   aria-describedby="addon-wrapping"
                   [(ngModel)]="searchTerm"
-                  [ngModelOptions]="{standalone: true}"
+                  [ngModelOptions]="{ standalone: true }"
                 />
               </div>
             </div>
@@ -88,7 +90,7 @@
               type="button"
               class="btn btn-pink radius-all"
             >
-            Update Multiple Market
+              Update Multiple Market
             </button>
             <!-- <div class="modal-dialog modal-dialog">
               <div class="modal-content">
@@ -186,7 +188,10 @@
           </h4>
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
-        <table class="table tableall marketSetting" *ngIf="marketSettingsList.length > 0">
+        <table
+          class="table tableall marketSetting"
+          *ngIf="marketSettingsList.length > 0"
+        >
           <thead class="text-dark">
             <tr>
               <th scope="col" class="first pointer">
@@ -199,27 +204,82 @@
                 />
               </th>
               <!-- <th scope="col">#</th> -->
-              <th scope="col" class="cursor-pointer" (click)="toggleSort('marketName')">Market Name</th>
-              <th scope="col" class="cursor-pointer" (click)="toggleSort('marketType')">Market Type</th>
-              <th scope="col" class="cursor-pointer" (click)="toggleSort('refMatchName')">Match Name</th>
-              <th scope="col" class="cursor-pointer" (click)="toggleSort('minBet')">Min Bet</th>
-              <th scope="col" class="cursor-pointer" (click)="toggleSort('maxBet')">Max Bet</th>
-              <th scope="col" class="cursor-pointer" (click)="toggleSort('maxMarketSize')">Max Market Size</th>
-              <th scope="col" class="cursor-pointer" (click)="toggleSort('marketDelay')">Market Delay</th>
+              <th
+                scope="col"
+                class="cursor-pointer"
+                (click)="toggleSort('marketName')"
+              >
+                Market Name
+              </th>
+              <th
+                scope="col"
+                class="cursor-pointer"
+                (click)="toggleSort('marketType')"
+              >
+                Market Type
+              </th>
+              <th
+                scope="col"
+                class="cursor-pointer"
+                (click)="toggleSort('refMatchName')"
+              >
+                Match Name
+              </th>
+              <th
+                scope="col"
+                class="cursor-pointer"
+                (click)="toggleSort('minBet')"
+              >
+                Min Bet
+              </th>
+              <th
+                scope="col"
+                class="cursor-pointer"
+                (click)="toggleSort('maxBet')"
+              >
+                Max Bet
+              </th>
+              <th
+                scope="col"
+                class="cursor-pointer"
+                (click)="toggleSort('maxMarketSize')"
+              >
+                Max Market Size
+              </th>
+              <th
+                scope="col"
+                class="cursor-pointer"
+                (click)="toggleSort('marketDelay')"
+              >
+                Market Delay
+              </th>
               <th scope="col">Setting</th>
-              <th scope="col" class="cursor-pointer last" (click)="toggleSort('marketIsActive')">Action</th>
+              <th
+                scope="col"
+                class="cursor-pointer last"
+                (click)="toggleSort('marketIsActive')"
+              >
+                Action
+              </th>
 
               <!-- (click)="toggleSort('marketIsActive')"  (click)="sortByBooleanProperty('marketIsActive')"-->
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let stmt of marketSettingsList | sort:sortColumn:sortAscending | search: searchTerm; let i = index">
+            <tr
+              *ngFor="
+                let stmt of marketSettingsList
+                  | sort : sortColumn : sortAscending
+                  | search : searchTerm;
+                let i = index
+              "
+            >
               <td>
                 <input
                   type="checkbox"
                   class="pointer"
                   (change)="checkMarketId(stmt.marketId)"
-                  [ngModelOptions]="{standalone: true}"
+                  [ngModelOptions]="{ standalone: true }"
                   [(ngModel)]="stmt.state"
                 />
               </td>
@@ -230,15 +290,14 @@
               <td>{{ stmt.marketType }}</td>
               <td>{{ stmt.refMatchName }}</td>
               <td>{{ stmt.minBet | indianCurrency }}</td>
-              <td>{{ stmt.maxBet | indianCurrency}}</td>
-              <td>{{ stmt.maxMarketSize | indianCurrency}}</td>
+              <td>{{ stmt.maxBet | indianCurrency }}</td>
+              <td>{{ stmt.maxMarketSize | indianCurrency }}</td>
               <td>{{ stmt.marketDelay }}</td>
               <td (click)="openSettingModal(stmt)">
                 <i class="fa fa-cog cursor-pointer" aria-hidden="true"></i>
               </td>
               <td>
                 <label class="toggle-container">
-                  
                   <input
                     [checked]="stmt.marketIsActive"
                     type="checkbox"
@@ -256,7 +315,6 @@
     </div>
   </section>
 </main>
-
 
 <!-- Modal start-->
 <div
@@ -293,7 +351,9 @@
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="minBet" min="0" (keypress)="preventNegativeKeyPress($event)"
+                    formControlName="minBet"
+                    min="0"
+                    (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
                 <div class="col-md-6 mb-2">
@@ -301,7 +361,9 @@
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="maxBet" min="0" (keypress)="preventNegativeKeyPress($event)"
+                    formControlName="maxBet"
+                    min="0"
+                    (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
                 <div class="col-md-6 mb-2">
@@ -309,7 +371,9 @@
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="maxMarketSize" min="0" (keypress)="preventNegativeKeyPress($event)"
+                    formControlName="maxMarketSize"
+                    min="0"
+                    (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
                 <div class="col-md-6 mb-2">
@@ -317,16 +381,24 @@
                   <input
                     type="number"
                     class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="marketDelay" min="0" (keypress)="preventNegativeKeyPress($event)"
+                    formControlName="marketDelay"
+                    min="0"
+                    (keypress)="preventNegativeKeyPress($event)"
                   />
                 </div>
-                
 
                 <div class="row">
                   <div class="col-md-6 text-end">
                     <button
-                      (click)="selectedUserForAdjustment.length> 0?submitBulkMarket() : saveMatchSettings() "
-                      [disabled]="selectedUserForAdjustment.length== 0 && matchSettingsForm.invalid"
+                      (click)="
+                        selectedUserForAdjustment.length > 0
+                          ? submitBulkMarket()
+                          : saveMatchSettings()
+                      "
+                      [disabled]="
+                        selectedUserForAdjustment.length == 0 &&
+                        matchSettingsForm.invalid
+                      "
                       class="btn btn-danger rounded-pill w-80 mt-2"
                     >
                       Save

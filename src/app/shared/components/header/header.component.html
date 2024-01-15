@@ -73,10 +73,10 @@
 <div class="row align-items-center mb-2 mt-2">
   <div class="col-lg-2 col-md-6 col-6">
     <div class="toggle-sidebar-btn d-flex align-items-center">
-      <a (click)="toggleMenu()" class="navbar-toggler bg-color text-white px-1 mx-0" type="button">
-        <!-- <span class="navbar-toggler-icon"></span> -->
+      <!-- <a (click)="toggleMenu()" class="navbar-toggler bg-color text-white px-1 mx-0" type="button">
+        
         <i class="fa fa-bars-staggered"></i>
-      </a>
+      </a> -->
 
       <a
         [routerLink]="['member/list']"
@@ -143,11 +143,16 @@
   </div>
   <div class="col-lg-2 col-md-6 col-6 text-center">
     <div class="user">
-      <p>Welcome, {{ adminDetails?.username }}.</p>
+      <span>Welcome, {{ adminDetails?.username }}.</span>
+      <a (click)="toggleMenu()" class="navbar-toggler bg-color text-white px-1 mx-0" type="button">
+        
+        <i class="fa fa-bars-staggered"></i>
+      </a>
       <!--<a (click)="refreshPage()" class="btn btn-pink radius-all">
         <i class="fa fa-redo-alt disnone"></i> Refresh
       </a>-->
     </div>
+    
   </div>
 
   <div class="col-md-12 smallMobileShow mt-3">
@@ -191,14 +196,14 @@
         <div class="casino-summary">
           <div class="balance">
             <div class="row text-center">
-              <p>
-                <span> BALANCE UP {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span>
+              <p >
+                <span class="f-13"> BALANCE UP {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span>
               </p>
-              <p>
-                <span>BALANCE DOWN {{ adminDetails?.casinoBalanceDown | indianCurrency }}  </span>
+              <p >
+                <span class="f-13">BALANCE DOWN {{ adminDetails?.casinoBalanceDown | indianCurrency }}  </span>
               </p>
-              <p>
-                <span>CASINO SUMMARY</span>
+              <p >
+                <span class="f-16">CASINO SUMMARY</span>
               </p>
             </div>
           </div>

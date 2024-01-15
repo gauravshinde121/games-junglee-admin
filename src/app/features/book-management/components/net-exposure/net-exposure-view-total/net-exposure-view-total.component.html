@@ -8,7 +8,7 @@
               <a routerLink="/book-management/net-exposure"
                 ><i class="fa fa-1x fa-circle-chevron-left"></i
               ></a>
-              {{ matchName }}
+             <small> {{ matchName }} </small> 
             </h6>
           </div>
           <div class="col-md-4 text-end">
@@ -21,7 +21,7 @@
                   name="fav_language"
                   value="HTML"
                   (click)="onFilterChange(true)"
-                /><span class="rounded-pill p-2 m-2">My PT</span>
+                /><small class="rounded-pill p-2 m-2">My PT</small>
               </a>
               <a class="text-decoration-none text-white">
                 <input
@@ -32,25 +32,25 @@
                   name="fav_language"
                   value="HTML"
                   (click)="onFilterChange(false)"
-                /><span class="rounded-pill p-2 m-2">Total Book</span>
+                /><small class="rounded-pill p-2 m-2">Total Book</small>
               </a>
             </p>
           </div>
           <div class="col-md-3 text-end">
-            {{ refreshCount }} &nbsp;
-            <button
+           <small>{{ refreshCount }} </small>  &nbsp;
+            <button [disabled] = "refreshCount == 0"
               class="btn btn-pink rounded-pill ps-4 pe-4"
               (click)="refreshCall()"
             >
-              <i class="fa fa-redo-alt disnone"></i> Refresh
+              <i class="fa fa-redo-alt disnone"></i> <small> Refresh </small> 
             </button>
-            <button
+            <!-- <button
               class="btn btn-pink rounded-pill ps-4 pe-4 ms-2"
               (click)="hideShowTV()"
             >
               <i [ngClass]="isTVEnable ? 'fa fa-xmark' : 'fa fa-play'"></i
               >&nbsp;{{ isTVEnable ? "HIDE" : "WATCH" }}
-            </button>
+            </button> -->
           </div>
 
           <div class="col-md-12" *ngIf="liveStreamingTVUrl" id="videoplayer">
@@ -135,7 +135,7 @@
 
                                       <br />
                                       <p class="mb-0 mt-1">
-                                        <span
+                                        <small
                                           [ngClass]="
                                             runner['amount'] <= 0
                                               ? 'text-danger'
@@ -144,7 +144,7 @@
                                           class="text-success"
                                           ><strong class="exposure-font">{{
                                             runner["amount"] | indianCurrency
-                                          }}</strong></span
+                                          }}</strong></small
                                         >
                                       </p>
                                     </a>
@@ -162,9 +162,9 @@
                                     <a
                                       ><strong>{{ runner["back2"] }}</strong>
                                       <br />
-                                      <span>{{
+                                      <small>{{
                                         runner["vback2"] | marketRateFormater
-                                      }}</span></a
+                                      }}</small></a
                                     >
                                   </td>
                                   <td
@@ -179,9 +179,9 @@
                                   >
                                     <a
                                       ><strong>{{ runner["back1"] }}</strong>
-                                      <br /><span>{{
+                                      <br /><small>{{
                                         runner["vback1"] | marketRateFormater
-                                      }}</span></a
+                                      }}</small></a
                                     >
                                   </td>
                                   <!-- <td class="colgray">-</td>
@@ -198,9 +198,9 @@
                                   >
                                     <a
                                       ><strong>{{ runner["back0"] }}</strong>
-                                      <br /><span>{{
+                                      <br /><small>{{
                                         runner["vback0"] | marketRateFormater
-                                      }}</span></a
+                                      }}</small></a
                                     >
                                   </td>
                                   <td
@@ -215,9 +215,9 @@
                                   >
                                     <a
                                       ><strong>{{ runner["lay0"] }}</strong>
-                                      <br /><span>{{
+                                      <br /><small>{{
                                         runner["vlay0"] | marketRateFormater
-                                      }}</span></a
+                                      }}</small></a
                                     >
                                   </td>
 
@@ -233,9 +233,9 @@
                                   >
                                     <a
                                       ><strong>{{ runner["lay1"] }}</strong>
-                                      <br /><span>{{
+                                      <br /><small>{{
                                         runner["vlay1"] | marketRateFormater
-                                      }}</span></a
+                                      }}</small></a
                                     >
                                   </td>
 
@@ -251,9 +251,9 @@
                                   >
                                     <a
                                       ><strong>{{ runner["lay2"] }}</strong>
-                                      <br /><span>{{
+                                      <br /><small>{{
                                         runner["vlay2"] | marketRateFormater
-                                      }}</span></a
+                                      }}</small></a
                                     >
                                   </td>
                                   <td
@@ -302,7 +302,7 @@
                                         runner["RunnerName"]
                                       }}</strong>
                                       <br />
-                                      <span
+                                      <small
                                         [ngClass]="
                                           runner['amount'] <= 0
                                             ? 'text-danger'
@@ -311,7 +311,7 @@
                                       >
                                         <strong class="exposure-font">{{
                                           runner["amount"] | indianCurrency
-                                        }}</strong></span
+                                        }}</strong></small
                                       >
                                     </a>
                                   </td>
@@ -334,9 +334,9 @@
                                         (runner["back1"] - 1) * 100
                                           | roundToHalf
                                       }}</strong>
-                                      <br /><span *ngIf="runner['vback1']">{{
+                                      <br /><small *ngIf="runner['vback1']">{{
                                         runner["vback1"] | marketRateFormater
-                                      }}</span></a
+                                      }}</small></a
                                     >
                                   </td>
                                   <td
@@ -355,9 +355,9 @@
                                         (runner["lay1"] - 1) * 100
                                         | roundToHalf
                                       }}</strong>
-                                      <br /><span *ngIf="runner['vlay1']">{{
+                                      <br /><small *ngIf="runner['vlay1']">{{
                                         runner["vlay1"] | marketRateFormater
-                                      }}</span></a
+                                      }}</small></a
                                     >
                                   </td>
                                   <td
@@ -429,7 +429,7 @@
                                         runner["RunnerName"]
                                       }}</strong
                                       ><br />
-                                      <span
+                                      <small
                                         [ngClass]="
                                           runner['amount'] <= 0
                                             ? 'text-danger'
@@ -441,7 +441,7 @@
                                             runner["amount"] | indianCurrency
                                           }}</strong
                                         >
-                                      </span>
+                                      </small>
                                     </a>
                                   </td>
                                   <td>
@@ -487,9 +487,9 @@
                                   >
                                     <a
                                       ><strong>{{ runner["lay1"] }}</strong>
-                                      <br /><span>{{
+                                      <br /><small>{{
                                         runner["vlay1"] | marketRateFormater
-                                      }}</span></a
+                                      }}</small></a
                                     >
                                   </td>
                                   <td
@@ -504,9 +504,9 @@
                                   >
                                     <a
                                       ><strong>{{ runner["back1"] }}</strong>
-                                      <br /><span>{{
+                                      <br /><small>{{
                                         runner["vback1"] | marketRateFormater
-                                      }}</span></a
+                                      }}</small></a
                                     >
                                   </td>
 

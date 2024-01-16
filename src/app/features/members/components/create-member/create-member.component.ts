@@ -309,7 +309,7 @@ export class CreateMemberComponent implements OnInit {
         liveCasinoRate: [1, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(1)]],
         minBet: [100, [(c: AbstractControl) => Validators.required(c), Validators.min(100)]],
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(this.maxBetMinValue)]],
-        roleId: [this.createUserWithRoleId, Validators.required],
+        roleId: [null, Validators.required],
         fancyComission: [this.uplineInfo.fancyComission,  [(c: AbstractControl) => Validators.max(this.uplineInfo.fancyComission), Validators.min(0), this.customFancyCommissionValidator(this.uplineInfo.fancyComission)]],
         bookmakerComission: [this.uplineInfo.bookmakerComission,  [(c: AbstractControl) => Validators.max(this.uplineInfo.bookmakerComission), Validators.min(0), this.customBookmakerCommissionValidator(this.uplineInfo.bookmakerComission)]],
         partnerShipPercent: [partnerPercent, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],

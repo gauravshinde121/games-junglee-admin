@@ -168,65 +168,56 @@
                   scope="col"
                   class="pointer"
                   (click)="toggleSort('username')"
-                >
-                  UserName
+                >USERNAME
                 </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('userRoleName')"
-                >
-                  RoleName
+                >ROLENAME
                 </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('creditLimit')"
-                >
-                  Credit Limit
+                >CREDIT LIMIT
                 </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('exposure')"
-                >
-                  Net Exposure
+                >NET EXPOSURE
                 </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('take')"
-                >
-                  Take
+                >TAKE
                 </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('give')"
-                >
-                  Give
+                >GIVE
                 </th>
                 <th *ngIf="clientId == 1"
                 scope="col"
                 class="text-center pointer"
                 (click)="toggleSort('give')"
-              >
-                Casino Amount
+              >CASINO AMOUNT
               </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('availableCredit')"
-                >
-                  Available Credit
+                >AVAILABLE CREDIT
                 </th>
-                <th scope="col" class="text-center pointer" *ngIf="selectedRoleId != 7"  (click)="toggleSort('partnerShipPercent')">
-                  Partnership %
+                <th scope="col" class="text-center pointer" *ngIf="selectedRoleId != 7"  (click)="toggleSort('partnerShipPercent')">PARTNERSHIP %
                 </th>
-                <th scope="col" class="text-center">Details</th>
-                <th scope="col" class="text-center">Status</th>
-                <th scope="col" class="text-center">Change password</th>
-                <th scope="col" class="last text-center">Action</th>
+                <th scope="col" class="text-center">DETAILS</th>
+                <th scope="col" class="text-center">STATUS</th>
+                <th scope="col" class="text-center">CHANGE PASSWORD</th>
+                <th scope="col" class="last text-center">ACTION</th>
               </tr>
             </thead>
             <tbody>
@@ -251,13 +242,13 @@
                     [(ngModel)]="user.state"
                   />
                 </td> -->
-                <td>
+                <td >
                   <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                   <span *ngIf="currentPage > 1">{{
                     i + 1 + (currentPage - 1) * limit
                   }}</span>
                 </td>
-                <td
+                <td data-tooltip="{{user.displayName}}"
                   [ngStyle]="
                     selectedRoleId == 7
                       ? { cursor: 'context-menu' }
@@ -266,7 +257,9 @@
                 >
                   <span (click)="showDownlineTree(user)">{{
                     user.username
-                  }}</span>
+                  }}
+                </span>
+                 
                 </td>
                 <td class="text-center">
                   <span
@@ -428,6 +421,7 @@
               </tr>
             </tfoot>
           </table>
+
         </div>
         <div class="d-flex" *ngIf="userList.length > 0 && !this.isLoading">
           <button

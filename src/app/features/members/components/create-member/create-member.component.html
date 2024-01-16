@@ -20,6 +20,7 @@
               <select [attr.disabled]="editMode" formControlName="roleId"
                   name="roleId" id="ab"
                   class="form-select" (change)="onRoleChange($event)">
+                <option [value]=null selected>Select Role</option>  
                 <option *ngFor="let role of roles" [value]="role.roleId">
                   {{ role.userRoleName }}
                 </option>

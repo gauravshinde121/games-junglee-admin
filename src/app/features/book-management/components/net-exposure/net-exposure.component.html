@@ -5,7 +5,7 @@
         <!--your code will come here start-->
         <h4 class="text-pink">Net Exposure</h4>
         <div class="row" [formGroup]="filterForm">
-          <div class="col-md-8 col-12 net_exposure">
+          <div class="col-12 net_exposure">
             <div class="row">
               <div class="col-md-3">
                 <a class="text-decoration-none text-white">
@@ -41,7 +41,7 @@
                 </a>
               </div>
 
-              <div class="col-md-9 my-3 my-md-0">
+              <div class="col-md-7 my-3 my-md-0">
                 <div class="row">
                   <div class="col-md-12">
                     <span class="pt-2 me-3"
@@ -62,7 +62,7 @@
                         id="html"
                         name="sport"
                         value="All"
-                      /><small class="rounded-pill p-2">All</small>
+                      /><small class="rounded-pill p-2">ALL</small>
                     </a>
                     <a
                       *ngFor="let game of games"
@@ -81,48 +81,51 @@
                         id="html"
                         name="sport"
                         [value]="game.sportId"
-                      /><small class="rounded-pill p-2">{{
+                      /><small class="rounded-pill p-2 text-uppercase">{{
                         game.sportName
                       }}</small>
                     </a>
                   </div>
                 </div>
               </div>
+
+              <div class="col-md-2">
+                <!-- <div class="row"> -->
+                  <!-- <div class="col-md-6 col-6 pointer">
+                    <select
+                      name="matchId"
+                      formControlName="matchId"
+                      id="ab"
+                      class="form-select pointer p-0"
+                      (change)="onFilterChangeDropDown($event)"
+                      data-clicked="match"
+                    >
+                      <option value="null" class="pointer">All</option>
+                      <option
+                        class="pointer"
+                        value="{{ match.matchId }}"
+                        *ngFor="let match of matchList"
+                      >
+                        {{ match.matchName }}
+                      </option>
+                    </select>
+                  </div> -->
+                  <div class="text-end">
+                    <small> {{ refreshCount }} </small> &nbsp;
+                    <button [disabled]="refreshCount == 0"
+                      class="btn btn-pink rounded-pill"
+                      (click)="refreshCall()"
+                    >
+                      <i class="fa fa-redo-alt disnone"></i> <small>Refresh </small> 
+                    </button>
+                  </div>
+                <!-- </div> -->
+              </div>
             </div>
+            
           </div>
 
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-6 col-6 pointer">
-                <select
-                  name="matchId"
-                  formControlName="matchId"
-                  id="ab"
-                  class="form-select pointer p-0"
-                  (change)="onFilterChangeDropDown($event)"
-                  data-clicked="match"
-                >
-                  <option value="null" class="pointer">All</option>
-                  <option
-                    class="pointer"
-                    value="{{ match.matchId }}"
-                    *ngFor="let match of matchList"
-                  >
-                    {{ match.matchName }}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-6 col-6 text-end">
-                <small> {{ refreshCount }} </small> &nbsp;
-                <button [disabled]="refreshCount == 0"
-                  class="btn btn-pink rounded-pill"
-                  (click)="refreshCall()"
-                >
-                  <i class="fa fa-redo-alt disnone"></i> <small>Refresh </small> 
-                </button>
-              </div>
-            </div>
-          </div>
+          
 
           <div class="col-md-12 mt-3" *ngIf="booksForBackend.length == 0">
             <div class="border text-center p-5">

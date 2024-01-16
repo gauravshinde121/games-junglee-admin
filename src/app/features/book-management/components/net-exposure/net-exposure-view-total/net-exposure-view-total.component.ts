@@ -105,6 +105,7 @@ export class NetExposureViewTotalComponent implements OnInit {
       this.isLoading = false;
       if (data.booksForBackend.length > 0) {
         this.viewTotal = data.booksForBackend[0].result;
+        this.viewTotal = this.viewTotal.reverse(); 
       }
       this.totalPages = Math.ceil(this.viewTotal.length / this.pageSize);
     });

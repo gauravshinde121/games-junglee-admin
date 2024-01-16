@@ -193,14 +193,13 @@
       <div class="modal-body bg-dark text-white">
         <div class="row mb-4">
           <div class="col-md-6">
-
             <table class="table tableall">
-              <thead>
+              <!-- <thead>
                 <tr>
                   <th scope="col" class="first">Game Info</th>
                   <th scope="col" class="last"></th>
                 </tr>
-              </thead>
+              </thead> -->
               <tbody>
                 <tr>
                   <td>Game Date :</td>
@@ -230,6 +229,19 @@
                   <td>Commission&nbsp;Amt&nbsp;:</td>
                   <td>{{ oneAccount?.commissionAmt | indianCurrency}}</td>
                 </tr>
+                
+                <!-- <tr>
+                  <td>Round Id:</td>
+                  <td>{{ gameData?.marketId }}</td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col-md-6">
+          
+            <table class="table tableall">
+              <tbody>
                 <tr>
                   <td>Fancy Commission&nbsp;Amt&nbsp;:</td>
                   <td>{{ oneAccount?.totalFancyCommission | indianCurrency}}</td>
@@ -246,14 +258,28 @@
                     {{ oneAccount?.netAmt | indianCurrency }}
                   </td>
                 </tr>
-                <!-- <tr>
-                  <td>Round Id:</td>
-                  <td>{{ gameData?.marketId }}</td>
-                </tr> -->
+                <tr>
+                  <td>Winner&nbsp;Name&nbsp;:</td>
+                  <td>{{ gameData?.winningHorseName }}</td>
+                </tr>
+                <tr>
+                  <td>Match&nbsp;:</td>
+                  <td>{{ gameData?.eventName }}</td>
+                </tr>
               </tbody>
             </table>
+            
           </div>
-          <div class="col-md-6">
+
+          <!-- <div class="col-md-6"> -->
+
+
+              
+          
+
+          <!-- </div> -->
+
+          <!-- <div class="col-md-6">
             <table class="table tableall">
               <thead>
                 <tr>
@@ -272,9 +298,8 @@
                 </tr>
               </tbody>
             </table>
-          </div>
-          <div>
-          </div>
+          </div> -->
+
         </div>
 
 

@@ -17,10 +17,9 @@
           <div class="row mt-3">
             <div class="col-md-3 mb-2 mb-2">
               <label>Select Role</label>
-              <select [attr.disabled]="editMode" formControlName="roleId"
-                  name="roleId" id="ab"
-                  class="form-select" (change)="onRoleChange($event)">
-                <option [value]=null selected>Select Role</option>  
+              <select [attr.disabled]="editMode" formControlName="roleId" name="roleId" id="ab" class="form-select"
+                (change)="onRoleChange($event)">
+                <option [value]=null selected disabled>Select Role</option>
                 <option *ngFor="let role of roles" [value]="role.roleId">
                   {{ role.userRoleName }}
                 </option>
@@ -90,11 +89,11 @@
               </div>
 
               <!-- Add this div to show a password mismatch error -->
-        <div class="small text-danger" *ngIf="
+              <div class="small text-danger" *ngIf="
           memberForm.controls['confirmPassword'].hasError('confirmPasswordValidator') &&
           memberForm.controls['confirmPassword'].touched">
-        Password and Confirm password do not match
-      </div>
+                Password and Confirm password do not match
+              </div>
 
             </div>
 
@@ -120,7 +119,8 @@
     </section>
 
 
-    <section class="section gamedetails mt-3" *ngIf="setAdminCreationLimit || setSuperMasterCreationLimit || setMasterCreationLimit || setAgentCreationLimit || setDealerCreationLimit || setUserCreationLimit">
+    <section class="section gamedetails mt-3"
+      *ngIf="setAdminCreationLimit || setSuperMasterCreationLimit || setMasterCreationLimit || setAgentCreationLimit || setDealerCreationLimit || setUserCreationLimit">
       <div class="row">
         <div class="col-md-12 text-pink">
           <h4>Downline Creation Limits</h4>
@@ -128,31 +128,37 @@
       </div>
       <div class="row">
         <div class="col-md-3 mb-2" *ngIf="setAdminCreationLimit">
+         
           <label>Admin Creation Limit</label>
-          <input type="number" class="form-control" formControlName="adminCreationLimit"
+          <input *ngIf="userDetails?.roleId == 1"  type="number" class="form-control" formControlName="adminCreationLimit"
             placeholder="Admin Creation Limit*" />
+            <p *ngIf="userDetails?.roleId != 1">{{uplineInfo?.adminCreationLimit}}</p>
           <div class="small text-danger" *ngIf="memberForm.controls['adminCreationLimit'].errors?.required &&
           memberForm.controls['adminCreationLimit'].touched">
             Please enter Admin Creation Limit.
           </div>
         </div>
+
         <div class="col-md-3 mb-2" *ngIf="setSuperMasterCreationLimit">
           <label>Super Master Creation Limit</label>
-          <input type="number" class="form-control" formControlName="superMasterCreationLimit"
+          <input *ngIf="userDetails?.roleId == 1" type="number" class="form-control" formControlName="superMasterCreationLimit"
             placeholder="Super Master Creation Limit*" />
+            <p *ngIf="userDetails?.roleId != 1">{{uplineInfo?.superMasterCreationLimit}}</p>
           <div class="small text-danger" *ngIf="memberForm.controls['superMasterCreationLimit'].errors?.required &&
           memberForm.controls['superMasterCreationLimit'].touched">
-            Please enter Super Master  Creation Limit.
+            Please enter Super Master Creation Limit.
           </div>
           <div class="small text-danger" *ngIf="memberForm.controls['superMasterCreationLimit'].hasError('superMasterCreationLimit') &&
             memberForm.controls['superMasterCreationLimit'].touched">
             Creation Limit cannot exceed Player Credit Limit.
           </div>
         </div>
+
         <div class="col-md-3 mb-2" *ngIf="setMasterCreationLimit">
           <label>Master Creation Limit</label>
-          <input type="number" class="form-control" formControlName="masterCreationLimit"
+          <input *ngIf="userDetails?.roleId == 1" type="number" class="form-control" formControlName="masterCreationLimit"
             placeholder="Master Creation Limit*" />
+          <p *ngIf="userDetails?.roleId != 1">{{uplineInfo?.masterCreationLimit}}</p>
           <div class="small text-danger" *ngIf="memberForm.controls['masterCreationLimit'].errors?.required &&
           memberForm.controls['masterCreationLimit'].touched">
             Please enter Master Creation Limit.
@@ -164,8 +170,9 @@
         </div>
         <div class="col-md-3 mb-2" *ngIf="setAgentCreationLimit">
           <label>Agent Creation Limit</label>
-          <input type="number" class="form-control" formControlName="agentCreationLimit"
+          <input *ngIf="userDetails?.roleId == 1" type="number" class="form-control" formControlName="agentCreationLimit"
             placeholder="Agent Creation Limit*" />
+          <p *ngIf="userDetails?.roleId != 1">{{uplineInfo?.agentCreationLimit}}</p>
           <div class="small text-danger" *ngIf="memberForm.controls['agentCreationLimit'].errors?.required &&
           memberForm.controls['agentCreationLimit'].touched">
             Please enter Agent Creation Limit.
@@ -177,8 +184,9 @@
         </div>
         <div class="col-md-3 mb-2" *ngIf="setDealerCreationLimit">
           <label>Dealer Creation Limit</label>
-          <input type="number" class="form-control" formControlName="dealerCreationLimit"
+          <input *ngIf="userDetails?.roleId == 1" type="number" class="form-control" formControlName="dealerCreationLimit"
             placeholder="Dealer Creation Limit*" />
+          <p *ngIf="userDetails?.roleId != 1">{{uplineInfo?.dealerCreationLimit}}</p>
           <div class="small text-danger" *ngIf="memberForm.controls['dealerCreationLimit'].errors?.required &&
           memberForm.controls['dealerCreationLimit'].touched">
             Please enter Dealer Creation Limit.
@@ -190,8 +198,9 @@
         </div>
         <div class="col-md-3 mb-2" *ngIf="setUserCreationLimit">
           <label>User Creation Limit</label>
-          <input type="number" class="form-control" formControlName="userCreationLimit"
+          <input *ngIf="userDetails?.roleId == 1" type="number" class="form-control" formControlName="userCreationLimit"
             placeholder="User Creation Limit*" />
+            <p *ngIf="userDetails?.roleId != 1">{{uplineInfo?.userCreationLimit}}</p>
           <div class="small text-danger" *ngIf="memberForm.controls['userCreationLimit'].errors?.required &&
           memberForm.controls['userCreationLimit'].touched">
             Please enter User Creation Limit.
@@ -222,16 +231,13 @@
             </div>
           </div>
           <div class="col-lg-1 col-md-3 col-3 text-end">
-            <button
-            *ngIf="game.gameId == 4 && game.isActive == true"
-              type="button"
-              class="btn-sm btn-pink rounded-pill ms-2 text-white"
-              data-bs-toggle="modal" data-bs-target="#casinoProvider"
-            >
-            Provider
+            <button *ngIf="game.gameId == 4 && game.isActive == true" type="button"
+              class="btn-sm btn-pink rounded-pill ms-2 text-white" data-bs-toggle="modal"
+              data-bs-target="#casinoProvider">
+              Provider
             </button>
           </div>
-          </div>
+        </div>
         <div class="col-md-3">
 
         </div>
@@ -243,7 +249,7 @@
           <h4>Rate</h4>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-2">Sportsbook (INR)</div>
         <div class="col-md-2">Max Rate (INR) <br />My Share : 1</div>
         <div class="col-md-8">
@@ -251,8 +257,8 @@
             id="sportsBookRate" class="form-control pb-2" />
           <p>(Min : 1) (Max : 100)</p>
         </div>
-      </div>
-      <div class="row mt-5">
+      </div> -->
+      <!-- <div class="row mt-5">
         <div class="col-md-2">Live Casino</div>
         <div class="col-md-2">Max Rate (INR) <br />My Share : 1</div>
         <div class="col-md-8">
@@ -260,13 +266,13 @@
             class="form-control pb-2" />
           <p>(Min : 1) (Max : 100)</p>
         </div>
-      </div>
+      </div> -->
       <div class="row mt-5">
         <div class="col-md-2">Partnership Percentage</div>
         <div class="col-md-2">(%)</div>
         <div class="col-md-8">
           <input formControlName="partnerShipPercent" name="partnerShipPercent" type="number" class="form-control pb-2"
-          *ngIf="!editMode" (keyup)="calculateMemberPercentage($event)" />
+            *ngIf="!editMode" (keyup)="calculateMemberPercentage($event)" />
           <span *ngIf="editMode">{{ memberForm.get('partnerShipPercent')?.value }}</span>
           <p>(Min : {{ uplineInfo?.partnerShipPercent }} ) (Max : 100)</p>
           <div *ngIf="f?.partnerShipPercent?.errors?.min" class="small text-danger col-md-12 ps-5">
@@ -325,7 +331,8 @@
                   </button>
                 </div>
                 <div class="col-md-6">
-                  <button class="btn  rounded-pill w-100 mt-3 ms-3 float-right btn-pink" type="button" (click)="closeModal()">
+                  <button class="btn  rounded-pill w-100 mt-3 ms-3 float-right btn-pink" type="button"
+                    (click)="closeModal()">
                     Cancel
                   </button>
                 </div>
@@ -369,7 +376,8 @@
           </div>
 
           <div class="col-md-2">
-            <button class="btn  rounded-pill w-100 mt-3 ms-3 float-right btn-pink"  data-bs-dismiss="modal" (click)="closeModal()">
+            <button class="btn  rounded-pill w-100 mt-3 ms-3 float-right btn-pink" data-bs-dismiss="modal"
+              (click)="closeModal()">
               Ok
             </button>
           </div>

@@ -95,6 +95,7 @@ export class CreateMemberComponent implements OnInit {
     this.getGames();
     this._getRoles();
     this.getUserIp();
+    this._getUplineInfo();
   }
 
   getGames() {
@@ -365,6 +366,9 @@ export class CreateMemberComponent implements OnInit {
   }
 
   onRoleChange(e){
+    this.getRoleWiseDownLineLimits();
+    this.userDetails = this._sharedService.getUserDetails();
+
     this.setCreationLimit(e.target.value);
     this.selectedUserRole = this.roles.find(role => role.roleId === Number(e.target.value)).userRoleName;
     if(e.target.value == 2){
@@ -380,6 +384,9 @@ export class CreateMemberComponent implements OnInit {
     } else if(e.target.value == 7){
       this.maxLimit = this.uplineInfo.userCreationLimit;
     }
+
+    
+
 
     if(e.target.value == 7){
       this.memberForm?.patchValue({
@@ -421,10 +428,7 @@ export class CreateMemberComponent implements OnInit {
       this.memberForm?.get('playerAvailableCredit')?.updateValueAndValidity();
     }
 
-
     console.log(this.memberForm?.value['partnerShipPercent'])
-
-
 
   }
 
@@ -514,7 +518,9 @@ export class CreateMemberComponent implements OnInit {
   _getUplineInfo() {
     this._sharedService._getAdminDetailsApi().subscribe(((info: any) => {
       this.uplineInfo = info.admin;
-      this._createMemberForm()
+
+      this._createMemberForm();
+
       if (this.route.snapshot.params['id']) {
         this.editMode = true;
         this.editUserId = this.route.snapshot.params['id'];
@@ -522,6 +528,12 @@ export class CreateMemberComponent implements OnInit {
       }
     }))
 
+  }
+
+  getRoleWiseDownLineLimits(){
+    this._sharedService._getAdminDetailsApi().subscribe(((info: any) => {
+      this.uplineInfo = info.admin;
+    }))
   }
 
   // Must Match Password

@@ -119,7 +119,7 @@
     </span>
     <strong> NET Total Amount</strong>&nbsp;&nbsp;
     <span class="text-danger">{{ plStatement.length }}</span>
-
+ 
     <button
       *ngIf="plStatement.length > 0"
       type="button"
@@ -293,12 +293,12 @@
         <div class="row mb-4">
           <div class="col-md-6">
             <table class="table tableall">
-              <!-- <thead>
+              <thead>
                 <tr>
                   <th scope="col" class="first">Game Info</th>
                   <th scope="col" class="last"></th>
                 </tr>
-              </thead> -->
+              </thead>
               <tbody>
                 <tr>
                   <td>Game Date :</td>
@@ -330,19 +330,6 @@
                   <td>Commission&nbsp;Amt&nbsp;:</td>
                   <td>{{ oneAccount?.commissionAmt | indianCurrency }}</td>
                 </tr>
-                
-                <!-- <tr>
-                  <td>Round Id:</td>
-                  <td>{{ gameData?.marketId }}</td>
-                </tr> -->
-              </tbody>
-            </table>
-          </div>
-
-          <div class="col-md-6">
-          
-            <table class="table tableall">
-              <tbody>
                 <tr>
                   <td>Fancy Commission&nbsp;Amt&nbsp;:</td>
                   <td>
@@ -365,28 +352,14 @@
                     {{ oneAccount?.netAmt | indianCurrency }}
                   </td>
                 </tr>
-                <tr>
-                  <td>Winner&nbsp;Name&nbsp;:</td>
-                  <td>{{ gameData?.winningHorseName }}</td>
-                </tr>
-                <tr>
-                  <td>Match&nbsp;:</td>
-                  <td>{{ gameData?.eventName }}</td>
-                </tr>
+                <!-- <tr>
+                  <td>Round Id:</td>
+                  <td>{{ gameData?.marketId }}</td>
+                </tr> -->
               </tbody>
             </table>
-            
           </div>
-
-          <!-- <div class="col-md-6"> -->
-
-
-              
-          
-
-          <!-- </div> -->
-
-          <!-- <div class="col-md-6">
+          <div class="col-md-6">
             <table class="table tableall">
               <thead>
                 <tr>
@@ -408,7 +381,7 @@
           </div>
           <div></div>
         </div>
-
+ 
         <div class="row">
           <div class="col-md-12 mb-2">
             <button
@@ -420,7 +393,7 @@
               Export
             </button>
           </div>
-
+ 
           <div class="col-md-12">
             <div class="tableFixHead">
               <table class="table tableall text-center">
@@ -469,7 +442,7 @@
                     >
                       Odds
                     </th>
-
+ 
                     <th
                       scope="col"
                       class="pointer"
@@ -515,7 +488,7 @@
                     <td>{{ bet.horseName }}</td>
                     <!-- <td>{{ bet.avgOdds | number }}</td> -->
                     <td>{{ bet.odds }}</td>
-
+ 
                     <td>{{ bet.matchedStake }}</td>
                     <td
                       [ngClass]="

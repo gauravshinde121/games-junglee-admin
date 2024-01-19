@@ -4,17 +4,14 @@
       <div class="col-md-12">
         <!--your code will come here start-->
         <h4 class="text-pink">
-          <img src="assets/images/pnl.png" alt="" /> Player P/L Statement
+          <img src="../../../../../assets/images/pnl.png" alt="" /> Player P/L
+          Statement
         </h4>
         <hr />
         <div class="row align-items-end mb-3">
           <div class="col-md-6">
             <label>Select Member</label>
-            <select
-              formControlName="memberId"
-              id="ab"
-              class="form-select bg-dgre pointer"
-            >
+            <select formControlName="memberId" id="ab" class="form-select bg-dgre pointer">
               <option value="null">All</option>
               <option *ngFor="let member of allMembers" [value]="member.userId">
                 {{ member.username }}
@@ -22,10 +19,8 @@
             </select>
           </div>
           <div class="col-md-6">
-            <button
-              class="btn btn-outline-pink btn-pink text-white rounded-pill mt-4 w-100"
-              (click)="clearMemberName()"
-            >
+            <button class="btn btn-outline-pink btn-pink text-white rounded-pill mt-4 w-100"
+              (click)="clearMemberName()">
               <i class="fa fa-user-cog"></i> Clear Members
             </button>
           </div>
@@ -33,34 +28,16 @@
         <div class="row align-items-end">
           <div class="col-md-6">
             <label>From Date</label>
-            <input
-              type="date"
-              formControlName="fromDate"
-              name="fromDate"
-              class="form-control"
-              id=""
-              placeholder="Month"
-            />
+            <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id=""
+              placeholder="Month" />
           </div>
           <div class="col-md-6">
             <label>To Date</label>
-            <input
-              type="date"
-              formControlName="toDate"
-              name="toDate"
-              class="form-control"
-              id=""
-              placeholder="Month"
-            />
+            <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month" />
           </div>
           <div class="col-md-3 mt-3">
             <label>Select Sport</label>
-            <select
-              formControlName="sportsId"
-              id="ab"
-              class="form-select pointer"
-              (change)="changeGame($event)"
-            >
+            <select formControlName="sportsId" id="ab" class="form-select pointer" (change)="changeGame($event)">
               <option [value]="null">All</option>
               <option *ngFor="let game of games" [value]="game.sportId">
                 {{ game.sportName }}
@@ -69,41 +46,24 @@
           </div>
           <div class="col-md-3 mt-3">
             <label>Select Match</label>
-            <select
-              formControlName="matchId"
-              id="ab"
-              class="form-select pointer"
-              (change)="changeMatch($event)"
-            >
+            <select formControlName="matchId" id="ab" class="form-select pointer" (change)="changeMatch($event)">
               <option [value]="null">All</option>
-              <option [value]="match.matchId" *ngFor="let match of matchList">
+              <option [value]=" match.matchId " *ngFor="let match of matchList">
                 {{ match.matchName }}
               </option>
             </select>
           </div>
           <div class="col-md-3 mt-3">
             <label>Select Market</label>
-            <select
-              formControlName="marketId"
-              id="ab"
-              class="form-select pointer"
-              (change)="changeMarketType($event)"
-            >
+            <select formControlName="marketId" id="ab" class="form-select pointer" (change)="changeMarketType($event)">
               <option [value]="null">All</option>
-              <option
-                [value]="market.marketId"
-                *ngFor="let market of marketList"
-              >
+              <option [value]="market.marketId" *ngFor="let market of marketList">
                 {{ market.marketName }}
               </option>
             </select>
           </div>
           <div class="col-md-3 mt-3">
-            <button
-              type="button"
-              class="btn btn-pink rounded-pill mt-4 w-100"
-              (click)="searchList()"
-            >
+            <button type="button" class="btn btn-pink rounded-pill mt-4 w-100" (click)="searchList()">
               Search
             </button>
           </div>
@@ -115,22 +75,18 @@
   <br />
   <div class="col-md-12 text-right font">
     <span>
-      <img src="assets/images/dollaricon.png" alt="" class="doneLoading" />
+      <img src="../../../../../assets/images/dollaricon.png" alt="" class="doneLoading" />
     </span>
     <strong> NET Total Amount</strong>&nbsp;&nbsp;
     <span class="text-danger">{{ plStatement.length }}</span>
  
-    <button
-      *ngIf="plStatement.length > 0"
-      type="button"
-      class="btn btn-pink rounded-pill ms-2 text-white float-end"
-      (click)="exportExcel()"
-    >
-      Export
-    </button>
+ 
+    <button *ngIf="plStatement.length >0 " type="button" class="btn btn-pink  rounded-pill ms-2 text-white float-end"
+      (click)="exportExcel()">Export</button>
+ 
   </div>
   <br />
-  <div class="col-md-12">
+  <div class="col-md-12 ">
     <div *ngIf="plStatement.length == 0" class="border text-center p-5">
       <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
       <h4 *ngIf="isLoading">Loading...</h4>
@@ -140,51 +96,26 @@
         <thead class="text-dark">
           <tr>
             <th scope="col" class="first"></th>
-            <th
-              scope="col"
-              class="pointer"
-              (click)="toggleSort('createDateTime')"
-            >
-              <i class="fa fa-"></i> Date
-            </th>
-            <th scope="col" class="pointer" (click)="toggleSort('sport')">
-              Sport
-            </th>
+            <th scope="col" class="pointer" (click)="toggleSort('createDateTime')"><i class="fa fa-"></i> Date</th>
+            <th scope="col" class="pointer" (click)="toggleSort('sport')">Sport</th>
             <!--<th scope="col">Sub Game</th>-->
-            <th scope="col" class="pointer" (click)="toggleSort('match')">
-              Match
-            </th>
-            <th scope="col" class="pointer" (click)="toggleSort('market')">
-              Market
-            </th>
-            <th scope="col" class="pointer" (click)="toggleSort('name')">
-              Username
-            </th>
-            <th scope="col" class="pointer" (click)="toggleSort('amount')">
-              Amount
-            </th>
-            <th scope="col" class="pointer" (click)="toggleSort('amount')">
-              Fancy Commission
-            </th>
-            <th scope="col" class="pointer" (click)="toggleSort('amount')">
-              Bookmaker Commission
-            </th>
+            <th scope="col" class="pointer" (click)="toggleSort('match')">Match</th>
+            <th scope="col" class="pointer" (click)="toggleSort('market')">Market</th>
+            <th scope="col" class="pointer" (click)="toggleSort('name')">Username</th>
+            <th scope="col" class="pointer" (click)="toggleSort('amount')">Amount</th>
+            <th scope="col" class="pointer" (click)="toggleSort('amount')">Fancy Commission</th>
+            <th scope="col" class="pointer" (click)="toggleSort('amount')">Bookmaker Commission</th>
             <!-- <th scope="col">Master</th><th scope="col">Multiplier</th> -->
             <th scope="col" class="last text-center">Details</th>
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="
-              let pl of plStatement | sort : sortColumn : sortAscending;
-              let i = index
-            "
-          >
+          <tr *ngFor="let pl of plStatement | sort:sortColumn:sortAscending ; let i = index">
             <td>
               <span>{{ i + 1 }}</span>
               <span *ngIf="currentPage > 1">{{
-                i + 1 + (currentPage - 1) * limit
-              }}</span>
+              i + 1 + (currentPage - 1) * limit
+            }}</span>
             </td>
             <td>{{ pl.createDateTime | date : "medium" }}</td>
             <td>{{ pl.gameData.subGame }}</td>
@@ -195,26 +126,17 @@
               {{ pl.playerData.name }}
             </td>
             <td class="">
-              <div
-                [ngClass]="
-                  pl.gameData.finalNetAmount > 0
-                    ? 'text-success'
-                    : 'text-danger'
-                "
-              >
+              <div [ngClass]="
+                pl.gameData.finalNetAmount > 0 ? 'text-success' : 'text-danger'
+              ">
                 {{ pl.gameData.finalNetAmount | indianCurrency }}
               </div>
             </td>
             <td>{{ pl.gameData.totalFancyCommission }}</td>
             <td>{{ pl.gameData.totalBookmakerCommission }}</td>
             <td class="text-center">
-              <i
-                (click)="getOneAccount(pl)"
-                class="fa-sharp fa-solid fa-eye text-pink pointer"
-                aria-hidden="true"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-              ></i>
+              <i (click)="getOneAccount(pl)" class="fa-sharp fa-solid fa-eye text-pink pointer" aria-hidden="true"
+                data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
             </td>
           </tr>
         </tbody>
@@ -226,18 +148,10 @@
             <td></td>
             <td></td>
             <td></td>
-            <td
-              class="text-success float-left text-center"
-              [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'"
-            >
-              {{ totalAmount | indianCurrency }}
-            </td>
-            <td class="text-start">
-              {{ totalFancyCommission | indianCurrency }}
-            </td>
-            <td class="text-start">
-              {{ totalBookmakerCommission | indianCurrency }}
-            </td>
+            <td class="text-success float-left text-center"
+              [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | indianCurrency}}</td>
+            <td class="text-start">{{totalFancyCommission | indianCurrency}}</td>
+            <td class="text-start">{{totalBookmakerCommission | indianCurrency}}</td>
             <td></td>
           </tr>
         </tfoot>
@@ -265,40 +179,27 @@
   </div>
 </main>
 <!-- Modal start-->
-<div
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static"
+  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-xl">
-    <div class="modal-content border-danger">
+    <div class="modal-content  border-danger ">
       <div class="modal-header bg-pink p-2">
         <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
           Game Detail
         </h5>
-        <button
-          type="button"
-          (click)="closeModal()"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
       <div class="modal-body bg-dark text-white">
         <div class="row mb-4">
           <div class="col-md-6">
             <table class="table tableall">
-              <thead>
+              <!-- <thead>
                 <tr>
                   <th scope="col" class="first">Game Info</th>
                   <th scope="col" class="last"></th>
                 </tr>
-              </thead>
+              </thead> -->
               <tbody>
                 <tr>
                   <td>Game Date :</td>
@@ -314,44 +215,21 @@
                 </tr>
                 <tr>
                   <td>Win/Loss:</td>
-                  <td>{{ oneAccount?.status }}</td>
+                  <td>{{oneAccount?.status }}</td>
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
-                  <td
-                    [ngClass]="
-                      oneAccount?.winAmt > 0 ? 'text-success' : 'text-danger'
-                    "
-                  >
+                  <td [ngClass]="
+                    oneAccount?.winAmt > 0 ? 'text-success' : 'text-danger'
+                    ">
                     {{ oneAccount?.winAmt | indianCurrency }}
                   </td>
                 </tr>
                 <tr>
                   <td>Commission&nbsp;Amt&nbsp;:</td>
-                  <td>{{ oneAccount?.commissionAmt | indianCurrency }}</td>
+                  <td>{{ oneAccount?.commissionAmt | indianCurrency}}</td>
                 </tr>
-                <tr>
-                  <td>Fancy Commission&nbsp;Amt&nbsp;:</td>
-                  <td>
-                    {{ oneAccount?.totalFancyCommission | indianCurrency }}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Bookmaker Commission&nbsp;Amt&nbsp;:</td>
-                  <td>
-                    {{ oneAccount?.totalBookmakerCommission | indianCurrency }}
-                  </td>
-                </tr>
-                <tr>
-                  <td>Net Amt:</td>
-                  <td
-                    [ngClass]="
-                      oneAccount?.netAmt > 0 ? 'text-success' : 'text-danger'
-                    "
-                  >
-                    {{ oneAccount?.netAmt | indianCurrency }}
-                  </td>
-                </tr>
+                
                 <!-- <tr>
                   <td>Round Id:</td>
                   <td>{{ gameData?.marketId }}</td>
@@ -359,7 +237,49 @@
               </tbody>
             </table>
           </div>
+ 
           <div class="col-md-6">
+          
+            <table class="table tableall">
+              <tbody>
+                <tr>
+                  <td>Fancy Commission&nbsp;Amt&nbsp;:</td>
+                  <td>{{ oneAccount?.totalFancyCommission | indianCurrency}}</td>
+                </tr>
+                <tr>
+                  <td>Bookmaker Commission&nbsp;Amt&nbsp;:</td>
+                  <td>{{ oneAccount?.totalBookmakerCommission | indianCurrency}}</td>
+                </tr>
+                <tr>
+                  <td>Net Amt:</td>
+                  <td [ngClass]="
+                    oneAccount?.netAmt > 0 ? 'text-success' : 'text-danger'
+                    ">
+                    {{ oneAccount?.netAmt | indianCurrency }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Winner&nbsp;Name&nbsp;:</td>
+                  <td>{{ gameData?.winningHorseName }}</td>
+                </tr>
+                <tr>
+                  <td>Match&nbsp;:</td>
+                  <td>{{ gameData?.eventName }}</td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+ 
+          <!-- <div class="col-md-6"> -->
+ 
+ 
+              
+          
+ 
+          <!-- </div> -->
+ 
+          <!-- <div class="col-md-6">
             <table class="table tableall">
               <thead>
                 <tr>
@@ -378,85 +298,33 @@
                 </tr>
               </tbody>
             </table>
-          </div>
-          <div></div>
+          </div> -->
+ 
         </div>
+ 
  
         <div class="row">
           <div class="col-md-12 mb-2">
-            <button
-              *ngIf="oneAccount?.bets.length > 0"
-              type="button"
-              class="btn btn-pink rounded-pill ms-2 text-white float-end"
-              (click)="exportExcel1()"
-            >
-              Export
-            </button>
+            <button *ngIf="oneAccount?.bets.length > 0" type="button"
+              class="btn btn-pink  rounded-pill ms-2 text-white float-end" (click)="exportExcel1()">Export</button>
           </div>
  
           <div class="col-md-12">
+ 
             <div class="tableFixHead">
               <table class="table tableall text-center">
                 <thead>
                   <tr>
-                    <th
-                      scope="col"
-                      class="first w-auto pointer"
-                      (click)="toggleSort1('placedDate')"
-                    >
-                      Placed Date
-                    </th>
-                    <th
-                      scope="col"
-                      class="pointer"
-                      (click)="toggleSort1('matchedDate')"
-                    >
-                      Matched Date
-                    </th>
-                    <th
-                      scope="col"
-                      class="pointer"
-                      (click)="toggleSort1('type')"
-                    >
-                      Type
-                    </th>
-                    <th
-                      scope="col"
-                      class="pointer"
-                      (click)="toggleSort1('status')"
-                    >
-                      Status
-                    </th>
-                    <th
-                      scope="col"
-                      class="pointer"
-                      (click)="toggleSort1('horseName')"
-                    >
-                      Horse Name
-                    </th>
+                    <th scope="col" class="first w-auto pointer" (click)="toggleSort1('placedDate')">Placed Date</th>
+                    <th scope="col" class="pointer" (click)="toggleSort1('matchedDate')">Matched Date</th>
+                    <th scope="col" class="pointer" (click)="toggleSort1('type')">Type</th>
+                    <th scope="col" class="pointer" (click)="toggleSort1('status')">Status</th>
+                    <th scope="col" class="pointer" (click)="toggleSort1('horseName')">Horse Name</th>
                     <!-- <th scope="col" class="">Avg. Odds</th> -->
-                    <th
-                      scope="col"
-                      class="pointer"
-                      (click)="toggleSort1('odds')"
-                    >
-                      Odds
-                    </th>
+                    <th scope="col" class="pointer" (click)="toggleSort1('odds')">Odds</th>
  
-                    <th
-                      scope="col"
-                      class="pointer"
-                      (click)="toggleSort1('matchedStake')"
-                    >
-                      Stake
-                    </th>
-                    <th
-                      scope="col"
-                      class="pointer"
-                      (click)="toggleSort1('profitLoss')"
-                    >
-                      Profit/Loss (In INR)
-                    </th>
+                    <th scope="col" class="pointer" (click)="toggleSort1('matchedStake')">Stake</th>
+                    <th scope="col" class="pointer" (click)="toggleSort1('profitLoss')">Profit/Loss (In INR)</th>
                     <th scope="col" class="last">IP</th>
                   </tr>
                 </thead>
@@ -464,24 +332,14 @@
                   Loading...
                 </table>
                 <tbody *ngIf="oneAccount">
-                  <tr
-                    *ngFor="
-                      let bet of oneAccount?.bets
-                        | sort : sortColumn1 : sortAscending1;
-                      let i = index
-                    "
-                  >
+                  <tr *ngFor="let bet of oneAccount?.bets | sort:sortColumn1:sortAscending1 ;let i = index;">
                     <td>{{ bet.placedDate | date : "medium" }}</td>
                     <td>{{ bet.matchedDate | date : "medium" }}</td>
                     <td>
-                      <span
-                        *ngIf="bet.isBack == false"
-                        class="border r-2 bg-danger text-danger border-danger me-2 border-3"
-                      ></span>
-                      <span
-                        *ngIf="bet.isBack == true"
-                        class="border bg-primary text-primary border-primary me-2 border-3"
-                      ></span>
+                      <span *ngIf="bet.isBack == false"
+                        class="border r-2 bg-danger text-danger border-danger me-2 border-3"></span>
+                      <span *ngIf="bet.isBack == true"
+                        class="border bg-primary text-primary border-primary me-2 border-3"></span>
                       {{ bet.type }}
                     </td>
                     <td>{{ bet.status }}</td>
@@ -490,20 +348,13 @@
                     <td>{{ bet.odds }}</td>
  
                     <td>{{ bet.matchedStake }}</td>
-                    <td
-                      [ngClass]="
-                        bet.profitLoss > 0 ? 'text-success' : 'text-danger'
-                      "
-                    >
+                    <td [ngClass]="
+                      bet.profitLoss > 0 ? 'text-success' : 'text-danger'
+                    ">
                       {{ bet.profitLoss | indianCurrency }}
                     </td>
-                    <td class="tooltipnk ms-0 mt-1">
-                      <i
-                        class="fa-sharp fa-solid fa-info"
-                        ngxClipboard
-                        [cbContent]="bet.ipAddress"
-                        [container]="container"
-                      ></i>
+                    <td class="tooltipnk ms-0  mt-1">
+                      <i class="fa-sharp fa-solid fa-info" ngxClipboard [cbContent]="bet.ipAddress" [container]="container"></i>
                       <span class="tooltiptext tabTooltip px-5 w-auto">
                         <small #container>{{ bet.ipAddress }}</small>
                       </span>

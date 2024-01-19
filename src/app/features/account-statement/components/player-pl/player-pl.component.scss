@@ -2,26 +2,26 @@
   width: 160%;
   right: 30%;
 }
-
+ 
 .pointer {
   cursor: pointer;
 }
 table thead tr th:nth-child(1) {
   width: 1rem;
 }
-
+ 
 .modal table {
   // font-size: 16px;
   white-space: pre;
 }
-
+ 
 @media (max-width: 1024px) {
   .modal-size {
     width: 120%;
     right: 10%;
   }
 }
-
+ 
 @media (max-width: 767px) {
   .modal-dialog-scrollable .modal-body {
     overflow-x: hidden;
@@ -31,11 +31,12 @@ table thead tr th:nth-child(1) {
     right: 0;
   }
 }
-
+ 
 .tableRes {
   max-height: 50vh;
 }
-
+ 
 .modal table tr {
   line-height: 10px;
 }
+ 

@@ -46,6 +46,16 @@
   height: 65vh;
 }
 
+
+.tableRes th {
+  font-size: 13px;
+}
+
+
+.tableRes td {
+  font-size: 13px;
+}
+
 #bannerModal .modal-header {
   position: absolute;
   width: 100%;
@@ -68,6 +78,17 @@
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+
 .br-15 {
   border-radius: 15px;
+}
+
+
+.tooltip {
+  position: absolute;
+  background-color: #3498db; /* Set your desired background color here */
+  color: #fff;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

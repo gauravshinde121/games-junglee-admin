@@ -94,7 +94,11 @@ export class MembersListComponent implements OnInit {
   getModalImage(clientId){
     this.http.get('https://apisimg.cylsys.com/get-modal/'+clientId, {})
       .subscribe(response => {
-        this.modalImage = 'https://apisimg.cylsys.com/'+response[0].image_path;
+
+        if(response[0]){
+          console.log(response)
+          this.modalImage = 'https://apisimg.cylsys.com/'+response[0].image_path;
+        }
       }, error => {
         console.error('Error getting modal image:', error);
       });
@@ -237,8 +241,7 @@ export class MembersListComponent implements OnInit {
     }
     this.statusList = [
       { id: 1, status: "Active", color: 'green' },
-      { id: 2, status: "Inactive", color: 'yellow' },
-      { id: 3, status: "Closed", color: 'red' }
+      { id: 2, status: "Inactive", color: 'yellow' }
     ];
     this.getModalImage(this.clientId);
   }

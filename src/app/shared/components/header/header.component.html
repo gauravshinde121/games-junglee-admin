@@ -1,92 +1,30 @@
-<!-- <header id="header" class="header">
-  <div class="d-flex align-items-center">
-    <div class="col-md-2">
-      <div class="d-flex align-items-center">
-        <div class="col-md-2">
-          <div class="toggle-sidebar-btn">
-            <a (click)="toggleMenu()">
-              <i class="fa fa-bars fa-1x text-white"></i>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <a
-            [routerLink]="['member/list']"
-            routerLinkActive="router-link-active"
-            class="text-center"
-          >
-            <img src="/assets/images/logo.png" alt="" class="head_logo" />
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-4 col-4">
-          <div class="balance-first">
-            <div class="balance">
-              <p>
-                {{ adminDetails?.availableCredit | number }}
-                <br />
-                <span>AVAILABLE BALANCE</span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-4">
-          <div class="balance-up">
-            <div class="balance">
-              <p>
-                {{ adminDetails?.balanceUp | number }}
-                <br />
-                <span>BALANCE UP</span>&nbsp;
-                <i class="fa-regular fa-circle-up"></i>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-4">
-          <div class="balance-down">
-            <div class="balance">
-              <p>
-                {{ adminDetails?.balanceDown | number }}
-                <br />
-                <span>BALANCE DOWN</span>&nbsp;
-                <i class="fa-regular fa-circle-down"></i>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-2 text-center">
-      <div class="user">
-        <p>{{ adminDetails?.username }},</p>
-        <a (click)="refreshPage()" class="btn btn-pink radius-all">
-          <i class="fa fa-redo-alt disnone"></i> Refresh
-        </a>
-      </div>
-    </div>
-  </div>
-</header> -->
-
-<div class="row align-items-center mb-2 mt-2">
+<div class="row align-items-center mb-2 mt-2 border-bottom">
   <div class="col-lg-2 col-md-6 col-6">
     <div class="toggle-sidebar-btn d-flex align-items-center">
-      <a (click)="toggleMenu()" class="navbar-toggler bg-color text-white px-1 mx-0" type="button">
-        
+      <a
+        (click)="toggleMenu()"
+        class="navbar-toggler bg-color text-white px-1 mx-0"
+        type="button"
+      >
         <i class="fa fa-bars-staggered"></i>
       </a>
 
-      <a [routerLink]="['member/list']" routerLinkActive="router-link-active" class="navbar-brand m-0 d-block ms-3">
-        <!-- <img src="/assets/images/logo.svg" alt="" class="col-3 col-md-12 col-lg-7 " /> -->
-        <span>Sports</span>Zone365
+      <a
+        [routerLink]="['member/list']"
+        routerLinkActive="router-link-active"
+        class="navbar-brand m-0 d-block ms-3"
+      >
+        <img src="/assets/images/logo.svg" alt="" class="w-100" />
+        <!-- <span>Sports</span>Zone365 -->
       </a>
     </div>
   </div>
   <div class="col-md-8 col-8 smallMobileHide">
     <div class="row">
-      <div class="mb-2 mb-md-2" [ngClass]="clientId == 1?'col-md-3 col-6':'col-md-4 col-6'">
+      <div
+        class="mb-2 mb-md-2"
+        [ngClass]="clientId == 1 ? 'col-md-3 col-6' : 'col-md-4 col-6'"
+      >
         <div class="balance-first">
           <div class="balance">
             <p>
@@ -97,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div [ngClass]="clientId == 1?'col-md-3 col-6':'col-md-4 col-6'">
+      <div [ngClass]="clientId == 1 ? 'col-md-3 col-6' : 'col-md-4 col-6'">
         <div class="balance-up">
           <div class="balance">
             <p>
@@ -109,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div  [ngClass]="clientId == 1?'col-md-3 col-6':'col-md-4 col-6'">
+      <div [ngClass]="clientId == 1 ? 'col-md-3 col-6' : 'col-md-4 col-6'">
         <div class="balance-down">
           <div class="balance">
             <p>
@@ -126,12 +64,18 @@
           <div class="balance">
             <div class="row text-center">
               <p>
-                <span> BALANCE UP {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span>
+                <span>
+                  BALANCE UP
+                  {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span
+                >
               </p>
               <p>
-                <span>BALANCE DOWN {{ adminDetails?.casinoBalanceDown | indianCurrency }}  </span>
+                <span
+                  >BALANCE DOWN
+                  {{ adminDetails?.casinoBalanceDown | indianCurrency }}
+                </span>
               </p>
-                <small>CASINO SUMMARY</small>
+              <small>CASINO SUMMARY</small>
             </div>
           </div>
         </div>
@@ -149,7 +93,6 @@
         <i class="fa fa-redo-alt disnone"></i> Refresh
       </a>-->
     </div>
-    
   </div>
 
   <div class="col-md-12 smallMobileShow mt-3">
@@ -193,13 +136,19 @@
         <div class="casino-summary">
           <div class="balance">
             <div class="row text-center">
-              <p >
-                <span class="f-13"> BALANCE UP {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span>
+              <p>
+                <span class="f-13">
+                  BALANCE UP
+                  {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span
+                >
               </p>
-              <p >
-                <span class="f-13">BALANCE DOWN {{ adminDetails?.casinoBalanceDown | indianCurrency }}  </span>
+              <p>
+                <span class="f-13"
+                  >BALANCE DOWN
+                  {{ adminDetails?.casinoBalanceDown | indianCurrency }}
+                </span>
               </p>
-              <p >
+              <p>
                 <span class="f-16">CASINO SUMMARY</span>
               </p>
             </div>

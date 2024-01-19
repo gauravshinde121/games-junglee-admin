@@ -12,7 +12,7 @@
             </span>
             <input
               type="text"
-              class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
+              class="form-control bg-dark  border-start-0 border-pink radius-right-tb"
               placeholder="Search"
               aria-label="Search"
               aria-describedby="addon-wrapping"
@@ -41,7 +41,7 @@
           <i class="fa fa-pen"></i> Bulk Transfer
         </button>
       </div> -->
-        <!-- <div class="col-md-12 col-lg-12 col-xl-2 text-end">
+      <!-- <div class="col-md-12 col-lg-12 col-xl-2 text-end">
           ( Total : {{ userList.length }} )
         </div> -->
     </div>
@@ -59,7 +59,7 @@
             </span>
             <input
               type="text"
-              class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
+              class="form-control border-start-0 border-pink radius-right-tb"
               placeholder="Search"
               aria-label="Search"
               aria-describedby="addon-wrapping"
@@ -94,22 +94,23 @@
           </li>
         </ul> -->
 
-
-
-        <select name="role" id="role" class="form-select pointer bg-dark br-15 border-pink text-white" 
-                (change)="changeRole($event)">
-          <option [value]=null>Select Role</option>
+        <select
+          name="role"
+          id="role"
+          class="form-select pointer br-15 border-pink"
+          (change)="changeRole($event)"
+        >
+          <option [value]="null">Select Role</option>
           <option [value]="role.roleId" *ngFor="let role of roles">
             {{ role.userRoleName }}
           </option>
         </select>
-
-        
       </div>
       <!-- <div class="col-5"></div> -->
       <div class="col-md-3 col-lg-3 col-xl-2 mt-2">
         <button
-        (click)="onUserEdit(7)" routerLink="/member/create-member" 
+          (click)="onUserEdit(7)"
+          routerLink="/member/create-member"
           class="btn btn-pink radius-all"
         >
           <i class="fa fa-pen"></i> Create New
@@ -120,7 +121,7 @@
         <div class="row">Show Entries</div>
         <select
           (change)="updateLimit($event)"
-          class="form-select-sm border-colour bg-dark text-white rounded-3"
+          class="form-select-sm border-colour bg-dark rounded-3"
         >
           <!-- <option>25</option>
           <option>50</option> -->
@@ -168,51 +169,66 @@
                   scope="col"
                   class="pointer"
                   (click)="toggleSort('username')"
-                >USERNAME
+                >
+                  USERNAME
                 </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('userRoleName')"
-                >ROLENAME
+                >
+                  ROLENAME
                 </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('creditLimit')"
-                >CREDIT LIMIT
+                >
+                  CREDIT LIMIT
                 </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('exposure')"
-                >NET EXPOSURE
+                >
+                  NET EXPOSURE
                 </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('take')"
-                >TAKE
+                >
+                  TAKE
                 </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('give')"
-                >GIVE
+                >
+                  GIVE
                 </th>
-                <th *ngIf="clientId == 1"
-                scope="col"
-                class="text-center pointer"
-                (click)="toggleSort('give')"
-              >CASINO AMOUNT
-              </th>
+                <th
+                  *ngIf="clientId == 1"
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('give')"
+                >
+                  CASINO AMOUNT
+                </th>
                 <th
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('availableCredit')"
-                >AVAILABLE CREDIT
+                >
+                  AVAILABLE CREDIT
                 </th>
-                <th scope="col" class="text-center pointer" *ngIf="selectedRoleId != 7"  (click)="toggleSort('partnerShipPercent')">PARTNERSHIP %
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  *ngIf="selectedRoleId != 7"
+                  (click)="toggleSort('partnerShipPercent')"
+                >
+                  PARTNERSHIP %
                 </th>
                 <th scope="col" class="text-center">DETAILS</th>
                 <th scope="col" class="text-center">STATUS</th>
@@ -242,53 +258,42 @@
                     [(ngModel)]="user.state"
                   />
                 </td> -->
-                <td >
+                <td>
                   <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                   <span *ngIf="currentPage > 1">{{
                     i + 1 + (currentPage - 1) * limit
                   }}</span>
                 </td>
-                <td data-tooltip="{{user.displayName}}"
+                <td
+                  data-tooltip="{{ user.displayName }}"
                   [ngStyle]="
                     selectedRoleId == 7
                       ? { cursor: 'context-menu' }
                       : { cursor: 'pointer' }
                   "
                 >
-                  <span (click)="showDownlineTree(user)">{{
-                    user.username
-                  }}
-                </span>
-                 
+                  <span (click)="showDownlineTree(user)"
+                    >{{ user.username }}
+                  </span>
                 </td>
                 <td class="text-center">
                   <span
                     *ngFor="let role of roles"
                     (click)="showDownlineTree(user)"
-                    >
-                    </span>
-                    <span *ngIf="user.roleId == 2">
-                      ADMIN
-                    </span>
-                    <span *ngIf="user.roleId == 3">
-                      SUPER MASTER
-                    </span>
-                    <span *ngIf="user.roleId == 4">
-                      MASTER
-                    </span>
-                    <span *ngIf="user.roleId == 5">
-                      AGENT
-                    </span>
-                    <span *ngIf="user.roleId == 6">
-                      DEALER
-                    </span>
-                    <span *ngIf="user.roleId == 7">
-                      USER
-                    </span>
+                  >
+                  </span>
+                  <span *ngIf="user.roleId == 2"> ADMIN </span>
+                  <span *ngIf="user.roleId == 3"> SUPER MASTER </span>
+                  <span *ngIf="user.roleId == 4"> MASTER </span>
+                  <span *ngIf="user.roleId == 5"> AGENT </span>
+                  <span *ngIf="user.roleId == 6"> DEALER </span>
+                  <span *ngIf="user.roleId == 7"> USER </span>
                 </td>
-                <td class="text-center">{{ user.creditLimit | indianCurrency }}</td>
+                <td class="text-center">
+                  {{ user.creditLimit | indianCurrency }}
+                </td>
                 <td
-                (click)="showExposureDetails(user)"
+                  (click)="showExposureDetails(user)"
                   class="text-center pointer"
                   [ngClass]="user.exposure > 0 ? 'text-danger' : ''"
                 >
@@ -304,7 +309,9 @@
                     (click)="adjustWinningsForSingleUser(user, false)"
                     >{{ user.take | indianCurrency }}</a
                   >
-                  <span *ngIf="user.take <= 0">{{ user.take | indianCurrency }}</span>
+                  <span *ngIf="user.take <= 0">{{
+                    user.take | indianCurrency
+                  }}</span>
                 </td>
                 <td
                   [ngClass]="user.give > 0 ? 'text-danger' : ''"
@@ -316,20 +323,28 @@
                     (click)="adjustWinningsForSingleUser(user, true)"
                     >{{ user.give | indianCurrency }}</a
                   >
-                  <span *ngIf="user.give <= 0">{{ user.give | indianCurrency }}</span>
+                  <span *ngIf="user.give <= 0">{{
+                    user.give | indianCurrency
+                  }}</span>
                 </td>
-                <td
-                  class="text-center" *ngIf="clientId == 1"
-                >
+                <td class="text-center" *ngIf="clientId == 1">
                   <span
                     class="pointer text-success text-decoration-none"
                     *ngIf="user.casinoWinnings > 0"
                     >{{ user.casinoWinnings | indianCurrency }}</span
                   >
-                  <span class="pointer text-danger" *ngIf="user.casinoWinnings < 0">{{ user.casinoWinnings | indianCurrency }}</span>
-                  <span *ngIf="user.casinoWinnings == 0">{{ user.casinoWinnings | indianCurrency }}</span>
+                  <span
+                    class="pointer text-danger"
+                    *ngIf="user.casinoWinnings < 0"
+                    >{{ user.casinoWinnings | indianCurrency }}</span
+                  >
+                  <span *ngIf="user.casinoWinnings == 0">{{
+                    user.casinoWinnings | indianCurrency
+                  }}</span>
                 </td>
-                <td class="text-center">{{ user.availableCredit | indianCurrency }}</td>
+                <td class="text-center">
+                  {{ user.availableCredit | indianCurrency }}
+                </td>
                 <td *ngIf="selectedRoleId != 7" class="text-center">
                   {{ user.partnerShipPercent | indianCurrency }}
                 </td>
@@ -342,7 +357,7 @@
                 <td class="text-center">
                   <!-- <a (click)="openModal(user.userId)"><i class="fa fa-lock text-pink"></i></a> -->
                   <select
-                    class="custom-ddl text-white pointer"
+                    class="custom-ddl pointer"
                     (change)="changeStatus($event, user)"
                   >
                     <option
@@ -381,7 +396,10 @@
                     <i class="fa-sharp fa-solid fa-pen icon-pink pointer"></i>
                   </a> -->
 
-                  <a (click)="onUserEdit(user.roleId)" routerLink="/member/edit-member/{{ user.userId }}">
+                  <a
+                    (click)="onUserEdit(user.roleId)"
+                    routerLink="/member/edit-member/{{ user.userId }}"
+                  >
                     <i class="fa-sharp fa-solid fa-pen icon-pink pointer"></i>
                   </a>
                 </td>
@@ -395,33 +413,45 @@
                 <td></td>
 
                 <td>
-                  <span *ngIf="totalExposure==0">{{ totalExposure | indianCurrency }}</span>
-                  <span *ngIf="totalExposure!=0" class="text-danger">{{ totalExposure | indianCurrency }}</span>
-
+                  <span *ngIf="totalExposure == 0">{{
+                    totalExposure | indianCurrency
+                  }}</span>
+                  <span *ngIf="totalExposure != 0" class="text-danger">{{
+                    totalExposure | indianCurrency
+                  }}</span>
                 </td>
                 <td class="text-center">
-                  <span *ngIf="totalTake==0">{{ totalTake | indianCurrency }}</span>
-                  <span class="text-success" *ngIf="totalTake!=0">{{ totalTake | indianCurrency }}</span>
-                  
+                  <span *ngIf="totalTake == 0">{{
+                    totalTake | indianCurrency
+                  }}</span>
+                  <span class="text-success" *ngIf="totalTake != 0">{{
+                    totalTake | indianCurrency
+                  }}</span>
                 </td>
                 <td class="text-center">
-                  <span *ngIf="totalGive==0">{{ totalGive | indianCurrency }}</span>
-                  <span *ngIf="totalGive!=0" class="text-danger">{{ totalGive | indianCurrency }}</span>
+                  <span *ngIf="totalGive == 0">{{
+                    totalGive | indianCurrency
+                  }}</span>
+                  <span *ngIf="totalGive != 0" class="text-danger">{{
+                    totalGive | indianCurrency
+                  }}</span>
                 </td>
                 <td>
-                  <span *ngIf="totalCasino<0" class="text-danger">{{totalCasino}}</span>
-                  <span *ngIf="totalCasino==0">{{totalCasino}}</span>
-                  <span *ngIf="totalCasino>0" class="text-success">{{totalCasino}}</span>
+                  <span *ngIf="totalCasino < 0" class="text-danger">{{
+                    totalCasino
+                  }}</span>
+                  <span *ngIf="totalCasino == 0">{{ totalCasino }}</span>
+                  <span *ngIf="totalCasino > 0" class="text-success">{{
+                    totalCasino
+                  }}</span>
                 </td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-
               </tr>
             </tfoot>
           </table>
-
         </div>
         <div class="d-flex" *ngIf="userList.length > 0 && !this.isLoading">
           <button
@@ -477,7 +507,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body">
         <div class="row">
           <section class="section w-75 m-auto mt-4">
             <!-- <div class="row p-4 pt-5"> -->
@@ -490,7 +520,7 @@
                   <div class="input-group mw-100">
                     <input
                       [type]="show ? 'text' : 'password'"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                      class="form-control border-pink bg-transparent rounded-pill"
                       formControlName="password"
                       placeholder="Enter password"
                       id="password"
@@ -527,7 +557,7 @@
                   <div class="input-group mw-100">
                     <input
                       [type]="show1 ? 'text' : 'password'"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                      class="form-control border-pink bg-transparent rounded-pill"
                       formControlName="confirmPassword"
                       placeholder="Enter confirm password"
                       id="password"
@@ -610,14 +640,14 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body">
         <div class="row">
           <div class="col-md-12 pt-2">
             <label for="">Narration</label>
             <input
-             maxlength="150"
+              maxlength="150"
               type="text"
-              class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+              class="form-control border-pink bg-transparent rounded-pill"
               [(ngModel)]="description"
             />
           </div>
@@ -673,7 +703,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body">
         <div class="row">
           <div class="col-md-3">
             <label>Credit Limit:</label><br />{{ userDetails.creditLimit }}
@@ -705,16 +735,16 @@
                   <div class="col-md-12 pt-2">
                     <input
                       type="number"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                      class="form-control border-pink bg-transparent rounded-pill"
                       formControlName="amount"
                     />
                   </div>
                   <div class="col-md-12 pt-2">
                     <label for="">Narration</label>
                     <input
-                     maxlength="150"
+                      maxlength="150"
                       type="text"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                      class="form-control border-pink bg-transparent rounded-pill"
                       formControlName="description"
                     />
                   </div>
@@ -775,7 +805,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body">
         <div class="row">
           <section class="section w-75 m-auto">
             <table width="100%">
@@ -804,14 +834,15 @@
   tabindex="-1"
   aria-labelledby="bannerModalLabel"
   class="modal fade show"
-  style="display: block; padding-left: 0px;background: #00000063"
+  style="display: block; padding-left: 0px; background: #00000063"
   aria-modal="true"
   role="dialog"
   (click)="onCloseModal()"
 >
   <div
     _ngcontent-kxa-c63=""
-    class="modal-dialog modal-lg modal-dialog-centered" (click)="onModalClick($event)"
+    class="modal-dialog modal-lg modal-dialog-centered"
+    (click)="onModalClick($event)"
   >
     <div _ngcontent-kxa-c63="" class="modal-content">
       <div _ngcontent-kxa-c63="" class="modal-header">
@@ -828,7 +859,7 @@
       <div _ngcontent-kxa-c63="" class="modal-body p-0">
         <img
           _ngcontent-kxa-c63=""
-          src="{{this.modalImage}}"
+          src="{{ this.modalImage }}"
           alt=""
           width="100%"
         />
@@ -836,8 +867,6 @@
     </div>
   </div>
 </div>
-
-
 
 <div
   *ngIf="modalNumber == 5"
@@ -864,113 +893,135 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body">
         <div class="row" *ngFor="let expDtl of exposureDataList">
-            <h4>{{expDtl.matchName}}</h4>
-            <div *ngIf="expDtl.matchOddsMarket.length>0">
-              <div class="row" >
-                <div class="col-6">
-                  <strong>MATCH ODDS</strong>
-                </div>
-                <div class="col-3">
-                 <strong>Win/Loss</strong>
-                </div>
+          <h4>{{ expDtl.matchName }}</h4>
+          <div *ngIf="expDtl.matchOddsMarket.length > 0">
+            <div class="row">
+              <div class="col-6">
+                <strong>MATCH ODDS</strong>
               </div>
-              <div  class="row" *ngFor="let data of expDtl.matchOddsMarket[0].horses">
-                  <div class="col-6">
-                    <strong class="text-center">{{data.RunnerName}}</strong>
-                  </div>
-                  <div class="col-3">
-                    <strong *ngIf="data.finalAmount*-1>0" class="text-center text-success">{{data.finalAmount*-1 | number}}</strong>
-                    <strong *ngIf="data.finalAmount*-1<0" class="text-center text-danger">{{data.finalAmount*-1 | number}}</strong>
-                    <strong *ngIf="data.finalAmount==0" class="text-center">{{data.finalAmount | number}}</strong>
-                  </div>
+              <div class="col-3">
+                <strong>Win/Loss</strong>
               </div>
-              <hr class="text-white">
             </div>
-            <div *ngIf="expDtl.bookmakerMarkets.length>0">
-              <div class="row" >
-                <div class="col-6">
-                  <strong>BOOKMAKER</strong>
-                </div>
-                <div class="col-3">
-                 <strong>Win/Loss</strong>
-                </div>
+            <div
+              class="row"
+              *ngFor="let data of expDtl.matchOddsMarket[0].horses"
+            >
+              <div class="col-6">
+                <strong class="text-center">{{ data.RunnerName }}</strong>
               </div>
-              <div  class="row" *ngFor="let data of expDtl.bookmakerMarkets[0].horses">
-                  <div class="col-6">
-                    <strong class="text-center">{{data.RunnerName}}</strong>
-                  </div>
-                  <div class="col-3">
-                    <strong *ngIf="data.finalAmount*-1>0" class="text-center text-success">{{data.finalAmount*-1 | number}}</strong>
-                    <strong *ngIf="data.finalAmount*-1<0" class="text-center text-danger">{{data.finalAmount*-1 | number}}</strong>
-                    <strong *ngIf="data.finalAmount==0" class="text-center">{{data.finalAmount | number}}</strong>
-                  </div>
+              <div class="col-3">
+                <strong
+                  *ngIf="data.finalAmount * -1 > 0"
+                  class="text-center text-success"
+                  >{{ data.finalAmount * -1 | number }}</strong
+                >
+                <strong
+                  *ngIf="data.finalAmount * -1 < 0"
+                  class="text-center text-danger"
+                  >{{ data.finalAmount * -1 | number }}</strong
+                >
+                <strong *ngIf="data.finalAmount == 0" class="text-center">{{
+                  data.finalAmount | number
+                }}</strong>
               </div>
-              <hr class="text-white">
             </div>
-            <div *ngIf="expDtl.fancyMarkets.length>0">
-              <div class="row" >
-                <div class="col-6">
-                  <strong>Fancy Market Name</strong>
-                </div>
-                <div class="col-3">
-                 <strong>Runs</strong>
-                </div>
-                <div class="col-3">
-                  <strong>P&L</strong>
-                </div>
+            <hr class="text-white" />
+          </div>
+          <div *ngIf="expDtl.bookmakerMarkets.length > 0">
+            <div class="row">
+              <div class="col-6">
+                <strong>BOOKMAKER</strong>
               </div>
-              <div  class="row mb-3" *ngFor="let data of expDtl.fancyMarkets">
-                  <div class="col-6">
-                    <strong class="text-center">{{data.marketName}}</strong>
-                  </div>
-                  <div class="col-6">
-
-                    <div *ngFor="let ldr of data.ladder">
-                      <div class="row">
-                        <ng-container *ngIf="ldr['position'] != 'last'">
-                          <div
-                          class="col-6"
-                          *ngIf="ldr['startScore'] != ldr['endScore']"
-                          >
-                             {{ ldr["startScore"] }}-{{ ldr["endScore"] }}
-                        </div>
-
-                        <div
-                          class="col-6"
-                          *ngIf="ldr['startScore'] == ldr['endScore']">
-                                {{ ldr["startScore"] }}
-                          </div>
-                        </ng-container>
-
-                          <div
-                          *ngIf="ldr['position'] == 'last'"
-                          class="col-6"
-                          >
-                          {{ ldr["startScore"] }}+
-                        </div>
-
-                          <div class="col-6">
-                            <span
-                              [ngClass]="
-                                ldr['amount']*-1 >= 0 ? 'text-success' : 'text-danger'
-                              "
-                              >{{ ldr["amount"]*-1 }}</span
-                            >
-                          </div>
-
-
+              <div class="col-3">
+                <strong>Win/Loss</strong>
+              </div>
+            </div>
+            <div
+              class="row"
+              *ngFor="let data of expDtl.bookmakerMarkets[0].horses"
+            >
+              <div class="col-6">
+                <strong class="text-center">{{ data.RunnerName }}</strong>
+              </div>
+              <div class="col-3">
+                <strong
+                  *ngIf="data.finalAmount * -1 > 0"
+                  class="text-center text-success"
+                  >{{ data.finalAmount * -1 | number }}</strong
+                >
+                <strong
+                  *ngIf="data.finalAmount * -1 < 0"
+                  class="text-center text-danger"
+                  >{{ data.finalAmount * -1 | number }}</strong
+                >
+                <strong *ngIf="data.finalAmount == 0" class="text-center">{{
+                  data.finalAmount | number
+                }}</strong>
+              </div>
+            </div>
+            <hr class="text-white" />
+          </div>
+          <div *ngIf="expDtl.fancyMarkets.length > 0">
+            <div class="row">
+              <div class="col-6">
+                <strong>Fancy Market Name</strong>
+              </div>
+              <div class="col-3">
+                <strong>Runs</strong>
+              </div>
+              <div class="col-3">
+                <strong>P&L</strong>
+              </div>
+            </div>
+            <div class="row mb-3" *ngFor="let data of expDtl.fancyMarkets">
+              <div class="col-6">
+                <strong class="text-center">{{ data.marketName }}</strong>
+              </div>
+              <div class="col-6">
+                <div *ngFor="let ldr of data.ladder">
+                  <div class="row">
+                    <ng-container *ngIf="ldr['position'] != 'last'">
+                      <div
+                        class="col-6"
+                        *ngIf="ldr['startScore'] != ldr['endScore']"
+                      >
+                        {{ ldr["startScore"] }}-{{ ldr["endScore"] }}
                       </div>
 
+                      <div
+                        class="col-6"
+                        *ngIf="ldr['startScore'] == ldr['endScore']"
+                      >
+                        {{ ldr["startScore"] }}
+                      </div>
+                    </ng-container>
+
+                    <div *ngIf="ldr['position'] == 'last'" class="col-6">
+                      {{ ldr["startScore"] }}+
+                    </div>
+
+                    <div class="col-6">
+                      <span
+                        [ngClass]="
+                          ldr['amount'] * -1 >= 0
+                            ? 'text-success'
+                            : 'text-danger'
+                        "
+                        >{{ ldr["amount"] * -1 }}</span
+                      >
                     </div>
                   </div>
-                  <!-- <div class="col-3">
+                </div>
+              </div>
+              <!-- <div class="col-3">
                     <strong class="text-center text-danger">{{data.horses[0].finalAmount}}</strong>
                   </div> -->
-              </div>
-              <hr class="text-white">
             </div>
+            <hr class="text-white" />
+          </div>
         </div>
       </div>
     </div>
@@ -978,7 +1029,6 @@
 </div>
 
 <div class="modal-backdrop fade" *ngIf="showModal"></div>
-
 
 <div
   class="modal fade"

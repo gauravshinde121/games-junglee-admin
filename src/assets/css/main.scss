@@ -9,7 +9,7 @@ $color_3: #ffa7a3;
 $color_4: #d98e94;
 $color_5: #00cc38;
 $color_6: #d9520a;
-$color_7: #fff;
+$color_7: #000;
 $color_8: #aab7cf;
 $color_9: #d9d9d9;
 $color_10: #012970;
@@ -23,13 +23,13 @@ $color_17: #ffb9b560;
 $color_18: hsla(3.5, 21.3%, 52.2%, 0.78);
 $color_19: #d9d9d9;
 $color_20: #343535;
-$color_21: #000;
+$color_21: #fff;
 $color_22: #d35862;
 $color_23: #a7d8fd;
 $color_24: #f9c9d4;
 $color_25: rgba(38, 38, 38, 0.63);
 $color_26: #cd212f;
-$color_27: #e76f26;
+$color_27: #057f8b;
 $color_28: #a6a6a657;
 $color_29: #a6a6a6;
 $color_30: #ebf7fc;
@@ -53,26 +53,28 @@ $color_47: #71ff97;
 $color_48: #555;
 $color_49: #ccc;
 $color_50: #dee2e6;
+$color_51: #83c5cb;
+$outline: #08969f80;
 
-$gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
+$gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
 
 .browncolor {
   background-color: $color_21;
 }
 .bg-pink {
-  background: linear-gradient(0deg, $color_26 0, $color_27) !important;
+  background: linear-gradient(0deg, $color_27 0, $color_27) !important;
 }
 .border-pink {
-  border: 1px solid $color_28;
+  border: 1px solid $color_27;
 }
 .btn-pink {
   transition: all 0.2s ease-in;
   transform: scale(1);
   border: none;
-  color: $color_7;
+  color: $color_21;
   border-radius: 25px;
-  font-size: 0.75rem;
-  background-image: linear-gradient(0deg, $color_26 0, $color_27);
+  // font-size: 0.75rem;
+  background: $color_27;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   -webkit-transition: all 0.4s ease-in-out;
@@ -166,8 +168,8 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 .form-signin .form-floating > .form-control,
 .form-floating > .form-select {
   background: rgba(60, 62, 62, 0);
-  color: $color_7;
-  border-bottom: 1px solid $color_7 !important;
+  color: $color_21;
+  border-bottom: 1px solid $color_21 !important;
   border: 0px;
   border-radius: 0;
   padding: 24px 0px 15px 0px;
@@ -177,7 +179,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   border: 1px solid transparent;
   transform-origin: 0 0;
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
-  color: $color_7;
+  color: $color_21;
 }
 
 .form-signin .form-floating span {
@@ -265,17 +267,17 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   background: linear-gradient(0deg, $color_5 0, $color_47);
 }
 
-.balance-down {
-  background: linear-gradient(0deg, $color_46 0, $color_27);
-}
+// .balance-down {
+//   background: linear-gradient(0deg, $color_46 0, $color_27);
+// }
 
 .casino-summary {
-  background: linear-gradient(0deg, $color_46 0, $color_27);
+  // background: linear-gradient(0deg, $color_46 0, $color_27);
   border-radius: 10px;
 }
 
 .navbar-toggler {
-  background: linear-gradient(0deg, $color_46 0, $color_27);
+  background: $gradient-btn;
 }
 
 // balance up/Down end
@@ -295,15 +297,15 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   scrollbar-color: #aab7cf transparent;
 
   .nav-link {
-    color: $color_7;
+    color: $color_27;
   }
   &::-webkit-scrollbar {
     width: 5px;
     height: 8px;
-    background-color: $color_7;
+    background-color: $color_27;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: $color_8;
+    background-color: $color_27;
   }
   li {
     width: 100%;
@@ -328,10 +330,10 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   color: $color_7;
   white-space: nowrap;
   th {
-    background: linear-gradient(0deg, $color_26 0, $color_27);
+    background: $color_27;
     border: 0px;
     font-weight: 500;
-    color: $color_7;
+    color: $color_21;
   }
   th.first {
     border-top-left-radius: 15px;
@@ -341,8 +343,12 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   }
   td {
     vertical-align: middle;
-    border-bottom: 1px solid $color_2;
+    border-bottom: 1px solid $color_27;
     margin: 2px 0;
+
+    i {
+      color: $color_27;
+    }
   }
   input {
     cursor: pointer;
@@ -358,7 +364,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   .form-select {
     appearance: button;
     color: $color_7;
-    border: 1px solid $color_28;
+    border: 1px solid $color_27;
     background: $color_21;
   }
   ::-webkit-calendar-picker-indicator {
@@ -367,7 +373,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   .form-control {
     background: transparent;
     color: $color_7;
-    border: 1px solid $color_28;
+    border: 1px solid $color_27;
   }
 }
 input:-webkit-autofill,
@@ -402,7 +408,7 @@ select:-webkit-autofill:focus {
     top: 100%;
     left: 50%;
     margin-left: -60px;
-    background-image: radial-gradient($color_2, $color_21);
+    // background-image: radial-gradient($color_2, $color_21);
     border: 1px solid $color_29;
   }
 
@@ -504,11 +510,13 @@ select:-webkit-autofill:focus {
   background-color: $color_2;
   vertical-align: middle;
   margin-bottom: 25px;
+
   td {
     vertical-align: middle;
     padding: 2px 5px;
     text-align: center;
-    border-top: 2px solid $color_7;
+    border-top: 1px solid $color_51 !important;
+    border-bottom: 1px solid $color_51 !important;
     font-size: 11px;
     line-height: 13px;
   }
@@ -564,7 +572,7 @@ select:-webkit-autofill:focus {
   //color box start
   .colblue {
     background: linear-gradient(0deg, $color_36 0, $color_37);
-    border-left: 1px solid $color_7;
+    border-left: 1px solid $color_51;
   }
   .colblue.light {
     background-color: $color_33 !important;
@@ -574,7 +582,7 @@ select:-webkit-autofill:focus {
   }
   .colpink {
     background: linear-gradient(0deg, $color_34 0, $color_35);
-    border-left: 1px solid $color_7;
+    border-left: 1px solid $color_51;
   }
   .colpink.light {
     background-color: $color_17 !important;
@@ -702,7 +710,7 @@ select:-webkit-autofill:focus {
     position var(--d) var(--e) infinite;
   animation: color var(--d) var(--e) infinite,
     position var(--d) var(--e) infinite;
-  background-color: $color_21;
+  background-color: $color_7;
   padding-top: 2%;
   height: 100vh;
 }
@@ -720,11 +728,17 @@ select:-webkit-autofill:focus {
 .sidebar {
   .btn {
     text-align: start;
-    color: $color_7;
+    color: $color_27;
   }
   .active .nav-link,
   .btn:hover {
     color: $color_27;
+  }
+
+  .active {
+    .nav-link {
+      background-color: $color_51;
+    }
   }
 
   .active .nav-link,
@@ -735,7 +749,8 @@ select:-webkit-autofill:focus {
 
 .bg-dark_new,
 .bg-dark {
-  background-color: $color_21 !important;
+  background-color: $color_27 !important;
+  color: $color_21;
 }
 
 .modal {
@@ -800,7 +815,7 @@ select:-webkit-autofill:focus {
   &::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: linear-gradient(0deg, $color_26 0, $color_27) !important;
+    background: $color_27 !important;
   }
 }
 
@@ -817,7 +832,7 @@ fieldset:disabled .btn {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: linear-gradient(180deg, $color_26 0, $color_27);
+  background: $color_27;
 }
 
 ::-webkit-scrollbar-track {
@@ -863,6 +878,10 @@ tfoot tr {
   border: 0;
   // border-bottom: 1px solid $color_50;
   padding: 0 0 0.5rem;
+
+  span {
+    color: $color_21;
+  }
 }
 
 .pointer,
@@ -934,7 +953,10 @@ tfoot tr {
 }
 
 .border-bottom {
-  border-bottom: 1px solid $color_50 !important;
+  border-bottom: 1px solid $color_27 !important;
+}
+hr {
+  background-color: $color_27 !important;
 }
 
 .border-none {
@@ -998,7 +1020,11 @@ input:focus {
 
 a {
   text-decoration: none;
-  color: $color_7;
+  color: $color_27;
+
+  &:hover {
+    color: $color_27;
+  }
 }
 
 @media (min-width: 769px) {
@@ -1124,6 +1150,13 @@ $breakpoint-mobile: 767px;
   width: 100%;
 }
 
-.fa-info{
+.fa-info {
   cursor: copy;
+}
+.form-select {
+  background: transparent;
+}
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 2px 2px 6px 3px $outline;
 }

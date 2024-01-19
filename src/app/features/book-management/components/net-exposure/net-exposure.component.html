@@ -8,7 +8,7 @@
           <div class="col-12 net_exposure">
             <div class="row">
               <div class="col-md-3">
-                <a class="text-decoration-none text-white">
+                <a class="text-decoration-none">
                   <input
                     type="radio"
                     (click)="
@@ -21,7 +21,7 @@
                     value="MyPT"
                   /><small class="rounded-pill p-2">My PT</small>
                 </a>
-                <a class="text-decoration-none text-white">
+                <a class="text-decoration-none">
                   <input
                     value="totalBook"
                     (click)="
@@ -47,7 +47,7 @@
                     <span class="pt-2 me-3"
                       ><strong>Filter by Sport :</strong></span
                     >
-                    <a class="text-decoration-none text-white">
+                    <a class="text-decoration-none">
                       <input
                         (click)="
                           onFilterChange({
@@ -64,10 +64,7 @@
                         value="All"
                       /><small class="rounded-pill p-2">ALL</small>
                     </a>
-                    <a
-                      *ngFor="let game of games"
-                      class="text-decoration-none text-white"
-                    >
+                    <a *ngFor="let game of games" class="text-decoration-none">
                       <input
                         (click)="
                           onFilterChange({
@@ -90,42 +87,21 @@
               </div>
 
               <div class="col-md-2">
-                <!-- <div class="row"> -->
-                  <!-- <div class="col-md-6 col-6 pointer">
-                    <select
-                      name="matchId"
-                      formControlName="matchId"
-                      id="ab"
-                      class="form-select pointer p-0"
-                      (change)="onFilterChangeDropDown($event)"
-                      data-clicked="match"
-                    >
-                      <option value="null" class="pointer">All</option>
-                      <option
-                        class="pointer"
-                        value="{{ match.matchId }}"
-                        *ngFor="let match of matchList"
-                      >
-                        {{ match.matchName }}
-                      </option>
-                    </select>
-                  </div> -->
-                  <div class="text-end">
-                    <small> {{ refreshCount }} </small> &nbsp;
-                    <button [disabled]="refreshCount == 0"
-                      class="btn btn-pink rounded-pill"
-                      (click)="refreshCall()"
-                    >
-                      <i class="fa fa-redo-alt disnone"></i> <small>Refresh </small> 
-                    </button>
-                  </div>
+                <div class="text-end">
+                  <small> {{ refreshCount }} </small> &nbsp;
+                  <button
+                    [disabled]="refreshCount == 0"
+                    class="btn btn-pink rounded-pill"
+                    (click)="refreshCall()"
+                  >
+                    <i class="fa fa-redo-alt disnone"></i>
+                    <small>Refresh </small>
+                  </button>
+                </div>
                 <!-- </div> -->
               </div>
             </div>
-            
           </div>
-
-          
 
           <div class="col-md-12 mt-3" *ngIf="booksForBackend.length == 0">
             <div class="border text-center p-5">
@@ -164,7 +140,7 @@
             <div class="col-md-12 bg-pink">
               <div class="row align-items-center">
                 <div class="col-3">
-                  <span>{{ book.matchName }}</span>
+                  <span class="text-white">{{ book.matchName }}</span>
                 </div>
                 <div class="col">
                   <button

@@ -8,7 +8,7 @@
           </a>
           Downline Accounts List for
           <i class="fa fa-1x fa-angle-right colorpink"></i>
-          <span class="text-white p-2">{{currentUserName}}</span>
+          <span class="text-white p-2">{{ currentUserName }}</span>
         </p>
       </div>
     </div>
@@ -24,7 +24,7 @@
             </span>
             <input
               type="text"
-              class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
+              class="form-control border-start-0 border-pink radius-right-tb"
               placeholder="Search"
               aria-label="Search"
               aria-describedby="addon-wrapping"
@@ -100,41 +100,41 @@
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
         <div class="table-responsive tableRes tableFixHead">
-        <table
-          #myTable
-          class="table tableall"
-          *ngIf="userList.length > 0 && !this.isLoading"
-        >
-          <thead>
-            <tr>
-              <th scope="col" class="">
-                <i class="fa-sharp fa-regular fa-address-card"></i>
-              </th>
-              <th scope="col" class="">UserName</th>
-              <th scope="col" class="text-center">Credit Limit</th>
-              <th scope="col" class="text-center">Net Exposure</th>
-              <th scope="col" class="text-center">Take</th>
-              <th scope="col" class="text-center">Give</th>
-              <th scope="col" class="text-center">Available Credit</th>
+          <table
+            #myTable
+            class="table tableall"
+            *ngIf="userList.length > 0 && !this.isLoading"
+          >
+            <thead>
+              <tr>
+                <th scope="col" class="">
+                  <i class="fa-sharp fa-regular fa-address-card"></i>
+                </th>
+                <th scope="col" class="">UserName</th>
+                <th scope="col" class="text-center">Credit Limit</th>
+                <th scope="col" class="text-center">Net Exposure</th>
+                <th scope="col" class="text-center">Take</th>
+                <th scope="col" class="text-center">Give</th>
+                <th scope="col" class="text-center">Available Credit</th>
 
-              <th scope="col" class="text-center" *ngIf="selectedRoleId != 7">
-                Partnership %
-              </th>
-              <!-- <th scope="col" class="text-center">Details</th> -->
-              <th scope="col" class="text-center">Status</th>
-              <th scope="col" class="text-center">Change password</th>
-              <!--<th scope="col" class="last text-center">Action</th>-->
-            </tr>
-          </thead>
-          <tbody>
-            <h1
-              class="text-center"
-              *ngIf="userList.length == 0 && !this.isLoading"
-            >
-              No users Found
-            </h1>
-            <tr *ngFor="let user of userList; let i = index">
-              <!-- <td>
+                <th scope="col" class="text-center" *ngIf="selectedRoleId != 7">
+                  Partnership %
+                </th>
+                <!-- <th scope="col" class="text-center">Details</th> -->
+                <th scope="col" class="text-center">Status</th>
+                <th scope="col" class="text-center">Change password</th>
+                <!--<th scope="col" class="last text-center">Action</th>-->
+              </tr>
+            </thead>
+            <tbody>
+              <h1
+                class="text-center"
+                *ngIf="userList.length == 0 && !this.isLoading"
+              >
+                No users Found
+              </h1>
+              <tr *ngFor="let user of userList; let i = index">
+                <!-- <td>
                 <input
                   type="checkbox"
                   class="pointer"
@@ -143,75 +143,87 @@
                   [(ngModel)]="user.state"
                 />
               </td> -->
-              <td>
-                <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
-                <span *ngIf="currentPage > 1">{{
-                  i + 1 + (currentPage - 1) * limit
-                }}</span>
-              </td>
-              <td [ngStyle]="selectedRoleId == 7?{'cursor': 'context-menu'} : {'cursor': 'pointer'}"><span (click)="showDownlineTree(user)">{{ user.username }}</span></td>
-              <td class="text-center">{{ user.creditLimit | number }}</td>
-              <td
-                class="text-center"
-                [ngClass]="user.exposure > 0 ? 'text-danger' : ''"
-              >
-                {{ user.exposure | number }}
-              </td>
-              <td
-                [ngClass]="user.take > 0 ? 'text-success' : ''"
-                class="text-center"
-              >
-                <a
-                  class="pointer text-success text-decoration-none"
-                  *ngIf="user.take > 0"
-                  >{{ user.take | number }}</a
+                <td>
+                  <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+                  <span *ngIf="currentPage > 1">{{
+                    i + 1 + (currentPage - 1) * limit
+                  }}</span>
+                </td>
+                <td
+                  [ngStyle]="
+                    selectedRoleId == 7
+                      ? { cursor: 'context-menu' }
+                      : { cursor: 'pointer' }
+                  "
                 >
-                <span *ngIf="user.take <= 0">{{ user.take | number }}</span>
-              </td>
-              <td
-                [ngClass]="user.give > 0 ? 'text-danger' : ''"
-                class="text-center"
-              >
-                <a
-                  class="pointer text-danger text-decoration-none"
-                  *ngIf="user.give > 0"
-                  >{{ user.give | number }}</a
+                  <span (click)="showDownlineTree(user)">{{
+                    user.username
+                  }}</span>
+                </td>
+                <td class="text-center">{{ user.creditLimit | number }}</td>
+                <td
+                  class="text-center"
+                  [ngClass]="user.exposure > 0 ? 'text-danger' : ''"
                 >
-                <span *ngIf="user.give <= 0">{{ user.give | number }}</span>
-              </td>
-              <td class="text-center">{{ user.availableCredit | number }}</td>
-              <td *ngIf="selectedRoleId != 7" class="text-center">
-                {{ user.partnerShipPercent | number }}
-              </td>
+                  {{ user.exposure | number }}
+                </td>
+                <td
+                  [ngClass]="user.take > 0 ? 'text-success' : ''"
+                  class="text-center"
+                >
+                  <a
+                    class="pointer text-success text-decoration-none"
+                    *ngIf="user.take > 0"
+                    >{{ user.take | number }}</a
+                  >
+                  <span *ngIf="user.take <= 0">{{ user.take | number }}</span>
+                </td>
+                <td
+                  [ngClass]="user.give > 0 ? 'text-danger' : ''"
+                  class="text-center"
+                >
+                  <a
+                    class="pointer text-danger text-decoration-none"
+                    *ngIf="user.give > 0"
+                    >{{ user.give | number }}</a
+                  >
+                  <span *ngIf="user.give <= 0">{{ user.give | number }}</span>
+                </td>
+                <td class="text-center">{{ user.availableCredit | number }}</td>
+                <td *ngIf="selectedRoleId != 7" class="text-center">
+                  {{ user.partnerShipPercent | number }}
+                </td>
 
-              <!-- <td class="text-center">
+                <!-- <td class="text-center">
                 <a >
                   <i class="fa-sharp fa-solid fa-eye icon-pink pointer"></i>
                 </a>
               </td> -->
-              <td class="text-center">
-                <ng-container *ngIf="adminUser.roleId != 1">
-                  <span class="text-success" *ngIf="user.isActive == 'Active'">{{user.isActive}}</span>
-                  <span class="text-danger" *ngIf="(user.isActive == 'Inactive' || user.isActive == 'Closed')">{{user.isActive}}</span>
-                </ng-container>
-              
-                <select *ngIf="adminUser.roleId == 1"
-                  class="custom-ddl text-white pointer"
-                  (change)="changeStatus($event, user)"
-                >
-                  <option
-                    *ngFor="let item of statusList"
-                    [value]="item.status"
-                    [selected]="item.status == user.isActive"
-                    [ngClass]="
-                      item.status == 'Active'
-                        ? 'green'
-                        : item.status == 'Inactive'
-                        ? 'yellow'
-                        : 'red'
-                    "
+                <td class="text-center">
+                  <ng-container *ngIf="adminUser.roleId != 1">
+                    <span
+                      class="text-success"
+                      *ngIf="user.isActive == 'Active'"
+                      >{{ user.isActive }}</span
+                    >
+                    <span
+                      class="text-danger"
+                      *ngIf="
+                        user.isActive == 'Inactive' || user.isActive == 'Closed'
+                      "
+                      >{{ user.isActive }}</span
+                    >
+                  </ng-container>
+
+                  <select
+                    *ngIf="adminUser.roleId == 1"
+                    class="custom-ddl pointer"
+                    (change)="changeStatus($event, user)"
                   >
-                    <div
+                    <option
+                      *ngFor="let item of statusList"
+                      [value]="item.status"
+                      [selected]="item.status == user.isActive"
                       [ngClass]="
                         item.status == 'Active'
                           ? 'green'
@@ -220,29 +232,39 @@
                           : 'red'
                       "
                     >
-                      {{ item.status }}
-                    </div>
-                  </option>
-                </select>
-              </td>
-              <td class="text-center">
-                <a (click)="openModal(user.userId)">
-                  <i class="fa-sharp fa fa-lock icon-pink pointer"></i>
-                </a>
-              </td>
-              <!-- <td class="text-center" *ngIf="isSuperAdmin">
+                      <div
+                        [ngClass]="
+                          item.status == 'Active'
+                            ? 'green'
+                            : item.status == 'Inactive'
+                            ? 'yellow'
+                            : 'red'
+                        "
+                      >
+                        {{ item.status }}
+                      </div>
+                    </option>
+                  </select>
+                </td>
+                <td class="text-center">
+                  <a (click)="openModal(user.userId)">
+                    <i class="fa-sharp fa fa-lock icon-pink pointer"></i>
+                  </a>
+                </td>
+                <!-- <td class="text-center" *ngIf="isSuperAdmin">
                 <a (click)="openHierarchyModal(user.userId)">
                   <img src="/assets/images/net_expo.png" width="12px;"/>
                 </a>
               </td> -->
-              <!--<td class="text-center">
+                <!--<td class="text-center">
                 <a routerLink="/member/edit-member/{{ user.userId }}">
                   <i class="fa-sharp fa-solid fa-pen icon-pink pointer"></i>
                 </a>
               </td>-->
-            </tr>
-          </tbody>
-        </table></div>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div *ngIf="userList.length > 0 && !this.isLoading">
           <button
             class="btn rounded-pill text-white"
@@ -297,7 +319,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body">
         <div class="row">
           <section class="section w-75 m-auto mt-4">
             <!-- <div class="row p-4 pt-5"> -->
@@ -308,15 +330,20 @@
                 <div class="col-md-5">Password*</div>
                 <div class="col-md-7">
                   <div class="input-group mw-100">
-                  <input
-                    [type]="show ? 'text' : 'password'"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="password"
-                    placeholder="Enter password"
-                    id="password"
-                    name="password"
-                  />
-                  <span (click)="show=!show" class="input-group-text fa fa-eye bg-dark text-pink border-0 pointer"  id="Password" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
+                    <input
+                      [type]="show ? 'text' : 'password'"
+                      class="form-control border-pink bg-transparent rounded-pill"
+                      formControlName="password"
+                      placeholder="Enter password"
+                      id="password"
+                      name="password"
+                    />
+                    <span
+                      (click)="show = !show"
+                      class="input-group-text fa fa-eye bg-dark text-pink border-0 pointer"
+                      id="Password"
+                      [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"
+                    ></span>
                   </div>
                   <div
                     class="text-danger"
@@ -341,14 +368,19 @@
                 <div class="col-md-7">
                   <div class="input-group mw-100">
                     <input
-                    [type]="show1 ? 'text' : 'password'"
-                    class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                    formControlName="confirmPassword"
-                    placeholder="Enter confirm password"
-                    id="password"
-                    name="password"
-                  />
-                  <span (click)="show1=!show1" class="input-group-text fa fa-eye bg-dark text-pink border-0 pointer"  id="Password" [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"></span>
+                      [type]="show1 ? 'text' : 'password'"
+                      class="form-control border-pink bg-transparent rounded-pill"
+                      formControlName="confirmPassword"
+                      placeholder="Enter confirm password"
+                      id="password"
+                      name="password"
+                    />
+                    <span
+                      (click)="show1 = !show1"
+                      class="input-group-text fa fa-eye bg-dark text-pink border-0 pointer"
+                      id="Password"
+                      [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"
+                    ></span>
                   </div>
                   <div
                     *ngIf="
@@ -424,7 +456,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body ">
         <div class="row">
           <section class="section w-75 m-auto">
             <button
@@ -445,8 +477,6 @@
     </div>
   </div>
 </div> -->
-
-
 
 <!-- <div
   *ngIf="modalNumber == 3"
@@ -473,7 +503,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body ">
         <div class="row">
           <div class="col-md-3">
             <label>Credit Limit:</label><br />{{ userDetails.creditLimit }}
@@ -505,7 +535,7 @@
                   <div class="col-md-12 pt-2">
                     <input
                       type="number"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                      class="form-control border-pink bg-transparent  rounded-pill"
                       formControlName="amount"
                     />
                   </div>
@@ -539,8 +569,6 @@
   </div>
 </div> -->
 
-
-
 <!-- Modal 4 start -->
 <!-- <div
   *ngIf="modalNumber == 4"
@@ -567,7 +595,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body ">
         <div class="row">
           <section class="section w-75 m-auto">
             <table width="100%">

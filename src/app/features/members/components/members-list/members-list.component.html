@@ -161,7 +161,7 @@
           >
             <thead>
               <tr>
-                <th scope="col" class="">
+                <th scope="col" class="first">
                   <i class="fa-sharp fa-regular fa-address-card"></i>
                 </th>
                 <th
@@ -174,7 +174,7 @@
                   scope="col"
                   class="text-center pointer"
                   (click)="toggleSort('userRoleName')"
-                >ROLENAME
+                >ROLE
                 </th>
                 <th
                   scope="col"
@@ -216,8 +216,8 @@
                 </th>
                 <th scope="col" class="text-center">DETAILS</th>
                 <th scope="col" class="text-center">STATUS</th>
-                <th scope="col" class="text-center">CHANGE PASSWORD</th>
-                <th scope="col" class="last text-center">ACTION</th>
+                <th scope="col" class="text-center">PASSWORD</th>
+                <th scope="col" class="last text-center">EDIT</th>
               </tr>
             </thead>
             <tbody>
@@ -417,6 +417,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
 
               </tr>
             </tfoot>
@@ -467,7 +469,7 @@
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
-          Change Password &nbsp; <i class="fa fa-lock"></i>
+          Password &nbsp; <i class="fa fa-lock"></i>
         </h5>
         <button
           type="button"

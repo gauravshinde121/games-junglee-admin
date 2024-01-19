@@ -11,7 +11,7 @@ table thead tr th:nth-child(1) {
 }
 
 .modal table {
-  font-size: 16px;
+  // font-size: 16px;
   white-space: pre;
 }
 
@@ -34,4 +34,8 @@ table thead tr th:nth-child(1) {
 
 .tableRes {
   max-height: 50vh;
+}
+
+.modal table tr {
+  line-height: 10px;
 }

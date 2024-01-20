@@ -241,7 +241,8 @@ export class MembersListComponent implements OnInit {
     }
     this.statusList = [
       { id: 1, status: "Active", color: 'green' },
-      { id: 2, status: "Inactive", color: 'yellow' }
+      { id: 2, status: "Inactive", color: 'yellow' },
+      { id: 3, status: "Closed", color: 'yellow' }
     ];
     this.getModalImage(this.clientId);
   }

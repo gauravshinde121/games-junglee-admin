@@ -54,13 +54,13 @@ export class NetExposureViewTotalComponent implements OnInit {
     // this._initConfig();
     this.isPageDestroyed = false;
     this._getWebSocketUrl();
-    // this.resetTimerInterval = setInterval(() => {
-    //   if (this.refreshCount == 0) {
-    //     this.refreshCall();
-    //     this.refreshCount = 9;
-    //   }
-    //   this.refreshCount--;
-    // }, 1000)
+    this.resetTimerInterval = setInterval(() => {
+      if (this.refreshCount == 0) {
+        this.refreshCall();
+        this.refreshCount = 9;
+      }
+      this.refreshCount--;
+    }, 1000);
   }
 
   _getWebSocketUrl(isComplete = false) {

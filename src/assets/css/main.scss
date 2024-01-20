@@ -190,9 +190,10 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
 }
 .form-signin .form-floating input:focus {
   // border-bottom: 1px solid rgb(255, 167, 163) !important;
-  // color: $color_3;
+  color: $color_21;
   box-shadow: none;
 }
+
 /********** Login end ************/
 /********** main start ************/
 #main {
@@ -385,8 +386,8 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-text-fill-color: $color_7;
-  -webkit-box-shadow: 0 0 0px 1000px $color_21 inset;
+  -webkit-text-fill-color: $color_21;
+  -webkit-box-shadow: none;
   transition: background-color 5000s ease-in-out 0s;
 }
 /********** inner page pro end ************/

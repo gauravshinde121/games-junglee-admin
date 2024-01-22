@@ -22,6 +22,9 @@ export class MatchSettingsComponent implements OnInit {
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
+  selectedUserForAdjustment: any = [];
+  allChecked = false;
+  modalNumber: number;
 
   constructor(
     private settingsService: SettingsService,
@@ -72,6 +75,7 @@ export class MatchSettingsComponent implements OnInit {
   }
 
   getMatchSettingsList() {
+    this.selectedUserForAdjustment = [];
     this.isLoading = true;
     this.matchSettingsList = [];
     if (this.filterForm.value.memberName == null) {
@@ -139,8 +143,13 @@ export class MatchSettingsComponent implements OnInit {
 
   saveMatchSettings() {
     this.display = 'none';
+    // console.log("this.selectedUserForAdjustment,",this.selectedUserForAdjustment)
+    // return;
+
+    debugger;
     let body = {
-      matchId: this.selectedMatchSettings.matchId,
+      // matchId: this.selectedMatchSettings.matchId,
+      matchId : this.selectedUserForAdjustment,
       matchOddsMaxBet: this.matchSettingsForm.value.matchOddsMaxBet,
       matchOddsMinBet: this.matchSettingsForm.value.matchOddsMinBet,
       bookmakerMaxBet: this.matchSettingsForm.value.bookmakerMaxBet,
@@ -188,4 +197,61 @@ export class MatchSettingsComponent implements OnInit {
     }
   }
 
+  checkMatchId(matchId: any) {
+    if (this.selectedUserForAdjustment.includes(matchId)) {
+      this.selectedUserForAdjustment.splice(
+        this.selectedUserForAdjustment.indexOf(matchId),
+        1
+      );
+      return;
+    }
+      this.selectedUserForAdjustment.push(matchId);
+  }
+
+  checkAll(ev) {
+
+
+    if(ev.target.checked){
+      this.selectedUserForAdjustment = [];
+    }
+
+    this.allChecked = !this.allChecked;
+
+    this.matchSettingsList.forEach(x => x.state = ev.target.checked);
+
+    for(const match of this.matchSettingsList){
+      this.checkMatchId(match.matchId);
+    }
+  }
+
+  isAllChecked() {
+    return this.matchSettingsList.every(_ => _.state);
+  }
+
+  openBulkTransferModal() {
+    this.modalNumber = 1;
+    this.matchSettingsForm.patchValue({
+      matchOddsMinBet: 100,
+      matchOddsMaxBet: 100000,
+      matchOddDelay: 5,
+      maxMatchOddsSize: 400000,
+
+      bookmakerMinBet: 100,
+      bookmakerMaxBet: 500000,
+      bookmakerDelay: 0,
+      maxBookmakerSize: 1500000,
+
+      fancyMinBet: 100,
+      fancyMaxBet: 25000,
+      fancyDelay: 0,
+      maxFancySize: 100000,
+      
+      maxFancySessionMinBet: 100,
+      maxFancySessionMaxBet: 100000,
+      maxFancySessionDelay: 0,
+      maxFancySessionSize: 400000,
+    });
+    this.display = 'block';
+  }
 }
+

@@ -48,19 +48,19 @@
 
       <div class="table-responsive tableRes tableFixHead">
         <table class="table text-white tableall b-0" *ngIf="transferStatements.length > 0">
-          <tbody>
-            <tr>
+          <thead>
+            
               <th class="thts first">#</th>
               <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('createdDate')">
                 <i class="fa-regular fa-calendar-days"></i>&nbsp;
                 Creation Date
               </th>
               <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('fromUsername')">
-                <i class="fa-solid fa-user text-white"></i> From User
+                <i class="fa-solid fa-user text-white"></i>Payers / Payee 
               </th>
-              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('toUsername')">
+              <!-- <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('toUsername')">
                 <i class="fa-solid fa-user"></i> To User
-              </th>
+              </th> -->
               <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('amount')">
                 <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
                 Amount
@@ -72,8 +72,8 @@
               <th class="last" class="cursor-pointer pointer" (click)="toggleSort('description')">Narration</th>
               <th class="last" class="cursor-pointer pointer" (click)="toggleSort('ipAddress')">IP</th>
 
-            </tr>
-
+            </thead>
+            <tbody>
             <tr *ngFor="let user of transferStatements | sort:sortColumn:sortAscending; let i = index">
               <td class="tds tdts">
                 <!-- *ngIf="currentPage == 1" -->
@@ -86,11 +86,11 @@
                 {{ user.createdDate | date : "medium" }}
               </td>
               <td class="tds tdts">
-                {{ user.fromUsername }}
+                {{ user.fromUsername }}   &nbsp;/&nbsp;   {{ user.toUsername }}
               </td>
-              <td class="tds tdts">
+              <!-- <td class="tds tdts">
                 {{ user.toUsername }}
-              </td>
+              </td> -->
               <td [ngClass]="user.isGiven ? 'text-danger' : 'text-success'" class="amountt tds tdts">
                 {{ user.amount | indianCurrency }}
               </td>
@@ -109,6 +109,7 @@
               </td>
             </tr>
           </tbody>
+
           <tfoot>
             <tr>
               <td></td>

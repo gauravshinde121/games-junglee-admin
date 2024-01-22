@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <h4 class="text-pink">
           <img src="assets/images/master_dashboard.png" alt="" />
-          Commission Lena Dena
+          Commission Report
         </h4>
         <hr />
         <div class="col-md-12">
@@ -90,7 +90,10 @@
                 Name
               </th>
               <th scope="col" class="pointer"></th>
-              <th
+              <th colspan="3" class="text-center">COMMISION GIVEN</th>
+              <th colspan="3" class="text-center">COMMISION RECEIVED</th>
+              
+              <!-- <th
                 scope="col"
                 class="pointer text-center"
                 (click)="toggleSort('gameName')"
@@ -110,15 +113,28 @@
                 (click)="toggleSort('eventName')"
               >
                 Bookmaker (Entrywise Loosing)
-              </th>
-              <th
+              </th> -->
+              <!-- <th
                 scope="col"
                 class="pointer text-center last"
                 (click)="toggleSort('eventName')"
               >
                 Total Commission
-              </th>
+              </th> -->
             </tr>
+          </thead>
+          <thead class="th2">
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="small text-center">Fancy Comm <br> (Turnover wise)</th>
+            <th class="small text-center">Bookmaker<br> (Net Loosing)</th>
+            <th class="small text-center">Bookmaker <br>(Entrywise Loosing)</th>
+ 
+            <th class="small text-center" style="border-left: 1px solid #3a3a3a;">Fancy Comm<br>(Turnover wise)</th>
+            <th class="small text-center">Bookmaker<br>(Net Loosing)</th>
+            <th class="small text-center">Bookmaker<br>(Entrywise Loosing)</th>
+            <th></th>
           </thead>
           <tbody>
             <tr
@@ -142,6 +158,7 @@
                   Reset
                 </button>
               </td>
+ 
               <td class="text-center">
                 <strong>{{
                   cs.totalFancyTurnOverCommission | indianCurrency
@@ -157,9 +174,26 @@
                   cs.totalBookmakerEntrywiseLoosingCommission | indianCurrency
                 }}</strong>
               </td>
-              <td class="text-center">
-                <strong>{{ cs.rowTotal | indianCurrency }}</strong>
+ 
+              <td class="text-center" style="border-left: 1px solid #3a3a3a;">
+                <strong>{{
+                  cs.totalFancyTurnOverCommissionReceived | indianCurrency
+                }}</strong>
               </td>
+              <td class="text-center">
+                <strong>{{
+                  cs.totalBookmakerNetLoosingCommissionReceived | indianCurrency
+                }}</strong>
+              </td>
+              <td class="text-center">
+                <strong>{{
+                  cs.totalBookmakerEntrywiseLoosingCommissionReceived | indianCurrency
+                }}</strong>
+              </td>
+ 
+              <!-- <td class="text-center">
+                <strong>{{ cs.rowTotal | indianCurrency }}</strong>
+              </td> -->
             </tr>
           </tbody>
           <tfoot>
@@ -182,9 +216,28 @@
                   totalBookmakerEntrywiseLoosing | indianCurrency
                 }}</strong>
               </td>
+ 
+              <!-- Given -->
+ 
               <td class="text-center">
-                <strong>{{ totalColumSum | indianCurrency }}</strong>
+                <strong>{{
+                  totalFancyTurnOverCommissionReceived | indianCurrency
+                }}</strong>
               </td>
+              <td class="text-center">
+                <strong>{{
+                  totalBookmakerNetLoosingCommissionReceived | indianCurrency
+                }}</strong>
+              </td>
+              <td class="text-center">
+                <strong>{{
+                  totalBookmakerEntrywiseLoosingCommissionReceived | indianCurrency
+                }}</strong>
+              </td>
+ 
+              <!-- <td class="text-center">
+                <strong>{{ totalColumSum | indianCurrency }}</strong>
+              </td> -->
             </tr>
           </tfoot>
         </table>
@@ -192,3 +245,4 @@
     </div>
   </div>
 </main>
+ 

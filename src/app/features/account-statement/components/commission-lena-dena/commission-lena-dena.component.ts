@@ -4,26 +4,26 @@ import { AccountStatementService } from '../../services/account-statement.servic
 import { SharedService } from '@shared/services/shared.service';
 import { formatDate } from '@angular/common';
 import * as moment from 'moment';
-
-
+ 
+ 
 @Component({
   selector: 'app-commission-lena-dena',
   templateUrl: './commission-lena-dena.component.html',
   styleUrls: ['./commission-lena-dena.component.scss']
 })
 export class CommissionLenaDenaComponent implements OnInit {
-
-
-
+ 
+ 
+ 
   language = "en";
-
+ 
   commissionStatement:any = [];
   isLoading = false;
   totalFancyCommissionAmount = 0;
   totalBookmakerNetLoosingAmount = 0;
   totalBookmakerEntrywiseLoosing = 0;
   totalColumSum = 0;
-
+ 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
   fileName= 'Commission Statement '+'_'+new Date()+'.xlsx';
@@ -32,37 +32,43 @@ export class CommissionLenaDenaComponent implements OnInit {
   toDate:any = null;
   clientId:any = null;
   dateFormat = "yyyy-MM-dd";
-
-
-
+  userDetails: any;
+  totalFancyTurnOverCommissionReceived: number;
+  totalBookmakerNetLoosingCommissionReceived: number;
+  totalBookmakerEntrywiseLoosingCommissionReceived: number;
+ 
+ 
+ 
   constructor(
     private _accountStatementService: AccountStatementService,
     private _sharedService: SharedService
   ) { }
-
+ 
   ngOnInit(): void {
-
+ 
+    this.userDetails = this._sharedService.getUserDetails();
+ 
     this.getAllClients();
     this._preConfig();
-
+ 
   }
-
-
+ 
+ 
   _preConfig(){
     this.fromDate = this.formatFormDate(new Date())
     this.toDate = this.formatFormDate(new Date())
     this.getCommissionReport(true);
   }
-
+ 
   
   getCommissionReport(initialCall,toDate:any=null,fromDate:any=null){
-
+ 
     let paramObj = {
       fromDate:fromDate,
       toDate:toDate,
       clientId:this.clientId
     }
-
+ 
     if(initialCall){
       paramObj = {
         fromDate:null,
@@ -76,38 +82,49 @@ export class CommissionLenaDenaComponent implements OnInit {
     this.totalFancyCommissionAmount = 0;
     this.totalBookmakerEntrywiseLoosing = 0;
     this.totalBookmakerNetLoosingAmount = 0;
+ 
+    this.totalFancyTurnOverCommissionReceived = 0;
+    this.totalBookmakerNetLoosingCommissionReceived = 0;
+    this.totalBookmakerEntrywiseLoosingCommissionReceived = 0;
+ 
     this.totalColumSum = 0;
-
+ 
     this._accountStatementService._getCommissionReportEndpoint(paramObj).subscribe((res:any)=>{
-
+ 
       if(res.commissionReport){
         this.commissionStatement = res.commissionReport
         this.totalFancyCommissionAmount = this.commissionStatement.reduce((acc, crnt) => acc + crnt.totalFancyTurnOverCommission, 0);
         this.totalBookmakerEntrywiseLoosing = this.commissionStatement.reduce((acc, crnt) => acc + crnt.totalBookmakerEntrywiseLoosingCommission, 0);
         this.totalBookmakerNetLoosingAmount = this.commissionStatement.reduce((acc, crnt) => acc + crnt.totalBookmakerNetLoosingCommission, 0);
+        
+        this.totalFancyTurnOverCommissionReceived = this.commissionStatement.reduce((acc, crnt) => acc + crnt.totalFancyTurnOverCommissionReceived, 0);
+        this.totalBookmakerNetLoosingCommissionReceived = this.commissionStatement.reduce((acc, crnt) => acc + crnt.totalBookmakerNetLoosingCommissionReceived, 0);
+        this.totalBookmakerEntrywiseLoosingCommissionReceived = this.commissionStatement.reduce((acc, crnt) => acc + crnt.totalBookmakerEntrywiseLoosingCommissionReceived, 0);
+        
+        
         this.commissionStatement.map(cs=>cs.rowTotal = cs.totalFancyTurnOverCommission+cs.totalBookmakerEntrywiseLoosingCommission+cs.totalBookmakerNetLoosingCommission)
         this.totalColumSum = this.commissionStatement.reduce((acc, crnt) => acc + crnt.rowTotal, 0);
-
+ 
       }else{
         this.commissionStatement = []
       }
       this.isLoading = false;
     })
   }
-
+ 
   getAllClients(){
     this._sharedService._getPlayerListApi().subscribe((res:any)=>{
       this.playerList = res.memberData;
     });
   }
-
-
+ 
+ 
   formatFormDate(date: Date) {
     return formatDate(date, this.dateFormat, this.language);
   }
-
-
-
+ 
+ 
+ 
   exportExcel(){
     let pL : any = []
     this.commissionStatement.forEach(element => {
@@ -124,9 +141,9 @@ export class CommissionLenaDenaComponent implements OnInit {
       })
     });
     this._sharedService.exportExcel(pL,this.fileName);
- }
-
-
+}
+ 
+ 
   toggleSort(columnName: string) {
     if (this.sortColumn === columnName) {
       this.sortAscending = !this.sortAscending;
@@ -135,41 +152,42 @@ export class CommissionLenaDenaComponent implements OnInit {
       this.sortAscending = true;
     }
   }
-
-
+ 
+ 
   searchCommissionReport(){
-
+ 
     let fromDate = new Date(this.fromDate);
     fromDate.setHours(0)
     fromDate.setMinutes(0);
     fromDate.setSeconds(0);
-
+ 
     let toDate = new Date(this.toDate);
     toDate.setHours(23)
     toDate.setMinutes(59);
     toDate.setSeconds(59);
-
+ 
     if(this.clientId == 'null'){
       this.clientId = null;
     }
-
+ 
     this.getCommissionReport(false,toDate,fromDate);
   }
-
-
+ 
+ 
   resetCommissionReport(obj){
-
+ 
     let payloadObj = {
       userId:obj.userId,
       resultIds:obj.resultIds
     }
-
+ 
     this._accountStatementService._resetCommissionReportEndpoint(payloadObj).subscribe((res)=>{
       this._sharedService.getToastPopup("", 'Commission reset !', 'success');
       this.getCommissionReport(true);
     })
-
+ 
   }
-
-
+ 
+ 
 }
+ 

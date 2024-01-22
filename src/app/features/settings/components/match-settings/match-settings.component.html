@@ -43,7 +43,17 @@
               placeholder="enter match name.."
             />
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
+            <button
+              *ngIf="selectedUserForAdjustment.length > 0"
+              (click)="openBulkTransferModal()"
+              type="button"
+              class="btn btn-pink radius-all"
+            >
+            Update Multiple Matches
+            </button>
+          </div>
+          <div class="col-md-1">
             <button
               type="button"
               class="btn btn-pink rounded-pill mt-4"
@@ -68,7 +78,17 @@
         <table class="table tableall" *ngIf="matchSettingsList.length > 0">
           <thead class="text-dark">
             <tr>
-              <th scope="col" class="first">#</th>
+              
+              <!-- <th scope="col" class="first">#</th> -->
+              <th scope="col" class="first pointer">
+                <input
+                  type="checkbox"
+                  name="all"
+                  class="first cursor-pointer"
+                  [checked]="isAllChecked()"
+                  (change)="checkAll($event)"
+                />
+              </th>
               <th scope="col" class="cursor-pointer" (click)="toggleSort('matchName')">Match Name</th>
               <th scope="col" class="cursor-pointer" (click)="toggleSort('openDate')">Date</th>
               <th scope="col">Setting</th>
@@ -77,8 +97,17 @@
           </thead>
           <tbody>
             <tr *ngFor="let stmt of matchSettingsList | sort:sortColumn:sortAscending ; let i = index">
-              <td>
+              <!-- <td>
                 {{ i + 1 }}
+              </td> -->
+              <td>
+                <input
+                  type="checkbox"
+                  class="pointer"
+                  (change)="checkMatchId(stmt.matchId)"
+                  [ngModelOptions]="{standalone: true}"
+                  [(ngModel)]="stmt.state"
+                />
               </td>
               <td>{{ stmt.matchName }}</td>
               <td>{{ stmt.openDate | date : "medium" }}</td>
@@ -117,7 +146,7 @@
   aria-labelledby="staticBackdropLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog">
+  <div class="modal-dialog  modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">

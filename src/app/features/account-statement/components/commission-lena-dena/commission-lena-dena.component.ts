@@ -193,6 +193,7 @@ export class CommissionLenaDenaComponent implements OnInit {
       this._sharedService.getToastPopup("", 'Commission reset !', 'success');
       this.commisionDetails = [];
       this.getCommissionReport(true);
+      this.closeModal();
     })
  
   }

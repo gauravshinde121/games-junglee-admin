@@ -37,8 +37,10 @@ export class CommissionLenaDenaComponent implements OnInit {
   totalBookmakerNetLoosingCommissionReceived: number;
   totalBookmakerEntrywiseLoosingCommissionReceived: number;
  
- 
- 
+  display: string = 'none';
+  modalNumber: number;
+  commisionDetails: any;
+
   constructor(
     private _accountStatementService: AccountStatementService,
     private _sharedService: SharedService
@@ -173,21 +175,34 @@ export class CommissionLenaDenaComponent implements OnInit {
     this.getCommissionReport(false,toDate,fromDate);
   }
  
+
+  reset(commision:any){
+    this.modalNumber = 1;
+    this.commisionDetails = commision;
+    this.display = 'block';
+  }
  
-  resetCommissionReport(obj){
+  resetCommissionReport(){
  
     let payloadObj = {
-      userId:obj.userId,
-      resultIds:obj.resultIds
+      userId:this.commisionDetails.userId,
+      resultIds: this.commisionDetails.resultIds
     }
  
     this._accountStatementService._resetCommissionReportEndpoint(payloadObj).subscribe((res)=>{
       this._sharedService.getToastPopup("", 'Commission reset !', 'success');
+      this.commisionDetails = [];
       this.getCommissionReport(true);
     })
  
   }
  
+
+  closeModal() {
+    
+    this.display = 'none';
+    // this.changePasswordForm.reset();
+  }
  
 }
  

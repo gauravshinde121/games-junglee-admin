@@ -54,12 +54,13 @@ $color_48: #555;
 $color_49: #ccc;
 $color_50: #dee2e6;
 $color_51: #83c5cb;
+$color_52: #d0d0d0;
 $outline: #08969f80;
 
 $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
 
 .browncolor {
-  background-color: $color_21;
+  background-color: $color_52;
 }
 .bg-pink {
   background: linear-gradient(0deg, $color_27 0, $color_27) !important;
@@ -298,7 +299,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   scrollbar-color: #aab7cf transparent;
 
   .nav-link {
-    color: $color_27;
+    color: $color_7;
   }
   &::-webkit-scrollbar {
     width: 5px;
@@ -366,16 +367,16 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
     appearance: button;
     color: $color_7;
     border: 1px solid $color_27;
-    background: $color_21;
+    background: transparent;
   }
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
-  .form-control {
-    background: transparent;
-    color: $color_7;
-    border: 1px solid $color_27;
-  }
+}
+.form-control {
+  background: transparent;
+  color: $color_7;
+  border: 1px solid $color_27;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -729,9 +730,11 @@ select:-webkit-autofill:focus {
 .sidebar {
   .btn {
     text-align: start;
-    color: $color_27;
+    color: $color_7;
   }
-  .active .nav-link,
+  .active .nav-link {
+    color: $color_7;
+  }
   .btn:hover {
     color: $color_27;
   }
@@ -852,7 +855,7 @@ tfoot tr {
   /* border: 1px solid; */
   position: sticky;
   bottom: 0;
-  background: $color_21;
+  background: $color_52;
 }
 
 .net-exposure_scroll {

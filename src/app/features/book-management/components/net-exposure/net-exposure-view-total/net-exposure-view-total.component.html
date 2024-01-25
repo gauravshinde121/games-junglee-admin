@@ -1357,7 +1357,7 @@
     <div class="col-md-12">
       <div *ngIf="viewTotal.length > 0">
         <button
-          class="btn rounded-pill text-white"
+          class="btn rounded-pill text-dark"
           [disabled]="currentPage === 1"
           (click)="prev()"
         >
@@ -1367,7 +1367,7 @@
           >{{ currentPage }} / {{ totalPages }}
         </span>
         <button
-          class="btn rounded-pill text-white"
+          class="btn rounded-pill text-dark"
           [disabled]="currentPage === totalPages"
           (click)="next()"
         >

@@ -1,16 +1,37 @@
-<div [formGroup]="loginHistoryForm" class="tab-pane fade show active" id="pills-loginhistory" role="tabpanel"
-  aria-labelledby="pills-loginhistory-tab" tabindex="0">
+<div
+  [formGroup]="loginHistoryForm"
+  class="tab-pane fade show active"
+  id="pills-loginhistory"
+  role="tabpanel"
+  aria-labelledby="pills-loginhistory-tab"
+  tabindex="0"
+>
   <div class="row align-items-end">
     <div class="col-md-2">
       <label>From Date</label>
-      <input type="date" formControlName="fromDate" name="fromDate" class="form-control mt-2" id="" />
+      <input
+        type="date"
+        formControlName="fromDate"
+        name="fromDate"
+        class="form-control mt-2"
+        id=""
+      />
     </div>
     <div class="col-md-2">
       <label>To Date</label>
-      <input type="date" formControlName="toDate" name="toDate" class="form-control mt-2" id="" />
+      <input
+        type="date"
+        formControlName="toDate"
+        name="toDate"
+        class="form-control mt-2"
+        id=""
+      />
     </div>
     <div class="col-md-2">
-      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="searchLoginHistory()">
+      <button
+        class="btn btn-pink rounded-pill w-100 mt-4"
+        (click)="searchLoginHistory()"
+      >
         Search
       </button>
     </div>
@@ -23,12 +44,19 @@
    <h4>No data found </h4>
  </div> -->
     <div class="table-responsive tableFixHead tableRes">
-      <table class="table tableall" *ngIf="loginHistory.length > 0 && !this.isLoading">
+      <table
+        class="table tableall"
+        *ngIf="loginHistory.length > 0 && !this.isLoading"
+      >
         <thead>
           <tr>
             <th scope="col" class="first">#</th>
-            <th scope="col" class="pointer" (click)="toggleSort('username')">Name</th>
-            <th scope="col" class="pointer" (click)="toggleSort('createdDate')">Date</th>
+            <th scope="col" class="pointer" (click)="toggleSort('username')">
+              Name
+            </th>
+            <th scope="col" class="pointer" (click)="toggleSort('createdDate')">
+              Date
+            </th>
             <th scope="col" class="pointer">IP</th>
             <th scope="col" class="pointer">Device</th>
             <th scope="col" class="pointer">Browser</th>
@@ -36,12 +64,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let history of loginHistory| sort:sortColumn:sortAscending; let i = index">
+          <tr
+            *ngFor="
+              let history of loginHistory | sort : sortColumn : sortAscending;
+              let i = index
+            "
+          >
             <td>
               <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
               <span *ngIf="currentPage > 1">{{
-              i + 1 + (currentPage - 1) * limit
-            }}</span>
+                i + 1 + (currentPage - 1) * limit
+              }}</span>
             </td>
             <td>{{ history.username }}</td>
             <td>{{ history.createdDate | date : "medium" }}</td>
@@ -61,12 +94,21 @@
   </div>
 
   <div *ngIf="loginHistory.length > 0 && !this.isLoading">
-    <button class="btn rounded-pill text-white" [disabled]="currentPage === 1" (click)="prev()">
+    <button
+      class="btn rounded-pill text-dark"
+      [disabled]="currentPage === 1"
+      (click)="prev()"
+    >
       Prev
     </button>
-    <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
+    <span class="btn btn-pink rounded-pill ps-4 pe-4"
+      >{{ currentPage }} / {{ totalPages }}
     </span>
-    <button class="btn rounded-pill text-white" [disabled]="currentPage === totalPages" (click)="next()">
+    <button
+      class="btn rounded-pill text-dark"
+      [disabled]="currentPage === totalPages"
+      (click)="next()"
+    >
       Next
     </button>
   </div>

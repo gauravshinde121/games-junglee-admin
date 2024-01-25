@@ -50,13 +50,36 @@
       >
         <thead>
           <tr>
-            <th scope="col" class="text-white pointer first" (click)="toggleSort('createdDate')">Date</th>
-            <th  scope="col" class="text-white pointer" (click)="toggleSort('fromUsername')">Payer/Payee</th>
-            <th scope="col" class="text-white pointer last" (click)="toggleSort('amount')">Amount</th>
+            <th
+              scope="col"
+              class="text-white pointer first"
+              (click)="toggleSort('createdDate')"
+            >
+              Date
+            </th>
+            <th
+              scope="col"
+              class="text-white pointer"
+              (click)="toggleSort('fromUsername')"
+            >
+              Payer/Payee
+            </th>
+            <th
+              scope="col"
+              class="text-white pointer last"
+              (click)="toggleSort('amount')"
+            >
+              Amount
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let statements of transferStatements| sort:sortColumn:sortAscending">
+          <tr
+            *ngFor="
+              let statements of transferStatements
+                | sort : sortColumn : sortAscending
+            "
+          >
             <td>{{ statements?.createdDate | date }}</td>
             <td>
               {{ statements?.fromUsername }} ({{ statements?.toUsername }})
@@ -84,7 +107,7 @@
 
   <div *ngIf="transferStatements.length > 0 && !this.isLoading">
     <button
-      class="btn rounded-pill text-white"
+      class="btn rounded-pill text-dark"
       [disabled]="currentPage === 1"
       (click)="prev()"
     >
@@ -94,7 +117,7 @@
       >{{ currentPage }} / {{ totalPages }}
     </span>
     <button
-      class="btn rounded-pill text-white"
+      class="btn rounded-pill text-dark"
       [disabled]="currentPage === totalPages"
       (click)="next()"
     >

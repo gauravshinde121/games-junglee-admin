@@ -70,62 +70,56 @@
 
       <div class="table-responsive tableRes tableFixHead">
         <table class="table tableall b-0" *ngIf="transferStatements.length > 0">
+          <thead>
+            <th class="thts first">#</th>
+            <th
+              class="thts"
+              class="cursor-pointer pointer"
+              (click)="toggleSort('createdDate')"
+            >
+              <i class="fa-regular fa-calendar-days"></i>&nbsp; Creation Date
+            </th>
+            <th
+              class="thts"
+              class="cursor-pointer pointer"
+              (click)="toggleSort('fromUsername')"
+            >
+              <i class="fa-solid fa-user text-white"></i>Payers / Payee
+            </th>
+            <!-- <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('toUsername')">
+              <i class="fa-solid fa-user"></i> To User
+            </th> -->
+            <th
+              class="thts"
+              class="cursor-pointer pointer"
+              (click)="toggleSort('amount')"
+            >
+              <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
+              Amount
+            </th>
+            <th
+              class="thts"
+              class="cursor-pointer pointer"
+              (click)="toggleSort('isGiven')"
+            >
+              <i class="fa-solid fa-text-width"></i> Transaction Type
+            </th>
+            <th
+              class="last"
+              class="cursor-pointer pointer"
+              (click)="toggleSort('description')"
+            >
+              Narration
+            </th>
+            <th
+              class="last"
+              class="cursor-pointer pointer"
+              (click)="toggleSort('ipAddress')"
+            >
+              IP
+            </th>
+          </thead>
           <tbody>
-            <tr>
-              <th class="thts first">#</th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('createdDate')"
-              >
-                <i class="fa-regular fa-calendar-days"></i>&nbsp; Creation Date
-              </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('fromUsername')"
-              >
-                <i class="fa-solid fa-user text-white"></i> From User
-              </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('toUsername')"
-              >
-                <i class="fa-solid fa-user"></i> To User
-              </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('amount')"
-              >
-                <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
-                Amount
-              </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('isGiven')"
-              >
-                <i class="fa-solid fa-text-width"></i> Transaction Type
-              </th>
-
-              <th
-                class="last"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('description')"
-              >
-                Narration
-              </th>
-              <th
-                class="last"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('ipAddress')"
-              >
-                IP
-              </th>
-            </tr>
-
             <tr
               *ngFor="
                 let user of transferStatements
@@ -137,18 +131,18 @@
                 <!-- *ngIf="currentPage == 1" -->
                 <span>{{ i + 1 }}</span>
                 <!-- <span *ngIf="currentPage > 1">{{
-                i + 1 + (currentPage - 1) * limit
-              }}</span> -->
+              i + 1 + (currentPage - 1) * limit
+            }}</span> -->
               </td>
               <td class="tds tdts">
                 {{ user.createdDate | date : "medium" }}
               </td>
               <td class="tds tdts">
-                {{ user.fromUsername }}
+                {{ user.fromUsername }} &nbsp;/&nbsp; {{ user.toUsername }}
               </td>
-              <td class="tds tdts">
-                {{ user.toUsername }}
-              </td>
+              <!-- <td class="tds tdts">
+              {{ user.toUsername }}
+            </td> -->
               <td
                 [ngClass]="user.isGiven ? 'text-danger' : 'text-success'"
                 class="amountt tds tdts"

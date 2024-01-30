@@ -94,7 +94,10 @@ export class MembersListComponent implements OnInit {
   getModalImage(clientId){
     this.http.get('https://apisimg.cylsys.com/get-modal/'+clientId, {})
       .subscribe(response => {
-        this.modalImage = 'https://apisimg.cylsys.com/'+response[0].image_path;
+        if(response[0]){
+          console.log(response)
+          this.modalImage = 'https://apisimg.cylsys.com/'+response[0].image_path;
+        }
       }, error => {
         console.error('Error getting modal image:', error);
       });

@@ -685,11 +685,13 @@ select:-webkit-autofill:focus {
 .pointer {
   cursor: pointer;
 }
-
+.nav-pills .nav-link {
+  color: $color_7;
+}
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: $color_7;
-  background: linear-gradient(0deg, $color_26 0, $color_27);
+  background: linear-gradient(0deg, $outline 0, $color_27);
 }
 
 .nav-link:focus,
@@ -1163,4 +1165,8 @@ $breakpoint-mobile: 767px;
 .form-control:focus,
 .form-select:focus {
   box-shadow: 2px 2px 6px 3px $outline;
+}
+
+input[type="password"]:focus {
+  box-shadow: none;
 }

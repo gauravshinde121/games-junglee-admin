@@ -517,10 +517,10 @@
               <div class="row mb-4 align-items-center">
                 <div class="col-md-5">Password*</div>
                 <div class="col-md-7">
-                  <div class="input-group mw-100">
+                  <div class="input-group mw-100 border-pink">
                     <input
                       [type]="show ? 'text' : 'password'"
-                      class="form-control border-pink bg-transparent rounded-pill"
+                      class="form-control bg-transparent rounded-pill border-0"
                       formControlName="password"
                       placeholder="Enter password"
                       id="password"
@@ -528,7 +528,7 @@
                     />
                     <span
                       (click)="show = !show"
-                      class="input-group-text fa fa-eye bg-dark text-pink border-0 pointer"
+                      class="input-group-text fa fa-eye text-pink border-0 pointer"
                       id="Password"
                       [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"
                     ></span>
@@ -554,10 +554,10 @@
               <div class="row mb-4 align-items-center">
                 <div class="col-md-5">Confirm&nbsp;Password*</div>
                 <div class="col-md-7">
-                  <div class="input-group mw-100">
+                  <div class="input-group mw-100 border-pink">
                     <input
                       [type]="show1 ? 'text' : 'password'"
-                      class="form-control border-pink bg-transparent rounded-pill"
+                      class="form-control bg-transparent rounded-pill border-0"
                       formControlName="confirmPassword"
                       placeholder="Enter confirm password"
                       id="password"
@@ -565,7 +565,7 @@
                     />
                     <span
                       (click)="show1 = !show1"
-                      class="input-group-text fa fa-eye bg-dark text-pink border-0 pointer"
+                      class="input-group-text fa fa-eye text-pink border-0 pointer"
                       id="Password"
                       [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"
                     ></span>
@@ -593,14 +593,14 @@
                   <button
                     (click)="postChangePassword()"
                     [disabled]="changePasswordForm.invalid"
-                    class="btn btn-danger rounded-pill w-80 mt-4"
+                    class="btn btn-pink rounded-pill w-80 mt-4"
                   >
                     Save
                   </button>
                 </div>
                 <div class="col-md-6">
                   <button
-                    class="btn btn-danger rounded-pill w-80 mt-4"
+                    class="btn btn-pink rounded-pill w-80 mt-4"
                     (click)="resetForm()"
                   >
                     Reset

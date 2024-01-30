@@ -109,7 +109,7 @@
         >Current</a
       >
       <a
-        class="nav-link cursor-pointer"
+        class="nav-link cursor-pointer text-pink"
         [class]="btnActive === 'past' ? 'activeLink' : ''"
         (click)="showMatch('past')"
         >Past</a
@@ -125,7 +125,7 @@
         *ngIf="!isMatch"
         [class]="btnActive === 'unmatch' ? 'activeLink' : ''"
         (click)="showMatch('unmatch')"
-        class="nav-link cursor-pointer"
+        class="nav-link cursor-pointer text-pink"
         >Unmatched</a
       >
     </nav>

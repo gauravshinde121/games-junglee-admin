@@ -9,7 +9,7 @@
         </h4>
         <hr />
         <div class="row align-items-end mb-3">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label>Select Member</label>
             <select
               formControlName="memberId"
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="row align-items-end">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label>From Date</label>
             <input
               type="date"
@@ -43,7 +43,7 @@
               placeholder="Month"
             />
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label>To Date</label>
             <input
               type="date"
@@ -54,7 +54,14 @@
               placeholder="Month"
             />
           </div>
-          <div class="col-md-3 mt-3">
+
+          <div class="col-md-4 mt-3">
+            <button type="button" class="btn btn-pink rounded-pill mt-4 w-100" (click)="searchList()">
+              Search
+            </button>
+          </div>
+
+          <!-- <div class="col-md-3 mt-3">
             <label>Select Sport</label>
             <select
               formControlName="sportsId"
@@ -67,8 +74,9 @@
                 {{ game.sportName }}
               </option>
             </select>
-          </div>
-          <div class="col-md-3 mt-3">
+          </div> -->
+
+          <!-- <div class="col-md-3 mt-3">
             <label>Select Match</label>
             <select
               formControlName="matchId"
@@ -81,8 +89,19 @@
                 {{ match.matchName }}
               </option>
             </select>
+          </div> -->
+
+          <div class="col-md-4 mt-3">
+            <label>Select Match</label>
+            <select formControlName="matchId" id="ab" class="form-select pointer" (change)="changeMatch($event)">
+              <option [value]=null>All</option>
+              <option [value]=" match" *ngFor="let match of matchList">
+                {{ match }}
+              </option>
+            </select>
           </div>
-          <div class="col-md-3 mt-3">
+
+          <!-- <div class="col-md-3 mt-3">
             <label>Select Market</label>
             <select
               formControlName="marketId"
@@ -98,8 +117,20 @@
                 {{ market.marketName }}
               </option>
             </select>
+          </div> -->
+
+          <div class="col-md-4 mt-3">
+            <label>Select Market</label>
+            <select formControlName="marketId" id="ab" class="form-select pointer" (change)="changeMarketType($event)">
+              <option [value]=null>All</option>
+              <option [value]="market" *ngFor="let market of marketList">
+                {{ market }}
+              </option>
+            </select>
           </div>
-          <div class="col-md-3 mt-3">
+
+
+          <!-- <div class="col-md-3 mt-3">
             <button
               type="button"
               class="btn btn-pink rounded-pill mt-4 w-100"
@@ -107,7 +138,7 @@
             >
               Search
             </button>
-          </div>
+          </div> -->
         </div>
         <!--your code will come here end-->
       </div>
@@ -122,7 +153,7 @@
         class="doneLoading"
       />
     </span>
-    <strong> NET Total Amount</strong>&nbsp;&nbsp;
+    <strong> Total Records</strong>&nbsp;&nbsp;
     <span class="text-danger">{{ plStatement.length }}</span>
 
     <button

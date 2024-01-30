@@ -9,7 +9,7 @@
         </h4>
         <hr />
         <div class="row align-items-end mb-3">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label>Select Member</label>
             <select
               formControlName="memberId"
@@ -22,17 +22,8 @@
               </option>
             </select>
           </div>
-          <div class="col-md-6">
-            <button
-              class="btn btn-outline-pink btn-pink text-white rounded-pill mt-4 w-100"
-              (click)="clearMemberName()"
-            >
-              <i class="fa fa-user-cog"></i> Clear Members
-            </button>
-          </div>
-        </div>
-        <div class="row align-items-end">
-          <div class="col-md-4">
+
+          <div class="col-md-3">
             <label>From Date</label>
             <input
               type="date"
@@ -43,7 +34,7 @@
               placeholder="Month"
             />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label>To Date</label>
             <input
               type="date"
@@ -55,11 +46,22 @@
             />
           </div>
 
-          <div class="col-md-4 mt-3">
+          <div class="col-md-3 mt-3">
             <button type="button" class="btn btn-pink rounded-pill mt-4 w-100" (click)="searchList()">
               Search
             </button>
           </div>
+
+          <!-- <div class="col-md-6">
+            <button
+              class="btn btn-outline-pink btn-pink text-white rounded-pill mt-4 w-100"
+              (click)="clearMemberName()"
+            >
+              <i class="fa fa-user-cog"></i> Clear Members
+            </button>
+          </div> -->
+        </div>
+        <div class="row align-items-end">
 
           <!-- <div class="col-md-3 mt-3">
             <label>Select Sport</label>

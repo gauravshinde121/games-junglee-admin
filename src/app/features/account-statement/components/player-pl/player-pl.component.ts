@@ -158,12 +158,12 @@ export class PlayerPlComponent implements OnInit {
     // this.filterForm.patchValue({marketId:null});
     this.filterForm.value.matchId = evt.target.value;
 
-    if(this.filterForm.value.matchId == "null" && this.filterForm.value.marketId == "null"){
+    if((this.filterForm.value.matchId == null || this.filterForm.value.matchId == "null") && (this.filterForm.value.marketId == null || this.filterForm.value.marketId == "null")){
       
       // || this.filterForm.value.matchId == "null"
       this.getPlStatement();
     }
-    debugger;
+
  
     if(this.filterForm.value.matchId != null && this.filterForm.value.marketId == null) {
       this.plStatement = this.originalPlStatement.filter(item => item.match === evt.target.value);
@@ -189,7 +189,7 @@ export class PlayerPlComponent implements OnInit {
     // this.marketTypeId = evt.target.value;
     this.filterForm.value.marketId = evt.target.value;
 
-    if(this.filterForm.value.matchId == "null" && this.filterForm.value.marketId == "null"){
+    if((this.filterForm.value.matchId == null || this.filterForm.value.matchId == "null") && (this.filterForm.value.marketId == null || this.filterForm.value.marketId == "null")){
     
       this.getPlStatement();
     }
@@ -364,12 +364,26 @@ export class PlayerPlComponent implements OnInit {
       this.isLoading = false;
       // if (res.admin.finalList.length > 0) {
         this.plStatement = res.admin.finalList;
+        this.originalPlStatement = res.admin.finalList;
 
-        this.plStatement.map(pl=>pl.sport = pl.gameData.subGame)
-        this.plStatement.map(pl=>pl.match = pl.gameData.eventName)
-        this.plStatement.map(pl=>pl.name = pl.playerData.name)
-        this.plStatement.map(pl=>pl.amount = pl.gameData.finalNetAmount)
+        // this.plStatement.map(pl=>pl.sport = pl.gameData.subGame)
+        // this.plStatement.map(pl=>pl.match = pl.gameData.eventName)
+        // this.plStatement.map(pl=>pl.name = pl.playerData.name)
+        // this.plStatement.map(pl=>pl.amount = pl.gameData.finalNetAmount)
         // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+
+        this.originalPlStatement.map(pl=>pl.sport = pl.gameData.subGame)
+        this.originalPlStatement.map(pl=>pl.match = pl.gameData.eventName)
+
+        let match = this.originalPlStatement.map(pl=>pl.match = pl.gameData.eventName);
+
+        this.matchList = [...new Set(match)];
+        this.originalPlStatement.map(pl=>pl.name = pl.playerData.name)
+        this.originalPlStatement.map(pl=>pl.amount = pl.gameData.finalNetAmount)
+
+
+        let market = this.originalPlStatement.map(pl=>pl.marketName = pl.gameData.marketName);
+        this.marketList = [...new Set(market)];
 
         this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.finalNetAmount, 0);
         this.totalFancyCommission = this.plStatement.reduce((acc, crnt) => acc + crnt.gameData.totalFancyCommission, 0);

@@ -734,9 +734,7 @@ select:-webkit-autofill:focus {
     text-align: start;
     color: $color_7;
   }
-  .active .nav-link {
-    color: $color_7;
-  }
+
   .btn:hover {
     color: $color_27;
   }
@@ -744,10 +742,10 @@ select:-webkit-autofill:focus {
   .active {
     .nav-link {
       background-color: $color_51;
+      color: $color_7;
     }
   }
 
-  .active .nav-link,
   .active .btn {
     color: $color_27;
   }

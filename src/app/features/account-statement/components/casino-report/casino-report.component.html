@@ -1,36 +1,60 @@
 <main id="main" class="main m-0">
   <section class="section gamedetails">
     <div class="row pb-1">
-
       <div class="col-md-12">
         <div class="row">
-          <h4 class="text-pink">
-            Casino Report
-          </h4>
+          <h4 class="text-pink">Casino Report</h4>
           <hr />
         </div>
 
         <div class="col-md-12">
           <div class="row align-items-end" [formGroup]="casinoReportForm">
             <div class="col-md-3">
-              <label for="text" class="cassino">Select Casino Provider</label><br />
-              <select (change)="onDateChange()" formControlName="providerCode" id="ab" class="form-select pointer">
-                <option value=null>--</option>
-                <option [value]="c_provider.providerCode" *ngFor="let c_provider of casinoList">
+              <label for="text" class="cassino">Select Casino Provider</label
+              ><br />
+              <select
+                (change)="onDateChange()"
+                formControlName="providerCode"
+                id="ab"
+                class="form-select pointer"
+              >
+                <option value="null">--</option>
+                <option
+                  [value]="c_provider.providerCode"
+                  *ngFor="let c_provider of casinoList"
+                >
                   {{ c_provider.providerName }}
                 </option>
               </select>
             </div>
             <div class="col-md-3">
               <label>From Date</label>
-              <input (change)="onDateChange()" type="date" formControlName="fromDate" name="fromDate" class="form-control" placeholder="Month" />
+              <input
+                (change)="onDateChange()"
+                type="date"
+                formControlName="fromDate"
+                name="fromDate"
+                class="form-control"
+                placeholder="Month"
+              />
             </div>
             <div class="col-md-3">
               <label>To Date</label>
-              <input (change)="onDateChange()" type="date" formControlName="toDate" name="toDate" class="form-control" placeholder="Month" />
+              <input
+                (change)="onDateChange()"
+                type="date"
+                formControlName="toDate"
+                name="toDate"
+                class="form-control"
+                placeholder="Month"
+              />
             </div>
             <div class="col-md-1 btnmarginauto">
-              <button type="button" class="btn btn-pink rounded-pill mt-4" (click)="getCasinoReport()">
+              <button
+                type="button"
+                class="btn btn-pink rounded-pill mt-4"
+                (click)="getCasinoReport()"
+              >
                 Search
               </button>
             </div>
@@ -46,15 +70,13 @@
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <!-- <section class="section gamedetails mt-3"> -->
   <div class="row mt-3">
-    <div class="col-md-12 tablescroll ">
+    <div class="col-md-12 tablescroll">
       <div *ngIf="casinoStatements.length == 0" class="border text-center p-5">
         <h4 *ngIf="casinoStatements.length == 0 && !isLoading">
           No data found
@@ -63,44 +85,86 @@
       </div>
 
       <div class="table-responsive tableRes tableFixHead">
-        <table class="table text-white tableall b-0" *ngIf="casinoStatements.length > 0">
+        <table class="table tableall b-0" *ngIf="casinoStatements.length > 0">
           <tbody>
             <tr>
-              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('createdDate')">
-                <i class="fa-regular fa-calendar-days"></i>&nbsp;
-                Sr No
+              <th
+                class="thts"
+                class="cursor-pointer pointer"
+                (click)="toggleSort('createdDate')"
+              >
+                <i class="fa-regular fa-calendar-days"></i>&nbsp; Sr No
               </th>
-              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('username')">
+              <th
+                class="thts"
+                class="cursor-pointer pointer"
+                (click)="toggleSort('username')"
+              >
                 <i class="fa-solid fa-user text-white"></i> Username
               </th>
-              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('amount')">
+              <th
+                class="thts"
+                class="cursor-pointer pointer"
+                (click)="toggleSort('amount')"
+              >
                 <i class="fa-solid fa-user"></i> Amount
               </th>
-              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('status')">
+              <th
+                class="thts"
+                class="cursor-pointer pointer"
+                (click)="toggleSort('status')"
+              >
                 <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
                 Status
               </th>
-              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('status')">
+              <th
+                class="thts"
+                class="cursor-pointer pointer"
+                (click)="toggleSort('status')"
+              >
                 <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
                 Provider Name
               </th>
-              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('date')">
+              <th
+                class="thts"
+                class="cursor-pointer pointer"
+                (click)="toggleSort('date')"
+              >
                 <i class="fa-solid fa-text-width"></i> Date
               </th>
-              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('date')">
+              <th
+                class="thts"
+                class="cursor-pointer pointer"
+                (click)="toggleSort('date')"
+              >
                 <i class="fa-solid fa-text-width"></i> Details
               </th>
             </tr>
 
-            <tr *ngFor="let user of casinoStatements | sort:sortColumn:sortAscending; let i = index">
+            <tr
+              *ngFor="
+                let user of casinoStatements
+                  | sort : sortColumn : sortAscending;
+                let i = index
+              "
+            >
               <td class="tds tdts">
                 <span>{{ i + 1 }}</span>
               </td>
               <td class="tds tdts">
-                <a class="pointer text-white" (click)="getReportDetails(user.userId, user.gameCode)">{{ user.username }}</a>
+                <a
+                  class="pointer"
+                  (click)="getReportDetails(user.userId, user.gameCode)"
+                  >{{ user.username }}</a
+                >
               </td>
               <td class="tds tdts">
-                <strong [ngClass]="{'text-success': user.amount > 0, 'text-danger': user.amount < 0}">
+                <strong
+                  [ngClass]="{
+                    'text-success': user.amount > 0,
+                    'text-danger': user.amount < 0
+                  }"
+                >
                   {{ user.amount | indianCurrency }}
                 </strong>
               </td>
@@ -114,7 +178,12 @@
                 {{ user.date | date : "medium" }}
               </td>
               <td class="tds tdts">
-                <button (click)="getReportDetails(user.userId, user.gameCode)" type="button" class="btn btn-pink rounded-pill" (click)="getCasinoReport()">
+                <button
+                  (click)="getReportDetails(user.userId, user.gameCode)"
+                  type="button"
+                  class="btn btn-pink rounded-pill"
+                  (click)="getCasinoReport()"
+                >
                   Details
                 </button>
               </td>
@@ -124,7 +193,12 @@
             <tr>
               <td></td>
               <td></td>
-              <td style="text-align: left;"><strong [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | indianCurrency}}</strong></td>
+              <td style="text-align: left">
+                <strong
+                  [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'"
+                  >{{ totalAmount | indianCurrency }}</strong
+                >
+              </td>
               <td></td>
               <td></td>
               <td></td>
@@ -133,7 +207,6 @@
           </tfoot>
         </table>
       </div>
-
     </div>
   </div>
 </main>

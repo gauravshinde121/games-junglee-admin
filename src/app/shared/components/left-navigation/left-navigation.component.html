@@ -132,7 +132,7 @@
           data-bs-target="#orders-collapse"
           aria-expanded="false"
         >
-          <i class="fa-solid fa-receipt icon-pink me-2"></i>ACCOUNT STATEMENT
+          <i class="fa-solid fa-receipt icon-pink me-2"></i>ACCOUNT
         </a>
         <div
           [ngClass]="
@@ -146,6 +146,22 @@
           id="orders-collapse"
         >
           <ul class="btn-toggle-nav list-unstyled fw-normal">
+            <li *ngIf="adminDetails.refClientid == 3 && adminDetails.refClientid == 4"
+              [routerLinkActive]="
+                currentPath == '/account-statement/account-list' ? 'active' : ''
+              "
+              [ngClass]="
+                currentPath == '/account-statement/account-list' ? 'active' : ''
+              "
+            >
+              <a
+                (click)="storePath('/account-statement/account-list')"
+                routerLink="/account-statement/account-list"
+                class="nav-link small ps-5"
+                >ACCCOUNT LIST</a
+              >
+            </li>
+
             <li
               [routerLinkActive]="
                 currentPath == '/account-statement/my-pl' ? 'active' : ''

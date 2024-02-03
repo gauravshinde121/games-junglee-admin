@@ -67,6 +67,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     this._sharedService.getWebSocketURLApi().subscribe((res: any) => {
       if (res) {
         this.realDataWebSocket = webSocket(res['url']);
+        // this.realDataWebSocket = webSocket('ws://localhost:8888');
         if (!isComplete) {
           this.route.params.subscribe((routeParams) => {
             let bookMgmParams = {};
@@ -614,12 +615,12 @@ export class NetExposureViewTotalComponent implements OnInit {
       (err) => {
         console.log('err', err);
         console.log(this.isPageDestroyed);
-        if (!this.isPageDestroyed) this._getWebSocketUrl(true);
+        if (!this.isPageDestroyed) this._getWebSocketUrl(false);
       }, // Called if at any point WebSocket API signals some kind of error.
       () => {
         console.log('completed');
         console.log(this.isPageDestroyed);
-        if (!this.isPageDestroyed) this._getWebSocketUrl(true);
+        if (!this.isPageDestroyed) this._getWebSocketUrl(false);
       } // Called when connection is closed (for whatever reason).
     );
   }

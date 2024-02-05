@@ -8,7 +8,7 @@
             <h4 *ngIf="userList.length == 0 && !isLoading">No data found</h4>
             <h4 *ngIf="isLoading">Loading...</h4>
           </div>
-          <div class="table-responsive tableRes tableFixHead">
+          <div class="table-responsive tableRes tableFixHead" *ngIf="userList.length > 0 && !isLoading">
             <table
               #myTable
               class="table tableall"
@@ -314,7 +314,7 @@
                 <div class="row mt-5">
                   <div class="col-md-6 text-end">
                     <button
-                      (click)="postChangePassword()"
+                      (click)="postData(true)"
                       
                       class="btn btn-pink rounded-pill w-80 mt-4"
                     >
@@ -326,7 +326,7 @@
                       class="btn btn-pink rounded-pill w-80 mt-4"
                       (click)="closeModal()"
                     >
-                      Reset
+                      Cancel
                     </button>
                   </div>
                 </div>
@@ -465,7 +465,7 @@
                 <div class="row mt-5">
                   <div class="col-md-6 text-end">
                     <button
-                      (click)="postChangePassword()"
+                      (click)="postData(false)"
                       
                       class="btn btn-pink rounded-pill w-80 mt-4"
                     >
@@ -657,6 +657,7 @@
                                 placeholder="Amount"
                                 id="amount"
                                 name="amount"
+                                type="number"
                                 autocomplete="off"
                                 (input)="onAmountChange($event)"
                               /> 
@@ -682,7 +683,7 @@
                       <div class="row mt-5">
                         <div class="col-md-6 text-end">
                           <button
-                            (click)="postChangePassword()"
+                            (click)="postData(true)"
                             
                             class="btn btn-pink rounded-pill w-80 mt-4"
                           >
@@ -805,7 +806,7 @@
                       <div class="row mt-5">
                         <div class="col-md-6 text-end">
                           <button
-                            (click)="postChangePassword()"
+                            (click)="postData(false)"
                             
                             class="btn btn-pink rounded-pill w-80 mt-4"
                           >

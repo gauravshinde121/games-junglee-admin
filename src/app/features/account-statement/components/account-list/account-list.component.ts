@@ -20,7 +20,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
   selectedUserForAdjustment: any = [];
   display: string = 'none';
   showMyContainer: boolean = false;
-  modalNumber: number;
+  modalNumber: any;
   userDetails: any;
   isGiven: boolean;
   memberHierarchy: any;
@@ -75,6 +75,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
   creditWithdrawForm!: FormGroup;
   amountSubscription: Subscription  | undefined;
 
+  userIp = "";
 
 
 
@@ -103,10 +104,6 @@ export class AccountListComponent implements OnInit , OnDestroy {
     }
     )
 
-    // Subscribe to changes in the amount field
-    this.amountSubscription = this.creditDepositeForm?.get('amount')?.valueChanges.subscribe(amount => {
-      this.onAmountChange(amount);
-    });
   }
 
   ngOnDestroy() {
@@ -124,7 +121,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
       refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)])
     }
     )
   }
@@ -156,9 +153,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
   ngOnInit(): void {
 
-    let userIp = this._sharedService.getIpAddress();
-
-    console.log("UserIP",userIp);
+    this.userIp = this._sharedService.getIpAddress();
 
     const hasSeenModal = localStorage.getItem('hasSeenModal');
     if (!hasSeenModal) {
@@ -305,28 +300,39 @@ export class AccountListComponent implements OnInit , OnDestroy {
   }
 
   onAmountChange(event: any) {
-    
+    console.log('changes')
+    console.log(this.creditDepositeForm.value)
+    // console.log(event)
+    // console.log(this.adminDetails)
+    // console.log(this.userData)
     let amount = parseFloat(event?.target.value);
     // Check if the amount is a valid number
     if (!isNaN(amount)) {
       // Perform the necessary calculations to update refupline_credit and refdownline_credit
-      const refupline_credit = parseFloat(this.creditDepositeForm.value.refupline_credit) - amount;
-      const refdownline_credit = parseFloat(this.creditDepositeForm.value.refdownline_credit) + amount;
+      const refupline_credit = parseFloat(this.adminDetails.availableCredit) - amount;
+      const refdownline_credit = parseFloat(this.userData.availableCredit) + amount;
 
       // Update the form values
       this.creditDepositeForm.patchValue({
         refupline_credit: refupline_credit,
-        refdownline_credit: refdownline_credit
+        refdownline_credit: refdownline_credit,
+        amount:amount
       });
     } else {
       // Handle the case when the input value is not a valid number
       // For example, reset the form field or display an error message
+      this.creditDepositeForm.patchValue({
+        refupline_credit: this.adminDetails.availableCredit,
+        refdownline_credit: this.userData.availableCredit,
+        amount:null
+      });
     }
   }
 
 
   closeModal() {
     this.display = 'none';
+    this.modalNumber = null;
     // this.changePasswordForm.reset();
   }
 
@@ -340,8 +346,22 @@ export class AccountListComponent implements OnInit , OnDestroy {
     event.stopPropagation();
   }
 
-  postChangePassword(){
+  postData(isDeposit){
+    console.log(this.creditDepositeForm.value)
 
+    let payload = {
+      "userId":this.userData.userId,
+      "isDeposit":isDeposit,
+      "amount":this.creditDepositeForm.value.amount,
+      "ip":this.userIp,
+      "remark":this.creditDepositeForm.value.remark?this.creditDepositeForm.value.remark:"Credit Transfer"
+  }
+
+    this._sharedService._getCreditSettlementApi(payload).subscribe((res)=>{
+      console.log(res)
+      this.modalNumber = null;
+      this.refreshCall();
+    })
   }
 
   getAdminDetails(){

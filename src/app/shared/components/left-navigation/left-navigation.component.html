@@ -148,7 +148,7 @@
 
         <!-- *ngIf="adminDetails.refClientid == 3 || adminDetails.refClientid == 4" -->
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li 
+            <li *ngIf="adminDetails.refClientid == 3 || adminDetails.refClientid == 4"
               [routerLinkActive]="
                 currentPath == '/account-statement/account-list' ? 'active' : ''
               "

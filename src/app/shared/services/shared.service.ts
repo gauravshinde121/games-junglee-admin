@@ -320,5 +320,11 @@ _getStartWebJobApi(status){
 }
 
 
+_getCreditSettlementApi(payload){
+  return this._apiHttpService
+    .post(this._apiEndpointsService.geCreditSettlementEndpoint(),payload);
+}
+
+
 }
 

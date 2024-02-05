@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {  AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
+import { Subscription } from 'rxjs';
 import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { environment } from 'src/environments/environment';
@@ -12,7 +13,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './account-list.component.html',
   styleUrls: ['./account-list.component.scss']
 })
-export class AccountListComponent implements OnInit {
+export class AccountListComponent implements OnInit , OnDestroy {
 
   userList: any = [];
   isLoading = false;
@@ -60,35 +61,22 @@ export class AccountListComponent implements OnInit {
   ladderObj:any = [];
   modalImage:any;
 
-  fileName = 'MemberList.xlsx';
-
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
   showModal: boolean;
   clientId: any = environment.clientId;
-  description : any = "Weekly settlement";
-  exposureData:any = {
-    matchName:null,
-    fancyMarkets:[],
-    matchOddsMarket:[],
-    bookmakerMarkets:[]
-  };
-  exposureDataList:any = [];
+  
   role_id: any;
+  admin: any;
+  userData: any;
+  adminDetails: any;
+  
+  creditDepositeForm!: FormGroup;
+  creditWithdrawForm!: FormGroup;
+  amountSubscription: Subscription  | undefined;
 
 
-  createPasswordForm() {
-    this.changePasswordForm = this.formbuilder.group({
-      password: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
-        "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
-      )]),
-      confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-    },
-      {
-        validators: this.Mustmatch('password', 'confirmPassword')
-      }
-    )
-  }
+
 
   getModalImage(clientId){
     this.http.get('https://apisimg.cylsys.com/get-modal/'+clientId, {})
@@ -101,103 +89,44 @@ export class AccountListComponent implements OnInit {
         console.error('Error getting modal image:', error);
       });
   }
-  get f() {
-    return this.changePasswordForm.controls;
-  }
 
-  postChangePassword() {
-    this.disableSubmit = true;
 
-    if (this.changePasswordForm.value.password == "") {
-      this._sharedService.getToastPopup("Enter password", 'Password', 'error');
-      return;
+  createCreditDepositeForm() {
+    this.creditDepositeForm = this.formbuilder.group({
+      upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     }
-    else if (this.changePasswordForm.value.confirmPassword == "") {
-      this._sharedService.getToastPopup("Enter confirm password", 'Password', 'error');
-      return;
-    }
+    )
 
-    let body = {
-      "userId": this.userId,
-      "password": this.changePasswordForm.value.password
-    }
-
-
-    this._memberService._changeMemberPasswordApi(body).subscribe((res: any) => {
-      this._sharedService.getToastPopup(res.message, 'Password', 'success');
-      this.disableSubmit = true;
-      this.closeModal();
-    })
-  }
-
-  // Validation & Confirm Password
-
-  get passwordValue() {
-    return this.changePasswordForm.get('password')
-  }
-
-  get confirmPasswordVail() {
-    return this.changePasswordForm.get('confirmPassword')
-  }
-
-  Mustmatch(password: any, confirmPassword: any) {
-    return (formGroup: FormGroup) => {
-      const passwordControl = formGroup.controls[password];
-      const confirmPasswordcontrol = formGroup.controls[confirmPassword];
-
-      if (confirmPasswordcontrol.errors && !confirmPasswordcontrol.errors['Mustmatch']) {
-        return;
-      }
-      if (passwordControl.value !== confirmPasswordcontrol.value) {
-        confirmPasswordcontrol.setErrors({ Mustmatch: true });
-      }
-      else {
-        confirmPasswordcontrol.setErrors(null);
-      }
-    }
-  };
-
-  adjustWinningsForSingleUser(user, isGiven) {
-    this.userId = user.userId;
-    var adjustWinningsForSingleUserValue: number;
-    if (isGiven) {
-      adjustWinningsForSingleUserValue = user.give;
-      this.createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue);
-      this.adjustWinningsForSingleUserForm.patchValue({ 'amount': user.give });
-    } else {
-      adjustWinningsForSingleUserValue = user.take;
-      this.createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue);
-      this.adjustWinningsForSingleUserForm.patchValue({ 'amount': user.take });
-    }
-    this.modalNumber = 3;
-    this.userDetails = user;
-    this.isGiven = isGiven;
-    this.display = 'block';
-  }
-
-  createAdjustWinningsForSingleUserForm(adjustWinningsForSingleUserValue) {
-    this.adjustWinningsForSingleUserForm = this.formbuilder.group({
-      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.max(adjustWinningsForSingleUserValue)]),
-      description : new FormControl('Weekly settlement', [(c: AbstractControl) => Validators.required(c)])
+    // Subscribe to changes in the amount field
+    this.amountSubscription = this.creditDepositeForm?.get('amount')?.valueChanges.subscribe(amount => {
+      this.onAmountChange(amount);
     });
   }
 
-  postAdjustWinningsForSingleUser() {
-    let body = {
-      "userId": this.userId,
-      "amount": this.adjustWinningsForSingleUserForm.value.amount,
-      "isGiven": this.isGiven,
-      "description" : this.adjustWinningsForSingleUserForm.value.description,
-      "ipAddress" : this._sharedService.getIpAddress()
+  ngOnDestroy() {
+    // Unsubscribe from the amount subscription to prevent memory leaks
+    if (this.amountSubscription) {
+      this.amountSubscription.unsubscribe();
     }
+  }
 
-    this.closeModal();
-    this._memberService._adjustWinningsForSingleUserApi(body).subscribe((res: any) => {
-      this._sharedService.getToastPopup(res.message, 'Adjust Winnings', 'success');
-      this._sharedService.callAdminDetails.next(true);
-      this._getAllUserInfo(this.selectedRoleId);
-
-    });
+  createCreditWithdrawForm() {
+    this.creditDepositeForm = this.formbuilder.group({
+      upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+    }
+    )
   }
 
   resetForm() {
@@ -221,12 +150,16 @@ export class AccountListComponent implements OnInit {
     private _router: Router,
     private _sharedService: SharedService,
     private _memberService: MembersService,
+    private http: HttpClient,
     private formbuilder: FormBuilder,
-    private _bookMgmService:BookManagementService,
-    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
+
+    let userIp = this._sharedService.getIpAddress();
+
+    console.log("UserIP",userIp);
+
     const hasSeenModal = localStorage.getItem('hasSeenModal');
     if (!hasSeenModal) {
       this.showModal = true;
@@ -236,11 +169,11 @@ export class AccountListComponent implements OnInit {
     if (this._sharedService.getUserDetails().roleId === 1) {
       this.isSuperAdmin = true;
     }
-    this.statusList = [
-      { id: 1, status: "Active", color: 'green' },
-      { id: 2, status: "Inactive", color: 'yellow' },
-      { id: 3, status: "Closed", color: 'red' }
-    ];
+
+    this.getAdminDetails();
+
+    this.admin = this._sharedService.getUserDetails();
+
     this.getModalImage(this.clientId);
   }
 
@@ -253,102 +186,8 @@ export class AccountListComponent implements OnInit {
     }
   }
 
-  checkAll(ev) {
-
-    if (ev.target.checked) {
-      this.selectedUserForAdjustment = [];
-    }
-
-    this.allChecked = !this.allChecked;
-
-    // this.userList.forEach(x => x.state = ev.target.checked)
-
-    this.userList.forEach(element => {
-      if (element.winnings != 0) {
-        element.state = ev.target.checked
-      }
-
-    });
-
-    for (const user of this.userList) {
-      if (user.winnings != 0) {
-        this.checkUserId(user.userId);
-      }
-    }
-  }
-
-
-  openExposureViewModal(userId) {
-    this.modalNumber = 5;
-    this.userId = userId;
-    this.display = 'block';
-  }
-
-
-  getLadderDataByMarket(marketId){
-    this.ladderObj = [];
-    this._bookMgmService._postLadderMemberListDataByMarketApi({ marketId: marketId , myPt: false,memberId:this.userId}).subscribe((res: any) => {
-      this.ladderObj = res?.ladderDetails;
-    })
-  }
-
-
-  showExposureDetails(user){
-    this.exposureDataList = [];
-    if(user.exposure == 0) return
-
-    this._sharedService._getExposureDetailsApi(user.userId).subscribe((data:any)=>{
-      // console.log(data)
-
-      if(data){
-        for(let d of data.exposureDetails){
-          this.exposureDataList.push(
-            {
-              matchName:d.matchName,
-              fancyMarkets:d.data.filter(mrkt=>mrkt.fancyFlag==true),
-              matchOddsMarket:d.data.filter(mrkt=>mrkt.matchoddsFlag==true),
-              bookmakerMarkets:d.data.filter(mrkt=>mrkt.bookmakerFlag==true)
-            }
-          )
-        }
-      }
-
-      this.exposureData = this.exposureDataList;
-      // console.log(this.exposureDataList)
-
-      this.openExposureViewModal(user.userId)
-    })
-  }
-
-  checkUserId(userId: any) {
-
-    if (this.selectedUserForAdjustment.includes(userId)) {
-      this.selectedUserForAdjustment.splice(
-        this.selectedUserForAdjustment.indexOf(userId),
-        1
-      );
-
-      return;
-    }
-
-    this.selectedUserForAdjustment.push(userId);
-
-
-  }
-
-  isAllChecked() {
-    return this.userList.every(_ => _.state);
-  }
-
-  isAllUnChecked() {
-    return this.userList.map(item => ({
-      ...item,
-      state: false
-    }));
-  }
-
   _preConfig() {
-    this.createPasswordForm();
+
     this._getRoles();
     this._getAllUserInfo(this.selectedRoleId);
 
@@ -357,9 +196,9 @@ export class AccountListComponent implements OnInit {
     }, 60000)
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.resetTimerInterval)
-  }
+  // ngOnDestroy(): void {
+  //   clearInterval(this.resetTimerInterval)
+  // }
 
   fetchListByCategory(category) {
     this.selectedUserForAdjustment = [];
@@ -434,164 +273,63 @@ export class AccountListComponent implements OnInit {
     });
   }
 
-  checkUserForAdjustment(userId: any) {
-
-    if (this.selectedUserForAdjustment.includes(userId)) {
-      this.selectedUserForAdjustment.splice(
-        this.selectedUserForAdjustment.indexOf(userId), 1);
-      return;
-    }
-    this.selectedUserForAdjustment.push(userId);
-
-    this.isAllChecked();
-  }
-
-
-  updateLimit(event) {
-    this.limit = parseInt(event.target.value);
-    this.pageSize = this.limit;
-    this.refreshCall();
-  }
-
-  adjustWinnings() {
-
-    var currentUserIp: any;
-    this._sharedService.currentUserIp.subscribe((data: any) => {
-      currentUserIp = data.userIp;
-    });
-    //if (confirm('Do you want bulk transfer ?')) {
-    this._sharedService
-      ._adjustWinningsApi({ userList: this.selectedUserForAdjustment, "ipAddress" : this._sharedService.getIpAddress() , description:this.description })
-      .subscribe((res: any) => {
-        this._sharedService.getToastPopup(
-          'Adjusted Successfully',
-          'User',
-          'success'
-        );
-        this._sharedService.sharedSubject.next({
-          updateAdminDetails: true,
-        });
-        this.selectedUserForAdjustment = [];
-        this._getAllUserInfo(this.selectedRoleId);
-        this._sharedService.callAdminDetails.next(true);
-        this.closeModal();
-      });
-    //}
-  }
-
-  openWithdraw(userId) {
+  openWithdraw(user) {
     this.modalNumber = 1;
-    this.userId = userId;
+    this.userData = user;
     this.display = 'block';
   }
 
-  openDeposit(userId) {
+  openDeposit(user) {
     this.modalNumber = 2;
-    this.userId = userId;
+    this.userData = user;
     this.display = 'block';
   }
 
-  openCredit(userId) {
+  openCredit(user) {
     this.modalNumber = 3;
-    this.userId = userId;
+    this.userData = user;
+
+    console.log("Userdata",this.userData);
     this.display = 'block';
+    this.createCreditDepositeForm();
+
+    this.getAdminDetails();
+
+    this.creditDepositeForm.patchValue({
+      upline_credit : this.adminDetails.availableCredit,
+      refupline_credit : this.adminDetails.availableCredit,
+      downline_credit : this.userData.availableCredit,
+      refdownline_credit : this.userData.availableCredit,
+      profitLoss : this.userData.winnings
+    })
+  }
+
+  onAmountChange(event: any) {
+    
+    let amount = parseFloat(event?.target.value);
+    // Check if the amount is a valid number
+    if (!isNaN(amount)) {
+      // Perform the necessary calculations to update refupline_credit and refdownline_credit
+      const refupline_credit = parseFloat(this.creditDepositeForm.value.refupline_credit) - amount;
+      const refdownline_credit = parseFloat(this.creditDepositeForm.value.refdownline_credit) + amount;
+
+      // Update the form values
+      this.creditDepositeForm.patchValue({
+        refupline_credit: refupline_credit,
+        refdownline_credit: refdownline_credit
+      });
+    } else {
+      // Handle the case when the input value is not a valid number
+      // For example, reset the form field or display an error message
+    }
   }
 
 
   closeModal() {
     this.display = 'none';
-    this.changePasswordForm.reset();
+    // this.changePasswordForm.reset();
   }
 
-
-  closeExposureModal(){
-    this.display = 'none';
-  }
-
-  updateGameControl(status: any, sportsId) {
-    this._memberService
-      ._updateGameControlApi({
-        refUserId: this.userId,
-        gameControlId: sportsId,
-        isActive: !status,
-      })
-      .subscribe((data: any) => {
-        this.closeModal();
-        this._getAllUserInfo(this.selectedRoleId);
-      });
-  }
-
-  updateSportsControl(status: any, eventControlId: any) {
-    this._memberService
-      ._updateSportsControlApi({
-        refUserId: this.userId,
-        eventsControlId: eventControlId,
-        isActive: !status,
-      })
-      .subscribe((data: any) => {
-        this.closeModal();
-        this._getAllUserInfo(this.selectedRoleId);
-      });
-  }
-
-  navigateToDownline(user) {
-    this._router.navigate([
-      `/member/member-details/Player/${user.username}/${user.createdDate}/${user.userId}`,
-    ]);
-  }
-
-  changeStatus(evt, user) {
-    let status = evt.target.value;
-    let body = {
-      "userId": user.userId,
-      "isActive": status
-    }
-
-    this._memberService._changeMemberStatusApi(body).subscribe(res => {
-      this._sharedService.getToastPopup(res['message'], '', 'success');
-    })
-  }
-
-
-  showDownlineTree(user) {
-    if (this.selectedRoleId != 7) {
-      this._router.navigate(['/member/downline-list/' + user.userId])
-    }
-  }
-
-
-  exportExcel() {
-    let memberList: any = []
-    let mergedArray = [];
-
-    if (this.selectedRoleId == this.roleId) {
-      this.userList.forEach(element =>
-        this.roles.forEach(elements => {
-          if (this.selectedRoleId === elements.roleId){
-        memberList.push({
-          Username: element.username,
-          RoleName: elements.userRoleName,
-          CreditLimit: element.creditLimit,
-          NetExposure: element.exposure,
-          Take: element.take,
-          Give: element.give,
-          AvailableCredit: element.availableCredit,
-          Status: element.isActive,
-        })
-        // this.roles.forEach(elements => {
-        //   if (this.selectedRoleId === elements.roleId) {
-        //     memberList.push({
-        //       RoleName: elements.userRoleName
-        //     })
-        //   }
-        // })
-      }}));
-
-      this._sharedService.exportExcel(memberList, this.fileName);
-    }
-
-    let result = this.userList.map()
-  }
 
   onCloseModal() {
     localStorage.setItem('hasSeenModal', 'true');
@@ -602,5 +340,20 @@ export class AccountListComponent implements OnInit {
     event.stopPropagation();
   }
 
+  postChangePassword(){
 
+  }
+
+  getAdminDetails(){
+    this._sharedService._getAdminDetailsApi().subscribe((adminDetails:any)=>{
+      if(adminDetails.admin){
+        this.adminDetails = adminDetails.admin;
+
+        console.log(" this.adminDetails", this.adminDetails);
+
+
+      }
+    })
+
+}
 }

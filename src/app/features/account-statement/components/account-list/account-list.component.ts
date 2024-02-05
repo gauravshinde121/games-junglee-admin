@@ -34,7 +34,6 @@ export class AccountListComponent implements OnInit , OnDestroy {
   liveCasinoRate: any;
   sportsBook: any;
   clubCasino: any;
-
   eventStatus: any = [];
   gameStatus: any = [];
   roles: any = [];
@@ -73,6 +72,10 @@ export class AccountListComponent implements OnInit , OnDestroy {
   
   creditDepositeForm!: FormGroup;
   creditWithdrawForm!: FormGroup;
+
+  winningDepositForm!:FormGroup;
+  winningWithdrawalForm!:FormGroup;
+
   amountSubscription: Subscription  | undefined;
 
   userIp = "";
@@ -92,18 +95,18 @@ export class AccountListComponent implements OnInit , OnDestroy {
   }
 
 
-  createCreditDepositeForm() {
-    this.creditDepositeForm = this.formbuilder.group({
+  createWinningSettlementForm(){
+    this.creditWithdrawForm = this.formbuilder.group({
       upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      ref_profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     }
     )
-
   }
 
   ngOnDestroy() {
@@ -111,19 +114,6 @@ export class AccountListComponent implements OnInit , OnDestroy {
     if (this.amountSubscription) {
       this.amountSubscription.unsubscribe();
     }
-  }
-
-  createCreditWithdrawForm() {
-    this.creditDepositeForm = this.formbuilder.group({
-      upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)])
-    }
-    )
   }
 
   resetForm() {
@@ -182,13 +172,64 @@ export class AccountListComponent implements OnInit , OnDestroy {
   }
 
   _preConfig() {
-
+    this.createForms();
     this._getRoles();
     this._getAllUserInfo(this.selectedRoleId);
 
     this.resetTimerInterval = setInterval(() => {
       this.refreshCall();
     }, 60000)
+  }
+
+
+
+  createForms(){
+    this.creditDepositeForm = this.formbuilder.group({
+      upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+    })
+
+
+    this.creditWithdrawForm = this.formbuilder.group({
+      upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+    }
+    )
+
+
+    this.winningDepositForm = this.formbuilder.group({
+      upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+    }
+    )
+
+    this.winningWithdrawalForm = this.formbuilder.group({
+      upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+    }
+    )
   }
 
   // ngOnDestroy(): void {
@@ -268,28 +309,12 @@ export class AccountListComponent implements OnInit , OnDestroy {
     });
   }
 
-  openWithdraw(user) {
-    this.modalNumber = 1;
-    this.userData = user;
-    this.display = 'block';
-  }
 
-  openDeposit(user) {
-    this.modalNumber = 2;
-    this.userData = user;
-    this.display = 'block';
-  }
 
-  openCredit(user) {
-    this.modalNumber = 3;
-    this.userData = user;
 
-    console.log("Userdata",this.userData);
-    this.display = 'block';
-    this.createCreditDepositeForm();
-
-    this.getAdminDetails();
-
+  onCreditDepositOpen(){
+    console.log('on credit deposit open')
+    
     this.creditDepositeForm.patchValue({
       upline_credit : this.adminDetails.availableCredit,
       refupline_credit : this.adminDetails.availableCredit,
@@ -299,9 +324,70 @@ export class AccountListComponent implements OnInit , OnDestroy {
     })
   }
 
+
+  onWinningDepositOpen(){
+    this.winningDepositForm.patchValue({
+      upline_credit : this.adminDetails.availableCredit,
+      refupline_credit : this.adminDetails.availableCredit,
+      downline_credit : this.userData.availableCredit,
+      refdownline_credit : this.userData.availableCredit,
+      profitLoss : this.userData.winnings,
+      profitLoss_ref : this.userData.winnings
+    })
+  }
+
+
+  onWinningWithdrawalOpen(){
+    this.winningWithdrawalForm.patchValue({
+      upline_credit : this.adminDetails.availableCredit,
+      refupline_credit : this.adminDetails.availableCredit,
+      downline_credit : this.userData.availableCredit,
+      refdownline_credit : this.userData.availableCredit,
+      profitLoss : this.userData.winnings,
+      profitLoss_ref : this.userData.winnings,
+    })
+  }
+
+
+
+  onCreditWithdrawalOpen(){
+    this.creditWithdrawForm.patchValue({
+      upline_credit : this.adminDetails.availableCredit,
+      refupline_credit : this.adminDetails.availableCredit,
+      downline_credit : this.userData.availableCredit,
+      refdownline_credit : this.userData.availableCredit,
+      profitLoss : this.userData.winnings
+    })
+  }
+
+
+  openCredit(user) {
+    this.userData = user;
+    this.display = 'block';
+    this.modalNumber = 3;
+    this.onCreditDepositOpen();
+  }
+
+
+  openDeposit(user) {
+    this.modalNumber = 1;
+    this.userData = user;
+    this.display = 'block';
+    this.onWinningDepositOpen();
+  }
+
+
+  openWithdraw(user) {
+    this.modalNumber = 2;
+    this.userData = user;
+    this.display = 'block';
+    this.onWinningWithdrawalOpen();
+  }
+
+
+
   onAmountChange(event: any) {
     console.log('changes')
-    console.log(this.creditDepositeForm.value)
     // console.log(event)
     // console.log(this.adminDetails)
     // console.log(this.userData)
@@ -330,6 +416,75 @@ export class AccountListComponent implements OnInit , OnDestroy {
   }
 
 
+  onAmountDepositChange(event: any) {
+    console.log('changes')
+    // console.log(event)
+    // console.log(this.adminDetails)
+    // console.log(this.userData)
+    let amount = parseFloat(event?.target.value);
+    // Check if the amount is a valid number
+    if (!isNaN(amount)) {
+      // Perform the necessary calculations to update refupline_credit and refdownline_credit
+      const profitLoss_ref = parseFloat(this.userData.winnings) + amount;
+
+      const refupline_credit = parseFloat(this.adminDetails.availableCredit) - amount;
+      const refdownline_credit = parseFloat(this.userData.availableCredit) + amount;
+
+      // Update the form values
+      this.winningDepositForm.patchValue({
+        refupline_credit:refupline_credit,
+        refdownline_credit:refdownline_credit,
+        profitLoss_ref: +profitLoss_ref.toFixed(2),
+        amount:amount
+      });
+    } else {
+      // Handle the case when the input value is not a valid number
+      // For example, reset the form field or display an error message
+      this.winningDepositForm.patchValue({
+        profitLoss_ref: this.userData.winnings,
+        refupline_credit: this.adminDetails.availableCredit,
+        refdownline_credit: this.userData.availableCredit,
+        amount:null
+      });
+    }
+  }
+
+
+  onAmountWithdrawalChange(event: any) {
+    console.log('changes')
+    // console.log(event)
+    // console.log(this.adminDetails)
+    // console.log(this.userData)
+    let amount = parseFloat(event?.target.value);
+    // Check if the amount is a valid number
+    if (!isNaN(amount)) {
+      // Perform the necessary calculations to update refupline_credit and refdownline_credit
+      const refupline_credit = parseFloat(this.adminDetails.availableCredit) + amount;
+      const refdownline_credit = parseFloat(this.userData.availableCredit) - amount;
+      const profitLoss_ref = parseFloat(this.userData.winnings) - amount;
+
+
+      // Update the form values
+      this.winningWithdrawalForm.patchValue({
+        profitLoss_ref:profitLoss_ref,
+        refupline_credit: refupline_credit,
+        refdownline_credit: refdownline_credit,
+        amount:amount
+      });
+    } else {
+      // Handle the case when the input value is not a valid number
+      // For example, reset the form field or display an error message
+      this.winningWithdrawalForm.patchValue({
+        profitLoss_ref:this.userData.winnings,
+        refupline_credit: this.adminDetails.availableCredit,
+        refdownline_credit: this.userData.availableCredit,
+        amount:null
+      });
+    }
+  }
+
+
+
   closeModal() {
     this.display = 'none';
     this.modalNumber = null;
@@ -347,7 +502,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
   }
 
   postData(isDeposit){
-    console.log(this.creditDepositeForm.value)
+  console.log("isDeposit",isDeposit);
 
     let payload = {
       "userId":this.userData.userId,
@@ -360,9 +515,49 @@ export class AccountListComponent implements OnInit , OnDestroy {
     this._sharedService._getCreditSettlementApi(payload).subscribe((res)=>{
       console.log(res)
       this.modalNumber = null;
+      this.getAdminDetails();
       this.refreshCall();
     })
   }
+
+
+  postWinningsData(isDeposit){
+    console.log("isDeposit",isDeposit);
+  
+      let payload = {
+        "userId":this.userData.userId,
+        "isDeposit":isDeposit,
+        "amount":this.winningDepositForm.value.amount,
+        "ip":this.userIp,
+        "remark":this.winningDepositForm.value.remark?this.winningDepositForm.value.remark:"Deposit"
+    }
+  
+      this._sharedService._getWinningSettlementApi(payload).subscribe((res)=>{
+        this.modalNumber = null;
+        this.getAdminDetails();
+        this.refreshCall();
+      })
+    }
+
+
+  postWithdrawData(isDeposit){
+    console.log("isDeposit",isDeposit);
+  
+      let payload = {
+        "userId":this.userData.userId,
+        "isDeposit":isDeposit,
+        "amount":this.winningWithdrawalForm.value.amount,
+        "ip":this.userIp,
+        "remark":this.winningWithdrawalForm.value.remark?this.winningWithdrawalForm.value.remark:"Withdrawal"
+    }
+  
+    this._sharedService._getWinningSettlementApi(payload).subscribe((res)=>{
+      console.log(res)
+      this.modalNumber = null;
+      this.getAdminDetails();
+      this.refreshCall();
+    })
+    }
 
   getAdminDetails(){
     this._sharedService._getAdminDetailsApi().subscribe((adminDetails:any)=>{

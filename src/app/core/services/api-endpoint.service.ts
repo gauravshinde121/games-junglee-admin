@@ -513,5 +513,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_CREDIT_SETTLEMENT)
   }
 
+  public geWinningSettlementEndpoint(){
+    return this.createUrl(this._constants.API_WINNING_SETTLEMENT)
+  }
+
   
 }

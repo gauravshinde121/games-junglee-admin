@@ -69,6 +69,7 @@ export class Constants {
     //change password
     public readonly API_CHANGE_PASSWORD: string = 'api/junglee-admin/changePassword';
     public readonly API_CREDIT_SETTLEMENT: string = 'api/credit-settlement';
+    public readonly API_WINNING_SETTLEMENT: string = 'api/winning-settlement';
 
 
     //misc

@@ -306,7 +306,7 @@
         </div>
       </li>
 
-      <li
+      <li *ngIf="adminDetails.refClientid == 1 || adminDetails.refClientid == 2"
         [routerLinkActive]="currentPath == '/bank' ? 'active' : ''"
         [ngClass]="currentPath == '/bank' ? 'active' : ''"
       >

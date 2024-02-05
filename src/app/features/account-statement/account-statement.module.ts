@@ -16,6 +16,7 @@ import { PlayerwiseAccountStatementComponent } from './components/playerwise-acc
 import { CasinoReportComponent } from './components/casino-report/casino-report.component';
 import { CasinoReportDetailsComponent } from './components/casino-report-details/casino-report-details.component';
 import { CommissionLenaDenaComponent } from './components/commission-lena-dena/commission-lena-dena.component';
+import { AccountListComponent } from './components/account-list/account-list.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CommissionLenaDenaComponent } from './components/commission-lena-dena/c
     PlayerwiseAccountStatementComponent,
     CasinoReportComponent,
     CasinoReportDetailsComponent,
-    CommissionLenaDenaComponent
+    CommissionLenaDenaComponent,
+    AccountListComponent
   ],
   imports: [
     CommonModule,

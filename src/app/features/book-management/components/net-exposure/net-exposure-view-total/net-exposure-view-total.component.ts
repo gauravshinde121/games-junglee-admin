@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '@shared/services/shared.service';
 import { ActivatedRoute } from '@angular/router';
 import { BookManagementService } from '../../../services/book-management.service';
-import * as _ from "lodash";
+import * as _ from 'lodash';
 import { webSocket } from 'rxjs/webSocket';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
@@ -10,10 +10,9 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-net-exposure-view-total',
   templateUrl: './net-exposure-view-total.component.html',
-  styleUrls: ['./net-exposure-view-total.component.scss']
+  styleUrls: ['./net-exposure-view-total.component.scss'],
 })
 export class NetExposureViewTotalComponent implements OnInit {
-
   isLoading = false;
   viewTotal: any = [];
   searchTerm: any = null;
@@ -41,7 +40,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   downlineBooks: any = [];
 
   sortColumn: string = '';
-  sortAscending: boolean = true;// 1: ascending, -1: descending
+  sortAscending: boolean = true; // 1: ascending, -1: descending
   isPageDestroyed = false;
 
   constructor(
@@ -49,7 +48,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     private _bookMgmService: BookManagementService,
     private route: ActivatedRoute,
     public sanitizer: DomSanitizer
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // this._initConfig();
@@ -61,121 +60,126 @@ export class NetExposureViewTotalComponent implements OnInit {
         this.refreshCount = 9;
       }
       this.refreshCount--;
-    }, 1000)
+    }, 1000);
   }
-
-
-
 
   _getWebSocketUrl(isComplete = false) {
-    this._sharedService.getWebSocketURLApi().subscribe(
-      (res: any) => {
-        if (res) {
-          this.realDataWebSocket = webSocket(res['url']);
-          if (!isComplete) {
-            this.route.params.subscribe((routeParams) => {
-              let bookMgmParams = {};
-              this.payload = {
-                pageNo: this.currentPage,
-                limit: this.pageSize,
-                searchText: this.searchTerm
-              };
-              if (routeParams['marketIds']) {
-                bookMgmParams['marketIds'] = routeParams['marketIds'].split(',');
-                this.payload['marketIds'] = routeParams['marketIds'].split(',');
-              } else {
-                bookMgmParams['matchId'] = routeParams['matchId'];
-                this.payload['matchId'] = routeParams['matchId'];
-              }
-              bookMgmParams['myPT'] = this.myPT
-              this._postBooksForAdminBookMgmApi(bookMgmParams);
-              this._getNetExposureViewTotal();
-              this._subscribeWebSocket()
-            })
-          }
+    this._sharedService.getWebSocketURLApi().subscribe((res: any) => {
+      if (res) {
+        this.realDataWebSocket = webSocket(res['url']);
+        // this.realDataWebSocket = webSocket('ws://localhost:8888');
+        if (!isComplete) {
+          this.route.params.subscribe((routeParams) => {
+            let bookMgmParams = {};
+            this.payload = {
+              pageNo: this.currentPage,
+              limit: this.pageSize,
+              searchText: this.searchTerm,
+            };
+            if (routeParams['marketIds']) {
+              bookMgmParams['marketIds'] = routeParams['marketIds'].split(',');
+              this.payload['marketIds'] = routeParams['marketIds'].split(',');
+            } else {
+              bookMgmParams['matchId'] = routeParams['matchId'];
+              this.payload['matchId'] = routeParams['matchId'];
+            }
+            bookMgmParams['myPT'] = this.myPT;
+            this._postBooksForAdminBookMgmApi(bookMgmParams);
+            this._getNetExposureViewTotal();
+            this._subscribeWebSocket();
+          });
         }
-      });
-
-  }
-
-
-  _getNetExposureViewTotal() {
-    this.isLoading = true;
-    this._sharedService._getBetDetailsForWorkStationApi(this.payload).subscribe((data: any) => {
-      this.isLoading = false;
-      if (data.booksForBackend.length > 0) {
-        this.viewTotal = data.booksForBackend[0].result;
       }
-      this.totalPages = Math.ceil(this.viewTotal.length / this.pageSize);
     });
   }
 
+  _getNetExposureViewTotal() {
+    this.isLoading = true;
+    this._sharedService
+      ._getBetDetailsForWorkStationApi(this.payload)
+      .subscribe((data: any) => {
+        this.isLoading = false;
+        if (data.booksForBackend.length > 0) {
+          this.viewTotal = data.booksForBackend[0].result;
+          // this.viewTotal = this.viewTotal.reverse();
+        }
+        this.totalPages = Math.ceil(this.viewTotal.length / this.pageSize);
+      });
+  }
+
   getTotalBookViewTotal(marketId, totalBookStatus, adminBook) {
-
-
     if (totalBookStatus) {
-
       this.adminBooksList.map((adminBook) => {
         if (adminBook['marketId'] == marketId) {
           adminBook['totalBook'] = [];
           adminBook['isTotaltotalBookView'] = false;
         }
         return adminBook;
-      })
+      });
       this.totalBooks.map((singleBook) => {
         if (singleBook['marketId'] == marketId) {
-          this.totalBooks = this.totalBooks.filter((item) => item.marketId !== marketId);
+          this.totalBooks = this.totalBooks.filter(
+            (item) => item.marketId !== marketId
+          );
         }
         return singleBook;
-      })
+      });
       return;
     }
     let totalBookParams = {
       marketId: marketId,
-      myPT: this.myPT
+      myPT: this.myPT,
     };
 
+    this._bookMgmService
+      ._postTotalBookApi(totalBookParams)
+      .subscribe((data: any) => {
+        this.downlineBooks = [];
 
-    this._bookMgmService._postTotalBookApi(totalBookParams).subscribe((data: any) => {
+        if (data.book.length > 0) {
+          data.book = data.book.map((el) => ({
+            ...el,
+            marketId: totalBookParams.marketId,
+            isExpanded: false,
+          }));
 
-      this.downlineBooks = [];
+          for (let book of data.book) {
+            this.downlineBooks.push(book);
+          }
 
-      if (data.book.length > 0) {
-        data.book = data.book.map((el) => ({ ...el, marketId: totalBookParams.marketId, isExpanded: false }));
-
-        for (let book of data.book) {
-          this.downlineBooks.push(book)
+          this.addMarketIdsRecursive(
+            this.downlineBooks,
+            totalBookParams.marketId
+          );
+        } else {
+          this.downlineBooks = [];
         }
 
-        this.addMarketIdsRecursive(this.downlineBooks, totalBookParams.marketId)
-      } else {
-        this.downlineBooks = [];
-      }
-
-      if (data['book'].length > 0) {
-        this.totalBooks.push({ marketId: marketId, totalBook: data['book'], isTotaltotalBookView: true });
-        this.adminBooksList.map((adminBook) => {
-          if (adminBook['marketId'] == marketId) {
-            adminBook['totalBook'] = data['book'];
-            adminBook['isTotaltotalBookView'] = true;
-          } else {
-            adminBook['isTotaltotalBookView'] = false;
-          }
-          return adminBook;
-        })
-      }
-    });
-
-
+        if (data['book'].length > 0) {
+          this.totalBooks.push({
+            marketId: marketId,
+            totalBook: data['book'],
+            isTotaltotalBookView: true,
+          });
+          this.adminBooksList.map((adminBook) => {
+            if (adminBook['marketId'] == marketId) {
+              adminBook['totalBook'] = data['book'];
+              adminBook['isTotaltotalBookView'] = true;
+            } else {
+              adminBook['isTotaltotalBookView'] = false;
+            }
+            return adminBook;
+          });
+        }
+      });
   }
-
 
   addMarketIdsRecursive(userBook, marketId) {
     for (let book of userBook) {
       book.marketId = marketId;
       book.isExpanded = false;
       if (book.downline.length > 0) {
-        this.addMarketIdsRecursive(book.downline, marketId)
+        this.addMarketIdsRecursive(book.downline, marketId);
       }
     }
   }
@@ -201,189 +205,277 @@ export class NetExposureViewTotalComponent implements OnInit {
     bookMgmParams['myPT'] = this.myPT;
 
     this._getNetExposureViewTotal();
-    if (_.differenceBy(this.newAdminBooksList, this.adminBooksList, 'marketName').length > 0) {
+    if (
+      _.differenceBy(this.newAdminBooksList, this.adminBooksList, 'marketName')
+        .length > 0
+    ) {
       this._postBooksForAdminBookMgmApi(bookMgmParams);
     } else {
       this._postBooksForAdminBookMgmRefreshApi(bookMgmParams);
-
     }
   }
 
   _postBooksForAdminBookMgmRefreshApi(bookMgmParams) {
-    this._bookMgmService._postBooksForAdminBookMgmApi(bookMgmParams).subscribe((res: any) => {
-      this.newAdminBooksList = res['book'];
-      if (this.newAdminBooksList) {
-        for (let i = this.adminBooksList.length - 1; i >= 0; i--) {
-          let newMarket = res['book'].findIndex(mrkt => mrkt.marketId === this.adminBooksList[i].marketId);
-          if (newMarket === -1) {
-            this.adminBooksList.splice(i, 1);
+    this._bookMgmService
+      ._postBooksForAdminBookMgmApi(bookMgmParams)
+      .subscribe((res: any) => {
+        this.newAdminBooksList = res['book'];
+        if (this.newAdminBooksList) {
+          for (let i = this.adminBooksList.length - 1; i >= 0; i--) {
+            let newMarket = res['book'].findIndex(
+              (mrkt) => mrkt.marketId === this.adminBooksList[i].marketId
+            );
+            if (newMarket === -1) {
+              this.adminBooksList.splice(i, 1);
+            }
           }
         }
 
-
-      }
-
-
-      if (res['book'].length > 0) {
-        this.setOrUnsetWebSocketParamsObj = [];
-        res['book'].map((singleBook) => {
-          this.adminBooksList.map((adminSingleBook) => {
-            if (singleBook['marketId'].toString() == adminSingleBook['marketId'].toString()) {
-              adminSingleBook['userBook'] = singleBook['userBook'];
-              adminSingleBook['adminBook'].map(sinlgeRunner => {
-                let runnerRes = _.filter(singleBook['adminBook'], ['SelectionId', sinlgeRunner['SelectionId']]);
-                if (runnerRes.length > 0) sinlgeRunner['amount'] = runnerRes[0]['amount'];
-                return sinlgeRunner;
-              })
-            }
-            return adminSingleBook;
-          })
-        })
-      }
-
-
-    })
+        if (res['book'].length > 0) {
+          this.setOrUnsetWebSocketParamsObj = [];
+          res['book'].map((singleBook) => {
+            this.adminBooksList.map((adminSingleBook) => {
+              if (
+                singleBook['marketId'].toString() ==
+                adminSingleBook['marketId'].toString()
+              ) {
+                adminSingleBook['userBook'] = singleBook['userBook'];
+                adminSingleBook['adminBook'].map((sinlgeRunner) => {
+                  let runnerRes = _.filter(singleBook['adminBook'], [
+                    'SelectionId',
+                    sinlgeRunner['SelectionId'],
+                  ]);
+                  if (runnerRes.length > 0)
+                    sinlgeRunner['amount'] = runnerRes[0]['amount'];
+                  return sinlgeRunner;
+                });
+              }
+              return adminSingleBook;
+            });
+          });
+        }
+      });
   }
 
   _postBooksForAdminBookMgmApi(bookMgmParams) {
-    this._bookMgmService._postBooksForAdminBookMgmApi(bookMgmParams).subscribe((res: any) => {
+    this._bookMgmService
+      ._postBooksForAdminBookMgmApi(bookMgmParams)
+      .subscribe((res: any) => {
+        this.matchName = res['matchName'];
+        if (res['book'].length > 0) {
+          this.setOrUnsetWebSocketParamsObj = [];
+          res['book'].map((singleBook) => {
+            this.matchId = singleBook['marketId'];
+            singleBook['isExpand'] = true;
+            this.setOrUnsetWebSocketParamsObj.push(singleBook.centralId);
+            let totalBookMarket = _.find(this.totalBooks, [
+              'marketId',
+              singleBook['marketId'],
+            ]);
+            if (totalBookMarket != undefined) {
+              singleBook['totalBook'] = totalBookMarket['totalBook'];
+              singleBook['isTotaltotalBookView'] =
+                totalBookMarket['isTotaltotalBookView'];
+            }
+            return singleBook['adminBook'].map((runnerRes) => {
+              switch (singleBook['marketTypName']) {
+                case 'Match Odds':
+                  if (
+                    runnerRes['batb'] == undefined ||
+                    runnerRes['batl'] == undefined
+                  ) {
+                    runnerRes['back0'] = '';
+                    runnerRes['vback0'] = '';
 
-      this.matchName = res['matchName']
-      if (res['book'].length > 0) {
-        this.setOrUnsetWebSocketParamsObj = [];
-        res['book'].map((singleBook) => {
-          this.matchId = singleBook['marketId'];
-          singleBook['isExpand'] = true;
-          this.setOrUnsetWebSocketParamsObj.push(singleBook.centralId);
-          let totalBookMarket = _.find(this.totalBooks, ['marketId', singleBook['marketId']]);
-          if (totalBookMarket != undefined) {
-            singleBook['totalBook'] = totalBookMarket['totalBook']
-            singleBook['isTotaltotalBookView'] = totalBookMarket['isTotaltotalBookView']
-          }
-          return singleBook['adminBook'].map(runnerRes => {
-            switch (singleBook['marketTypName']) {
-              case 'Match Odds':
-                if ((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)) {
-                  runnerRes['back0'] = '';
-                  runnerRes['vback0'] = '';
+                    runnerRes['back1'] = '';
+                    runnerRes['vback1'] = '';
 
-                  runnerRes['back1'] = '';
-                  runnerRes['vback1'] = '';
+                    runnerRes['back2'] = '';
+                    runnerRes['vback2'] = '';
 
-                  runnerRes['back2'] = '';
-                  runnerRes['vback2'] = '';
+                    runnerRes['lay0'] = '';
+                    runnerRes['vlay0'] = '';
 
-                  runnerRes['lay0'] = '';
-                  runnerRes['vlay0'] = '';
+                    runnerRes['lay1'] = '';
+                    runnerRes['vlay1'] = '';
 
-                  runnerRes['lay1'] = '';
-                  runnerRes['vlay1'] = '';
+                    runnerRes['lay2'] = '';
+                    runnerRes['vlay2'] = '';
+                  } else {
+                    runnerRes['back0'] =
+                      runnerRes['batb'][0] !== undefined
+                        ? runnerRes['batb'][0]['odds']
+                        : '';
+                    runnerRes['vback0'] =
+                      runnerRes['batb'][0] !== undefined
+                        ? runnerRes['batb'][0]['tv']
+                        : '';
 
-                  runnerRes['lay2'] = '';
-                  runnerRes['vlay2'] = '';
+                    runnerRes['back1'] =
+                      runnerRes['batb'][1] !== undefined
+                        ? runnerRes['batb'][1]['odds']
+                        : '';
+                    runnerRes['vback1'] =
+                      runnerRes['batb'][1] !== undefined
+                        ? runnerRes['batb'][1]['tv']
+                        : '';
 
-                } else {
-                  runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds'] : '';
-                  runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv'] : '';
+                    runnerRes['back2'] =
+                      runnerRes['batb'][2] !== undefined
+                        ? runnerRes['batb'][2]['odds']
+                        : '';
+                    runnerRes['vback2'] =
+                      runnerRes['batb'][2] !== undefined
+                        ? runnerRes['batb'][2]['tv']
+                        : '';
 
-                  runnerRes['back1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['odds'] : '';
-                  runnerRes['vback1'] = runnerRes['batb'][1] !== undefined ? runnerRes['batb'][1]['tv'] : '';
+                    runnerRes['lay0'] =
+                      runnerRes['batl'][0] !== undefined
+                        ? runnerRes['batl'][0]['odds']
+                        : '';
+                    runnerRes['vlay0'] =
+                      runnerRes['batl'][0] !== undefined
+                        ? runnerRes['batl'][0]['tv']
+                        : '';
 
-                  runnerRes['back2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['odds'] : '';
-                  runnerRes['vback2'] = runnerRes['batb'][2] !== undefined ? runnerRes['batb'][2]['tv'] : '';
+                    runnerRes['lay1'] =
+                      runnerRes['batl'][1] !== undefined
+                        ? runnerRes['batl'][1]['odds']
+                        : '';
+                    runnerRes['vlay1'] =
+                      runnerRes['batl'][1] !== undefined
+                        ? runnerRes['batl'][1]['tv']
+                        : '';
 
-                  runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds'] : '';
-                  runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv'] : '';
+                    runnerRes['lay2'] =
+                      runnerRes['batl'][2] !== undefined
+                        ? runnerRes['batl'][2]['odds']
+                        : '';
+                    runnerRes['vlay2'] =
+                      runnerRes['batl'][1] !== undefined
+                        ? runnerRes['batl'][1]['tv']
+                        : '';
+                  }
+                  break;
 
-                  runnerRes['lay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['odds'] : '';
-                  runnerRes['vlay1'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv'] : '';
+                case 'Bookmaker':
+                  if (
+                    runnerRes['batb'] == undefined ||
+                    runnerRes['batl'] == undefined
+                  ) {
+                    runnerRes['back0'] = '';
+                    runnerRes['vback0'] = '';
 
-                  runnerRes['lay2'] = runnerRes['batl'][2] !== undefined ? runnerRes['batl'][2]['odds'] : '';
-                  runnerRes['vlay2'] = runnerRes['batl'][1] !== undefined ? runnerRes['batl'][1]['tv'] : '';
-                }
-                break;
-
-              case 'Bookmaker':
-                if ((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)) {
-                  runnerRes['back0'] = '';
-                  runnerRes['vback0'] = '';
-
-                  runnerRes['lay0'] = '';
-                  runnerRes['vlay0'] = '';
-                } else {
-                  runnerRes['showSuspended'] = false;
-                  runnerRes['back0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds'] : '';
-                  runnerRes['vback0'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv'] : '';
-
-                  runnerRes['lay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds'] : '';
-                  runnerRes['vlay0'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv'] : '';
-
-
-                  if(runnerRes['back0'] == runnerRes['lay0'] && runnerRes['back0'] != '' && runnerRes['lay0'] != ''){
-                    runnerRes['showSuspended'] = true;
+                    runnerRes['lay0'] = '';
+                    runnerRes['vlay0'] = '';
                   } else {
                     runnerRes['showSuspended'] = false;
+                    runnerRes['back0'] =
+                      runnerRes['batb'][0] !== undefined
+                        ? runnerRes['batb'][0]['odds']
+                        : '';
+                    runnerRes['vback0'] =
+                      runnerRes['batb'][0] !== undefined
+                        ? runnerRes['batb'][0]['tv']
+                        : '';
+
+                    runnerRes['lay0'] =
+                      runnerRes['batl'][0] !== undefined
+                        ? runnerRes['batl'][0]['odds']
+                        : '';
+                    runnerRes['vlay0'] =
+                      runnerRes['batl'][0] !== undefined
+                        ? runnerRes['batl'][0]['tv']
+                        : '';
+
+                    if (
+                      runnerRes['back0'] == runnerRes['lay0'] &&
+                      runnerRes['back0'] != '' &&
+                      runnerRes['lay0'] != ''
+                    ) {
+                      runnerRes['showSuspended'] = true;
+                    } else {
+                      runnerRes['showSuspended'] = false;
+                    }
                   }
-                }
 
+                  break;
 
+                case 'Fancy':
+                  if (
+                    runnerRes['batb'] == undefined ||
+                    runnerRes['batl'] == undefined
+                  ) {
+                    runnerRes['back1'] = '';
+                    runnerRes['vback1'] = '';
 
+                    runnerRes['lay1'] = '';
+                    runnerRes['vlay1'] = '';
+                  } else {
+                    runnerRes['back1'] =
+                      runnerRes['batb'][0] !== undefined
+                        ? runnerRes['batb'][0]['odds']
+                        : '';
+                    runnerRes['vback1'] =
+                      runnerRes['batb'][0] !== undefined
+                        ? runnerRes['batb'][0]['tv']
+                        : '';
 
-                break;
+                    runnerRes['lay1'] =
+                      runnerRes['batl'][0] !== undefined
+                        ? runnerRes['batl'][0]['odds']
+                        : '';
+                    runnerRes['vlay1'] =
+                      runnerRes['batl'][0] !== undefined
+                        ? runnerRes['batl'][0]['tv']
+                        : '';
+                  }
+                  break;
+              }
+              return runnerRes;
+            });
+          });
+          this.adminBooksList = res['book'];
 
-              case 'Fancy':
-                if ((runnerRes['batb'] == undefined) || (runnerRes['batl'] == undefined)) {
-                  runnerRes['back1'] = '';
-                  runnerRes['vback1'] = '';
-
-                  runnerRes['lay1'] = '';
-                  runnerRes['vlay1'] = '';
-                } else {
-                  runnerRes['back1'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['odds'] : '';
-                  runnerRes['vback1'] = runnerRes['batb'][0] !== undefined ? runnerRes['batb'][0]['tv'] : '';
-
-                  runnerRes['lay1'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['odds'] : '';
-                  runnerRes['vlay1'] = runnerRes['batl'][0] !== undefined ? runnerRes['batl'][0]['tv'] : '';
-                }
-                break;
-            }
-            return runnerRes;
-          })
-        })
-        this.adminBooksList = res['book'];
-
-
-        if (this.prevSetOrUnsetWebSocketParamsObj.length !== this.setOrUnsetWebSocketParamsObj.length) {
-          let setObj = {
-            set: {
-              deviceId: sessionStorage.getItem('deviceId'),
-              centralIdList: this.setOrUnsetWebSocketParamsObj
-            }
+          if (
+            this.prevSetOrUnsetWebSocketParamsObj.length !==
+            this.setOrUnsetWebSocketParamsObj.length
+          ) {
+            let setObj = {
+              set: {
+                deviceId: sessionStorage.getItem('deviceId'),
+                centralIdList: this.setOrUnsetWebSocketParamsObj,
+              },
+            };
+            let unsetObj = {};
+            unsetObj['unset'] = setObj['set'];
           }
-          let unsetObj = {};
-          unsetObj['unset'] = setObj['set'];
+          this.prevSetOrUnsetWebSocketParamsObj =
+            this.setOrUnsetWebSocketParamsObj;
         }
-        this.prevSetOrUnsetWebSocketParamsObj = this.setOrUnsetWebSocketParamsObj;
-      }
-    })
+      });
   }
 
   private _updateMarketData(data: any) {
     let parseData = JSON.parse(data);
-    if (parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string') {
+    if (
+      parseData.hasOwnProperty('data') &&
+      typeof parseData?.data !== 'string'
+    ) {
       let webSocketData = parseData['data'];
       if (webSocketData.length > 0) {
         webSocketData = webSocketData.map((singleItem) => {
           singleItem['bmi'] = +singleItem['bmi'];
           return singleItem;
-        })
+        });
       }
 
       this.adminBooksList.map((singleBook) => {
-        let singleWebSocketMarketData = _.find(webSocketData, ['bmi', +singleBook['marketId']]);
+        let singleWebSocketMarketData = _.find(webSocketData, [
+          'bmi',
+          +singleBook['marketId'],
+        ]);
         if (singleWebSocketMarketData != undefined) {
-
-
           singleBook['appMarketStatus'] = singleWebSocketMarketData['ms'];
 
           if (singleBook['marketTypName'] == 'Bookmaker') {
@@ -414,32 +506,42 @@ export class NetExposureViewTotalComponent implements OnInit {
 
           return singleBook['adminBook'].map((runnerRes) => {
             if (singleBook['marketTypName'] == 'Match Odds') {
-              let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
+              let webSocketRunners = _.filter(
+                singleWebSocketMarketData?.['rt'],
+                ['ri', runnerRes['SelectionId']]
+              );
 
               for (let singleWebsocketRunner of webSocketRunners) {
-
                 if (singleWebsocketRunner['ib']) {
                   //back
 
                   //Live Rate
-                  runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+                  runnerRes['back' + singleWebsocketRunner['pr']] =
+                    singleWebsocketRunner['rt'];
 
                   //Volume from Betfair
-                  runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-
+                  runnerRes['vback' + singleWebsocketRunner['pr']] =
+                    singleWebsocketRunner['bv'];
                 } else {
                   //lay
 
                   //Live Rate
-                  runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+                  runnerRes['lay' + singleWebsocketRunner['pr']] =
+                    singleWebsocketRunner['rt'];
 
                   //Volume from Betfair
-                  runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
-
+                  runnerRes['vlay' + singleWebsocketRunner['pr']] =
+                    singleWebsocketRunner['bv'];
                 }
               }
-            } else if (singleBook['marketTypName'] == 'Bookmaker' || singleBook['marketTypName'] == 'Fancy') {
-              let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId'].toString()]);
+            } else if (
+              singleBook['marketTypName'] == 'Bookmaker' ||
+              singleBook['marketTypName'] == 'Fancy'
+            ) {
+              let webSocketRunners = _.filter(
+                singleWebSocketMarketData?.['rt'],
+                ['ri', runnerRes['SelectionId'].toString()]
+              );
 
               for (let singleWebsocketRunner of webSocketRunners) {
                 if (singleWebsocketRunner['ib']) {
@@ -449,12 +551,11 @@ export class NetExposureViewTotalComponent implements OnInit {
                   runnerRes['back1'] = singleWebsocketRunner['rt'];
 
                   //Volume from Betfair
-                  if(singleBook['marketTypName'] == 'Bookmaker'){
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
                     runnerRes['vback1'] = singleWebsocketRunner['bv'];
-                  }else{
+                  } else {
                     runnerRes['vback1'] = singleWebsocketRunner['pt'];
                   }
-
                 } else {
                   //lay
 
@@ -462,40 +563,38 @@ export class NetExposureViewTotalComponent implements OnInit {
                   runnerRes['lay1'] = singleWebsocketRunner['rt'];
 
                   //Volume from Betfair
-                  if(singleBook['marketTypName'] == 'Bookmaker'){
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
                     runnerRes['vlay1'] = singleWebsocketRunner['bv'];
-                  }else{
+                  } else {
                     runnerRes['vlay1'] = singleWebsocketRunner['pt'];
                   }
 
-
-                  if(singleBook['marketTypName'] == 'Bookmaker'){
-                    if(runnerRes['back1'] == runnerRes['lay1']){
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
+                    if (runnerRes['back1'] == runnerRes['lay1']) {
                       runnerRes['showSuspended'] = true;
                     } else {
                       runnerRes['showSuspended'] = false;
 
-                      if(
-                        (Math.ceil((runnerRes['lay1']-1)*100) > 99) || 
-                        (Math.ceil((runnerRes['back1']-1)*100) > 99)
-                        ){
+                      if (
+                        Math.ceil((runnerRes['lay1'] - 1) * 100) > 99 ||
+                        Math.ceil((runnerRes['back1'] - 1) * 100) > 99
+                      ) {
                         runnerRes['showSuspended'] = true;
-
                       }
-                }
-               }
+                    }
+                  }
                 }
               }
             }
 
             return runnerRes;
-          })
+          });
         }
-      })
+      });
     }
   }
 
-/*
+  /*
   _subscribeWebSocket() {
     this.realDataWebSocket.subscribe(
       data => {
@@ -507,22 +606,21 @@ export class NetExposureViewTotalComponent implements OnInit {
     );
   }*/
 
-
-  _subscribeWebSocket(){
+  _subscribeWebSocket() {
     this.realDataWebSocket.subscribe(
-      data => {
-        if(typeof data == 'string') this._updateMarketData(data);
+      (data) => {
+        if (typeof data == 'string') this._updateMarketData(data);
         // if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
-      err => {
-        console.log('err',err)
-        console.log(this.isPageDestroyed)
-        if(!this.isPageDestroyed)this._getWebSocketUrl(true);
+      (err) => {
+        console.log('err', err);
+        console.log(this.isPageDestroyed);
+        if (!this.isPageDestroyed) this._getWebSocketUrl(false);
       }, // Called if at any point WebSocket API signals some kind of error.
       () => {
-        console.log('completed')
-        console.log(this.isPageDestroyed)
-        if(!this.isPageDestroyed)this._getWebSocketUrl(true);
+        console.log('completed');
+        console.log(this.isPageDestroyed);
+        if (!this.isPageDestroyed) this._getWebSocketUrl(false);
       } // Called when connection is closed (for whatever reason).
     );
   }
@@ -556,26 +654,31 @@ export class NetExposureViewTotalComponent implements OnInit {
   startStreamingLiveTV() {
     // sportszone365.org
     // domain: window.location.hostname
-    this._sharedService.postLiveStreamForMarket({ domain: 'sportszone365.org', matchId: this.matchId }).subscribe((res: any) => {
-      this.liveStreamingTVUrl = res?.streamObj?.data?.streamingUrl;
-    })
+    this._sharedService
+      .postLiveStreamForMarket({
+        domain: 'sportszone365.org',
+        matchId: this.matchId,
+      })
+      .subscribe((res: any) => {
+        this.liveStreamingTVUrl = res?.streamObj?.data?.streamingUrl;
+      });
   }
 
   ngOnDestroy(): void {
     // if(this.realDataWebSocket) this.realDataWebSocket.complete();
-    if (this.realDataWebSocket){
+    if (this.realDataWebSocket) {
       this.realDataWebSocket.complete();
       this.isPageDestroyed = true;
     }
-    clearInterval(this.resetTimerInterval)
+    clearInterval(this.resetTimerInterval);
   }
 
   exportExcel() {
-    let viewtotal: any = []
-    this.viewTotal.forEach(element => {
+    let viewtotal: any = [];
+    this.viewTotal.forEach((element) => {
       viewtotal.push({
         member: element.userName,
-        date: moment(element.placedDate).format("MMM D, YYYY, h:mm:ss a"),
+        date: moment(element.placedDate).format('MMM D, YYYY, h:mm:ss a'),
         event: element.event,
         market: element.marketName,
         selection: element.selectionName,
@@ -583,18 +686,19 @@ export class NetExposureViewTotalComponent implements OnInit {
         odds_matched: element.betRate,
         mathedStake: element.isMatched ? element.stake : null,
         umatchedStake: element.isMatched ? null : element.stake,
-        profit_Liablity: element.profitLiability
-      })
+        profit_Liablity: element.profitLiability,
+      });
     });
     this._sharedService.exportExcel(viewtotal, this.fileName);
   }
 
-
   getLadderDataByMarket(marketId: any) {
     this.ladderObj = [];
-    this._bookMgmService._postLadderDataByMarketApi({ marketId: marketId , myPt: this.myPT}).subscribe((res: any) => {
-      this.ladderObj = res?.ladderDetails;
-    })
+    this._bookMgmService
+      ._postLadderDataByMarketApi({ marketId: marketId, myPt: this.myPT })
+      .subscribe((res: any) => {
+        this.ladderObj = res?.ladderDetails;
+      });
   }
 
   toggleSort(columnName: string) {
@@ -605,5 +709,4 @@ export class NetExposureViewTotalComponent implements OnInit {
       this.sortAscending = true;
     }
   }
-
 }

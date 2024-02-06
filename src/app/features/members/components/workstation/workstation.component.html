@@ -39,9 +39,8 @@
   </section>
 
   <section class="section gamedetails mt-3 mb-3">
-    <input type="text" class="form-control bg-dark  border-start-0 border-pink radius-right-tb"
-      placeholder="Search Member Name" aria-label="Search" aria-describedby="addon-wrapping" [(ngModel)]="searchTerm"
-      (ngModelChange)="search()" />
+    <input type="text" class="form-control border-start-0 border-pink radius-right-tb" placeholder="Search Member Name"
+      aria-label="Search" aria-describedby="addon-wrapping" [(ngModel)]="searchTerm" (ngModelChange)="search()" />
     <div class="col-md-12 text-end">Bet Count : {{ viewTotal.length }}</div>
     <div class="col-md-12 overflow-auto">
       <table class="table tableall">
@@ -66,7 +65,7 @@
             <td>{{ viewTotalEach.placedDate | date : "medium" }}</td>
             <td>{{ viewTotalEach.event }}</td>
             <td>
-              <span *ngIf="!viewTotalEach.isBack" class="border bg-danger text-danger border-danger me-2"></span>
+              <span *ngIf="!viewTotalEach.isBack" class="border bg-danger text-danger me-2"></span>
               <span *ngIf="viewTotalEach.isBack" class="border bg-primary text-primary border-primary me-2"></span>
               {{ viewTotalEach.marketName }}
             </td>

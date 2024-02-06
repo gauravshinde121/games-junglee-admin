@@ -9,7 +9,7 @@ $color_3: #ffa7a3;
 $color_4: #d98e94;
 $color_5: #00cc38;
 $color_6: #d9520a;
-$color_7: #fff;
+$color_7: #000;
 $color_8: #aab7cf;
 $color_9: #d9d9d9;
 $color_10: #012970;
@@ -23,7 +23,7 @@ $color_17: #ffb9b560;
 $color_18: hsla(3.5, 21.3%, 52.2%, 0.78);
 $color_19: #d9d9d9;
 $color_20: #343535;
-$color_21: #000;
+$color_21: #fff;
 $color_22: #d35862;
 $color_23: #a7d8fd;
 $color_24: #f9c9d4;
@@ -53,17 +53,20 @@ $color_47: #71ff97;
 $color_48: #555;
 $color_49: #ccc;
 $color_50: #dee2e6;
+$color_51: #83c5cb;
+$color_52: #d0d0d0;
+$outline: #08969f80;
 
-$gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
+$gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
 
 .browncolor {
   background-color: $color_7;
 }
 .bg-pink {
-  background: linear-gradient(0deg, $color_26 0, $color_27) !important;
+  background: linear-gradient(0deg, $color_27 0, $color_27) !important;
 }
 .border-pink {
-  border: 1px solid $color_28;
+  border: 1px solid $color_27;
 }
 .btn-pink {
   transition: all 0.2s ease-in;
@@ -72,7 +75,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   color: $color_7;
   border-radius: 25px;
   font-size: 0.75rem;
-  background-image: linear-gradient(0deg, $color_26 0, $color_27);
+  background: $color_27;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   -webkit-transition: all 0.4s ease-in-out;
@@ -169,8 +172,8 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 .form-signin .form-floating > .form-control,
 .form-floating > .form-select {
   background: rgba(60, 62, 62, 0);
-  color: $color_7;
-  border-bottom: 1px solid $color_7 !important;
+  color: $color_21;
+  border-bottom: 1px solid $color_21 !important;
   border: 0px;
   border-radius: 0;
   padding: 24px 0px 15px 0px;
@@ -180,7 +183,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   border: 1px solid transparent;
   transform-origin: 0 0;
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
-  color: $color_7;
+  color: $color_21;
 }
 
 .form-signin .form-floating span {
@@ -191,9 +194,10 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 }
 .form-signin .form-floating input:focus {
   // border-bottom: 1px solid rgb(255, 167, 163) !important;
-  // color: $color_3;
+  color: $color_21;
   box-shadow: none;
 }
+
 /********** Login end ************/
 /********** main start ************/
 #main {
@@ -262,18 +266,18 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
 }
 
 .balance-first {
-  background: linear-gradient(0deg, $color_45 0, $color_22);
+  background: $color_51;
 }
 .balance-up {
-  background: linear-gradient(0deg, $color_5 0, $color_47);
+  background: $color_51;
 }
 
 .balance-down {
-  background: linear-gradient(0deg, $color_46 0, $color_27);
+  background: $color_51;
 }
 
 .casino-summary {
-  background: linear-gradient(0deg, $color_46 0, $color_27);
+  background: $color_51;
   border-radius: 10px;
 }
 
@@ -307,10 +311,10 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   &::-webkit-scrollbar {
     width: 5px;
     height: 8px;
-    background-color: $color_7;
+    background-color: $color_27;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: $color_8;
+    background-color: $color_27;
   }
   li {
     width: 100%;
@@ -335,10 +339,10 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   color: $color_21;
   white-space: nowrap;
   th {
-    background: linear-gradient(0deg, $color_26 0, $color_27);
+    background: $color_27;
     border: 0px;
     font-weight: 500;
-    color: $color_7;
+    color: $color_21;
   }
   th.first {
     border-top-left-radius: 15px;
@@ -348,8 +352,12 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   }
   td {
     vertical-align: middle;
-    border-bottom: 1px solid $color_2;
+    border-bottom: 1px solid $color_27;
     margin: 2px 0;
+
+    i {
+      color: $color_27;
+    }
   }
   input {
     cursor: pointer;
@@ -386,8 +394,8 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-text-fill-color: $color_7;
-  -webkit-box-shadow: 0 0 0px 1000px $color_21 inset;
+  -webkit-text-fill-color: $color_21;
+  -webkit-box-shadow: none;
   transition: background-color 5000s ease-in-out 0s;
 }
 /********** inner page pro end ************/
@@ -409,7 +417,7 @@ select:-webkit-autofill:focus {
     top: 100%;
     left: 50%;
     margin-left: -60px;
-    background-image: radial-gradient($color_2, $color_21);
+    // background-image: radial-gradient($color_2, $color_21);
     border: 1px solid $color_29;
   }
 
@@ -511,16 +519,18 @@ select:-webkit-autofill:focus {
   background-color: $color_2;
   vertical-align: middle;
   margin-bottom: 25px;
+
   td {
     vertical-align: middle;
     padding: 2px 5px;
     text-align: center;
-    border-top: 2px solid $color_7;
+    border-top: 1px solid $color_51 !important;
+    border-bottom: 1px solid $color_51 !important;
     font-size: 11px;
     line-height: 13px;
   }
   a {
-    color: $color_21;
+    color: $color_7;
     text-decoration: none;
     display: block;
     font-size: 14px;
@@ -571,7 +581,7 @@ select:-webkit-autofill:focus {
   //color box start
   .colblue {
     background: linear-gradient(0deg, $color_36 0, $color_37);
-    border-left: 1px solid $color_7;
+    border-left: 1px solid $color_51;
   }
   .colblue.light {
     background-color: $color_33 !important;
@@ -581,7 +591,7 @@ select:-webkit-autofill:focus {
   }
   .colpink {
     background: linear-gradient(0deg, $color_34 0, $color_35);
-    border-left: 1px solid $color_7;
+    border-left: 1px solid $color_51;
   }
   .colpink.light {
     background-color: $color_17 !important;
@@ -691,7 +701,7 @@ select:-webkit-autofill:focus {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: $color_7;
-  background: linear-gradient(0deg, $color_26 0, $color_27);
+  background: linear-gradient(0deg, $outline 0, $color_27);
 }
 
 .nav-link:focus,
@@ -714,7 +724,7 @@ select:-webkit-autofill:focus {
     position var(--d) var(--e) infinite;
   animation: color var(--d) var(--e) infinite,
     position var(--d) var(--e) infinite;
-  background-color: $color_21;
+  background-color: $color_7;
   padding-top: 2%;
   height: 100vh;
 }
@@ -734,12 +744,18 @@ select:-webkit-autofill:focus {
     text-align: start;
     color: $color_21;
   }
-  .active .nav-link,
+
   .btn:hover {
     color: $color_27;
   }
 
-  .active .nav-link,
+  .active {
+    .nav-link {
+      background-color: $color_51;
+      color: $color_7;
+    }
+  }
+
   .active .btn {
     color: $color_27;
   }
@@ -813,7 +829,7 @@ select:-webkit-autofill:focus {
   &::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: linear-gradient(0deg, $color_26 0, $color_27) !important;
+    background: $color_27 !important;
   }
 }
 
@@ -830,7 +846,7 @@ fieldset:disabled .btn {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: linear-gradient(180deg, $color_26 0, $color_27);
+  background: $color_27;
 }
 
 ::-webkit-scrollbar-track {
@@ -876,6 +892,10 @@ tfoot tr {
   border: 0;
   // border-bottom: 1px solid $color_50;
   padding: 0 0 0.5rem;
+
+  span {
+    color: $color_21;
+  }
 }
 
 .pointer,
@@ -921,7 +941,7 @@ tfoot tr {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: $color_49;
+  background-color: $color_51;
   transition: 0.4s;
   border-radius: 34px;
 }
@@ -939,7 +959,7 @@ tfoot tr {
 }
 
 .toggle-class:checked + .toggle-class-slider {
-  background-color: $color_5;
+  background-color: $color_27;
 }
 
 .toggle-class:checked + .toggle-class-slider:before {
@@ -947,7 +967,10 @@ tfoot tr {
 }
 
 .border-bottom {
-  border-bottom: 1px solid $color_50 !important;
+  border-bottom: 1px solid $color_51 !important;
+}
+hr {
+  background-color: $color_27 !important;
 }
 
 .border-none {
@@ -1137,6 +1160,17 @@ $breakpoint-mobile: 767px;
   width: 100%;
 }
 
-.fa-info{
+.fa-info {
   cursor: copy;
+}
+.form-select {
+  background: transparent;
+}
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 2px 2px 6px 3px $outline;
+}
+
+input[type="password"]:focus {
+  box-shadow: none;
 }

@@ -21,7 +21,7 @@
               <input type="date" formControlName="toDate" name="toDate" class="form-control" id=""
                 placeholder="Month" />
             </div>
-            <div class="col-md-3 mb-3">
+            <!-- <div class="col-md-3 mb-3">
               <label>Select Sport</label>
               <select formControlName="sportsId" id="ab" class="form-select pointer" (change)="changeGame($event)">
                 <option [value]="null">All</option>
@@ -29,13 +29,13 @@
                   {{ game.sportName }}
                 </option>
               </select>
-            </div>
+            </div> -->
             <div class="col-md-3 mb-3">
               <label>Select Match</label>
               <select formControlName="matchId" id="ab" class="form-select pointer" (change)="changeMatch($event)">
                 <option [value]="null">All</option>
-                <option [value]="match.matchId" *ngFor="let match of matchList">
-                  {{ match.matchName }}
+                <option [value]="match" *ngFor="let match of matchList">
+                  {{ match }}
                 </option>
               </select>
             </div>
@@ -49,7 +49,7 @@
                 </option>
               </select>
             </div> -->
-            <div class="col-md-3 d-flex align-items-end">
+            <div class="col-md-3 d-flex align-items-end mb-3">
               <button type="button" (click)="searchList()" class="btn btn-pink rounded-pill mt-4">
                 Search
               </button>
@@ -74,7 +74,7 @@
           <thead>
             <tr>
               <th class="thts first">#</th>
-              <th scope="col" class="pointer" (click)="toggleSort('createdAt')">Date</th>
+              <!-- <th scope="col" class="pointer" (click)="toggleSort('createdAt')">Date</th> -->
               <th scope="col" class="pointer" (click)="toggleSort('gameName')">Game</th>
               <th scope="col" class="pointer" (click)="toggleSort('subGame')">Sub Game</th>
               <th scope="col" class="pointer" (click)="toggleSort('eventName')">Event</th>
@@ -96,7 +96,7 @@
 
               </td>
               <td>{{ pl.createdAt | date : "medium" }}</td>
-              <td>{{ pl.gameName }}</td>
+              <!-- <td>{{ pl.gameName }}</td> -->
               <td>{{ pl.subGame }}</td>
               <td>{{ pl.eventName }}</td>
               <td class="text-center" [ngClass]="pl.isWon ? 'text-success' : 'text-danger'">
@@ -126,7 +126,7 @@
           </tbody>
           <tfoot>
             <tr>
-              <td></td>
+              <!-- <td></td> -->
               <td></td>
               <td></td>
               <td></td>

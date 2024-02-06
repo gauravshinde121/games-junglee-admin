@@ -36,6 +36,7 @@ export class MyPlComponent implements OnInit {
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
   totalAmount = 0;
+  originalPlStatement: any;
 
 
   constructor(
@@ -47,14 +48,14 @@ export class MyPlComponent implements OnInit {
 
   ngOnInit(): void {
     this._preconfig();
-    this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      this._getMatchBySportId(selectedValue);
-    });
-    this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
-      this._getMarketsByMatchId(selectedValue);
-      this.filterForm.value.marketId = null;
-      this.filterForm.patchValue( {'marketId':null} );
-    });
+    // this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
+    //   this._getMatchBySportId(selectedValue);
+    // });
+    // this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
+    //   this._getMarketsByMatchId(selectedValue);
+    //   this.filterForm.value.marketId = null;
+    //   this.filterForm.patchValue( {'marketId':null} );
+    // });
     this.getPlStatement();
 
   }
@@ -108,13 +109,13 @@ export class MyPlComponent implements OnInit {
     });
    }
 
-   _getMatchBySportId(sportId) {
-    this._sharedService.getMatchBySportId(sportId).subscribe((data: any) => {
-      if (data.matchList) {
-        this.matchList = data.matchList;
-      }
-    });
-  }
+  //  _getMatchBySportId(sportId) {
+  //   this._sharedService.getMatchBySportId(sportId).subscribe((data: any) => {
+  //     if (data.matchList) {
+  //       this.matchList = data.matchList;
+  //     }
+  //   });
+  // }
 
   _getMarketByMatchId(sportId){
     this._sharedService.getMarketsByMatchId(sportId).subscribe((data:any)=>{
@@ -125,9 +126,9 @@ export class MyPlComponent implements OnInit {
   }
 
 
-  onGameSelected(sportId){
-    this._getMatchBySportId(sportId);
-  }
+  // onGameSelected(sportId){
+  //   this._getMatchBySportId(sportId);
+  // }
 
   changeGame(evt) {
     // this.sportsId = evt.target.value;
@@ -141,10 +142,15 @@ export class MyPlComponent implements OnInit {
   changeMatch(evt) {
     // this.matchId = evt.target.value;
     this.filterForm.value.matchId = evt.target.value;
-    if(evt.target.value == null) {
-      this.filterForm.value.marketId = null;
-      this.filterForm.patchValue( {'marketId':null} );
+
+    if(evt.target.value == null || evt.target.value == "null") {
+      this.getPlStatement();
     }
+
+    this.plStatement = this.originalPlStatement.filter(item => item.match === evt.target.value);
+    // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+    this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.netAmount,0);
+
   }
 
   changeMarketType(evt) {
@@ -199,6 +205,14 @@ export class MyPlComponent implements OnInit {
       this.isLoading = false;
       // if (res.admin.finalResult.length > 0) {
         this.plStatement = res.admin.finalResult;
+        this.originalPlStatement = res.admin.finalResult;
+
+        let match = this.originalPlStatement.map(pl=>pl.match = pl.eventName);
+
+        this.matchList = [...new Set(match)];
+        // this.originalPlStatement.map(pl=>pl.name = pl.playerData.name);
+        // this.originalPlStatement.map(pl=>pl.amount = pl.gameData.finalNetAmount);
+
         this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
         this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.netAmount,0);
 
@@ -218,9 +232,11 @@ export class MyPlComponent implements OnInit {
   }
 
   searchList(){
+
     if(this.filterForm.value.sportsId == null || this.filterForm.value.sportsId== "null"){
       this.filterForm.value.matchId = null;
     }
+    
     this.isLoading = true;
     this.plStatement = [];
     let fromDate = new Date(this.filterForm.value.fromDate);
@@ -258,7 +274,20 @@ export class MyPlComponent implements OnInit {
       // if (res.admin.finalResult.length > 0) {
         this.plStatement = res.admin.finalResult;
         // this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+        this.originalPlStatement = res.admin.finalResult;
 
+        this.filterForm.patchValue({
+          "matchId" : null
+        })
+
+        // this.filterForm.value.matchId = null;
+        // this.filterForm.value.matchId = "null";
+        // console.log("this.originalPlStatement",this.originalPlStatement);
+
+        let match = this.originalPlStatement.map(pl=>pl.match = pl.eventName);
+
+        this.matchList = [...new Set(match)];
+        this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
         this.totalAmount = this.plStatement.reduce((acc, crnt) => acc + crnt.netAmount,0);
       // }
       //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);

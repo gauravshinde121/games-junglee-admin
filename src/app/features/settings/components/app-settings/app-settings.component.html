@@ -1,5 +1,3 @@
-
-
 <main id="main" class="main m-0">
   <section class="section gamedetails">
     <h3 *ngIf="isLoading" class="text-center">Loading ...</h3>
@@ -17,18 +15,13 @@
         </div>
         <div class="col-md-6 mb-3">
           <label class="toggle-container">
-                  
-            <input
-              [checked]="betStatus"
-              type="checkbox"
-              id="toggle-button"
-              class="toggle-class active"
-              (change)="_toggleBetStatus(betStatus=!betStatus)"
-            />
+
+            <input [checked]="betStatus" type="checkbox" id="toggle-button" class="toggle-class active"
+              (change)="_toggleBetStatus(betStatus=!betStatus)" />
             <span class="toggle-class-slider"></span>
           </label>
         </div>
-        <hr class="text-white">
+        <hr class="">
       </div>
       <div class="row mb-2">
         <div class="col-md-3">
@@ -41,38 +34,35 @@
         </div>
         <div class="col-md-6 mb-3">
           <label class="toggle-container">
-                  
-            <input
-              [checked]="socketStatus"
-              type="checkbox"
-              id="toggle-button"
-              class="toggle-class active"
-              (change)="_toggleSocketStatus(socketStatus=!socketStatus)"
-            />
+
+            <input [checked]="socketStatus" type="checkbox" id="toggle-button" class="toggle-class active"
+              (change)="_toggleSocketStatus(socketStatus=!socketStatus)" />
             <span class="toggle-class-slider"></span>
           </label>
         </div>
-        <hr class="text-white">
+        <hr class="">
       </div>
       <div class="row" *ngIf="!isLoading && settingObj">
         <div class="col-3">
           <h3 class="text-pink">Notice Message</h3>
         </div>
-       </div>
-       <div class="row" *ngIf="!isLoading && settingObj">
+      </div>
+      <div class="row" *ngIf="!isLoading && settingObj">
         <!-- ! -->
         <div class="col-3">
-          <textarea id="noticeMessage" name="noticeMessage" class="form-control" [(ngModel)]="settingObj.noticeMessage"  rows="4" cols="50">
-    
+          <textarea id="noticeMessage" name="noticeMessage" class="form-control" [(ngModel)]="settingObj.noticeMessage"
+            rows="4" cols="50">
+
           </textarea>
         </div>
-       </div>
-       <div class="row mt-5" *ngIf="!isLoading && settingObj">
+      </div>
+      <div class="row mt-5" *ngIf="!isLoading && settingObj">
         <div class="col-6 offset-md-3 text-center">
-          <button class="form-control" class="btn btn-pink rounded-pill w-50" [disabled]="submitting" (click)="submit()">{{submitting?'Saving..':'Save'}}</button>
+          <button class="form-control" class="btn btn-pink rounded-pill w-50" [disabled]="submitting"
+            (click)="submit()">{{submitting?'Saving..':'Save'}}</button>
         </div>
-       </div>
+      </div>
     </div>
-   
+
   </section>
 </main>

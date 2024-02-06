@@ -4,29 +4,24 @@
       <div class="col-md-6 col-lg-6 col-xl-6">
         <div class="row ">
           <div class="input-group flex-nowrap">
-            <span
-              class="input-group-text bg-dark  border-pink radius-left-tb"
-              id="addon-wrapping"
-            >
+            <span class="input-group-text bg-dark  border-pink radius-left-tb" id="addon-wrapping">
               <i class="fa fa-search"></i>
             </span>
-            <input
-              type="text"
-              class="form-control bg-dark  border-start-0 border-pink radius-right-tb"
-              placeholder="Search"
-              aria-label="Search"
-              aria-describedby="addon-wrapping"
-              [(ngModel)]="searchTerm"
-              (ngModelChange)="search()"
-            />
-            <span class="input-group-text bg-dark  border-pink cursor-pointer radius-right-tb" (click)="clearSearch()">Clear search</span>
+            <input type="text" class="form-control border-start-0 border-pink radius-right-tb" placeholder="Search"
+              aria-label="Search" aria-describedby="addon-wrapping" [(ngModel)]="searchTerm"
+              (ngModelChange)="search()" />
+            <span class="input-group-text bg-dark  border-pink cursor-pointer radius-right-tb"
+              (click)="clearSearch()">Clear search</span>
           </div>
           <div class="searchList" *ngIf="memberList">
             <ul>
-              <li *ngFor="let member of memberList"><a class="pointer" (click)="searchMember(member)">{{member.username}}</a></li>
+              <li *ngFor="let member of memberList">
+                <a class="pointer" (click)="searchMember(member)">{{
+                  member.username
+                  }}</a>
+              </li>
             </ul>
           </div>
-
         </div>
       </div>
     </div>
@@ -34,22 +29,21 @@
     <div class="row mt-3">
       <div class="col-md-12 overflow-auto">
         <div class="border text-center p-5">
-          <table width="100%" *ngIf="memberHierarchy.length>0">
-
-            <tr *ngFor="let member of memberHierarchy; let i = index;">
+          <table width="100%" *ngIf="memberHierarchy.length > 0">
+            <tr *ngFor="let member of memberHierarchy; let i = index">
               <!-- <td>{{i+1}}</td> -->
               <td>
-                <img src="assets/images/arrowDown2.gif" alt="" class="my-md-3" width="30px"><br>
+                <img src="assets/images/arrowDown2.gif" alt="" class="my-md-3" width="30px" /><br />
                 <div *ngIf="member.roleName">
-                  <span>{{member.username}} ({{member.roleName}})</span>
+                  <span>{{ member.username }} ({{ member.roleName }})</span>
                 </div>
                 <div *ngIf="!member.roleName">
-                  <span>{{member.username}} ({{member.displayName}})</span>
+                  <span>{{ member.username }} ({{ member.displayName }})</span>
                 </div>
               </td>
             </tr>
           </table>
-          <div class="searchList" *ngIf="memberList.length==0">
+          <div class="searchList" *ngIf="memberList.length == 0">
             <h4 class="text-center">Enter member name in search field.</h4>
           </div>
         </div>

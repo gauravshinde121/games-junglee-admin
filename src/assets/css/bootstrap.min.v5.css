@@ -211,7 +211,8 @@ strong {
 
 .small,
 small {
-  font-size: 0.875em;
+  /* font-size: 0.875em; */
+  font-size: small;
 }
 
 .mark,

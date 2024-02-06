@@ -46,12 +46,18 @@ export class LeftNavigationComponent implements OnInit {
     this.isLoggedIn = this._sharedService.isLoggedIn();
     this.userDetails = this._sharedService.getUserDetails();
     this.adminDetails = this.userDetails;
-    
+
     this._sharedService.sharedSubject.subscribe((data: any) => {
       if (data.adminDetails) {
         this.adminDetails = data.adminDetails
       }
     });
+
+
+    this._sharedService._getAdminDetailsApi().subscribe((res:any)=>{
+      console.log(res)
+      this.adminDetails = res.admin
+    })
 
     // this._sharedService.leftMenuStatus.subscribe(status=>{
 

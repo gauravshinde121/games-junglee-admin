@@ -25,7 +25,7 @@ export class MembersListComponent implements OnInit {
   isGiven: boolean;
   memberHierarchy: any;
   isSuperAdmin: boolean = false;
-  limit: number = 25;
+  limit: number = 100;
   userId: any;
   totalTake = 0;
   totalExposure = 0;
@@ -39,7 +39,7 @@ export class MembersListComponent implements OnInit {
   eventStatus: any = [];
   gameStatus: any = [];
   roles: any = [];
-  selectedRoleId = 7;
+  selectedRoleId = null;
   resetTimerInterval: any;
   show: boolean = false;
   show1: boolean = false;
@@ -47,7 +47,7 @@ export class MembersListComponent implements OnInit {
 
   searchTerm: string = '';
   currentPage: number = 1;
-  pageSize: number = 25;
+  pageSize: number = 100;
   totalPages: number = 0;
 
   statusList: any = [];
@@ -75,6 +75,7 @@ export class MembersListComponent implements OnInit {
     bookmakerMarkets:[]
   };
   exposureDataList:any = [];
+  role_id: any;
 
 
   createPasswordForm() {
@@ -93,7 +94,10 @@ export class MembersListComponent implements OnInit {
   getModalImage(clientId){
     this.http.get('https://apisimg.cylsys.com/get-modal/'+clientId, {})
       .subscribe(response => {
-        this.modalImage = 'https://apisimg.cylsys.com/'+response[0].image_path;
+        if(response[0]){
+          console.log(response)
+          this.modalImage = 'https://apisimg.cylsys.com/'+response[0].image_path;
+        }
       }, error => {
         console.error('Error getting modal image:', error);
       });
@@ -605,6 +609,24 @@ export class MembersListComponent implements OnInit {
 
   onModalClick(event: MouseEvent): void {
     event.stopPropagation();
+  }
+
+  changeRole(evt: any){
+    console.log(evt.target.value);
+    this.selectedRoleId = evt.target.value;
+    this.selectedUserForAdjustment = [];
+    this.currentPage = 1;
+    if(this.selectedRoleId == "null"){
+      this.selectedRoleId = null;
+    }
+    this._getAllUserInfo(this.selectedRoleId);
+  }
+
+  onUserEdit(roleId : any){
+    this._sharedService.selectedUserRoleId.next({
+      'createUserWithRoleId': roleId
+    });
+    
   }
 
 }

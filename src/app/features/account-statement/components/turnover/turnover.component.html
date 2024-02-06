@@ -39,19 +39,26 @@
           <thead>
             <tr>
               <th scope="col" class="first">#</th>
-              <th scope="col" class="pointer" (click)="toggleSort('matchName')">Event</th>
-              <th scope="col" class="pointer" (click)="toggleSort('matchTime')">Date</th>
+              <th scope="col" class="pointer" (click)="toggleSort('matchName')">
+                Event
+              </th>
+              <th scope="col" class="pointer" (click)="toggleSort('matchTime')">
+                Date
+              </th>
               <th scope="col" class="">Detail</th>
               <th scope="col" class="last">Bet Detail</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let pl of plStatement| sort:sortColumn:sortAscending ; let i = index">
+            <tr *ngFor="
+                let pl of plStatement | sort : sortColumn : sortAscending;
+                let i = index
+              ">
               <td>
                 <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                 <span *ngIf="currentPage > 1">{{
-                i + 1 + (currentPage - 1) * limit
-              }}</span>
+                  i + 1 + (currentPage - 1) * limit
+                  }}</span>
               </td>
               <td>{{ pl.matchName }}</td>
               <td>{{ pl.matchTime | date : "medium" }}</td>
@@ -87,8 +94,8 @@
 <!-- Modal start-->
 <div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static"
   data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable ">
-    <div class="modal-content border-danger">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino " id="staticBackdropLabel">
           Detail
@@ -96,10 +103,8 @@
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-dark " *ngIf="!marketInfo">
-        Loading...
-      </div>
-      <div class="modal-body bg-dark " *ngIf="marketInfo">
+      <div class="modal-body" *ngIf="!marketInfo">Loading...</div>
+      <div class="modal-body" *ngIf="marketInfo">
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-6">
@@ -148,7 +153,9 @@
                     marketInfo?.winLose?.totalWinLose > 0
                       ? 'text-success'
                       : 'text-danger'
-                  ">{{ marketInfo?.winLose?.totalWinLose | indianCurrency }}</span>
+                  ">{{
+                  marketInfo?.winLose?.totalWinLose | indianCurrency
+                  }}</span>
               </p>
             </div>
           </div>
@@ -186,8 +193,8 @@
 <div class="modal" [ngStyle]="{ display: display }" id="betDetailBackdrop" data-bs-backdrop="static"
   data-bs-keyboard="false" tabindex="-1" aria-labelledby="betDetailLabel" aria-hidden="true">
   <!-- modal-dialog-scrollable -->
-  <div class="modal-dialog  modal-xl">
-    <div class="modal-content border-danger ">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino " id="betDetailLabel">
           Detail
@@ -195,43 +202,66 @@
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
-      <div class=" col-md-12  bg-dark">
-          <button *ngIf="betInfo?.length > 0" type="button"
-            class="btn btn-pink  rounded-pill ms-2  float-end" (click)="exportExcel()">Export</button>
+      <div class="col-md-12 bg-dark">
+        <button *ngIf="betInfo?.length > 0" type="button" class="btn btn-pink rounded-pill ms-2  float-end"
+          (click)="exportExcel()">
+          Export
+        </button>
       </div>
-      <div class="modal-body bg-dark " *ngIf="!betInfo">
-        Loading...
-      </div>
-      <div class="modal-body bg-dark " *ngIf="betInfo">
+      <div class="modal-body" *ngIf="!betInfo">Loading...</div>
+      <div class="modal-body" *ngIf="betInfo">
         <div class="col-md-12 mb-4">
           <div class="tableFixHead">
             <table class="table tableall" *ngIf="betInfo.length > 0">
               <thead>
                 <tr>
                   <th scope="col" class="first">#</th>
-                  <th scope="col" class="pointer" (click)="toggleSort('member')">Member</th>
-                  <th scope="col" class="pointer" (click)="toggleSort('placeTime')">Placed</th>
-                  <th scope="col" class="pointer" (click)="toggleSort('placeTime')">Matched Date</th>
-                  <th scope="col" class="pointer" (click)="toggleSort('event')">Event</th>
-                  <th scope="col" class="pointer" (click)="toggleSort('market')">Market</th>
-                  <th scope="col" class="pointer" (click)="toggleSort('selection')">Selection</th>
-                  <th scope="col" class="pointer" (click)="toggleSort('oddsPlaced')">Odds Placed</th>
-                  <th scope="col" class="pointer" (click)="toggleSort('oddsPlaced')">Odds Matched</th>
-                  <th scope="col" class="pointer" (click)="toggleSort('stake')">Matched</th>
-                  <th scope="col" class="pointer" (click)="toggleSort('stake')">Unmatched</th>
+                  <th scope="col" class="pointer" (click)="toggleSort('member')">
+                    Member
+                  </th>
+                  <th scope="col" class="pointer" (click)="toggleSort('placeTime')">
+                    Placed
+                  </th>
+                  <th scope="col" class="pointer" (click)="toggleSort('placeTime')">
+                    Matched Date
+                  </th>
+                  <th scope="col" class="pointer" (click)="toggleSort('event')">
+                    Event
+                  </th>
+                  <th scope="col" class="pointer" (click)="toggleSort('market')">
+                    Market
+                  </th>
+                  <th scope="col" class="pointer" (click)="toggleSort('selection')">
+                    Selection
+                  </th>
+                  <th scope="col" class="pointer" (click)="toggleSort('oddsPlaced')">
+                    Odds Placed
+                  </th>
+                  <th scope="col" class="pointer" (click)="toggleSort('oddsPlaced')">
+                    Odds Matched
+                  </th>
+                  <th scope="col" class="pointer" (click)="toggleSort('stake')">
+                    Matched
+                  </th>
+                  <th scope="col" class="pointer" (click)="toggleSort('stake')">
+                    Unmatched
+                  </th>
                   <!-- <th scope="col" class="">Profit Liability</th> -->
                   <th scope="col" class="last">IP</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let bet of betInfo| sort:sortColumn:sortAscending ; let i = index">
+                <tr *ngFor="
+                    let bet of betInfo | sort : sortColumn : sortAscending;
+                    let i = index
+                  ">
                   <td>{{ i + 1 }}</td>
                   <td>{{ bet.member }}</td>
                   <td>{{ bet.placeTime | date : "medium" }}</td>
                   <td>{{ bet.placeTime | date : "medium" }}</td>
                   <td>{{ bet.event }}</td>
                   <td>
-                    <span *ngIf="!bet.isBack" class="border r-2 bg-danger text-danger border-danger me-2 border-3">
+                    <span *ngIf="!bet.isBack" class="border r-2 bg-danger text-danger me-2 border-3">
                     </span>
                     <span *ngIf="bet.isBack" class="border bg-primary text-primary border-primary me-2 border-3">
                     </span>
@@ -257,7 +287,8 @@
                   </td> -->
                   <td>
                     <div class="tooltipnk">
-                      <i class="fa-sharp fa-solid fa-clipboard cursor-pointer" ngxClipboard [cbContent]="bet.ip" [container]="container"></i>
+                      <i class="fa-sharp fa-solid fa-clipboard cursor-pointer" ngxClipboard [cbContent]="bet.ip"
+                        [container]="container"></i>
                       <span class="tooltiptext tabTooltip px-5 w-auto">
                         <small #container>{{ bet.ip }}</small>
                       </span>

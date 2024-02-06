@@ -9,7 +9,7 @@
         </a>
       </div>
       <div class="row login pt-3 form-signin m-0">
-        <h3 class="text-center m-0">Backend Login</h3>
+        <h3 class="text-center m-0 text-uppercase">Backend Login</h3>
         <div class="form-floating mt-3">
           <input
             autocomplete="disabled"
@@ -38,21 +38,11 @@
           <!-- <input type="text" class="form-control" autocomplete="disabled" formControlName="password" id="floatingInput" placeholder="Password*">
     -->
           <label for="floatingInput">Password</label>
-          <span
-            class="fa "
-            (click)="show = !show"
-            [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"
-          ></span>
+          <span class="fa " (click)="show = !show" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
         </div>
         <div class="input-group">
-          <button
-            [disabled]="signInForm.invalid || isLoading"
-            class="btn bg-pink w-100  rounded-pill mt-4"
-          >
-            {{ button }} &nbsp;<i
-              class="fa"
-              [ngClass]="{ 'fa-spin fa-spinner': isLoading }"
-            ></i>
+          <button [disabled]="signInForm.invalid || isLoading" class="btn bg-pink w-100  rounded-pill mt-4">
+            {{ button }} &nbsp;<i class="fa" [ngClass]="{ 'fa-spin fa-spinner': isLoading }"></i>
           </button>
         </div>
         <div class="col mt-4 text-center ">

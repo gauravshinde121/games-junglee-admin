@@ -33,22 +33,6 @@
                 placeholder="Month"
               />
             </div>
-            <div class="col-md-6 mb-3">
-              <label>Select Member</label>
-              <select
-                formControlName="memberId"
-                id="ab"
-                class="form-select bg-dgre pointer"
-              >
-                <option value="null">All</option>
-                <option
-                  *ngFor="let member of allMembers"
-                  [value]="member.userId"
-                >
-                  {{ member.username }}
-                </option>
-              </select>
-            </div>
 
             <div class="col-md-3 mb-3 d-flex align-items-end">
               <button
@@ -79,17 +63,17 @@
         <h4 *ngIf="plStatement.length == 0 && !isLoading">No data found</h4>
         <h4 *ngIf="isLoading">Loading...</h4>
       </div>
-      <div class="table-responsive tableRes tableFixHead">
+      <div class="table-responsive tableRes tableFixHead" *ngIf="plStatement.length > 0 && !isLoading">
         <!-- *ngIf="plStatement.length > 0" -->
         <table class="table tableall">
           <thead>
             <tr>
-              <th scope="col" class="">
+              <th scope="col" class="first">
                 <i class="fa-sharp fa-regular fa-address-card"></i>
               </th>
               <th
                 scope="col"
-                class="first pointer"
+                class="pointer"
                 (click)="toggleSort('createdAt')"
               >
                 Date
@@ -118,10 +102,9 @@
               "
               (click)="openAllBets(pl.matchId)"
             >
-              <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
-              <span *ngIf="currentPage > 1">{{
-                i + 1 + (currentPage - 1) * limit
-              }}</span>
+              <td>
+                <span >{{i + 1}}</span>
+              </td>
               <td>{{ pl.date | date : "medium" }}</td>
               <td>{{ pl.credit }}</td>
               <td>{{ pl.debit }}</td>

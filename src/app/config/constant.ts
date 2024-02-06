@@ -136,6 +136,7 @@ export class Constants {
     public readonly API_GET_BANK_USERS: string = 'api/junglee-admin/getBankUsers';
 
     public readonly API_GET_ADMIN_ACCOUNT_STATEMENT: string = 'api/junglee-admin/getAdminAccountStatement';
+    public readonly API_GET_ADMIN_ACCOUNT_STATEMENT_NEW: string = 'api/getAdminAccountStatementNew';
     public readonly API_GET_PUBSUB_STATUS: string = 'api/getPubsubStatus';
     public readonly API_START_WEBJOB: string = 'api/startAzureSocketAndWebJob';
     public readonly API_GET_COMMISSION_REPORT: string = 'api/getAdminCommissionReport';

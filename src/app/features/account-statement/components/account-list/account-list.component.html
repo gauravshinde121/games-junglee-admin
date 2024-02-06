@@ -115,10 +115,10 @@
 
                   <td class="text-center">
                     <ng-container *ngIf="user.take > 0 || user.give > 0">
-                      <a class="pointer text-success text-decoration-none" *ngIf="user.take > 0">
+                      <a class="pointer text-danger text-decoration-none" *ngIf="user.take > 0">
                         {{ user.take | indianCurrency }}
                       </a>
-                      <a class="pointer text-danger text-decoration-none" *ngIf="user.give > 0">
+                      <a class="pointer text-success text-decoration-none" *ngIf="user.give > 0">
                         {{ user.give | indianCurrency }}
                       </a>
                     </ng-container>
@@ -305,7 +305,7 @@
                         <input
                           min="0"
                           class="form-control bg-transparent"
-                          formControlname="amount"
+                          formControlName="amount"
                           placeholder="Amount"
                           id="amount"
                           name="amount"
@@ -322,7 +322,7 @@
 
                       <input
                       class="form-control bg-transparent"
-                      formControlname="remark"
+                      formControlName="remark"
                       placeholder="Remark"
                       id="remark"
                       name="remark"
@@ -474,8 +474,8 @@
                     <div class="col-md-8">
                         <input
                           class="form-control bg-transparent"
-                          formControlname="amount"
-                          (input)="onAmountWithdrawalChange($event)"
+                          formControlName="amount"
+                          (input)="onWinningWithdrawalChange($event)"
                           placeholder="Amount"
                           min="0"
                           id="amount"
@@ -492,7 +492,7 @@
 
                       <input
                       class="form-control bg-transparent"
-                      formControlname="remark"
+                      formControlName="remark"
                       placeholder="Remark"
                       id="remark"
                       name="remark"
@@ -592,6 +592,7 @@
               </li>
               <li class="nav-item" role="presentation">
                 <button
+                (click)="onCreditHistoryOpen()"
                   class="nav-link"
                   id="pills-table-tab"
                   data-bs-toggle="pill"
@@ -695,7 +696,7 @@
                           <div class="col-md-8">
                               <input
                                 class="form-control bg-transparent"
-                                formControlname="amount"
+                                formControlName="amount"
                                 placeholder="Amount"
                                 id="amount"
                                 name="amount"
@@ -712,7 +713,7 @@
       
                             <input
                             class="form-control bg-transparent"
-                            formControlname="remark"
+                            formControlName="remark"
                             placeholder="Remark"
                             id="remark"
                             name="remark"
@@ -834,7 +835,7 @@
                           <div class="col-md-8">
                               <input
                                 class="form-control bg-transparent"
-                                formControlname="amount"
+                                formControlName="amount"
                                 placeholder="Amount"
                                 min="0"
                                 id="amount"
@@ -852,7 +853,7 @@
       
                             <input
                             class="form-control bg-transparent"
-                            formControlname="remark"
+                            formControlName="remark"
                             placeholder="Remark"
                             id="remark"
                             name="remark"
@@ -865,7 +866,7 @@
                       <div class="row mt-5">
                         <div class="col-md-6 text-end">
                           <button
-                            (click)="postWithdrawData(false)"
+                          (click)="postWithdrawalData(false)"
                             
                             class="btn btn-pink rounded-pill w-80 mt-4"
                           >
@@ -912,7 +913,7 @@
                               class="pointer"
                               (click)="toggleSort('username')"
                             >
-                              USERNAME
+                              Creation Date
                             </th>
                            
                             <th
@@ -920,15 +921,15 @@
                               class="text-center pointer"
                               (click)="toggleSort('creditLimit')"
                             >
-                              CR
+                              Amount
                             </th>
-          
+
                             <th
                               scope="col"
                               class="text-center pointer"
                               (click)="toggleSort('creditLimit')"
                             >
-                              AVAILABLE CREDIT
+                              Remark
                             </th>
           
                           </tr>
@@ -936,65 +937,33 @@
                         <tbody>
                           <h1
                             class="text-center"
-                            *ngIf="userList.length == 0 && !this.isLoading"
+                            *ngIf="clTransfers.length == 0 && !this.isLoading"
                           >
-                            No users Found
+                            No Record Found
                           </h1>
                           <tr
                             *ngFor="
-                              let user of userList | sort : sortColumn : sortAscending;
+                              let stmt of clTransfers | sort : sortColumn : sortAscending;
                               let i = index
                             "
                           >
-                            
-                            <td>
-                              <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
-                              <span *ngIf="currentPage > 1">{{
-                                i + 1 + (currentPage - 1) * limit
-                              }}</span>
-                            </td>
-                            <td>
-                              <span
-                                >{{ user.username }}
-                              </span>
-                            </td>
-                            
-                            <td class="text-center">
-                              <a (click)="openCredit(user)" class="cursor-pointer">{{ user.creditLimit | indianCurrency }}</a> 
-                            </td>
-                            
-                            <td class="text-center">
-                              {{ user.availableCredit | indianCurrency }}
-                            </td>
-          
+                          <td>
+                            {{i+1}}
+                          </td>
+                          <td>
+                            {{stmt.createdDate | date : "medium"}}
+                          </td>
+                          <td class="text-center">
+                            <strong class="text-success" *ngIf="!stmt.isGiven">{{stmt.amount}}</strong>
+                            <strong class="text-danger" *ngIf="stmt.isGiven">{{stmt.amount}}</strong>
+                          </td>
+                          <td class="text-center">
+                            {{stmt.remark}}
+                          </td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
-                    <div class="d-flex" *ngIf="userList.length > 0 && !this.isLoading">
-                      <button
-                        class="btn rounded-pill text-dark"
-                        [disabled]="currentPage === 1"
-                        (click)="prev()"
-                      >
-                        Prev
-                      </button>
-                      <span class="btn btn-pink rounded-pill ps-4 pe-4"
-                        >{{ currentPage }} / {{ totalPages }}
-                      </span>
-                      <button
-                        class="btn rounded-pill text-dark"
-                        [disabled]="currentPage === totalPages"
-                        (click)="next()"
-                      >
-                        Next
-                      </button>
-                    </div>
-                    <!--
-                    <button [disabled]="currentPage === 1" (click)="prev()">Prev</button><span>{{ currentPage }} / {{ totalPages }}</span><button [disabled]="currentPage === totalPages" (click)="next()">
-                      Next
-                    </button> -->
-                    <!-- <div *ngIf="userList.length > 0 && !this.isLoading"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn btn-pink rounded-pill ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
                   </div>
                 </div>
 

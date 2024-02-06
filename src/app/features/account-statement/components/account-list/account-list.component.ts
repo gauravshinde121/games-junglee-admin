@@ -148,10 +148,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
     this.userIp = this._sharedService.getIpAddress();
 
-    const hasSeenModal = localStorage.getItem('hasSeenModal');
-    if (!hasSeenModal) {
-      this.showModal = true;
-    }
+   
     this._preConfig();
     //if (this._sharedService.getUserDetails().roleId.indexOf(1) != -1) {
     if (this._sharedService.getUserDetails().roleId === 1) {

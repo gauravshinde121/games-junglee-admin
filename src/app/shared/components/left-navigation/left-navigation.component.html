@@ -185,6 +185,22 @@
                 class="nav-link small ps-5">COMMISSION REPORT</a>
             </li>
             <li
+            *ngIf="adminDetails.refClientid == 1"
+              [routerLinkActive]="
+                currentPath == '/account-statement/my-account-statement' ? 'active' : ''
+              "
+              [ngClass]="
+                currentPath == '/account-statement/my-account-statement' ? 'active' : ''
+              "
+            >
+              <a
+                (click)="storePath('/account-statement/my-account-statement')"
+                routerLink="/account-statement/my-account-statement"
+                class="nav-link small ps-5"
+                >MY ACCOUNT STATEMENT</a
+              >
+            </li>
+            <li
               *ngIf="adminDetails.refClientid == 2"
               [routerLinkActive]="
                 currentPath == '/account-statement/commission' ? 'active' : ''
@@ -197,7 +213,7 @@
                 (click)="storePath('/account-statement/commission')"
                 routerLink="/account-statement/commission"
                 class="nav-link small ps-5"
-                >COMMISSION LENA/DENA</a
+                >COMMISSION REPORT</a
               >
             </li>
             <li

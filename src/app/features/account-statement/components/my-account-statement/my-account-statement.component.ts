@@ -36,7 +36,6 @@ export class MyAccountStatementComponent implements OnInit {
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
-  allMembers: any = [];
   memberId;
   limit: number = 25;
 
@@ -44,52 +43,21 @@ export class MyAccountStatementComponent implements OnInit {
     private _accountStatementService: AccountStatementService,
     private _sharedService: SharedService,
     private _router: Router,
-    private _fb: FormBuilder,
-    private _memberService: MembersService,
+    private _fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this._preconfig();
-    this.filterForm.get('sportsId')?.valueChanges.subscribe((selectedValue) => {
-      this._getMatchBySportId(selectedValue);
-    });
-    this.filterForm.get('matchId')?.valueChanges.subscribe((selectedValue) => {
-      this._getMarketsByMatchId(selectedValue);
-      this.filterForm.value.marketId = null;
-      this.filterForm.patchValue( {'marketId':null} );
-    });
-    this.getPlStatement();
-
   }
 
-  _getMarketsByMatchId(sportId){
-    this._sharedService.getMarketsByMatchId(sportId).subscribe((data:any)=>{
-      if(data.marketList){
-        this.marketList = data.marketList;
-      }
-    });
-  }
+
 
   _preconfig() {
-    /*this._sharedService._getGames().subscribe((res:any)=>{
-      this.games = res.gamesList;
-    });*/
-    this._getGames();
     this._initForm();
-    // this.getPlStatement();
-    this._getAllMarketTypeList();
-    this._getAllMembers();
+    this.getPlStatement();
   }
 
-  // __initForm() {
-  //   this.filterForm = new FormGroup({
-  //     fromDate: new FormControl(this.formatFormDate(new Date())),
-  //     toDate: new FormControl(this.formatFormDate(new Date())),
-  //     sportsId: new FormControl(null),
-  //     matchId: new FormControl(null),
-  //     marketId: new FormControl(null)
-  //   })
-  // }
+
   _initForm(){
     this.filterForm = this._fb.group({
       fromDate : this.formatFormDate(new Date()),
@@ -101,69 +69,11 @@ export class MyAccountStatementComponent implements OnInit {
     });
   }
 
-  _getAllMembers() {
-    this._memberService._getAllMembers().subscribe((data: any) => {
-      if (data.memberData) {
-        this.allMembers = data.memberData;
-      }
-    });
-  }
 
   formatFormDate(date: Date) {
     return formatDate(date, this.dateFormat, this.language);
   }
 
-  _getGames() {
-    this._sharedService._getSports().subscribe((data: any) => {
-      if (data) {
-        this.games = data;
-      }
-    });
-   }
-
-   _getMatchBySportId(sportId) {
-    this._sharedService.getMatchBySportId(sportId).subscribe((data: any) => {
-      if (data.matchList) {
-        this.matchList = data.matchList;
-      }
-    });
-  }
-
-  _getMarketByMatchId(sportId){
-    this._sharedService.getMarketsByMatchId(sportId).subscribe((data:any)=>{
-      if(data.marketList){
-        this.marketList = data.marketList;
-      }
-    });
-  }
-
-
-  onGameSelected(sportId){
-    this._getMatchBySportId(sportId);
-  }
-
-  changeGame(evt) {
-    // this.sportsId = evt.target.value;
-    this.filterForm.value.sportsId = evt.target.value;
-    if(evt.target.value == null) {
-      this.filterForm.value.matchId = null;
-      this.filterForm.value.marketId = null;
-    }
-  }
-
-  changeMatch(evt) {
-    // this.matchId = evt.target.value;
-    this.filterForm.value.matchId = evt.target.value;
-    if(evt.target.value == null) {
-      this.filterForm.value.marketId = null;
-      this.filterForm.patchValue( {'marketId':null} );
-    }
-  }
-
-  changeMarketType(evt) {
-    // this.marketTypeId = evt.target.value;
-    this.filterForm.value.marketId = evt.target.value;
-  }
 
 
   getPlStatement() {
@@ -179,33 +89,13 @@ export class MyAccountStatementComponent implements OnInit {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
 
-    // if(this.filterForm.value.sportsId == 'null'){
-    //   this.filterForm.patchValue( {'sportsId':null} );
-    // }
-    // if(this.filterForm.value.matchId == 'null'){
-    //   this.filterForm.patchValue( {'matchId':null} );
-    // }
-    // if(this.filterForm.value.marketId == 'null'){
-    //   this.filterForm.patchValue( {'marketId':null} );
-    // }
-    // let body = {
-    //   fromDate: fromDate,
-    //   toDate: toDate,
-    //   sportId:this.filterForm.value.sportsId?+this.filterForm.value.sportsId:this.filterForm.value.sportsId,
-    //   matchId: this.filterForm.value.matchId,
-    //   marketId: this.filterForm.value.marketId,
-    //   pageNo: this.currentPage,
-    //   limit: 50,
-    // };
-
     let body = {
       fromDate:fromDate,
       toDate:toDate,
       userId : null
     };
 
-    debugger;
-    this._accountStatementService._getAdminAccountStatement(body).subscribe((res: any) => {
+    this._accountStatementService._getAdminAccountStatementApi(body).subscribe((res: any) => {
       this.isLoading = false;
       if (res.accountStatement.length > 0) {
         this.plStatement = res.accountStatement;
@@ -217,13 +107,6 @@ export class MyAccountStatementComponent implements OnInit {
     });
   }
 
-  _getAllMarketTypeList() {
-    this._sharedService.getAllMarketTypeList().subscribe((data: any) => {
-      if (data.data) {
-        this.marketTypeList = data.data;
-      }
-    });
-  }
 
   searchList(){
     if(this.filterForm.value.sportsId == null || this.filterForm.value.sportsId== "null"){
@@ -254,16 +137,14 @@ export class MyAccountStatementComponent implements OnInit {
     let payload = {
       fromDate:fromDate,
       toDate:toDate,
-      userId : this.filterForm.value.memberId
     };
 
-    this._accountStatementService._getAdminAccountStatement(payload).subscribe((res: any) => {
+    this._accountStatementService._getAdminAccountStatementApi(payload).subscribe((res: any) => {
       this.isLoading = false;
-      // if (res.admin.finalResult.length > 0) {
-        this.plStatement = res.admin.finalResult;
-        this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
-      // }
-      //this.currentTotalPage = Math.ceil(this.currentPage  / this.totalPages);
+      console.log(res)
+      this.plStatement = res.admin.finalResult;
+      this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+    
     },(err)=>{
       this._sharedService.getToastPopup("Internal server error","","error")
     });
@@ -276,11 +157,6 @@ export class MyAccountStatementComponent implements OnInit {
     }
   }
 
-
-
-  // onGameSelected(sportId) {
-  //   this._getMatchBySportId(+sportId);
-  // }
 
   next(): void {
     this.currentPage++;

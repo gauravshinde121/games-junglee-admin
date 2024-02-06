@@ -4,6 +4,7 @@ import {  AbstractControl, FormBuilder, FormControl, FormGroup, Validators } fro
 import { Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { Subscription } from 'rxjs';
+import { AllLogsService } from 'src/app/features/all-logs/services/all-logs.service';
 import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { environment } from 'src/environments/environment';
@@ -42,6 +43,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
   show: boolean = false;
   show1: boolean = false;
   //dtOptions: DataTables.Settings = {};
+  clTransfers:any = [];
 
   searchTerm: string = '';
   currentPage: number = 1;
@@ -139,6 +141,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
     private _memberService: MembersService,
     private http: HttpClient,
     private formbuilder: FormBuilder,
+    private allLogService:AllLogsService
   ) { }
 
   ngOnInit(): void {
@@ -286,7 +289,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
       this.totalCasino = this.userList.reduce((acc, crnt) => acc + crnt.casinoWinnings, 0);
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
-      this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);
+      this.totalPages = Math.ceil(users.memberData.filteredRecords / this.pageSize);
       this.totalMembers = users.memberData.totalMembers;
     });
   }
@@ -313,14 +316,13 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
 
   onCreditDepositOpen(){
-    console.log('on credit deposit open')
-    
     this.creditDepositeForm.patchValue({
       upline_credit : this.adminDetails.availableCredit,
       refupline_credit : this.adminDetails.availableCredit,
       downline_credit : this.userData.availableCredit,
       refdownline_credit : this.userData.availableCredit,
-      profitLoss : this.userData.winnings
+      profitLoss : this.userData.winnings,
+      remark:null
     })
   }
 
@@ -417,7 +419,6 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
 
   onAmountDepositChange(event: any) {
-    console.log('changes')
     // console.log(event)
     // console.log(this.adminDetails)
     // console.log(this.userData)
@@ -451,7 +452,36 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
 
   onAmountWithdrawalChange(event: any) {
-    console.log('changes')
+    // console.log(event)
+    // console.log(this.adminDetails)
+    // console.log(this.userData)
+    let amount = parseFloat(event?.target.value);
+    // Check if the amount is a valid number
+    if (!isNaN(amount)) {
+      // Perform the necessary calculations to update refupline_credit and refdownline_credit
+      const refupline_credit = parseFloat(this.adminDetails.availableCredit) + amount;
+      const refdownline_credit = parseFloat(this.userData.availableCredit) - amount;
+
+      // Update the form values
+      this.creditWithdrawForm.patchValue({
+        refupline_credit: refupline_credit,
+        refdownline_credit: refdownline_credit,
+        amount:amount
+      });
+    } else {
+      // Handle the case when the input value is not a valid number
+      // For example, reset the form field or display an error message
+      this.creditWithdrawForm.patchValue({
+        refupline_credit: this.adminDetails.availableCredit,
+        refdownline_credit: this.userData.availableCredit,
+        amount:null
+      });
+    }
+  }
+
+
+
+  onWinningWithdrawalChange(event: any) {
     // console.log(event)
     // console.log(this.adminDetails)
     // console.log(this.userData)
@@ -488,7 +518,15 @@ export class AccountListComponent implements OnInit , OnDestroy {
   closeModal() {
     this.display = 'none';
     this.modalNumber = null;
-    // this.changePasswordForm.reset();
+    this.resetForms();
+  }
+
+
+  resetForms(){
+    this.creditDepositeForm.reset();
+    this.creditWithdrawForm.reset();
+    this.winningDepositForm.reset();
+    this.winningWithdrawalForm.reset();
   }
 
 
@@ -502,7 +540,6 @@ export class AccountListComponent implements OnInit , OnDestroy {
   }
 
   postData(isDeposit){
-  console.log("isDeposit",isDeposit);
 
     let payload = {
       "userId":this.userData.userId,
@@ -513,17 +550,33 @@ export class AccountListComponent implements OnInit , OnDestroy {
   }
 
     this._sharedService._getCreditSettlementApi(payload).subscribe((res)=>{
-      console.log(res)
-      this.modalNumber = null;
+      this._sharedService.getToastPopup(`Credit Deposit Successfull`, 'Credit', 'success');
+      this.closeModal();
       this.getAdminDetails();
       this.refreshCall();
     })
   }
 
 
-  postWinningsData(isDeposit){
-    console.log("isDeposit",isDeposit);
+  postWithdrawalData(isDeposit){
+      let payload = {
+        "userId":this.userData.userId,
+        "isDeposit":isDeposit,
+        "amount":this.creditWithdrawForm.value.amount,
+        "ip":this.userIp,
+        "remark":this.creditWithdrawForm.value.remark?this.creditWithdrawForm.value.remark:"Credit Transfer"
+    }
   
+      this._sharedService._getCreditSettlementApi(payload).subscribe((res)=>{
+        this._sharedService.getToastPopup(`Credit withdrawal Successfull`, 'Credit', 'success');
+        this.closeModal();
+        this.getAdminDetails();
+        this.refreshCall();
+      })
+    }
+
+
+  postWinningsData(isDeposit){
       let payload = {
         "userId":this.userData.userId,
         "isDeposit":isDeposit,
@@ -533,7 +586,8 @@ export class AccountListComponent implements OnInit , OnDestroy {
     }
   
       this._sharedService._getWinningSettlementApi(payload).subscribe((res)=>{
-        this.modalNumber = null;
+        this.closeModal();
+        this._sharedService.getToastPopup(`Deposit Successfull`, 'Deposit', 'success');
         this.getAdminDetails();
         this.refreshCall();
       })
@@ -541,8 +595,6 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
 
   postWithdrawData(isDeposit){
-    console.log("isDeposit",isDeposit);
-  
       let payload = {
         "userId":this.userData.userId,
         "isDeposit":isDeposit,
@@ -552,8 +604,8 @@ export class AccountListComponent implements OnInit , OnDestroy {
     }
   
     this._sharedService._getWinningSettlementApi(payload).subscribe((res)=>{
-      console.log(res)
-      this.modalNumber = null;
+      this._sharedService.getToastPopup(`Withdrawal Successfull`, 'Withdrawal', 'success');
+      this.closeModal();
       this.getAdminDetails();
       this.refreshCall();
     })
@@ -570,5 +622,45 @@ export class AccountListComponent implements OnInit , OnDestroy {
       }
     })
 
+}
+
+
+onCreditHistoryOpen(){
+  this.getClTransfers();
+}
+
+
+getClTransfers(){
+  console.log(this.userData)
+  this.isLoading = true;
+  this.clTransfers = [];
+
+  let fromDate = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000);
+  fromDate.setHours(0)
+  fromDate.setMinutes(0);
+  fromDate.setSeconds(0);
+
+  let toDate = new Date();
+  toDate.setHours(23)
+  toDate.setMinutes(59);
+  toDate.setSeconds(59);
+
+ 
+  let body = {
+    fromDate: fromDate,
+    toDate: toDate,
+    memberId: this.userData.userId,
+    pageNo: 1,
+    limit: 50,
+  }
+  this.allLogService._getClTransferApi(body).subscribe((data:any)=>{
+    this.isLoading = false;
+    if(data.clTransferStatement.clTrnsfers){
+      this.clTransfers = data.clTransferStatement.clTrnsfers
+    }
+    this.totalPages = Math.ceil(data.clTransferStatement.totalNoOfRecords / this.pageSize);
+
+    console.log(this.clTransfers)
+  })
 }
 }

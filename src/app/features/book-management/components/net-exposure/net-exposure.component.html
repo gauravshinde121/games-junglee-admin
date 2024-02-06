@@ -9,78 +9,47 @@
             <div class="row">
               <div class="col-md-3">
                 <a class="text-decoration-none">
-                  <input
-                    type="radio"
-                    (click)="
+                  <input type="radio" (click)="
                       onFilterChange({ clicked: 'type', selectedType: 'MyPT' })
-                    "
-                    formControlName="selectedType"
-                    class="radioselected pointer"
-                    id="html"
-                    name="selectedType"
-                    value="MyPT"
-                  /><small class="rounded-pill p-2">My PT</small>
+                    " formControlName="selectedType" class="radioselected pointer" id="html" name="selectedType"
+                    value="MyPT" /><small class="rounded-pill p-2">My PT</small>
                 </a>
                 <a class="text-decoration-none">
-                  <input
-                    value="totalBook"
-                    (click)="
+                  <input value="totalBook" (click)="
                       onFilterChange({
                         clicked: 'type',
                         selectedType: 'TotalBook'
                       })
-                    "
-                    formControlName="selectedType"
-                    type="radio"
-                    id="html"
-                    checked
-                    name="selectedType"
-                    value="TotalBook"
-                    class="pointer radioselected"
-                  /><small class="rounded-pill p-2">Total Book</small>
+                    " formControlName="selectedType" type="radio" id="html" checked name="selectedType"
+                    value="TotalBook" class="pointer radioselected" /><small class="rounded-pill p-2">Total Book</small>
                 </a>
               </div>
 
               <div class="col-md-7 my-3 my-md-0">
                 <div class="row">
                   <div class="col-md-12">
-                    <span class="pt-2 me-3"
-                      ><strong>Filter by Sport :</strong></span
-                    >
+                    <span class="pt-2 me-3"><strong>Filter by Sport :</strong></span>
                     <a class="text-decoration-none">
-                      <input
-                        (click)="
+                      <input (click)="
                           onFilterChange({
                             clicked: 'sport',
                             sportId: null,
                             refreshCallVar: false
                           })
-                        "
-                        type="radio"
-                        checked="true"
-                        class="radioselected pointerr"
-                        id="html"
-                        name="sport"
-                        value="All"
-                      /><small class="rounded-pill p-2">ALL</small>
+                        " type="radio" checked="true" class="radioselected pointerr" id="html" name="sport"
+                        value="All" /><small class="rounded-pill p-2">ALL</small>
                     </a>
                     <a *ngFor="let game of games" class="text-decoration-none">
-                      <input
-                        (click)="
+                      <input (click)="
                           onFilterChange({
                             clicked: 'sport',
                             sportId: game.sportId,
                             refreshCallVar: false
                           })
-                        "
-                        type="radio"
-                        class="radioselected pointer"
-                        id="html"
-                        name="sport"
-                        [value]="game.sportId"
-                      /><small class="rounded-pill p-2 text-uppercase">{{
+                        " type="radio" class="radioselected pointer" id="html" name="sport"
+                        [value]="game.sportId" /><small class="rounded-pill p-2 text-uppercase">{{
                         game.sportName
-                      }}</small>
+                        }}</small>
                     </a>
                   </div>
                 </div>
@@ -89,11 +58,7 @@
               <div class="col-md-2">
                 <div class="text-end">
                   <small> {{ refreshCount }} </small> &nbsp;
-                  <button
-                    [disabled]="refreshCount == 0"
-                    class="btn btn-pink rounded-pill"
-                    (click)="refreshCall()"
-                  >
+                  <button [disabled]="refreshCount == 0" class="btn btn-pink rounded-pill" (click)="refreshCall()">
                     <i class="fa fa-redo-alt disnone"></i>
                     <small>Refresh </small>
                   </button>
@@ -140,13 +105,10 @@
             <div class="col-md-12 bg-pink">
               <div class="row align-items-center">
                 <div class="col-3">
-                  <span class="text-white">{{ book.matchName }}</span>
+                  <span class="">{{ book.matchName }}</span>
                 </div>
                 <div class="col">
-                  <button
-                    class="btn-warning rounded-pill"
-                    (click)="getViewTotal(book)"
-                  >
+                  <button class="btn-warning rounded-pill" (click)="getViewTotal(book)">
                     View total
                   </button>
                 </div>
@@ -154,59 +116,40 @@
             </div>
 
             <div class="col-md-6 col-6">
-              <div
-                class="row mb-2 align-items-center"
-                *ngFor="let market of book.leftMarkets"
-              >
+              <div class="row mb-2 align-items-center" *ngFor="let market of book.leftMarkets">
                 <div class="col-md-6 col">
                   <div class="row">
                     <div class="col-md-10 col">{{ market.marketName }}</div>
                     <div class="col-md-2 col">
-                      <a
-                        (click)="redirectUrlByMarket([market])"
-                        class="pointer"
-                      >
-                        <img
-                          src="assets/images/net_exposure.png"
-                          width="22px"
-                          alt=""
-                      /></a>
+                      <a (click)="redirectUrlByMarket([market])" class="pointer">
+                        <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col">
                   <div class="row">
-                    <div class="col-md-3 col p-2 bg-white text-dark">
+                    <div class="col-md-3 col p-2 bg-white ">
                       {{ market.totalStakes | indianCurrency }}
                     </div>
-                    <div
-                      class="col-md-3 col p-2 bg-white"
-                      [ngClass]="
+                    <div class="col-md-3 col p-2 bg-white" [ngClass]="
                         market.horses[0]?.finalAmount > 0
                           ? 'text-success'
                           : 'text-danger'
-                      "
-                    >
+                      ">
                       {{ market.horses[0]?.finalAmount | indianCurrency }}
                     </div>
-                    <div
-                      class="col-md-3 col p-2 bg-white"
-                      [ngClass]="
+                    <div class="col-md-3 col p-2 bg-white" [ngClass]="
                         market.horses[2]?.finalAmount > 0
                           ? 'text-success'
                           : 'text-danger'
-                      "
-                    >
+                      ">
                       {{ market.horses[2]?.finalAmount | indianCurrency }}
                     </div>
-                    <div
-                      class="col-md-3 col p-2 bg-white"
-                      [ngClass]="
+                    <div class="col-md-3 col p-2 bg-white" [ngClass]="
                         market.horses[1]?.finalAmount > 0
                           ? 'text-success'
                           : 'text-danger'
-                      "
-                    >
+                      ">
                       {{ market.horses[1]?.finalAmount | indianCurrency }}
                     </div>
                   </div>
@@ -215,10 +158,7 @@
             </div>
 
             <div class="col-md-6 col-6">
-              <div
-                class="row mb-2 align-items-center"
-                *ngFor="let market of book.rightMarkets"
-              >
+              <div class="row mb-2 align-items-center" *ngFor="let market of book.rightMarkets">
                 <div class="col-md-6 col">
                   <div class="row align-items-center">
                     <div class="col-md-10 col">{{ market.marketName }}</div>
@@ -226,15 +166,8 @@
                       <ul class="list-inline d-flex m-0">
                         <li>
                           <!-- (click)="redirectUrlByMarket([data])" -->
-                          <a
-                            (click)="redirectUrlByMarket([market])"
-                            class="pointer"
-                          >
-                            <img
-                              src="assets/images/net_exposure.png"
-                              width="22px"
-                              alt=""
-                          /></a>
+                          <a (click)="redirectUrlByMarket([market])" class="pointer">
+                            <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
                         </li>
                         <!-- <li>
                         <a (click)="redirectUrlByMarket(market)" class="pointer">
@@ -254,15 +187,12 @@
                 </div>
                 <div class="col-md-6 col">
                   <div class="row">
-                    <div class="col-4 bg-white text-dark p-2">
+                    <div class="col-4 bg-white  p-2">
                       <span> {{ market.totalStakes | indianCurrency }}</span>
                     </div>
-                    <div
-                      class="col-4 bg-white p-2"
-                      [ngClass]="
+                    <div class="col-4 bg-white p-2" [ngClass]="
                         market.maxWin >= 0 ? 'text-success' : 'text-danger'
-                      "
-                    >
+                      ">
                       <span> {{ market.maxWin | indianCurrency }}</span>
                     </div>
                     <div class="col-4 bg-white text-danger p-2">
@@ -280,7 +210,7 @@
         <div class="row" *ngIf="isMobileView">
           <div class="col-md-12">
             <div class="table-responsive mobileTable">
-              <table class="table text-white">
+              <table class="table ">
                 <thead>
                   <tr *ngIf="bookObj.length != 0">
                     <th></th>
@@ -294,66 +224,47 @@
                 <tbody *ngFor="let book of bookObj">
                   <tr class="bg-pink">
                     <td colspan="11">
-                      <tr>
-                        <td class="col-9">
-                          <span>{{ book.matchName }}</span>
-                        </td>
-                        <td>
-                          <button
-                            class="btn-warning rounded-pill"
-                            (click)="getViewTotal(book)"
-                          >
-                            View total
-                          </button>
-                        </td>
-                      </tr>
+                  <tr>
+                    <td class="col-9">
+                      <span>{{ book.matchName }}</span>
                     </td>
+                    <td>
+                      <button class="btn-warning rounded-pill" (click)="getViewTotal(book)">
+                        View total
+                      </button>
+                    </td>
+                  </tr>
+                  </td>
                   </tr>
                   <ng-container>
                     <tr *ngFor="let market of book.leftMarkets">
                       <td>{{ market.marketName }}</td>
                       <td>
-                        <a
-                          (click)="redirectUrlByMarket([market])"
-                          class="pointer"
-                        >
-                          <img
-                            src="assets/images/net_exposure.png"
-                            width="22px"
-                            alt=""
-                        /></a>
+                        <a (click)="redirectUrlByMarket([market])" class="pointer">
+                          <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
                       </td>
-                      <td class="bg-white text-dark">
+                      <td class="bg-white ">
                         {{ market.totalStakes | indianCurrency }}
                       </td>
-                      <td
-                        class="bg-white"
-                        [ngClass]="
+                      <td class="bg-white" [ngClass]="
                           market.horses[0]?.finalAmount > 0
                             ? 'text-success'
                             : 'text-danger'
-                        "
-                      >
+                        ">
                         {{ market.horses[0]?.finalAmount | indianCurrency }}
                       </td>
-                      <td
-                        class="bg-white"
-                        [ngClass]="
+                      <td class="bg-white" [ngClass]="
                           market.horses[2]?.finalAmount > 0
                             ? 'text-success'
                             : 'text-danger'
-                        "
-                      >
+                        ">
                         {{ market.horses[2]?.finalAmount | indianCurrency }}
                       </td>
-                      <td
-                        class="bg-white"
-                        [ngClass]="
+                      <td class="bg-white" [ngClass]="
                           market.horses[1]?.finalAmount > 0
                             ? 'text-success'
                             : 'text-danger'
-                        "
-                      >
+                        ">
                         {{ market.horses[1]?.finalAmount | indianCurrency }}
                       </td>
                     </tr>
@@ -361,7 +272,7 @@
                     <ng-container>
                       <tr class="rgtMarket">
                         <td colspan="6" *ngIf="book.rightMarkets.length != 0">
-                          <table class="table text-white">
+                          <table class="table ">
                             <tr>
                               <th scope="col" class="col-5"></th>
                               <th scope="col"></th>
@@ -372,42 +283,28 @@
                             <tr *ngFor="let market of book.rightMarkets">
                               <td colspan="1">{{ market.marketName }}</td>
                               <td colspan="1">
-                                <a
-                                  (click)="redirectUrlByMarket([market])"
-                                  class="pointer"
-                                >
-                                  <img
-                                    src="assets/images/net_exposure.png"
-                                    width="22px"
-                                    alt=""
-                                /></a>
+                                <a (click)="redirectUrlByMarket([market])" class="pointer">
+                                  <img src="assets/images/net_exposure.png" width="22px" alt="" /></a>
                               </td>
-                              <td colspan="1" class="bg-white text-dark">
+                              <td colspan="1" class="bg-white ">
                                 <span>
                                   {{
-                                    market.totalStakes | indianCurrency
-                                  }}</span
-                                >
+                                  market.totalStakes | indianCurrency
+                                  }}</span>
                               </td>
-                              <td
-                                class="bg-white"
-                                colspan="1"
-                                [ngClass]="
+                              <td class="bg-white" colspan="1" [ngClass]="
                                   market.maxWin >= 0
                                     ? 'text-success'
                                     : 'text-danger'
-                                "
-                              >
+                                ">
                                 <span>
-                                  {{ market.maxWin | indianCurrency }}</span
-                                >
+                                  {{ market.maxWin | indianCurrency }}</span>
                               </td>
                               <td colspan="1" class="bg-white text-danger">
                                 <span>
                                   {{
-                                    market.netExposure | indianCurrency
-                                  }}</span
-                                >
+                                  market.netExposure | indianCurrency
+                                  }}</span>
                               </td>
                             </tr>
                           </table>

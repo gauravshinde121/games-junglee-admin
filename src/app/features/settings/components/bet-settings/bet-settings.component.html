@@ -106,22 +106,12 @@
 
 <main id="main" class="main m-0">
   <section class="section gamedetails">
-    <div
-      [formGroup]="betTickerForm"
-      class="tab-pane fade show active"
-      id="pills-batlist"
-      role="tabpanel"
-      aria-labelledby="pills-batlist-tab"
-      tabindex="0"
-    >
+    <div [formGroup]="betTickerForm" class="tab-pane fade show active" id="pills-batlist" role="tabpanel"
+      aria-labelledby="pills-batlist-tab" tabindex="0">
       <div class="row mb-3 align-items-end">
         <div class="col-md-3">
           <label>Select Member</label>
-          <select
-            formControlName="memberId"
-            id="ab"
-            class="form-select pointer"
-          >
+          <select formControlName="memberId" id="ab" class="form-select pointer">
             <option value="null">All</option>
             <option *ngFor="let member of allMembers" [value]="member.userId">
               {{ member.username }}
@@ -129,43 +119,23 @@
           </select>
         </div>
         <div class="col-md-3">
-          <button
-            class="btn border-pink btn-pink rounded-pill mt-4 w-100 text-white"
-            (click)="clearMember()"
-          >
+          <button class="btn border-pink btn-pink rounded-pill mt-4 w-100 " (click)="clearMember()">
             <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
           </button>
         </div>
         <div class="col-md-3 mt-2">
           <label>From Date</label>
-          <input
-            formControlName="fromDate"
-            type="date"
-            class="form-control"
-            id=""
-            placeholder="Month"
-          />
+          <input formControlName="fromDate" type="date" class="form-control" id="" placeholder="Month" />
         </div>
         <div class="col-md-3">
           <label>To Date</label>
-          <input
-            type="date"
-            formControlName="toDate"
-            class="form-control"
-            id=""
-            placeholder="Month"
-          />
+          <input type="date" formControlName="toDate" class="form-control" id="" placeholder="Month" />
         </div>
       </div>
       <div class="row mb-2 align-items-end">
         <div class="col-md-4 mb-3">
           <label>Select Sport</label>
-          <select
-            formControlName="sportsId"
-            id="ab"
-            class="form-select pointer"
-            (change)="changeGame($event)"
-          >
+          <select formControlName="sportsId" id="ab" class="form-select pointer" (change)="changeGame($event)">
             <option value="null">All</option>
             <option *ngFor="let game of games" [value]="game.sportId">
               {{ game.sportName }}
@@ -174,12 +144,7 @@
         </div>
         <div class="col-md-4 mb-3">
           <label>Select Match</label>
-          <select
-            formControlName="matchId"
-            id="ab"
-            class="form-select pointer"
-            (change)="changeMatch($event)"
-          >
+          <select formControlName="matchId" id="ab" class="form-select pointer" (change)="changeMatch($event)">
             <option value="null">All</option>
             <option value="{{ match.matchId }}" *ngFor="let match of matchList">
               {{ match.matchName }}
@@ -188,17 +153,9 @@
         </div>
         <div class="col-md-4 mb-3">
           <label>Select Market Type</label>
-          <select
-            formControlName="marketId"
-            id="ab"
-            class="form-select pointer"
-            (change)="changeMarketType($event)"
-          >
+          <select formControlName="marketId" id="ab" class="form-select pointer" (change)="changeMarketType($event)">
             <option value="null">All</option>
-            <option
-              value="{{ market.marketId }}"
-              *ngFor="let market of marketList"
-            >
+            <option value="{{ market.marketId }}" *ngFor="let market of marketList">
               {{ market.marketName }}
             </option>
           </select>
@@ -206,39 +163,21 @@
 
         <div class="col-md-4 mb-3">
           <label>Stakes From Value</label>
-          <input
-            formControlName="stakesFromValue"
-            type="number"
-            class="form-control"
-            value=""
-            placeholder="Enter Stake From..."
-          />
+          <input formControlName="stakesFromValue" type="number" class="form-control" value=""
+            placeholder="Enter Stake From..." />
         </div>
         <div class="col-md-4 mb-3">
           <label>Stakes To Value</label>
-          <input
-            formControlName="stakesToValue"
-            type="number"
-            class="form-control"
-            value=""
-            placeholder="Enter Stake To..."
-          />
+          <input formControlName="stakesToValue" type="number" class="form-control" value=""
+            placeholder="Enter Stake To..." />
         </div>
 
         <div class="col-md-4 mb-3 mt-4">
-          <button
-            type="button"
-            class="btn btn-pink rounded-pill w-25"
-            (click)="searchList()"
-          >
+          <button type="button" class="btn btn-pink rounded-pill w-25" (click)="searchList()">
             Search
           </button>
-          <button
-            *ngIf="allBets.length > 0"
-            type="button"
-            class="btn btn-pink rounded-pill w-25 ms-2 text-white"
-            (click)="exportExcel()"
-          >
+          <button *ngIf="allBets.length > 0" type="button" class="btn btn-pink rounded-pill w-25 ms-2 "
+            (click)="exportExcel()">
             Export
           </button>
         </div>
@@ -247,52 +186,29 @@
     <div class="row mb-3">
       <div class="col-md-12">
         <div class="table-responsive tableRes tableFixHead">
-          <table
-            class="table tableall"
-            *ngIf="allBets.length > 0 && !this.isLoading"
-          >
+          <table class="table tableall" *ngIf="allBets.length > 0 && !this.isLoading">
             <thead>
               <tr>
                 <th scope="col" class="first">#</th>
-                <th
-                  scope="col"
-                  class="pointer"
-                  (click)="toggleSort('username')"
-                >
+                <th scope="col" class="pointer" (click)="toggleSort('username')">
                   Member
                 </th>
-                <th
-                  scope="col"
-                  class="pointer"
-                  (click)="toggleSort('placedDate')"
-                >
+                <th scope="col" class="pointer" (click)="toggleSort('placedDate')">
                   Place time
                 </th>
                 <th scope="col" class="pointer" (click)="toggleSort('event')">
                   Events
                 </th>
-                <th
-                  scope="col"
-                  class="pointer"
-                  (click)="toggleSort('betCategory')"
-                >
+                <th scope="col" class="pointer" (click)="toggleSort('betCategory')">
                   Market
                 </th>
-                <th
-                  scope="col"
-                  class="pointer"
-                  (click)="toggleSort('selectionName')"
-                >
+                <th scope="col" class="pointer" (click)="toggleSort('selectionName')">
                   Selection
                 </th>
                 <th scope="col" class="pointer" (click)="toggleSort('betRate')">
                   Odds Placed
                 </th>
-                <th
-                  scope="col"
-                  class="pointer"
-                  (click)="toggleSort('averagePriceMatched')"
-                >
+                <th scope="col" class="pointer" (click)="toggleSort('averagePriceMatched')">
                   Odds Matched
                 </th>
                 <th scope="col" class="pointer" (click)="toggleSort('stake')">
@@ -307,25 +223,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr
-                *ngFor="
+              <tr *ngFor="
                   let bets of allBets | sort : sortColumn : sortAscending;
                   let i = index
-                "
-              >
+                ">
                 <td>{{ i + 1 }}</td>
                 <td>{{ bets.username }}</td>
                 <td>{{ bets.placedDate | date : "medium" }}</td>
                 <td>{{ bets.event }}</td>
                 <td width="11%">
-                  <span
-                    *ngIf="!bets.type"
-                    class="border r-2 bg-danger text-danger me-2 border-3"
-                  ></span>
-                  <span
-                    *ngIf="bets.type"
-                    class="border bg-primary text-primary border-primary me-2 border-3"
-                  ></span>
+                  <span *ngIf="!bets.type" class="border r-2 bg-danger text-danger me-2 border-3"></span>
+                  <span *ngIf="bets.type" class="border bg-primary text-primary border-primary me-2 border-3"></span>
                   {{ bets.betCategory }}
                 </td>
 
@@ -351,22 +259,15 @@
               </td> -->
                 <td>
                   <div class="tooltipnk">
-                    <i
-                      class="fa-sharp fa-solid fa-clipboard cursor-pointer"
-                      ngxClipboard
-                      [cbContent]="bets.ip"
-                      [container]="container"
-                    ></i>
+                    <i class="fa-sharp fa-solid fa-clipboard cursor-pointer" ngxClipboard [cbContent]="bets.ip"
+                      [container]="container"></i>
                     <span class="tooltiptext tabTooltip px-5 w-auto">
                       <small #container>{{ bets.ip }}</small>
                     </span>
                   </div>
                 </td>
                 <td>
-                  <button
-                    class="btn btn-pink rounded-pill w-80"
-                    (click)="openModal(bets)"
-                  >
+                  <button class="btn btn-pink rounded-pill w-80" (click)="openModal(bets)">
                     Delete
                   </button>
                 </td>
@@ -378,21 +279,12 @@
     </div>
 
     <div *ngIf="allBets.length > 0 && !this.isLoading">
-      <button
-        class="btn rounded-pill text-dark"
-        [disabled]="currentPage === 1"
-        (click)="prev()"
-      >
+      <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
         Prev
       </button>
-      <span class="btn btn-pink rounded-pill ps-4 pe-4"
-        >{{ currentPage / totalPages }}
+      <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage / totalPages }}
       </span>
-      <button
-        class="btn rounded-pill text-dark"
-        [disabled]="currentPage === totalPages"
-        (click)="next()"
-      >
+      <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
         Next
       </button>
     </div>
@@ -407,29 +299,16 @@
 </main>
 
 <!-- Modal start-->
-<div
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static"
+  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
+        <h5 class="modal-title cassino " id="staticBackdropLabel">
           Add Remark
         </h5>
-        <button
-          type="button"
-          (click)="closeModal()"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -438,13 +317,8 @@
               <div class="row mb-4 align-items-center">
                 <div class="col-md-5">Remark*</div>
                 <div class="col-md-7">
-                  <input
-                    type="text"
-                    class="form-control border-pink bg-transparent rounded-pill"
-                    formControlName="remarks"
-                    placeholder="Enter remarks"
-                    (keydown.enter)="submitForm()"
-                  />
+                  <input type="text" class="form-control border-pink bg-transparent rounded-pill"
+                    formControlName="remarks" placeholder="Enter remarks" (keydown.enter)="submitForm()" />
                   <!--<div
                     class="text-danger"
                     *ngIf="
@@ -460,19 +334,13 @@
 
               <div class="row mt-5">
                 <div class="col-md-6">
-                  <button
-                    class="btn btn-pink rounded-pill w-80 mt-4"
-                    (click)="closeModal()"
-                  >
+                  <button class="btn btn-pink rounded-pill w-80 mt-4" (click)="closeModal()">
                     Cancel
                   </button>
                 </div>
                 <div class="col-md-6 text-end">
-                  <button
-                    (click)="confirmDeleteBet()"
-                    [disabled]="deleteBetForm.invalid"
-                    class="btn btn-pink rounded-pill w-80 mt-4"
-                  >
+                  <button (click)="confirmDeleteBet()" [disabled]="deleteBetForm.invalid"
+                    class="btn btn-pink rounded-pill w-80 mt-4">
                     Save Remark and Delete
                   </button>
                 </div>

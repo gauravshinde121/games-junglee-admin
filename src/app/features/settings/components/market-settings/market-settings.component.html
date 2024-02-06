@@ -11,12 +11,8 @@
         <div class="row align-items-end">
           <div class="col-md-3">
             <label>Sport Name</label>
-            <select
-              formControlName="sportName"
-              id="ab"
-              class="form-select bg-dgrey pointer"
-              (change)="_onSportSelect()"
-            >
+            <select formControlName="sportName" id="ab" class="form-select bg-dgrey pointer"
+              (change)="_onSportSelect()">
               <option value="null">All</option>
               <option *ngFor="let game of sports" [value]="game.sportId">
                 {{ game.sportName }}
@@ -25,28 +21,17 @@
           </div>
           <div class="col-md-3">
             <label>Tournament Name</label>
-            <select
-              formControlName="tournamentId"
-              id="ab"
-              class="form-select bg-dgrey pointer"
-              (change)="_onTournamentSelect()"
-            >
+            <select formControlName="tournamentId" id="ab" class="form-select bg-dgrey pointer"
+              (change)="_onTournamentSelect()">
               <option value="null">All</option>
-              <option
-                *ngFor="let game of tournamentList"
-                [value]="game.tournamentId"
-              >
+              <option *ngFor="let game of tournamentList" [value]="game.tournamentId">
                 {{ game.tournamentName }}
               </option>
             </select>
           </div>
           <div class="col-md-3">
             <label>Match Name</label>
-            <select
-              formControlName="matchName"
-              id="ab"
-              class="form-select bg-dgrey pointer"
-            >
+            <select formControlName="matchName" id="ab" class="form-select bg-dgrey pointer">
               <option value="null">All</option>
               <option *ngFor="let game of matchList" [value]="game.matchId">
                 {{ game.matchName }}
@@ -54,43 +39,26 @@
             </select>
           </div>
           <div class="col-md-3">
-            <button
-              type="button"
-              class="btn btn-pink rounded-pill mt-4"
-              (click)="getMarketSettingsList()"
-            >
+            <button type="button" class="btn btn-pink rounded-pill mt-4" (click)="getMarketSettingsList()">
               Search
             </button>
           </div>
 
           <div class="col-md-4 col-lg-4 col-xl-4 pt-3">
-            <div class="row text-white">
+            <div class="row ">
               <div class="input-group flex-nowrap">
-                <span
-                  class="input-group-text bg-dark text-white border-pink radius-left-tb"
-                  id="addon-wrapping"
-                >
+                <span class="input-group-text bg-dark  border-pink radius-left-tb" id="addon-wrapping">
                   <i class="fa fa-search"></i>
                 </span>
-                <input
-                  type="text"
-                  class="form-control border-start-0 border-pink radius-right-tb"
-                  placeholder="Search"
-                  aria-label="Search"
-                  aria-describedby="addon-wrapping"
-                  [(ngModel)]="searchTerm"
-                  [ngModelOptions]="{ standalone: true }"
-                />
+                <input type="text" class="form-control border-start-0 border-pink radius-right-tb" placeholder="Search"
+                  aria-label="Search" aria-describedby="addon-wrapping" [(ngModel)]="searchTerm"
+                  [ngModelOptions]="{ standalone: true }" />
               </div>
             </div>
           </div>
           <div class="col-md-3">
-            <button
-              *ngIf="selectedUserForAdjustment.length > 0"
-              (click)="openBulkTransferModal()"
-              type="button"
-              class="btn btn-pink radius-all"
-            >
+            <button *ngIf="selectedUserForAdjustment.length > 0" (click)="openBulkTransferModal()" type="button"
+              class="btn btn-pink radius-all">
               Update Multiple Market
             </button>
             <!-- <div class="modal-dialog modal-dialog">
@@ -180,86 +148,43 @@
         </div>
       </div>
       <div class="col-md-12 mt-3 overflow-auto">
-        <div
-          *ngIf="marketSettingsList.length == 0"
-          class="border text-center p-5"
-        >
+        <div *ngIf="marketSettingsList.length == 0" class="border text-center p-5">
           <h4 *ngIf="marketSettingsList.length == 0 && !isLoading">
             No data found
           </h4>
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
-        <table
-          class="table tableall marketSetting"
-          *ngIf="marketSettingsList.length > 0"
-        >
-          <thead class="text-dark">
+        <table class="table tableall marketSetting" *ngIf="marketSettingsList.length > 0">
+          <thead class="">
             <tr>
               <th scope="col" class="first pointer">
-                <input
-                  type="checkbox"
-                  name="all"
-                  class="first cursor-pointer"
-                  [checked]="isAllChecked()"
-                  (change)="checkAll($event)"
-                />
+                <input type="checkbox" name="all" class="first cursor-pointer" [checked]="isAllChecked()"
+                  (change)="checkAll($event)" />
               </th>
               <!-- <th scope="col">#</th> -->
-              <th
-                scope="col"
-                class="cursor-pointer"
-                (click)="toggleSort('marketName')"
-              >
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('marketName')">
                 Market Name
               </th>
-              <th
-                scope="col"
-                class="cursor-pointer"
-                (click)="toggleSort('marketType')"
-              >
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('marketType')">
                 Market Type
               </th>
-              <th
-                scope="col"
-                class="cursor-pointer"
-                (click)="toggleSort('refMatchName')"
-              >
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('refMatchName')">
                 Match Name
               </th>
-              <th
-                scope="col"
-                class="cursor-pointer"
-                (click)="toggleSort('minBet')"
-              >
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('minBet')">
                 Min Bet
               </th>
-              <th
-                scope="col"
-                class="cursor-pointer"
-                (click)="toggleSort('maxBet')"
-              >
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('maxBet')">
                 Max Bet
               </th>
-              <th
-                scope="col"
-                class="cursor-pointer"
-                (click)="toggleSort('maxMarketSize')"
-              >
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('maxMarketSize')">
                 Max Market Size
               </th>
-              <th
-                scope="col"
-                class="cursor-pointer"
-                (click)="toggleSort('marketDelay')"
-              >
+              <th scope="col" class="cursor-pointer" (click)="toggleSort('marketDelay')">
                 Market Delay
               </th>
               <th scope="col">Setting</th>
-              <th
-                scope="col"
-                class="cursor-pointer last"
-                (click)="toggleSort('marketIsActive')"
-              >
+              <th scope="col" class="cursor-pointer last" (click)="toggleSort('marketIsActive')">
                 Action
               </th>
 
@@ -267,22 +192,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="
+            <tr *ngFor="
                 let stmt of marketSettingsList
                   | sort : sortColumn : sortAscending
                   | search : searchTerm;
                 let i = index
-              "
-            >
+              ">
               <td>
-                <input
-                  type="checkbox"
-                  class="pointer"
-                  (change)="checkMarketId(stmt.marketId)"
-                  [ngModelOptions]="{ standalone: true }"
-                  [(ngModel)]="stmt.state"
-                />
+                <input type="checkbox" class="pointer" (change)="checkMarketId(stmt.marketId)"
+                  [ngModelOptions]="{ standalone: true }" [(ngModel)]="stmt.state" />
               </td>
               <!-- <td>
                 {{ i + 1 }}
@@ -299,13 +217,8 @@
               </td>
               <td>
                 <label class="toggle-container">
-                  <input
-                    [checked]="stmt.marketIsActive"
-                    type="checkbox"
-                    id="toggle-button"
-                    class="toggle-class active"
-                    (change)="onToggleChange($event, stmt.marketId)"
-                  />
+                  <input [checked]="stmt.marketIsActive" type="checkbox" id="toggle-button" class="toggle-class active"
+                    (change)="onToggleChange($event, stmt.marketId)" />
                   <span class="toggle-class-slider"></span>
                 </label>
               </td>
@@ -318,29 +231,16 @@
 </main>
 
 <!-- Modal start-->
-<div
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static"
+  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
           Market Settings
         </h5>
-        <button
-          type="button"
-          (click)="closeModal()"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -349,67 +249,40 @@
               <div class="row">
                 <div class="col-md-6 mb-2">
                   Min Bet*
-                  <input
-                    type="number"
-                    class="form-control border-pink bg-transparent rounded-pill"
-                    formControlName="minBet"
-                    min="0"
-                    (keypress)="preventNegativeKeyPress($event)"
-                  />
+                  <input type="number" class="form-control border-pink bg-transparent rounded-pill"
+                    formControlName="minBet" min="0" (keypress)="preventNegativeKeyPress($event)" />
                 </div>
                 <div class="col-md-6 mb-2">
                   Max Bet*
-                  <input
-                    type="number"
-                    class="form-control border-pink bg-transparent rounded-pill"
-                    formControlName="maxBet"
-                    min="0"
-                    (keypress)="preventNegativeKeyPress($event)"
-                  />
+                  <input type="number" class="form-control border-pink bg-transparent rounded-pill"
+                    formControlName="maxBet" min="0" (keypress)="preventNegativeKeyPress($event)" />
                 </div>
                 <div class="col-md-6 mb-2">
                   Max Market Size*
-                  <input
-                    type="number"
-                    class="form-control border-pink bg-transparent rounded-pill"
-                    formControlName="maxMarketSize"
-                    min="0"
-                    (keypress)="preventNegativeKeyPress($event)"
-                  />
+                  <input type="number" class="form-control border-pink bg-transparent rounded-pill"
+                    formControlName="maxMarketSize" min="0" (keypress)="preventNegativeKeyPress($event)" />
                 </div>
                 <div class="col-md-6 mb-2">
                   Market Delay*
-                  <input
-                    type="number"
-                    class="form-control border-pink bg-transparent rounded-pill"
-                    formControlName="marketDelay"
-                    min="0"
-                    (keypress)="preventNegativeKeyPress($event)"
-                  />
+                  <input type="number" class="form-control border-pink bg-transparent rounded-pill"
+                    formControlName="marketDelay" min="0" (keypress)="preventNegativeKeyPress($event)" />
                 </div>
 
                 <div class="row">
                   <div class="col-md-6 text-end">
-                    <button
-                      (click)="
+                    <button (click)="
                         selectedUserForAdjustment.length > 0
                           ? submitBulkMarket()
                           : saveMatchSettings()
-                      "
-                      [disabled]="
+                      " [disabled]="
                         selectedUserForAdjustment.length == 0 &&
                         matchSettingsForm.invalid
-                      "
-                      class="btn btn-danger rounded-pill w-80 mt-2"
-                    >
+                      " class="btn btn-danger rounded-pill w-80 mt-2">
                       Save
                     </button>
                   </div>
                   <div class="col-md-6">
-                    <button
-                      class="btn btn-danger rounded-pill w-80 mt-2"
-                      (click)="closeModal()"
-                    >
+                    <button class="btn btn-danger rounded-pill w-80 mt-2" (click)="closeModal()">
                       Cancel
                     </button>
                   </div>

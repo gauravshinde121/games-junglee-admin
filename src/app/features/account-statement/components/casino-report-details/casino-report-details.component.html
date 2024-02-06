@@ -37,54 +37,32 @@
         <table class="table tableall b-0" *ngIf="casinoStatements.length > 0">
           <tbody>
             <tr>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('createdDate')"
-              >
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('createdDate')">
                 <i class="fa-regular fa-calendar-days"></i>&nbsp; Sr No
               </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('username')"
-              >
-                <i class="fa-solid fa-user text-white"></i> Username
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('username')">
+                <i class="fa-solid fa-user "></i> Username
               </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('credit')"
-              >
-                <i class="fa-solid fa-user text-white"></i> Win/Loss
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('credit')">
+                <i class="fa-solid fa-user "></i> Win/Loss
               </th>
               <!-- <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('debit')">
                 <i class="fa-solid fa-user"></i> Debit
               </th> -->
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('remark')"
-              >
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('remark')">
                 <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
                 Remark
               </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('date')"
-              >
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('date')">
                 <i class="fa-solid fa-text-width"></i> Date
               </th>
             </tr>
 
-            <tr
-              *ngFor="
+            <tr *ngFor="
                 let user of casinoStatements
                   | sort : sortColumn : sortAscending;
                 let i = index
-              "
-            >
+              ">
               <td class="tds tdts">
                 <!-- *ngIf="currentPage == 1" -->
                 <span>{{ i + 1 }}</span>
@@ -98,10 +76,10 @@
               <td class="tds tdts">
                 <strong class="text-danger" *ngIf="user.debit < 0">{{
                   user.debit | indianCurrency
-                }}</strong>
+                  }}</strong>
                 <strong class="text-success" *ngIf="user.credit > 0">{{
                   user.credit | indianCurrency
-                }}</strong>
+                  }}</strong>
               </td>
               <td class="tds tdts">
                 {{ user.remark }}
@@ -115,10 +93,7 @@
             <tr>
               <td></td>
               <td></td>
-              <td
-                style="text-align: left"
-                [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'"
-              >
+              <td style="text-align: left" [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">
                 {{ totalAmount | indianCurrency }}
               </td>
               <td></td>

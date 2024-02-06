@@ -14,17 +14,9 @@
           <div class="row align-items-end" [formGroup]="accountStmtForm">
             <div class="col-md-4">
               <label for="text" class="cassino">Select Player</label><br />
-              <select
-                formControlName="playerId"
-                id="ab"
-                class="form-select pointer"
-                (change)="searchList($event)"
-              >
+              <select formControlName="playerId" id="ab" class="form-select pointer" (change)="searchList($event)">
                 <option [value]="null">--</option>
-                <option
-                  [value]="market.userId"
-                  *ngFor="let market of playerList"
-                >
+                <option [value]="market.userId" *ngFor="let market of playerList">
                   {{ market.username }}
                 </option>
               </select>
@@ -49,59 +41,33 @@
         <table class="table tableall b-0" *ngIf="accountStatements.length > 0">
           <tbody>
             <tr>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('createdDate')"
-              >
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('createdDate')">
                 <i class="fa-regular fa-calendar-days"></i>&nbsp; Sr No
               </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('fromUsername')"
-              >
-                <i class="fa-solid fa-user text-white"></i> Date
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('fromUsername')">
+                <i class="fa-solid fa-user "></i> Date
               </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('toUsername')"
-              >
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('toUsername')">
                 <i class="fa-solid fa-user"></i> Credit
               </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('amount')"
-              >
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('amount')">
                 <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
                 Debit
               </th>
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('isGiven')"
-              >
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('isGiven')">
                 <i class="fa-solid fa-text-width"></i> Balance
               </th>
 
-              <th
-                class="thts"
-                class="cursor-pointer pointer"
-                (click)="toggleSort('isGiven')"
-              >
+              <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('isGiven')">
                 <i class="fa-solid fa-text-width"></i> Remark
               </th>
             </tr>
 
-            <tr
-              *ngFor="
+            <tr *ngFor="
                 let user of accountStatements
                   | sort : sortColumn : sortAscending;
                 let i = index
-              "
-            >
+              ">
               <td class="tds tdts">
                 <!-- *ngIf="currentPage == 1" -->
                 <span>{{ i + 1 }}</span>
@@ -118,10 +84,7 @@
               <td class="tds tdts">
                 {{ user.debit | indianCurrency }}
               </td>
-              <td
-                [ngClass]="user.isGiven ? 'text-danger' : 'text-success'"
-                class="amountt tds tdts"
-              >
+              <td [ngClass]="user.isGiven ? 'text-danger' : 'text-success'" class="amountt tds tdts">
                 {{ user.balance | indianCurrency }}
               </td>
               <td class="tds tdts">
@@ -135,10 +98,8 @@
               <td></td>
               <td></td>
               <td></td>
-              <td
-                class="text-success float-left text-center"
-                [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'"
-              >
+              <td class="text-success float-left text-center"
+                [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">
                 {{ totalAmount | indianCurrency }}
               </td>
               <td></td>

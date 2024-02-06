@@ -10,12 +10,8 @@
         <div class="row align-items-end">
           <div class="col-md-3">
             <label>Sport Name</label>
-            <select
-              formControlName="sportName"
-              id="ab"
-              class="form-select bg-dgrey pointer"
-              (change)="_onSportSelect()"
-            >
+            <select formControlName="sportName" id="ab" class="form-select bg-dgrey pointer"
+              (change)="_onSportSelect()">
               <option value="null">All</option>
               <option *ngFor="let game of sports" [value]="game.sportId">
                 {{ game.sportName }}
@@ -24,29 +20,18 @@
           </div>
           <div class="col-md-3">
             <label>Tournament Name</label>
-            <select
-              formControlName="tournamentId"
-              id="ab"
-              class="form-select bg-dgrey pointer"
-              (change)="_onTournamentSelect()"
-            >
+            <select formControlName="tournamentId" id="ab" class="form-select bg-dgrey pointer"
+              (change)="_onTournamentSelect()">
               <option value="null">All</option>
-              <option
-                *ngFor="let game of tournamentList"
-                [value]="game.tournamentId"
-              >
+              <option *ngFor="let game of tournamentList" [value]="game.tournamentId">
                 {{ game.tournamentName }}
               </option>
             </select>
           </div>
           <div class="col-md-3">
             <label>Match Name</label>
-            <select
-              formControlName="matchName"
-              id="ab"
-              class="form-select bg-dgrey pointer"
-              (change)="getMarketByMatchId()"
-            >
+            <select formControlName="matchName" id="ab" class="form-select bg-dgrey pointer"
+              (change)="getMarketByMatchId()">
               <option value="null">All</option>
               <option *ngFor="let game of matchList" [value]="game.matchId">
                 {{ game.matchName }}
@@ -71,18 +56,12 @@
         </div>
       </div>
       <div class="col-md-12 mt-3 overflow-auto">
-        <div
-          *ngIf="marketList && marketList.length == 0"
-          class="border text-center p-5"
-        >
+        <div *ngIf="marketList && marketList.length == 0" class="border text-center p-5">
           <h4 *ngIf="marketList.length == 0 && !isLoading">No data found</h4>
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
-        <table
-          class="table tableall marketSetting"
-          *ngIf="marketList && marketList.length > 0"
-        >
-          <thead class="text-dark">
+        <table class="table tableall marketSetting" *ngIf="marketList && marketList.length > 0">
+          <thead class="">
             <tr>
               <th scope="col" class="cursor-pointer first">Market Name</th>
               <th scope="col" class="cursor-pointer">Market Status</th>
@@ -94,10 +73,7 @@
             <tr *ngFor="let stmt of marketList; let i = index">
               <td>{{ stmt.marketName }}</td>
               <td>
-                <button
-                  class="bg-pink btn text-white"
-                  (click)="toggleMarketStatus(stmt)"
-                >
+                <button class="bg-pink btn " (click)="toggleMarketStatus(stmt)">
                   {{ stmt.isMarketSuspended === false ? "Active" : "Suspend" }}
                 </button>
               </td>
@@ -105,10 +81,7 @@
                 <div *ngFor="let runner of stmt.runnerStatus">
                   <div class="d-flex">
                     <div class="mr-2 col-sm-5">{{ runner.RunnerName }}</div>
-                    <button
-                      class="bg-pink btn text-white"
-                      (click)="toggleRunnerStatus(stmt, runner)"
-                    >
+                    <button class="bg-pink btn " (click)="toggleRunnerStatus(stmt, runner)">
                       {{ runner.isSuspended === 1 ? "Suspend" : "Active" }}
                     </button>
                   </div>

@@ -11,14 +11,8 @@
         <div (click)="toggleMenu()" class="{{ mainClass }}">
           <main id="main" class="main w-100">
             <section class="section gamedetails">
-              <div
-                [formGroup]="betTickerForm"
-                class="tab-pane fade show active"
-                id="pills-batlist"
-                role="tabpanel"
-                aria-labelledby="pills-batlist-tab"
-                tabindex="0"
-              >
+              <div [formGroup]="betTickerForm" class="tab-pane fade show active" id="pills-batlist" role="tabpanel"
+                aria-labelledby="pills-batlist-tab" tabindex="0">
                 <div class="row mb-3">
                   <div class="col-md-3">
                     <h3 class="text-pink">Surveillance</h3>
@@ -27,61 +21,35 @@
                 <div class="row mb-3 align-items-center">
                   <div class="col-md-3 col-6">
                     <label>Select Member</label>
-                    <select
-                      formControlName="memberId"
-                      id="ab"
-                      class="form-select pointer"
-                    >
+                    <select formControlName="memberId" id="ab" class="form-select pointer">
                       <option value="null">All</option>
-                      <option
-                        *ngFor="let member of allMembers"
-                        [value]="member.userId"
-                      >
+                      <option *ngFor="let member of allMembers" [value]="member.userId">
                         {{ member.username }}
                       </option>
                     </select>
                   </div>
                   <div class="col-md-3 col-6">
-                    <button
-                      class="btn rounded-pill btn-pink mt-4 w-100 text-white"
-                      (click)="clearMemberName()"
-                    >
+                    <button class="btn rounded-pill btn-pink mt-4 w-100 " (click)="clearMemberName()">
                       <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
                     </button>
                   </div>
 
                   <div class="col-md-3 col-6">
                     <label>From Date</label>
-                    <input
-                      type="date"
-                      formControlName="fromDate"
-                      name="fromDate"
-                      class="form-control"
-                      id=""
-                      placeholder="Month"
-                    />
+                    <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id=""
+                      placeholder="Month" />
                   </div>
                   <div class="col-md-3 col-6">
                     <label>To Date</label>
-                    <input
-                      type="date"
-                      formControlName="toDate"
-                      name="toDate"
-                      class="form-control"
-                      id=""
-                      placeholder="Month"
-                    />
+                    <input type="date" formControlName="toDate" name="toDate" class="form-control" id=""
+                      placeholder="Month" />
                   </div>
                 </div>
                 <div class="row mb-3 align-items-center">
                   <div class="col-md-4 mb-2">
                     <label>Select Sport</label>
-                    <select
-                      formControlName="sportsId"
-                      id="ab"
-                      class="form-select pointer"
-                      (change)="changeGame($event)"
-                    >
+                    <select formControlName="sportsId" id="ab" class="form-select pointer"
+                      (change)="changeGame($event)">
                       <option value="null">All</option>
                       <option *ngFor="let game of games" [value]="game.sportId">
                         {{ game.sportName }}
@@ -90,169 +58,116 @@
                   </div>
                   <div class="col-md-4 mb-2">
                     <label>Select Match</label>
-                    <select
-                      formControlName="matchId"
-                      id="ab"
-                      class="form-select pointer"
-                      (change)="changeMatch($event)"
-                    >
+                    <select formControlName="matchId" id="ab" class="form-select pointer"
+                      (change)="changeMatch($event)">
                       <option value="null">All</option>
-                      <option
-                        value="{{ match.matchId }}"
-                        *ngFor="let match of matchList"
-                      >
+                      <option value="{{ match.matchId }}" *ngFor="let match of matchList">
                         {{ match.matchName }}
                       </option>
                     </select>
                   </div>
                   <div class="col-md-4 mb-2">
                     <label>Select Market Type</label>
-                    <select
-                      formControlName="marketId"
-                      id="ab"
-                      class="form-select pointer"
-                      (change)="changeMarketType($event)"
-                    >
+                    <select formControlName="marketId" id="ab" class="form-select pointer"
+                      (change)="changeMarketType($event)">
                       <option value="null">All</option>
-                      <option
-                        value="{{ market.marketId }}"
-                        *ngFor="let market of marketList"
-                      >
+                      <option value="{{ market.marketId }}" *ngFor="let market of marketList">
                         {{ market.marketName }}
                       </option>
                     </select>
                   </div>
                   <div class="col-md-4 mb-2">
                     <label>Stakes From Value</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      formControlName="stakesFromValue"
-                      placeholder="Enter Stake From..."
-                      (keypress)="numberOnly($event)"
-                    />
+                    <input type="number" class="form-control" formControlName="stakesFromValue"
+                      placeholder="Enter Stake From..." (keypress)="numberOnly($event)" />
                   </div>
                   <div class="col-md-4 mb-2">
                     <label>Stakes To Value</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      formControlName="stakesToValue"
-                      placeholder="Enter Stake To..."
-                      (keypress)="numberOnly($event)"
-                    />
+                    <input type="number" class="form-control" formControlName="stakesToValue"
+                      placeholder="Enter Stake To..." (keypress)="numberOnly($event)" />
                   </div>
                   <div class="col-md-2 mb-1 col-6 mt-3">
-                    <button
-                      type="button"
-                      class="btn btn-pink rounded-pill"
-                      (click)="searchList()"
-                    >
+                    <button type="button" class="btn btn-pink rounded-pill" (click)="searchList()">
                       Search
                     </button>
-                    <button
-                      *ngIf="allBets.length > 0"
-                      type="button"
-                      class="btn btn-pink rounded-pill ms-2 text-white"
-                      (click)="exportExcel()"
-                    >
+                    <button *ngIf="allBets.length > 0" type="button" class="btn btn-pink rounded-pill ms-2 "
+                      (click)="exportExcel()">
                       Export
                     </button>
                   </div>
                   <div class="col-md-2 mb-1 text-end col-6 mt-3">
                     {{ refreshCount }} &nbsp;
-                    <button
-                      class="btn btn-pink rounded-pill ps-2 pe-2"
-                      (click)="refreshCall()"
-                    >
+                    <button class="btn btn-pink rounded-pill ps-2 pe-2" (click)="refreshCall()">
                       <i class="fa fa-redo-alt disnone"></i> Refresh
                     </button>
                   </div>
                 </div>
               </div>
               <div class="row mt-3">
-                <div class="col-md-12 ">
+                <div class="col-md-12">
                   <div class="table-responsive tableRes tableFixHead">
-                  <table
-                    class="table tableall"
-                    *ngIf="allBets.length > 0 && !this.isLoading"
-                  >
-                    <thead>
-                      <tr>
-                        <th scope="col" class="first">#</th>
-                        <th scope="col">Member</th>
-                        <th scope="col">Place time</th>
-                        <th scope="col">Events</th>
-                        <th scope="col">Market</th>
-                        <th scope="col">Selection</th>
-                        <th scope="col">Odds Placed</th>
-                        <th scope="col">Odds Matched</th>
-                        <th scope="col">Matched Stake</th>
-                        <th scope="col" class="last">Unmatched Stake</th>
-                        <!-- <th scope="col">Profit/Liability</th> -->
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let bets of allBets; let i = index">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ bets.username }}</td>
-                        <td>{{ bets.placedDate | date : "medium" }}</td>
-                        <td>{{ bets.event }}</td>
-                        <td>
-                          <span
-                            *ngIf="!bets.type"
-                            class="border r-2 bg-danger text-danger border-danger me-2 border-3"
-                          ></span>
-                          <span
-                            *ngIf="bets.type"
-                            class="border bg-primary text-primary border-primary me-2 border-3"
-                          ></span>
-                          {{ bets.betCategory }}
-                        </td>
-                        <td>{{ bets.selectionName }}</td>
-                        <td>{{ bets.betRate }}</td>
-                        <td>{{ bets.averagePriceMatched }}</td>
-                        <td>
-                          <ng-container *ngIf="bets.isMatched; else notMatched">
-                            {{ bets.stake }}
-                          </ng-container>
-                          <ng-template #notMatched> -- </ng-template>
-                        </td>
-                        <td>
-                          <ng-container
-                            *ngIf="!bets.isMatched; else notMatched"
-                          >
-                            {{ bets.stake }}
-                          </ng-container>
-                          <ng-template #notMatched> -- </ng-template>
-                        </td>
-                        <!-- <td>
+                    <table class="table tableall" *ngIf="allBets.length > 0 && !this.isLoading">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="first">#</th>
+                          <th scope="col">Member</th>
+                          <th scope="col">Place time</th>
+                          <th scope="col">Events</th>
+                          <th scope="col">Market</th>
+                          <th scope="col">Selection</th>
+                          <th scope="col">Odds Placed</th>
+                          <th scope="col">Odds Matched</th>
+                          <th scope="col">Matched Stake</th>
+                          <th scope="col" class="last">Unmatched Stake</th>
+                          <!-- <th scope="col">Profit/Liability</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let bets of allBets; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ bets.username }}</td>
+                          <td>{{ bets.placedDate | date : "medium" }}</td>
+                          <td>{{ bets.event }}</td>
+                          <td>
+                            <span *ngIf="!bets.type" class="border r-2 bg-danger text-danger me-2 border-3"></span>
+                            <span *ngIf="bets.type"
+                              class="border bg-primary text-primary border-primary me-2 border-3"></span>
+                            {{ bets.betCategory }}
+                          </td>
+                          <td>{{ bets.selectionName }}</td>
+                          <td>{{ bets.betRate }}</td>
+                          <td>{{ bets.averagePriceMatched }}</td>
+                          <td>
+                            <ng-container *ngIf="bets.isMatched; else notMatched">
+                              {{ bets.stake }}
+                            </ng-container>
+                            <ng-template #notMatched> -- </ng-template>
+                          </td>
+                          <td>
+                            <ng-container *ngIf="!bets.isMatched; else notMatched">
+                              {{ bets.stake }}
+                            </ng-container>
+                            <ng-template #notMatched> -- </ng-template>
+                          </td>
+                          <!-- <td>
                           <span [ngClass]="bets.type ? 'text-success' : 'text-danger'">
                             {{ bets.profitLiability }}
                           </span>
                         </td> -->
-                      </tr>
-                    </tbody>
-                  </table>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
               <div *ngIf="allBets.length > 0 && !this.isLoading">
-                <button
-                  class="btn rounded-pill text-white"
-                  [disabled]="currentPage === 1"
-                  (click)="prev()"
-                >
+                <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
                   Prev
                 </button>
                 <span class="btn btn-pink rounded-pill ps-4 pe-4">
                   {{ currentPage }} / {{ totalPages }}
                 </span>
-                <button
-                  class="btn rounded-pill text-white"
-                  [disabled]="currentPage === totalPages"
-                  (click)="next()"
-                >
+                <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
                   Next
                 </button>
               </div>

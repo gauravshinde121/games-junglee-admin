@@ -12,11 +12,13 @@ import { PlayerwiseAccountStatementComponent } from './components/playerwise-acc
 import { CasinoReportComponent } from './components/casino-report/casino-report.component';
 import { CasinoReportDetailsComponent } from './components/casino-report-details/casino-report-details.component';
 import { CommissionLenaDenaComponent } from './components/commission-lena-dena/commission-lena-dena.component';
+import { AccountListComponent } from './components/account-list/account-list.component';
 
 const routes: Routes = [{
     path: 'account-statement', component: AccountStatementMainComponent,
     children: [
       { path: 'transfer-statement', component: TransferStatementComponent },
+      { path: 'account-list', component: AccountListComponent },
       { path: 'my-pl', component: MyPlComponent },
       { path: 'commission', component: CommissionLenaDenaComponent },
       { path: 'all-bets/:matchId', component: AllBetsComponent },

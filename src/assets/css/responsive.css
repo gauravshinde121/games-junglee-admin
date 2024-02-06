@@ -21,11 +21,14 @@
     cursor: pointer;
   }
   .sidebar {
-    background: #202121;
+    background: #83c5cb;
     position: absolute;
     top: 3.5rem;
     border: 1px solid #71514f;
     height: 100%;
+  }
+  .sidebar a {
+    color: #000 !important;
   }
 
   .balance p {

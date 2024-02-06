@@ -517,5 +517,9 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_WINNING_SETTLEMENT)
   }
 
+  public geAdminAccountStatementNewEndpoint(){
+    return this.createUrl(this._constants.API_GET_ADMIN_ACCOUNT_STATEMENT_NEW)
+  }
+
   
 }

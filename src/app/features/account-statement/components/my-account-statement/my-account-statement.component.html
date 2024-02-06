@@ -13,57 +13,30 @@
           <div class="row align-items-end">
             <div class="col-md-3 mb-3">
               <label>From Date</label>
-              <input
-                type="date"
-                formControlName="fromDate"
-                name="fromDate"
-                class="form-control"
-                id=""
-                placeholder="Month"
-              />
+              <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id=""
+                placeholder="Month" />
             </div>
             <div class="col-md-3 mb-3">
               <label>To Date</label>
-              <input
-                type="date"
-                formControlName="toDate"
-                name="toDate"
-                class="form-control"
-                id=""
-                placeholder="Month"
-              />
+              <input type="date" formControlName="toDate" name="toDate" class="form-control" id=""
+                placeholder="Month" />
             </div>
             <div class="col-md-6 mb-3">
               <label>Select Member</label>
-              <select
-                formControlName="memberId"
-                id="ab"
-                class="form-select bg-dgre pointer"
-              >
+              <select formControlName="memberId" id="ab" class="form-select bg-dgre pointer">
                 <option value="null">All</option>
-                <option
-                  *ngFor="let member of allMembers"
-                  [value]="member.userId"
-                >
+                <option *ngFor="let member of allMembers" [value]="member.userId">
                   {{ member.username }}
                 </option>
               </select>
             </div>
 
             <div class="col-md-3 mb-3 d-flex align-items-end">
-              <button
-                type="button"
-                (click)="searchList()"
-                class="btn btn-pink rounded-pill mt-4"
-              >
+              <button type="button" (click)="searchList()" class="btn btn-pink rounded-pill mt-4">
                 Search
               </button>
-              <button
-                *ngIf="plStatement.length > 0"
-                type="button"
-                class="btn btn-pink rounded-pill ms-2 text-white"
-                (click)="exportExcel()"
-              >
+              <button *ngIf="plStatement.length > 0" type="button" class="btn btn-pink rounded-pill ms-2 "
+                (click)="exportExcel()">
                 Export
               </button>
             </div>
@@ -87,11 +60,7 @@
               <th scope="col" class="">
                 <i class="fa-sharp fa-regular fa-address-card"></i>
               </th>
-              <th
-                scope="col"
-                class="first pointer"
-                (click)="toggleSort('createdAt')"
-              >
+              <th scope="col" class="first pointer" (click)="toggleSort('createdAt')">
                 Date
               </th>
               <th scope="col" class="pointer" (click)="toggleSort('gameName')">
@@ -111,17 +80,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="
+            <tr *ngFor="
                 let pl of plStatement | sort : sortColumn : sortAscending;
                 let i = index
-              "
-              (click)="openAllBets(pl.matchId)"
-            >
+              " (click)="openAllBets(pl.matchId)">
               <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
               <span *ngIf="currentPage > 1">{{
                 i + 1 + (currentPage - 1) * limit
-              }}</span>
+                }}</span>
               <td>{{ pl.date | date : "medium" }}</td>
               <td>{{ pl.credit }}</td>
               <td>{{ pl.debit }}</td>
@@ -134,23 +100,14 @@
         </table>
       </div>
     </div>
-    <!-- <div class="col-md-12"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
+    <!-- <div class="col-md-12"><a class="btn rounded-pill ">First</a><a class="btn rounded-pill ">Previous</a><a class="btn bg-pink rounded-pill  ps-4 pe-4">1</a><a class="btn rounded-pill ">Next</a><a class="btn rounded-pill ">Last</a></div> -->
     <div *ngIf="plStatement.length > 0 && !this.isLoading">
-      <button
-        class="btn rounded-pill text-dark pointer"
-        [disabled]="currentPage === 1"
-        (click)="prev()"
-      >
+      <button class="btn rounded-pill  pointer" [disabled]="currentPage === 1" (click)="prev()">
         Prev
       </button>
-      <span class="btn btn-pink rounded-pill ps-4 pe-4"
-        >{{ currentPage }} / {{ totalPages }}
+      <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
       </span>
-      <button
-        class="btn rounded-pill text-dark pointer"
-        [disabled]="currentPage === totalPages"
-        (click)="next()"
-      >
+      <button class="btn rounded-pill  pointer" [disabled]="currentPage === totalPages" (click)="next()">
         Next
       </button>
     </div>

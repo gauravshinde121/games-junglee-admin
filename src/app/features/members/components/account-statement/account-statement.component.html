@@ -1,10 +1,5 @@
-<div
-  class="tab-pane fade show active"
-  id="pills-accountstatement"
-  role="tabpanel"
-  aria-labelledby="pills-accountstatement-tab"
-  tabindex="0"
->
+<div class="tab-pane fade show active" id="pills-accountstatement" role="tabpanel"
+  aria-labelledby="pills-accountstatement-tab" tabindex="0">
   <div class="row align-items-end" [formGroup]="filterForm">
     <div class="col-md-3">
       <label>Select Sport</label>
@@ -17,33 +12,16 @@
     </div>
     <div class="col-md-3">
       <label>From Date</label>
-      <input
-        formControlName="fromDate"
-        type="date"
-        onfocus="(this.type='date')"
-        onblur="if(this.value==''){this.type='text'}"
-        name="fromDate"
-        class="form-control"
-        id=""
-      />
+      <input formControlName="fromDate" type="date" onfocus="(this.type='date')"
+        onblur="if(this.value==''){this.type='text'}" name="fromDate" class="form-control" id="" />
     </div>
     <div class="col-md-3">
       <label>To Date</label>
-      <input
-        formControlName="toDate"
-        type="date"
-        onfocus="(this.type='date')"
-        onblur="if(this.value==''){this.type='text'}"
-        name="toDate"
-        class="form-control"
-        id=""
-      />
+      <input formControlName="toDate" type="date" onfocus="(this.type='date')"
+        onblur="if(this.value==''){this.type='text'}" name="toDate" class="form-control" id="" />
     </div>
     <div class="col-md-3">
-      <button
-        class="btn btn-pink rounded-pill w-100 mt-4"
-        (click)="getAccountStatement()"
-      >
+      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getAccountStatement()">
         Search
       </button>
     </div>
@@ -58,18 +36,10 @@
           <thead>
             <tr>
               <th scope="col" class="first">#</th>
-              <th
-                scope="col"
-                class="pointer"
-                (click)="toggleSort('settledDate')"
-              >
+              <th scope="col" class="pointer" (click)="toggleSort('settledDate')">
                 Date
               </th>
-              <th
-                scope="col"
-                class="pointer"
-                (click)="toggleSort('marketName')"
-              >
+              <th scope="col" class="pointer" (click)="toggleSort('marketName')">
                 Market Description
               </th>
               <th scope="col" class="pointer" (click)="toggleSort('matchName')">
@@ -82,17 +52,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="
+            <tr *ngFor="
                 let acc of accountStatement | sort : sortColumn : sortAscending;
                 let i = index
-              "
-            >
+              ">
               <td>
                 <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                 <span *ngIf="currentPage > 1">{{
                   i + 1 + (currentPage - 1) * limit
-                }}</span>
+                  }}</span>
               </td>
               <td>{{ acc.settledDate | date : "medium" }}</td>
               <td>{{ acc.marketName }}</td>
@@ -101,11 +69,7 @@
                 {{ acc.netAmt | number }}
               </td>
               <td>
-                <a (click)="openModal(acc)"
-                  ><i
-                    class="fa-sharp fa-solid fa-eye text-pink cursor-pointer"
-                  ></i
-                ></a>
+                <a (click)="openModal(acc)"><i class="fa-sharp fa-solid fa-eye text-pink cursor-pointer"></i></a>
               </td>
             </tr>
           </tbody>
@@ -121,50 +85,28 @@
   </div>
 
   <div *ngIf="accountStatement.length > 0 && !this.isLoading">
-    <button
-      class="btn rounded-pill text-dark"
-      [disabled]="currentPage === 1"
-      (click)="prev()"
-    >
+    <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
       Prev
     </button>
-    <span class="btn btn-pink rounded-pill ps-4 pe-4"
-      >{{ currentPage }} / {{ totalPages }}
+    <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
     </span>
-    <button
-      class="btn rounded-pill text-dark"
-      [disabled]="currentPage === totalPages"
-      (click)="next()"
-    >
+    <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
       Next
     </button>
   </div>
 </div>
 
 <!-- Modal start-->
-<div
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static"
+  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
+        <h5 class="modal-title cassino " id="staticBackdropLabel">
           Game Detail &nbsp;
         </h5>
-        <button
-          type="button"
-          (click)="closeModal()"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -172,7 +114,7 @@
             <table class="table tableall">
               <thead>
                 <tr>
-                  <th scope="col" class="text-white first">Game Info</th>
+                  <th scope="col" class=" first">Game Info</th>
                   <th scope="col" class="last"></th>
                 </tr>
               </thead>
@@ -195,13 +137,11 @@
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
-                  <td
-                    [ngClass]="
+                  <td [ngClass]="
                       selectedAccount?.marketSubTotal > 0
                         ? 'text-success'
                         : 'text-danger'
-                    "
-                  >
+                    ">
                     {{ selectedAccount?.marketSubTotal | number }}
                   </td>
                 </tr>
@@ -211,13 +151,11 @@
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
-                  <td
-                    [ngClass]="
+                  <td [ngClass]="
                       selectedAccount?.netAmt > 0
                         ? 'text-success'
                         : 'text-danger'
-                    "
-                  >
+                    ">
                     {{ selectedAccount?.netAmt | number }}
                   </td>
                 </tr>
@@ -232,8 +170,8 @@
             <table class="table tableall">
               <thead>
                 <tr>
-                  <th scope="col" class="text-white first">Winner</th>
-                  <th scope="col" class="text-white last"></th>
+                  <th scope="col" class=" first">Winner</th>
+                  <th scope="col" class=" last"></th>
                 </tr>
               </thead>
               <tbody>
@@ -254,67 +192,46 @@
             <table class="table tableall" *ngIf="accountStatement.length > 0">
               <thead>
                 <tr>
-                  <th
-                    scope="col"
-                    class="text-white pointer first"
-                    (click)="toggleSort('createDateTime')"
-                  >
+                  <th scope="col" class=" pointer first" (click)="toggleSort('createDateTime')">
                     Place Date
                   </th>
-                  <th
-                    scope="col"
-                    class="text-white pointer"
-                    (click)="toggleSort('createDateTime')"
-                  >
+                  <th scope="col" class=" pointer" (click)="toggleSort('createDateTime')">
                     Matched Date
                   </th>
-                  <th class="text-white pointer" (click)="toggleSort('type')">
+                  <th class=" pointer" (click)="toggleSort('type')">
                     Type
                   </th>
-                  <th class="text-white pointer" (click)="toggleSort('status')">
+                  <th class=" pointer" (click)="toggleSort('status')">
                     Status
                   </th>
-                  <th
-                    class="text-white pointer"
-                    (click)="toggleSort('selectionName')"
-                  >
+                  <th class=" pointer" (click)="toggleSort('selectionName')">
                     Horse Name
                   </th>
-                  <!-- <th class="text-white pointer" (click)="toggleSort('member')">Avg. Odds</th> -->
-                  <th class="text-white pointer" (click)="toggleSort('odds')">
+                  <!-- <th class=" pointer" (click)="toggleSort('member')">Avg. Odds</th> -->
+                  <th class=" pointer" (click)="toggleSort('odds')">
                     Odds
                   </th>
-                  <th class="text-white pointer" (click)="toggleSort('stake')">
+                  <th class=" pointer" (click)="toggleSort('stake')">
                     Stake
                   </th>
-                  <!-- <th class="text-white pointer" (click)="toggleSort('member')">Matched Stake</th> -->
-                  <th
-                    class="text-white pointer"
-                    (click)="toggleSort('netAmount')"
-                  >
+                  <!-- <th class=" pointer" (click)="toggleSort('member')">Matched Stake</th> -->
+                  <th class=" pointer" (click)="toggleSort('netAmount')">
                     Profit/Loss (In INR)
                   </th>
-                  <!-- <th scope="col" class="text-white last">IP</th> -->
+                  <!-- <th scope="col" class=" last">IP</th> -->
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="
+                <tr *ngFor="
                     let bet of selectedAccount?.bets
                       | sort : sortColumn : sortAscending
-                  "
-                >
+                  ">
                   <td>{{ bet.createDateTime | date : "medium" }}</td>
                   <td>{{ bet.createDateTime | date : "medium" }}</td>
                   <td>
-                    <span
-                      *ngIf="bet.isBack == false"
-                      class="border r-2 bg-danger text-danger me-2 border-3"
-                    ></span>
-                    <span
-                      *ngIf="bet.isBack == true"
-                      class="border bg-primary text-primary border-primary me-2 border-3"
-                    ></span>
+                    <span *ngIf="bet.isBack == false" class="border r-2 bg-danger text-danger me-2 border-3"></span>
+                    <span *ngIf="bet.isBack == true"
+                      class="border bg-primary text-primary border-primary me-2 border-3"></span>
                     {{ bet.type }}
                   </td>
                   <td>{{ bet.status }}</td>
@@ -323,11 +240,9 @@
                   <td>{{ bet.odds }}</td>
                   <!-- <td>{{ bet.stake }}</td> -->
                   <td>{{ bet.stake }}</td>
-                  <td
-                    [ngClass]="
+                  <td [ngClass]="
                       bet.netAmount > 0 ? 'text-success' : 'text-danger'
-                    "
-                  >
+                    ">
                     {{ bet.netAmount | number }}
                   </td>
                   <!-- <td>

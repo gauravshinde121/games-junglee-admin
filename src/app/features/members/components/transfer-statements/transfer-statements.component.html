@@ -1,36 +1,16 @@
-<div
-  class="tab-pane fade show active"
-  id="pills-transferstatements"
-  role="tabpanel"
-  aria-labelledby="pills-transferstatements-tab"
-  tabindex="0"
->
+<div class="tab-pane fade show active" id="pills-transferstatements" role="tabpanel"
+  aria-labelledby="pills-transferstatements-tab" tabindex="0">
   <div class="row align-items-end" [formGroup]="filterForm">
     <div class="col-md-2">
       <label>From Date</label>
-      <input
-        type="date"
-        formControlName="fromDate"
-        name="fromDate"
-        class="form-control mt-2"
-        id=""
-      />
+      <input type="date" formControlName="fromDate" name="fromDate" class="form-control mt-2" id="" />
     </div>
     <div class="col-md-2">
       <label>To Date</label>
-      <input
-        type="date"
-        formControlName="toDate"
-        name="toDate"
-        class="form-control mt-2"
-        id=""
-      />
+      <input type="date" formControlName="toDate" name="toDate" class="form-control mt-2" id="" />
     </div>
     <div class="col-md-2">
-      <button
-        class="btn btn-pink rounded-pill w-100 mt-4"
-        (click)="getTransferStatement()"
-      >
+      <button class="btn btn-pink rounded-pill w-100 mt-4" (click)="getTransferStatement()">
         Search
       </button>
     </div>
@@ -38,57 +18,38 @@
       <label>
         <p>
           Total Net Share <span class="text-success ps-2 pe-2"> 0 </span>
-        </p></label
-      >
+        </p>
+      </label>
     </div>
   </div>
   <div class="col-md-12 mt-3">
     <div class="table-responsive tableFixHead tableRes">
-      <table
-        class="table tableall"
-        *ngIf="transferStatements.length > 0 && !this.isLoading"
-      >
+      <table class="table tableall" *ngIf="transferStatements.length > 0 && !this.isLoading">
         <thead>
           <tr>
-            <th
-              scope="col"
-              class="text-white pointer first"
-              (click)="toggleSort('createdDate')"
-            >
+            <th scope="col" class=" pointer first" (click)="toggleSort('createdDate')">
               Date
             </th>
-            <th
-              scope="col"
-              class="text-white pointer"
-              (click)="toggleSort('fromUsername')"
-            >
+            <th scope="col" class=" pointer" (click)="toggleSort('fromUsername')">
               Payer/Payee
             </th>
-            <th
-              scope="col"
-              class="text-white pointer last"
-              (click)="toggleSort('amount')"
-            >
+            <th scope="col" class=" pointer last" (click)="toggleSort('amount')">
               Amount
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="
+          <tr *ngFor="
               let statements of transferStatements
                 | sort : sortColumn : sortAscending
-            "
-          >
+            ">
             <td>{{ statements?.createdDate | date }}</td>
             <td>
               {{ statements?.fromUsername }} ({{ statements?.toUsername }})
             </td>
-            <td
-              [ngClass]="
+            <td [ngClass]="
                 statements?.amount > 0 ? 'text-success' : 'text-danger'
-              "
-            >
+              ">
               {{ statements?.amount }}
             </td>
           </tr>
@@ -106,21 +67,12 @@
   </div>
 
   <div *ngIf="transferStatements.length > 0 && !this.isLoading">
-    <button
-      class="btn rounded-pill text-dark"
-      [disabled]="currentPage === 1"
-      (click)="prev()"
-    >
+    <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
       Prev
     </button>
-    <span class="btn btn-pink rounded-pill ps-4 pe-4"
-      >{{ currentPage }} / {{ totalPages }}
+    <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
     </span>
-    <button
-      class="btn rounded-pill text-dark"
-      [disabled]="currentPage === totalPages"
-      (click)="next()"
-    >
+    <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
       Next
     </button>
   </div>

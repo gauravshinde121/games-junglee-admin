@@ -2,35 +2,23 @@
   <section class="section dashboard">
     <div class="row mb-3 align-items-end">
       <div class="col-md-6 col-lg-6 col-xl-6">
-        <div class="row text-white">
+        <div class="row ">
           <div class="input-group flex-nowrap">
-            <span
-              class="input-group-text bg-dark text-white border-pink radius-left-tb"
-              id="addon-wrapping"
-            >
+            <span class="input-group-text bg-dark  border-pink radius-left-tb" id="addon-wrapping">
               <i class="fa fa-search"></i>
             </span>
-            <input
-              type="text"
-              class="form-control border-start-0 border-pink radius-right-tb"
-              placeholder="Search"
-              aria-label="Search"
-              aria-describedby="addon-wrapping"
-              [(ngModel)]="searchTerm"
-              (ngModelChange)="search()"
-            />
-            <span
-              class="input-group-text bg-dark text-white border-pink cursor-pointer radius-right-tb"
-              (click)="clearSearch()"
-              >Clear search</span
-            >
+            <input type="text" class="form-control border-start-0 border-pink radius-right-tb" placeholder="Search"
+              aria-label="Search" aria-describedby="addon-wrapping" [(ngModel)]="searchTerm"
+              (ngModelChange)="search()" />
+            <span class="input-group-text bg-dark  border-pink cursor-pointer radius-right-tb"
+              (click)="clearSearch()">Clear search</span>
           </div>
           <div class="searchList" *ngIf="memberList">
             <ul>
               <li *ngFor="let member of memberList">
                 <a class="pointer" (click)="searchMember(member)">{{
                   member.username
-                }}</a>
+                  }}</a>
               </li>
             </ul>
           </div>
@@ -45,12 +33,7 @@
             <tr *ngFor="let member of memberHierarchy; let i = index">
               <!-- <td>{{i+1}}</td> -->
               <td>
-                <img
-                  src="assets/images/arrowDown2.gif"
-                  alt=""
-                  class="my-md-3"
-                  width="30px"
-                /><br />
+                <img src="assets/images/arrowDown2.gif" alt="" class="my-md-3" width="30px" /><br />
                 <div *ngIf="member.roleName">
                   <span>{{ member.username }} ({{ member.roleName }})</span>
                 </div>

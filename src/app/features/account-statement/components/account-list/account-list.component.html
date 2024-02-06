@@ -1,7 +1,7 @@
 <main id="main" class="main m-0">
   <section class="section dashboard">
-
-
+    
+    
     <div class="row mt-3">
       <div class="col-md-12 overflow-auto">
         <div *ngIf="userList.length == 0" class="border text-center p-5">
@@ -9,89 +9,116 @@
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
         <div class="table-responsive tableRes tableFixHead" *ngIf="userList.length > 0 && !isLoading">
-          <table #myTable class="table tableall">
+          <table
+            #myTable
+            class="table tableall"
+
+          >
             <thead>
               <tr>
                 <th scope="col" class="first">
                   <i class="fa-sharp fa-regular fa-address-card"></i>
                 </th>
-                <th scope="col" class="pointer" (click)="toggleSort('username')">
+                <th
+                  scope="col"
+                  class="pointer"
+                  (click)="toggleSort('username')"
+                >
                   USERNAME
                 </th>
-
-                <th scope="col" class="text-center pointer" (click)="toggleSort('creditLimit')">
+               
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('creditLimit')"
+                >
                   CR
                 </th>
 
-                <th scope="col" class="text-center pointer" (click)="toggleSort('creditLimit')">
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('creditLimit')"
+                >
                   AVAILABLE CREDIT
                 </th>
-
-                <th scope="col" class="text-center pointer" (click)="toggleSort('give')">
+                
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('give')"
+                >
                   CLIENT(P/L)
                 </th>
 
-                <th scope="col" class="text-center pointer" (click)="toggleSort('give')">
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('give')"
+                >
                   EXPOSURE
                 </th>
 
-                <th scope="col" class="text-center pointer" (click)="toggleSort('give')">
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('give')"
+                >
                   ACCOUNT TYPE
                 </th>
-
+                
                 <th scope="col" class="last text-center">ACTION</th>
 
               </tr>
             </thead>
             <tbody>
-              <h1 class="text-center" *ngIf="userList.length == 0 && !this.isLoading">
+              <h1
+                class="text-center"
+                *ngIf="userList.length == 0 && !this.isLoading"
+              >
                 No users Found
               </h1>
-              <tr *ngFor="
-                    let user of userList | sort : sortColumn : sortAscending;
-                    let i = index
-                  ">
+              <tr
+                *ngFor="
+                  let user of userList | sort : sortColumn : sortAscending;
+                  let i = index
+                "
+              >
                 <!-- <td>
-                    <input
-                      type="checkbox"
-                      class="pointer"
-                      (change)="checkUserForAdjustment(user.userId)"
-                      *ngIf="user.take > 0 || user.give > 0"
-                      [(ngModel)]="user.state"
-                    />
-                  </td> -->
+                  <input
+                    type="checkbox"
+                    class="pointer"
+                    (change)="checkUserForAdjustment(user.userId)"
+                    *ngIf="user.take > 0 || user.give > 0"
+                    [(ngModel)]="user.state"
+                  />
+                </td> -->
                 <td>
                   <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                   <span *ngIf="currentPage > 1">{{
                     i + 1 + (currentPage - 1) * limit
-                    }}</span>
+                  }}</span>
                 </td>
                 <td>
-                  <span>{{ user.username }}
+                  <span
+                    >{{ user.username }}
                   </span>
                 </td>
-
-                  <td class="text-center">
-                    <ng-container *ngIf="user.take > 0 || user.give > 0">
-                      <a class="pointer text-danger text-decoration-none" *ngIf="user.take > 0">
-                        {{ user.take | indianCurrency }}
-                      </a>
-                      <a class="pointer text-success text-decoration-none" *ngIf="user.give > 0">
-                        {{ user.give | indianCurrency }}
-                      </a>
-                    </ng-container>
-                  </td>
-
+                
+                <td class="text-center">
+                  <a (click)="openCredit(user)" class="cursor-pointer">{{ user.creditLimit | indianCurrency }}</a> 
+                </td>
+                
                 <td class="text-center">
                   {{ user.availableCredit | indianCurrency }}
                 </td>
 
                 <td class="text-center">
                   <ng-container *ngIf="user.take > 0 || user.give > 0">
-                    <a class="pointer text-success text-decoration-none" *ngIf="user.take > 0">
+                    <a class="pointer text-danger text-decoration-none" *ngIf="user.take > 0">
                       {{ user.take | indianCurrency }}
                     </a>
-                    <a class="pointer text-danger text-decoration-none" *ngIf="user.give > 0">
+                    <a class="pointer text-success text-decoration-none" *ngIf="user.give > 0">
                       {{ user.give | indianCurrency }}
                     </a>
                   </ng-container>
@@ -102,7 +129,9 @@
                 </td>
 
                 <td class="text-center">
-                  <span *ngFor="let role of roles">
+                  <span
+                    *ngFor="let role of roles"
+                  >
                   </span>
                   <span *ngIf="user.roleId == 2"> ADMIN </span>
                   <span *ngIf="user.roleId == 3"> SUPER MASTER </span>
@@ -119,8 +148,11 @@
                     D
                   </a>
 
-                  <a class="btn btn-danger" *ngIf="user.give > 0" (click)="openWithdraw(user)">
-                    W
+                  <a class="btn btn-danger"
+                  *ngIf="user.give > 0"
+                  (click)="openWithdraw(user)"
+                  >
+                  W
                     <!-- <i class="fa-sharp fa-solid fa-pen icon-pink pointer"></i> -->
                   </a>
                 </td>
@@ -130,246 +162,111 @@
           </table>
         </div>
         <div class="d-flex" *ngIf="userList.length > 0 && !this.isLoading">
-          <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
+          <button
+            class="btn rounded-pill text-dark"
+            [disabled]="currentPage === 1"
+            (click)="prev()"
+          >
             Prev
           </button>
-          <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
+          <span class="btn btn-pink rounded-pill ps-4 pe-4"
+            >{{ currentPage }} / {{ totalPages }}
           </span>
-          <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
+          <button
+            class="btn rounded-pill text-dark"
+            [disabled]="currentPage === totalPages"
+            (click)="next()"
+          >
             Next
           </button>
         </div>
         <!--
-          <button [disabled]="currentPage === 1" (click)="prev()">Prev</button><span>{{ currentPage }} / {{ totalPages }}</span><button [disabled]="currentPage === totalPages" (click)="next()">
-            Next
-          </button> -->
-          <!-- <div *ngIf="userList.length > 0 && !this.isLoading"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn btn-pink rounded-pill ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
-        </div>
-      </div>
-    </section>
-  </main>
-
-
- <!-- Modal start Deposit-->
-  <div
-    *ngIf="modalNumber == 1"
-    class="modal"
-    [ngStyle]="{ display: display }"
-    id="staticBackdrop"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    tabindex="-1"
-    aria-labelledby="staticBackdropLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-pink">
-          <h5 class="modal-title cassino" id="staticBackdropLabel">
-            DEPOSIT
-          </h5>
-          <button
-            type="button"
-            (click)="closeModal()"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <section class="section m-auto mt-4">
-              <form [formGroup]="winningDepositForm">
-                <div class="row mb-4 align-items-center">
-                  <div class="col-md-4">{{admin?.username}}</div>
-                  <div class="col-md-4">
-                      <input
-                        class="form-control bg-transparent"
-                        formControlName="upline_credit"
-                        placeholder=""
-                        readonly
-                        id="upline_credit"
-                        name="upline_credit"
-                        autocomplete="off"
-                      /> 
-                  </div>
-                  <div class="col-md-4">
-                    <input
-                      class="form-control bg-transparent"
-                      formControlName="refupline_credit"
-                      placeholder=""
-                      id="refupline_credit"
-                      name="refupline_credit"
-                      autocomplete="off"
-                      readonly
-                    /> 
-                </div>
-                </div>
-
-                <div class="row mb-4 align-items-center">
-                  <div class="col-md-4">{{userData?.username}}</div>
-                    <div class="col-md-4">
-                        <input
-                          class="form-control bg-transparent"
-                          formControlName="downline_credit"
-                          placeholder=""
-                          id="downline_credit"
-                          name="downline_credit"
-                          autocomplete="off"
-                          readonly
-                        /> 
-                    </div>
-                    <div class="col-md-4">
-                      <input
-                        class="form-control bg-transparent"
-                        formControlName="refdownline_credit"
-                        placeholder=""
-                        id="refdownline_credit"
-                        name="refdownline_credit"
-                        autocomplete="off"
-                        readonly
-                      /> 
-                  </div>
-                  </div>
-
-                  <div class="row mb-4 align-items-center">
-                    <div class="col-md-4">Profit/Losss</div>
-                    <div class="col-md-4">
-                        <input
-                          class="form-control bg-transparent"
-                          formControlName="profitLoss"
-                          placeholder="Profit/Losss"
-                          id="profitLoss"
-                          name="profitLoss"
-                          autocomplete="off"
-                          readonly
-                        /> 
-                    </div>
-                    <div class="col-md-4">
-                      <input
-                        class="form-control bg-transparent"
-                        formControlName="profitLoss_ref"
-                        placeholder="Profit/Losss"
-                        id="profitLoss_ref"
-                        name="profitLoss_ref"
-                        autocomplete="off"
-                        readonly
-                      /> 
-                  </div>
-                  </div>
-
-                  <div class="row mb-4 align-items-center">
-                    <div class="col-md-4">Amount</div>
-                    <div class="col-md-8">
-                        <input
-                          min="0"
-                          class="form-control bg-transparent"
-                          formControlName="amount"
-                          placeholder="Amount"
-                          id="amount"
-                          name="amount"
-                          type="number"
-                          autocomplete="off"
-                          (input)="onAmountDepositChange($event)"
-                        /> 
-                    </div>
-                  </div>
-
-                  <div class="row mb-4 align-items-center">
-                    <div class="col-md-4">Remark</div>
-                    <div class="col-md-8">
-
-                      <input
-                      class="form-control bg-transparent"
-                      formControlName="remark"
-                      placeholder="Remark"
-                      id="remark"
-                      name="remark"
-                      autocomplete="off"
-                    /> 
-                    </div>
-                  </div>
-
-                
-                <div class="row mt-5">
-                  <div class="col-md-6 text-end">
-                    <button
-                      (click)="postWinningsData(true)"
-                      
-                      class="btn btn-pink rounded-pill w-80 mt-4"
-                    >
-                      Save
-                    </button>
-                  </div>
-                  <div class="col-md-6">
-                    <button
-                      class="btn btn-pink rounded-pill w-80 mt-4"
-                      (click)="closeModal()"
-                    >
-                      Close
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </section>
-          </div>
-        </div>
+        <button [disabled]="currentPage === 1" (click)="prev()">Prev</button><span>{{ currentPage }} / {{ totalPages }}</span><button [disabled]="currentPage === totalPages" (click)="next()">
+          Next
+        </button> -->
+        <!-- <div *ngIf="userList.length > 0 && !this.isLoading"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn btn-pink rounded-pill ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
       </div>
     </div>
   </section>
 </main>
 
 
-  <!-- Modal start  Withdraw-->
-  <div
-    *ngIf="modalNumber == 2"
-    class="modal"
-    [ngStyle]="{ display: display }"
-    id="staticBackdrop"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    tabindex="-1"
-    aria-labelledby="staticBackdropLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-pink">
-          <h5 class="modal-title cassino" id="staticBackdropLabel">
-            WITHDRAW
-          </h5>
-          <button
-            type="button"
-            (click)="closeModal()"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <section class="section m-auto mt-4">
-              <form [formGroup]="winningWithdrawalForm">
-                <div class="row mb-4 align-items-center">
-                  <div class="col-md-4">{{admin?.username}}</div>
+<!-- Modal start Deposit-->
+<div
+  *ngIf="modalNumber == 1"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          DEPOSIT
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <section class="section m-auto mt-4">
+            <form [formGroup]="winningDepositForm">
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-4">{{admin?.username}}</div>
+                <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="upline_credit"
+                      placeholder=""
+                      readonly
+                      id="upline_credit"
+                      name="upline_credit"
+                      autocomplete="off"
+                    /> 
+                </div>
+                <div class="col-md-4">
+                  <input
+                    class="form-control bg-transparent"
+                    formControlName="refupline_credit"
+                    placeholder=""
+                    id="refupline_credit"
+                    name="refupline_credit"
+                    autocomplete="off"
+                    readonly
+                  /> 
+              </div>
+              </div>
+
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-4">{{userData?.username}}</div>
                   <div class="col-md-4">
                       <input
                         class="form-control bg-transparent"
-                        formControlName="upline_credit"
+                        formControlName="downline_credit"
                         placeholder=""
-                        readonly
-                        id="upline_credit"
-                        name="upline_credit"
+                        id="downline_credit"
+                        name="downline_credit"
                         autocomplete="off"
+                        readonly
                       /> 
                   </div>
                   <div class="col-md-4">
                     <input
                       class="form-control bg-transparent"
-                      formControlName="refupline_credit"
+                      formControlName="refdownline_credit"
                       placeholder=""
-                      id="refupline_credit"
-                      name="refupline_credit"
+                      id="refdownline_credit"
+                      name="refdownline_credit"
                       autocomplete="off"
                       readonly
                     /> 
@@ -377,406 +274,400 @@
                 </div>
 
                 <div class="row mb-4 align-items-center">
-                  <div class="col-md-4">{{userData?.username}}</div>
-                    <div class="col-md-4">
-                        <input
-                          class="form-control bg-transparent"
-                          formControlName="downline_credit"
-                          placeholder=""
-                          id="downline_credit"
-                          name="downline_credit"
-                          autocomplete="off"
-                          readonly
-                        /> 
-                    </div>
-                    <div class="col-md-4">
+                  <div class="col-md-4">Profit/Losss</div>
+                  <div class="col-md-4">
                       <input
                         class="form-control bg-transparent"
-                        formControlName="refdownline_credit"
-                        placeholder=""
-                        id="refdownline_credit"
-                        name="refdownline_credit"
-                        autocomplete="off"
-                        readonly
-                      /> 
-                  </div>
-                  </div>
-
-                  <div class="row mb-4 align-items-center">
-                    <div class="col-md-4">Profit/Losss</div>
-                    <div class="col-md-4">
-                        <input
-                          class="form-control bg-transparent"
-                          formControlName="profitLoss"
-                          placeholder="Profit/Losss"
-                          id="profitLoss"
-                          name="profitLoss"
-                          autocomplete="off"
-                          readonly
-                        /> 
-                    </div>
-                    <div class="col-md-4">
-                      <input
-                        class="form-control bg-transparent"
-                        formControlName="profitLoss_ref"
+                        formControlName="profitLoss"
                         placeholder="Profit/Losss"
-                        id="profitLoss_ref"
-                        name="profitLoss_ref"
+                        id="profitLoss"
+                        name="profitLoss"
                         autocomplete="off"
                         readonly
                       /> 
                   </div>
-                  </div>
-
-                  <div class="row mb-4 align-items-center">
-                    <div class="col-md-4">Amount</div>
-                    <div class="col-md-8">
-                        <input
-                          class="form-control bg-transparent"
-                          formControlName="amount"
-                          (input)="onWinningWithdrawalChange($event)"
-                          placeholder="Amount"
-                          min="0"
-                          id="amount"
-                          name="amount"
-                          type="number"
-                          autocomplete="off"
-                        /> 
-                    </div>
-                  </div>
-
-                  <div class="row mb-4 align-items-center">
-                    <div class="col-md-4">Remark</div>
-                    <div class="col-md-8">
-
-                      <input
+                  <div class="col-md-4">
+                    <input
                       class="form-control bg-transparent"
-                      formControlName="remark"
-                      placeholder="Remark"
-                      id="remark"
-                      name="remark"
+                      formControlName="profitLoss_ref"
+                      placeholder="Profit/Losss"
+                      id="profitLoss_ref"
+                      name="profitLoss_ref"
                       autocomplete="off"
+                      readonly
                     /> 
-                    </div>
-                  </div>
+                </div>
+                </div>
 
-                
-                <div class="row mt-5">
-                  <div class="col-md-6 text-end">
-                    <button
-                      (click)="postWithdrawData(false)"
-                      
-                      class="btn btn-pink rounded-pill w-80 mt-4"
-                    >
-                      Save
-                    </button>
-                  </div>
-                  <div class="col-md-6">
-                    <button
-                      class="btn btn-pink rounded-pill w-80 mt-4"
-                      (click)="closeModal()"
-                    >
-                      Close
-                    </button>
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Amount</div>
+                  <div class="col-md-8">
+                      <input
+                        min="0"
+                        class="form-control bg-transparent"
+                        formControlName="amount"
+                        placeholder="Amount"
+                        id="amount"
+                        name="amount"
+                        type="number"
+                        autocomplete="off"
+                        (input)="onAmountDepositChange($event)"
+                      /> 
                   </div>
                 </div>
-              </form>
-            </section>
-          </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Remark</div>
+                  <div class="col-md-8">
+
+                    <input
+                    class="form-control bg-transparent"
+                    formControlName="remark"
+                    placeholder="Remark"
+                    id="remark"
+                    name="remark"
+                    autocomplete="off"
+                  /> 
+                  </div>
+                </div>
+
+              
+              <div class="row mt-5">
+                <div class="col-md-6 text-end">
+                  <button
+                    (click)="postWinningsData(true)"
+                    
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                  >
+                    Save
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                    (click)="closeModal()"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </form>
+          </section>
         </div>
       </div>
     </div>
   </div>
-  <!-- Modal end -->
+</div>
+<!-- Modal end -->
 
 
-  <!-- Modal start  Credit activity-->
-  <div
-    *ngIf="modalNumber == 3"
-    class="modal"
-    [ngStyle]="{ display: display }"
-    id="staticBackdrop"
-    data-bs-backdrop="static"
-    data-bs-keyboard="false"
-    tabindex="-1"
-    aria-labelledby="staticBackdropLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-pink">
-          <h5 class="modal-title cassino" id="staticBackdropLabel">
-            CREDIT ACTIVITY
-          </h5>
-          <button
-            type="button"
-            (click)="closeModal()"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <ul class="nav nav-pills memberslist" id="pills-tab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button
-                (click)="onCreditDepositOpen()"
-                  class="nav-link active"
-                  id="pills-activity-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-deposit"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-deposit"
-                  aria-selected="true"
-                >
-                  Credit Deposit
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                (click)="onCreditWithdrawalOpen()"
-                  class="nav-link"
-                  id="pills-withdraw-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-withdraw"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-withdraw"
-                  aria-selected="false"
-                >
-                  Credit Withdraw
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                (click)="onCreditHistoryOpen()"
-                  class="nav-link"
-                  id="pills-table-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-table"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-table"
-                  aria-selected="false"
-                >
-                  Credit History
-                </button>
-              </li>
-            </ul>
-            
-            <div class="tab-content" id="pills-tabContent">
-              <!-- Deposit Form -->
-              <div class="tab-pane fade show active" id="pills-deposit" role="tabpanel" aria-labelledby="pills-deposit-tab">
-                
-                  <section class="section m-auto mt-4">
-                    <form [formGroup]="creditDepositeForm">
-                      <div class="row mb-4 align-items-center">
-                        <div class="col-md-4">{{admin?.username}}</div>
-                        <div class="col-md-4">
-                            <input
-                              class="form-control bg-transparent"
-                              formControlName="upline_credit"
-                              placeholder=""
-                              readonly
-                              id="upline_credit"
-                              name="upline_credit"
-                              autocomplete="off"
-                            /> 
-                        </div>
-                        <div class="col-md-4">
-                          <input
-                            class="form-control bg-transparent"
-                            formControlName="refupline_credit"
-                            placeholder=""
-                            id="refupline_credit"
-                            name="refupline_credit"
-                            autocomplete="off"
-                            readonly
-                          /> 
-                      </div>
-                      </div>
-      
-                      <div class="row mb-4 align-items-center">
-                        <div class="col-md-4">{{userData?.username}}</div>
-                          <div class="col-md-4">
-                              <input
-                                class="form-control bg-transparent"
-                                formControlName="downline_credit"
-                                placeholder=""
-                                id="downline_credit"
-                                name="downline_credit"
-                                autocomplete="off"
-                                readonly
-                              /> 
-                          </div>
-                          <div class="col-md-4">
-                            <input
-                              class="form-control bg-transparent"
-                              formControlName="refdownline_credit"
-                              placeholder=""
-                              id="refdownline_credit"
-                              name="refdownline_credit"
-                              autocomplete="off"
-                              readonly
-                            /> 
-                        </div>
-                        </div>
-      
-                        <div class="row mb-4 align-items-center">
-                          <div class="col-md-4">Profit/Losss</div>
-                          <div class="col-md-4">
-                              <input
-                                class="form-control bg-transparent"
-                                formControlName="profitLoss"
-                                placeholder="Profit/Losss"
-                                id="profitLoss"
-                                name="profitLoss"
-                                autocomplete="off"
-                                readonly
-                              /> 
-                          </div>
-                          <div class="col-md-4">
-                            <input
-                              class="form-control bg-transparent"
-                              formControlName="profitLoss"
-                              placeholder="Profit/Losss"
-                              id="profitLoss"
-                              name="profitLoss"
-                              autocomplete="off"
-                              readonly
-                            /> 
-                        </div>
-                        </div>
-      
-                        <div class="row mb-4 align-items-center">
-                          <div class="col-md-4">Amount</div>
-                          <div class="col-md-8">
-                              <input
-                                class="form-control bg-transparent"
-                                formControlName="amount"
-                                placeholder="Amount"
-                                id="amount"
-                                name="amount"
-                                type="number"
-                                autocomplete="off"
-                                (input)="onAmountChange($event)"
-                              /> 
-                          </div>
-                        </div>
-      
-                        <div class="row mb-4 align-items-center">
-                          <div class="col-md-4">Remark</div>
-                          <div class="col-md-8">
-      
-                            <input
-                            class="form-control bg-transparent"
-                            formControlName="remark"
-                            placeholder="Remark"
-                            id="remark"
-                            name="remark"
-                            autocomplete="off"
-                          /> 
-                          </div>
-                        </div>
-      
-                      
-                      <div class="row mt-5">
-                        <div class="col-md-6 text-end">
-                          <button
-                            (click)="postData(true)"
-                            
-                            class="btn btn-pink rounded-pill w-80 mt-4"
-                          >
-                            Save
-                          </button>
-                        </div>
-                        <div class="col-md-6">
-                          <button
-                            class="btn btn-pink rounded-pill w-80 mt-4"
-                            (click)="closeModal()"
-                          >
-                            Close
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </section>
-                
+<!-- Modal start  Withdraw-->
+<div
+  *ngIf="modalNumber == 2"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          WITHDRAW
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <section class="section m-auto mt-4">
+            <form [formGroup]="winningWithdrawalForm">
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-4">{{admin?.username}}</div>
+                <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="upline_credit"
+                      placeholder=""
+                      readonly
+                      id="upline_credit"
+                      name="upline_credit"
+                      autocomplete="off"
+                    /> 
+                </div>
+                <div class="col-md-4">
+                  <input
+                    class="form-control bg-transparent"
+                    formControlName="refupline_credit"
+                    placeholder=""
+                    id="refupline_credit"
+                    name="refupline_credit"
+                    autocomplete="off"
+                    readonly
+                  /> 
               </div>
+              </div>
+
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-4">{{userData?.username}}</div>
+                  <div class="col-md-4">
+                      <input
+                        class="form-control bg-transparent"
+                        formControlName="downline_credit"
+                        placeholder=""
+                        id="downline_credit"
+                        name="downline_credit"
+                        autocomplete="off"
+                        readonly
+                      /> 
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="refdownline_credit"
+                      placeholder=""
+                      id="refdownline_credit"
+                      name="refdownline_credit"
+                      autocomplete="off"
+                      readonly
+                    /> 
+                </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Profit/Losss</div>
+                  <div class="col-md-4">
+                      <input
+                        class="form-control bg-transparent"
+                        formControlName="profitLoss"
+                        placeholder="Profit/Losss"
+                        id="profitLoss"
+                        name="profitLoss"
+                        autocomplete="off"
+                        readonly
+                      /> 
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="profitLoss_ref"
+                      placeholder="Profit/Losss"
+                      id="profitLoss_ref"
+                      name="profitLoss_ref"
+                      autocomplete="off"
+                      readonly
+                    /> 
+                </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Amount</div>
+                  <div class="col-md-8">
+                      <input
+                        class="form-control bg-transparent"
+                        formControlName="amount"
+                        (input)="onWinningWithdrawalChange($event)"
+                        placeholder="Amount"
+                        min="0"
+                        id="amount"
+                        name="amount"
+                        type="number"
+                        autocomplete="off"
+                      /> 
+                  </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Remark</div>
+                  <div class="col-md-8">
+
+                    <input
+                    class="form-control bg-transparent"
+                    formControlName="remark"
+                    placeholder="Remark"
+                    id="remark"
+                    name="remark"
+                    autocomplete="off"
+                  /> 
+                  </div>
+                </div>
+
               
-              <!-- Withdraw Form -->
-              <div class="tab-pane fade" id="pills-withdraw" role="tabpanel" aria-labelledby="pills-withdraw-tab">
-                <form>
-                  <section class="section m-auto mt-4">
-                    <form [formGroup]="creditWithdrawForm">
-                      <div class="row mb-4 align-items-center">
-                        <div class="col-md-4">{{admin?.username}}</div>
+              <div class="row mt-5">
+                <div class="col-md-6 text-end">
+                  <button
+                    (click)="postWithdrawData(false)"
+                    
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                  >
+                    Save
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                    (click)="closeModal()"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->
+
+
+<!-- Modal start  Credit activity-->
+<div
+  *ngIf="modalNumber == 3"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          CREDIT ACTIVITY
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <ul class="nav nav-pills memberslist" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+              (click)="onCreditDepositOpen()"
+                class="nav-link active"
+                id="pills-activity-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-deposit"
+                type="button"
+                role="tab"
+                aria-controls="pills-deposit"
+                aria-selected="true"
+              >
+                Credit Deposit
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+              (click)="onCreditWithdrawalOpen()"
+                class="nav-link"
+                id="pills-withdraw-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-withdraw"
+                type="button"
+                role="tab"
+                aria-controls="pills-withdraw"
+                aria-selected="false"
+              >
+                Credit Withdraw
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+              (click)="onCreditHistoryOpen()"
+                class="nav-link"
+                id="pills-table-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-table"
+                type="button"
+                role="tab"
+                aria-controls="pills-table"
+                aria-selected="false"
+              >
+                Credit History
+              </button>
+            </li>
+          </ul>
+          
+          <div class="tab-content" id="pills-tabContent">
+            <!-- Deposit Form -->
+            <div class="tab-pane fade show active" id="pills-deposit" role="tabpanel" aria-labelledby="pills-deposit-tab">
+              
+                <section class="section m-auto mt-4">
+                  <form [formGroup]="creditDepositeForm">
+                    <div class="row mb-4 align-items-center">
+                      <div class="col-md-4">{{admin?.username}}</div>
+                      <div class="col-md-4">
+                          <input
+                            class="form-control bg-transparent"
+                            formControlName="upline_credit"
+                            placeholder=""
+                            readonly
+                            id="upline_credit"
+                            name="upline_credit"
+                            autocomplete="off"
+                          /> 
+                      </div>
+                      <div class="col-md-4">
+                        <input
+                          class="form-control bg-transparent"
+                          formControlName="refupline_credit"
+                          placeholder=""
+                          id="refupline_credit"
+                          name="refupline_credit"
+                          autocomplete="off"
+                          readonly
+                        /> 
+                    </div>
+                    </div>
+    
+                    <div class="row mb-4 align-items-center">
+                      <div class="col-md-4">{{userData?.username}}</div>
                         <div class="col-md-4">
                             <input
                               class="form-control bg-transparent"
-                              formControlName="upline_credit"
+                              formControlName="downline_credit"
                               placeholder=""
-                              readonly
-                              id="upline_credit"
-                              name="upline_credit"
+                              id="downline_credit"
+                              name="downline_credit"
                               autocomplete="off"
+                              readonly
                             /> 
                         </div>
                         <div class="col-md-4">
                           <input
                             class="form-control bg-transparent"
-                            formControlName="refupline_credit"
+                            formControlName="refdownline_credit"
                             placeholder=""
-                            id="refupline_credit"
-                            name="refupline_credit"
+                            id="refdownline_credit"
+                            name="refdownline_credit"
                             autocomplete="off"
                             readonly
                           /> 
                       </div>
                       </div>
-      
+    
                       <div class="row mb-4 align-items-center">
-                        <div class="col-md-4">{{userData?.username}}</div>
-                          <div class="col-md-4">
-                              <input
-                                class="form-control bg-transparent"
-                                formControlName="downline_credit"
-                                placeholder=""
-                                id="downline_credit"
-                                name="downline_credit"
-                                autocomplete="off"
-                                readonly
-                              /> 
-                          </div>
-                          <div class="col-md-4">
-                            <input
-                              class="form-control bg-transparent"
-                              formControlName="refdownline_credit"
-                              placeholder=""
-                              id="refdownline_credit"
-                              name="refdownline_credit"
-                              autocomplete="off"
-                              readonly
-                            /> 
-                        </div>
-                        </div>
-      
-                        <div class="row mb-4 align-items-center">
-                          <div class="col-md-4">Profit/Losss</div>
-                          <div class="col-md-4">
-                              <input
-                                class="form-control bg-transparent"
-                                formControlName="profitLoss"
-                                placeholder="Profit/Losss"
-                                id="profitLoss"
-                                name="profitLoss"
-                                autocomplete="off"
-                                readonly
-                              /> 
-                          </div>
-                          <div class="col-md-4">
+                        <div class="col-md-4">Profit/Losss</div>
+                        <div class="col-md-4">
                             <input
                               class="form-control bg-transparent"
                               formControlName="profitLoss"
@@ -787,67 +678,75 @@
                               readonly
                             /> 
                         </div>
-                        </div>
-      
-                        <div class="row mb-4 align-items-center">
-                          <div class="col-md-4">Amount</div>
-                          <div class="col-md-8">
-                              <input
-                                class="form-control bg-transparent"
-                                formControlName="amount"
-                                placeholder="Amount"
-                                min="0"
-                                id="amount"
-                                name="amount"
-                                type="number"
-                                autocomplete="off"
-                                (input)="onAmountWithdrawalChange($event)"
-                              /> 
-                          </div>
-                        </div>
-      
-                        <div class="row mb-4 align-items-center">
-                          <div class="col-md-4">Remark</div>
-                          <div class="col-md-8">
-      
-                            <input
+                        <div class="col-md-4">
+                          <input
                             class="form-control bg-transparent"
-                            formControlName="remark"
-                            placeholder="Remark"
-                            id="remark"
-                            name="remark"
+                            formControlName="profitLoss"
+                            placeholder="Profit/Losss"
+                            id="profitLoss"
+                            name="profitLoss"
                             autocomplete="off"
+                            readonly
                           /> 
-                          </div>
-                        </div>
-      
-                      
-                      <div class="row mt-5">
-                        <div class="col-md-6 text-end">
-                          <button
-                          (click)="postWithdrawalData(false)"
-                            
-                            class="btn btn-pink rounded-pill w-80 mt-4"
-                          >
-                            Save
-                          </button>
-                        </div>
-                        <div class="col-md-6">
-                          <button
-                            class="btn btn-pink rounded-pill w-80 mt-4"
-                            (click)="closeModal()"
-                          >
-                            Close
-                          </button>
+                      </div>
+                      </div>
+    
+                      <div class="row mb-4 align-items-center">
+                        <div class="col-md-4">Amount</div>
+                        <div class="col-md-8">
+                            <input
+                              class="form-control bg-transparent"
+                              formControlName="amount"
+                              placeholder="Amount"
+                              id="amount"
+                              name="amount"
+                              type="number"
+                              autocomplete="off"
+                              (input)="onAmountChange($event)"
+                            /> 
                         </div>
                       </div>
-                    </form>
-                  </section>
-                </form>
-              </section>
-
+    
+                      <div class="row mb-4 align-items-center">
+                        <div class="col-md-4">Remark</div>
+                        <div class="col-md-8">
+    
+                          <input
+                          class="form-control bg-transparent"
+                          formControlName="remark"
+                          placeholder="Remark"
+                          id="remark"
+                          name="remark"
+                          autocomplete="off"
+                        /> 
+                        </div>
+                      </div>
+    
+                    
+                    <div class="row mt-5">
+                      <div class="col-md-6 text-end">
+                        <button
+                          (click)="postData(true)"
+                          
+                          class="btn btn-pink rounded-pill w-80 mt-4"
+                        >
+                          Save
+                        </button>
+                      </div>
+                      <div class="col-md-6">
+                        <button
+                          class="btn btn-pink rounded-pill w-80 mt-4"
+                          (click)="closeModal()"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </section>
+              
             </div>
-
+            
             <!-- Withdraw Form -->
             <div class="tab-pane fade" id="pills-withdraw" role="tabpanel" aria-labelledby="pills-withdraw-tab">
               <form>
@@ -856,88 +755,221 @@
                     <div class="row mb-4 align-items-center">
                       <div class="col-md-4">{{admin?.username}}</div>
                       <div class="col-md-4">
-                        <input class="form-control bg-transparent" formControlName="upline_credit" placeholder=""
-                          readonly id="upline_credit" name="upline_credit" autocomplete="off" />
+                          <input
+                            class="form-control bg-transparent"
+                            formControlName="upline_credit"
+                            placeholder=""
+                            readonly
+                            id="upline_credit"
+                            name="upline_credit"
+                            autocomplete="off"
+                          /> 
                       </div>
                       <div class="col-md-4">
-                        <input class="form-control bg-transparent" formControlName="refupline_credit" placeholder=""
-                          id="refupline_credit" name="refupline_credit" autocomplete="off" readonly />
+                        <input
+                          class="form-control bg-transparent"
+                          formControlName="refupline_credit"
+                          placeholder=""
+                          id="refupline_credit"
+                          name="refupline_credit"
+                          autocomplete="off"
+                          readonly
+                        /> 
+                    </div>
+                    </div>
+    
+                    <div class="row mb-4 align-items-center">
+                      <div class="col-md-4">{{userData?.username}}</div>
+                        <div class="col-md-4">
+                            <input
+                              class="form-control bg-transparent"
+                              formControlName="downline_credit"
+                              placeholder=""
+                              id="downline_credit"
+                              name="downline_credit"
+                              autocomplete="off"
+                              readonly
+                            /> 
+                        </div>
+                        <div class="col-md-4">
+                          <input
+                            class="form-control bg-transparent"
+                            formControlName="refdownline_credit"
+                            placeholder=""
+                            id="refdownline_credit"
+                            name="refdownline_credit"
+                            autocomplete="off"
+                            readonly
+                          /> 
+                      </div>
+                      </div>
+    
+                      <div class="row mb-4 align-items-center">
+                        <div class="col-md-4">Profit/Losss</div>
+                        <div class="col-md-4">
+                            <input
+                              class="form-control bg-transparent"
+                              formControlName="profitLoss"
+                              placeholder="Profit/Losss"
+                              id="profitLoss"
+                              name="profitLoss"
+                              autocomplete="off"
+                              readonly
+                            /> 
+                        </div>
+                        <div class="col-md-4">
+                          <input
+                            class="form-control bg-transparent"
+                            formControlName="profitLoss"
+                            placeholder="Profit/Losss"
+                            id="profitLoss"
+                            name="profitLoss"
+                            autocomplete="off"
+                            readonly
+                          /> 
+                      </div>
+                      </div>
+    
+                      <div class="row mb-4 align-items-center">
+                        <div class="col-md-4">Amount</div>
+                        <div class="col-md-8">
+                            <input
+                              class="form-control bg-transparent"
+                              formControlName="amount"
+                              placeholder="Amount"
+                              min="0"
+                              id="amount"
+                              name="amount"
+                              type="number"
+                              autocomplete="off"
+                              (input)="onAmountWithdrawalChange($event)"
+                            /> 
+                        </div>
+                      </div>
+    
+                      <div class="row mb-4 align-items-center">
+                        <div class="col-md-4">Remark</div>
+                        <div class="col-md-8">
+    
+                          <input
+                          class="form-control bg-transparent"
+                          formControlName="remark"
+                          placeholder="Remark"
+                          id="remark"
+                          name="remark"
+                          autocomplete="off"
+                        /> 
+                        </div>
+                      </div>
+    
+                    
+                    <div class="row mt-5">
+                      <div class="col-md-6 text-end">
+                        <button
+                        (click)="postWithdrawalData(false)"
+                          
+                          class="btn btn-pink rounded-pill w-80 mt-4"
+                        >
+                          Save
+                        </button>
+                      </div>
+                      <div class="col-md-6">
+                        <button
+                          class="btn btn-pink rounded-pill w-80 mt-4"
+                          (click)="closeModal()"
+                        >
+                          Close
+                        </button>
                       </div>
                     </div>
-                    <div class="table-responsive tableRes tableFixHead">
-                      <table
-                        #myTable
-                        class="table tableall"
-                        
-                      >
-                        <thead>
-                          <tr>
-                            <th scope="col" class="first">
-                              <i class="fa-sharp fa-regular fa-address-card"></i>
-                            </th>
-                            <th
-                              scope="col"
-                              class="pointer"
-                              (click)="toggleSort('username')"
-                            >
-                              Creation Date
-                            </th>
-                           
-                            <th
-                              scope="col"
-                              class="text-center pointer"
-                              (click)="toggleSort('creditLimit')"
-                            >
-                              Amount
-                            </th>
+                  </form>
+                </section>
+              </form>
+            </div>
+            
+            <!-- Data Table -->
+            <div class="tab-pane fade" id="pills-table" role="tabpanel" aria-labelledby="pills-table-tab">
+              <!-- Display your table here -->
 
-                            <th
-                              scope="col"
-                              class="text-center pointer"
-                              (click)="toggleSort('creditLimit')"
-                            >
-                              Remark
-                            </th>
-          
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <h1
-                            class="text-center"
-                            *ngIf="clTransfers.length == 0 && !this.isLoading"
+              <div class="row mt-3">
+                <div class="col-md-12 overflow-auto">
+                  <div *ngIf="userList.length == 0" class="border text-center p-5">
+                    <h4 *ngIf="userList.length == 0 && !isLoading">No data found</h4>
+                    <h4 *ngIf="isLoading">Loading...</h4>
+                  </div>
+                  <div class="table-responsive tableRes tableFixHead">
+                    <table
+                      #myTable
+                      class="table tableall"
+                      
+                    >
+                      <thead>
+                        <tr>
+                          <th scope="col" class="first">
+                            <i class="fa-sharp fa-regular fa-address-card"></i>
+                          </th>
+                          <th
+                            scope="col"
+                            class="pointer"
+                            (click)="toggleSort('username')"
                           >
-                            No Record Found
-                          </h1>
-                          <tr
-                            *ngFor="
-                              let stmt of clTransfers | sort : sortColumn : sortAscending;
-                              let i = index
-                            "
+                            Creation Date
+                          </th>
+                         
+                          <th
+                            scope="col"
+                            class="text-center pointer"
+                            (click)="toggleSort('creditLimit')"
                           >
-                          <td>
-                            {{i+1}}
-                          </td>
-                          <td>
-                            {{stmt.createdDate | date : "medium"}}
-                          </td>
-                          <td class="text-center">
-                            <strong class="text-success" *ngIf="!stmt.isGiven">{{stmt.amount}}</strong>
-                            <strong class="text-danger" *ngIf="stmt.isGiven">{{stmt.amount}}</strong>
-                          </td>
-                          <td class="text-center">
-                            {{stmt.remark}}
-                          </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                            Amount
+                          </th>
+
+                          <th
+                            scope="col"
+                            class="text-center pointer"
+                            (click)="toggleSort('creditLimit')"
+                          >
+                            Remark
+                          </th>
+        
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <h1
+                          class="text-center"
+                          *ngIf="clTransfers.length == 0 && !this.isLoading"
+                        >
+                          No Record Found
+                        </h1>
+                        <tr
+                          *ngFor="
+                            let stmt of clTransfers | sort : sortColumn : sortAscending;
+                            let i = index
+                          "
+                        >
+                        <td>
+                          {{i+1}}
+                        </td>
+                        <td>
+                          {{stmt.createdDate | date : "medium"}}
+                        </td>
+                        <td class="text-center">
+                          <strong class="text-success" *ngIf="!stmt.isGiven">{{stmt.amount}}</strong>
+                          <strong class="text-danger" *ngIf="stmt.isGiven">{{stmt.amount}}</strong>
+                        </td>
+                        <td class="text-center">
+                          {{stmt.remark}}
+                        </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
 
             </div>
           </div>
-
+          
         </div>
       </div>
     </div>

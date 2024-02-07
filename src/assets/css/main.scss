@@ -372,6 +372,11 @@ $gradient-btn: linear-gradient(
     vertical-align: middle;
     border-bottom: 1px solid $color_2;
     margin: 2px 0;
+    
+      .custom-ddl{
+        color: $color_7;
+      }
+    
   }
   input {
     cursor: pointer;

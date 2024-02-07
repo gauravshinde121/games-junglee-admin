@@ -7,8 +7,8 @@
         <div class="col-md-3 mb-3">
           <label>Select Sports</label>
           <select formControlName="sportsId" id="ab" class="form-select pointer">
-            <option class=" bg-white" value="null">All</option>
-            <option class=" bg-white" *ngFor="let game of games" [value]="game.sportId">
+            <option  value="null">All</option>
+            <option  *ngFor="let game of games" [value]="game.sportId">
               {{ game.sportName }}
             </option>
           </select>
@@ -16,8 +16,8 @@
         <div class="col-md-3 mb-3">
           <label>Select Market</label>
           <select formControlName="marketId" id="ab" class="form-select pointer">
-            <option class=" bg-white" value="null">All</option>
-            <option class=" bg-white" [value]="market.marketId" *ngFor="let market of marketList">
+            <option  value="null">All</option>
+            <option  [value]="market.marketId" *ngFor="let market of marketList">
               {{ market.marketName }}
             </option>
           </select>

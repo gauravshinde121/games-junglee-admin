@@ -16,28 +16,28 @@
     </div>
     <div class="row mt-5">
       <div class="col">
-        <a class="btn btn-pink btn-lg text-dark w-100" (click)="navigate('activity')">Activity</a>
+        <a class="btn btn-pink btn-lg  w-100" (click)="navigate('activity')">Activity</a>
       </div>
       <div class="col">
-        <a class="btn btn-pink text-dark  w-100" (click)="navigate('balance')">Balance</a>
+        <a class="btn btn-pink   w-100" (click)="navigate('balance')">Balance</a>
       </div>
       <div class="col">
-        <a class="btn btn-pink text-dark  w-100" (click)="navigate('bet-list')">Bet List</a>
+        <a class="btn btn-pink   w-100" (click)="navigate('bet-list')">Bet List</a>
       </div>
       <div class="col">
-        <a class="btn btn-pink text-dark  w-100" (click)="navigate('accountStatement')">Account Statement</a>
+        <a class="btn btn-pink   w-100" (click)="navigate('accountStatement')">Account Statement</a>
       </div>
       <div class="col">
-        <a class="btn btn-pink text-dark  w-100" (click)="navigate('transfer-statement')">Transfer Statement</a>
+        <a class="btn btn-pink   w-100" (click)="navigate('transfer-statement')">Transfer Statement</a>
       </div>
       <div class="col">
-        <a class="btn btn-pink text-dark  w-100" (click)="navigate('login-history')">Login History</a>
+        <a class="btn btn-pink   w-100" (click)="navigate('login-history')">Login History</a>
       </div>
       <div class="col">
-        <a class="btn btn-pink text-dark  w-100" (click)="navigate('commission')">Commission</a>
+        <a class="btn btn-pink   w-100" (click)="navigate('commission')">Commission</a>
       </div>
       <div class="col">
-        <a class="btn btn-pink text-dark  w-100" (click)="navigate('net-exposure')">Net Exposure</a>
+        <a class="btn btn-pink   w-100" (click)="navigate('net-exposure')">Net Exposure</a>
       </div>
     </div>
     <br>
@@ -54,21 +54,21 @@
       <section class="content">
         <div class="card gamedetails">
           <div class="col-md-12">
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <p class="text-pink">
-                <a class="text-pink" routerLink="/member/list">
-                  <i class="fa fa-1x fa-circle-chevron-left text-pink"></i>
-                </a>
-                Member listing Downline
-                <i class="fa fa-1x fa-angle-right colorpink"></i>
-                <span class="text-white p-2">{{ username }}</span>
-              </p>
-            </div>
-            <!-- <div class="col-md-4">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p class="text-pink">
+                  <a class="text-pink" routerLink="/member/list">
+                    <i class="fa fa-1x fa-circle-chevron-left text-pink"></i>
+                  </a>
+                  Member listing Downline
+                  <i class="fa fa-1x fa-angle-right colorpink"></i>
+                  <span class="p-2">{{ username }}</span>
+                </p>
+              </div>
+              <!-- <div class="col-md-4">
               <div class="input-group flex-nowrap">
                 <span
-                  class="input-group-text bg-dark text-white radius-left-tb border-secondary"
+                  class="input-group-text bg-dark  radius-left-tb border-secondary"
                   id="addon-wrapping"
                 >
                   <i class="fa fa-search"></i>
@@ -82,103 +82,55 @@
                 />
               </div>
             </div> -->
-            <div class="col-md-4 offset-md-2">
-              <p class="flot-right">Created On : {{ createdDate | date }}</p>
+              <div class="col-md-4 offset-md-2">
+                <p class="flot-right">Created On : {{ createdDate | date }}</p>
+              </div>
             </div>
-          
-          </div>
           </div>
           <div class="row">
             <!-- nav tab -->
             <div class="col-md-12">
               <ul class="nav nav-pills mt-3 p-1" id="pills-tab" role="tablist">
                 <li class="nav-item btnheader" role="presentation">
-                  <button
-                    class="nav-link active"
-                    id="pills-activity-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-activity"
-                    type="button"
-                    role="tab"
-                    aria-controls="pills-activity"
-                    (click)="navigate('activity')"
-                    aria-selected="true"
-                  >
+                  <button class="nav-link active" id="pills-activity-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-activity" type="button" role="tab" aria-controls="pills-activity"
+                    (click)="navigate('activity')" aria-selected="true">
                     Activity
                   </button>
                 </li>
                 <li class="nav-item btnheader" role="presentation">
-                  <button
-                    class="nav-link"
-                    id="pills-balance-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-balance"
-                    type="button"
-                    role="tab"
-                    aria-controls="pills-balance"
-                    (click)="navigate('balance')"
-                    aria-selected="false"
-                  >
+                  <button class="nav-link" id="pills-balance-tab" data-bs-toggle="pill" data-bs-target="#pills-balance"
+                    type="button" role="tab" aria-controls="pills-balance" (click)="navigate('balance')"
+                    aria-selected="false">
                     Balance
                   </button>
                 </li>
                 <li class="nav-item btnheader" role="presentation">
-                  <button
-                    class="nav-link"
-                    id="pills-batlist-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-batlist"
-                    type="button"
-                    role="tab"
-                    aria-controls="pills-batlist"
-                    (click)="navigate('bet-list')"
-                    aria-selected="false"
-                  >
+                  <button class="nav-link" id="pills-batlist-tab" data-bs-toggle="pill" data-bs-target="#pills-batlist"
+                    type="button" role="tab" aria-controls="pills-batlist" (click)="navigate('bet-list')"
+                    aria-selected="false">
                     Bet List
                   </button>
                 </li>
                 <li class="nav-item btnheader" role="presentation">
-                  <button
-                    class="nav-link"
-                    id="pills-accountstatement-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-accountstatement"
-                    type="button"
-                    role="tab"
-                    (click)="navigate('accountStatement')"
-                    aria-controls="pills-accountstatement"
-                    aria-selected="false"
-                  >
+                  <button class="nav-link" id="pills-accountstatement-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-accountstatement" type="button" role="tab"
+                    (click)="navigate('accountStatement')" aria-controls="pills-accountstatement" aria-selected="false">
                     Account Statement
                   </button>
                 </li>
                 <li class="nav-item btnheader" role="presentation">
-                  <button
-                    class="nav-link"
-                    id="pills-transferstatements-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-transferstatements"
-                    type="button"
-                    role="tab"
-                    (click)="navigate('transfer-statement')"
-                    aria-controls="pills-transferstatements"
-                    aria-selected="false"
-                  >
+                  <button class="nav-link" id="pills-transferstatements-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-transferstatements" type="button" role="tab"
+                    (click)="navigate('transfer-statement')" aria-controls="pills-transferstatements"
+                    aria-selected="false">
                     Transfer Statements
                   </button>
                 </li>
                 <li class="nav-item btnheader" role="presentation">
-                  <button
-                    class="nav-link"
-                    id="pills-loginhistory-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-loginhistory"
-                    type="button"
-                    role="tab"
-                    (click)="navigate('login-history')"
-                    aria-controls="pills-loginhistory"
-                    aria-selected="false"
-                  >
+                  <button class="nav-link" id="pills-loginhistory-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-loginhistory" type="button" role="tab" (click)="navigate('login-history')"
+                    aria-controls="pills-loginhistory" aria-selected="false">
                     Login History
                   </button>
                 </li>
@@ -200,17 +152,9 @@
                   </button>
                 </li> -->
                 <li class="nav-item btnheader" role="presentation">
-                  <button
-                    class="nav-link"
-                    id="pills-netexposure-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#pills-netexposure"
-                    type="button"
-                    role="tab"
-                    (click)="navigate('net-exposure')"
-                    aria-controls="pills-netexposure"
-                    aria-selected="false"
-                  >
+                  <button class="nav-link" id="pills-netexposure-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-netexposure" type="button" role="tab" (click)="navigate('net-exposure')"
+                    aria-controls="pills-netexposure" aria-selected="false">
                     Net Exposure
                   </button>
                 </li>

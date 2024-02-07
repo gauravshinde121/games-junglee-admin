@@ -68,6 +68,8 @@ export class Constants {
     public readonly API_URL_GET_CASINO_REPORT_DETAIL: string = '/api/junglee-admin/getCasinoReportForAdminDetail';
     //change password
     public readonly API_CHANGE_PASSWORD: string = 'api/junglee-admin/changePassword';
+    public readonly API_CREDIT_SETTLEMENT: string = 'api/credit-settlement';
+    public readonly API_WINNING_SETTLEMENT: string = 'api/winning-settlement';
 
 
     //misc
@@ -134,6 +136,7 @@ export class Constants {
     public readonly API_GET_BANK_USERS: string = 'api/junglee-admin/getBankUsers';
 
     public readonly API_GET_ADMIN_ACCOUNT_STATEMENT: string = 'api/junglee-admin/getAdminAccountStatement';
+    public readonly API_GET_ADMIN_ACCOUNT_STATEMENT_NEW: string = 'api/getAdminAccountStatementNew';
     public readonly API_GET_PUBSUB_STATUS: string = 'api/getPubsubStatus';
     public readonly API_START_WEBJOB: string = 'api/startAzureSocketAndWebJob';
     public readonly API_GET_COMMISSION_REPORT: string = 'api/getAdminCommissionReport';

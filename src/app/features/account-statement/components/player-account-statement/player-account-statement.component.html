@@ -5,7 +5,7 @@
         <!--your code will come here start-->
 
         <h4 class="text-pink">
-          <img src="assets/images/master_dashboard.png" alt="" />
+          <img src="../../../../../assets/images/master_dashboard.png" alt="" />
           Player Account Statement
         </h4>
         <hr />
@@ -13,41 +13,21 @@
           <div class="row align-items-end">
             <div class="col-md-3 mb-3">
               <label>From Date</label>
-              <input
-                type="date"
-                formControlName="fromDate"
-                name="fromDate"
-                class="form-control"
-                id=""
-                placeholder="Month"
-              />
+              <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id=""
+                placeholder="Month" />
             </div>
             <div class="col-md-3 mb-3">
               <label>To Date</label>
-              <input
-                type="date"
-                formControlName="toDate"
-                name="toDate"
-                class="form-control"
-                id=""
-                placeholder="Month"
-              />
+              <input type="date" formControlName="toDate" name="toDate" class="form-control" id=""
+                placeholder="Month" />
             </div>
 
             <div class="col-md-3 mb-3 d-flex align-items-end">
-              <button
-                type="button"
-                (click)="searchList()"
-                class="btn btn-pink rounded-pill mt-4"
-              >
+              <button type="button" (click)="searchList()" class="btn btn-pink rounded-pill mt-4">
                 Search
               </button>
-              <button
-                *ngIf="plStatement.length > 0"
-                type="button"
-                class="btn btn-pink rounded-pill ms-2 text-white"
-                (click)="exportExcel()"
-              >
+              <button *ngIf="plStatement.length > 0" type="button" class="btn btn-pink rounded-pill ms-2 "
+                (click)="exportExcel()">
                 Export
               </button>
             </div>
@@ -67,11 +47,7 @@
         <table class="table tableall">
           <thead>
             <tr>
-              <th
-                scope="col"
-                class="first pointer"
-                (click)="toggleSort('createdAt')"
-              >
+              <th scope="col" class="first pointer" (click)="toggleSort('createdAt')">
                 Date
               </th>
               <th scope="col" class="pointer">User Name</th>
@@ -145,23 +121,14 @@
         </table>
       </div>
     </div>
-    <!-- <div class="col-md-12"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn bg-pink rounded-pill text-white ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
+    <!-- <div class="col-md-12"><a class="btn rounded-pill ">First</a><a class="btn rounded-pill ">Previous</a><a class="btn bg-pink rounded-pill  ps-4 pe-4">1</a><a class="btn rounded-pill ">Next</a><a class="btn rounded-pill ">Last</a></div> -->
     <div *ngIf="plStatement.length > 0 && !this.isLoading">
-      <button
-        class="btn rounded-pill text-white pointer"
-        [disabled]="currentPage === 1"
-        (click)="prev()"
-      >
+      <button class="btn rounded-pill  pointer" [disabled]="currentPage === 1" (click)="prev()">
         Prev
       </button>
-      <span class="btn btn-pink rounded-pill ps-4 pe-4"
-        >{{ currentPage }} / {{ totalPages }}
+      <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
       </span>
-      <button
-        class="btn rounded-pill text-white pointer"
-        [disabled]="currentPage === totalPages"
-        (click)="next()"
-      >
+      <button class="btn rounded-pill  pointer" [disabled]="currentPage === totalPages" (click)="next()">
         Next
       </button>
     </div>

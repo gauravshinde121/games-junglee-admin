@@ -1,11 +1,11 @@
 <main id="main" class="main m-0">
   <section class="section gamedetails">
     <div class="row pb-1">
-
       <div class="col-md-12">
         <div class="row">
           <h4 class="text-pink">
-            <img src="/assest/images/list_transfer.png" alt="" /> Player-wise Account Statement
+            <img src="assets/images/list_transfer.png" alt="" /> Player-wise
+            Account Statement
           </h4>
           <hr />
         </div>
@@ -23,15 +23,13 @@
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <!-- <section class="section gamedetails mt-3"> -->
   <div class="row mt-3">
-    <div class="col-md-12 tablescroll ">
+    <div class="col-md-12 tablescroll">
       <div *ngIf="accountStatements.length == 0" class="border text-center p-5">
         <h4 *ngIf="accountStatements.length == 0 && !isLoading">
           No data found
@@ -40,15 +38,14 @@
       </div>
 
       <div class="table-responsive tableRes tableFixHead">
-        <table class="table text-white tableall b-0" *ngIf="accountStatements.length > 0">
+        <table class="table tableall b-0" *ngIf="accountStatements.length > 0">
           <tbody>
             <tr>
               <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('createdDate')">
-                <i class="fa-regular fa-calendar-days"></i>&nbsp;
-                Sr No
+                <i class="fa-regular fa-calendar-days"></i>&nbsp; Sr No
               </th>
               <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('fromUsername')">
-                <i class="fa-solid fa-user text-white"></i> Date
+                <i class="fa-solid fa-user "></i> Date
               </th>
               <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('toUsername')">
                 <i class="fa-solid fa-user"></i> Credit
@@ -66,7 +63,11 @@
               </th>
             </tr>
 
-            <tr *ngFor="let user of accountStatements | sort:sortColumn:sortAscending; let i = index">
+            <tr *ngFor="
+                let user of accountStatements
+                  | sort : sortColumn : sortAscending;
+                let i = index
+              ">
               <td class="tds tdts">
                 <!-- *ngIf="currentPage == 1" -->
                 <span>{{ i + 1 }}</span>
@@ -98,14 +99,15 @@
               <td></td>
               <td></td>
               <td class="text-success float-left text-center"
-                [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{totalAmount | indianCurrency}}</td>
+                [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">
+                {{ totalAmount | indianCurrency }}
+              </td>
               <td></td>
               <td></td>
             </tr>
           </tfoot>
         </table>
       </div>
-
     </div>
   </div>
 </main>

@@ -16,11 +16,10 @@
           </div>
           <div class="row mt-3">
             <div class="col-md-3 mb-2 mb-2">
-              <label>Select Role {{editMode}}</label>
-              <select [attr.disabled]="editMode" formControlName="roleId"
-                  name="roleId" id="ab"
-                  class="form-select" (change)="onRoleChange($event)">
-                <option [value]=null selected>Select Role</option>  
+              <label>Select Role</label>
+              <select [attr.disabled]="editMode" formControlName="roleId" name="roleId" id="ab" class="form-select"
+                (change)="onRoleChange($event)">
+                <option [value]="null" selected>Select Role</option>
                 <option *ngFor="let role of roles" [value]="role.roleId">
                   {{ role.userRoleName }}
                 </option>
@@ -53,7 +52,7 @@
               <div class="input-group">
                 <input [type]="show ? 'text' : 'password'" class="form-control" formControlName="password"
                   placeholder="Password*" id="password" name="password" />
-                <span (click)="show=!show" class="input-group-text fa fa-eye text-dark p-0" id="Password"
+                <span (click)="show = !show" class="input-group-text fa fa-eye  p-0" id="Password"
                   [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
               </div>
               <div class="small text-danger" *ngIf="
@@ -79,7 +78,7 @@
               <div class="input-group">
                 <input [type]="show1 ? 'text' : 'password'" class="form-control" formControlName="confirmPassword"
                   placeholder="Confirm Password*" id="confirm_password" name="password" />
-                <span (click)="show1=!show1" class="input-group-text fa fa-eye text-dark p-0" id="Password"
+                <span (click)="show1 = !show1" class="input-group-text fa fa-eye  p-0" id="Password"
                   [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"></span>
               </div>
               <div *ngIf="
@@ -90,121 +89,50 @@
               </div>
 
               <!-- Add this div to show a password mismatch error -->
-        <div class="small text-danger" *ngIf="
-          memberForm.controls['confirmPassword'].hasError('confirmPasswordValidator') &&
-          memberForm.controls['confirmPassword'].touched">
-        Password and Confirm password do not match
-      </div>
-
+              <div class="small text-danger" *ngIf="
+                  memberForm.controls['confirmPassword'].hasError(
+                    'confirmPasswordValidator'
+                  ) && memberForm.controls['confirmPassword'].touched
+                ">
+                Password and Confirm password do not match
+              </div>
             </div>
 
             <div class="col-md-3 mb-2">
               <label>Credit Limit</label>
               <input type="number" class="form-control" formControlName="playerAvailableCredit" (input)="checkValueCreditLimit($event)"
                 placeholder="Player Credit Limit*" />
-              <div class="small text-danger" *ngIf="memberForm.controls['playerAvailableCredit'].errors?.required &&
-              memberForm.controls['playerAvailableCredit'].touched">
+              <div class="small text-danger" *ngIf="
+                  memberForm.controls['playerAvailableCredit'].errors
+                    ?.required &&
+                  memberForm.controls['playerAvailableCredit'].touched
+                ">
                 Please enter Credit Limit.
               </div>
               <div class="small text-danger" *ngIf="memberForm.controls['playerAvailableCredit'].errors?.['min']">
                 Credit Limit cannot be negative.
               </div>
+              <div class="small text-danger" *ngIf="
+                  memberForm.controls['playerAvailableCredit'].errors
+                    ?.creditLimit
+                ">
+                {{ selectedUserRole }} Creation Limit has been exceeded. Please
+                contact your upline.
+              </div>
             </div>
-
-            <!-- <div class="col-md-3 mb-2">
-              <label>Fancy Commission</label>
-              <input type="number" class="form-control" formControlName="fancyComission" *ngIf="!editMode"
-                placeholder="Fancy Commission*" />
-                <span *ngIf="editMode">: {{ memberForm.get('fancyComission')?.value }}%</span>
-              <div class="small text-danger" *ngIf="memberForm.get('fancyComission')?.hasError('invalidFancyCommission') || memberForm.controls['fancyComission'].errors?.required &&
-              memberForm.controls['fancyComission'].touched">
-              Member Fancy Comission cannot be greater than upline fancy comission!
-              </div>
-            </div> -->
-
-            <!-- <div class="col-md-3 mb-2">
-              <label>Book Maker Commission</label>
-              <input type="number" class="form-control" formControlName="bookmakerComission"
-                placeholder="Book Maker Commission*" *ngIf="!editMode" />
-                <span *ngIf="editMode">: {{ memberForm.get('bookmakerComission')?.value }}%</span>
-              <div class="small text-danger" *ngIf="memberForm.get('bookmakerComission')?.hasError('invalidBookmakerCommission') || memberForm.controls['bookmakerComission'].errors?.required &&
-              memberForm.controls['bookmakerComission'].touched">
-              Book Maker Fancy Comission cannot be greater than upline fancy comission!
-              </div>
-            </div> -->
-          </div>
-          
-        </div>
-      </div>
-    </section>
-
-    <section class="section gamedetails mt-3">
-      <div class="row">
-        <div class="col-md-12 text-pink">
-          <h4>Comission Settings</h4>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-12">
-         <h5>Bookmaker Commission: </h5> 
-        </div>
-        <div class="row">
-          <div class="col-3">
-              <select *ngIf="!editMode" [disabled]="(uplineInfo.roleId[0] != 1)" [ngModelOptions]="{standalone: true}" [(ngModel)]="bookmakerComissionTypesValue" 
-                  name="bookmakerComissionTypesValue" id="ab"
-                  class="form-select" (change)="onBookmakerComissionChange($event)">
-                <option *ngFor="let comissionType of bookmakerComissionTypes" [value]="comissionType.name">
-                  {{ comissionType.name }}
-                </option>
-              </select>
-              <label *ngIf="editMode" for="bookmakerComission">{{bookmakerComissionTypesValue}}</label>
-
-          </div>
-          <div class="col-3" *ngIf="isBookmakerComissionVisible">
-            <input max="5" step="0.50"  type="number" class="form-control" formControlName="bookmakerComission" min="0" (input)="checkValue($event,'Bookmaker')"
-              placeholder="Book Maker Commission*" *ngIf="!editMode" />
-              <span *ngIf="editMode">: {{ memberForm.get('bookmakerComission')?.value }}%</span>
-              <div class="small text-danger" *ngIf="memberForm.get('bookmakerComission')?.hasError('invalidBookmakerCommission') || memberForm.controls['bookmakerComission'].errors?.required &&
-              memberForm.controls['bookmakerComission'].touched">
-              Book Maker Fancy Comission cannot be greater than upline fancy comission!
-              </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col-12">
-         <h5>Fancy Commission:</h5> 
-        </div>
-        <div class="row mb-3">
-          <div class="col-3">
-            <select *ngIf="!editMode" [disabled]="(uplineInfo.roleId[0] != 1)" [ngModelOptions]="{standalone: true}" [(ngModel)]="fancyComissionTypesValue" 
-                  name="fancyComissionTypesValue" id="ab"
-                  class="form-select" (change)="onFancyComissionChange($event)">
-                <option *ngFor="let comissionType of fancyComissionTypes" [value]="comissionType.name">
-                  {{ comissionType.name == 'Turnover wise Comission' ? 'Bet to Bet Comission':comissionType.name }}
-                </option>
-              </select>
-              <label *ngIf="editMode" for="fancyComission">{{fancyComissionTypesValue == 'Turnover wise Comission' ? 'Bet to Bet Comission':fancyComissionTypesValue}}</label>
-          </div>
-          <div class="col-3" *ngIf="isFancyComissionVisible">
-            <input step="0.50" type="number" class="form-control" formControlName="fancyComission" min="0" max="5" (input)="checkValue($event,'Fancy')"
-              placeholder="Fancy Commission*" *ngIf="!editMode" />
-              <span *ngIf="editMode">: {{ memberForm.get('fancyComission')?.value }}%</span>
-              <div class="small text-danger" *ngIf="memberForm.get('fancyComission')?.hasError('invalidFancyCommission') || memberForm.controls['fancyComission'].errors?.required &&
-                          memberForm.controls['fancyComission'].touched">
-                          Member Fancy Comission cannot be greater than upline fancy comission!
-              </div>
-              <div class="small text-danger" *ngIf="showError()">
-                Member Fancy Commission cannot be greater than upline fancy commission!
-              </div>
           </div>
         </div>
       </div>
     </section>
 
-
-    <section class="section gamedetails mt-3" *ngIf="setAdminCreationLimit || setSuperMasterCreationLimit || setMasterCreationLimit || setAgentCreationLimit || setDealerCreationLimit || setUserCreationLimit">
+    <section class="section gamedetails mt-3" *ngIf="
+        setAdminCreationLimit ||
+        setSuperMasterCreationLimit ||
+        setMasterCreationLimit ||
+        setAgentCreationLimit ||
+        setDealerCreationLimit ||
+        setUserCreationLimit
+      ">
       <div class="row">
         <div class="col-md-12 text-pink">
           <h4>Downline Creation Limits</h4>
@@ -215,8 +143,10 @@
           <label>Admin Creation Limit</label>
           <input type="number" class="form-control" formControlName="adminCreationLimit"
             placeholder="Admin Creation Limit*" />
-          <div class="small text-danger" *ngIf="memberForm.controls['adminCreationLimit'].errors?.required &&
-          memberForm.controls['adminCreationLimit'].touched">
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['adminCreationLimit'].errors?.required &&
+              memberForm.controls['adminCreationLimit'].touched
+            ">
             Please enter Admin Creation Limit.
           </div>
         </div>
@@ -224,12 +154,18 @@
           <label>Super Master Creation Limit</label>
           <input type="number" class="form-control" formControlName="superMasterCreationLimit"
             placeholder="Super Master Creation Limit*" />
-          <div class="small text-danger" *ngIf="memberForm.controls['superMasterCreationLimit'].errors?.required &&
-          memberForm.controls['superMasterCreationLimit'].touched">
-            Please enter Super Master  Creation Limit.
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['superMasterCreationLimit'].errors
+                ?.required &&
+              memberForm.controls['superMasterCreationLimit'].touched
+            ">
+            Please enter Super Master Creation Limit.
           </div>
-          <div class="small text-danger" *ngIf="memberForm.controls['superMasterCreationLimit'].hasError('superMasterCreationLimit') &&
-            memberForm.controls['superMasterCreationLimit'].touched">
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['superMasterCreationLimit'].hasError(
+                'superMasterCreationLimit'
+              ) && memberForm.controls['superMasterCreationLimit'].touched
+            ">
             Creation Limit cannot exceed Player Credit Limit.
           </div>
         </div>
@@ -237,12 +173,17 @@
           <label>Master Creation Limit</label>
           <input type="number" class="form-control" formControlName="masterCreationLimit"
             placeholder="Master Creation Limit*" />
-          <div class="small text-danger" *ngIf="memberForm.controls['masterCreationLimit'].errors?.required &&
-          memberForm.controls['masterCreationLimit'].touched">
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['masterCreationLimit'].errors?.required &&
+              memberForm.controls['masterCreationLimit'].touched
+            ">
             Please enter Master Creation Limit.
           </div>
-          <div class="small text-danger" *ngIf="memberForm.controls['masterCreationLimit'].hasError('masterCreationLimit') &&
-            memberForm.controls['masterCreationLimit'].touched">
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['masterCreationLimit'].hasError(
+                'masterCreationLimit'
+              ) && memberForm.controls['masterCreationLimit'].touched
+            ">
             Creation Limit cannot exceed Player Credit Limit.
           </div>
         </div>
@@ -250,12 +191,17 @@
           <label>Agent Creation Limit</label>
           <input type="number" class="form-control" formControlName="agentCreationLimit"
             placeholder="Agent Creation Limit*" />
-          <div class="small text-danger" *ngIf="memberForm.controls['agentCreationLimit'].errors?.required &&
-          memberForm.controls['agentCreationLimit'].touched">
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['agentCreationLimit'].errors?.required &&
+              memberForm.controls['agentCreationLimit'].touched
+            ">
             Please enter Agent Creation Limit.
           </div>
-          <div class="small text-danger" *ngIf="memberForm.controls['agentCreationLimit'].hasError('agentCreationLimit') &&
-            memberForm.controls['agentCreationLimit'].touched">
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['agentCreationLimit'].hasError(
+                'agentCreationLimit'
+              ) && memberForm.controls['agentCreationLimit'].touched
+            ">
             Creation Limit cannot exceed Player Credit Limit.
           </div>
         </div>
@@ -263,12 +209,17 @@
           <label>Dealer Creation Limit</label>
           <input type="number" class="form-control" formControlName="dealerCreationLimit"
             placeholder="Dealer Creation Limit*" />
-          <div class="small text-danger" *ngIf="memberForm.controls['dealerCreationLimit'].errors?.required &&
-          memberForm.controls['dealerCreationLimit'].touched">
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['dealerCreationLimit'].errors?.required &&
+              memberForm.controls['dealerCreationLimit'].touched
+            ">
             Please enter Dealer Creation Limit.
           </div>
-          <div class="small text-danger" *ngIf="memberForm.controls['dealerCreationLimit'].hasError('dealerCreationLimit') &&
-            memberForm.controls['dealerCreationLimit'].touched">
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['dealerCreationLimit'].hasError(
+                'dealerCreationLimit'
+              ) && memberForm.controls['dealerCreationLimit'].touched
+            ">
             Creation Limit cannot exceed Player Credit Limit.
           </div>
         </div>
@@ -276,12 +227,17 @@
           <label>User Creation Limit</label>
           <input type="number" class="form-control" formControlName="userCreationLimit"
             placeholder="User Creation Limit*" />
-          <div class="small text-danger" *ngIf="memberForm.controls['userCreationLimit'].errors?.required &&
-          memberForm.controls['userCreationLimit'].touched">
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['userCreationLimit'].errors?.required &&
+              memberForm.controls['userCreationLimit'].touched
+            ">
             Please enter User Creation Limit.
           </div>
-          <div class="small text-danger" *ngIf="memberForm.controls['userCreationLimit'].hasError('userCreationLimit') &&
-            memberForm.controls['userCreationLimit'].touched">
+          <div class="small text-danger" *ngIf="
+              memberForm.controls['userCreationLimit'].hasError(
+                'userCreationLimit'
+              ) && memberForm.controls['userCreationLimit'].touched
+            ">
             Creation Limit cannot exceed Player Credit Limit.
           </div>
         </div>
@@ -306,19 +262,13 @@
             </div>
           </div>
           <div class="col-lg-1 col-md-3 col-3 text-end">
-            <button
-            *ngIf="game.gameId == 4 && game.isActive == true"
-              type="button"
-              class="btn-sm btn-pink rounded-pill ms-2 text-white"
-              data-bs-toggle="modal" data-bs-target="#casinoProvider"
-            >
-            Provider
+            <button *ngIf="game.gameId == 4 && game.isActive == true" type="button"
+              class="btn-sm btn-pink rounded-pill ms-2 " data-bs-toggle="modal" data-bs-target="#casinoProvider">
+              Provider
             </button>
           </div>
-          </div>
-        <div class="col-md-3">
-
         </div>
+        <div class="col-md-3"></div>
       </div>
     </section>
     <section class="section gamedetails mt-3">
@@ -331,8 +281,14 @@
         <div class="col-md-2">Sportsbook (INR)</div>
         <div class="col-md-2">Max Rate (INR) <br />My Share : 1</div>
         <div class="col-md-8">
-          <input [readOnly]="true" formControlName="sportsBookRate" name="sportsBookRate" type="number"
-            id="sportsBookRate" class="form-control pb-2" />
+          <input
+            [readOnly]="true"
+            formControlName="sportsBookRate"
+            name="sportsBookRate"
+            type="number"
+            id="sportsBookRate"
+            class="form-control pb-2"
+          />
           <p>(Min : 1) (Max : 100)</p>
         </div>
       </div>
@@ -340,8 +296,14 @@
         <div class="col-md-2">Live Casino</div>
         <div class="col-md-2">Max Rate (INR) <br />My Share : 1</div>
         <div class="col-md-8">
-          <input [readOnly]="true" formControlName="liveCasinoRate" name="liveCasinoRate" type="number" id=""
-            class="form-control pb-2" />
+          <input
+            [readOnly]="true"
+            formControlName="liveCasinoRate"
+            name="liveCasinoRate"
+            type="number"
+            id=""
+            class="form-control pb-2"
+          />
           <p>(Min : 1) (Max : 100)</p>
         </div>
       </div> -->
@@ -350,8 +312,10 @@
         <div class="col-md-2">(%)</div>
         <div class="col-md-8">
           <input formControlName="partnerShipPercent" name="partnerShipPercent" type="number" class="form-control pb-2"
-          *ngIf="!editMode" (keyup)="calculateMemberPercentage($event)" />
-          <span *ngIf="editMode">{{ memberForm.get('partnerShipPercent')?.value }}</span>
+            *ngIf="!editMode" (keyup)="calculateMemberPercentage($event)" />
+          <span *ngIf="editMode">{{
+            memberForm.get("partnerShipPercent")?.value
+            }}</span>
           <p>(Min : {{ uplineInfo?.partnerShipPercent }} ) (Max : 100)</p>
           <div *ngIf="f?.partnerShipPercent?.errors?.min" class="small text-danger col-md-12 ps-5">
             value cannot be less than {{ uplineInfo?.partnerShipPercent }}
@@ -389,18 +353,17 @@
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
-        <h5 class="modal-title cassino text-white" id="staticBackdropLabel">
+        <h5 class="modal-title cassino " id="staticBackdropLabel">
           Please enter your Password
         </h5>
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body">
         <div class="row">
-          <section class="section  m-auto">
+          <section class="section m-auto">
             <form (ngSubmit)="createMember()">
-              <input #confirm_password type="password"
-                class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+              <input #confirm_password type="password" class="form-control border-pink bg-transparent rounded-pill"
                 placeholder="Enter your password" [(ngModel)]="uplinePwd" name="password" autofocus />
               <div class="row">
                 <div class="col-md-6">
@@ -409,13 +372,13 @@
                   </button>
                 </div>
                 <div class="col-md-6">
-                  <button class="btn  rounded-pill w-100 mt-3 ms-3 float-right btn-pink" type="button" (click)="closeModal()">
+                  <button class="btn rounded-pill w-100 mt-3 ms-3 float-right btn-pink" type="button"
+                    (click)="closeModal()">
                     Cancel
                   </button>
                 </div>
               </div>
             </form>
-
           </section>
         </div>
       </div>
@@ -431,7 +394,7 @@
         <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body">
         <div class="row">
           <div class="col-md-4 mt-3 d-flex" *ngFor="let casino of casinoProviderList">
             <p class="me-2">{{ casino.providerName }}</p>
@@ -448,22 +411,18 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-5">
-
-          </div>
+          <div class="col-md-5"></div>
 
           <div class="col-md-2">
-            <button class="btn  rounded-pill w-100 mt-3 ms-3 float-right btn-pink"  data-bs-dismiss="modal" (click)="closeModal()">
+            <button class="btn rounded-pill w-100 mt-3 ms-3 float-right btn-pink" data-bs-dismiss="modal"
+              (click)="closeModal()">
               Ok
             </button>
           </div>
 
-          <div class="col-md-5">
-
-          </div>
+          <div class="col-md-5"></div>
         </div>
       </div>
-
     </div>
   </div>
 </div>

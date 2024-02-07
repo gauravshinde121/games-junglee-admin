@@ -15,11 +15,8 @@
 
 .border-5 {
   border-radius: 5px;
-}
-
-.tablematchodds {
-  height: 100%;
-  margin-bottom: 0;
+  border-collapse: separate;
+  // border-spacing: 1;
 }
 
 .accordion-header .fa-plus:before {
@@ -61,3 +58,45 @@
 //   border-top: 1px solid #000;
 //   border-bottom: 1px solid #000;
 // }
+
+.tbl-height {
+  min-height: 80px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.tablematchodds {
+  // background-color: $color_1;
+  -moz-border-radius: 15px !important;
+  border-collapse: separate !important;
+  // border: 1px solid black !important;
+  border-spacing: 0;
+  border-radius: 5px;
+  vertical-align: middle;
+  margin-bottom: 25px;
+  height: 100%;
+  tbody {
+    tr {
+      &:nth-child(2) {
+        td {
+          border-top: 1px solid #83c5cb !important;
+        }
+      }
+      &:nth-child(1) {
+        td {
+          border-top: none !important;
+        }
+      }
+      td {
+        padding: 2px 5px;
+        text-align: center;
+        // border-top: 2px solid $color_1;
+        line-height: 12px;
+        // border: none !important;
+        border-bottom: none !important;
+        border-top: none !important;
+      }
+    }
+  }
+}

@@ -13,13 +13,13 @@
             <section class="section dashboard">
               <!-- <div class="row mb-3 align-items-end">
                  <div class="col-md-6 col-lg-6 col-xl-6">
-                  <div class="row text-white">
+                  <div class="row ">
                     <div class="input-group flex-nowrap">
-                      <span class="input-group-text bg-dark text-white border-pink radius-left-tb" id="addon-wrapping">
+                      <span class="input-group-text bg-dark  border-pink radius-left-tb" id="addon-wrapping">
                         <i class="fa fa-search"></i>
                       </span>
                       <input type="text"
-                        class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
+                        class="form-control bg-dark  border-start-0 border-pink radius-right-tb"
                         placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping"
                         [(ngModel)]="searchTerm" (ngModelChange)="search()" />
                     </div>
@@ -31,26 +31,18 @@
               </div>-->
               <div class="row align-items-center">
                 <h4 class="text-pink">
-                  <img src="assets/images/pnl.png" alt="" /> Bank Transfer
+                  <img src="../../../../../assets/images/pnl.png" alt="" /> Bank
+                  Transfer
                 </h4>
 
                 <div class="col-md-6 col-lg-6 col-xl-6 mt-2">
                   <div class="input-group flex-nowrap">
-                    <span
-                      class="input-group-text bg-dark text-white border-pink radius-left-tb"
-                      id="addon-wrapping"
-                    >
+                    <span class="input-group-text bg-dark  border-pink radius-left-tb" id="addon-wrapping">
                       <i class="fa fa-search"></i>
                     </span>
-                    <input
-                      type="text"
-                      class="form-control bg-dark text-white border-start-0 border-pink radius-right-tb"
-                      placeholder="Search"
-                      aria-label="Search"
-                      aria-describedby="addon-wrapping"
-                      [(ngModel)]="searchTerm"
-                      (ngModelChange)="search()"
-                    />
+                    <input type="text" class="form-control border-start-0 border-pink radius-right-tb"
+                      placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping"
+                      [(ngModel)]="searchTerm" (ngModelChange)="search()" />
                   </div>
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-2 mt-2">
@@ -69,22 +61,15 @@
                 </div>
 
                 <div class="col-lg-1 col-md-3 col-3 text-end">
-                  <button
-                    *ngIf="userList.length > 0"
-                    type="button"
-                    class="btn-sm btn-pink rounded-pill ms-2 text-white"
-                    (click)="exportExcel()"
-                  >
+                  <button *ngIf="userList.length > 0" type="button" class="btn-sm btn-pink rounded-pill ms-2 "
+                    (click)="exportExcel()">
                     Export
                   </button>
                 </div>
               </div>
               <div class="row mt-3">
                 <div class="col-md-12 overflow-auto">
-                  <div
-                    *ngIf="userList.length == 0"
-                    class="border text-center p-5"
-                  >
+                  <div *ngIf="userList.length == 0" class="border text-center p-5">
                     <h4 *ngIf="userList.length == 0 && !isLoading">
                       No data found
                     </h4>
@@ -109,46 +94,22 @@
                           <th scope="col" class="">
                             <i class="fa-sharp fa-regular fa-address-card"></i>
                           </th>
-                          <th
-                            scope="col"
-                            class="pointer"
-                            (click)="toggleSort('username')"
-                          >
+                          <th scope="col" class="pointer" (click)="toggleSort('username')">
                             UserName
                           </th>
-                          <th
-                            scope="col"
-                            class="text-center pointer"
-                            (click)="toggleSort('userRoleName')"
-                          >
+                          <th scope="col" class="text-center pointer" (click)="toggleSort('userRoleName')">
                             RoleName
                           </th>
-                          <th
-                            scope="col"
-                            class="text-center pointer"
-                            (click)="toggleSort('creditLimit')"
-                          >
+                          <th scope="col" class="text-center pointer" (click)="toggleSort('creditLimit')">
                             Credit Limit
                           </th>
-                          <th
-                            scope="col"
-                            class="text-center pointer"
-                            (click)="toggleSort('exposure')"
-                          >
+                          <th scope="col" class="text-center pointer" (click)="toggleSort('exposure')">
                             Net Exposure
                           </th>
-                          <th
-                            scope="col"
-                            class="text-center pointer"
-                            (click)="toggleSort('take')"
-                          >
+                          <th scope="col" class="text-center pointer" (click)="toggleSort('take')">
                             Take
                           </th>
-                          <th
-                            scope="col"
-                            class="text-center pointer"
-                            (click)="toggleSort('give')"
-                          >
+                          <th scope="col" class="text-center pointer" (click)="toggleSort('give')">
                             Give
                           </th>
                           <th scope="col" class="text-center pointer">
@@ -160,11 +121,7 @@
                           <th scope="col" class="text-center pointer">
                             Manage Casino Transfer
                           </th>
-                          <th
-                            scope="col"
-                            class="text-center pointer last"
-                            (click)="toggleSort('availableCredit')"
-                          >
+                          <th scope="col" class="text-center pointer last" (click)="toggleSort('availableCredit')">
                             Available Credit
                           </th>
                         </tr>
@@ -176,13 +133,11 @@
                         >
                           No users Found
                         </h1>
-                        <tr
-                          *ngFor="
+                        <tr *ngFor="
                             let user of userList
                               | sort : sortColumn : sortAscending;
                             let i = index
-                          "
-                        >
+                          ">
                           <td>
                             <input
                               type="checkbox"
@@ -197,57 +152,39 @@
                             <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                             <span *ngIf="currentPage > 1">{{
                               i + 1 + (currentPage - 1) * limit
-                            }}</span>
+                              }}</span>
                           </td>
                           <td>
                             <span (click)="showDownlineTree(user)">{{
                               user.username
-                            }}</span>
+                              }}</span>
                           </td>
                           <td class="text-center">{{ user.userRoleName }}</td>
                           <td class="text-center">
                             {{ user.creditLimit | indianCurrency }}
                           </td>
-                          <td
-                            class="text-center"
-                            [ngClass]="user.exposure > 0 ? 'text-danger' : ''"
-                          >
+                          <td class="text-center" [ngClass]="user.exposure > 0 ? 'text-danger' : ''">
                             {{ user.exposure | indianCurrency }}
                           </td>
-                          <td
-                            [ngClass]="user.take > 0 ? 'text-success' : ''"
-                            class="text-center"
-                          >
-                            <a
-                              class="pointer text-success text-decoration-none"
-                              *ngIf="user.take > 0"
-                              >{{ user.take | indianCurrency }}</a
-                            >
+                          <td [ngClass]="user.take > 0 ? 'text-success' : ''" class="text-center">
+                            <a class="pointer text-success text-decoration-none" *ngIf="user.take > 0">{{ user.take |
+                              indianCurrency }}</a>
                             <span *ngIf="user.take <= 0">{{
                               user.take | indianCurrency
-                            }}</span>
+                              }}</span>
                           </td>
-                          <td
-                            [ngClass]="user.give > 0 ? 'text-danger' : ''"
-                            class="text-center"
-                          >
-                            <a
-                              class="pointer text-danger text-decoration-none"
-                              *ngIf="user.give > 0"
-                              >{{ user.give | indianCurrency }}</a
-                            >
+                          <td [ngClass]="user.give > 0 ? 'text-danger' : ''" class="text-center">
+                            <a class="pointer text-danger text-decoration-none" *ngIf="user.give > 0">{{ user.give |
+                              indianCurrency }}</a>
                             <span *ngIf="user.give <= 0">{{
                               user.give | indianCurrency
-                            }}</span>
+                              }}</span>
                           </td>
 
                           <td class="text-center">
-                            <button
-                              *ngIf="user.give > 0"
-                              class="btn btn-sm btn-danger pointer text-decoration-none"
+                            <button *ngIf="user.give > 0" class="btn btn-sm btn-danger pointer text-decoration-none"
                               (click)="adjustWinningsForSingleUser(user, true)"
-                              [disabled]="selectedUserForAdjustment.length > 1"
-                            >
+                              [disabled]="selectedUserForAdjustment.length > 1">
                               Give
                             </button>
 
@@ -255,45 +192,29 @@
                               *ngIf="user.take > 0"
                               class="btn btn-sm btn-success pointer text-decoration-none"
                               (click)="adjustWinningsForSingleUser(user, false)"
-                              [disabled]="selectedUserForAdjustment.length > 1"
-                            >
+                              [disabled]="selectedUserForAdjustment.length > 1">
                               Take
                             </button>
                           </td>
-                          <td
-                            (click)="openCasinoSummary(user)"
-                            class="text-center pointer"
-                          >
-                            <span
-                              *ngIf="user.casinoWinnings > 0"
-                              class="text-success"
-                              >{{ user.casinoWinnings | indianCurrency }}</span
-                            >
-                            <span
-                              *ngIf="user.casinoWinnings < 0"
-                              class="text-danger"
-                              >{{ user.casinoWinnings | indianCurrency }}</span
-                            >
+                          <td (click)="openCasinoSummary(user)" class="text-center pointer">
+                            <span *ngIf="user.casinoWinnings > 0" class="text-success">{{ user.casinoWinnings |
+                              indianCurrency }}</span>
+                            <span *ngIf="user.casinoWinnings < 0" class="text-danger">{{ user.casinoWinnings |
+                              indianCurrency }}</span>
                             <span *ngIf="user.casinoWinnings == 0">{{
                               user.casinoWinnings | indianCurrency
-                            }}</span>
+                              }}</span>
                           </td>
                           <td class="text-center">
-                            <button
-                              (click)="openCasinoSettlement(user, false)"
-                              type="button"
+                            <button (click)="openCasinoSettlement(user, false)" type="button"
                               *ngIf="user.casinoWinnings > 0"
-                              class="btn btn-sm btn-success pointer text-decoration-none"
-                            >
+                              class="btn btn-sm btn-success pointer text-decoration-none">
                               Take
                             </button>
 
-                            <button
-                              (click)="openCasinoSettlement(user, true)"
-                              type="button"
+                            <button (click)="openCasinoSettlement(user, true)" type="button"
                               *ngIf="user.casinoWinnings < 0"
-                              class="btn btn-sm btn-danger pointer text-decoration-none"
-                            >
+                              class="btn btn-sm btn-danger pointer text-decoration-none">
                               Give
                             </button>
                           </td>
@@ -320,15 +241,11 @@
                           <td class="text-center">
                             <span *ngIf="totalCasino < 0" class="text-danger">{{
                               totalCasino | indianCurrency
-                            }}</span>
+                              }}</span>
                             <span *ngIf="totalCasino == 0">{{
                               totalCasino | indianCurrency
-                            }}</span>
-                            <span
-                              *ngIf="totalCasino > 0"
-                              class="text-success"
-                              >{{ totalCasino | indianCurrency }}</span
-                            >
+                              }}</span>
+                            <span *ngIf="totalCasino > 0" class="text-success">{{ totalCasino | indianCurrency }}</span>
                           </td>
                           <td></td>
                           <td></td>
@@ -338,21 +255,13 @@
                   </div>
 
                   <div *ngIf="userList.length > 0 && !this.isLoading">
-                    <button
-                      class="btn rounded-pill text-white"
-                      [disabled]="currentPage === 1"
-                      (click)="prev()"
-                    >
+                    <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
                       Prev
                     </button>
                     <span class="btn btn-pink rounded-pill ps-4 pe-4"
                       >{{ currentPage }} / {{ totalPages }}
                     </span>
-                    <button
-                      class="btn rounded-pill text-white"
-                      [disabled]="currentPage === totalPages"
-                      (click)="next()"
-                    >
+                    <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
                       Next
                     </button>
                   </div>
@@ -361,7 +270,7 @@
           <button [disabled]="currentPage === 1" (click)="prev()">Prev</button><span>{{ currentPage }} / {{ totalPages }}</span><button [disabled]="currentPage === totalPages" (click)="next()">
             Next
           </button> -->
-                  <!-- <div *ngIf="userList.length > 0 && !this.isLoading"><a class="btn rounded-pill text-white">First</a><a class="btn rounded-pill text-white">Previous</a><a class="btn btn-pink rounded-pill ps-4 pe-4">1</a><a class="btn rounded-pill text-white">Next</a><a class="btn rounded-pill text-white">Last</a></div> -->
+                  <!-- <div *ngIf="userList.length > 0 && !this.isLoading"><a class="btn rounded-pill ">First</a><a class="btn rounded-pill ">Previous</a><a class="btn btn-pink rounded-pill ps-4 pe-4">1</a><a class="btn rounded-pill ">Next</a><a class="btn rounded-pill ">Last</a></div> -->
                 </div>
               </div>
             </section>
@@ -398,16 +307,12 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body">
         <div class="row">
           <div class="col-md-12 pt-2">
             <label for="">Narration</label>
-            <input
-              maxlength="150"
-              type="text"
-              class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-              [(ngModel)]="description"
-            />
+            <input maxlength="150" type="text" class="form-control border-pink bg-transparent rounded-pill"
+              [(ngModel)]="description" />
           </div>
         </div>
         <div class="row">
@@ -428,17 +333,9 @@
 </div>
 <!-- Modal end -->
 
-<div
-  *ngIf="modalNumber == 3"
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div *ngIf="modalNumber == 3" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
+  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
@@ -453,7 +350,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body">
         <div class="row">
           <div class="col-md-3">
             <label>Credit Limit:</label><br />{{ userDetails.creditLimit }}
@@ -469,7 +366,7 @@
           </div>
           <div class="col-md-3">
             <label>Difference:</label><br />{{
-              (userDetails.availableCredit - userDetails.exposure).toFixed(1)
+            (userDetails.availableCredit - userDetails.exposure).toFixed(1)
             }}
           </div>
           <div class="col-md-12">
@@ -483,24 +380,17 @@
                     You Can Transfer {{ userDetails.take }} Amount
                   </div>
                   <div class="col-md-12 pt-2">
-                    <input
-                      type="number"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                      formControlName="amount"
-                    />
+                    <input type="number" class="form-control border-pink bg-transparent rounded-pill"
+                      formControlName="amount" />
                   </div>
                   <div class="col-md-12 pt-2">
                     <label for="">Narration</label>
-                    <input
-                      maxlength="150"
-                      type="text"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                      formControlName="description"
-                    />
+                    <input maxlength="150" type="text" class="form-control border-pink bg-transparent rounded-pill"
+                      formControlName="description" />
                   </div>
                   <!-- <div class="col-md-12 pt-2">
                     <label for="">Narration</label>
-                    <input type="text" class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    <input type="text" class="form-control  border-pink bg-transparent  rounded-pill"
                       formControlName="amount" />
                   </div> -->
                 </div>
@@ -560,7 +450,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark text-white">
+      <div class="modal-body">
         <div class="row">
           <section class="section w-75 m-auto">
             <table width="100%">
@@ -583,17 +473,9 @@
 </div>
 <!-- Modal end -->
 
-<div
-  *ngIf="modalNumber == 5"
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div *ngIf="modalNumber == 5" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
+  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
@@ -608,7 +490,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body">
         <div class="row">
           <div class="col-md-3">
             <label>Credit Limit:</label><br />{{ userDetails.creditLimit }}
@@ -635,27 +517,20 @@
                   </div>
                   <div class="col-md-12 pt-2">
                     <label for="">Narration</label>
-                    <input
-                      maxlength="150"
-                      type="text"
-                      class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
-                      formControlName="description"
-                    />
+                    <input maxlength="150" type="text" class="form-control border-pink bg-transparent rounded-pill"
+                      formControlName="description" />
                   </div>
                   <!-- <div class="col-md-12 pt-2">
                     <label for="">Narration</label>
-                    <input type="text" class="form-control bg-dark border-pink bg-transparent text-white rounded-pill"
+                    <input type="text" class="form-control  border-pink bg-transparent  rounded-pill"
                       formControlName="amount" />
                   </div> -->
                 </div>
 
                 <div class="row">
                   <div class="col-md-6 text-end">
-                    <button
-                      (click)="postAdjustCasinoWinnings()"
-                      [disabled]="adjustWinningsForSingleUserForm.invalid"
-                      class="btn btn-danger rounded-pill w-80"
-                    >
+                    <button (click)="postAdjustCasinoWinnings()" [disabled]="adjustWinningsForSingleUserForm.invalid"
+                      class="btn btn-danger rounded-pill w-80">
                       Save
                     </button>
                   </div>
@@ -678,17 +553,9 @@
   </div>
 </div>
 
-<div
-  *ngIf="modalNumber == 6"
-  class="modal"
-  [ngStyle]="{ display: display }"
-  id="staticBackdrop"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div *ngIf="modalNumber == 6" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
+  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+  aria-hidden="true">
   <div class="casino-summary-modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
@@ -703,19 +570,12 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body bg-dark_new text-white">
+      <div class="modal-body">
         <div class="table-responsive tableRes tableFixHead">
-          <table
-            class="table text-white tableall b-0"
-            *ngIf="casinoSummary.length > 0"
-          >
+          <table class="table tableall b-0" *ngIf="casinoSummary.length > 0">
             <tbody>
               <tr>
-                <th
-                  class="thts"
-                  class="cursor-pointer pointer"
-                  (click)="toggleSort('createdDate')"
-                >
+                <th class="thts" class="cursor-pointer pointer" (click)="toggleSort('createdDate')">
                   <i class="fa-regular fa-calendar-days"></i>&nbsp; Sr No
                 </th>
                 <th
@@ -753,23 +613,19 @@
                 </th> -->
               </tr>
 
-              <tr
-                *ngFor="
+              <tr *ngFor="
                   let summary of casinoSummary
                     | sort : sortColumn : sortAscending;
                   let i = index
-                "
-              >
+                ">
                 <td class="tds tdts">
                   <span>{{ i + 1 }}</span>
                 </td>
                 <td class="tds tdts">
-                  <strong
-                    [ngClass]="{
+                  <strong [ngClass]="{
                       'text-success': summary.amount > 0,
                       'text-danger': summary.amount < 0
-                    }"
-                  >
+                    }">
                     {{ summary.amount | indianCurrency }}
                   </strong>
                 </td>
@@ -793,10 +649,8 @@
               <tr>
                 <td></td>
                 <td style="text-align: left">
-                  <strong
-                    [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'"
-                    >{{ totalAmount | indianCurrency }}</strong
-                  >
+                  <strong [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">{{ totalAmount | indianCurrency
+                    }}</strong>
                 </td>
                 <td></td>
                 <td></td>

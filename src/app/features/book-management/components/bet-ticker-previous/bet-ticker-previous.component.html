@@ -1,52 +1,34 @@
 <main id="main" class="main m-0">
   <section class="section gamedetails">
-    <div
-      [formGroup]="filterForm"
-      class="tab-pane fade show active"
-      id="pills-batlist"
-      role="tabpanel"
-      aria-labelledby="pills-batlist-tab"
-      tabindex="0"
-    >
+    <div [formGroup]="filterForm" class="tab-pane fade show active" id="pills-batlist" role="tabpanel"
+      aria-labelledby="pills-batlist-tab" tabindex="0">
       <div class="row">
         <div class="col-md-3">
           <h3 class="text-pink">Bet Ticker Previous</h3>
         </div>
         <div class="col-md-3">
-          <button
-            type="button"
-            class="btn rounded-pill mt-3 text-white border-danger w-100"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          >
+          <button type="button" class="btn rounded-pill mt-3  w-100" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
             <i class="fa fa-user-pen"></i> Member Name
           </button>
         </div>
         <div class="col-md-3">
-          <button
-            type="button"
-            class="btn rounded-pill mt-3 text-white border-danger w-100"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          >
+          <button type="button" class="btn rounded-pill mt-3  w-100" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
             <i class="fa fa-location-dot"></i> Member IP
           </button>
         </div>
         <div class="col-md-3"></div>
         <div class="col-md-12 mb-3 mt-3">
-          <span class="me-3"
-            ><input type="radio" class="radioselected" name="1" id="1" /> My
-            PT</span
-          >
-          <span
-            ><input type="radio" class="radioselected" name="1" id="1" /> Total
-            Book</span
-          >
+          <span class="me-3"><input type="radio" class="radioselected" name="1" id="1" /> My
+            PT</span>
+          <span><input type="radio" class="radioselected" name="1" id="1" /> Total
+            Book</span>
         </div>
       </div>
       <div class="row">
         <div class="col-md-3 mb-3">
-          <button class="btn border-pink rounded-pill mt-4 w-100 text-white">
+          <button class="btn border-pink rounded-pill mt-4 w-100 ">
             <i class="fa fa-user-cog"> &nbsp;</i>Clear Members
           </button>
         </div>
@@ -102,49 +84,23 @@
         </div>
         <div class="col-md-3 mb-3">
           <label>Stakes From Value</label>
-          <input
-            type="number"
-            class="form-control"
-            value=""
-            placeholder="Enter Stake From..."
-          />
+          <input type="number" class="form-control" value="" placeholder="Enter Stake From..." />
         </div>
         <div class="col-md-3 mb-3">
           <label>Stakes To Value</label>
-          <input
-            type="number"
-            class="form-control"
-            value=""
-            placeholder="Enter Stake To..."
-          />
+          <input type="number" class="form-control" value="" placeholder="Enter Stake To..." />
         </div>
         <div class="col-md-3 mb-3">
           <label>From Date</label>
-          <input
-            type="date"
-            name=""
-            class="form-control"
-            id=""
-            placeholder="Month"
-          />
+          <input type="date" name="" class="form-control" id="" placeholder="Month" />
         </div>
         <div class="col-md-3 mb-3">
           <label>To Date</label>
-          <input
-            type="date"
-            name=""
-            class="form-control"
-            id=""
-            placeholder="Month"
-          />
+          <input type="date" name="" class="form-control" id="" placeholder="Month" />
         </div>
         <div class="col-md-3 mt-4">
-          <button
-            type="button"
-            class="btn btn-pink rounded-pill w-100"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
-          >
+          <button type="button" class="btn btn-pink rounded-pill w-100" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">
             Search
           </button>
         </div>

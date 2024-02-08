@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { Subscription } from 'rxjs';
 import { AllLogsService } from 'src/app/features/all-logs/services/all-logs.service';
-import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { environment } from 'src/environments/environment';
+import { AccountStatementService } from '../../services/account-statement.service';
 
 @Component({
   selector: 'app-account-list',
@@ -143,7 +143,8 @@ export class AccountListComponent implements OnInit , OnDestroy {
     private _memberService: MembersService,
     private http: HttpClient,
     private formbuilder: FormBuilder,
-    private allLogService:AllLogsService
+    private allLogService:AllLogsService,
+    private accountService:AccountStatementService
   ) { }
 
   ngOnInit(): void {
@@ -298,13 +299,12 @@ export class AccountListComponent implements OnInit , OnDestroy {
       this.userList = [];
     }
     let body = {
-      roleId: roleId,
+      
       pageNo: this.currentPage,
       limit: this.limit,
-      searchName: this.searchTerm,
     };
 
-    this._sharedService._getAllUsersApi(body).subscribe((users: any) => {
+    this.accountService._getAllUserAccountApi(body).subscribe((users: any) => {
       if (!autoRefresh) {
         this.isLoading = false;
       }
@@ -369,11 +369,10 @@ export class AccountListComponent implements OnInit , OnDestroy {
       refupline_credit : this.adminDetails.availableCredit,
       downline_credit : this.userData.availableCredit,
       refdownline_credit : this.userData.availableCredit,
-      profitLoss : this.userData.winnings,
-      profitLoss_ref : this.userData.winnings
+      profitLoss : this.userData.casinoWinnings,
+      profitLoss_ref : this.userData.casinoWinnings
     })
   }
-
 
   onWinningWithdrawalOpen(){
     this.winningWithdrawalForm.patchValue({
@@ -382,10 +381,9 @@ export class AccountListComponent implements OnInit , OnDestroy {
       downline_credit : this.userData.availableCredit,
       refdownline_credit : this.userData.availableCredit,
       profitLoss : this.userData.winnings,
-      profitLoss_ref : this.userData.winnings,
+      profitLoss_ref : this.userData.winnings
     })
   }
-
 
   onWinningCasinoWithdrawalOpen(){
     this.winningCasinoWithdrawalForm.patchValue({
@@ -393,12 +391,10 @@ export class AccountListComponent implements OnInit , OnDestroy {
       refupline_credit : this.adminDetails.availableCredit,
       downline_credit : this.userData.availableCredit,
       refdownline_credit : this.userData.availableCredit,
-      profitLoss : this.userData.winnings,
-      profitLoss_ref : this.userData.winnings,
+      profitLoss : this.userData.casinoWinnings,
+      profitLoss_ref : this.userData.casinoWinnings,
     })
   }
-
-
 
   onCreditWithdrawalOpen(){
     this.creditWithdrawForm.patchValue({
@@ -410,14 +406,12 @@ export class AccountListComponent implements OnInit , OnDestroy {
     })
   }
 
-
   openCredit(user) {
     this.userData = user;
     this.display = 'block';
     this.modalNumber = 3;
     this.onCreditDepositOpen();
   }
-
 
   openDeposit(user) {
     this.modalNumber = 1;
@@ -426,14 +420,12 @@ export class AccountListComponent implements OnInit , OnDestroy {
     this.onWinningDepositOpen();
   }
 
-
   openCasinoDeposit(user) {
     this.modalNumber = 4;
     this.userData = user;
     this.display = 'block';
-    this.onWinningDepositOpen();
+    this.onWinningCasinoDepositOpen(); 
   }
-
 
   openWithdraw(user) {
     this.modalNumber = 2;
@@ -442,15 +434,12 @@ export class AccountListComponent implements OnInit , OnDestroy {
     this.onWinningWithdrawalOpen();
   }
 
-
   openCasinoWithdraw(user) {
     this.modalNumber = 5;
     this.userData = user;
     this.display = 'block';
-    this.onWinningWithdrawalOpen();
+    this.onWinningCasinoWithdrawalOpen();
   }
-
-
 
   onAmountChange(event: any) {
     console.log('changes')
@@ -544,7 +533,6 @@ export class AccountListComponent implements OnInit , OnDestroy {
   }
 
 
-
   onWinningWithdrawalChange(event: any) {
     // console.log(event)
     // console.log(this.adminDetails)
@@ -560,7 +548,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
       // Update the form values
       this.winningWithdrawalForm.patchValue({
-        profitLoss_ref:profitLoss_ref,
+        profitLoss_ref: +profitLoss_ref.toFixed(2),
         refupline_credit: refupline_credit,
         refdownline_credit: refdownline_credit,
         amount:amount
@@ -570,6 +558,70 @@ export class AccountListComponent implements OnInit , OnDestroy {
       // For example, reset the form field or display an error message
       this.winningWithdrawalForm.patchValue({
         profitLoss_ref:this.userData.winnings,
+        refupline_credit: this.adminDetails.availableCredit,
+        refdownline_credit: this.userData.availableCredit,
+        amount:null
+      });
+    }
+  }
+
+  onCasinoAmountDepositChange(event: any){
+     // console.log(event)
+    // console.log(this.adminDetails)
+    // console.log(this.userData)
+    let amount = parseFloat(event?.target.value);
+    // Check if the amount is a valid number
+    if (!isNaN(amount)) {
+      // Perform the necessary calculations to update refupline_credit and refdownline_credit
+      const profitLoss_ref = parseFloat(this.userData.casinoWinnings) + amount;
+
+      const refupline_credit = parseFloat(this.adminDetails.availableCredit) - amount;
+      const refdownline_credit = parseFloat(this.userData.availableCredit) + amount;
+
+      // Update the form values
+      this.winningCasinoDepositForm.patchValue({
+        refupline_credit:refupline_credit,
+        refdownline_credit:refdownline_credit,
+        profitLoss_ref: +profitLoss_ref.toFixed(2),
+        amount:amount
+      });
+    } else {
+      // Handle the case when the input value is not a valid number
+      // For example, reset the form field or display an error message
+      this.winningCasinoDepositForm.patchValue({
+        profitLoss_ref: this.userData.casinoWinnings,
+        refupline_credit: this.adminDetails.availableCredit,
+        refdownline_credit: this.userData.availableCredit,
+        amount:null
+      });
+    }
+  }
+
+  onCasinoAmountWithdrawChange(event: any) {
+    // console.log(event)
+    // console.log(this.adminDetails)
+    // console.log(this.userData)
+    let amount = parseFloat(event?.target.value);
+    // Check if the amount is a valid number
+    if (!isNaN(amount)) {
+      // Perform the necessary calculations to update refupline_credit and refdownline_credit
+      const profitLoss_ref = parseFloat(this.userData.casinoWinnings) - amount;
+
+      const refupline_credit = parseFloat(this.adminDetails.availableCredit) + amount;
+      const refdownline_credit = parseFloat(this.userData.availableCredit) - amount;
+
+      // Update the form values
+      this.winningCasinoWithdrawalForm.patchValue({
+        refupline_credit:refupline_credit,
+        refdownline_credit:refdownline_credit,
+        profitLoss_ref: +profitLoss_ref.toFixed(2),
+        amount:amount
+      });
+    } else {
+      // Handle the case when the input value is not a valid number
+      // For example, reset the form field or display an error message
+      this.winningCasinoWithdrawalForm.patchValue({
+        profitLoss_ref: this.userData.casinoWinnings,
         refupline_credit: this.adminDetails.availableCredit,
         refdownline_credit: this.userData.availableCredit,
         amount:null
@@ -591,6 +643,8 @@ export class AccountListComponent implements OnInit , OnDestroy {
     this.creditWithdrawForm.reset();
     this.winningDepositForm.reset();
     this.winningWithdrawalForm.reset();
+    this.winningCasinoDepositForm.reset();
+    this.winningCasinoWithdrawalForm.reset();
   }
 
 
@@ -685,8 +739,43 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
       }
     })
-
 }
+
+postCasinoWithdrawData(isDeposit){
+  let payload = {
+    "userId":this.userData.userId,
+    "isDeposit":isDeposit,
+    "amount":this.winningCasinoWithdrawalForm.value.amount,
+    "ip":this.userIp,
+    "remark":this.winningCasinoWithdrawalForm.value.remark?this.winningCasinoWithdrawalForm.value.remark:"Withdrawal"
+}
+
+this.accountService._getCasinoSettlementApi(payload).subscribe((res)=>{
+  this._sharedService.getToastPopup(`Withdrawal Successfull`, 'Withdrawal', 'success');
+  this.closeModal();
+  this.getAdminDetails();
+  this.refreshCall();
+})
+}
+
+postCasinoDepositeData(isDeposit){
+  let payload = {
+    "userId":this.userData.userId,
+    "isDeposit":isDeposit,
+    "amount":this.winningCasinoDepositForm.value.amount,
+    "ip":this.userIp,
+    "remark":this.winningCasinoDepositForm.value.remark?this.winningCasinoDepositForm.value.remark:"Deposit"
+}
+
+this.accountService._getCasinoSettlementApi(payload).subscribe((res)=>{
+  this._sharedService.getToastPopup(`Deposit Successfull`, 'Deposit', 'success');
+  this.closeModal();
+  this.getAdminDetails();
+  this.refreshCall();
+})
+}
+
+// _getCasinoSettlementApi
 
 
 onCreditHistoryOpen(){

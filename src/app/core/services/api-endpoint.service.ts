@@ -164,6 +164,11 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_ALL_USERS);
   }
 
+  public getAllUserAccountEndpoint():string{
+    return this.createUrl(this._constants.API_URL_GET_USERACCOUNTLIST);
+  }
+  
+
   public getBankUserEndpoint():string{
     return this.createUrl(this._constants.API_GET_BANK_USERS);
   }
@@ -516,6 +521,12 @@ export class ApiEndpointsService {
   public geWinningSettlementEndpoint(){
     return this.createUrl(this._constants.API_WINNING_SETTLEMENT)
   }
+
+  public getCasinoSettlementEndpoint(){
+    return this.createUrl(this._constants.API_CASINO_SETTLEMENT)
+  }
+  
+
 
   public geAdminAccountStatementNewEndpoint(){
     return this.createUrl(this._constants.API_GET_ADMIN_ACCOUNT_STATEMENT_NEW)

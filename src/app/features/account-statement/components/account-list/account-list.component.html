@@ -67,8 +67,9 @@
                   ACCOUNT TYPE
                 </th>
                 
+                <th scope="col" class="text-center">ACTION</th>
+                <th scope="col" class="text-center">Client Casino P/L</th>
                 <th scope="col" class="last text-center">ACTION</th>
-
               </tr>
             </thead>
             <tbody>
@@ -153,7 +154,30 @@
                   (click)="openWithdraw(user)"
                   >
                   W
-                    <!-- <i class="fa-sharp fa-solid fa-pen icon-pink pointer"></i> -->
+                  </a>
+                </td>
+
+                <td class="text-center">
+                  <ng-container>
+                    <a class="pointer text-danger text-decoration-none" *ngIf="user.casinoWinnings < 0">
+                      {{ user.casinoWinnings | indianCurrency }}
+                    </a>
+                    <a class="pointer text-success text-decoration-none" *ngIf="user.casinoWinnings > 0">
+                      {{ user.casinoWinnings | indianCurrency }}
+                    </a>
+                  </ng-container>
+                </td>
+
+                <td class="text-center">
+                  <a class="btn btn-success" (click)="openCasinoDeposit(user)" *ngIf="user.casinoWinnings < 0">
+                    D
+                  </a>
+
+                  <a class="btn btn-danger"
+                  *ngIf="user.casinoWinnings > 0"
+                  (click)="openCasinoWithdraw(user)"
+                  >
+                  W
                   </a>
                 </td>
 
@@ -976,6 +1000,177 @@
   </div>
 </div>
 <!-- Modal end -->
+
+
+
+<!-- CASINO DEPOSIT -->
+
+<div
+  *ngIf="modalNumber == 4"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          CASINO DEPOSIT
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <section class="section m-auto mt-4">
+            <form [formGroup]="winningDepositForm">
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-4">{{admin?.username}}</div>
+                <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="upline_credit"
+                      placeholder=""
+                      readonly
+                      id="upline_credit"
+                      name="upline_credit"
+                      autocomplete="off"
+                    /> 
+                </div>
+                <div class="col-md-4">
+                  <input
+                    class="form-control bg-transparent"
+                    formControlName="refupline_credit"
+                    placeholder=""
+                    id="refupline_credit"
+                    name="refupline_credit"
+                    autocomplete="off"
+                    readonly
+                  /> 
+              </div>
+              </div>
+
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-4">{{userData?.username}}</div>
+                  <div class="col-md-4">
+                      <input
+                        class="form-control bg-transparent"
+                        formControlName="downline_credit"
+                        placeholder=""
+                        id="downline_credit"
+                        name="downline_credit"
+                        autocomplete="off"
+                        readonly
+                      /> 
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="refdownline_credit"
+                      placeholder=""
+                      id="refdownline_credit"
+                      name="refdownline_credit"
+                      autocomplete="off"
+                      readonly
+                    /> 
+                </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Profit/Losss</div>
+                  <div class="col-md-4">
+                      <input
+                        class="form-control bg-transparent"
+                        formControlName="profitLoss"
+                        placeholder="Profit/Losss"
+                        id="profitLoss"
+                        name="profitLoss"
+                        autocomplete="off"
+                        readonly
+                      /> 
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="profitLoss_ref"
+                      placeholder="Profit/Losss"
+                      id="profitLoss_ref"
+                      name="profitLoss_ref"
+                      autocomplete="off"
+                      readonly
+                    /> 
+                </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Amount</div>
+                  <div class="col-md-8">
+                      <input
+                        min="0"
+                        class="form-control bg-transparent"
+                        formControlName="amount"
+                        placeholder="Amount"
+                        id="amount"
+                        name="amount"
+                        type="number"
+                        autocomplete="off"
+                        (input)="onAmountDepositChange($event)"
+                      /> 
+                  </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Remark</div>
+                  <div class="col-md-8">
+
+                    <input
+                    class="form-control bg-transparent"
+                    formControlName="remark"
+                    placeholder="Remark"
+                    id="remark"
+                    name="remark"
+                    autocomplete="off"
+                  /> 
+                  </div>
+                </div>
+
+              
+              <div class="row mt-5">
+                <div class="col-md-6 text-end">
+                  <button
+                    (click)="postWinningsData(true)"
+                    
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                  >
+                    Save
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                    (click)="closeModal()"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- <div class="modal-backdrop fade" *ngIf="showModal"></div> -->

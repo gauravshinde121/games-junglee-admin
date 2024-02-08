@@ -77,6 +77,8 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
   winningDepositForm!:FormGroup;
   winningWithdrawalForm!:FormGroup;
+  winningCasinoDepositForm:FormGroup;
+  winningCasinoWithdrawalForm:FormGroup;
 
   amountSubscription: Subscription  | undefined;
 
@@ -216,8 +218,19 @@ export class AccountListComponent implements OnInit , OnDestroy {
       profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-    }
-    )
+    })
+
+
+    this.winningCasinoDepositForm = this.formbuilder.group({
+      upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+    })
 
     this.winningWithdrawalForm = this.formbuilder.group({
       upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
@@ -228,8 +241,22 @@ export class AccountListComponent implements OnInit , OnDestroy {
       profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-    }
-    )
+    })
+
+
+    this.winningCasinoWithdrawalForm = this.formbuilder.group({
+      upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+    })
+
+
+
   }
 
   // ngOnDestroy(): void {
@@ -336,8 +363,32 @@ export class AccountListComponent implements OnInit , OnDestroy {
   }
 
 
+  onWinningCasinoDepositOpen(){
+    this.winningCasinoDepositForm.patchValue({
+      upline_credit : this.adminDetails.availableCredit,
+      refupline_credit : this.adminDetails.availableCredit,
+      downline_credit : this.userData.availableCredit,
+      refdownline_credit : this.userData.availableCredit,
+      profitLoss : this.userData.winnings,
+      profitLoss_ref : this.userData.winnings
+    })
+  }
+
+
   onWinningWithdrawalOpen(){
     this.winningWithdrawalForm.patchValue({
+      upline_credit : this.adminDetails.availableCredit,
+      refupline_credit : this.adminDetails.availableCredit,
+      downline_credit : this.userData.availableCredit,
+      refdownline_credit : this.userData.availableCredit,
+      profitLoss : this.userData.winnings,
+      profitLoss_ref : this.userData.winnings,
+    })
+  }
+
+
+  onWinningCasinoWithdrawalOpen(){
+    this.winningCasinoWithdrawalForm.patchValue({
       upline_credit : this.adminDetails.availableCredit,
       refupline_credit : this.adminDetails.availableCredit,
       downline_credit : this.userData.availableCredit,
@@ -376,8 +427,24 @@ export class AccountListComponent implements OnInit , OnDestroy {
   }
 
 
+  openCasinoDeposit(user) {
+    this.modalNumber = 4;
+    this.userData = user;
+    this.display = 'block';
+    this.onWinningDepositOpen();
+  }
+
+
   openWithdraw(user) {
     this.modalNumber = 2;
+    this.userData = user;
+    this.display = 'block';
+    this.onWinningWithdrawalOpen();
+  }
+
+
+  openCasinoWithdraw(user) {
+    this.modalNumber = 5;
     this.userData = user;
     this.display = 'block';
     this.onWinningWithdrawalOpen();

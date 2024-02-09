@@ -64,6 +64,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
 }
 .bg-pink {
   background: linear-gradient(0deg, $color_27 0, $color_27) !important;
+  color: $color_21;
 }
 .border-pink {
   border: 1px solid $color_27;
@@ -85,7 +86,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   // justify-content: space-around;
 
   &:hover {
-    color: $color_7;
+    color: $color_21;
     transition: all 0.2s ease-in;
     transform: scale(1.01);
   }
@@ -1163,8 +1164,14 @@ $breakpoint-mobile: 767px;
 .form-control:focus,
 .form-select:focus {
   box-shadow: 2px 2px 6px 3px $outline;
+  background-color: transparent;
 }
 
 input[type="password"]:focus {
   box-shadow: none;
+}
+
+
+.modal-body{
+  background-color: $color_52;
 }

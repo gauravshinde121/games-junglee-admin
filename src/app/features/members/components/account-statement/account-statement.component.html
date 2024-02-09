@@ -229,7 +229,7 @@
                   <td>{{ bet.createDateTime | date : "medium" }}</td>
                   <td>{{ bet.createDateTime | date : "medium" }}</td>
                   <td>
-                    <span *ngIf="bet.isBack == false" class="border r-2 bg-danger text-danger me-2 border-3"></span>
+                    <span *ngIf="bet.isBack == false" class="border r-2 bg-danger text-danger me-2 border-3 border-danger"></span>
                     <span *ngIf="bet.isBack == true"
                       class="border bg-primary text-primary border-primary me-2 border-3"></span>
                     {{ bet.type }}

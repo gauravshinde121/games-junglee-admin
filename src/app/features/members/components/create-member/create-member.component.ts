@@ -352,6 +352,12 @@ export class CreateMemberComponent implements OnInit {
     }
   }
 
+  preventSpace(event: KeyboardEvent) {
+    if (event.keyCode === 32) {
+      event.preventDefault();
+    }
+  }
+
   customFancyCommissionValidator(uplineFancyCommission: number): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const value = control.value;

@@ -130,16 +130,7 @@
                 </td>
 
                 <td class="text-center">
-                  <span
-                    *ngFor="let role of roles"
-                  >
-                  </span>
-                  <span *ngIf="user.roleId == 2"> ADMIN </span>
-                  <span *ngIf="user.roleId == 3"> SUPER MASTER </span>
-                  <span *ngIf="user.roleId == 4"> MASTER </span>
-                  <span *ngIf="user.roleId == 5"> AGENT </span>
-                  <span *ngIf="user.roleId == 6"> DEALER </span>
-                  <span *ngIf="user.roleId == 7"> USER </span>
+                 {{user.userRoleName}}
                 </td>
 
 

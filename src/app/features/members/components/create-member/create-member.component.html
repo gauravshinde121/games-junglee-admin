@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-3 mb-2">
               <label>Username</label>
-              <input [readOnly]="editMode" formControlName="username" type="text" class="form-control"
+              <input [readOnly]="editMode" (keydown)="preventSpace($event)" formControlName="username" type="text" class="form-control"
                 placeholder="Username*" />
               <div class="small text-danger" *ngIf="
                   memberForm.controls['username'].errors?.required &&

@@ -112,14 +112,95 @@
               <div class="small text-danger" *ngIf="memberForm.controls['playerAvailableCredit'].errors?.['min']">
                 Credit Limit cannot be negative.
               </div>
-              <div class="small text-danger" *ngIf="
-                  memberForm.controls['playerAvailableCredit'].errors
-                    ?.creditLimit
-                ">
-                {{ selectedUserRole }} Creation Limit has been exceeded. Please
-                contact your upline.
-              </div>
             </div>
+
+            <!-- <div class="col-md-3 mb-2">
+              <label>Fancy Commission</label>
+              <input type="number" class="form-control" formControlName="fancyComission" *ngIf="!editMode"
+                placeholder="Fancy Commission*" />
+                <span *ngIf="editMode">: {{ memberForm.get('fancyComission')?.value }}%</span>
+              <div class="small text-danger" *ngIf="memberForm.get('fancyComission')?.hasError('invalidFancyCommission') || memberForm.controls['fancyComission'].errors?.required &&
+              memberForm.controls['fancyComission'].touched">
+              Member Fancy Comission cannot be greater than upline fancy comission!
+              </div>
+            </div> -->
+
+            <!-- <div class="col-md-3 mb-2">
+              <label>Book Maker Commission</label>
+              <input type="number" class="form-control" formControlName="bookmakerComission"
+                placeholder="Book Maker Commission*" *ngIf="!editMode" />
+                <span *ngIf="editMode">: {{ memberForm.get('bookmakerComission')?.value }}%</span>
+              <div class="small text-danger" *ngIf="memberForm.get('bookmakerComission')?.hasError('invalidBookmakerCommission') || memberForm.controls['bookmakerComission'].errors?.required &&
+              memberForm.controls['bookmakerComission'].touched">
+              Book Maker Fancy Comission cannot be greater than upline fancy comission!
+              </div>
+            </div> -->
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="section gamedetails mt-3">
+      <div class="row">
+        <div class="col-md-12 text-pink">
+          <h4>Comission Settings</h4>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12">
+         <h5>Bookmaker Commission: </h5> 
+        </div>
+        <div class="row">
+          <div class="col-3">
+              <select *ngIf="!editMode" [disabled]="(uplineInfo.roleId[0] != 1)" [ngModelOptions]="{standalone: true}" [(ngModel)]="bookmakerComissionTypesValue" 
+                  name="bookmakerComissionTypesValue" id="ab"
+                  class="form-select" (change)="onBookmakerComissionChange($event)">
+                <option *ngFor="let comissionType of bookmakerComissionTypes" [value]="comissionType.name">
+                  {{ comissionType.name }}
+                </option>
+              </select>
+              <label *ngIf="editMode" for="bookmakerComission">{{bookmakerComissionTypesValue}}</label>
+
+          </div>
+          <div class="col-3" *ngIf="isBookmakerComissionVisible">
+            <input max="5" step="0.50"  type="number" class="form-control" formControlName="bookmakerComission" min="0" (input)="checkValue($event,'Bookmaker')"
+              placeholder="Book Maker Commission*" *ngIf="!editMode" />
+              <span *ngIf="editMode">: {{ memberForm.get('bookmakerComission')?.value }}%</span>
+              <div class="small text-danger" *ngIf="memberForm.get('bookmakerComission')?.hasError('invalidBookmakerCommission') || memberForm.controls['bookmakerComission'].errors?.required &&
+              memberForm.controls['bookmakerComission'].touched">
+              Book Maker Fancy Comission cannot be greater than upline fancy comission!
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-12">
+         <h5>Fancy Commission:</h5> 
+        </div>
+        <div class="row mb-3">
+          <div class="col-3">
+            <select *ngIf="!editMode" [disabled]="(uplineInfo.roleId[0] != 1)" [ngModelOptions]="{standalone: true}" [(ngModel)]="fancyComissionTypesValue" 
+                  name="fancyComissionTypesValue" id="ab"
+                  class="form-select" (change)="onFancyComissionChange($event)">
+                <option *ngFor="let comissionType of fancyComissionTypes" [value]="comissionType.name">
+                  {{ comissionType.name == 'Turnover wise Comission' ? 'Bet to Bet Comission':comissionType.name }}
+                </option>
+              </select>
+              <label *ngIf="editMode" for="fancyComission">{{fancyComissionTypesValue == 'Turnover wise Comission' ? 'Bet to Bet Comission':fancyComissionTypesValue}}</label>
+          </div>
+          <div class="col-3" *ngIf="isFancyComissionVisible">
+            <input step="0.50" type="number" class="form-control" formControlName="fancyComission" min="0" max="5" (input)="checkValue($event,'Fancy')"
+              placeholder="Fancy Commission*" *ngIf="!editMode" />
+              <span *ngIf="editMode">: {{ memberForm.get('fancyComission')?.value }}%</span>
+              <div class="small text-danger" *ngIf="memberForm.get('fancyComission')?.hasError('invalidFancyCommission') || memberForm.controls['fancyComission'].errors?.required &&
+                          memberForm.controls['fancyComission'].touched">
+                          Member Fancy Comission cannot be greater than upline fancy comission!
+              </div>
+              <div class="small text-danger" *ngIf="showError()">
+                Member Fancy Commission cannot be greater than upline fancy commission!
+              </div>
           </div>
         </div>
       </div>

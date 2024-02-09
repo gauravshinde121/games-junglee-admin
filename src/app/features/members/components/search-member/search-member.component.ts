@@ -23,11 +23,10 @@ export class SearchMemberComponent implements OnInit {
     this._preConfig();
   }
 
-  _preConfig() {
-  }
+  _preConfig() { }
 
   search(): void {
-    if(this.searchTerm.length > 2){
+    if(this.searchTerm.length > 1){
       let body = {
         searchText: this.searchTerm,
       };

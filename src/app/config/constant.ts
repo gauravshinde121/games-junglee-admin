@@ -47,6 +47,9 @@ export class Constants {
     public readonly API_URL_GET_USER_BY_UPLINE_ID: string = 'api/junglee-admin/getUserByAdminId';
     public readonly API_URL_GET_EXPOSURE_DETAILS: string = 'api/junglee-admin/getExposureDetails';
 
+    public readonly API_URL_GET_USERACCOUNTLIST: string = 'api/getAccountListUsers';
+    
+
 
     //book management
     public readonly API_URL_GET_BOOK_FOR_BACKEND: string = 'api/junglee-admin/getBooksForBackend';
@@ -70,6 +73,9 @@ export class Constants {
     public readonly API_CHANGE_PASSWORD: string = 'api/junglee-admin/changePassword';
     public readonly API_CREDIT_SETTLEMENT: string = 'api/credit-settlement';
     public readonly API_WINNING_SETTLEMENT: string = 'api/winning-settlement';
+
+    public readonly API_CASINO_SETTLEMENT: string = 'api/casinoSettlement';
+    
 
 
     //misc

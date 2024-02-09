@@ -232,7 +232,7 @@
                 <td>{{ bets.placedDate | date : "medium" }}</td>
                 <td>{{ bets.event }}</td>
                 <td width="11%">
-                  <span *ngIf="!bets.type" class="border r-2 bg-danger text-danger me-2 border-3"></span>
+                  <span *ngIf="!bets.type" class="border r-2 bg-danger text-danger me-2 border-3 border-danger border-danger"></span>
                   <span *ngIf="bets.type" class="border bg-primary text-primary border-primary me-2 border-3"></span>
                   {{ bets.betCategory }}
                 </td>

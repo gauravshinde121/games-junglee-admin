@@ -278,6 +278,12 @@ export class CreateMemberComponent implements OnInit {
     }
   }
 
+  preventSpace(event: KeyboardEvent) {
+    if (event.keyCode === 32) {
+      event.preventDefault();
+    }
+  }
+
   createMember(){
     if (this.memberForm) {
       this.isLoading = true;

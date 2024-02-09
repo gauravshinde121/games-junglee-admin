@@ -90,4 +90,14 @@ export class AccountStatementService {
     return this._apiHttpService.post(this._apiEndpointsService.geAdminAccountStatementNewEndpoint(),paramObj)
   }
 
+  _getAllUserAccountApi(body){
+    return this._apiHttpService.post(this._apiEndpointsService.getAllUserAccountEndpoint(),body)
+  }
+
+  _getCasinoSettlementApi(payload){
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getCasinoSettlementEndpoint(),payload);
+  }
+
+  
 }

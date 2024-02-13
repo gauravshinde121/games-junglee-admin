@@ -81,6 +81,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
   winningCasinoWithdrawalForm:FormGroup;
 
   amountSubscription: Subscription  | undefined;
+  subjectSub !:Subscription;
 
   userIp = "";
 
@@ -118,6 +119,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
     if (this.amountSubscription) {
       this.amountSubscription.unsubscribe();
     }
+    this.subjectSub.unsubscribe();
   }
 
   resetForm() {
@@ -159,6 +161,10 @@ export class AccountListComponent implements OnInit , OnDestroy {
     }
 
     this.getAdminDetails();
+
+    this.subjectSub = this._sharedService.callAdminDetails.subscribe((res)=>{
+      this.getAdminDetails();
+    })
 
     this.admin = this._sharedService.getUserDetails();
 
@@ -255,14 +261,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     })
-
-
-
   }
-
-  // ngOnDestroy(): void {
-  //   clearInterval(this.resetTimerInterval)
-  // }
 
   fetchListByCategory(category) {
     this.selectedUserForAdjustment = [];

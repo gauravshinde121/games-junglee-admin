@@ -154,7 +154,7 @@
                 <th scope="col" class="text-center pointer" (click)="toggleSort('give')">
                   GIVE
                 </th>
-                <th *ngIf="clientId == 1" scope="col" class="text-center pointer" (click)="toggleSort('give')">
+                <th *ngIf="clientId == 1 || clientId == 3" scope="col" class="text-center pointer" (click)="toggleSort('give')">
                   CASINO AMOUNT
                 </th>
                 <th scope="col" class="text-center pointer" (click)="toggleSort('availableCredit')">

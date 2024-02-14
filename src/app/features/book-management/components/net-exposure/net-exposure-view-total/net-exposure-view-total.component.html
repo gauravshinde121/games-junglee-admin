@@ -84,7 +84,7 @@
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
-                    <div
+                    <div *ngIf="singleAdminBook['marketTypName'] !== 'Fancy'"
                       class="row"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne"
@@ -108,250 +108,264 @@
                   data-bs-parent="#accordionExample"
                 >
                   <div class="accordion-body p-0">
-                    <div class="row m-0">
-                      <div class="col-md-6 tbl-height bg-white">
-                        <table
-                          class="table tablematchodds border-5 bg-transparent m-0"
-                        >
-                          <tbody>
-                            <ng-container
-                              *ngIf="
-                                singleAdminBook['marketTypName'] == 'Match Odds'
-                              "
-                            >
-                              <tr
-                                *ngFor="
-                                  let runner of singleAdminBook['adminBook'];
-                                  let last = last;
-                                  let first = first
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="bg-white border-5">
+                          <table class="table tablematchodds bg-transparent">
+                            <tbody>
+                              <ng-container
+                                *ngIf="
+                                  singleAdminBook['marketTypName'] ==
+                                  'Match Odds'
                                 "
                               >
-                                <td
-                                  class="text-start ps-2 heading border_bottom"
+                                <tr
+                                  *ngFor="
+                                    let runner of singleAdminBook['adminBook'];
+                                    let last = last;
+                                    let first = first
+                                  "
                                 >
-                                  <a
-                                    ><strong
-                                      >{{ runner["RunnerName"] }}
-                                    </strong>
+                                  <td
+                                    class="text-start ps-2 heading border-top"
+                                  >
+                                    <a href=""
+                                      ><strong
+                                        >{{ runner["RunnerName"] }}
+                                      </strong>
 
-                                    <br />
-                                    <p class="mb-0 mt-1">
+                                      <br />
+                                      <p class="mb-0 mt-1">
+                                        <small
+                                          [ngClass]="
+                                            runner['amount'] <= 0
+                                              ? 'text-danger'
+                                              : 'text-success'
+                                          "
+                                          class="text-success"
+                                          ><strong class="exposure-font">{{
+                                            runner["amount"] | indianCurrency
+                                          }}</strong></small
+                                        >
+                                      </p>
+                                    </a>
+                                  </td>
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colblue"
+                                    [boxHighlight]="runner['back2']"
+                                    [boxHighlight]="runner['vback2']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["back2"] }}</strong>
+                                      <br />
+                                      <small>{{
+                                        runner["vback2"] | marketRateFormater
+                                      }}</small></a
+                                    >
+                                  </td>
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colblue"
+                                    [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["back1"] }}</strong>
+                                      <br /><small>{{
+                                        runner["vback1"] | marketRateFormater
+                                      }}</small></a
+                                    >
+                                  </td>
+                                  <!-- <td class="colgray">-</td>
+                                <td class="colgray">-</td> -->
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colblue"
+                                    [boxHighlight]="runner['back0']"
+                                    [boxHighlight]="runner['vback0']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["back0"] }}</strong>
+                                      <br /><small>{{
+                                        runner["vback0"] | marketRateFormater
+                                      }}</small></a
+                                    >
+                                  </td>
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay0']"
+                                    [boxHighlight]="runner['vlay0']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["lay0"] }}</strong>
+                                      <br /><small>{{
+                                        runner["vlay0"] | marketRateFormater
+                                      }}</small></a
+                                    >
+                                  </td>
+
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay1']"
+                                    [boxHighlight]="runner['vlay1']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["lay1"] }}</strong>
+                                      <br /><small>{{
+                                        runner["vlay1"] | marketRateFormater
+                                      }}</small></a
+                                    >
+                                  </td>
+
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay2']"
+                                    [boxHighlight]="runner['vlay2']"
+                                  >
+                                    <a
+                                      ><strong>{{ runner["lay2"] }}</strong>
+                                      <br /><small>{{
+                                        runner["vlay2"] | marketRateFormater
+                                      }}</small></a
+                                    >
+                                  </td>
+                                  <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <div
+                                      class="suspendedbm1"
+                                      *ngIf="
+                                        singleAdminBook['appMarketStatus'] ==
+                                          '3' ||
+                                        singleAdminBook['appMarketStatus'] ==
+                                          '9'
+                                      "
+                                    >
+                                      <button type="button" class="suspendedm1">
+                                        {{
+                                          singleAdminBook["appMarketStatus"] ==
+                                          "9"
+                                            ? "Ball Running"
+                                            : "Suspended"
+                                        }}
+                                      </button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </ng-container>
+                              <ng-container
+                                *ngIf="
+                                  singleAdminBook['marketTypName'] ==
+                                  'Bookmaker'
+                                "
+                              >
+                                <tr
+                                  *ngFor="
+                                    let runner of singleAdminBook['adminBook'];
+                                    let last = last;
+                                    let first = first
+                                  "
+                                >
+                                  <td
+                                    class="text-start ps-2 heading border-top"
+                                  >
+                                    <a
+                                      ><strong>{{
+                                        runner["RunnerName"]
+                                      }}</strong>
+                                      <br />
                                       <small
                                         [ngClass]="
                                           runner['amount'] <= 0
                                             ? 'text-danger'
                                             : 'text-success'
                                         "
-                                        class="text-success"
-                                        ><strong class="exposure-font">{{
+                                      >
+                                        <strong class="exposure-font">{{
                                           runner["amount"] | indianCurrency
                                         }}</strong></small
                                       >
-                                    </p>
-                                  </a>
-                                </td>
-                                <td
-                                  *ngIf="
-                                    singleAdminBook['appMarketStatus'] != '3' &&
-                                    singleAdminBook['appMarketStatus'] != '9'
-                                  "
-                                  class="colblue border_bottom"
-                                  [boxHighlight]="runner['back2']"
-                                  [boxHighlight]="runner['vback2']"
-                                >
-                                  <a
-                                    ><strong>{{ runner["back2"] }}</strong>
-                                    <br />
-                                    <small>{{
-                                      runner["vback2"] | marketRateFormater
-                                    }}</small></a
-                                  >
-                                </td>
-                                <td
-                                  *ngIf="
-                                    singleAdminBook['appMarketStatus'] != '3' &&
-                                    singleAdminBook['appMarketStatus'] != '9'
-                                  "
-                                  class="colblue border_bottom"
-                                  [boxHighlight]="runner['back1']"
-                                  [boxHighlight]="runner['vback1']"
-                                >
-                                  <a
-                                    ><strong>{{ runner["back1"] }}</strong>
-                                    <br /><small>{{
-                                      runner["vback1"] | marketRateFormater
-                                    }}</small></a
-                                  >
-                                </td>
-                                <!-- <td class="colgray">-</td>
+                                    </a>
+                                  </td>
+
+                                  <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
-                                <td
-                                  *ngIf="
-                                    singleAdminBook['appMarketStatus'] != '3' &&
-                                    singleAdminBook['appMarketStatus'] != '9'
-                                  "
-                                  class="colblue border_bottom"
-                                  [boxHighlight]="runner['back0']"
-                                  [boxHighlight]="runner['vback0']"
-                                >
-                                  <a
-                                    ><strong>{{ runner["back0"] }}</strong>
-                                    <br /><small>{{
-                                      runner["vback0"] | marketRateFormater
-                                    }}</small></a
-                                  >
-                                </td>
-                                <td
-                                  *ngIf="
-                                    singleAdminBook['appMarketStatus'] != '3' &&
-                                    singleAdminBook['appMarketStatus'] != '9'
-                                  "
-                                  class="colpink border_bottom"
-                                  [boxHighlight]="runner['lay0']"
-                                  [boxHighlight]="runner['vlay0']"
-                                >
-                                  <a
-                                    ><strong>{{ runner["lay0"] }}</strong>
-                                    <br /><small>{{
-                                      runner["vlay0"] | marketRateFormater
-                                    }}</small></a
-                                  >
-                                </td>
-
-                                <td
-                                  *ngIf="
-                                    singleAdminBook['appMarketStatus'] != '3' &&
-                                    singleAdminBook['appMarketStatus'] != '9'
-                                  "
-                                  class="colpink border_bottom"
-                                  [boxHighlight]="runner['lay1']"
-                                  [boxHighlight]="runner['vlay1']"
-                                >
-                                  <a
-                                    ><strong>{{ runner["lay1"] }}</strong>
-                                    <br /><small>{{
-                                      runner["vlay1"] | marketRateFormater
-                                    }}</small></a
-                                  >
-                                </td>
-
-                                <td
-                                  *ngIf="
-                                    singleAdminBook['appMarketStatus'] != '3' &&
-                                    singleAdminBook['appMarketStatus'] != '9'
-                                  "
-                                  class="colpink border_bottom"
-                                  [boxHighlight]="runner['lay2']"
-                                  [boxHighlight]="runner['vlay2']"
-                                >
-                                  <a
-                                    ><strong>{{ runner["lay2"] }}</strong>
-                                    <br /><small>{{
-                                      runner["vlay2"] | marketRateFormater
-                                    }}</small></a
-                                  >
-                                </td>
-                                <td class="" [ngClass]="{ '': !first }">
-                                  <div
-                                    class="suspendedbm1"
+                                  <td
                                     *ngIf="
-                                      singleAdminBook['appMarketStatus'] ==
-                                        '3' ||
-                                      singleAdminBook['appMarketStatus'] == '9'
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '9' &&
+                                      !runner['showSuspended']
                                     "
+                                    class="colblue"
+                                    [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']"
                                   >
-                                    <button type="button" class="suspendedm1">
-                                      {{
-                                        singleAdminBook["appMarketStatus"] ==
-                                        "9"
-                                          ? "Ball Running"
-                                          : "Suspended"
-                                      }}
-                                    </button>
-                                  </div>
-                                </td>
-                              </tr>
-                            </ng-container>
-
-                            <ng-container
-                              *ngIf="
-                                singleAdminBook['marketTypName'] == 'Bookmaker'
-                              "
-                            >
-                              <tr
-                                *ngFor="
-                                  let runner of singleAdminBook['adminBook'];
-                                  let last = last;
-                                  let first = first
-                                "
-                                class="boder_bottom"
-                              >
-                                <td
-                                  class="text-start ps-2 heading border_bottom"
-                                >
-                                  <a
-                                    ><strong>{{ runner["RunnerName"] }}</strong>
-                                    <br />
-                                    <small
-                                      [ngClass]="
-                                        runner['amount'] <= 0
-                                          ? 'text-danger'
-                                          : 'text-success'
-                                      "
+                                    <a
+                                      ><strong *ngIf="runner['back1']">{{
+                                        (runner["back1"] - 1) * 100
+                                          | roundToHalf
+                                      }}</strong>
+                                      <br /><small *ngIf="runner['vback1']">{{
+                                        runner["vback1"] | marketRateFormater
+                                      }}</small></a
                                     >
-                                      <strong class="exposure-font">{{
-                                        runner["amount"] | indianCurrency
-                                      }}</strong></small
+                                  </td>
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '9' &&
+                                      !runner['showSuspended']
+                                    "
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay1']"
+                                    [boxHighlight]="runner['vlay1']"
+                                  >
+                                    <a
+                                      ><strong *ngIf="runner['lay1']">{{
+                                        (runner["lay1"] - 1) * 100 | roundToHalf
+                                      }}</strong>
+                                      <br /><small *ngIf="runner['vlay1']">{{
+                                        runner["vlay1"] | marketRateFormater
+                                      }}</small></a
                                     >
-                                  </a>
-                                </td>
-
-                                <!-- <td class="colgray">-</td>
-                                <td class="colgray">-</td> -->
-                                <td
-                                  *ngIf="
-                                    singleAdminBook['appMarketStatus'] != '3' &&
-                                    singleAdminBook['appMarketStatus'] != '9' &&
-                                    !runner['showSuspended']
-                                  "
-                                  class="colblue"
-                                  [boxHighlight]="runner['back1']"
-                                  [boxHighlight]="runner['vback1']"
-                                >
-                                  <a
-                                    ><strong *ngIf="runner['back1']">{{
-                                      (runner["back1"] - 1) * 100 | roundToHalf
-                                    }}</strong>
-                                    <br /><small *ngIf="runner['vback1']">{{
-                                      runner["vback1"] | marketRateFormater
-                                    }}</small></a
-                                  >
-                                </td>
-                                <td
-                                  *ngIf="
-                                    singleAdminBook['appMarketStatus'] != '3' &&
-                                    singleAdminBook['appMarketStatus'] != '9' &&
-                                    !runner['showSuspended']
-                                  "
-                                  class="colpink"
-                                  [boxHighlight]="runner['lay1']"
-                                  [boxHighlight]="runner['vlay1']"
-                                >
-                                  <a
-                                    ><strong *ngIf="runner['lay1']">{{
-                                      (runner["lay1"] - 1) * 100 | roundToHalf
-                                    }}</strong>
-                                    <br /><small *ngIf="runner['vlay1']">{{
-                                      runner["vlay1"] | marketRateFormater
-                                    }}</small></a
-                                  >
-                                </td>
-                                <td
-                                  colspan="4"
-                                  class=""
-                                  [ngClass]="{ 'border-top': !first }"
-                                >
-                                  <div
+                                  </td>
+                                  <td
+                                    colspan="4"
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
                                     *ngIf="
                                       singleAdminBook['appMarketStatus'] ==
                                         '3' ||
@@ -392,112 +406,115 @@
                                         Suspended
                                       </button>
                                     </div>
-                                  </div>
-                                </td>
-                                <!-- <td></td> -->
-                              </tr>
-                            </ng-container>
+                                  </td>
+                                </tr>
+                              </ng-container>
 
-                            <ng-container
-                              *ngIf="
-                                singleAdminBook['marketTypName'] == 'Fancy'
-                              "
-                            >
-                              <tr
-                                *ngFor="
-                                  let runner of singleAdminBook['adminBook'];
-                                  let last = last;
-                                  let first = first
+                              <ng-container
+                                *ngIf="
+                                  singleAdminBook['marketTypName'] == 'Fancy'
                                 "
                               >
-                                <td class="text-start ps-2 heading">
-                                  <a
-                                    ><strong>{{ runner["RunnerName"] }}</strong
-                                    ><br />
-                                    <small
-                                      [ngClass]="
-                                        runner['amount'] <= 0
-                                          ? 'text-danger'
-                                          : 'text-success'
+                                <tr
+                                  *ngFor="
+                                    let runner of singleAdminBook['adminBook'];
+                                    let last = last;
+                                    let first = first
+                                  "
+                                >
+                                  <td
+                                    class="text-start ps-2 heading border-top"
+                                  >
+                                    <a
+                                      ><strong>{{
+                                        runner["RunnerName"]
+                                      }}</strong
+                                      ><br />
+                                      <small
+                                        [ngClass]="
+                                          runner['amount'] <= 0
+                                            ? 'text-danger'
+                                            : 'text-success'
+                                        "
+                                      >
+                                        <strong class="exposure-font">
+                                          {{
+                                            runner["amount"] | indianCurrency
+                                          }}</strong
+                                        >
+                                      </small>
+                                    </a>
+                                  </td>
+                                  <td>
+                                    <a><strong></strong> <br /></a>
+                                  </td>
+                                  <td>
+                                    <a><strong></strong> <br /></a>
+                                  </td>
+                                  <td
+                                    width="10%"
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                  >
+                                    <a
+                                      data-bs-toggle="modal"
+                                      href="#exampleModalToggle"
+                                      role="button"
+                                      class="laddericon"
+                                      (click)="
+                                        getLadderDataByMarket(
+                                          singleAdminBook['marketId']
+                                        )
                                       "
                                     >
-                                      <strong class="exposure-font">
-                                        {{
-                                          runner["amount"] | indianCurrency
-                                        }}</strong
-                                      >
-                                    </small>
-                                  </a>
-                                </td>
-                                <td>
-                                  <a><strong></strong> <br /></a>
-                                </td>
-                                <td>
-                                  <a><strong></strong> <br /></a>
-                                </td>
-                                <td
-                                  width="10%"
-                                  class=""
-                                  [ngClass]="{ '': !first }"
-                                >
-                                  <a
-                                    data-bs-toggle="modal"
-                                    href="#exampleModalToggle"
-                                    role="button"
-                                    class="laddericon"
-                                    (click)="
-                                      getLadderDataByMarket(
-                                        singleAdminBook['marketId']
-                                      )
-                                    "
-                                  >
-                                    <img
-                                      src="/assets/images/ladder-icon.png"
-                                      width="10px"
-                                    />
-                                  </a>
-                                </td>
-                                <!-- <td class="colgray">-</td>
+                                      <img
+                                        src="/assets/images/ladder-icon.png"
+                                        width="10px"
+                                      />
+                                    </a>
+                                  </td>
+                                  <!-- <td class="colgray">-</td>
                                 <td class="colgray">-</td> -->
 
-                                <td
-                                  *ngIf="
-                                    singleAdminBook['appMarketStatus'] != '3' &&
-                                    singleAdminBook['appMarketStatus'] != '9'
-                                  "
-                                  class="colpink"
-                                  [boxHighlight]="runner['lay1']"
-                                  [boxHighlight]="runner['vlay1']"
-                                >
-                                  <a
-                                    ><strong>{{ runner["lay1"] }}</strong>
-                                    <br /><small>{{
-                                      runner["vlay1"] | marketRateFormater
-                                    }}</small></a
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colpink"
+                                    [boxHighlight]="runner['lay1']"
+                                    [boxHighlight]="runner['vlay1']"
                                   >
-                                </td>
-                                <td
-                                  *ngIf="
-                                    singleAdminBook['appMarketStatus'] != '3' &&
-                                    singleAdminBook['appMarketStatus'] != '9'
-                                  "
-                                  class="colblue"
-                                  [boxHighlight]="runner['back1']"
-                                  [boxHighlight]="runner['vback1']"
-                                >
-                                  <a
-                                    ><strong>{{ runner["back1"] }}</strong>
-                                    <br /><small>{{
-                                      runner["vback1"] | marketRateFormater
-                                    }}</small></a
+                                    <a
+                                      ><strong>{{ runner["lay1"] }}</strong>
+                                      <br /><small>{{
+                                        runner["vlay1"] | marketRateFormater
+                                      }}</small></a
+                                    >
+                                  </td>
+                                  <td
+                                    *ngIf="
+                                      singleAdminBook['appMarketStatus'] !=
+                                        '3' &&
+                                      singleAdminBook['appMarketStatus'] != '9'
+                                    "
+                                    class="colblue"
+                                    [boxHighlight]="runner['back1']"
+                                    [boxHighlight]="runner['vback1']"
                                   >
-                                </td>
+                                    <a
+                                      ><strong>{{ runner["back1"] }}</strong>
+                                      <br /><small>{{
+                                        runner["vback1"] | marketRateFormater
+                                      }}</small></a
+                                    >
+                                  </td>
 
-                                <td
-                                  [ngClass]="{ '': !first }"
-                                  class="suspendedbm1"
-                                >
-                                  <div
+                                  <td
+                                    class="border-top"
+                                    [ngClass]="{ 'border-top': !first }"
+                                    class="suspendedbm1"
                                     *ngIf="
                                       singleAdminBook['appMarketStatus'] ==
                                         '3' ||
@@ -512,15 +529,15 @@
                                           : "Suspended"
                                       }}
                                     </button>
-                                  </div>
-                                </td>
-                              </tr>
-                            </ng-container>
-                          </tbody>
-                        </table>
+                                  </td>
+                                </tr>
+                              </ng-container>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                       <div class="col-md-6 my-3 my-md-0">
-                        <div class="bg-white border-5 tbl-height">
+                        <div class="bg-white border-5">
                           <table class="table bg-transparent align_thead">
                             <thead>
                               <tr>
@@ -1188,12 +1205,12 @@
     <!-- <div class="col-md-12 mt-1 mb-1">
       <div class="row">
         <div class="col-md-6">
-          <input type="text" class="form-control bg-dark  radius-left-tb border-pink radius-right-tb"
+          <input type="text" class="form-control bg-dark text-white radius-left-tb border-pink radius-right-tb"
             placeholder="Search Member Name" aria-label="Search" aria-describedby="addon-wrapping"
             [(ngModel)]="searchTerm" (ngModelChange)="search()" />
         </div>
         <div class="col-md-6 text-end">
-          <button *ngIf="viewTotal.length > 0" type="button" class="btn btn-pink rounded-pill ms-2 "
+          <button *ngIf="viewTotal.length > 0" type="button" class="btn btn-pink rounded-pill ms-2 text-white"
             (click)="exportExcel()">
             Export
           </button>
@@ -1277,7 +1294,7 @@
               <td class="col">
                 <span
                   *ngIf="!viewTotalEach.isBack"
-                  class="border bg-danger text-danger border-danger me-2 border-3"
+                  class="border bg-danger text-danger me-2 border-3"
                 ></span>
                 <span
                   *ngIf="viewTotalEach.isBack"
@@ -1340,7 +1357,7 @@
     <div class="col-md-12">
       <div *ngIf="viewTotal.length > 0">
         <button
-          class="btn rounded-pill"
+          class="btn rounded-pill text-dark"
           [disabled]="currentPage === 1"
           (click)="prev()"
         >
@@ -1350,7 +1367,7 @@
           >{{ currentPage }} / {{ totalPages }}
         </span>
         <button
-          class="btn rounded-pill"
+          class="btn rounded-pill text-dark"
           [disabled]="currentPage === totalPages"
           (click)="next()"
         >
@@ -1408,7 +1425,7 @@
               </div>
             </div>
             <div
-              class="row border-bottom p-2 "
+              class="row border-bottom p-2 bg-light"
               *ngIf="ldr['position'] == 'last'"
             >
               <ng-container>

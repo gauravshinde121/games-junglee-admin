@@ -29,7 +29,7 @@ $color_23: #a7d8fd;
 $color_24: #f9c9d4;
 $color_25: rgba(38, 38, 38, 0.63);
 $color_26: #cd212f;
-$color_27: #057f8b;
+$color_27: #ffc21e;
 $color_28: #a6a6a657;
 $color_29: #a6a6a6;
 $color_30: #ebf7fc;
@@ -53,18 +53,23 @@ $color_47: #71ff97;
 $color_48: #555;
 $color_49: #ccc;
 $color_50: #dee2e6;
-$color_51: #83c5cb;
-$color_52: #d0d0d0;
-$outline: #08969f80;
+// $color_27: #83c5cb;
+$color_52: linear-gradient(180deg, #313131 0%, #191618 100%);
+$outline: #ffc21e80;
 
-$gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
+$gradient-btn: linear-gradient(90deg, #ffc21e 0%, rgba(135, 58, 0, 0) 104.35%);
 
 .browncolor {
-  background-color: $color_52;
+  background: $color_52;
+  min-height: 100vh;
 }
 .bg-pink {
   background: linear-gradient(0deg, $color_27 0, $color_27) !important;
-  color: $color_21;
+  color: $color_7;
+  .btn-warning.rounded-pill {
+    border: 1px solid $color_1;
+    background-color: $outline;
+  }
 }
 .border-pink {
   border: 1px solid $color_27;
@@ -73,7 +78,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   transition: all 0.2s ease-in;
   transform: scale(1);
   border: none;
-  color: $color_21;
+  color: $color_7 !important;
   border-radius: 25px;
   font-size: 0.75rem;
   background: $color_27;
@@ -139,6 +144,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   padding: 10px;
   background: rgb(0 0 0 / 8%);
   margin-top: 30px;
+  color: $color_21;
 
   a {
     text-decoration: none;
@@ -146,6 +152,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   .btn {
     font-size: 16px;
     padding: 3px 4px;
+    color: $color_21;
   }
   .form-control {
     line-height: 2.5;
@@ -193,7 +200,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
 .form-signin .form-floating input:focus {
   // border-bottom: 1px solid rgb(255, 167, 163) !important;
   color: $color_21;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 /********** Login end ************/
@@ -202,7 +209,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   // padding: 20px 10px;
   // padding: 20px 0;
   transition: all 0.3s;
-  color: $color_7;
+  color: $color_21;
 }
 /********** main end ************/
 /********** header start ************/
@@ -228,7 +235,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   height: 70px;
   background-color: $color_22;
   border-radius: 10px;
-  color: $color_7;
+  color: $color_21;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,14 +243,14 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   background-repeat: no-repeat;
   p {
     font-size: 20px;
-    color: $color_7;
+    color: $color_21;
     line-height: 26px;
     letter-spacing: 1px;
     margin: 0;
   }
   span {
     font-size: 16px;
-    color: $color_7;
+    color: $color_21;
   }
 }
 
@@ -264,29 +271,25 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
 }
 
 .balance-first {
-  background: $color_51;
+  background: $gradient-btn;
 }
 .balance-up {
-  background: $color_51;
+  background: $gradient-btn;
 }
 
 .balance-down {
-  background: $color_51;
+  background: $gradient-btn;
 }
 
 .casino-summary {
-  background: $color_51;
-  border-radius: 10px;
-}
-
-.navbar-toggler {
   background: $gradient-btn;
+  border-radius: 10px;
 }
 
 // balance up/Down end
 
 .user {
-  color: $color_7;
+  color: $color_21;
 }
 /********** header end ************/
 /********** Sidebar start ************/
@@ -300,7 +303,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   scrollbar-color: #aab7cf transparent;
 
   .nav-link {
-    color: $color_7;
+    color: $color_21;
   }
   &::-webkit-scrollbar {
     width: 5px;
@@ -312,6 +315,29 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   }
   li {
     width: 100%;
+  }
+
+  .btn {
+    text-align: start;
+    color: $color_21;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .btn:hover {
+    color: $color_27;
+  }
+
+  .active {
+    .nav-link {
+      background-color: transparent;
+      color: $color_27;
+    }
+  }
+
+  .active .btn {
+    color: $color_27;
   }
 }
 .fixed-sidebar {
@@ -336,7 +362,7 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
     background: $color_27;
     border: 0px;
     font-weight: 500;
-    color: $color_21;
+    color: $color_7;
   }
   th.first {
     border-top-left-radius: 15px;
@@ -348,9 +374,14 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
     vertical-align: middle;
     border-bottom: 1px solid $color_27;
     margin: 2px 0;
+    color: $color_21;
 
     i {
-      color: $color_27;
+      color: $color_21;
+    }
+
+    .custom-ddl {
+      color: $color_21;
     }
   }
   input {
@@ -366,9 +397,13 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
   background: transparent;
   .form-select {
     appearance: button;
-    color: $color_7;
+    color: $color_21;
     border: 1px solid $color_27;
     background: transparent;
+
+    option {
+      color: $color_7;
+    }
   }
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
@@ -376,8 +411,14 @@ $gradient-btn: linear-gradient(180deg, #354857 0%, #82c0c6 100%);
 }
 .form-control {
   background: transparent;
-  color: $color_7;
+  color: $color_21;
   border: 1px solid $color_27;
+  &:focus {
+    background-color: transparent;
+    outline: none;
+    border: 1px solid $color_27;
+    box-shadow: 2px 2px 6px 3px $outline !important;
+  }
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -518,8 +559,8 @@ select:-webkit-autofill:focus {
     vertical-align: middle;
     padding: 2px 5px;
     text-align: center;
-    border-top: 1px solid $color_51 !important;
-    border-bottom: 1px solid $color_51 !important;
+    border-top: 1px solid $color_27 !important;
+    border-bottom: 1px solid $color_27 !important;
     font-size: 11px;
     line-height: 13px;
   }
@@ -575,7 +616,7 @@ select:-webkit-autofill:focus {
   //color box start
   .colblue {
     background: linear-gradient(0deg, $color_36 0, $color_37);
-    border-left: 1px solid $color_51;
+    border-left: 1px solid $color_27;
   }
   .colblue.light {
     background-color: $color_33 !important;
@@ -585,7 +626,7 @@ select:-webkit-autofill:focus {
   }
   .colpink {
     background: linear-gradient(0deg, $color_34 0, $color_35);
-    border-left: 1px solid $color_51;
+    border-left: 1px solid $color_27;
   }
   .colpink.light {
     background-color: $color_17 !important;
@@ -730,32 +771,10 @@ select:-webkit-autofill:focus {
   }
 }
 
-.sidebar {
-  .btn {
-    text-align: start;
-    color: $color_7;
-  }
-
-  .btn:hover {
-    color: $color_27;
-  }
-
-  .active {
-    .nav-link {
-      background-color: $color_51;
-      color: $color_7;
-    }
-  }
-
-  .active .btn {
-    color: $color_27;
-  }
-}
-
 .bg-dark_new,
 .bg-dark {
   background-color: $color_27 !important;
-  color: $color_21;
+  color: $color_7;
 }
 
 .modal {
@@ -768,7 +787,7 @@ select:-webkit-autofill:focus {
 }
 
 .icon-pink {
-  color: $color_27;
+  color: $color_21;
 }
 
 .form-floating > .form-control:focus ~ label,
@@ -824,10 +843,15 @@ select:-webkit-autofill:focus {
   }
 }
 
+.dashboard .btn.rounded-pill {
+  color: $color_21;
+}
+
 .btn.disabled,
 .btn:disabled,
 fieldset:disabled .btn {
   opacity: 0.3;
+  color: $color_21;
 }
 
 ::-webkit-scrollbar {
@@ -932,7 +956,7 @@ tfoot tr {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: $color_51;
+  background-color: $color_27;
   transition: 0.4s;
   border-radius: 34px;
 }
@@ -958,7 +982,7 @@ tfoot tr {
 }
 
 .border-bottom {
-  border-bottom: 1px solid $color_51 !important;
+  border-bottom: 1px solid $color_27 !important;
 }
 hr {
   background-color: $color_27 !important;
@@ -1021,6 +1045,8 @@ input:focus {
   box-shadow: none;
   outline: none !important;
   border: 1px solid $color_22;
+  color: $color_21 !important;
+  box-shadow: none !important;
 }
 
 a {
@@ -1160,18 +1186,30 @@ $breakpoint-mobile: 767px;
 }
 .form-select {
   background: transparent;
-}
-.form-control:focus,
-.form-select:focus {
-  box-shadow: 2px 2px 6px 3px $outline;
-  background-color: transparent;
+  color: $color_21;
+  option {
+    color: $color_7;
+  }
+
+  &:focus {
+    box-shadow: 2px 2px 6px 3px $outline;
+    background-color: transparent;
+  }
 }
 
 input[type="password"]:focus {
   box-shadow: none;
 }
 
+.modal-body {
+  background: $color_52;
+  color: $color_21;
+}
 
-.modal-body{
-  background-color: $color_52;
+.input-group-text {
+  background-color: transparent;
+}
+
+.bg-white {
+  color: $color_7;
 }

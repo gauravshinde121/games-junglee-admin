@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import { webSocket } from 'rxjs/webSocket';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-net-exposure-view-total',
@@ -26,6 +27,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   setOrUnsetWebSocketParamsObj: any = [];
   prevSetOrUnsetWebSocketParamsObj: any = [];
   realDataWebSocket: any;
+  realCustomDataWebSocket: any = webSocket(environment.oddsSocketUrl);
   myPT: boolean = false;
   refreshCount: number = 8;
   resetTimerInterval: any;
@@ -61,6 +63,7 @@ export class NetExposureViewTotalComponent implements OnInit {
       }
       this.refreshCount--;
     }, 1000);
+    this._subscribeCustomWebSocket();
   }
 
   _getWebSocketUrl(isComplete = false) {
@@ -594,17 +597,6 @@ export class NetExposureViewTotalComponent implements OnInit {
     }
   }
 
-  /*
-  _subscribeWebSocket() {
-    this.realDataWebSocket.subscribe(
-      data => {
-        if (typeof data == 'string') this._updateMarketData(data);
-        // if(typeof data == 'string')
-      }, // Called whenever there is a message from the server.
-      err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-      () => console.log('complete') // Called when connection is closed (for whatever reason).
-    );
-  }*/
 
   _subscribeWebSocket() {
     this.realDataWebSocket.subscribe(
@@ -621,6 +613,26 @@ export class NetExposureViewTotalComponent implements OnInit {
         console.log('completed');
         console.log(this.isPageDestroyed);
         if (!this.isPageDestroyed) this._getWebSocketUrl(false);
+      } // Called when connection is closed (for whatever reason).
+    );
+  }
+
+
+  _subscribeCustomWebSocket() {
+    this.realCustomDataWebSocket.subscribe(
+      (data) => {
+        if (typeof data == 'string') this._updateMarketData(data);
+        // if(typeof data == 'string') console.log('sub',data);
+      }, // Called whenever there is a message from the server.
+      (err) => {
+        console.log('err', err);
+        console.log(this.isPageDestroyed);
+        if (!this.isPageDestroyed) this._subscribeCustomWebSocket();
+      }, // Called if at any point WebSocket API signals some kind of error.
+      () => {
+        console.log('completed');
+        console.log(this.isPageDestroyed);
+        if (!this.isPageDestroyed) this._subscribeCustomWebSocket();
       } // Called when connection is closed (for whatever reason).
     );
   }

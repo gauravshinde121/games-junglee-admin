@@ -7,5 +7,6 @@ export const environment = {
   appEnv: 'production',
   OcpApimSubscriptionKey:'131ad35b6d6e48c597bb466343d18b2d',
   JungleeToken:'RANDOM_GUID',
-  clientId:3
+  clientId:3,
+  oddsSocketUrl:'wss://odds.cylsys.com'
 };

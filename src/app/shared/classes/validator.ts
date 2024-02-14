@@ -8,7 +8,6 @@ export function stringValidator(
 ) {
   return (control: AbstractControl): ValidationErrors | null => {
     //let pattern = '^.{'+minlength+','+maxlength+'}$';
-    debugger
     let pattern = '^(?!:\/\/)([a-zA-Z0-9]+\.)?[a-zA-Z0-9][a-zA-Z0-9-]+\.[a-zA-Z]{'+minlength+','+maxlength+'}?$';
     return !control.value.length && minlength > 0
       ? { error: true, message: `${controlName} is required` }

@@ -21,14 +21,14 @@
     cursor: pointer;
   }
   .sidebar {
-    background: #83c5cb;
+    background: linear-gradient(180deg, #313131 0%, #191618 100%);
     position: absolute;
     top: 3.5rem;
     border: 1px solid #71514f;
     height: 100%;
   }
   .sidebar a {
-    color: #000 !important;
+    color: #fff !important;
   }
 
   .balance p {
@@ -256,7 +256,7 @@
 
 @media only screen and (min-width: 1536px) {
   .table {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   body {

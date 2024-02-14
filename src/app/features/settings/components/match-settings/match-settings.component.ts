@@ -153,7 +153,6 @@ export class MatchSettingsComponent implements OnInit {
     // console.log("this.selectedUserForAdjustment,",this.selectedUserForAdjustment)
     // return;
 
-    debugger;
     let body = {
       // matchId: this.selectedMatchSettings.matchId,
       matchId: this.selectedUserForAdjustment,

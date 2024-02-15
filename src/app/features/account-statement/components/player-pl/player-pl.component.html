@@ -201,14 +201,14 @@
             <td>
               {{ pl.playerData.name }}
             </td>
-            <td class="">
-              <div [ngClass]="
+            <td class="text-center">
+              <span [ngClass]="
                   pl.gameData.finalNetAmount > 0
                     ? 'text-success'
                     : 'text-danger'
                 ">
                 {{ pl.gameData.finalNetAmount | indianCurrency }}
-              </div>
+            </span>
             </td>
             <td>{{ pl.gameData.totalFancyCommission }}</td>
             <td>{{ pl.gameData.totalBookmakerCommission }}</td>
@@ -226,7 +226,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="text-success float-left text-center"
+            <td class="text-success"
               [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">
               {{ totalAmount | indianCurrency }}
             </td>
@@ -236,6 +236,7 @@
             <td class="text-start">
               {{ totalBookmakerCommission | indianCurrency }}
             </td>
+            <td></td>
             <td></td>
           </tr>
         </tfoot>

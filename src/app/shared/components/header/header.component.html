@@ -70,8 +70,9 @@
         </div>
       </div>
       <div
+        *ngIf="clientId == 1 || clientId == 3"
         [ngClass]="
-          clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-4 col-6'
+          clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-3 col-6'
         "
       >
         <div class="casino-summary">

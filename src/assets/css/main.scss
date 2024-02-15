@@ -71,8 +71,9 @@ $gradient-btn: linear-gradient(
   background: $color_11 !important;
   color: $color_21;
   .btn-warning.rounded-pill {
-    border: 1px solid $color_1;
-    background-color: $outline;
+    border: 1px solid $color_21;
+    background-color: $gradient-btn;
+    color: $color_7;
   }
 }
 .border-pink {
@@ -1051,7 +1052,7 @@ a {
   color: $color_7;
 
   &:hover {
-    color: $color_21;
+    color: $color_7;
   }
 }
 

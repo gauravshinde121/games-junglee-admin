@@ -473,7 +473,7 @@
                 >BALANCE</a
               >
             </li>
-            <li
+            <li *ngIf="adminDetails.refClientid == 1 || adminDetails.refClientid == 2"
               [routerLinkActive]="
                 currentPath == '/settings/bet-settings' ? 'active' : ''
               "

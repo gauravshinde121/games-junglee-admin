@@ -48,20 +48,29 @@
     <div class="row align-items-center">
       <!-- nav tab -->
 
-      <div class="col-md-3 col-lg-3 col-xl-3">
-        <div class="row ">
+      <div class="col-md-3 col-lg-3 col-xl-3 col-12">
+        <div class="row">
           <div class="input-group flex-nowrap">
-            <span class="input-group-text bg-dark  border-pink radius-left-tb" id="addon-wrapping">
+            <span
+              class="input-group-text bg-dark border-pink radius-left-tb"
+              id="addon-wrapping"
+            >
               <i class="fa fa-search"></i>
             </span>
-            <input type="text" class="form-control border-start-0 border-pink radius-right-tb" placeholder="Search"
-              aria-label="Search" aria-describedby="addon-wrapping" [(ngModel)]="searchTerm"
-              (ngModelChange)="search()" />
+            <input
+              type="text"
+              class="form-control border-start-0 border-pink radius-right-tb"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="addon-wrapping"
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="search()"
+            />
           </div>
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-3 col-3">
+      <div class="col-lg-3 col-md-3 col-6 mt-2">
         <!-- <ul class="nav nav-pills memberslist" id="pills-tab" role="tablist">
           <li
             class="nav-item mr-5 mb-md-0 mb-2"
@@ -85,7 +94,12 @@
           </li>
         </ul> -->
 
-        <select name="role" id="role" class="form-select pointer br-15 border-pink" (change)="changeRole($event)">
+        <select
+          name="role"
+          id="role"
+          class="form-select pointer br-15 border-pink"
+          (change)="changeRole($event)"
+        >
           <option [value]="null">Select Role</option>
           <option [value]="role.roleId" *ngFor="let role of roles">
             {{ role.userRoleName }}
@@ -93,15 +107,22 @@
         </select>
       </div>
       <!-- <div class="col-5"></div> -->
-      <div class="col-md-3 col-lg-3 col-xl-2 mt-2">
-        <button (click)="onUserEdit(7)" routerLink="/member/create-member" class="btn btn-pink radius-all">
+      <div class="col-md-3 col-lg-3 col-xl-2 mt-2 col-6">
+        <button
+          (click)="onUserEdit(7)"
+          routerLink="/member/create-member"
+          class="btn btn-pink radius-all col-12"
+        >
           <i class="fa fa-pen"></i> Create New
         </button>
       </div>
 
-      <div class="col-lg-1 col-md-6 col-6">
-        <div class="row">Show Entries</div>
-        <select (change)="updateLimit($event)" class="form-select-sm border-colour bg-dark rounded-3">
+      <div class="col-lg-1 col-md-6 col-6 mt-2">
+        <!-- <div class="col-12">Show Entries</div> -->
+        <select
+          (change)="updateLimit($event)"
+          class="form-select-sm border-colour bg-dark rounded-3"
+        >
           <!-- <option>25</option>
           <option>50</option> -->
           <option>100</option>
@@ -110,15 +131,19 @@
           <option>250</option>
         </select>
       </div>
-      <div class="col-lg-2 col-md-3 col-3 text-end">
+      <div class="col-lg-2 col-md-3 col-3 mt-2 text-end">
         <!--{{ refreshCount }} &nbsp;-->
         <button class="btn btn-pink rounded-pill" (click)="refreshCall()">
           <i class="fa fa-redo-alt disnone"></i> Refresh
         </button>
       </div>
-      <div class="col-lg-1 col-md-3 col-3 text-end">
-        <button *ngIf="userList.length > 0" type="button" class="btn-sm btn-pink rounded-pill ms-2 "
-          (click)="exportExcel()">
+      <div class="col-lg-1 col-md-3 col-3 mt-2 text-end">
+        <button
+          *ngIf="userList.length > 0"
+          type="button"
+          class="btn-sm btn-pink rounded-pill ms-2"
+          (click)="exportExcel()"
+        >
           Export
         </button>
       </div>
@@ -130,38 +155,79 @@
           <h4 *ngIf="isLoading">Loading...</h4>
         </div>
         <div class="table-responsive tableRes tableFixHead">
-          <table #myTable class="table tableall" *ngIf="userList.length > 0 && !this.isLoading">
+          <table
+            #myTable
+            class="table tableall"
+            *ngIf="userList.length > 0 && !this.isLoading"
+          >
             <thead>
               <tr>
                 <th scope="col" class="first">
                   <i class="fa-sharp fa-regular fa-address-card"></i>
                 </th>
-                <th scope="col" class="pointer" (click)="toggleSort('username')">
+                <th
+                  scope="col"
+                  class="pointer"
+                  (click)="toggleSort('username')"
+                >
                   USERNAME
                 </th>
-                <th scope="col" class="text-center pointer" (click)="toggleSort('userRoleName')">
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('userRoleName')"
+                >
                   ROLE
                 </th>
-                <th scope="col" class="text-center pointer" (click)="toggleSort('creditLimit')">
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('creditLimit')"
+                >
                   CREDIT LIMIT
                 </th>
-                <th scope="col" class="text-center pointer" (click)="toggleSort('exposure')">
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('exposure')"
+                >
                   NET EXPOSURE
                 </th>
-                <th scope="col" class="text-center pointer" (click)="toggleSort('take')">
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('take')"
+                >
                   TAKE
                 </th>
-                <th scope="col" class="text-center pointer" (click)="toggleSort('give')">
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('give')"
+                >
                   GIVE
                 </th>
-                <th *ngIf="clientId == 1 || clientId == 3" scope="col" class="text-center pointer" (click)="toggleSort('give')">
+                <th
+                  *ngIf="clientId == 1 || clientId == 3"
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('give')"
+                >
                   CASINO AMOUNT
                 </th>
-                <th scope="col" class="text-center pointer" (click)="toggleSort('availableCredit')">
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  (click)="toggleSort('availableCredit')"
+                >
                   AVAILABLE CREDIT
                 </th>
-                <th scope="col" class="text-center pointer" *ngIf="selectedRoleId != 7"
-                  (click)="toggleSort('partnerShipPercent')">
+                <th
+                  scope="col"
+                  class="text-center pointer"
+                  *ngIf="selectedRoleId != 7"
+                  (click)="toggleSort('partnerShipPercent')"
+                >
                   PARTNERSHIP %
                 </th>
                 <th scope="col" class="text-center">DETAILS</th>
@@ -171,13 +237,18 @@
               </tr>
             </thead>
             <tbody>
-              <h1 class="text-center" *ngIf="userList.length == 0 && !this.isLoading">
+              <h1
+                class="text-center"
+                *ngIf="userList.length == 0 && !this.isLoading"
+              >
                 No users Found
               </h1>
-              <tr *ngFor="
+              <tr
+                *ngFor="
                   let user of userList | sort : sortColumn : sortAscending;
                   let i = index
-                ">
+                "
+              >
                 <!-- <td>
                   <input
                     type="checkbox"
@@ -191,18 +262,25 @@
                   <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                   <span *ngIf="currentPage > 1">{{
                     i + 1 + (currentPage - 1) * limit
-                    }}</span>
+                  }}</span>
                 </td>
-                <td data-tooltip="{{ user.displayName }}" [ngStyle]="
+                <td
+                  data-tooltip="{{ user.displayName }}"
+                  [ngStyle]="
                     selectedRoleId == 7
                       ? { cursor: 'context-menu' }
                       : { cursor: 'pointer' }
-                  ">
-                  <span (click)="showDownlineTree(user)">{{ user.username }}
+                  "
+                >
+                  <span (click)="showDownlineTree(user)"
+                    >{{ user.username }}
                   </span>
                 </td>
                 <td class="text-center">
-                  <span *ngFor="let role of roles" (click)="showDownlineTree(user)">
+                  <span
+                    *ngFor="let role of roles"
+                    (click)="showDownlineTree(user)"
+                  >
                   </span>
                   <span *ngIf="user.roleId == 2"> ADMIN </span>
                   <span *ngIf="user.roleId == 3"> SUPER MASTER </span>
@@ -214,32 +292,55 @@
                 <td class="text-center">
                   {{ user.creditLimit | indianCurrency }}
                 </td>
-                <td (click)="showExposureDetails(user)" class="text-center pointer"
-                  [ngClass]="user.exposure > 0 ? 'text-danger' : ''">
+                <td
+                  (click)="showExposureDetails(user)"
+                  class="text-center pointer"
+                  [ngClass]="user.exposure > 0 ? 'text-danger' : ''"
+                >
                   {{ user.exposure | indianCurrency }}
                 </td>
-                <td [ngClass]="user.take > 0 ? 'text-success' : ''" class="text-center">
-                  <a class="pointer text-success text-decoration-none" *ngIf="user.take > 0"
-                    (click)="adjustWinningsForSingleUser(user, false)">{{ user.take | indianCurrency }}</a>
+                <td
+                  [ngClass]="user.take > 0 ? 'text-success' : ''"
+                  class="text-center"
+                >
+                  <a
+                    class="pointer text-success text-decoration-none"
+                    *ngIf="user.take > 0"
+                    (click)="adjustWinningsForSingleUser(user, false)"
+                    >{{ user.take | indianCurrency }}</a
+                  >
                   <span *ngIf="user.take <= 0">{{
                     user.take | indianCurrency
-                    }}</span>
+                  }}</span>
                 </td>
-                <td [ngClass]="user.give > 0 ? 'text-danger' : ''" class="text-center">
-                  <a class="pointer text-danger text-decoration-none" *ngIf="user.give > 0"
-                    (click)="adjustWinningsForSingleUser(user, true)">{{ user.give | indianCurrency }}</a>
+                <td
+                  [ngClass]="user.give > 0 ? 'text-danger' : ''"
+                  class="text-center"
+                >
+                  <a
+                    class="pointer text-danger text-decoration-none"
+                    *ngIf="user.give > 0"
+                    (click)="adjustWinningsForSingleUser(user, true)"
+                    >{{ user.give | indianCurrency }}</a
+                  >
                   <span *ngIf="user.give <= 0">{{
                     user.give | indianCurrency
-                    }}</span>
+                  }}</span>
                 </td>
                 <td class="text-center" *ngIf="clientId == 1">
-                  <span class="pointer text-success text-decoration-none" *ngIf="user.casinoWinnings > 0">{{
-                    user.casinoWinnings | indianCurrency }}</span>
-                  <span class="pointer text-danger" *ngIf="user.casinoWinnings < 0">{{ user.casinoWinnings |
-                    indianCurrency }}</span>
+                  <span
+                    class="pointer text-success text-decoration-none"
+                    *ngIf="user.casinoWinnings > 0"
+                    >{{ user.casinoWinnings | indianCurrency }}</span
+                  >
+                  <span
+                    class="pointer text-danger"
+                    *ngIf="user.casinoWinnings < 0"
+                    >{{ user.casinoWinnings | indianCurrency }}</span
+                  >
                   <span *ngIf="user.casinoWinnings == 0">{{
                     user.casinoWinnings | indianCurrency
-                    }}</span>
+                  }}</span>
                 </td>
                 <td class="text-center">
                   {{ user.availableCredit | indianCurrency }}
@@ -255,22 +356,31 @@
                 </td>
                 <td class="text-center">
                   <!-- <a (click)="openModal(user.userId)"><i class="fa fa-lock text-pink"></i></a> -->
-                  <select class="custom-ddl pointer" (change)="changeStatus($event, user)">
-                    <option *ngFor="let item of statusList" [value]="item.status"
-                      [selected]="item.status == user.isActive" [ngClass]="
+                  <select
+                    class="custom-ddl pointer"
+                    (change)="changeStatus($event, user)"
+                  >
+                    <option
+                      *ngFor="let item of statusList"
+                      [value]="item.status"
+                      [selected]="item.status == user.isActive"
+                      [ngClass]="
                         item.status == 'Active'
                           ? 'green'
                           : item.status == 'Inactive'
                           ? 'yellow'
                           : 'red'
-                      ">
-                      <div [ngClass]="
+                      "
+                    >
+                      <div
+                        [ngClass]="
                           item.status == 'Active'
                             ? 'green'
                             : item.status == 'Inactive'
                             ? 'yellow'
                             : 'red'
-                        ">
+                        "
+                      >
                         {{ item.status }}
                       </div>
                     </option>
@@ -286,7 +396,10 @@
                     <i class="fa-sharp fa-solid fa-pen icon-pink pointer"></i>
                   </a> -->
 
-                  <a (click)="onUserEdit(user.roleId)" routerLink="/member/edit-member/{{ user.userId }}">
+                  <a
+                    (click)="onUserEdit(user.roleId)"
+                    routerLink="/member/edit-member/{{ user.userId }}"
+                  >
                     <i class="fa-sharp fa-solid fa-pen icon-pink pointer"></i>
                   </a>
                 </td>
@@ -302,35 +415,35 @@
                 <td>
                   <span *ngIf="totalExposure == 0">{{
                     totalExposure | indianCurrency
-                    }}</span>
+                  }}</span>
                   <span *ngIf="totalExposure != 0" class="text-danger">{{
                     totalExposure | indianCurrency
-                    }}</span>
+                  }}</span>
                 </td>
                 <td class="text-center">
                   <span *ngIf="totalTake == 0">{{
                     totalTake | indianCurrency
-                    }}</span>
+                  }}</span>
                   <span class="text-success" *ngIf="totalTake != 0">{{
                     totalTake | indianCurrency
-                    }}</span>
+                  }}</span>
                 </td>
                 <td class="text-center">
                   <span *ngIf="totalGive == 0">{{
                     totalGive | indianCurrency
-                    }}</span>
+                  }}</span>
                   <span *ngIf="totalGive != 0" class="text-danger">{{
                     totalGive | indianCurrency
-                    }}</span>
+                  }}</span>
                 </td>
                 <td>
                   <span *ngIf="totalCasino < 0" class="text-danger">{{
                     totalCasino
-                    }}</span>
+                  }}</span>
                   <span *ngIf="totalCasino == 0">{{ totalCasino }}</span>
                   <span *ngIf="totalCasino > 0" class="text-success">{{
                     totalCasino
-                    }}</span>
+                  }}</span>
                 </td>
                 <td></td>
                 <td></td>
@@ -343,12 +456,21 @@
           </table>
         </div>
         <div class="d-flex" *ngIf="userList.length > 0 && !this.isLoading">
-          <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
+          <button
+            class="btn rounded-pill"
+            [disabled]="currentPage === 1"
+            (click)="prev()"
+          >
             Prev
           </button>
-          <span class="btn btn-pink rounded-pill ps-4 pe-4">{{ currentPage }} / {{ totalPages }}
+          <span class="btn btn-pink rounded-pill ps-4 pe-4"
+            >{{ currentPage }} / {{ totalPages }}
           </span>
-          <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
+          <button
+            class="btn rounded-pill"
+            [disabled]="currentPage === totalPages"
+            (click)="next()"
+          >
             Next
           </button>
         </div>
@@ -362,17 +484,30 @@
   </section>
 </main>
 <!-- Modal start-->
-<div *ngIf="modalNumber == 2" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
-  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-  aria-hidden="true">
+<div
+  *ngIf="modalNumber == 2"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
           Change Password &nbsp; <i class="fa fa-lock"></i>
         </h5>
-        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
-          aria-label="Close"></button>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -385,16 +520,29 @@
                 <div class="col-md-5">Password*</div>
                 <div class="col-md-7">
                   <div class="input-group mw-100 border-pink">
-                    <input [type]="show ? 'text' : 'password'" class="form-control bg-transparent rounded-pill border-0"
-                      formControlName="password" placeholder="Enter password" id="password" name="password" />
-                    <span (click)="show = !show" class="input-group-text fa fa-eye text-pink border-0 pointer"
-                      id="Password" [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
+                    <input
+                      [type]="show ? 'text' : 'password'"
+                      class="form-control bg-transparent rounded-pill border-0"
+                      formControlName="password"
+                      placeholder="Enter password"
+                      id="password"
+                      name="password"
+                    />
+                    <span
+                      (click)="show = !show"
+                      class="input-group-text fa fa-eye text-pink border-0 pointer"
+                      id="Password"
+                      [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"
+                    ></span>
                   </div>
-                  <div class="text-danger" *ngIf="
+                  <div
+                    class="text-danger"
+                    *ngIf="
                       passwordValue &&
                       passwordValue.invalid &&
                       passwordValue.touched
-                    ">
+                    "
+                  >
                     Password is required. Password should be atleast 8
                     characters and maximum 20 characters <br />
                     It should contain <br />
@@ -409,33 +557,54 @@
                 <div class="col-md-5">Confirm&nbsp;Password*</div>
                 <div class="col-md-7">
                   <div class="input-group mw-100 border-pink">
-                    <input [type]="show1 ? 'text' : 'password'"
-                      class="form-control bg-transparent rounded-pill border-0" formControlName="confirmPassword"
-                      placeholder="Enter confirm password" id="password" name="password" />
-                    <span (click)="show1 = !show1" class="input-group-text fa fa-eye text-pink border-0 pointer"
-                      id="Password" [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"></span>
+                    <input
+                      [type]="show1 ? 'text' : 'password'"
+                      class="form-control bg-transparent rounded-pill border-0"
+                      formControlName="confirmPassword"
+                      placeholder="Enter confirm password"
+                      id="password"
+                      name="password"
+                    />
+                    <span
+                      (click)="show1 = !show1"
+                      class="input-group-text fa fa-eye text-pink border-0 pointer"
+                      id="Password"
+                      [ngClass]="show1 ? 'fa-eye' : 'fa-eye-slash'"
+                    ></span>
                   </div>
-                  <div *ngIf="
+                  <div
+                    *ngIf="
                       confirmPasswordVail &&
                       confirmPasswordVail.invalid &&
                       confirmPasswordVail.touched
-                    " class="text-danger">
+                    "
+                    class="text-danger"
+                  >
                     Confirm Password is required
                   </div>
-                  <div *ngIf="f['confirmPassword'].getError('Mustmatch') != null" class="text-danger">
+                  <div
+                    *ngIf="f['confirmPassword'].getError('Mustmatch') != null"
+                    class="text-danger"
+                  >
                     This password did not match
                   </div>
                 </div>
               </div>
               <div class="row mt-5">
                 <div class="col-md-6 text-end">
-                  <button (click)="postChangePassword()" [disabled]="changePasswordForm.invalid"
-                    class="btn btn-pink rounded-pill w-80 mt-4">
+                  <button
+                    (click)="postChangePassword()"
+                    [disabled]="changePasswordForm.invalid"
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                  >
                     Save
                   </button>
                 </div>
                 <div class="col-md-6">
-                  <button class="btn btn-pink rounded-pill w-80 mt-4" (click)="resetForm()">
+                  <button
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                    (click)="resetForm()"
+                  >
                     Reset
                   </button>
                 </div>
@@ -448,32 +617,56 @@
   </div>
 </div>
 <!-- Modal end -->
-<div *ngIf="modalNumber == 1" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
-  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-  aria-hidden="true">
+<div
+  *ngIf="modalNumber == 1"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
           Do you want bulk transfer?
         </h5>
-        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
-          aria-label="Close"></button>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12 pt-2">
             <label for="">Narration</label>
-            <input maxlength="150" type="text" class="form-control border-pink bg-transparent rounded-pill"
-              [(ngModel)]="description" />
+            <input
+              maxlength="150"
+              type="text"
+              class="form-control border-pink bg-transparent rounded-pill"
+              [(ngModel)]="description"
+            />
           </div>
         </div>
         <div class="row">
           <section class="section w-75 m-auto">
-            <button class="btn btn-success rounded-pill w-80 mt-3" (click)="adjustWinnings()">
+            <button
+              class="btn btn-success rounded-pill w-80 mt-3"
+              (click)="adjustWinnings()"
+            >
               Yes
             </button>
-            <button class="btn btn-danger rounded-pill w-80 mt-3 float-right" type="button" (click)="closeModal()">
+            <button
+              class="btn btn-danger rounded-pill w-80 mt-3 float-right"
+              type="button"
+              (click)="closeModal()"
+            >
               Cancel
             </button>
             <!--your code will come here end-->
@@ -487,17 +680,30 @@
 </div>
 <!-- Modal end -->
 
-<div *ngIf="modalNumber == 3" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
-  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-  aria-hidden="true">
+<div
+  *ngIf="modalNumber == 3"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
           Transaction
         </h5>
-        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
-          aria-label="Close"></button>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -515,7 +721,7 @@
           </div>
           <div class="col-md-3">
             <label>Difference:</label><br />{{
-            (userDetails.availableCredit - userDetails.exposure).toFixed(1)
+              (userDetails.availableCredit - userDetails.exposure).toFixed(1)
             }}
           </div>
           <div class="col-md-12">
@@ -529,25 +735,39 @@
                     You Can Transfer {{ userDetails.take }} Amount
                   </div>
                   <div class="col-md-12 pt-2">
-                    <input type="number" class="form-control border-pink bg-transparent rounded-pill"
-                      formControlName="amount" />
+                    <input
+                      type="number"
+                      class="form-control border-pink bg-transparent rounded-pill"
+                      formControlName="amount"
+                    />
                   </div>
                   <div class="col-md-12 pt-2">
                     <label for="">Narration</label>
-                    <input maxlength="150" type="text" class="form-control border-pink bg-transparent rounded-pill"
-                      formControlName="description" />
+                    <input
+                      maxlength="150"
+                      type="text"
+                      class="form-control border-pink bg-transparent rounded-pill"
+                      formControlName="description"
+                    />
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col-md-6 text-end">
-                    <button (click)="postAdjustWinningsForSingleUser()"
-                      [disabled]="adjustWinningsForSingleUserForm.invalid" class="btn btn-danger rounded-pill w-80">
+                    <button
+                      (click)="postAdjustWinningsForSingleUser()"
+                      [disabled]="adjustWinningsForSingleUserForm.invalid"
+                      class="btn btn-danger rounded-pill w-80"
+                    >
                       Save
                     </button>
                   </div>
                   <div class="col-md-6">
-                    <button type="button" class="btn btn-danger rounded-pill w-80" (click)="closeModal()">
+                    <button
+                      type="button"
+                      class="btn btn-danger rounded-pill w-80"
+                      (click)="closeModal()"
+                    >
                       Cancel
                     </button>
                   </div>
@@ -562,17 +782,30 @@
 </div>
 
 <!-- Modal 4 start -->
-<div *ngIf="modalNumber == 4" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
-  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-  aria-hidden="true">
+<div
+  *ngIf="modalNumber == 4"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
           Member Hierarchy
         </h5>
-        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
-          aria-label="Close"></button>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -597,34 +830,70 @@
 </div>
 <!-- Modal end -->
 
-<div *ngIf="showModal" id="bannerModal" tabindex="-1" aria-labelledby="bannerModalLabel" class="modal fade show"
-  style="display: block; padding-left: 0px; background: #00000063" aria-modal="true" role="dialog"
-  (click)="onCloseModal()">
-  <div _ngcontent-kxa-c63="" class="modal-dialog modal-lg modal-dialog-centered" (click)="onModalClick($event)">
+<div
+  *ngIf="showModal"
+  id="bannerModal"
+  tabindex="-1"
+  aria-labelledby="bannerModalLabel"
+  class="modal fade show"
+  style="display: block; padding-left: 0px; background: #00000063"
+  aria-modal="true"
+  role="dialog"
+  (click)="onCloseModal()"
+>
+  <div
+    _ngcontent-kxa-c63=""
+    class="modal-dialog modal-lg modal-dialog-centered"
+    (click)="onModalClick($event)"
+  >
     <div _ngcontent-kxa-c63="" class="modal-content">
       <div _ngcontent-kxa-c63="" class="modal-header">
-        <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn" (click)="onCloseModal()">
+        <button
+          type="button"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          class="btn"
+          (click)="onCloseModal()"
+        >
           X
         </button>
       </div>
       <div _ngcontent-kxa-c63="" class="modal-body p-0">
-        <img _ngcontent-kxa-c63="" src="{{ this.modalImage }}" alt="" width="100%" />
+        <img
+          _ngcontent-kxa-c63=""
+          src="{{ this.modalImage }}"
+          alt=""
+          width="100%"
+        />
       </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="modalNumber == 5" class="modal" [ngStyle]="{ display: display }" id="staticBackdrop"
-  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-  aria-hidden="true">
+<div
+  *ngIf="modalNumber == 5"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="exposure-dialog">
     <div class="modal-content">
       <div class="modal-header bg-pink">
         <h5 class="modal-title cassino" id="staticBackdropLabel">
           Exposure Details (Client Copy)
         </h5>
-        <button type="button" (click)="closeExposureModal()" class="btn-close" data-bs-dismiss="modal"
-          aria-label="Close"></button>
+        <button
+          type="button"
+          (click)="closeExposureModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="row" *ngFor="let expDtl of exposureDataList">
@@ -638,18 +907,27 @@
                 <strong>Win/Loss</strong>
               </div>
             </div>
-            <div class="row" *ngFor="let data of expDtl.matchOddsMarket[0].horses">
+            <div
+              class="row"
+              *ngFor="let data of expDtl.matchOddsMarket[0].horses"
+            >
               <div class="col-6">
                 <strong class="text-center">{{ data.RunnerName }}</strong>
               </div>
               <div class="col-3">
-                <strong *ngIf="data.finalAmount * -1 > 0" class="text-center text-success">{{ data.finalAmount * -1 |
-                  number }}</strong>
-                <strong *ngIf="data.finalAmount * -1 < 0" class="text-center text-danger">{{ data.finalAmount * -1 |
-                  number }}</strong>
+                <strong
+                  *ngIf="data.finalAmount * -1 > 0"
+                  class="text-center text-success"
+                  >{{ data.finalAmount * -1 | number }}</strong
+                >
+                <strong
+                  *ngIf="data.finalAmount * -1 < 0"
+                  class="text-center text-danger"
+                  >{{ data.finalAmount * -1 | number }}</strong
+                >
                 <strong *ngIf="data.finalAmount == 0" class="text-center">{{
                   data.finalAmount | number
-                  }}</strong>
+                }}</strong>
               </div>
             </div>
             <hr class="" />
@@ -663,18 +941,27 @@
                 <strong>Win/Loss</strong>
               </div>
             </div>
-            <div class="row" *ngFor="let data of expDtl.bookmakerMarkets[0].horses">
+            <div
+              class="row"
+              *ngFor="let data of expDtl.bookmakerMarkets[0].horses"
+            >
               <div class="col-6">
                 <strong class="text-center">{{ data.RunnerName }}</strong>
               </div>
               <div class="col-3">
-                <strong *ngIf="data.finalAmount * -1 > 0" class="text-center text-success">{{ data.finalAmount * -1 |
-                  number }}</strong>
-                <strong *ngIf="data.finalAmount * -1 < 0" class="text-center text-danger">{{ data.finalAmount * -1 |
-                  number }}</strong>
+                <strong
+                  *ngIf="data.finalAmount * -1 > 0"
+                  class="text-center text-success"
+                  >{{ data.finalAmount * -1 | number }}</strong
+                >
+                <strong
+                  *ngIf="data.finalAmount * -1 < 0"
+                  class="text-center text-danger"
+                  >{{ data.finalAmount * -1 | number }}</strong
+                >
                 <strong *ngIf="data.finalAmount == 0" class="text-center">{{
                   data.finalAmount | number
-                  }}</strong>
+                }}</strong>
               </div>
             </div>
             <hr class="" />
@@ -699,11 +986,17 @@
                 <div *ngFor="let ldr of data.ladder">
                   <div class="row">
                     <ng-container *ngIf="ldr['position'] != 'last'">
-                      <div class="col-6" *ngIf="ldr['startScore'] != ldr['endScore']">
+                      <div
+                        class="col-6"
+                        *ngIf="ldr['startScore'] != ldr['endScore']"
+                      >
                         {{ ldr["startScore"] }}-{{ ldr["endScore"] }}
                       </div>
 
-                      <div class="col-6" *ngIf="ldr['startScore'] == ldr['endScore']">
+                      <div
+                        class="col-6"
+                        *ngIf="ldr['startScore'] == ldr['endScore']"
+                      >
                         {{ ldr["startScore"] }}
                       </div>
                     </ng-container>
@@ -713,11 +1006,14 @@
                     </div>
 
                     <div class="col-6">
-                      <span [ngClass]="
+                      <span
+                        [ngClass]="
                           ldr['amount'] * -1 >= 0
                             ? 'text-success'
                             : 'text-danger'
-                        ">{{ ldr["amount"] * -1 }}</span>
+                        "
+                        >{{ ldr["amount"] * -1 }}</span
+                      >
                     </div>
                   </div>
                 </div>
@@ -736,8 +1032,13 @@
 
 <div class="modal-backdrop fade" *ngIf="showModal"></div>
 
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-  tabindex="-1">
+<div
+  class="modal fade"
+  id="exampleModalToggle"
+  aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1"
+>
   <div class="modal-dialog modal-sm">
     <div class="modal-content modalradius">
       <!-- <div class="modal-header">
@@ -750,34 +1051,56 @@
         </div>
         <ng-container *ngIf="ladderObj && ladderObj.length > 0">
           <div *ngFor="let ldr of ladderObj">
-            <div class="row border-bottom p-2" *ngIf="ldr['position'] != 'last'">
-              <div class="col-md-6" *ngIf="ldr['startScore'] != ldr['endScore']">
+            <div
+              class="row border-bottom p-2"
+              *ngIf="ldr['position'] != 'last'"
+            >
+              <div
+                class="col-md-6"
+                *ngIf="ldr['startScore'] != ldr['endScore']"
+              >
                 {{ ldr["startScore"] }}-{{ ldr["endScore"] }}
               </div>
-              <div class="col-md-6" *ngIf="ldr['startScore'] == ldr['endScore']">
+              <div
+                class="col-md-6"
+                *ngIf="ldr['startScore'] == ldr['endScore']"
+              >
                 {{ ldr["startScore"] }}
               </div>
               <div class="col-md-6">
-                <span [ngClass]="
+                <span
+                  [ngClass]="
                     ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
-                  ">{{ ldr["amount"] }}</span>
+                  "
+                  >{{ ldr["amount"] }}</span
+                >
               </div>
             </div>
-            <div class="row border-bottom p-2 " *ngIf="ldr['position'] == 'last'">
+            <div
+              class="row border-bottom p-2"
+              *ngIf="ldr['position'] == 'last'"
+            >
               <ng-container>
                 <div class="col-md-6">{{ ldr["startScore"] }}+</div>
               </ng-container>
               <div class="col-md-6">
-                <span [ngClass]="
+                <span
+                  [ngClass]="
                     ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
-                  ">{{ ldr["amount"] }}</span>
+                  "
+                  >{{ ldr["amount"] }}</span
+                >
               </div>
             </div>
           </div>
         </ng-container>
         <div class="row">
-          <button class="btn col-md-4 mt-3 btn-outline-pink border-0" data-bs-target="#exampleModalToggle2"
-            data-bs-toggle="modal" data-bs-dismiss="modal">
+          <button
+            class="btn col-md-4 mt-3 btn-outline-pink border-0"
+            data-bs-target="#exampleModalToggle2"
+            data-bs-toggle="modal"
+            data-bs-dismiss="modal"
+          >
             CLOSE
           </button>
         </div>

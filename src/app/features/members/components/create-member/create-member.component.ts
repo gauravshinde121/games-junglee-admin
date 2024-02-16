@@ -25,7 +25,7 @@ export class CreateMemberComponent implements OnInit {
   userDetails: any;
   isSuperAdmin: any;
   roleId: string = '';
-  createUserWithRoleId: number;
+  createUserWithRoleId: any;
   uplineInfo;
   maxBetMinValue: number;
   memberPercentage:any = '--';
@@ -63,14 +63,21 @@ export class CreateMemberComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this._sharedService.selectedUserRoleId.subscribe((res: any) => {
-      this.createUserWithRoleId = res['createUserWithRoleId'];
-    });
+    // this._sharedService.selectedUserRoleId.subscribe((res: any) => {
+    //   console.log("Res",res);
+    //   this.createUserWithRoleId = res['createUserWithRoleId'];
+      
+    // });
 
     this._sharedService.maxBetMinValue.subscribe((res: any) => {
       this.maxBetMinValue = res['value'];
     });
+
+    this.userDetails = this._sharedService.getUserDetails();
+
     this._preConfig();
+
+    this.createUserWithRoleId = localStorage.getItem('role_id');
 
     if (this.route.snapshot.params['id']) {
       this.editMode = true;
@@ -204,8 +211,6 @@ export class CreateMemberComponent implements OnInit {
 
         this.roleId = this.memberData.roleId;
         if (this.memberForm) {
-
-          console.log(this.memberData)
 
           let creditLimit = this.memberData.creditLimit;
           
@@ -425,6 +430,16 @@ export class CreateMemberComponent implements OnInit {
     if (this.memberForm) {
       this.isLoading = true;
       let memberData = {};
+
+      if(this.userDetails.roleId != 1) {
+        this.memberForm.value['adminCreationLimit'] = this.uplineInfo.adminCreationLimit;
+        this.memberForm.value['superMasterCreationLimit'] = this.uplineInfo.superMasterCreationLimit;
+        this.memberForm.value['masterCreationLimit'] = this.uplineInfo.masterCreationLimit;
+        this.memberForm.value['agentCreationLimit'] = this.uplineInfo.agentCreationLimit;
+        this.memberForm.value['dealerCreationLimit'] = this.uplineInfo.dealerCreationLimit;
+        this.memberForm.value['userCreationLimit'] = this.uplineInfo.userCreationLimit;
+      }
+
       if (!this.editMode) {
 
         let fancyTurnOverWiseComissionEnabled = false;
@@ -482,7 +497,9 @@ export class CreateMemberComponent implements OnInit {
           "bookmakerNetLoosingComissionEnabled":bookmakerNetLoosingComissionEnabled,
           "bookmakerEntrywiseLoosingComissionEnabled":bookmakerEntrywiseLoosingComissionEnabled
         }
+
       } else {
+
         memberData = {
           "displayName": this.memberForm.value['displayName'],
           "username": this.memberForm.value['username'],
@@ -579,7 +596,6 @@ export class CreateMemberComponent implements OnInit {
         this.memberPercentage = memPer;
       }
 
-      console.log(this.memberPercentage)
 
     }else{
       this.memberForm?.patchValue({
@@ -607,25 +623,27 @@ export class CreateMemberComponent implements OnInit {
     }
 
 
-    console.log(this.memberForm?.value['partnerShipPercent'])
-
-
 
   }
 
   playerAvailableCreditValidator(maxLimit: number): ValidatorFn {
-    console.log('playerAvailableCreditValidator called');
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
-      this.memberForm?.get('superMasterCreationLimit')?.setValue(value);
-      this.memberForm?.get('masterCreationLimit')?.setValue(value);
-      this.memberForm?.get('agentCreationLimit')?.setValue(value);
-      this.memberForm?.get('dealerCreationLimit')?.setValue(value);
-      this.memberForm?.get('userCreationLimit')?.setValue(value);
-      if (value !== null && (isNaN(value) || value < 0 || value > maxLimit)) {
-        return { 'creditLimit': true };
+
+      if(this.editMode) {
+        return null;
       }
-      return null;
+      else {
+        this.memberForm?.get('superMasterCreationLimit')?.setValue(value);
+        this.memberForm?.get('masterCreationLimit')?.setValue(value);
+        this.memberForm?.get('agentCreationLimit')?.setValue(value);
+        this.memberForm?.get('dealerCreationLimit')?.setValue(value);
+        this.memberForm?.get('userCreationLimit')?.setValue(value/10);
+        if (value !== null && (isNaN(value) || value < 0 || value > maxLimit)) {
+          return { 'creditLimit': true };
+        }
+        return null;
+      }
     };
   }
 
@@ -673,8 +691,8 @@ export class CreateMemberComponent implements OnInit {
   _getRoles() {
     this._memberService._getRolesApi().subscribe((roles: any) => {
       this.roles = roles.data;
-      this.setCreationLimit(this.createUserWithRoleId);
-      this.selectedUserRole = this.roles.find(role => role.roleId === this.createUserWithRoleId).userRoleName;
+      this.setCreationLimit(+this.createUserWithRoleId);
+      this.selectedUserRole = this.roles.find(role => role.roleId === +this.createUserWithRoleId).userRoleName;
       this._getUplineInfo();
     })
   }
@@ -774,6 +792,7 @@ export class CreateMemberComponent implements OnInit {
 
   ngOnDestroy() {
     this.playerAvailableCreditSubscription?.unsubscribe();
+    localStorage.removeItem('role_id');
   }
 
 }

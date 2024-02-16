@@ -206,14 +206,15 @@
       </div>
     </section>
 
+   <ng-container *ngIf="userDetails.roleId == 1">
     <section class="section gamedetails mt-3" *ngIf="
-        setAdminCreationLimit ||
-        setSuperMasterCreationLimit ||
-        setMasterCreationLimit ||
-        setAgentCreationLimit ||
-        setDealerCreationLimit ||
-        setUserCreationLimit
-      ">
+    setAdminCreationLimit ||
+    setSuperMasterCreationLimit ||
+    setMasterCreationLimit ||
+    setAgentCreationLimit ||
+    setDealerCreationLimit ||
+    setUserCreationLimit
+  ">
       <div class="row">
         <div class="col-md-12 text-pink">
           <h4>Downline Creation Limits</h4>
@@ -324,6 +325,7 @@
         </div>
       </div>
     </section>
+  </ng-container> 
 
     <section class="section gamedetails mt-3">
       <div class="row">

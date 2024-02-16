@@ -631,7 +631,7 @@ export class MembersListComponent implements OnInit {
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });
-    
+    localStorage.setItem('role_id',roleId);
   }
 
 }

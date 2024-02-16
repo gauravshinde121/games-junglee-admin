@@ -215,7 +215,7 @@
                             {{ totalGive | indianCurrency }}
                           </td>
                           <td></td>
-                          <td class="text-center">
+                          <td class="text-center" *ngIf="clientId == 1 || clientId == 3">
                             <span *ngIf="totalCasino < 0" class="text-danger">{{
                               totalCasino | indianCurrency
                               }}</span>
@@ -224,7 +224,7 @@
                               }}</span>
                             <span *ngIf="totalCasino > 0" class="text-success">{{ totalCasino | indianCurrency }}</span>
                           </td>
-                          <td></td>
+                          <td *ngIf="clientId == 1 || clientId == 3"></td>
                           <td></td>
                         </tr>
                       </tfoot>

@@ -1144,17 +1144,5 @@ $breakpoint-mobile: 767px;
 .fa-info{
   cursor: copy;
 }
-.form-select {
-  background: transparent;
-}
-.form-control:focus,
-.form-select:focus {
-  box-shadow: 2px 2px 6px 3px $outline;
-  background-color: transparent;
-}
-
-input[type="password"]:focus {
-  box-shadow: none;
-}
 
 

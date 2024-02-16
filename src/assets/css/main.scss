@@ -988,11 +988,11 @@ hr {
 .searchList {
   ul {
     // border: 1px solid $color_22;
-    padding: 15px 0 0;
+    padding: 0 0 0;
     list-style: none;
     border-top: none;
     position: relative;
-    top: -16px;
+    // top: -16px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     margin: 0;
@@ -1002,7 +1002,7 @@ hr {
       }
 
       &:hover {
-        background-color: $color_27;
+        color: $color_27;
       }
     }
   }

@@ -436,7 +436,7 @@ select:-webkit-autofill:focus {
 /********** Tooltip start ************/
 .tooltipnk {
   position: relative;
-  display: inline-block;
+  // display: inline-block;
   border-bottom: 1px dotted $color_21;
   .tooltiptext {
     visibility: hidden;
@@ -1015,11 +1015,11 @@ tfoot tr {
 .searchList {
   ul {
     // border: 1px solid $color_22;
-    padding: 15px 0 0;
+    padding: 0 0 0;
     list-style: none;
     border-top: none;
     position: relative;
-    top: -16px;
+    // top: -16px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     margin: 0;
@@ -1029,7 +1029,7 @@ tfoot tr {
       }
  
       &:hover {
-        background-color: $color_27;
+        color: $color_27;
       }
     }
   }
@@ -1174,7 +1174,8 @@ $breakpoint-mobile: 767px;
     // height: 82px;
     text-align: center;
     p {
-      font-size: 12px;
+      font-size: 13px;
+      font-weight: 600;
       span {
         font-size: 10px;
       }
@@ -1195,4 +1196,11 @@ $breakpoint-mobile: 767px;
 
 .bg-white{
   color: $color_21;
+}
+input[type="password"]:focus {
+  box-shadow: none;
+}
+
+.modal-body {
+  background-color: $color_52;
 }

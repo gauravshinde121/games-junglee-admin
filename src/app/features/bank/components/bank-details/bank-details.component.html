@@ -118,7 +118,7 @@
                           <th scope="col" class="text-center pointer">
                             My Casino Win
                           </th>
-                          <th scope="col" class="text-center pointer">
+                          <th scope="col" class="text-center pointer" *ngIf="clientId == 1 || clientId == 3">
                             Manage Casino Transfer
                           </th>
                           <th scope="col" class="text-center pointer last" (click)="toggleSort('availableCredit')">
@@ -205,7 +205,7 @@
                               user.casinoWinnings | indianCurrency
                               }}</span>
                           </td>
-                          <td class="text-center">
+                          <td class="text-center" *ngIf="clientId == 1 || clientId == 3">
                             <button (click)="openCasinoSettlement(user, false)" type="button"
                               *ngIf="user.casinoWinnings > 0"
                               class="btn btn-sm btn-success pointer text-decoration-none">

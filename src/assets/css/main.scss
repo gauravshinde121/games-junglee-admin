@@ -396,7 +396,7 @@ select:-webkit-autofill:focus {
 /********** Tooltip start ************/
 .tooltipnk {
   position: relative;
-  display: inline-block;
+  // display: inline-block;
   border-bottom: 1px dotted $color_21;
   .tooltiptext {
     visibility: hidden;

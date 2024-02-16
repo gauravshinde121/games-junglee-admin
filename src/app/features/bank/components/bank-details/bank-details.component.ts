@@ -64,6 +64,7 @@ export class BankDetailsComponent implements OnInit {
   mainClass:String = 'col-md-10';
   isMobileView = false;
   description : any = "Weekly settlement";
+  clientId: any;
 
 
   get f() {
@@ -217,6 +218,9 @@ export class BankDetailsComponent implements OnInit {
     });
 
     this._preConfig();
+
+    const user = this._sharedService.getUserDetails()
+    this.clientId = user.refClientid;
     //if(this._sharedService.getUserDetails().roleId.indexOf(1) != -1){
     if (this._sharedService.getUserDetails().roleId === 1) {
       this.isSuperAdmin = true;

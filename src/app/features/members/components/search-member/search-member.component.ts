@@ -26,6 +26,11 @@ export class SearchMemberComponent implements OnInit {
   _preConfig() { }
 
   search(): void {
+    if (this.searchTerm.length === 0 || this.searchTerm === "") {
+      this.clearSearch();
+      // this.memberList = [];
+      this.memberHierarchy = [];
+    }
     if(this.searchTerm.length > 1){
       let body = {
         searchText: this.searchTerm,
@@ -41,7 +46,8 @@ export class SearchMemberComponent implements OnInit {
     this.memberHierarchy = [];
     this._sharedService.getUplineSummaryApi(member.userId).subscribe((res)=>{
       this.memberHierarchy = res;
-      this.memberHierarchy.push(member)
+      this.memberHierarchy.push(member);
+      this.memberList = [];
     });
   }
 

@@ -473,7 +473,7 @@
                 >BALANCE</a
               >
             </li>
-            <li *ngIf="adminDetails.refClientid == 1 || adminDetails.refClientid == 2"
+            <li
               [routerLinkActive]="
                 currentPath == '/settings/bet-settings' ? 'active' : ''
               "
@@ -536,7 +536,7 @@
           </ul>
         </div>
       </li>
-      <li
+      <!-- <li
         *ngIf="
           adminDetails?.userRoleName == 'SUPER ADMIN' ||
           adminDetails?.username == 'KASHI'
@@ -556,7 +556,7 @@
         >
           <i class="fa-solid fa-pen-to-square icon-pink me-2"></i>GAMES SETTINGS
         </a>
-      </li>
+      </li> -->
       <li>
         <a
           class="btn collapsed"

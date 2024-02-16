@@ -102,7 +102,7 @@
                           <th scope="col" class="text-center pointer">
                             Manage Transfer
                           </th>
-                          <th scope="col" class="text-center pointer">
+                          <th scope="col" class="text-center pointer" *ngIf="clientId == 1 || clientId == 3">
                             My Casino Win
                           </th>
                           <th scope="col" class="text-center pointer" *ngIf="clientId == 1 || clientId == 3">
@@ -173,7 +173,7 @@
                               Take
                             </button>
                           </td>
-                          <td (click)="openCasinoSummary(user)" class="text-center pointer">
+                          <td (click)="openCasinoSummary(user)" class="text-center pointer" *ngIf="clientId == 1 || clientId == 3">
                             <span *ngIf="user.casinoWinnings > 0" class="text-success">{{ user.casinoWinnings |
                               indianCurrency }}</span>
                             <span *ngIf="user.casinoWinnings < 0" class="text-danger">{{ user.casinoWinnings |

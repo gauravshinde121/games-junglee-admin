@@ -62,7 +62,7 @@
   #main {
     /* padding: 20px 15px; */
     margin-top: 22px;
-    border-top: 1px solid #e76f26;
+    /* border-top: 1px solid #e76f26; */
   }
 
   .user p {
@@ -105,9 +105,9 @@
     width: 121px;
     font-size: 12px;
   }
-  .gamedetails {
+  /* .gamedetails {
     padding: 0 !important;
-  }
+  } */
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

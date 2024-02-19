@@ -84,7 +84,8 @@
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
-                    <div *ngIf="singleAdminBook['marketTypName'] !== 'Fancy'"
+                    <div
+                      *ngIf="singleAdminBook['marketTypName'] !== 'Fancy'"
                       class="row"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne"
@@ -110,7 +111,7 @@
                   <div class="accordion-body p-0">
                     <div class="row">
                       <div class="col-md-6">
-                        <div class="bg-white border-5">
+                        <div class="bg-white border-5 shadow-lg">
                           <table class="table tablematchodds bg-transparent">
                             <tbody>
                               <ng-container
@@ -537,7 +538,7 @@
                         </div>
                       </div>
                       <div class="col-md-6 my-3 my-md-0">
-                        <div class="bg-white border-5">
+                        <div class="bg-white border-5 shadow-lg">
                           <table class="table bg-transparent align_thead">
                             <thead>
                               <tr>

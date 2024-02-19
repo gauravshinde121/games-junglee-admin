@@ -345,11 +345,11 @@ export class CreateMemberComponent implements OnInit {
         fancyComission: [0, Validators.min(0)],
         bookmakerComission: [0, Validators.min(0)],
         adminCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
-        superMasterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.superMasterCreationLimitValidator]],
-        masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.masterCreationLimitValidator]],
-        agentCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.agentCreationLimitValidator]],
-        dealerCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.dealerCreationLimitValidator]],
-        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.userCreationLimitValidator]]
+        superMasterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        agentCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        dealerCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]]
       },
         {
           validators: []

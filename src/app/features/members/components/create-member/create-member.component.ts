@@ -271,11 +271,11 @@ export class CreateMemberComponent implements OnInit {
         maxBet: [500000, [(c: AbstractControl) => Validators.required(c), Validators.max(10000000), Validators.min(1)]],
         partnerShipPercent: [0, [(c: AbstractControl) => Validators.required(c), Validators.max(100), Validators.min(this.uplineInfo.partnerShipPercent)]],
         adminCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
-        superMasterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.superMasterCreationLimitValidator]],
-        masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.masterCreationLimitValidator]],
-        agentCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.agentCreationLimitValidator]],
-        dealerCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.dealerCreationLimitValidator]],
-        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.userCreationLimitValidator]]
+        superMasterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        agentCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        dealerCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]]
       },
         {
           validators: []

@@ -1,11 +1,19 @@
-<div class="row align-items-center mb-2 mt-2 border-bottom">
+<div class="row align-items-center py-2 border-bottom">
   <div class="col-lg-2 col-md-6 col-6">
     <div class="toggle-sidebar-btn d-flex align-items-center">
-      <a (click)="toggleMenu()" class="navbar-toggler bg-color  px-1 mx-0" type="button">
+      <a
+        (click)="toggleMenu()"
+        class="navbar-toggler bg-color px-1 mx-0"
+        type="button"
+      >
         <i class="fa fa-bars-staggered"></i>
       </a>
 
-      <a [routerLink]="['member/list']" routerLinkActive="router-link-active" class="navbar-brand m-0 d-block ms-3">
+      <a
+        [routerLink]="['member/list']"
+        routerLinkActive="router-link-active"
+        class="navbar-brand m-0 d-block ms-3"
+      >
         <img src="/assets/images/logo.svg" alt="" class="w-100" />
         <!-- <span>Sports</span>Zone365 -->
       </a>
@@ -13,7 +21,12 @@
   </div>
   <div class="col-md-8 col-8 smallMobileHide">
     <div class="row">
-      <div class="mb-2 mb-md-2" [ngClass]="clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-4 col-6'">
+      <div
+        class="mb-2 mb-md-2"
+        [ngClass]="
+          clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-4 col-6'
+        "
+      >
         <div class="balance-first">
           <div class="balance">
             <p>
@@ -24,7 +37,11 @@
           </div>
         </div>
       </div>
-      <div [ngClass]="clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-4 col-6'">
+      <div
+        [ngClass]="
+          clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-4 col-6'
+        "
+      >
         <div class="balance-up">
           <div class="balance">
             <p>
@@ -36,7 +53,11 @@
           </div>
         </div>
       </div>
-      <div [ngClass]="clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-4 col-6'">
+      <div
+        [ngClass]="
+          clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-4 col-6'
+        "
+      >
         <div class="balance-down">
           <div class="balance">
             <p>
@@ -48,17 +69,24 @@
           </div>
         </div>
       </div>
-      <div *ngIf="clientId == 1 || clientId == 3" [ngClass]="clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-3 col-6'">
+      <div
+        *ngIf="clientId == 1 || clientId == 3"
+        [ngClass]="
+          clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-3 col-6'
+        "
+      >
         <div class="casino-summary">
           <div class="balance">
             <div class="row text-center">
               <p>
                 <span>
                   BALANCE UP
-                  {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span>
+                  {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span
+                >
               </p>
               <p>
-                <span>BALANCE DOWN
+                <span
+                  >BALANCE DOWN
                   {{ adminDetails?.casinoBalanceDown | indianCurrency }}
                 </span>
               </p>
@@ -126,10 +154,12 @@
               <p>
                 <span class="f-13">
                   BALANCE UP
-                  {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span>
+                  {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span
+                >
               </p>
               <p>
-                <span class="f-13">BALANCE DOWN
+                <span class="f-13"
+                  >BALANCE DOWN
                   {{ adminDetails?.casinoBalanceDown | indianCurrency }}
                 </span>
               </p>

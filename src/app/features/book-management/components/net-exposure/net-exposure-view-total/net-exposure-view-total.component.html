@@ -1398,7 +1398,6 @@
         </div>
         <ng-container *ngIf="ladderObj && ladderObj.length > 0">
           <div *ngFor="let ldr of ladderObj">
-            <!-- {{ldr?['amount'] | json}} -->
             <div
               class="row border-bottom p-2"
               *ngIf="ldr['position'] != 'last'"
@@ -1420,7 +1419,7 @@
                   [ngClass]="
                     ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
                   "
-                  >{{ ldr["amount"] }}</span
+                  >{{ ldr["amount"] | indianCurrency}}</span
                 >
               </div>
             </div>
@@ -1436,7 +1435,7 @@
                   [ngClass]="
                     ldr['amount'] >= 0 ? 'text-success' : 'text-danger'
                   "
-                  >{{ ldr["amount"] }}</span
+                  >{{ ldr["amount"] | indianCurrency}}</span
                 >
               </div>
             </div>

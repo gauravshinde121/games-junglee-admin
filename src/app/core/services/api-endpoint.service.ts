@@ -6,6 +6,7 @@ import { QueryStringParameters } from '@shared/models/query-string-parameters';
 
 // Application Constants
 import { Constants } from '@config/constant';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable()
 export class ApiEndpointsService {
@@ -191,7 +192,13 @@ export class ApiEndpointsService {
   }
 
   public getAdjustWinningsEndpoint():string{
-    return this.createUrl(this._constants.API_URL_ADJUST_WINNINGS);
+    if(environment.clientId == 1 || environment.clientId == 3 ) {
+      return this.createUrl(this._constants.API_BANK_BULK_TRANSFER);
+    }
+    else {
+      return this.createUrl(this._constants.API_URL_ADJUST_WINNINGS);
+    }
+    
   }
 
   public getTransferStatementEndpoint(){
@@ -425,7 +432,11 @@ export class ApiEndpointsService {
   }
 
   public adjustWinningsForSingleUserEndpoint(){
-    return this.createUrl(this._constants.API_URL_ADJUST_WINNING_FOR_SINGLE_USER)
+    if(environment.clientId == 1 || environment.clientId == 3) {
+      return this.createUrl(this._constants.API_BANK_SETTLEMENT)
+    }else {
+      return this.createUrl(this._constants.API_URL_ADJUST_WINNING_FOR_SINGLE_USER)
+    }
   }
 
   public deleteBetEndpoint(){
@@ -490,7 +501,12 @@ export class ApiEndpointsService {
 
 
   public getAdjustCasinoEndpoint(){
-    return this.createUrl(this._constants.API_GET_ADJUST_CASINO_AMOUNT)
+    if(environment.clientId == 1 || environment.clientId == 3) {
+      return this.createUrl(this._constants.API_BANK_BANK_CASINO_SETTLEMENT)
+    }
+    else {
+      return this.createUrl(this._constants.API_GET_ADJUST_CASINO_AMOUNT)
+    }
   }
 
 

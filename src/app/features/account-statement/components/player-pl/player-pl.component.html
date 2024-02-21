@@ -1,4 +1,4 @@
-<main id="main" class="main m-0">
+<main id="main" class="main">
   <section class="section gamedetails">
     <div class="row" [formGroup]="filterForm">
       <div class="col-md-12">
@@ -11,7 +11,11 @@
         <div class="row align-items-end mb-3">
           <div class="col-md-3">
             <label>Select Member</label>
-            <select formControlName="memberId" id="ab" class="form-select bg-dgre pointer">
+            <select
+              formControlName="memberId"
+              id="ab"
+              class="form-select bg-dgre pointer"
+            >
               <option value="null">All</option>
               <option *ngFor="let member of allMembers" [value]="member.userId">
                 {{ member.username }}
@@ -21,16 +25,33 @@
 
           <div class="col-md-3">
             <label>From Date</label>
-            <input type="date" formControlName="fromDate" name="fromDate" class="form-control" id=""
-              placeholder="Month" />
+            <input
+              type="date"
+              formControlName="fromDate"
+              name="fromDate"
+              class="form-control"
+              id=""
+              placeholder="Month"
+            />
           </div>
           <div class="col-md-3">
             <label>To Date</label>
-            <input type="date" formControlName="toDate" name="toDate" class="form-control" id="" placeholder="Month" />
+            <input
+              type="date"
+              formControlName="toDate"
+              name="toDate"
+              class="form-control"
+              id=""
+              placeholder="Month"
+            />
           </div>
 
           <div class="col-md-3 mt-3">
-            <button type="button" class="btn btn-pink rounded-pill mt-4 w-100" (click)="searchList()">
+            <button
+              type="button"
+              class="btn btn-pink rounded-pill mt-4 w-100"
+              (click)="searchList()"
+            >
               Search
             </button>
           </div>
@@ -45,7 +66,6 @@
           </div> -->
         </div>
         <div class="row align-items-end">
-
           <!-- <div class="col-md-3 mt-3">
             <label>Select Sport</label>
             <select
@@ -78,9 +98,14 @@
 
           <div class="col-md-4 mt-3">
             <label>Select Match</label>
-            <select formControlName="matchId" id="ab" class="form-select pointer" (change)="changeMatch($event)">
-              <option [value]=null>All</option>
-              <option [value]=" match" *ngFor="let match of matchList">
+            <select
+              formControlName="matchId"
+              id="ab"
+              class="form-select pointer"
+              (change)="changeMatch($event)"
+            >
+              <option [value]="null">All</option>
+              <option [value]="match" *ngFor="let match of matchList">
                 {{ match }}
               </option>
             </select>
@@ -106,14 +131,18 @@
 
           <div class="col-md-4 mt-3">
             <label>Select Market</label>
-            <select formControlName="marketId" id="ab" class="form-select pointer" (change)="changeMarketType($event)">
-              <option [value]=null>All</option>
+            <select
+              formControlName="marketId"
+              id="ab"
+              class="form-select pointer"
+              (change)="changeMarketType($event)"
+            >
+              <option [value]="null">All</option>
               <option [value]="market" *ngFor="let market of marketList">
                 {{ market }}
               </option>
             </select>
           </div>
-
 
           <!-- <div class="col-md-3 mt-3">
             <button
@@ -132,13 +161,21 @@
   <br />
   <div class="col-md-12 text-right font">
     <span>
-      <img src="../../../../../assets/images/dollaricon.png" alt="" class="doneLoading" />
+      <img
+        src="../../../../../assets/images/dollaricon.png"
+        alt=""
+        class="doneLoading"
+      />
     </span>
     <strong> Total Records</strong>&nbsp;&nbsp;
     <span class="text-danger">{{ plStatement.length }}</span>
 
-    <button *ngIf="plStatement.length > 0" type="button" class="btn btn-pink rounded-pill ms-2  float-end"
-      (click)="exportExcel()">
+    <button
+      *ngIf="plStatement.length > 0"
+      type="button"
+      class="btn btn-pink rounded-pill ms-2 float-end"
+      (click)="exportExcel()"
+    >
       Export
     </button>
   </div>
@@ -153,7 +190,11 @@
         <thead class="">
           <tr>
             <th scope="col" class="first"></th>
-            <th scope="col" class="pointer" (click)="toggleSort('createDateTime')">
+            <th
+              scope="col"
+              class="pointer"
+              (click)="toggleSort('createDateTime')"
+            >
               <i class="fa fa-"></i> Date
             </th>
             <th scope="col" class="pointer" (click)="toggleSort('sport')">
@@ -183,15 +224,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="
+          <tr
+            *ngFor="
               let pl of plStatement | sort : sortColumn : sortAscending;
               let i = index
-            ">
+            "
+          >
             <td>
               <span>{{ i + 1 }}</span>
               <span *ngIf="currentPage > 1">{{
                 i + 1 + (currentPage - 1) * limit
-                }}</span>
+              }}</span>
             </td>
             <td>{{ pl.createDateTime | date : "medium" }}</td>
             <td>{{ pl.gameData.subGame }}</td>
@@ -202,19 +245,26 @@
               {{ pl.playerData.name }}
             </td>
             <td class="text-center">
-              <span [ngClass]="
+              <span
+                [ngClass]="
                   pl.gameData.finalNetAmount > 0
                     ? 'text-success'
                     : 'text-danger'
-                ">
+                "
+              >
                 {{ pl.gameData.finalNetAmount | indianCurrency }}
-            </span>
+              </span>
             </td>
             <td>{{ pl.gameData.totalFancyCommission }}</td>
             <td>{{ pl.gameData.totalBookmakerCommission }}</td>
             <td class="text-center">
-              <i (click)="getOneAccount(pl)" class="fa-sharp fa-solid fa-eye text-pink pointer" aria-hidden="true"
-                data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+              <i
+                (click)="getOneAccount(pl)"
+                class="fa-sharp fa-solid fa-eye text-pink pointer"
+                aria-hidden="true"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+              ></i>
             </td>
           </tr>
         </tbody>
@@ -226,8 +276,10 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="text-success"
-              [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'">
+            <td
+              class="text-success"
+              [ngClass]="totalAmount > 0 ? 'text-success' : 'text-danger'"
+            >
               {{ totalAmount | indianCurrency }}
             </td>
             <td class="text-start">
@@ -264,16 +316,29 @@
   </div>
 </main>
 <!-- Modal start-->
-<div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static"
-  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content">
       <div class="modal-header bg-pink p-2">
-        <h5 class="modal-title cassino " id="staticBackdropLabel">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
           Game Detail
         </h5>
-        <button type="button" (click)="closeModal()" class="btn-close" data-bs-dismiss="modal"
-          aria-label="Close"></button>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="row mb-4">
@@ -304,9 +369,11 @@
                 </tr>
                 <tr>
                   <td>Win Amt:</td>
-                  <td [ngClass]="
+                  <td
+                    [ngClass]="
                       oneAccount?.winAmt > 0 ? 'text-success' : 'text-danger'
-                    ">
+                    "
+                  >
                     {{ oneAccount?.winAmt | indianCurrency }}
                   </td>
                 </tr>
@@ -340,9 +407,11 @@
                 </tr>
                 <tr>
                   <td>Net Amt:</td>
-                  <td [ngClass]="
+                  <td
+                    [ngClass]="
                       oneAccount?.netAmt > 0 ? 'text-success' : 'text-danger'
-                    ">
+                    "
+                  >
                     {{ oneAccount?.netAmt | indianCurrency }}
                   </td>
                 </tr>
@@ -386,8 +455,12 @@
 
         <div class="row">
           <div class="col-md-12 mb-2">
-            <button *ngIf="oneAccount?.bets.length > 0" type="button" class="btn btn-pink rounded-pill ms-2  float-end"
-              (click)="exportExcel1()">
+            <button
+              *ngIf="oneAccount?.bets.length > 0"
+              type="button"
+              class="btn btn-pink rounded-pill ms-2 float-end"
+              (click)="exportExcel1()"
+            >
               Export
             </button>
           </div>
@@ -397,30 +470,62 @@
               <table class="table tableall text-center">
                 <thead>
                   <tr>
-                    <th scope="col" class="first w-auto pointer" (click)="toggleSort1('placedDate')">
+                    <th
+                      scope="col"
+                      class="first w-auto pointer"
+                      (click)="toggleSort1('placedDate')"
+                    >
                       Placed Date
                     </th>
-                    <th scope="col" class="pointer" (click)="toggleSort1('matchedDate')">
+                    <th
+                      scope="col"
+                      class="pointer"
+                      (click)="toggleSort1('matchedDate')"
+                    >
                       Matched Date
                     </th>
-                    <th scope="col" class="pointer" (click)="toggleSort1('type')">
+                    <th
+                      scope="col"
+                      class="pointer"
+                      (click)="toggleSort1('type')"
+                    >
                       Type
                     </th>
-                    <th scope="col" class="pointer" (click)="toggleSort1('status')">
+                    <th
+                      scope="col"
+                      class="pointer"
+                      (click)="toggleSort1('status')"
+                    >
                       Status
                     </th>
-                    <th scope="col" class="pointer" (click)="toggleSort1('horseName')">
+                    <th
+                      scope="col"
+                      class="pointer"
+                      (click)="toggleSort1('horseName')"
+                    >
                       Horse Name
                     </th>
                     <!-- <th scope="col" class="">Avg. Odds</th> -->
-                    <th scope="col" class="pointer" (click)="toggleSort1('odds')">
+                    <th
+                      scope="col"
+                      class="pointer"
+                      (click)="toggleSort1('odds')"
+                    >
                       Odds
                     </th>
 
-                    <th scope="col" class="pointer" (click)="toggleSort1('matchedStake')">
+                    <th
+                      scope="col"
+                      class="pointer"
+                      (click)="toggleSort1('matchedStake')"
+                    >
                       Stake
                     </th>
-                    <th scope="col" class="pointer" (click)="toggleSort1('profitLoss')">
+                    <th
+                      scope="col"
+                      class="pointer"
+                      (click)="toggleSort1('profitLoss')"
+                    >
                       Profit/Loss (In INR)
                     </th>
                     <th scope="col" class="last">IP</th>
@@ -430,17 +535,24 @@
                   Loading...
                 </table>
                 <tbody *ngIf="oneAccount">
-                  <tr *ngFor="
+                  <tr
+                    *ngFor="
                       let bet of oneAccount?.bets
                         | sort : sortColumn1 : sortAscending1;
                       let i = index
-                    ">
+                    "
+                  >
                     <td>{{ bet.placedDate | date : "medium" }}</td>
                     <td>{{ bet.matchedDate | date : "medium" }}</td>
                     <td>
-                      <span *ngIf="bet.isBack == false" class="border r-2 bg-danger text-danger me-2 border-3 border-danger"></span>
-                      <span *ngIf="bet.isBack == true"
-                        class="border bg-primary text-primary border-primary me-2 border-3"></span>
+                      <span
+                        *ngIf="bet.isBack == false"
+                        class="border r-2 bg-danger text-danger me-2 border-3 border-danger"
+                      ></span>
+                      <span
+                        *ngIf="bet.isBack == true"
+                        class="border bg-primary text-primary border-primary me-2 border-3"
+                      ></span>
                       {{ bet.type }}
                     </td>
                     <td>{{ bet.status }}</td>
@@ -449,14 +561,20 @@
                     <td>{{ bet.odds }}</td>
 
                     <td>{{ bet.matchedStake }}</td>
-                    <td [ngClass]="
+                    <td
+                      [ngClass]="
                         bet.profitLoss > 0 ? 'text-success' : 'text-danger'
-                      ">
+                      "
+                    >
                       {{ bet.profitLoss | indianCurrency }}
                     </td>
                     <td class="tooltipnk ms-0 mt-1">
-                      <i class="fa-sharp fa-solid fa-info" ngxClipboard [cbContent]="bet.ipAddress"
-                        [container]="container"></i>
+                      <i
+                        class="fa-sharp fa-solid fa-info"
+                        ngxClipboard
+                        [cbContent]="bet.ipAddress"
+                        [container]="container"
+                      ></i>
                       <span class="tooltiptext tabTooltip px-5 w-auto">
                         <small #container>{{ bet.ipAddress }}</small>
                       </span>

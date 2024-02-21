@@ -1,4 +1,4 @@
-<main id="main" class="main m-0">
+<main id="main" class="main">
   <section class="section dashboard">
     <!-- <div class="row mb-3 align-items-end"> -->
     <!-- <div class="col-md-6 col-lg-6 col-xl-6">
@@ -48,7 +48,7 @@
     <div class="row align-items-center">
       <!-- nav tab -->
 
-      <div class="col-md-3 col-lg-3 col-xl-3">
+      <div class="col-md-3 col-lg-3 col-xl-3 col-12 mb-3">
         <div class="row">
           <div class="input-group flex-nowrap">
             <span
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-3 col-6 mt-2">
+      <div class="col-lg-3 col-md-3 col-6 mb-3">
         <!-- <ul class="nav nav-pills memberslist" id="pills-tab" role="tablist">
           <li
             class="nav-item mr-5 mb-md-0 mb-2"
@@ -107,7 +107,7 @@
         </select>
       </div>
       <!-- <div class="col-5"></div> -->
-      <div class="col-md-3 col-lg-3 col-xl-2 mt-2">
+      <div class="col-md-3 col-lg-3 col-xl-2 col-6 mb-3">
         <button
           (click)="onUserEdit(7)"
           routerLink="/member/create-member"
@@ -117,7 +117,7 @@
         </button>
       </div>
 
-      <div class="col-lg-1 col-md-6 col-6 mt-2">
+      <div class="col-lg-1 col-md-6 col-6 mb-3">
         <!-- <div class="col-12">Show Entries</div> -->
         <select
           (change)="updateLimit($event)"
@@ -131,13 +131,13 @@
           <option>250</option>
         </select>
       </div>
-      <div class="col-lg-2 col-md-3 col-3 mt-2 text-end">
+      <div class="col-lg-2 col-md-3 col-3 text-end mb-3">
         <!--{{ refreshCount }} &nbsp;-->
         <button class="btn btn-pink rounded-pill" (click)="refreshCall()">
           <i class="fa fa-redo-alt disnone"></i> Refresh
         </button>
       </div>
-      <div class="col-lg-1 col-md-3 col-3 text-end">
+      <div class="col-lg-1 col-md-3 col-3 text-end mb-3">
         <button
           *ngIf="userList.length > 0"
           type="button"
@@ -148,7 +148,7 @@
         </button>
       </div>
     </div>
-    <div class="row mt-3">
+    <div class="row">
       <div class="col-md-12 overflow-auto">
         <div *ngIf="userList.length == 0" class="border text-center p-5">
           <h4 *ngIf="userList.length == 0 && !isLoading">No data found</h4>

@@ -80,20 +80,29 @@
       >
         <div class="casino-summary">
           <div class="balance">
-            <div class="row text-center">
-              <p>
-                <span>
-                  BALANCE UP
-                  {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span
-                >
-              </p>
-              <p>
-                <span
-                  >BALANCE DOWN
-                  {{ adminDetails?.casinoBalanceDown | indianCurrency }}
-                </span>
-              </p>
-              <small>CASINO SUMMARY</small>
+            <div class="row text-center m-0">
+              <div class="col-4">
+                <p>
+                  <span>
+                    {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span
+                  >
+                </p>
+                <small>UP</small>
+              </div>
+              <div class="col-4">
+                <p>
+                  <span> | </span>
+                </p>
+                <small>BALANCE</small>
+              </div>
+              <div class="col-4">
+                <p>
+                  <span>
+                    {{ adminDetails?.casinoBalanceDown | indianCurrency }}
+                  </span>
+                </p>
+                <small>DOWN</small>
+              </div>
             </div>
           </div>
         </div>

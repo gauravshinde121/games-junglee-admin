@@ -112,7 +112,16 @@
               <div class="small text-danger" *ngIf="memberForm.controls['playerAvailableCredit'].errors?.['min']">
                 Credit Limit cannot be negative.
               </div>
+              <div class="small text-danger" *ngIf="
+              memberForm.controls['playerAvailableCredit'].errors
+                ?.creditLimit
+            ">
+            {{ selectedUserRole }} Creation Limit has been exceeded. Please
+            contact your upline.
+          </div>
             </div>
+
+            
 
             <!-- <div class="col-md-3 mb-2">
               <label>Fancy Commission</label>

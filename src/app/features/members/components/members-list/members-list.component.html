@@ -48,7 +48,7 @@
     <div class="row align-items-center">
       <!-- nav tab -->
 
-      <div class="col-md-3 col-lg-3 col-xl-3 col-12">
+      <div class="col-md-3 col-lg-3 col-xl-3">
         <div class="row">
           <div class="input-group flex-nowrap">
             <span
@@ -107,11 +107,11 @@
         </select>
       </div>
       <!-- <div class="col-5"></div> -->
-      <div class="col-md-3 col-lg-3 col-xl-2 mt-2 col-6">
+      <div class="col-md-3 col-lg-3 col-xl-2 mt-2">
         <button
           (click)="onUserEdit(7)"
           routerLink="/member/create-member"
-          class="btn btn-pink radius-all col-12"
+          class="btn btn-pink radius-all"
         >
           <i class="fa fa-pen"></i> Create New
         </button>
@@ -137,7 +137,7 @@
           <i class="fa fa-redo-alt disnone"></i> Refresh
         </button>
       </div>
-      <div class="col-lg-1 col-md-3 col-3 mt-2 text-end">
+      <div class="col-lg-1 col-md-3 col-3 text-end">
         <button
           *ngIf="userList.length > 0"
           type="button"
@@ -327,7 +327,7 @@
                     user.give | indianCurrency
                   }}</span>
                 </td>
-                <td class="text-center" *ngIf="clientId == 1">
+                <td class="text-center" *ngIf="clientId == 1 || clientId == 3">
                   <span
                     class="pointer text-success text-decoration-none"
                     *ngIf="user.casinoWinnings > 0"
@@ -843,7 +843,7 @@
 >
   <div
     _ngcontent-kxa-c63=""
-    class="modal-dialog modal-lg modal-dialog-centered"
+    class="modal-dialog modal-dialog-centered"
     (click)="onModalClick($event)"
   >
     <div _ngcontent-kxa-c63="" class="modal-content">

@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-left-navigation',
@@ -24,6 +25,7 @@ export class LeftNavigationComponent implements OnInit {
   currentPath: any = '';
   isMobileView = false;
 
+  clientId = environment.clientId;
 
   onResize() {
     if (window.innerWidth <= 767) {

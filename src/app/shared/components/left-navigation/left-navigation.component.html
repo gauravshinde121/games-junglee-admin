@@ -148,7 +148,7 @@
 
         <!-- *ngIf="adminDetails.refClientid == 3 || adminDetails.refClientid == 4" -->
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li *ngIf="(adminDetails.refClientid == 3 || adminDetails.refClientid == 4) || adminDetails.username=='tiger_admin' || adminDetails.refSuperAdminId == 251"
+            <li *ngIf="clientId == 3 || clientId == 1"
               [routerLinkActive]="
                 currentPath == '/account-statement/account-list' ? 'active' : ''
               "
@@ -282,7 +282,7 @@
               >
             </li>
             <li
-              *ngIf="adminDetails.refClientid == 1"
+              *ngIf="adminDetails.refClientid == 1 || adminDetails.refClientid == 3"
               [routerLinkActive]="
                 currentPath == '/account-statement/casino-report'
                   ? 'active'

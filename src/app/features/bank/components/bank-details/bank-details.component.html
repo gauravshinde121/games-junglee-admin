@@ -83,9 +83,9 @@
                     >
                       <thead>
                         <tr>
-                          <th scope="col" class="first pointer">
+                          <!-- <th scope="col" class="first pointer">
                             <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)" />
-                          </th>
+                          </th> -->
                           <th scope="col" class="">
                             <i class="fa-sharp fa-regular fa-address-card"></i>
                           </th>
@@ -133,10 +133,10 @@
                               | sort : sortColumn : sortAscending;
                             let i = index
                           ">
-                          <td>
+                          <!-- <td>
                             <input type="checkbox" class="pointer" (change)="checkUserForAdjustment(user.userId)"
                               *ngIf="user.take > 0 || user.give > 0" [(ngModel)]="user.state" />
-                          </td>
+                          </td> -->
 
                           <td>
                             <span *ngIf="currentPage == 1">{{ i + 1 }}</span>

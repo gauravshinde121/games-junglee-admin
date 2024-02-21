@@ -12,7 +12,7 @@ $color_6: #d9520a;
 $color_7: #fff;
 $color_8: #aab7cf;
 $color_9: #d9d9d9;
-$color_10: #021a44;
+$color_10: #012970;
 $color_11: #dc3545;
 $color_12: #a2a2a2;
 $color_13: #6abefa;
@@ -107,7 +107,7 @@ $gradient-btn: linear-gradient(
   width: 30%;
 }
 .text-pink {
-  color: $color_11 !important;
+  color: $color_27 !important;
 }
  
 .btn-outline-pink {
@@ -139,7 +139,7 @@ $gradient-btn: linear-gradient(
   border-radius: 0;
 }
 .radioselected {
-  accent-color: $color_11;
+  accent-color: $color_27;
 }
 /********** common property end ************/
 /********** Login start ************/
@@ -215,7 +215,6 @@ $gradient-btn: linear-gradient(
   // padding: 20px 0;
   transition: all 0.3s;
   color: $color_7;
-  min-height: 87vh;
 }
 /********** main end ************/
 /********** header start ************/
@@ -235,31 +234,28 @@ $gradient-btn: linear-gradient(
   }
 }
 .balance {
-  background: $gradient-btn;
+  background-image: url(../images/balance.png);
   width: 100%;
   // height: 158px;
   height: 70px;
-  // background-color: $color_22;
-  border-radius: 15px;
-  color: $color_21;
+  background-color: $color_22;
+  border-radius: 10px;
+  color: $color_7;
   display: flex;
   align-items: center;
   justify-content: center;
-
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   p {
-    font-size: 14px;
-    color: $color_21;
+    font-size: 20px;
+    color: $color_7;
     line-height: 26px;
     letter-spacing: 1px;
     margin: 0;
-    font-weight: 600;
   }
   span {
-    font-size: 12px;
-    color: $color_21;
-  }
-  small {
-    font-weight: 600;
+    font-size: 16px;
+    color: $color_7;
   }
 }
  
@@ -282,12 +278,10 @@ $gradient-btn: linear-gradient(
 .balance-first {
   // background: linear-gradient(0deg, $color_45 0, $color_22);
   background: linear-gradient(0deg, $color_27 0, $color_27);
- 
 }
 .balance-up {
   // background: linear-gradient(0deg, $color_5 0, $color_47);
   background: linear-gradient(0deg, $color_27 0, $color_27);
- 
 }
  
 .balance-down {
@@ -333,29 +327,6 @@ $gradient-btn: linear-gradient(
   li {
     width: 100%;
   }
-
-  .btn {
-    text-align: start;
-    color: $color_7;
-    &:focus {
-      box-shadow: none;
-    }
-  }
-
-  .btn:hover {
-    color: $color_11;
-  }
-
-  .active {
-    .nav-link {
-      background-color: transparent;
-      color: $color_11;
-    }
-  }
-
-  .active .btn {
-    color: $color_11;
-  }
 }
 .fixed-sidebar {
   position: -webkit-sticky;
@@ -399,11 +370,10 @@ $gradient-btn: linear-gradient(
     vertical-align: middle;
     border-bottom: 1px solid $color_2;
     margin: 2px 0;
-    
-      .custom-ddl{
-        color: $color_7;
-      }
-    
+ 
+    .custom-ddl {
+      color: $color_7;
+    }
   }
   input {
     cursor: pointer;
@@ -429,21 +399,20 @@ $gradient-btn: linear-gradient(
     background: transparent;
     color: $color_7;
     border: 1px solid $color_28;
-
-    
   }
 }
-.form-control, .form-select {
+.form-control,
+.form-select {
   background: $color_21;
   color: $color_7;
   border: 1px solid $color_28;
-
-  &:focus{
+ 
+  &:focus {
     background: $color_21;
     color: $color_7;
   }
 }
-.btn.rounded-pill{
+.btn.rounded-pill {
   color: $color_7;
 }
 input:-webkit-autofill,
@@ -464,7 +433,7 @@ select:-webkit-autofill:focus {
 .tooltipnk {
   position: relative;
   // display: inline-block;
-  border-bottom: 1px solid $color_21;
+  border-bottom: 1px dotted $color_21;
   .tooltiptext {
     visibility: hidden;
     width: 170px;
@@ -544,7 +513,7 @@ select:-webkit-autofill:focus {
   line-height: 0;
   padding: 11px 2px;
   background-color: $color_31;
-  color: $color_7;
+  color: $color_21;
   border-radius: 50%;
   transition: 0.3s ease all;
 }
@@ -561,7 +530,7 @@ select:-webkit-autofill:focus {
   right: -28px;
   left: auto;
   background-color: $color_31;
-  color: $color_7;
+  color: $color_21;
 }
  
 #button-2 .checkbox:checked + .knobs:before {
@@ -760,7 +729,7 @@ select:-webkit-autofill:focus {
  
 .nav-link:focus,
 .nav-link:hover {
-  color: $color_7;
+  color: $color_27;
 }
  
 #loginregbg {
@@ -817,7 +786,7 @@ select:-webkit-autofill:focus {
  
 .modal {
   backdrop-filter: blur(3px);
-  .modal-content{
+  .modal-content {
     background-color: $color_21;
     color: $color_7;
   }
@@ -829,7 +798,7 @@ select:-webkit-autofill:focus {
 }
  
 .icon-pink {
-  color: $color_11;
+  color: $color_27;
 }
  
 .form-floating > .form-control:focus ~ label,
@@ -889,7 +858,6 @@ select:-webkit-autofill:focus {
 .btn:disabled,
 fieldset:disabled .btn {
   opacity: 0.3;
-  color: $color_21;
 }
  
 ::-webkit-scrollbar {
@@ -899,7 +867,7 @@ fieldset:disabled .btn {
  
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: $color_11;
+  background: $color_27;
 }
  
 ::-webkit-scrollbar-track {
@@ -965,7 +933,7 @@ tfoot tr {
 }
  
 .form-signin h3 {
-  color: $color_11;
+  color: $color_27;
 }
  
 //
@@ -1036,10 +1004,10 @@ tfoot tr {
 }
  
 // //////////
-
-.dashboard {
-  padding: 20px 0;
-}
+ 
+// .dashboard .border {
+//   border: 1px solid $color_27 !important;
+// }
 .searchList {
   ul {
     // border: 1px solid $color_22;
@@ -1057,7 +1025,7 @@ tfoot tr {
       }
  
       &:hover {
-        background-color: $color_21;
+        color: $color_27;
       }
     }
   }
@@ -1076,8 +1044,6 @@ input:focus {
   box-shadow: none;
   outline: none !important;
   border: 1px solid $color_22;
-  color: $color_7 !important;
-  box-shadow: none !important;
 }
  
 a {
@@ -1146,8 +1112,6 @@ a {
 }
  
 // below CSS is for Mafia specifically
- 
-
  
 .gamedetails {
   border: 1px solid $color_27;
@@ -1223,39 +1187,15 @@ $breakpoint-mobile: 767px;
 .fa-info {
   cursor: copy;
 }
-
-.bg-white{
+ 
+.bg-white {
   color: $color_21;
 }
 input[type="password"]:focus {
-  box-shadow: none !important;
+  box-shadow: none;
 }
-
+ 
 .modal-body {
   background-color: $color_21;
 }
-
-.input-group-text {
-  background-color: transparent;
-}
-
-.bg-white {
-  color: $color_7;
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
-}
-
-.mobile-menu {
-  border-right: 1px solid $color_11;
-}
-
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  /* Add your icon styles */
-  width: 20px; /* Adjust icon width */
-  height: 20px; /* Adjust icon height */
-  background-size: cover; /* Ensure the icon covers the area */
-  cursor: pointer; /* Show pointer cursor */
-  margin-left: -25px; /* Adjust icon position */
-  filter: brightness(1.3) sepia(2) saturate(4) hue-rotate(20deg);
-
-}
+ 

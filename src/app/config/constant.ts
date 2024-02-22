@@ -75,7 +75,9 @@ export class Constants {
     public readonly API_WINNING_SETTLEMENT: string = 'api/winning-settlement';
 
     public readonly API_CASINO_SETTLEMENT: string = 'api/casinoSettlement';
-    
+    public readonly API_BANK_SETTLEMENT: string = 'api/bankSettlement';
+    public readonly API_BANK_BULK_TRANSFER: string = 'api/bankBulkTransfer';
+    public readonly API_BANK_BANK_CASINO_SETTLEMENT: string = 'api/bankCasinoSettlement';
 
 
     //misc

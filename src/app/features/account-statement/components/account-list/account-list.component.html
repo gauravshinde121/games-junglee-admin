@@ -1,7 +1,41 @@
 <main id="main" class="main m-0">
   <section class="section dashboard">
     
-    
+    <div class="row align-items-center">
+      <h4 class="text-pink">
+        <img src="../../../../../assets/images/pnl.png" alt="" /> Account
+        List
+      </h4>
+
+      <div class="col-md-6 col-lg-6 col-xl-6 mt-2">
+        <div class="input-group flex-nowrap">
+          <span class="input-group-text bg-dark  border-pink radius-left-tb" id="addon-wrapping">
+            <i class="fa fa-search"></i>
+          </span>
+          <input type="text" class="form-control border-start-0 border-pink radius-right-tb"
+            placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping"
+            [(ngModel)]="searchTerm" (ngModelChange)="search()" />
+        </div>
+      </div>
+      <div class="col-md-3 col-lg-3 col-xl-2 mt-2">
+        <button *ngIf="selectedUserForAdjustment.length > 0" (click)="openBulkTransferModal()" type="button"
+          class="btn btn-pink radius-all">
+          <i class="fa fa-pen"></i> Bulk Transfer
+        </button>
+      </div>
+
+      <div class="col-md-12 col-lg-12 col-xl-2 text-end">
+        ( Total : {{ userList.length }} )
+      </div>
+
+      <div class="col-lg-1 col-md-3 col-3 text-end">
+        <button *ngIf="userList.length > 0" type="button" class="btn-sm btn-pink rounded-pill ms-2 "
+          (click)="exportExcel()">
+          Export
+        </button>
+      </div>
+    </div>
+
     <div class="row mt-3">
       <div class="col-md-12 overflow-auto">
         <div *ngIf="userList.length == 0" class="border text-center p-5">

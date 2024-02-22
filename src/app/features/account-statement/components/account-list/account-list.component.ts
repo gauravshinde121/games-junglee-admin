@@ -84,6 +84,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
   subjectSub !:Subscription;
 
   userIp = "";
+  fileName = 'Accountlist.xlsx';
 
 
 
@@ -298,7 +299,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
       this.userList = [];
     }
     let body = {
-      
+      searchName : this.searchTerm,
       pageNo: this.currentPage,
       limit: this.limit,
     };
@@ -814,5 +815,27 @@ getClTransfers(){
 
     console.log(this.clTransfers)
   })
+}
+
+exportExcel() {
+  let memberList: any = []
+  this.userList.forEach(element => {
+    memberList.push({
+
+      Username: element.username,
+      CreditLimit: element.creditLimit,
+      NetExposure: element.exposure,
+      Take: element.take,
+      Give: element.give,
+      AvailableCredit: element.availableCredit,
+      Status: element.isActive,
+    })
+  });
+  this._sharedService.exportExcel(memberList, this.fileName);
+}
+
+openBulkTransferModal() {
+  this.modalNumber = 1;
+  this.display = 'block';
 }
 }

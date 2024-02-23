@@ -17,11 +17,20 @@
             [(ngModel)]="searchTerm" (ngModelChange)="search()" />
         </div>
       </div>
-      <div class="col-md-3 col-lg-3 col-xl-2 mt-2">
-        <button *ngIf="selectedUserForAdjustment.length > 0" (click)="openBulkTransferModal()" type="button"
-          class="btn btn-pink radius-all">
-          <i class="fa fa-pen"></i> Bulk Transfer
-        </button>
+
+      <div class="col-lg-1 col-md-6 col-6 mt-2">
+        <!-- <div class="col-12">Show Entries</div> -->
+        <select
+          (change)="updateLimit($event)"
+          class="form-select-sm border-colour bg-dark rounded-3"
+        >
+          <!-- <option>25</option>
+          <option>50</option> -->
+          <option>100</option>
+          <option>150</option>
+          <option>200</option>
+          <option>250</option>
+        </select>
       </div>
 
       <div class="col-md-12 col-lg-12 col-xl-2 text-end">
@@ -362,6 +371,9 @@
                         autocomplete="off"
                         (input)="onAmountDepositChange($event)"
                       /> 
+                      <span class="small text-danger" *ngIf="winningDepositForm?.get('profitLoss_ref')?.value !== null && winningDepositForm?.get('profitLoss_ref')?.value !== undefined && winningDepositForm?.get('profitLoss_ref')?.value > 0">
+                        Enter valid amount
+                      </span>
                   </div>
                 </div>
 
@@ -385,7 +397,7 @@
                 <div class="col-md-6 text-end">
                   <button
                     (click)="postWinningsData(true)"
-                    
+                    [disabled]="winningDepositForm.invalid"
                     class="btn btn-pink rounded-pill w-80 mt-4"
                   >
                     Save
@@ -532,6 +544,9 @@
                         type="number"
                         autocomplete="off"
                       /> 
+                      <span class="small text-danger" *ngIf="winningWithdrawalForm?.get('profitLoss_ref')?.value !== null && winningWithdrawalForm?.get('profitLoss_ref')?.value !== undefined && winningWithdrawalForm?.get('profitLoss_ref')?.value < 0">
+                        Enter valid amount
+                      </span>
                   </div>
                 </div>
 
@@ -555,7 +570,7 @@
                 <div class="col-md-6 text-end">
                   <button
                     (click)="postWithdrawData(false)"
-                    
+                    [disabled]="winningWithdrawalForm.invalid"
                     class="btn btn-pink rounded-pill w-80 mt-4"
                   >
                     Save
@@ -685,6 +700,7 @@
                           autocomplete="off"
                           readonly
                         /> 
+                        
                     </div>
                     </div>
     
@@ -753,6 +769,10 @@
                               autocomplete="off"
                               (input)="onAmountChange($event)"
                             /> 
+
+                            <span class="text-danger small" *ngIf="creditDepositeForm?.get('refupline_credit')?.value !== null && creditDepositeForm?.get('refupline_credit')?.value !== undefined && creditDepositeForm?.get('refupline_credit')?.value < 0">
+                              Enter valid amount
+                            </span>
                         </div>
                       </div>
     
@@ -776,7 +796,7 @@
                       <div class="col-md-6 text-end">
                         <button
                           (click)="postData(true)"
-                          
+                          [disabled]="creditDepositeForm.invalid"
                           class="btn btn-pink rounded-pill w-80 mt-4"
                         >
                           Save
@@ -850,6 +870,7 @@
                             autocomplete="off"
                             readonly
                           /> 
+                          
                       </div>
                       </div>
     
@@ -893,7 +914,11 @@
                               autocomplete="off"
                               (input)="onAmountWithdrawalChange($event)"
                             /> 
+                            <span class="text-danger small" *ngIf="creditWithdrawForm?.get('refdownline_credit')?.value !== null && creditWithdrawForm?.get('refdownline_credit')?.value !== undefined && creditWithdrawForm?.get('refdownline_credit')?.value < 0">
+                              Enter valid amount
+                            </span>
                         </div>
+                        
                       </div>
     
                       <div class="row mb-4 align-items-center">
@@ -916,7 +941,7 @@
                       <div class="col-md-6 text-end">
                         <button
                         (click)="postWithdrawalData(false)"
-                          
+                          [disabled]="creditWithdrawForm.invalid"
                           class="btn btn-pink rounded-pill w-80 mt-4"
                         >
                           Save
@@ -942,10 +967,7 @@
 
               <div class="row mt-3">
                 <div class="col-md-12 overflow-auto">
-                  <div *ngIf="userList.length == 0" class="border text-center p-5">
-                    <h4 *ngIf="userList.length == 0 && !isLoading">No data found</h4>
-                    <h4 *ngIf="isLoading">Loading...</h4>
-                  </div>
+                  
                   <div class="table-responsive tableRes tableFixHead">
                     <table
                       #myTable
@@ -984,12 +1006,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <h1
+                        <!-- <h4
                           class="text-center"
                           *ngIf="clTransfers.length == 0 && !this.isLoading"
                         >
                           No Record Found
-                        </h1>
+                        </h4> -->
                         <tr
                           *ngFor="
                             let stmt of clTransfers | sort : sortColumn : sortAscending;
@@ -1012,6 +1034,18 @@
                         </tr>
                       </tbody>
                     </table>
+
+
+                    <div *ngIf="clTransfers.length == 0" class="border text-center p-5">
+                      <h4 *ngIf="clTransfers.length == 0 && !isLoading">No data found</h4>
+                      <!-- <h4 *ngIf="isLoading">Loading...</h4> -->
+                    </div>
+                    <!-- <h4
+                            class="text-center"
+                            *ngIf="clTransfers.length == 0 && !this.isLoading"
+                          >
+                            No Record Found
+                          </h4> -->
                   </div>
                 </div>
               </div>
@@ -1151,7 +1185,11 @@
                         autocomplete="off"
                         (input)="onCasinoAmountDepositChange($event)"
                       /> 
+                      <span class="small text-danger" *ngIf="winningCasinoDepositForm?.get('profitLoss_ref')?.value !== null && winningCasinoDepositForm?.get('profitLoss_ref')?.value !== undefined && winningCasinoDepositForm?.get('profitLoss_ref')?.value > 0">
+                        Enter valid amount
+                      </span>
                   </div>
+                  
                 </div>
 
                 <div class="row mb-4 align-items-center">
@@ -1174,7 +1212,7 @@
                 <div class="col-md-6 text-end">
                   <button
                     (click)="postCasinoDepositeData(true)"
-                    
+                    [disabled]="winningCasinoDepositForm.invalid"
                     class="btn btn-pink rounded-pill w-80 mt-4"
                   >
                     Save
@@ -1321,6 +1359,9 @@
                         autocomplete="off"
                         (input)="onCasinoAmountWithdrawChange($event)"
                       /> 
+                      <span class="text-danger small" *ngIf="winningCasinoWithdrawalForm?.get('profitLoss_ref')?.value !== null && winningCasinoWithdrawalForm?.get('profitLoss_ref')?.value !== undefined && winningCasinoWithdrawalForm?.get('profitLoss_ref')?.value < 0">
+                        Enter valid amount
+                      </span>
                   </div>
                 </div>
 
@@ -1344,7 +1385,7 @@
                 <div class="col-md-6 text-end">
                   <button
                     (click)="postCasinoWithdrawData(false)"
-                    
+                    [disabled]="winningCasinoWithdrawalForm.invalid"
                     class="btn btn-pink rounded-pill w-80 mt-4"
                   >
                     Save

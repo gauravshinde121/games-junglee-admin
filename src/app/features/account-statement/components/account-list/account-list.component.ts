@@ -196,7 +196,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
   createForms(){
     this.creditDepositeForm = this.formbuilder.group({
       upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.min(0)]),
       downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
@@ -209,7 +209,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
       upline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       refupline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.min(0)]),
       profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
@@ -223,7 +223,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
       downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.max(0)]),
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     })
@@ -235,7 +235,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
       downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.max(0)]),
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     })
@@ -246,7 +246,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
       downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.min(0)]),
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     })
@@ -258,7 +258,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
       downline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       refdownline_credit: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       profitLoss: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
-      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
+      profitLoss_ref: new FormControl(null, [(c: AbstractControl) => Validators.required(c),Validators.min(0)]),
       amount: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
       remark: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
     })
@@ -313,7 +313,7 @@ export class AccountListComponent implements OnInit , OnDestroy {
       this.totalCasino = this.userList.reduce((acc, crnt) => acc + crnt.casinoWinnings, 0);
       this.totalTake = this.userList.reduce((acc, crnt) => acc + crnt.take, 0);
       this.totalGive = this.userList.reduce((acc, crnt) => acc + crnt.give, 0);
-      this.totalPages = Math.ceil(users.memberData.filteredRecords / this.pageSize);
+      this.totalPages = Math.ceil(users.memberData.totalMembers / this.pageSize);
       this.totalMembers = users.memberData.totalMembers;
     });
   }
@@ -341,11 +341,11 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
   onCreditDepositOpen(){
     this.creditDepositeForm.patchValue({
-      upline_credit : this.adminDetails.availableCredit,
-      refupline_credit : this.adminDetails.availableCredit,
-      downline_credit : this.userData.availableCredit,
-      refdownline_credit : this.userData.availableCredit,
-      profitLoss : this.userData.winnings,
+      upline_credit : this.adminDetails?.availableCredit,
+      refupline_credit : this.adminDetails?.availableCredit,
+      downline_credit : this.userData?.availableCredit,
+      refdownline_credit : this.userData?.availableCredit,
+      profitLoss : this.userData?.winnings,
       remark:null
     })
   }
@@ -353,56 +353,56 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
   onWinningDepositOpen(){
     this.winningDepositForm.patchValue({
-      upline_credit : this.adminDetails.availableCredit,
-      refupline_credit : this.adminDetails.availableCredit,
-      downline_credit : this.userData.availableCredit,
-      refdownline_credit : this.userData.availableCredit,
-      profitLoss : this.userData.winnings,
-      profitLoss_ref : this.userData.winnings
+      upline_credit : this.adminDetails?.availableCredit,
+      refupline_credit : this.adminDetails?.availableCredit,
+      downline_credit : this.userData?.availableCredit,
+      refdownline_credit : this.userData?.availableCredit,
+      profitLoss : this.userData?.winnings,
+      profitLoss_ref : this.userData?.winnings
     })
   }
 
 
   onWinningCasinoDepositOpen(){
     this.winningCasinoDepositForm.patchValue({
-      upline_credit : this.adminDetails.availableCredit,
-      refupline_credit : this.adminDetails.availableCredit,
-      downline_credit : this.userData.availableCredit,
-      refdownline_credit : this.userData.availableCredit,
-      profitLoss : this.userData.casinoWinnings,
-      profitLoss_ref : this.userData.casinoWinnings
+      upline_credit : this.adminDetails?.availableCredit,
+      refupline_credit : this.adminDetails?.availableCredit,
+      downline_credit : this.userData?.availableCredit,
+      refdownline_credit : this.userData?.availableCredit,
+      profitLoss : this.userData?.casinoWinnings,
+      profitLoss_ref : this.userData?.casinoWinnings
     })
   }
 
   onWinningWithdrawalOpen(){
     this.winningWithdrawalForm.patchValue({
-      upline_credit : this.adminDetails.availableCredit,
-      refupline_credit : this.adminDetails.availableCredit,
-      downline_credit : this.userData.availableCredit,
-      refdownline_credit : this.userData.availableCredit,
-      profitLoss : this.userData.winnings,
-      profitLoss_ref : this.userData.winnings
+      upline_credit : this.adminDetails?.availableCredit,
+      refupline_credit : this.adminDetails?.availableCredit,
+      downline_credit : this.userData?.availableCredit,
+      refdownline_credit : this.userData?.availableCredit,
+      profitLoss : this.userData?.winnings,
+      profitLoss_ref : this.userData?.winnings
     })
   }
 
   onWinningCasinoWithdrawalOpen(){
     this.winningCasinoWithdrawalForm.patchValue({
-      upline_credit : this.adminDetails.availableCredit,
-      refupline_credit : this.adminDetails.availableCredit,
-      downline_credit : this.userData.availableCredit,
-      refdownline_credit : this.userData.availableCredit,
-      profitLoss : this.userData.casinoWinnings,
-      profitLoss_ref : this.userData.casinoWinnings,
+      upline_credit : this.adminDetails?.availableCredit,
+      refupline_credit : this.adminDetails?.availableCredit,
+      downline_credit : this.userData?.availableCredit,
+      refdownline_credit : this.userData?.availableCredit,
+      profitLoss : this.userData?.casinoWinnings,
+      profitLoss_ref : this.userData?.casinoWinnings,
     })
   }
 
   onCreditWithdrawalOpen(){
     this.creditWithdrawForm.patchValue({
-      upline_credit : this.adminDetails.availableCredit,
-      refupline_credit : this.adminDetails.availableCredit,
-      downline_credit : this.userData.availableCredit,
-      refdownline_credit : this.userData.availableCredit,
-      profitLoss : this.userData.winnings
+      upline_credit : this.adminDetails?.availableCredit,
+      refupline_credit : this.adminDetails?.availableCredit,
+      downline_credit : this.userData?.availableCredit,
+      refdownline_credit : this.userData?.availableCredit,
+      profitLoss : this.userData?.winnings
     })
   }
 
@@ -455,16 +455,16 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
       // Update the form values
       this.creditDepositeForm.patchValue({
-        refupline_credit: refupline_credit,
-        refdownline_credit: refdownline_credit,
+        refupline_credit: refupline_credit.toFixed(2),
+        refdownline_credit: refdownline_credit.toFixed(2),
         amount:amount
       });
     } else {
       // Handle the case when the input value is not a valid number
       // For example, reset the form field or display an error message
       this.creditDepositeForm.patchValue({
-        refupline_credit: this.adminDetails.availableCredit,
-        refdownline_credit: this.userData.availableCredit,
+        refupline_credit: this.adminDetails.availableCredit.toFixed(2),
+        refdownline_credit: this.userData.availableCredit.toFixed(2),
         amount:null
       });
     }
@@ -486,8 +486,8 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
       // Update the form values
       this.winningDepositForm.patchValue({
-        refupline_credit:refupline_credit,
-        refdownline_credit:refdownline_credit,
+        refupline_credit:refupline_credit.toFixed(2),
+        refdownline_credit:refdownline_credit.toFixed(2),
         profitLoss_ref: +profitLoss_ref.toFixed(2),
         amount:amount
       });
@@ -495,9 +495,9 @@ export class AccountListComponent implements OnInit , OnDestroy {
       // Handle the case when the input value is not a valid number
       // For example, reset the form field or display an error message
       this.winningDepositForm.patchValue({
-        profitLoss_ref: this.userData.winnings,
-        refupline_credit: this.adminDetails.availableCredit,
-        refdownline_credit: this.userData.availableCredit,
+        profitLoss_ref: this.userData.winnings.toFixed(2),
+        refupline_credit: this.adminDetails.availableCredit.toFixed(2),
+        refdownline_credit: this.userData.availableCredit.toFixed(2),
         amount:null
       });
     }
@@ -517,16 +517,16 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
       // Update the form values
       this.creditWithdrawForm.patchValue({
-        refupline_credit: refupline_credit,
-        refdownline_credit: refdownline_credit,
+        refupline_credit: refupline_credit.toFixed(2),
+        refdownline_credit: refdownline_credit.toFixed(2),
         amount:amount
       });
     } else {
       // Handle the case when the input value is not a valid number
       // For example, reset the form field or display an error message
       this.creditWithdrawForm.patchValue({
-        refupline_credit: this.adminDetails.availableCredit,
-        refdownline_credit: this.userData.availableCredit,
+        refupline_credit: this.adminDetails.availableCredit.toFixed(2),
+        refdownline_credit: this.userData.availableCredit.toFixed(2),
         amount:null
       });
     }
@@ -549,17 +549,17 @@ export class AccountListComponent implements OnInit , OnDestroy {
       // Update the form values
       this.winningWithdrawalForm.patchValue({
         profitLoss_ref: +profitLoss_ref.toFixed(2),
-        refupline_credit: refupline_credit,
-        refdownline_credit: refdownline_credit,
+        refupline_credit: refupline_credit.toFixed(2),
+        refdownline_credit: refdownline_credit.toFixed(2),
         amount:amount
       });
     } else {
       // Handle the case when the input value is not a valid number
       // For example, reset the form field or display an error message
       this.winningWithdrawalForm.patchValue({
-        profitLoss_ref:this.userData.winnings,
-        refupline_credit: this.adminDetails.availableCredit,
-        refdownline_credit: this.userData.availableCredit,
+        profitLoss_ref:this.userData.winnings.toFixed(2),
+        refupline_credit: this.adminDetails.availableCredit.toFixed(2),
+        refdownline_credit: this.userData.availableCredit.toFixed(2),
         amount:null
       });
     }
@@ -580,8 +580,8 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
       // Update the form values
       this.winningCasinoDepositForm.patchValue({
-        refupline_credit:refupline_credit,
-        refdownline_credit:refdownline_credit,
+        refupline_credit:refupline_credit.toFixed(2),
+        refdownline_credit:refdownline_credit.toFixed(2),
         profitLoss_ref: +profitLoss_ref.toFixed(2),
         amount:amount
       });
@@ -589,9 +589,9 @@ export class AccountListComponent implements OnInit , OnDestroy {
       // Handle the case when the input value is not a valid number
       // For example, reset the form field or display an error message
       this.winningCasinoDepositForm.patchValue({
-        profitLoss_ref: this.userData.casinoWinnings,
-        refupline_credit: this.adminDetails.availableCredit,
-        refdownline_credit: this.userData.availableCredit,
+        profitLoss_ref: this.userData.casinoWinnings.toFixed(2),
+        refupline_credit: this.adminDetails.availableCredit.toFixed(2),
+        refdownline_credit: this.userData.availableCredit.toFixed(2),
         amount:null
       });
     }
@@ -612,8 +612,8 @@ export class AccountListComponent implements OnInit , OnDestroy {
 
       // Update the form values
       this.winningCasinoWithdrawalForm.patchValue({
-        refupline_credit:refupline_credit,
-        refdownline_credit:refdownline_credit,
+        refupline_credit:refupline_credit.toFixed(2),
+        refdownline_credit:refdownline_credit.toFixed(2),
         profitLoss_ref: +profitLoss_ref.toFixed(2),
         amount:amount
       });
@@ -621,9 +621,9 @@ export class AccountListComponent implements OnInit , OnDestroy {
       // Handle the case when the input value is not a valid number
       // For example, reset the form field or display an error message
       this.winningCasinoWithdrawalForm.patchValue({
-        profitLoss_ref: this.userData.casinoWinnings,
-        refupline_credit: this.adminDetails.availableCredit,
-        refdownline_credit: this.userData.availableCredit,
+        profitLoss_ref: this.userData.casinoWinnings.toFixed(2),
+        refupline_credit: this.adminDetails.availableCredit.toFixed(2),
+        refdownline_credit: this.userData.availableCredit.toFixed(2),
         amount:null
       });
     }
@@ -837,5 +837,11 @@ exportExcel() {
 openBulkTransferModal() {
   this.modalNumber = 1;
   this.display = 'block';
+}
+
+updateLimit(event) {
+  this.limit = parseInt(event.target.value);
+  this.pageSize = this.limit;
+  this.refreshCall();
 }
 }

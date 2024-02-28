@@ -173,7 +173,7 @@ export class MyAccountStatementComponent implements OnInit {
     this.plStatement.forEach(element => {
       console.log("pl",element);
       pL.push({
-        Date :  moment(element.createdAt).format("MMM D, YYYY, h:mm:ss a"),
+        Date :  moment(element.date).format("MMM D, YYYY, h:mm:ss a"),
         Credit: element.credit,
         Debit:element.debit,
         Balance : element.balance,

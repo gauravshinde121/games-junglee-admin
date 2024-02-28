@@ -32,7 +32,7 @@ export class MyAccountStatementComponent implements OnInit {
   marketTypeId: any = null;
   //currentTotalPage:any;
 
-  fileName= 'P/L Statement.xlsx';
+  fileName= 'Account_Statement.xlsx';
 
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
@@ -142,8 +142,8 @@ export class MyAccountStatementComponent implements OnInit {
     this._accountStatementService._getAdminAccountStatementApi(payload).subscribe((res: any) => {
       this.isLoading = false;
       console.log(res)
-      this.plStatement = res.admin.finalResult;
-      this.totalPages = Math.ceil(res.admin.totalNoOfRecords / this.pageSize);
+      this.plStatement = res.accountStatement;
+      this.totalPages = Math.ceil(res.totalRecords / this.pageSize);
     
     },(err)=>{
       this._sharedService.getToastPopup("Internal server error","","error")
@@ -171,16 +171,14 @@ export class MyAccountStatementComponent implements OnInit {
   exportExcel(){
     let pL : any = []
     this.plStatement.forEach(element => {
+      console.log("pl",element);
       pL.push({
         Date :  moment(element.createdAt).format("MMM D, YYYY, h:mm:ss a"),
-        Game: element.gameName,
-        SubGame:element.subGame,
-        Event : element.eventName,
-        Win_Loss :element.win,
-        Commision:element.commission,
-        NetAmount:element.netAmount,
-        UserCount:element.userCount,
-        BetCount:element.userBetCount
+        Credit: element.credit,
+        Debit:element.debit,
+        Balance : element.balance,
+        Remark :element.remark,
+        
       })
     });
     this._sharedService.exportExcel(pL,this.fileName);

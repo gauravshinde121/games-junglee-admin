@@ -151,7 +151,7 @@ $gradient-btn: linear-gradient(
   padding: 10px;
   background: rgb(0 0 0 / 8%);
   margin-top: 30px;
-  color: $color_21;
+  color: $color_7;
  
   a {
     text-decoration: none;
@@ -159,7 +159,7 @@ $gradient-btn: linear-gradient(
   .btn {
     font-size: 16px;
     padding: 3px 4px;
-    color: $color_21;
+    color: $color_7 !important;
   }
   .form-control {
     line-height: 2.5;
@@ -724,10 +724,14 @@ select:-webkit-autofill:focus {
 .pointer {
   cursor: pointer;
 }
+
+.nav-pills .nav-link {
+  color: unset;
+}
  
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: $color_21;
+  color: $color_7;
   background: $gradient-btn;
 }
  
@@ -754,6 +758,7 @@ select:-webkit-autofill:focus {
   background-color: $color_21;
   padding-top: 2%;
   height: 100vh;
+  color: $color_7;
 }
  
 @keyframes color {

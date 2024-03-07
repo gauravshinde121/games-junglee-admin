@@ -1,35 +1,23 @@
 <div class="row align-items-center mb-2 mt-2 ">
   <div class="col-lg-2 col-md-6 col-6">
     <div class="toggle-sidebar-btn d-flex align-items-center">
-      <a
-        (click)="toggleMenu()"
-        class="navbar-toggler bg-color px-1 mx-0"
-        type="button"
-      >
+      <a (click)="toggleMenu()" class="navbar-toggler bg-color px-1 mx-0" type="button">
         <i class="fa fa-bars-staggered"></i>
       </a>
- 
-      <a
-        [routerLink]="['member/list']"
-        routerLinkActive="router-link-active"
-        class=" d-block ms-3"
-      >
-        <!-- <img src="/assets/images/logo.svg" alt="" class="head_logo"/> -->
- 
-        <img src="assets/images/mafia_logo.png" width="60px" /><br>
-        <span class="text-center m-0 text-light" style="font-size: 15px;font-family:math; letter-spacing:2px">MAFIA</span><span style="color: #366dbd; font-size: 15px;font-family:math;letter-spacing:2px">SPORTS</span>
-        <p class="text-center m-0 text-light" style="font-size: 9px;">BETTING UNLIMITED</p>
+
+      <a [routerLink]="['member/list']" routerLinkActive="router-link-active" class=" d-block ms-3">
+        <!-- <img src="assets/images/mafia_logo.png" width="60px" /><br> -->
+        <span class="text-center m-0 "
+          style="font-size: 15px;font-family:math; letter-spacing:2px">PARAB</span><span
+          style="color: #366dbd; font-size: 15px;font-family:math;letter-spacing:2px">111</span>
       </a>
     </div>
   </div>
   <div class="col-md-8 col-8 smallMobileHide">
     <div class="row">
-      <div
-        class="mb-2 mb-md-2"
-        [ngClass]="
+      <div class="mb-2 mb-md-2" [ngClass]="
           clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-4 col-6'
-        "
-      >
+        ">
         <div class="balance-first">
           <div class="balance">
             <p>
@@ -40,11 +28,9 @@
           </div>
         </div>
       </div>
-      <div
-        [ngClass]="
+      <div [ngClass]="
           clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-4 col-6'
-        "
-      >
+        ">
         <div class="balance-up">
           <div class="balance">
             <p>
@@ -56,11 +42,9 @@
           </div>
         </div>
       </div>
-      <div
-        [ngClass]="
+      <div [ngClass]="
           clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-4 col-6'
-        "
-      >
+        ">
         <div class="balance-down">
           <div class="balance">
             <p>
@@ -72,20 +56,16 @@
           </div>
         </div>
       </div>
-      <div
-        *ngIf="clientId == 1 || clientId == 3"
-        [ngClass]="
+      <div *ngIf="clientId == 1 || clientId == 3" [ngClass]="
           clientId == 1 || clientId == 3 ? 'col-md-3 col-6' : 'col-md-3 col-6'
-        "
-      >
+        ">
         <div class="casino-summary">
           <div class="balance">
             <div class="row text-center m-0">
               <div class="col-4">
                 <p>
                   <span>
-                    {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span
-                  >
+                    {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span>
                 </p>
                 <small>UP</small>
               </div>
@@ -121,7 +101,7 @@
       </a>-->
     </div>
   </div>
- 
+
   <div class="col-md-12 smallMobileShow mt-3">
     <div class="row">
       <div class="col-md-3 col-6 mb-2 mb-md-2">
@@ -166,12 +146,10 @@
               <p>
                 <span class="f-13">
                   BALANCE UP
-                  {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span
-                >
+                  {{ adminDetails?.casinoBalanceUp | indianCurrency }}</span>
               </p>
               <p>
-                <span class="f-13"
-                  >BALANCE DOWN
+                <span class="f-13">BALANCE DOWN
                   {{ adminDetails?.casinoBalanceDown | indianCurrency }}
                 </span>
               </p>

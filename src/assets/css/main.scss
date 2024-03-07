@@ -29,7 +29,7 @@ $color_23: #a7d8fd;
 $color_24: #f9c9d4;
 $color_25: rgba(38, 38, 38, 0.63);
 $color_26: #cd212f;
-$color_27: #396cbc;
+$color_27: #0AA40A;
 $color_28: #a6a6a657;
 $color_29: #a6a6a6;
 $color_30: #ebf7fc;
@@ -56,22 +56,22 @@ $color_50: #dee2e6;
 $color_51: #bd362f;
 $gradient-btn: linear-gradient(
   to right top,
-  #396cbc,
-  #366dbd,
-  #326ebe,
-  #2e6fbe,
-  #2a70bf,
-  #2379c6,
-  #1d82cc,
-  #188bd2,
-  #1f9ede,
-  #31b1e9,
-  #47c4f2,
-  #5fd7fb
+  #0AA40A,
+  #0AA40A,
+  #0AA40A,
+  #0AA40A,
+  #0AA40A,
+  #0AA40A,
+  #0AA40A,
+  #0AA40A,
+  #0AA40A,
+  #0AA40A,
+  #0AA40A,
+  #0AA40A
 );
  
 .browncolor {
-  background-color: $color_21;
+  background-color: $color_7;
 }
  
 .border-pink {
@@ -79,12 +79,13 @@ $gradient-btn: linear-gradient(
 }
 .bg-pink {
   background-image: $gradient-btn;
+  color: $color_7;
 }
 .btn-pink {
   transition: all 0.2s ease-in;
   transform: scale(1);
   border: none;
-  color: $color_7;
+  color: $color_7 !important;
   border-radius: 25px;
   font-size: 0.75rem;
   background-image: $gradient-btn;
@@ -97,7 +98,7 @@ $gradient-btn: linear-gradient(
   // justify-content: space-around;
  
   &:hover {
-    color: $color_21;
+    color: $color_7;
     transition: all 0.2s ease-in;
     transform: scale(1.01);
   }
@@ -114,7 +115,7 @@ $gradient-btn: linear-gradient(
   color: $color_3;
   border-color: $color_3;
   &:hover {
-    color: $color_21;
+    color: $color_7;
     background-color: $color_3;
     border-color: $color_3;
   }
@@ -135,7 +136,7 @@ $gradient-btn: linear-gradient(
   background-color: $color_20;
   border: none;
   border-bottom: 0.5px solid $color_12;
-  color: $color_7;
+  color: $color_21;
   border-radius: 0;
 }
 .radioselected {
@@ -150,7 +151,7 @@ $gradient-btn: linear-gradient(
   padding: 10px;
   background: rgb(0 0 0 / 8%);
   margin-top: 30px;
-  color: $color_7;
+  color: $color_21;
  
   a {
     text-decoration: none;
@@ -158,7 +159,7 @@ $gradient-btn: linear-gradient(
   .btn {
     font-size: 16px;
     padding: 3px 4px;
-    color: $color_7;
+    color: $color_21;
   }
   .form-control {
     line-height: 2.5;
@@ -214,7 +215,7 @@ $gradient-btn: linear-gradient(
   // padding: 20px 10px;
   // padding: 20px 0;
   transition: all 0.3s;
-  color: $color_7;
+  color: $color_21;
 }
 /********** main end ************/
 /********** header start ************/
@@ -300,7 +301,7 @@ $gradient-btn: linear-gradient(
 // balance up/Down end
  
 .user {
-  color: $color_7;
+  color: $color_21;
 }
 /********** header end ************/
 /********** Sidebar start ************/
@@ -314,12 +315,12 @@ $gradient-btn: linear-gradient(
   scrollbar-color: #aab7cf transparent;
  
   .nav-link {
-    color: $color_7;
+    color: $color_21;
   }
   &::-webkit-scrollbar {
     width: 5px;
     height: 8px;
-    background-color: $color_7;
+    background-color: $color_21;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $color_8;
@@ -344,7 +345,7 @@ $gradient-btn: linear-gradient(
 /********** table pro start ************/
 .tableall {
   border-radius: 15px;
-  color: $color_7;
+  color: $color_21;
   white-space: nowrap;
   thead {
     tr {
@@ -372,7 +373,7 @@ $gradient-btn: linear-gradient(
     margin: 2px 0;
  
     .custom-ddl {
-      color: $color_7;
+      color: $color_21;
     }
   }
   input {
@@ -388,32 +389,35 @@ $gradient-btn: linear-gradient(
   background: transparent;
   .form-select {
     appearance: button;
-    color: $color_7;
+    color: $color_21;
     border: 1px solid $color_28;
-    background: $color_21;
+    background: $color_7;
   }
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
   .form-control {
     background: transparent;
-    color: $color_7;
+    color: $color_21;
     border: 1px solid $color_28;
   }
 }
 .form-control,
 .form-select {
-  background: $color_21;
-  color: $color_7;
+  background: $color_7;
+  color: $color_21;
   border: 1px solid $color_28;
  
   &:focus {
-    background: $color_21;
-    color: $color_7;
+    background: $color_7;
+    color: $color_21;
+    box-shadow: none;
+    outline: none;
+    border: 1px solid $color_28;
   }
 }
 .btn.rounded-pill {
-  color: $color_7;
+  color: $color_21;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -433,7 +437,7 @@ select:-webkit-autofill:focus {
 .tooltipnk {
   position: relative;
   // display: inline-block;
-  border-bottom: 1px dotted $color_21;
+  border-bottom: 1px dotted $color_7;
   .tooltiptext {
     visibility: hidden;
     width: 170px;
@@ -513,7 +517,7 @@ select:-webkit-autofill:focus {
   line-height: 0;
   padding: 11px 2px;
   background-color: $color_31;
-  color: $color_21;
+  color: $color_7;
   border-radius: 50%;
   transition: 0.3s ease all;
 }
@@ -530,7 +534,7 @@ select:-webkit-autofill:focus {
   right: -28px;
   left: auto;
   background-color: $color_31;
-  color: $color_21;
+  color: $color_7;
 }
  
 #button-2 .checkbox:checked + .knobs:before {
@@ -553,12 +557,12 @@ select:-webkit-autofill:focus {
     vertical-align: middle;
     padding: 2px 5px;
     text-align: center;
-    border-top: 2px solid $color_7;
+    border-top: 2px solid $color_21;
     font-size: 11px;
     line-height: 13px;
   }
   a {
-    color: $color_21;
+    color: $color_7;
     text-decoration: none;
     display: block;
     font-size: 14px;
@@ -609,7 +613,7 @@ select:-webkit-autofill:focus {
   //color box start
   .colblue {
     background: linear-gradient(0deg, $color_36 0, $color_37);
-    border-left: 1px solid $color_7;
+    border-left: 1px solid $color_21;
   }
   .colblue.light {
     background-color: $color_33 !important;
@@ -619,7 +623,7 @@ select:-webkit-autofill:focus {
   }
   .colpink {
     background: linear-gradient(0deg, $color_34 0, $color_35);
-    border-left: 1px solid $color_7;
+    border-left: 1px solid $color_21;
   }
   .colpink.light {
     background-color: $color_17 !important;
@@ -631,7 +635,7 @@ select:-webkit-autofill:focus {
   }
   .colgray {
     background-color: $color_19 !important;
-    border-left: 1px solid $color_7;
+    border-left: 1px solid $color_21;
   }
   .colpink.last {
     border-bottom-right-radius: 15px;
@@ -654,7 +658,7 @@ select:-webkit-autofill:focus {
 }
 .ipdetail {
   .dbg {
-    background: $color_21;
+    background: $color_7;
   }
  
   p {
@@ -700,7 +704,7 @@ select:-webkit-autofill:focus {
     margin-right: 10px;
  
     .nav-link {
-      border: 1px solid $color_7;
+      border: 1px solid $color_21;
     }
  
     .nav-link:hover {
@@ -709,7 +713,7 @@ select:-webkit-autofill:focus {
     }
  
     .nav-link.active {
-      color: $color_7;
+      color: $color_21;
     }
   }
 }
@@ -723,7 +727,7 @@ select:-webkit-autofill:focus {
  
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: $color_7;
+  color: $color_21;
   background: $gradient-btn;
 }
  
@@ -765,7 +769,7 @@ select:-webkit-autofill:focus {
 .sidebar {
   .btn {
     text-align: start;
-    color: $color_7;
+    color: $color_21;
   }
   .active .nav-link,
   .btn:hover {
@@ -780,15 +784,15 @@ select:-webkit-autofill:focus {
  
 .bg-dark_new,
 .bg-dark {
-  background-color: $color_21 !important;
-  color: $color_7;
+  background-color: $color_7 !important;
+  color: $color_21;
 }
  
 .modal {
   backdrop-filter: blur(3px);
   .modal-content {
-    background-color: $color_21;
-    color: $color_7;
+    background-color: $color_7;
+    color: $color_21;
   }
 }
  
@@ -810,7 +814,7 @@ select:-webkit-autofill:focus {
  
 .suspendedm1 {
   background: $color_25;
-  color: $color_7;
+  color: $color_21;
   border-radius: 35px;
   // padding: 14px 5px;
   padding: 7px 5px;
@@ -871,7 +875,7 @@ fieldset:disabled .btn {
 }
  
 ::-webkit-scrollbar-track {
-  background-color: $color_21;
+  background-color: $color_7;
 }
  
 tfoot td {
@@ -886,7 +890,7 @@ tfoot tr {
   /* border: 1px solid; */
   position: sticky;
   bottom: 0;
-  background: $color_21;
+  background: $color_7;
 }
  
 .net-exposure_scroll {
@@ -970,7 +974,7 @@ tfoot tr {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: $color_7;
+  background-color: $color_21;
   transition: 0.4s;
   border-radius: 50%;
 }
@@ -1048,7 +1052,11 @@ input:focus {
  
 a {
   text-decoration: none;
-  color: $color_7;
+  color: $color_21;
+
+  &:hover{
+    color: $color_21;
+  }
 }
  
 @media (min-width: 769px) {
@@ -1117,7 +1125,7 @@ a {
   border: 1px solid $color_27;
 }
 .navbar-brand {
-  color: $color_7 !important;
+  color: $color_21 !important;
   font-family: "FontAwesome";
   letter-spacing: 2px;
   font-size: 16px;
@@ -1189,13 +1197,13 @@ $breakpoint-mobile: 767px;
 }
  
 .bg-white {
-  color: $color_21;
+  color: $color_7;
 }
 input[type="password"]:focus {
   box-shadow: none;
 }
  
 .modal-body {
-  background-color: $color_21;
+  background-color: $color_7;
 }
  

@@ -460,7 +460,7 @@
           id="settings-collapse"
         >
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li
+            <li *ngIf="adminDetails?.refClientid != 5"
               [routerLinkActive]="
                 currentPath == '/settings/balance' ? 'active' : ''
               "

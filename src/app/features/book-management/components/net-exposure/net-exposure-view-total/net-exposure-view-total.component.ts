@@ -29,7 +29,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   realDataWebSocket: any;
   realCustomDataWebSocket: any = webSocket(environment.oddsSocketUrl);
   myPT: boolean = false;
-  refreshCount: number = 8;
+  refreshCount: number = 1;
   resetTimerInterval: any;
   totalBooks: any = [];
   isTVEnable: boolean = false;
@@ -59,7 +59,7 @@ export class NetExposureViewTotalComponent implements OnInit {
     this.resetTimerInterval = setInterval(() => {
       if (this.refreshCount == 0) {
         this.refreshCall();
-        this.refreshCount = 9;
+        this.refreshCount = 1;
       }
       this.refreshCount--;
     }, 1000);

@@ -24,7 +24,7 @@ export class NetExposureComponent implements OnInit {
   currentClicked: any;
 
   loggedInUser: any;
-  refreshCount: number = 8;
+  refreshCount: number = 1;
   resetTimerInterval: any;
   bookObj: any = [];
   isMobileView = false;
@@ -51,7 +51,7 @@ export class NetExposureComponent implements OnInit {
     this.resetTimerInterval = setInterval(() => {
       if (this.refreshCount == 0) {
         this.refreshCall();
-        this.refreshCount = 9;
+        this.refreshCount = 1;
       }
       this.refreshCount--;
     }, 1000)
@@ -106,7 +106,7 @@ export class NetExposureComponent implements OnInit {
     })
   }
 
- 
+
 
   onFilterChange(filterObj) {
     this.MyPT = filterObj.selectedType == 'MyPT' ? true : false;

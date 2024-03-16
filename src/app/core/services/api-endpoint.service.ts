@@ -192,12 +192,7 @@ export class ApiEndpointsService {
   }
 
   public getAdjustWinningsEndpoint():string{
-    if(environment.clientId == 1 || environment.clientId == 2 || environment.clientId == 3 ) {
       return this.createUrl(this._constants.API_BANK_BULK_TRANSFER);
-    }
-    else {
-      return this.createUrl(this._constants.API_URL_ADJUST_WINNINGS);
-    }
     
   }
 
@@ -432,11 +427,7 @@ export class ApiEndpointsService {
   }
 
   public adjustWinningsForSingleUserEndpoint(){
-    if(environment.clientId == 1 || environment.clientId == 2 || environment.clientId == 3) {
       return this.createUrl(this._constants.API_BANK_SETTLEMENT)
-    }else {
-      return this.createUrl(this._constants.API_URL_ADJUST_WINNING_FOR_SINGLE_USER)
-    }
   }
 
   public deleteBetEndpoint(){
@@ -501,12 +492,7 @@ export class ApiEndpointsService {
 
 
   public getAdjustCasinoEndpoint(){
-    if(environment.clientId == 1 || environment.clientId == 2 || environment.clientId == 3) {
       return this.createUrl(this._constants.API_BANK_BANK_CASINO_SETTLEMENT)
-    }
-    else {
-      return this.createUrl(this._constants.API_GET_ADJUST_CASINO_AMOUNT)
-    }
   }
 
 

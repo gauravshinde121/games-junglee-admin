@@ -538,9 +538,240 @@ export class NetExposureViewTotalComponent implements OnInit {
                 }
               }
             } else if (
-              singleBook['marketTypName'] == 'Bookmaker' ||
-              singleBook['marketTypName'] == 'Fancy'
-            ) {
+              singleBook['marketTypName'] == 'Bookmaker') {
+              let webSocketRunners = _.filter(
+                singleWebSocketMarketData?.['rt'],
+                ['ri', runnerRes['SelectionId'].toString()]
+              );
+
+              for (let singleWebsocketRunner of webSocketRunners) {
+                if (singleWebsocketRunner['ib']) {
+                  //back
+
+                  //Live Rate
+                  runnerRes['back1'] = singleWebsocketRunner['rt'];
+
+                  //Volume from Betfair
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
+                    runnerRes['vback1'] = singleWebsocketRunner['bv'];
+                  } else {
+                    runnerRes['vback1'] = singleWebsocketRunner['pt'];
+                  }
+                } else {
+                  //lay
+
+                  //Live Rate
+                  runnerRes['lay1'] = singleWebsocketRunner['rt'];
+
+                  //Volume from Betfair
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
+                    runnerRes['vlay1'] = singleWebsocketRunner['bv'];
+                  } else {
+                    runnerRes['vlay1'] = singleWebsocketRunner['pt'];
+                  }
+
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
+                    if (runnerRes['back1'] == runnerRes['lay1']) {
+                      runnerRes['showSuspended'] = true;
+                    } else {
+                      runnerRes['showSuspended'] = false;
+
+                      if (
+                        Math.ceil((runnerRes['lay1'] - 1) * 100) > 99 ||
+                        Math.ceil((runnerRes['back1'] - 1) * 100) > 99
+                      ) {
+                        runnerRes['showSuspended'] = true;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            else if (singleBook['marketTypName'] == 'Fancy') {
+              let webSocketRunners = _.filter(
+                singleWebSocketMarketData?.['rt'],
+                ['ri', runnerRes['SelectionId'].toString()]
+              );
+
+              for (let singleWebsocketRunner of webSocketRunners) {
+                if (singleWebsocketRunner['ib']) {
+                  //back
+
+                  //Live Rate
+                  runnerRes['back1'] = singleWebsocketRunner['rt'];
+
+                  //Volume from Betfair
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
+                    runnerRes['vback1'] = singleWebsocketRunner['bv'];
+                  } else {
+                    runnerRes['vback1'] = singleWebsocketRunner['pt'];
+                  }
+                } else {
+                  //lay
+
+                  //Live Rate
+                  runnerRes['lay1'] = singleWebsocketRunner['rt'];
+
+                  //Volume from Betfair
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
+                    runnerRes['vlay1'] = singleWebsocketRunner['bv'];
+                  } else {
+                    runnerRes['vlay1'] = singleWebsocketRunner['pt'];
+                  }
+
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
+                    if (runnerRes['back1'] == runnerRes['lay1']) {
+                      runnerRes['showSuspended'] = true;
+                    } else {
+                      runnerRes['showSuspended'] = false;
+
+                      if (
+                        Math.ceil((runnerRes['lay1'] - 1) * 100) > 99 ||
+                        Math.ceil((runnerRes['back1'] - 1) * 100) > 99
+                      ) {
+                        runnerRes['showSuspended'] = true;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            return runnerRes;
+          });
+        }
+      });
+    }
+  }
+
+
+
+  private _updateCustomMarketData(data: any) {
+    let parseData = JSON.parse(data);
+    if (
+      parseData.hasOwnProperty('data') &&
+      typeof parseData?.data !== 'string'
+    ) {
+      let webSocketData = parseData['data'];
+
+      this.adminBooksList.map((singleBook) => {
+        let singleWebSocketMarketData = _.find(webSocketData, [
+          'bmi',
+          singleBook['marketId'],
+        ]);
+        if (singleWebSocketMarketData != undefined) {
+
+          singleBook['appMarketStatus'] = singleWebSocketMarketData['ms'];
+
+          if (singleBook['marketTypName'] == 'Bookmaker') {
+            for (let rnr of singleBook['adminBook']) {
+              rnr['back1'] = null;
+              rnr['lay1'] = null;
+              rnr['vback1'] = null;
+              rnr['vlay1'] = null;
+            }
+          }
+
+          if (singleBook['marketTypName'] == 'Match Odds') {
+            for (let rnr of singleBook['adminBook']) {
+              rnr['back0'] = null;
+              rnr['back1'] = null;
+              rnr['back2'] = null;
+              rnr['lay0'] = null;
+              rnr['lay1'] = null;
+              rnr['lay2'] = null;
+              rnr['vback0'] = null;
+              rnr['vback1'] = null;
+              rnr['vback2'] = null;
+              rnr['vlay0'] = null;
+              rnr['vlay1'] = null;
+              rnr['vlay2'] = null;
+            }
+          }
+
+          return singleBook['adminBook'].map((runnerRes) => {
+            if (singleBook['marketTypName'] == 'Match Odds') {
+              let webSocketRunners = _.filter(
+                singleWebSocketMarketData?.['rt'],
+                ['ri', runnerRes['SelectionId']]
+              );
+
+              for (let singleWebsocketRunner of webSocketRunners) {
+                if (singleWebsocketRunner['ib']) {
+                  //back
+
+                  //Live Rate
+                  runnerRes['back' + singleWebsocketRunner['pr']] =
+                    singleWebsocketRunner['rt'];
+
+                  //Volume from Betfair
+                  runnerRes['vback' + singleWebsocketRunner['pr']] =
+                    singleWebsocketRunner['bv'];
+                } else {
+                  //lay
+
+                  //Live Rate
+                  runnerRes['lay' + singleWebsocketRunner['pr']] =
+                    singleWebsocketRunner['rt'];
+
+                  //Volume from Betfair
+                  runnerRes['vlay' + singleWebsocketRunner['pr']] =
+                    singleWebsocketRunner['bv'];
+                }
+              }
+            } else if (singleBook['marketTypName'] == 'Bookmaker') {
+
+              let webSocketRunners = _.filter(
+                singleWebSocketMarketData?.['rt'],
+                ['ri', runnerRes['SelectionId'].toString()]
+              );
+
+              for (let singleWebsocketRunner of webSocketRunners) {
+                if (singleWebsocketRunner['ib']) {
+                  //back
+
+                  //Live Rate
+                  runnerRes['back1'] = singleWebsocketRunner['rt'];
+
+                  //Volume from Betfair
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
+                    runnerRes['vback1'] = singleWebsocketRunner['bv'];
+                  } else {
+                    runnerRes['vback1'] = singleWebsocketRunner['pt'];
+                  }
+                } else {
+                  //lay
+
+                  //Live Rate
+                  runnerRes['lay1'] = singleWebsocketRunner['rt'];
+
+                  //Volume from Betfair
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
+                    runnerRes['vlay1'] = singleWebsocketRunner['bv'];
+                  } else {
+                    runnerRes['vlay1'] = singleWebsocketRunner['pt'];
+                  }
+
+                  if (singleBook['marketTypName'] == 'Bookmaker') {
+                    if (runnerRes['back1'] == runnerRes['lay1']) {
+                      runnerRes['showSuspended'] = true;
+                    } else {
+                      runnerRes['showSuspended'] = false;
+
+                      if (
+                        Math.ceil((runnerRes['lay1'] - 1) * 100) > 99 ||
+                        Math.ceil((runnerRes['back1'] - 1) * 100) > 99
+                      ) {
+                        runnerRes['showSuspended'] = true;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            else if (singleBook['marketTypName'] == 'Fancy') {
+
               let webSocketRunners = _.filter(
                 singleWebSocketMarketData?.['rt'],
                 ['ri', runnerRes['SelectionId'].toString()]
@@ -621,7 +852,7 @@ export class NetExposureViewTotalComponent implements OnInit {
   _subscribeCustomWebSocket() {
     this.realCustomDataWebSocket.subscribe(
       (data) => {
-        if (typeof data == 'string') this._updateMarketData(data);
+        if (typeof data == 'string') this._updateCustomMarketData(data);
         // if(typeof data == 'string') console.log('sub',data);
       }, // Called whenever there is a message from the server.
       (err) => {

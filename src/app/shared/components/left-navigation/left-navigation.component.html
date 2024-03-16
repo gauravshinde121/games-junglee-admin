@@ -111,6 +111,21 @@
                 >BET TICKER</a
               >
             </li>
+            <li
+              [routerLinkActive]="
+                currentPath == '/book-management/market-watch' ? 'active' : ''
+              "
+              [ngClass]="
+                currentPath == '/book-management/market-watch' ? 'active' : ''
+              "
+            >
+              <a
+                (click)="storePath('/book-management/market-watch')"
+                routerLink="/book-management/market-watch"
+                class="nav-link small ps-5"
+                >MARKET WATCH</a
+              >
+            </li>
             <!-- <li><a routerLink="/book-management/bet-ticker-flag-final" class="nav-link small ps-5">Bet Ticker Flag Final</a></li> -->
             <!-- <li><a routerLink="/book-management/bet-ticker-previous"  class="nav-link small ps-5">Bet Ticker Previous</a></li> -->
             <!-- <li><a routerLink="/book-management/premium-sportsbook"  class="nav-link small ps-5">Premium Sportsbook</a></li> -->

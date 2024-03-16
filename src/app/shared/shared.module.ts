@@ -12,6 +12,7 @@ import { SortPipe } from './pipe/sort.pipe';
 import { SearchPipe } from './pipe/search.pipe';
 import { IndianCurrencyPipe } from './pipe/indian-currency.pipe';
 import { RoundToHalfPipe } from './pipe/oddFormat.pipe';
+import { MatchTimePipe } from './pipe/match-time.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RoundToHalfPipe } from './pipe/oddFormat.pipe';
     SortPipe,
     SearchPipe,
     IndianCurrencyPipe,
-    RoundToHalfPipe
+    RoundToHalfPipe,
+    MatchTimePipe
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ import { RoundToHalfPipe } from './pipe/oddFormat.pipe';
     SortPipe,
     SearchPipe,
     IndianCurrencyPipe,
-    RoundToHalfPipe
+    RoundToHalfPipe,
+    MatchTimePipe
   ]
 })
 export class SharedModule { }

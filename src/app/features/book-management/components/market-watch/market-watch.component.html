@@ -506,7 +506,7 @@
                   >
                     <a>
                       <span class="matchTime">{{
-                        singleMarket["matchTime"]
+                        singleMarket["matchTime"] | matchTime
                       }}</span
                       ><br />
                       <strong
@@ -649,11 +649,11 @@
                           </div>
                           <div class="col-1">
                             <span
-                              class="matchTime"
-                              style="font-style: italic"
-                            >
+                            class="matchTime text-danger"
+                            style="font-style: italic;white-space: nowrap;"
+                          >
                               (
-                              {{ singleMarket["matchTime"] }}
+                              {{ singleMarket["matchTime"] | matchTime}}
                               )
                             </span>
                           </div>
@@ -1218,7 +1218,7 @@
                   >
                     <a>
                       <span class="matchTime">{{
-                        singleMarket["matchTime"]
+                        singleMarket["matchTime"] | matchTime
                       }}</span
                       ><br />
                       <strong
@@ -1355,11 +1355,11 @@
                           </div>
                           <div class="col-2">
                             <span
-                              class="matchTime"
-                              style="font-style: italic"
+                              class="matchTime text-danger"
+                              style="font-style: italic;white-space: nowrap;"
                             >
                               (
-                              {{ singleMarket["matchTime"] }}
+                              {{ singleMarket["matchTime"] | matchTime }}
                               )
                             </span>
                           </div>

@@ -211,7 +211,7 @@
               >
             </li>
             <li
-              *ngIf="adminDetails.refClientid == 2"
+              *ngIf="adminDetails.refClientid == 2 || adminDetails.refClientid == 5"
               [routerLinkActive]="
                 currentPath == '/account-statement/commission' ? 'active' : ''
               "
@@ -322,7 +322,7 @@
         </div>
       </li>
 
-      <li *ngIf="(adminDetails.refClientid == 1 || adminDetails.refClientid == 2)"
+      <li *ngIf="(adminDetails.refClientid == 1 || adminDetails.refClientid == 2 || adminDetails.refClientid == 5)"
         [routerLinkActive]="currentPath == '/bank' ? 'active' : ''"
         [ngClass]="currentPath == '/bank' ? 'active' : ''"
       >
@@ -460,7 +460,7 @@
           id="settings-collapse"
         >
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li
+            <li *ngIf="adminDetails.refClientid !== 5"
               [routerLinkActive]="
                 currentPath == '/settings/balance' ? 'active' : ''
               "

@@ -214,27 +214,24 @@ input::-webkit-inner-spin-button,input::-webkit-outer-spin-button {
   margin: 0
 }
 
-a {
-  cursor: pointer
-}
-
-.browncolor {
-  background: #fff;
-  min-height: 100vh;
-  background-repeat: no-repeat
+.browncolor,.header-one {
+  background-color: #fff
 }
 
 .header-one {
-  border-bottom: .8px solid #ffa7a333;
-  background: #fff
+  border-bottom: .8px solid #ffa7a333
 }
 
-.bg-pink,.bg-pink:hover {
-  color: #fff
+.bg-pink:hover {
+  color: #000
 }
 
 .bg-pink {
-  background-color: #dc3545
+  color: #fff
+}
+
+.bg-pink,a.btn.border-colour.text-nowrap.rounded-pill.headerFont.bg-pink,button.btn.border-colour.me-2.text-nowrap.rounded-pill.disnone.headerFont.bg-pink {
+  background: #0aa40a!important
 }
 
 .border-pink {
@@ -243,18 +240,11 @@ a {
 
 .btn-pink {
   color: #fff;
-  background-color: #dc3545;
-  transition: all .2s ease-in;
-  transform: scale(1);
-  border: none;
-  border-radius: 25px;
-  font-size: .75rem;
-  transition: all .4s ease-in-out;
-  align-items: center
+  background-image: linear-gradient(to right top,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a)
 }
 
 .text-pink {
-  color: #fff!important
+  color: #0aa40a!important
 }
 
 .header-icon {
@@ -271,42 +261,40 @@ a {
 }
 
 .header-tow {
-  background-color: #dc3545;
-  border-top: .8px solid #000
+  background: #0aa40a;
+  border-top: .8px solid #396cbc;
+  font-weight: 600
 }
 
 .header-tow ul {
   padding: 0;
   margin: 0;
-  display: flex;
-  align-items: center;
-  flex-flow: row nowrap;
-  overflow: auto
+  overflow: auto;
+  flex-wrap: nowrap
 }
 
 .header-tow ul img {
-  width: 18px;
-  margin-right: 4px
+  margin-top: -5px;
+  width: 18px
 }
 
 .header-tow li a {
   font-size: 12px;
   color: #fff;
-  padding: 7px 15px;
-  margin: 3px 0;
-  display: flex;
-  align-items: center;
-  font-weight: 600
+  padding: 10px 15px;
+  margin: 3px;
+  border-radius: 60px
 }
 
 .header-tow li a:hover {
-  color: #fff
+  color: #ffe400
 }
 
 .header-tow li a.active {
-  border: 1px solid #fff;
+  border: .5px solid #ffb510;
   border-radius: 60px;
-  color: #fff
+  color: #000;
+  background: #ffe400
 }
 
 .header-tow a:visited {
@@ -314,7 +302,8 @@ a {
 }
 
 .accordionn ul {
-  border-bottom: .8px solid #dc3545!important
+  border-top: .8px solid #0aa40a;
+  border-bottom: .8px solid #0aa40a!important
 }
 
 .accordionn .nav-tabs .nav-link {
@@ -327,39 +316,37 @@ a {
 
 .accordionn .nav-tabs .nav-link.active {
   border: 0;
-  border-bottom: 3px solid #08969f;
-  background: #dc3545;
-  color: #000;
-  border-radius: 0;
-  color: #fff
+  border-bottom: 3px solid #ffb510;
+  background: #0aa40a;
+  color: #fff;
+  border-radius: 0
 }
 
 .rightacco .accordion-item {
   border-radius: 25px;
   border: none;
-  background-color: initial;
-  color: #000!important;
-  font-weight: 900
+  background-color: #fff;
+  color: #fff!important
 }
 
 .rightacco .accordion-item .accordion-button.collapsed {
   border-radius: 25px;
-  background: #dc3545;
-  color: #fff;
+  background-image: linear-gradient(to right top,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a);
+  color: #000;
   margin: 25px 0
 }
 
 .rightacco .accordion-body {
   padding: 1rem .3rem 0;
-  border: 1px solid #dc3545;
+  border: 1px solid #396cbc;
   border-radius: 15px;
   margin: 25px 0
 }
 
 .rightacco .accordion-button:not(.collapsed) {
-  background: #dc3545;
+  background-image: linear-gradient(to right top,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a);
   border-radius: 25px;
-  color: #fff
+  color: #000
 }
 
 .rightacco .accordion-body h6 {
@@ -371,10 +358,12 @@ a {
 }
 
 .asidenav {
-  border: 1px solid #dc3545;
+  border: 1px solid #0aa40a;
   border-radius: 15px;
   padding: 8px 0 0;
-  margin: 14px 0 0
+  margin: 14px 0 0;
+  font-weight: 600;
+  background: linear-gradient(180deg,#f2e6e6,#0aa40a4d .01%,#ffe40012)
 }
 
 .asidenav ul {
@@ -385,9 +374,9 @@ a {
 
 .asidenav a {
   color: #000;
+  border-right: 3px solid #202121;
   padding-top: 10px;
-  padding-bottom: 10px;
-  font-weight: 600
+  padding-bottom: 10px
 }
 
 .asidenav a :visited {
@@ -395,25 +384,20 @@ a {
 }
 
 .asidenav li a.active {
-  border-right: 3px solid #dc3545;
-  background: #354857;
-  color: #fff!important
+  border-right: 3px solid #0aa40a;
+  background: linear-gradient(to right top,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a)
 }
 
 .asidenav li a:hover {
-  background: #dc3545;
-  border-right: 3px solid #fff;
-  color: #fff
-}
-
-.marketTab li button.active {
-  background: linear-gradient(180deg,#dc3545,#191618)!important;
-  border-bottom: #e76f26!important;
-  color: #fff
+  background: #0aa40a;
+  border-right: 3px solid #0aa40a;
+  color: #000
 }
 
 .innerpagem {
-  color: #000
+  border: 1px solid #0aa40a;
+  color: #000;
+  background-color: #fff
 }
 
 .btn-play-blue {
@@ -423,30 +407,28 @@ a {
 
 .btn-play-pink {
   color: #000;
-  background-image: linear-gradient(0deg,#dc3545,#ffa7a3)
+  background-image: linear-gradient(0deg,#0aa40a,#ff7768)
 }
 
 .btn-outline-pink {
-  color: #ffa7a3;
-  border-color: #ffa7a3
+  color: #ff7768;
+  border-color: #ff7768
 }
 
 .btn-outline-pink:hover {
   color: #fff;
-  background-color: #ffa7a3;
-  border-color: #ffa7a3
+  background-color: #ff7768;
+  border-color: #ff7768
 }
 
 .leftuser {
-  color: #fff;
-  border-radius: 50px;
-  margin: 0 5px;
-  padding: 4px 0 6px 3px
+  background: linear-gradient(to right top,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a);
+  color: #000
 }
 
 .bg-color {
-  background: #dc3545!important;
-  color: #fff!important
+  background-image: linear-gradient(to right top,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a);
+  color: #fff
 }
 
 .userb-icon i {
@@ -454,74 +436,54 @@ a {
 }
 
 .gamedetails {
-  border: 1px solid #dc3545;
+  border: 1px solid #0aa40a;
   color: #000;
   background: #0000;
   margin-top: 30px;
+  border-radius: 30px;
   padding: 15px 15px 0;
   font-size: 12px
 }
 
-.gamedetails,.gamedetails .mobileTableHide {
-  border-radius: 10px
-}
-
 .gamedetails .table {
-  -moz-border-radius: 15px!important;
-  border-collapse: initial!important;
-  border: 1px solid #dc3545!important;
-  border-spacing: 0;
-  border-radius: 10px;
+  background-color: #fff;
+  border-radius: 15px;
   vertical-align: middle;
-  margin-bottom: 25px
+  margin-bottom: 25px;
+  color: #000
 }
 
-.gamedetails .table thead th {
-  border: 0;
-  border-color: inherit;
+.gamedetails .table thead tr th {
   font-size: .8rem;
-  height: 50px;
   vertical-align: middle;
-  font-weight: 400;
-  color: #fff;
-  font-weight: 700;
-  border: none!important
+  font-weight: 400
 }
 
-.gamedetails .table thead th:first-child {
+.gamedetails .table thead tr th:first-child {
   border-radius: 10px 0 0 0!important
 }
 
-.gamedetails .table thead th:last-child {
+.gamedetails .table thead tr th:last-child {
   border-radius: 0 10px 0 0!important
-}
-
-.gamedetails .table tbody {
-  background-color: #fff
 }
 
 .gamedetails .table tbody tr td {
   vertical-align: middle;
-  padding: 0 5px;
+  padding: 5px;
   text-align: center;
-  line-height: 12px;
-  border-bottom: 0
-}
-
-.gamedetails .table tbody tr td:first-child a {
-  color: #000
+  line-height: 12px
 }
 
 .gamedetails .table tbody tr td a {
+  color: #000;
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
-  line-height: 12px;
-  color: #000
+  line-height: 12px
 }
 
-.gamedetails .table tbody tr td a .vs {
-  color: #dc3545
+.gamedetails .table tbody tr td a .matchTime,.gamedetails .table tbody tr td a .vs {
+  color: #0aa40a
 }
 
 .gamedetails .table tbody tr td .table {
@@ -545,22 +507,43 @@ a {
   border-radius: 0 0 10px 0!important
 }
 
+.gamedetails .table tbody .acc-statement-cls {
+  border-bottom: 3px solid #ededed
+}
+
 .gamedetails .heading {
   font-size: 10px;
   line-height: 12px
 }
 
+.gamedetails .bg-dgrey,.gamedetails input,.table {
+  color: #000
+}
+
+table .tfirstcol {
+  border-top-left-radius: 15px;
+  color: #000
+}
+
 table thead {
-  background: #dc3545
+  background: linear-gradient(to right top,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a)
+}
+
+table thead,table tr {
+  border: 0;
+  border-color: inherit
+}
+
+table .tlastcol {
+  border-top-right-radius: 15px
 }
 
 .coldark {
-  background: #dc3545!important;
   color: #fff
 }
 
 .tstartcol {
-  background: #ffa7a3
+  background: #ff7768
 }
 
 .colblue {
@@ -592,7 +575,8 @@ table thead {
 }
 
 .colgray {
-  background-color: #d9d9d9!important
+  background-color: #d9d9d9!important;
+  border-left: 1px solid #fff
 }
 
 .boxeffect:after {
@@ -604,7 +588,7 @@ table thead {
   padding: 10px 35px;
   background: #00000014;
   margin-top: 30px;
-  color: #dc3545
+  color: #0aa40a
 }
 
 .login a {
@@ -624,12 +608,12 @@ table thead {
 .login .form-control {
   line-height: 3.5;
   border-radius: 14px;
-  border: 1px solid #ffa7a3;
+  border: 1px solid #ff7768;
   border-right: none
 }
 
 .login .form-control.is-invalid,.login .was-validated .form-control:invalid {
-  border-color: #08969f;
+  border-color: #dc3545;
   padding-right: calc(1.5em + .75rem);
   background-image: none
 }
@@ -644,7 +628,7 @@ table thead {
 }
 
 .login .input-group-text {
-  border: 1px solid #ffa7a3;
+  border: 1px solid #ff7768;
   border-left: none;
   border-radius: 14px
 }
@@ -675,7 +659,7 @@ table thead {
   font-size: 12px;
   overflow-x: hidden;
   transition: all .5s ease;
-  box-shadow: 0 1px 2px #ffa7a3
+  box-shadow: 0 1px 2px #ff7768
 }
 
 #rightslider a {
@@ -705,7 +689,7 @@ table thead {
 
 .number .minus,.number .plus {
   border: 1px solid #ddd;
-  color: #fff
+  color: #000
 }
 
 .number input {
@@ -749,7 +733,7 @@ input:focus+.slider {
 }
 
 .favhead {
-  background: #ffa7a3;
+  background: #ff7768;
   color: #000
 }
 
@@ -759,17 +743,16 @@ input:focus+.slider {
 }
 
 .suspended {
-  background: #ac4040;
+  background: #000;
   color: #000
 }
 
 .suspendedm1 {
-  background: #ac4040;
+  background: #0aa40a;
   color: #fff;
   border-radius: 8px;
-  padding: 14px 5px;
+  padding: 17px 5px;
   position: absolute;
-  top: 0;
   text-align: center;
   border: 0;
   width: 196px;
@@ -861,17 +844,10 @@ input:focus+.slider {
   color: #dee2e6
 }
 
-.searchlist input {
+.searchlist input,.searchlist input:focus,.searchlist input:hover {
   background: #000;
   color: #626262;
-  border: .8px solid #dc3545
-}
-
-.searchlist input:hover {
-  background: #fff;
-  color: rgba(60,62,62,.722);
-  border: .8px solid #dc3545;
-  box-shadow: 2px 2px 6px 3px #dc3545
+  border: .8px solid #396cbc
 }
 
 .searchlist .dropdown-menu-dark {
@@ -893,7 +869,7 @@ input:focus+.slider {
 }
 
 .pink:hover {
-  background-color: #ffa7a3
+  background-color: #ff7768
 }
 
 .tooltipnk .tooltiptext {
@@ -910,22 +886,22 @@ input:focus+.slider {
 }
 
 .text-color {
-  color: #000!important
+  color: #0aa40a!important
 }
 
 .border-colour {
-  border: 1px solid #dc3545
+  border: 1px solid #0aa40a
 }
 
 .btn-outline-color {
-  color: #e76f26;
-  border-color: #e76f26
+  color: #0aa40a;
+  border-color: #0aa40a
 }
 
 .btn-outline-color:hover {
   color: #fff;
-  background-color: #e76f26;
-  border-color: #e76f26
+  background-color: #0aa40a;
+  border-color: #0aa40a
 }
 
 .form-floating>.form-select,.form-signin .form-floating>.form-control {
@@ -934,23 +910,22 @@ input:focus+.slider {
   border-bottom: 1px solid #fff!important
 }
 
+.form-control,.form-control:focus {
+  color: #000
+}
+
 .form-signin .form-floating>label {
   color: #fff
 }
 
-.mobileTableShow.header-tow li a {
-  color: #fff;
-  border: 1px solid #3e404000
-}
-
 .betting-pl-cls .accordion-item .accordion-collapse a {
-  color: #e76f26
+  color: #0aa40a
 }
 
 #leftslider {
-  background: #fff;
+  background: #202121;
   color: #000;
-  box-shadow: 0 1px 2px #ffa7a3
+  box-shadow: 0 1px 2px #ff7768
 }
 
 #leftslider a {
@@ -958,7 +933,7 @@ input:focus+.slider {
 }
 
 .suspendedm2 {
-  background: #ac4040;
+  background: #000;
   color: #000
 }
 
@@ -971,16 +946,48 @@ input:focus+.slider {
   color: #000
 }
 
+.marketTab li button.active {
+  background: linear-gradient(to right top,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a)!important;
+  border-bottom: #0aa40a!important
+}
+
+.betTaleRes table tr th {
+  color: #000
+}
+
+.betTaleRes table tr td {
+  color: #fff
+}
+
+#openbets .p-2 {
+  color: #fff;
+  border-bottom: 1px solid #404040
+}
+
+select.btn {
+  background-color: initial;
+  color: #000
+}
+
+select.btn:hover {
+  background-color: initial!important;
+  color: #000!important
+}
+
+select.btn option {
+  color: #000
+}
+
 .betTaleRes::-webkit-scrollbar {
   width: 4px
 }
 
 .betTaleRes::-webkit-scrollbar-thumb {
-  background: #dc3545
+  background: #0aa40a
 }
 
 .betTaleRes::-webkit-scrollbar-track {
-  background-color: #dc3545
+  background-color: #0aa40a
 }
 
 ::-webkit-scrollbar {
@@ -990,7 +997,7 @@ input:focus+.slider {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: #dc3545
+  background: #0aa40a
 }
 
 ::-webkit-scrollbar-track {
@@ -1006,27 +1013,19 @@ input:focus+.slider {
 }
 
 .wave {
-  background: linear-gradient(45deg,cyan,#000)
+  background: linear-gradient(45deg,cyan,#fff)
 }
 
 .matchHead {
-  background: #fff;
-  color: #000;
-  border-top: 1px solid #000
+  background-color: #fff
 }
 
-.marquee {
-  color: #000;
-  font-weight: 800
-}
-
-.marqueeColor {
-  background-image: linear-gradient(90deg,#354857,#e76f26)
+#clock,.marquee {
+  color: #000
 }
 
 #clock {
-  text-shadow: 0 0 1px #000;
-  color: #000
+  text-shadow: 0 0 1px #000
 }
 
 #clock span {
@@ -1039,7 +1038,7 @@ input:focus+.slider {
 }
 
 .colwhite {
-  background-color: #000!important
+  background-color: #fff!important
 }
 
 .skeleton-container {
@@ -1096,13 +1095,18 @@ input:focus+.slider {
   background-color: #d7e6f1db!important
 }
 
+.table .tfirstcol {
+  border-top-left-radius: 15px;
+  color: #fff
+}
+
 .skeleton-container .row {
   height: 45px
 }
 
 .casinodpdn select,.searchlist input,.searchlist input:focus {
   background-color: initial;
-  border: 1px solid #dc3545;
+  border: 1px solid linear-gradient(to right top,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a);
   color: #000;
   border-radius: 100px;
   box-shadow: none;
@@ -1118,9 +1122,18 @@ input:focus+.slider {
 }
 
 #casinoInnerSidebar .card,.wrapper .card {
-  background: linear-gradient(180deg,#dc3545,#191618);
+  background: linear-gradient(0deg,#0a0808,red);
   color: #000;
-  border: 1px solid #dc3545
+  border: 1px solid #0aa40a
+}
+
+.card {
+  border: none;
+  background: #0000
+}
+
+.card,.card .card-body input {
+  color: #000
 }
 
 .autocomplete {
@@ -1129,7 +1142,7 @@ input:focus+.slider {
 
 .autocomplete-items {
   position: absolute;
-  color: #e76f26;
+  color: #0aa40a;
   font-size: 14px;
   padding: 7px 12px;
   background-color: #000;
@@ -1222,13 +1235,13 @@ input:focus+.slider {
 }
 
 .navbar-brand {
-  color: #000!important;
+  color: #fff!important;
   font-family: FontAwesome;
   letter-spacing: 2px
 }
 
 .navbar-brand span {
-  color: #e76f26
+  color: #0aa40a
 }
 
 .logins .navbar-brand {
@@ -1289,22 +1302,17 @@ input:focus+.slider {
   padding: 0 7px
 }
 
-body.openModal {
-  overflow: hidden
-}
-
 input:-webkit-autofill,input:-webkit-autofill:focus,input:-webkit-autofill:hover,select:-webkit-autofill,select:-webkit-autofill:focus,select:-webkit-autofill:hover,textarea:-webkit-autofill,textarea:-webkit-autofill:focus,textarea:-webkit-autofill:hover {
-  -webkit-text-fill-color: #fff;
+  -webkit-text-fill-color: #000;
   -webkit-box-shadow: none;
   -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s
 }
 
-.btn-check:focus+.btn,.btn:focus {
-  outline: 0;
-  box-shadow: 0 0 4px 0 #dc3545
+.login input:-webkit-autofill,.login input:-webkit-autofill:focus,.login input:-webkit-autofill:hover {
+  -webkit-text-fill-color: #fff
 }
 
-.border-bottom {
-  border-bottom: 1px solid #dc3545!important
+.btn-md,.input-group .btn,.input-group-text {
+  color: #000
 }

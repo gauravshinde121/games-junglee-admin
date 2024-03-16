@@ -23,6 +23,7 @@ export class SharedService {
   callAdminDetails = new Subject();
   private currentAdmin = null;
   ipAddress:any;
+  isMobileView = new Subject();
 
   sportsList: Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
@@ -65,6 +66,10 @@ export class SharedService {
       .post(this._apiEndpointsService.getBankUserEndpoint(), body);
   }
 
+  _postInPlayUpcomingApi(inPlayUpcomingBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getInPlayUpcomingEndPoint(), inPlayUpcomingBody);
+  }
 
   testFunc(body) {
     return this._apiHttpService
@@ -301,6 +306,14 @@ export class SharedService {
     .post(this._apiEndpointsService.getExposureDetailEndpoint(),{userId});
 }
 
+
+isMobileViewFn() {
+  if (window.innerWidth <= 767) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 _getCasinoSummaryApi(memberId){
   return this._apiHttpService

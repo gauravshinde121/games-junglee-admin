@@ -12,6 +12,7 @@ import { NetExposureRacingComponent } from './components/net-exposure-racing/net
 import { BetTickerComponent } from './components/bet-ticker/bet-ticker.component';
 import { PremiumSportsbookComponent } from './components/premium-sportsbook/premium-sportsbook.component';
 import { NetExposureViewTotalComponent } from './components/net-exposure/net-exposure-view-total/net-exposure-view-total.component';
+import { MarketWatchComponent } from './components/market-watch/market-watch.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { NetExposureViewTotalComponent } from './components/net-exposure/net-exp
     NetExposureRacingComponent,
     BetTickerComponent,
     PremiumSportsbookComponent,
-    NetExposureViewTotalComponent
+    NetExposureViewTotalComponent,
+    MarketWatchComponent
   ],
   imports: [
     CommonModule,

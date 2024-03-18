@@ -78,7 +78,6 @@ export class MarketListComponent implements OnInit {
   liveStreamingTVUrl:any;
   matchedBets :any[] = [];
   unMatchedBets :any[] = [];
-  subjectSub:Subscription;
 
 
   showFancyMarkets = true;
@@ -142,6 +141,7 @@ export class MarketListComponent implements OnInit {
     this.socketSub = this._sharedService.socketUrlSubject.subscribe(res=>{
       if(res){
         this.realDataWebSocket = webSocket(res['url']);
+        console.log(this.realDataWebSocket)
         // this.realDataWebSocket = webSocket('ws://localhost:8888');
         this._getWebSocketUrl();
       }
@@ -1063,8 +1063,6 @@ export class MarketListComponent implements OnInit {
   }
 
   _subscribeWebSocket(){
-    console.log('socket sucscribed')
-
     this.realDataWebSocket.subscribe(
       data => {
         if(typeof data == 'string') this._updateMarketData(data);
@@ -1084,6 +1082,10 @@ export class MarketListComponent implements OnInit {
         }
       }
     );
+  }
+
+  goBack(){
+    this._location.back();
   }
 
 
@@ -1110,7 +1112,7 @@ export class MarketListComponent implements OnInit {
 
   ngOnDestroy(): void {
     clearInterval(this.fancyInterval);
-    this.subjectSub.unsubscribe();
+   
     this.socketSub.unsubscribe()
 
     if(this.realDataWebSocket){

@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
       this.isblur = res['isShowRightSideBar'];
     })
 
+    this.getWebSocketUrl();
     
 
     this.online$.subscribe((isOnline) =>{
@@ -108,6 +109,14 @@ export class AppComponent implements OnInit {
           );
         }
       });
+  }
+
+
+  getWebSocketUrl(){
+    this._sharedService.getWebSocketURLApi().subscribe(url=>{
+      console.log(url)
+      this._sharedService.socketUrlSubject.next(url)
+    })
   }
 
 

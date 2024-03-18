@@ -170,6 +170,10 @@ export class ApiEndpointsService {
   }
 
 
+  public getBooksForMarket():string{
+    return this.createUrl(this._constants.API_URL_BOOKS_MARKET)
+  }
+
   public getBankUserEndpoint():string{
     return this.createUrl(this._constants.API_GET_BANK_USERS);
   }
@@ -180,6 +184,19 @@ export class ApiEndpointsService {
 
   public testFuncEndpoint():string{
     return this.createUrl(this._constants.API_URL_TEST_FUNC);
+  }
+
+  public getCustomMarketEndpoint():string{
+    return this.createUrl(this._constants.API_URL_GET_CUSTOM_MARKET);
+  }
+
+
+  public getNoticeForUserEndpoint():string{
+    return this.createUrl(this._constants.API_URL_GET_NOTICE);
+  }
+
+  public postBookMakerMarketEndpoint():string{
+    return this.createUrl(this._constants.API_URL_POST_BOOKMAKER_MARKET);
   }
 
   public getUplineSummaryEndpoint():string{

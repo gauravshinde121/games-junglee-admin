@@ -13,6 +13,11 @@ import { ClipboardService } from 'ngx-clipboard'
 })
 export class SharedService {
 
+  markrtStatusChangedSubject = new Subject();
+  customMarketSubjectSubject =  new Subject();
+  marketNoticeChanged =  new Subject();
+  getUserBalanceMarket = new Subject();
+  socketUrlSubject = new BehaviorSubject<any>(null);
   currentUserIp = new BehaviorSubject({'userIp':''});
   sharedSubject = new Subject();
   getUserBalance = new Subject();
@@ -61,6 +66,12 @@ export class SharedService {
       .post(this._apiEndpointsService.getAllUserEndpoint(), body);
   }
 
+
+  _getBooksForMarketApi(marketIdListBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getBooksForMarket(), marketIdListBody);
+  }
+
   _getBankUsersApi(body) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getBankUserEndpoint(), body);
@@ -74,6 +85,21 @@ export class SharedService {
   testFunc(body) {
     return this._apiHttpService
       .post(this._apiEndpointsService.testFuncEndpoint(), body);
+  }
+
+  _getCustomMarketApi(body) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getCustomMarketEndpoint(), body);
+  }
+
+  getNoticeForUserApi(body) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getNoticeForUserEndpoint(), body);
+  }
+
+  _postBookMakerMarketApi(body) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.postBookMakerMarketEndpoint(), body);
   }
 
   getUplineSummaryApi(userId) {

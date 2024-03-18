@@ -13,6 +13,7 @@ import { SearchPipe } from './pipe/search.pipe';
 import { IndianCurrencyPipe } from './pipe/indian-currency.pipe';
 import { RoundToHalfPipe } from './pipe/oddFormat.pipe';
 import { MatchTimePipe } from './pipe/match-time.pipe';
+import { FormattednumberPipe } from './pipe/formattednumber.pipe';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatchTimePipe } from './pipe/match-time.pipe';
     MarketRateFormaterPipe,
     BoxHighlightDirective,
     SortPipe,
+    FormattednumberPipe,
     SearchPipe,
     IndianCurrencyPipe,
     RoundToHalfPipe,
@@ -41,6 +43,7 @@ import { MatchTimePipe } from './pipe/match-time.pipe';
     TooltipModule,
     BoxHighlightDirective,
     SortPipe,
+    FormattednumberPipe,
     SearchPipe,
     IndianCurrencyPipe,
     RoundToHalfPipe,

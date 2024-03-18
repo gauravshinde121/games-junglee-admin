@@ -87,6 +87,10 @@ export class AppComponent implements OnInit {
                 this._sharedService.removeUserDetails();
                 localStorage.clear();
                 this._router.navigate(['/login']);
+              }if (data.message == "CUSTOM_MARKET_STATUS_CHANGED") {
+                this._sharedService.customMarketSubjectSubject.next(true);
+              }if (data.message == "MARKET_NOTICE") {
+                this._sharedService.marketNoticeChanged.next(true);
               }
             }, 
             err => {

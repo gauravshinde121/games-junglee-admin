@@ -1,7 +1,7 @@
 <!--Aside start-->
 <div class="row matchbody m-0">
   <!--Artical Start-->
-  <div class="col-md-10">
+  <div class="col-md-12">
     <div class="row">
       <div [ngClass]="isBetSlipShow ? 'col-md-8' : 'col-md-12'">
         <!-- Nav tabs -->
@@ -9,7 +9,6 @@
 
         <!-- mobileTab -->
         <div class="row" *ngIf="isMobileView">
-
           <div class="col-12 tab-content" id="myTabContent">
             <div
               class="tab-pane fade"
@@ -47,7 +46,6 @@
 
           <!-- Tab panes -->
         </div>
-
 
         <div class="row">
           <div class="col-md-12">
@@ -186,7 +184,8 @@
                                     [boxHighlight]="runner['vback2']"
                                     [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
-                                    ">
+                                    "
+                                  >
                                     <a class="boxeffect"
                                       ><strong>{{ runner["back2"] }}</strong>
                                       <br /><span>{{
@@ -202,7 +201,6 @@
                                     [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     "
-
                                   >
                                     <a class="boxeffect"
                                       ><strong>{{ runner["back1"] }}</strong>
@@ -219,7 +217,6 @@
                                     [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     "
-
                                   >
                                     <a class="boxeffect"
                                       ><strong>{{ runner["back0"] }}</strong>
@@ -236,7 +233,6 @@
                                     [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     "
-
                                   >
                                     <a class="boxeffect"
                                       ><strong>{{ runner["lay0"] }}</strong>
@@ -253,7 +249,6 @@
                                     [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     "
-
                                   >
                                     <a class="boxeffect"
                                       ><strong>{{ runner["lay1"] }}</strong>
@@ -271,7 +266,6 @@
                                     [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     "
-
                                   >
                                     <a class="boxeffect"
                                       ><strong>{{ runner["lay2"] }}</strong>
@@ -477,8 +471,7 @@
                                       <div
                                         class="col-md-4 mobileTableShow"
                                         *ngIf="isMobileView"
-                                      >
-                                      </div>
+                                      ></div>
                                     </td>
                                   </tr>
                                 </ng-container>
@@ -944,8 +937,7 @@
                                         }}</span></a
                                       >
                                     </td>
-                                    <td
-                                    >
+                                    <td>
                                       <a
                                         class="colpink"
                                         [boxHighlight]="runner['lay0']"
@@ -1090,8 +1082,7 @@
                                       <div
                                         class="col-md-4 mb-3 sidebarhide"
                                         id="sidebarhide"
-                                      >
-                                      </div>
+                                      ></div>
                                     </td>
                                   </tr>
                                 </ng-container>
@@ -1254,7 +1245,6 @@
                                             [boxHighlight]="
                                               runner['vback0'] | number
                                             "
-
                                           >
                                             <a
                                               ><strong
@@ -1282,7 +1272,6 @@
                                             [boxHighlight]="
                                               runner['vlay0'] | number
                                             "
-
                                           >
                                             <a
                                               ><strong *ngIf="runner['lay0']">{{
@@ -1434,14 +1423,12 @@
                               "
                             >
                               <thead>
-                                <tr>
-                                </tr>
+                                <tr></tr>
                                 <tr>
                                   <th width="70%" class="tfirstcol">
                                     Manual {{ customMarkets["marketName"] }}
                                   </th>
-                                  <th class="coldark">
-                                  </th>
+                                  <th class="coldark"></th>
                                   <th colspan="1" class="text-center coldark">
                                     Back
                                   </th>
@@ -1457,7 +1444,6 @@
                                 </tr>
                               </thead>
                               <tbody class="pointer">
-
                                 <ng-container
                                   *ngFor="
                                     let runner of customMarkets['runners'];
@@ -1465,8 +1451,7 @@
                                     let first = first
                                   "
                                 >
-
-                             <tr [ngClass]="{ 'border-0': last }">
+                                  <tr [ngClass]="{ 'border-0': last }">
                                     <td
                                       class="text-start ps-2 heading border-top dis"
                                       [ngClass]="{ 'border-top': !first }"
@@ -1532,9 +1517,7 @@
                                         }}</span></a
                                       >
                                     </td>
-                                    <td
-
-                                    >
+                                    <td>
                                       <a
                                         class="colpink"
                                         [boxHighlight]="runner['lay0']"
@@ -1687,16 +1670,23 @@
                                       <div
                                         class="col-md-4 mb-3 sidebarhide"
                                         id="sidebarhide"
-                                      >
-                                      </div>
+                                      ></div>
                                     </td>
                                   </tr>
                                 </ng-container>
-                                <tr *ngIf="customMarkets['marketNotice']" style="background-color: yellow;">
+                                <tr
+                                  *ngIf="customMarkets['marketNotice']"
+                                  style="background-color: yellow"
+                                >
                                   <td colspan="7">
-                                  <span>
-                                    <strong>MESSAGE: {{customMarkets['marketNotice']}}</strong>
-                                  </span>
+                                    <span>
+                                      <strong
+                                        >MESSAGE:
+                                        {{
+                                          customMarkets["marketNotice"]
+                                        }}</strong
+                                      >
+                                    </span>
                                   </td>
                                 </tr>
                               </tbody>
@@ -1849,7 +1839,8 @@
                                             "
                                             [boxHighlight]="
                                               runner['vback0'] | number
-                                            ">
+                                            "
+                                          >
                                             <a
                                               ><strong
                                                 *ngIf="runner['back0']"
@@ -1873,7 +1864,8 @@
                                             "
                                             [boxHighlight]="
                                               runner['vlay0'] | number
-                                            ">
+                                            "
+                                          >
                                             <a
                                               ><strong *ngIf="runner['lay0']">{{
                                                 runner["lay0"]
@@ -2041,9 +2033,17 @@
                                   </td>
                                 </tr>
 
-                                <tr *ngIf="customMarkets['marketNotice']" style="background-color: yellow;">
-                                  <td colspan="12" style="text-align: justify;">
-                                  <strong>MESSAGE: {{customMarkets['marketNotice']}}</strong>
+                                <tr
+                                  *ngIf="customMarkets['marketNotice']"
+                                  style="background-color: yellow"
+                                >
+                                  <td colspan="12" style="text-align: justify">
+                                    <strong
+                                      >MESSAGE:
+                                      {{
+                                        customMarkets["marketNotice"]
+                                      }}</strong
+                                    >
                                   </td>
                                 </tr>
                               </tbody>
@@ -2179,7 +2179,8 @@
                                           "
                                           [boxHighlight]="
                                             singleFancyMarket['vlay1']
-                                          ">
+                                          "
+                                        >
                                           <strong>{{
                                             singleFancyMarket["lay1"]
                                           }}</strong>
@@ -2197,7 +2198,7 @@
                                           [boxHighlight]="
                                             singleFancyMarket['vback1']
                                           "
-                                          >
+                                        >
                                           <strong>{{
                                             singleFancyMarket["back1"]
                                           }}</strong>
@@ -2416,15 +2417,14 @@
                                     href="#exampleModalToggle"
                                     role="button"
                                     class="laddericon"
-                                   >
+                                  >
                                     <img
                                       src="/assets/images/ladder-icon.png"
                                       width="10px"
                                     />
                                   </a>
                                 </td>
-                                <td
-                                >
+                                <td>
                                   <a
                                     class="colpink"
                                     [boxHighlight]="singleFancyMarket['lay1']"
@@ -2586,8 +2586,7 @@
                                   <div
                                     class="col-md-4 mb-3 sidebarhide"
                                     id="sidebarhide"
-                                  >
-                                  </div>
+                                  ></div>
                                 </td>
                               </tr>
                             </ng-container>
@@ -2646,7 +2645,7 @@
                                 let first = first
                               "
                             >
-                                <!-- NOTICE ROW -->
+                              <!-- NOTICE ROW -->
 
                               <tr
                                 *ngIf="
@@ -2692,8 +2691,7 @@
                                     data-bs-toggle="modal"
                                     href="#exampleModalToggle"
                                     role="button"
-                                    class="laddericon
-                                    "
+                                    class="laddericon"
                                   >
                                     <!-- <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" class="laddericon" > -->
                                     <img
@@ -2877,51 +2875,46 @@
                               </tr>
 
                               <tr
-                              style="background-color: yellow;"
-                              *ngIf="singleFancyMarket['marketNotice']"
-                              [ngClass]="{ 'border-0': last }"
-                            >
-                              <td
-                                width="30%"
-                                class="text-start ps-2 heading border-top"
-                                [ngClass]="{ 'border-top': !first }"
+                                style="background-color: yellow"
+                                *ngIf="singleFancyMarket['marketNotice']"
+                                [ngClass]="{ 'border-0': last }"
                               >
+                                <td
+                                  width="30%"
+                                  class="text-start ps-2 heading border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                >
+                                  <a
+                                    ><strong
+                                      >MESSAGE:
+                                      {{ singleFancyMarket["marketNotice"]
+                                      }}<br /> </strong
+                                  ></a>
+                                </td>
 
-                            <a><strong>MESSAGE: {{singleFancyMarket['marketNotice']}}<br /> </strong></a>
+                                <td
+                                  width="10%"
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                ></td>
+                                <td
+                                  width="10%"
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                ></td>
+                                <td
+                                  width="10%"
+                                  class="border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                ></td>
+                                <td
+                                  class="event-container text-center"
+                                  colspan="6"
+                                ></td>
 
-                              </td>
-
-                              <td
-                                width="10%"
-                                class="border-top"
-                                [ngClass]="{ 'border-top': !first }"
-                              >
-
-                              </td>
-                              <td
-                                width="10%"
-                                class="border-top"
-                                [ngClass]="{ 'border-top': !first }"
-                              ></td>
-                              <td
-                                width="10%"
-                                class="border-top"
-                                [ngClass]="{ 'border-top': !first }"
-                              ></td>
-                              <td
-                                class="event-container text-center"
-                                colspan="6"
-                              >
-
-                              </td>
-
-                              <td>
-
-                              </td>
-                            </tr>
+                                <td></td>
+                              </tr>
                             </ng-container>
-
-
                           </tbody>
                         </table>
                       </div>
@@ -3017,7 +3010,7 @@
                                     />
                                   </a>
                                 </td>
-                                <td >
+                                <td>
                                   <a
                                     class="colpink"
                                     [boxHighlight]="singleFancyMarket['lay1']"
@@ -3032,8 +3025,7 @@
                                     }}</span></a
                                   >
                                 </td>
-                                <td
-                                >
+                                <td>
                                   <a
                                     class="colblue"
                                     [boxHighlight]="singleFancyMarket['back1']"
@@ -3166,18 +3158,23 @@
                                 </td>
                               </tr>
                               <tr
-                              style="background-color: yellow;"
-                              *ngIf="singleFancyMarket['marketNotice']"
-                                  [ngClass]="{ 'border-0': last }"
-                                >
-                                  <td
+                                style="background-color: yellow"
+                                *ngIf="singleFancyMarket['marketNotice']"
+                                [ngClass]="{ 'border-0': last }"
+                              >
+                                <td
                                   colspan="6"
-                                    class="text-start ps-2 heading border-top"
-                                    [ngClass]="{ 'border-top': !first }"
-                                  >
-                                  <a><strong>MESSAGE: {{singleFancyMarket['marketNotice']}}<br /> </strong></a>
-                                  </td>
-                                </tr>
+                                  class="text-start ps-2 heading border-top"
+                                  [ngClass]="{ 'border-top': !first }"
+                                >
+                                  <a
+                                    ><strong
+                                      >MESSAGE:
+                                      {{ singleFancyMarket["marketNotice"]
+                                      }}<br /> </strong
+                                  ></a>
+                                </td>
+                              </tr>
                               <tr
                                 *ngIf="
                                   betSlipObj['odds'] !== '' &&
@@ -3190,8 +3187,7 @@
                                   <div
                                     class="col-md-4 mb-3 sidebarhide"
                                     id="sidebarhide"
-                                  >
-                                  </div>
+                                  ></div>
                                 </td>
                               </tr>
                             </ng-container>

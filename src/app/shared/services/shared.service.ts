@@ -102,6 +102,12 @@ export class SharedService {
       .post(this._apiEndpointsService.postBookMakerMarketEndpoint(), body);
   }
 
+
+  _postFancyMarketApi(body) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.postFancyEndpoint(), body);
+  }
+
   getUplineSummaryApi(userId) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getUplineSummaryEndpoint(), {"userId":userId});

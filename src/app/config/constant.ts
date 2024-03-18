@@ -48,7 +48,7 @@ export class Constants {
     public readonly API_URL_GET_EXPOSURE_DETAILS: string = 'api/junglee-admin/getExposureDetails';
 
     public readonly API_URL_GET_USERACCOUNTLIST: string = 'api/getAccountListUsers';
-
+    public readonly API_URL_BOOKS_MARKET:string = 'api/getBooksForMarket';
 
 
     //book management
@@ -151,7 +151,9 @@ export class Constants {
     public readonly API_RESET_COMMISSION_REPORT: string = 'api/resetCommission';
 
 
-
+    public readonly API_URL_POST_BOOKMAKER_MARKET: string = 'api/getMarketWatchOtherMarket';
+    public readonly API_URL_GET_NOTICE: string = 'api/getNoticeForAdmin';
+    public readonly API_URL_GET_CUSTOM_MARKET: string = 'api/getMarketWatchCustomMarket';
     //BANK
     public readonly API_GET_ADJUST_CASINO_AMOUNT: string = 'api/junglee-admin/settleCasinoAmount';
     public readonly API_GET_CASINO_SUMMARY: string = 'api/junglee-admin/getCasinoWinSummary';

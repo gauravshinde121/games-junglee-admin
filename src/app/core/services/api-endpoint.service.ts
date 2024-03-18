@@ -168,15 +168,39 @@ export class ApiEndpointsService {
   public getAllUserAccountEndpoint():string{
     return this.createUrl(this._constants.API_URL_GET_USERACCOUNTLIST);
   }
-  
+
+
+  public getBooksForMarket():string{
+    return this.createUrl(this._constants.API_URL_BOOKS_MARKET)
+  }
 
   public getBankUserEndpoint():string{
     return this.createUrl(this._constants.API_GET_BANK_USERS);
   }
 
+  public getInPlayUpcomingEndPoint(): string {
+    return this.createUrl(this._constants.API_URL_GET_IN_PLAY_UPCOMING);
+  }
 
   public testFuncEndpoint():string{
     return this.createUrl(this._constants.API_URL_TEST_FUNC);
+  }
+
+  public getCustomMarketEndpoint():string{
+    return this.createUrl(this._constants.API_URL_GET_CUSTOM_MARKET);
+  }
+
+
+  public getNoticeForUserEndpoint():string{
+    return this.createUrl(this._constants.API_URL_GET_NOTICE);
+  }
+
+  public postBookMakerMarketEndpoint():string{
+    return this.createUrl(this._constants.API_URL_POST_BOOKMAKER_MARKET);
+  }
+
+  public postFancyEndpoint():string{
+    return this.createUrl(this._constants.API_URL_POST_FANCY_MARKET);
   }
 
   public getUplineSummaryEndpoint():string{
@@ -193,7 +217,7 @@ export class ApiEndpointsService {
 
   public getAdjustWinningsEndpoint():string{
       return this.createUrl(this._constants.API_BANK_BULK_TRANSFER);
-    
+
   }
 
   public getTransferStatementEndpoint(){
@@ -527,12 +551,12 @@ export class ApiEndpointsService {
   public getCasinoSettlementEndpoint(){
     return this.createUrl(this._constants.API_CASINO_SETTLEMENT)
   }
-  
+
 
 
   public geAdminAccountStatementNewEndpoint(){
     return this.createUrl(this._constants.API_GET_ADMIN_ACCOUNT_STATEMENT_NEW)
   }
 
-  
+
 }

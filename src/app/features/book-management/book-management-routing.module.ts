@@ -8,6 +8,8 @@ import { BetTickerComponent } from './components/bet-ticker/bet-ticker.component
 import { PremiumSportsbookComponent } from './components/premium-sportsbook/premium-sportsbook.component';
 import { BetTickerPreviousComponent } from './components/bet-ticker-previous/bet-ticker-previous.component';
 import { NetExposureViewTotalComponent } from './components/net-exposure/net-exposure-view-total/net-exposure-view-total.component';
+import { MarketWatchComponent } from './components/market-watch/market-watch.component';
+import { MarketListComponent } from './components/market-list/market-list.component';
 
 const routes: Routes = [{
   path:'book-management',
@@ -18,6 +20,8 @@ const routes: Routes = [{
     {path:'advance-workstation-match/:matchId',component:NetExposureViewTotalComponent},
     {path:'net-exposure-racing', component:NetExposureRacingComponent},
     {path:'bet-ticker', component:BetTickerComponent},
+    {path:'market-watch', component:MarketWatchComponent},
+    {path:'market-list/:sports/:tourId/:matchId',component:MarketListComponent},
     {path:'bet-ticker-flag-final', component:BetTickerFlagFinalComponent},
     {path:'bet-ticker-previous', component:BetTickerPreviousComponent},
     {path:'premium-sportsbook', component:PremiumSportsbookComponent}

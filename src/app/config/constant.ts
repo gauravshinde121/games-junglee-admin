@@ -152,6 +152,7 @@ export class Constants {
 
 
     public readonly API_URL_POST_BOOKMAKER_MARKET: string = 'api/getMarketWatchOtherMarket';
+    public readonly API_URL_POST_FANCY_MARKET: string = 'api/getFancyMarketForAdmin';
     public readonly API_URL_GET_NOTICE: string = 'api/getNoticeForAdmin';
     public readonly API_URL_GET_CUSTOM_MARKET: string = 'api/getMarketWatchCustomMarket';
     //BANK

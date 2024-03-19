@@ -199,6 +199,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_POST_BOOKMAKER_MARKET);
   }
 
+  public postFancyEndpoint():string{
+    return this.createUrl(this._constants.API_URL_POST_FANCY_MARKET);
+  }
+
   public getUplineSummaryEndpoint():string{
     return this.createUrl(this._constants.API_URL_GET_UPLINE_MEMBERS);
   }

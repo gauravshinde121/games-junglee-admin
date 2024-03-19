@@ -373,6 +373,20 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
     color: $color_21;
     border: 1px solid $color_28;
   }
+
+  table{
+    tbody{
+      tr{
+        td{
+          a{
+            .vs{
+              color: $color_11;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .form-select {
@@ -1214,7 +1228,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     thead{
       tr{
         th{
-          color: $color_21;
+          color: $color_7;
         }
       }
     }
@@ -1223,6 +1237,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 #allBets, #bookmaker {
   .modal-body {
+    .form-select{
+      color: $color_1;
+    }
     .table-responsive{
       table{
         font-size: 12px;
@@ -1230,7 +1247,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         thead{
           tr{
             th{
-              color: $color_21;
+              color: $color_7;
             }
           }
         }

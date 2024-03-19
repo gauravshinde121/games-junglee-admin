@@ -842,7 +842,6 @@ select:-webkit-autofill:focus {
 
 .dashboard .btn.rounded-pill {
   color: $color_27;
-
 }
 
 .btn.disabled,
@@ -1209,7 +1208,7 @@ input[type="password"]:focus {
     color: $color_21 !important;
   }
 
-  .tableall td{
+  .tableall td {
     color: $color_21;
   }
 }
@@ -1227,7 +1226,6 @@ input[type="password"]:focus {
   border-right: 1px solid $color_11;
 }
 
-
 input[type="date"]::-webkit-calendar-picker-indicator {
   /* Add your icon styles */
   width: 20px; /* Adjust icon width */
@@ -1236,5 +1234,43 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer; /* Show pointer cursor */
   margin-left: -25px; /* Adjust icon position */
   filter: brightness(1.3) sepia(2) saturate(4) hue-rotate(20deg);
+}
 
+.betList {
+  font-size: 12px;
+  font-weight: 600;
+  ul {
+    margin: 0;
+    button {
+      font-size: 12px;
+    }
+  }
+  table{
+    font-size: 11px;
+    thead{
+      tr{
+        th{
+          color: $color_21;
+        }
+      }
+    }
+  }
+}
+
+#allBets, #bookmaker {
+  .modal-body {
+    .table-responsive{
+      table{
+        font-size: 12px;
+        font-weight: 600;
+        thead{
+          tr{
+            th{
+              color: $color_21;
+            }
+          }
+        }
+      }
+    }
+  }
 }

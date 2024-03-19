@@ -909,9 +909,9 @@
     background: #d9d9d9
   }
   
-  .text-color {
-    color: #000!important
-  }
+  // .text-color {
+  //   color: #000!important
+  // }
   
   .border-colour {
     border: 1px solid #396cbc
@@ -1332,4 +1332,9 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+  }
+  
+  .modal-body{
+    background: white;
+    color: #000;
   }

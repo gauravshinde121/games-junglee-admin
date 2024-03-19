@@ -1200,5 +1200,53 @@ input[type="password"]:focus {
 }
  
 .matchTime{
-  color: #dc3545;
+  color: #dc3545;}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  /* Add your icon styles */
+  width: 20px; /* Adjust icon width */
+  height: 20px; /* Adjust icon height */
+  background-size: cover; /* Ensure the icon covers the area */
+  cursor: pointer; /* Show pointer cursor */
+  margin-left: -25px; /* Adjust icon position */
+  filter: brightness(1.3) sepia(2) saturate(4) hue-rotate(20deg);
+}
+
+.betList {
+  font-size: 12px;
+  font-weight: 600;
+  ul {
+    margin: 0;
+    button {
+      font-size: 12px;
+    }
+  }
+  table{
+    font-size: 11px;
+    thead{
+      tr{
+        th{
+          color: $color_7;
+        }
+      }
+    }
+  }
+}
+
+#allBets, #bookmaker {
+  .modal-body {
+    .table-responsive{
+      table{
+        font-size: 12px;
+        font-weight: 600;
+        thead{
+          tr{
+            th{
+              color: $color_7;
+            }
+          }
+        }
+      }
+    }
+  }
 }

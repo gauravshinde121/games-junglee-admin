@@ -234,7 +234,7 @@ a {
 }
 
 .bg-pink {
-  background-color: #dc3545
+  background-color: #396cbc
 }
 
 .border-pink {
@@ -243,7 +243,7 @@ a {
 
 .btn-pink {
   color: #fff;
-  background-color: #dc3545;
+  background-color: #396cbc;
   transition: all .2s ease-in;
   transform: scale(1);
   border: none;
@@ -271,7 +271,7 @@ a {
 }
 
 .header-tow {
-  background-color: #dc3545;
+  background-color: #396cbc;
   border-top: .8px solid #000
 }
 
@@ -314,7 +314,7 @@ a {
 }
 
 .accordionn ul {
-  border-bottom: .8px solid #dc3545!important
+  border-bottom: .8px solid #396cbc!important
 }
 
 .accordionn .nav-tabs .nav-link {
@@ -328,7 +328,7 @@ a {
 .accordionn .nav-tabs .nav-link.active {
   border: 0;
   border-bottom: 3px solid #08969f;
-  background: #dc3545;
+  background: #396cbc;
   color: #000;
   border-radius: 0;
   color: #fff
@@ -344,20 +344,20 @@ a {
 
 .rightacco .accordion-item .accordion-button.collapsed {
   border-radius: 25px;
-  background: #dc3545;
+  background: #396cbc;
   color: #fff;
   margin: 25px 0
 }
 
 .rightacco .accordion-body {
   padding: 1rem .3rem 0;
-  border: 1px solid #dc3545;
+  border: 1px solid #396cbc;
   border-radius: 15px;
   margin: 25px 0
 }
 
 .rightacco .accordion-button:not(.collapsed) {
-  background: #dc3545;
+  background: #396cbc;
   border-radius: 25px;
   color: #fff
 }
@@ -371,7 +371,7 @@ a {
 }
 
 .asidenav {
-  border: 1px solid #dc3545;
+  border: 1px solid #396cbc;
   border-radius: 15px;
   padding: 8px 0 0;
   margin: 14px 0 0
@@ -395,19 +395,19 @@ a {
 }
 
 .asidenav li a.active {
-  border-right: 3px solid #dc3545;
+  border-right: 3px solid #396cbc;
   background: #354857;
   color: #fff!important
 }
 
 .asidenav li a:hover {
-  background: #dc3545;
+  background: #396cbc;
   border-right: 3px solid #fff;
   color: #fff
 }
 
 .marketTab li button.active {
-  background: linear-gradient(180deg,#dc3545,#191618)!important;
+  background: linear-gradient(180deg,#396cbc,#191618)!important;
   border-bottom: #e76f26!important;
   color: #fff
 }
@@ -423,7 +423,7 @@ a {
 
 .btn-play-pink {
   color: #000;
-  background-image: linear-gradient(0deg,#dc3545,#ffa7a3)
+  background-image: linear-gradient(0deg,#396cbc,#ffa7a3)
 }
 
 .btn-outline-pink {
@@ -445,7 +445,7 @@ a {
 }
 
 .bg-color {
-  background: #dc3545!important;
+  background: #396cbc!important;
   color: #fff!important
 }
 
@@ -454,8 +454,8 @@ a {
 }
 
 .gamedetails {
-  border: 1px solid #dc3545;
-  color: #000;
+  border: 1px solid #396cbc;
+  color: #396cbc;
   background: #0000;
   margin-top: 30px;
   padding: 15px 15px 0;
@@ -469,7 +469,7 @@ a {
 .gamedetails .table {
   -moz-border-radius: 15px!important;
   border-collapse: initial!important;
-  border: 1px solid #dc3545!important;
+  border: 1px solid #396cbc!important;
   border-spacing: 0;
   border-radius: 10px;
   vertical-align: middle;
@@ -504,8 +504,8 @@ a {
   vertical-align: middle;
   padding: 0 5px;
   text-align: center;
-  line-height: 12px;
-  border-bottom: 0
+  // line-height: 12px;
+  // border-bottom: 0
 }
 
 .gamedetails .table tbody tr td:first-child a {
@@ -521,7 +521,7 @@ a {
 }
 
 .gamedetails .table tbody tr td a .vs {
-  color: #dc3545
+  color: #dc3545;
 }
 
 .gamedetails .table tbody tr td .table {
@@ -547,15 +547,15 @@ a {
 
 .gamedetails .heading {
   font-size: 10px;
-  line-height: 12px
+  // line-height: 12px
 }
 
 table thead {
-  background: #dc3545
+  background: #396cbc
 }
 
 .coldark {
-  background: #dc3545!important;
+  background: #396cbc!important;
   color: #fff
 }
 
@@ -604,7 +604,7 @@ table thead {
   padding: 10px 35px;
   background: #00000014;
   margin-top: 30px;
-  color: #dc3545
+  color: #396cbc
 }
 
 .login a {
@@ -864,14 +864,14 @@ input:focus+.slider {
 .searchlist input {
   background: #000;
   color: #626262;
-  border: .8px solid #dc3545
+  border: .8px solid #396cbc
 }
 
 .searchlist input:hover {
   background: #fff;
   color: rgba(60,62,62,.722);
-  border: .8px solid #dc3545;
-  box-shadow: 2px 2px 6px 3px #dc3545
+  border: .8px solid #396cbc;
+  box-shadow: 2px 2px 6px 3px #396cbc
 }
 
 .searchlist .dropdown-menu-dark {
@@ -914,7 +914,7 @@ input:focus+.slider {
 }
 
 .border-colour {
-  border: 1px solid #dc3545
+  border: 1px solid #396cbc
 }
 
 .btn-outline-color {
@@ -976,11 +976,11 @@ input:focus+.slider {
 }
 
 .betTaleRes::-webkit-scrollbar-thumb {
-  background: #dc3545
+  background: #396cbc
 }
 
 .betTaleRes::-webkit-scrollbar-track {
-  background-color: #dc3545
+  background-color: #396cbc
 }
 
 ::-webkit-scrollbar {
@@ -990,7 +990,7 @@ input:focus+.slider {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: #dc3545
+  background: #396cbc
 }
 
 ::-webkit-scrollbar-track {
@@ -1102,7 +1102,7 @@ input:focus+.slider {
 
 .casinodpdn select,.searchlist input,.searchlist input:focus {
   background-color: initial;
-  border: 1px solid #dc3545;
+  border: 1px solid #396cbc;
   color: #000;
   border-radius: 100px;
   box-shadow: none;
@@ -1118,9 +1118,9 @@ input:focus+.slider {
 }
 
 #casinoInnerSidebar .card,.wrapper .card {
-  background: linear-gradient(180deg,#dc3545,#191618);
+  background: linear-gradient(180deg,#396cbc,#191618);
   color: #000;
-  border: 1px solid #dc3545
+  border: 1px solid #396cbc
 }
 
 .autocomplete {
@@ -1302,9 +1302,20 @@ input:-webkit-autofill,input:-webkit-autofill:focus,input:-webkit-autofill:hover
 
 .btn-check:focus+.btn,.btn:focus {
   outline: 0;
-  box-shadow: 0 0 4px 0 #dc3545
+  box-shadow: 0 0 4px 0 #396cbc
 }
 
 .border-bottom {
-  border-bottom: 1px solid #dc3545!important
+  border-bottom: 1px solid #396cbc!important
+}
+.gamedetails .mobileTableShow .table td .colblue, .gamedetails .mobileTableShow .table td .colgray, .gamedetails .mobileTableShow .table td .colpink {
+  border-radius: 1rem;
+  height: 35px !important;
+  padding: 0 !important;
+  min-width: 55px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  line-height: 6px;
 }

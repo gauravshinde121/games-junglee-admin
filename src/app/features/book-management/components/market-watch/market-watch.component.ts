@@ -49,6 +49,14 @@ export class MarketWatchComponent implements OnInit {
 
     this.getInPlayUpcomingData({upComing:false}); //in-play
     this.getInPlayUpcomingData({upComing:true});  //upcoming
+
+    this.socketSub = this._sharedService.socketUrlSubject.subscribe(res=>{
+      if(res){
+        this.realDataWebSocket = webSocket(res['url']);
+        this._getWebSocketUrl();
+      }
+    })
+    
   }
 
   isMobileViewCallInit(){
@@ -56,6 +64,12 @@ export class MarketWatchComponent implements OnInit {
     this._sharedService.isMobileView.subscribe((res:any)=>{
       this.isMobileView = res;
     })
+  }
+
+
+  _getWebSocketUrl(isComplete = false){
+
+    this._subscribeWebSocket()
   }
 
 
@@ -124,6 +138,142 @@ export class MarketWatchComponent implements OnInit {
       paramsObj['upComing'] ?  this.upComingMatchListBySport = res['matchDetails']: this.inPlayMatchListBySport = res['matchDetails'];
       this.loadUpcomingMatched = false;
     })
+  }
+
+
+
+  private _updateMarketData(data: any) {
+    let parseData = JSON.parse(data);
+    if(parseData.hasOwnProperty('data') && typeof parseData?.data !== 'string'){
+      let webSocketData = parseData['data'];
+      if(this.inPlayMatchListBySport.length > 0 && this.inPlayMatchListBySport[0]['sports'].length >0){
+        this.inPlayMatchListBySport[0]['sports'].map(sportsObj =>{
+          return sportsObj['markets'].map(resObj=>{
+              let singleWebSocketMarketData = _.find(webSocketData, ['bmi', resObj['market']['marketId']]);
+              if(singleWebSocketMarketData != undefined){
+                resObj['market']['appMarketStatus'] = singleWebSocketMarketData['ms'];
+
+
+
+                if(resObj['market']['appMarketStatus'] !=4 && resObj['market']['appMarketStatus'] !=2) sportsObj['isShowCard'] = true;
+                return resObj['market']['runners'].map((runnerRes) => {
+
+                  runnerRes['back0'] = null;
+                  runnerRes['back1'] = null;
+                  runnerRes['back2'] = null;
+                  runnerRes['vback0'] = null;
+                  runnerRes['vback1'] = null;
+                  runnerRes['vback2'] = null;
+
+                  runnerRes['lay0'] = null;
+                  runnerRes['lay1'] = null;
+                  runnerRes['lay2'] = null;
+                  runnerRes['vlay0'] = null;
+                  runnerRes['vlay1'] = null;
+                  runnerRes['vlay2'] = null;
+
+
+                  let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
+                  for (let singleWebsocketRunner of webSocketRunners) {
+                    if (singleWebsocketRunner['ib']) {
+                      //back
+
+                      //Live Rate
+                      runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+
+                      //Volume from Betfair
+                      runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+
+                    } else {
+                      //lay
+
+                      //Live Rate
+                      runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+
+                      //Volume from Betfair
+                      runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+
+                    }
+                  }
+                  // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
+                  //     || runnerRes['lay0'] !==0 || runnerRes['lay1'] !==0 || runnerRes['lay2'] !==0){
+                  //       runnerRes['suspended'] = false;
+                  // }
+                  return runnerRes;
+                })
+              }
+          })
+        })
+      }
+
+      if(this.upComingMatchListBySport.length > 0 &&this.upComingMatchListBySport[0]['sports'].length >0){
+        this.upComingMatchListBySport[0]['sports'].map(sportsObj =>{
+          return sportsObj['markets'].map(resObj=>{
+              let singleWebSocketMarketData = _.find(webSocketData, ['bmi', resObj['market']['marketId']]);
+              if(singleWebSocketMarketData != undefined){
+                resObj['market']['appMarketStatus'] = singleWebSocketMarketData['ms'];
+                resObj['market']['inPlayStatus'] = singleWebSocketMarketData['ip'];
+
+                if(singleWebSocketMarketData['ip'] == 1) {
+                  this.getInPlayUpcomingData({upComing:false}); //in-play
+                  this.getInPlayUpcomingData({upComing:true});  //upcoming
+                }
+
+                if(resObj['market']['appMarketStatus'] !=4 && resObj['market']['appMarketStatus'] !=2) sportsObj['isShowCard'] = true;
+                return resObj['market']['runners'].map((runnerRes) => {
+                  let webSocketRunners = _.filter(singleWebSocketMarketData?.['rt'], ['ri', runnerRes['SelectionId']]);
+                  for (let singleWebsocketRunner of webSocketRunners) {
+                    if (singleWebsocketRunner['ib']) {
+                      //back
+
+                      //Live Rate
+                      runnerRes['back' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+
+                      //Volume from Betfair
+                      runnerRes['vback' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+
+                    } else {
+                      //lay
+
+                      //Live Rate
+                      runnerRes['lay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['rt'];
+
+                      //Volume from Betfair
+                      runnerRes['vlay' + singleWebsocketRunner['pr']] = singleWebsocketRunner['bv'];
+
+                    }
+                  }
+                  // if((runnerRes['back0'] !==0 || runnerRes['back1'] !==0 || runnerRes['back2'] !==0)
+                  //     || runnerRes['lay0'] !==0 || runnerRes['lay1'] !==0 || runnerRes['lay2'] !==0){
+                  //       runnerRes['suspended'] = false;
+                  // }
+                  return runnerRes;
+                })
+              }
+          })
+        })
+      }
+    }
+  }
+
+  _subscribeWebSocket(){
+    this.realDataWebSocket.subscribe(
+      data => {
+        if(typeof data == 'string') this._updateMarketData(data);
+        // if(typeof data == 'string') console.log('sub',data);
+      }, // Called whenever there is a message from the server.
+      err => {
+        console.log('ip err')
+
+        if(!this.isPageDestroyed)this._getWebSocketUrl(true);
+
+      }, // Called if at any point WebSocket API signals some kind of error.
+      () => {
+        console.log('ip compl')
+        console.log(this.isPageDestroyed)
+        if(!this.isPageDestroyed)this._getWebSocketUrl(true);
+      } // Called when connection is closed (for whatever reason).
+    );
   }
 
 }

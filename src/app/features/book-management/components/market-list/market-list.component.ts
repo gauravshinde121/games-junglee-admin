@@ -78,7 +78,6 @@ export class MarketListComponent implements OnInit {
   liveStreamingTVUrl:any;
   matchedBets :any[] = [];
   unMatchedBets :any[] = [];
-  subjectSub:Subscription;
 
 
   showFancyMarkets = true;
@@ -142,6 +141,7 @@ export class MarketListComponent implements OnInit {
     this.socketSub = this._sharedService.socketUrlSubject.subscribe(res=>{
       if(res){
         this.realDataWebSocket = webSocket(res['url']);
+        console.log(this.realDataWebSocket)
         // this.realDataWebSocket = webSocket('ws://localhost:8888');
         this._getWebSocketUrl();
       }
@@ -309,8 +309,7 @@ export class MarketListComponent implements OnInit {
   }
 
   getFancyData(calledFromTimer){
-
-    this._sharedService._postBookMakerMarketApi({matchId:this.matchId, "typeId": 10}).subscribe((res:any)=>{
+    this._sharedService._postFancyMarketApi({matchId:this.matchId}).subscribe((res:any)=>{
 
       if(res.length > 0){
         this.fancyDelay = res[0].fancyDelay
@@ -375,6 +374,7 @@ export class MarketListComponent implements OnInit {
   }
 
   getUpdatedFancyMarketOnInterval(){
+    console.log("called")
     if(this.fancyInterval){
       clearInterval(this.fancyInterval)
     }
@@ -803,6 +803,7 @@ export class MarketListComponent implements OnInit {
 
       if(this.fancyMarket){
         this.fancyMarket.map(fancyMarketObj=>{
+          
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +fancyMarketObj['marketId']]);
               if(singleWebSocketMarketDataBook != undefined){
 
@@ -814,11 +815,14 @@ export class MarketListComponent implements OnInit {
 
                 if(fancyMarketObj['appMarketStatus'] !=4 && fancyMarketObj['appMarketStatus'] !=2) this.isFancyCardShow = true;
                 fancyMarketObj['SelectionId'] = fancyMarketObj['SelectionId']?.toString();
+
                 let webSocketRunnersBook = _.filter(singleWebSocketMarketDataBook?.['rt'], ['ri', fancyMarketObj['SelectionId']]);
+
                 for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
                   if (singleWebsocketRunnerBook['ib']) {
                     //back
 
+                    console.log(singleWebsocketRunnerBook)
                     //Live Rate
                     fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
 
@@ -1063,8 +1067,6 @@ export class MarketListComponent implements OnInit {
   }
 
   _subscribeWebSocket(){
-    console.log('socket sucscribed')
-
     this.realDataWebSocket.subscribe(
       data => {
         if(typeof data == 'string') this._updateMarketData(data);
@@ -1084,6 +1086,10 @@ export class MarketListComponent implements OnInit {
         }
       }
     );
+  }
+
+  goBack(){
+    this._location.back();
   }
 
 
@@ -1110,7 +1116,7 @@ export class MarketListComponent implements OnInit {
 
   ngOnDestroy(): void {
     clearInterval(this.fancyInterval);
-    this.subjectSub.unsubscribe();
+   
     this.socketSub.unsubscribe()
 
     if(this.realDataWebSocket){

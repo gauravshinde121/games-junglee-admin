@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { EMarketName, EMarketType } from '@shared/models/shared';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-market-list',
@@ -78,6 +79,7 @@ export class MarketListComponent implements OnInit {
   liveStreamingTVUrl:any;
   matchedBets :any[] = [];
   unMatchedBets :any[] = [];
+  betListForm: FormGroup;
 
 
   showFancyMarkets = true;
@@ -95,6 +97,13 @@ export class MarketListComponent implements OnInit {
   customFancyLastUpdatedAt = new Date();
   socketSub:Subscription;
   isSocketCompleted = false;
+  betList:any = [];
+  allBets:any = [];
+
+  oddCount = 0;
+  bookmakerCount = 0;
+  fancyCount = 0;
+  marketList:any = [];
 
 
 
@@ -103,8 +112,14 @@ export class MarketListComponent implements OnInit {
     private _route: ActivatedRoute,
     private _location: Location,
     private _cdref: ChangeDetectorRef,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private _fb: FormBuilder,
   ) { }
+
+
+  get f() {
+    return this.betListForm.controls;
+  }
 
   ngOnInit(): void {
     this.isSocketCompleted = false;
@@ -138,6 +153,7 @@ export class MarketListComponent implements OnInit {
   }
 
   private _preConfig(){
+    this._initForm();
     this.socketSub = this._sharedService.socketUrlSubject.subscribe(res=>{
       if(res){
         this.realDataWebSocket = webSocket(res['url']);
@@ -155,6 +171,9 @@ export class MarketListComponent implements OnInit {
 
     this.isMobileViewCallInit();
       this._cdref.detectChanges();
+
+      this.getBetsForMarketWatch();
+      this.getMarketForMarketWatch()
   }
 
 
@@ -1093,6 +1112,96 @@ export class MarketListComponent implements OnInit {
   }
 
 
+  onClickAllBet(){
+    const payload = {
+      "matchId":this.matchId,
+      "clientName": null,
+      "marketTypeId": null,
+      "marketId": null,
+      "ammountFrom":null,
+      "ammountTo":null,
+      "limit":50,
+      "pageNo":1
+  }
+
+  this.getMarketForMarketWatch();
+
+    this._sharedService._getBetsForMarketWatchApi(payload).subscribe((res:any)=>{
+      for(let bet of res.booksForBackend){
+        if(bet.marketType == 1){
+          this.oddCount = bet.betlist.length;
+        }
+        if(bet.marketType == 12){
+          this.bookmakerCount = bet.betlist.length;
+        }
+        if(bet.marketType == 10){
+          this.fancyCount = bet.betlist.length;
+        }
+        for(let singleBet of bet.betlist){
+          this.allBets.push(singleBet)
+        }
+      }
+    })
+  }
+
+
+  getMarketForMarketWatch(){
+   
+    this._sharedService._getMarketForMarketWatchApi({matchId:this.matchId}).subscribe((res:any)=>{
+      console.log(res)
+      if(res){
+        this.marketList = res.booksForBackend
+      }
+    })
+  }
+
+
+  _initForm() {
+    this.betListForm = this._fb.group({
+      memberName: null,
+      marketTypeId: null,
+      marketId: null,
+      stakesFromValue: [null],
+      stakesToValue: [null]
+    });
+  }
+
+
+  getBetsForMarketWatch(){
+
+    const payload = {
+      "matchId":this.matchId,
+      "clientName": null,
+      "marketTypeId": null,
+      "marketId": null,
+      "ammountFrom":null,
+      "ammountTo":null,
+      "limit":30,
+      "pageNo":1
+  }
+
+    this._sharedService._getBetsForMarketWatchApi(payload).subscribe((res:any)=>{
+      console.log(res)
+      for(let bet of res.booksForBackend){
+        if(bet.marketType == 1){
+          this.oddCount = bet.betlist.length;
+        }
+        if(bet.marketType == 12){
+          this.bookmakerCount = bet.betlist.length;
+        }
+        if(bet.marketType == 10){
+          this.fancyCount = bet.betlist.length;
+        }
+        for(let singleBet of bet.betlist){
+          this.betList.push(singleBet)
+        }
+      }
+
+      console.log(this.betList)
+    })
+  }
+
+
   _subscribeCustomWebSocket(){
     this.realCustomDataWebSocket.subscribe(
       data => {
@@ -1125,6 +1234,47 @@ export class MarketListComponent implements OnInit {
     }
 
     clearInterval(this.dataFlowCheckerInterval);
+  }
+
+
+  onSubmit(){
+
+    for (let key in this.betListForm.value) {
+      if (this.betListForm.value.hasOwnProperty(key)) {
+        if(this.betListForm.value[key]== "null"){
+          this.betListForm.value[key] = null
+        }
+      }
+    }
+    // console.log(this.betListForm.value);
+
+    const payload = {
+      "matchId":this.matchId,
+      "clientName": this.betListForm.value.memberName,
+      "marketTypeId": this.betListForm.value.marketTypeId,
+      "marketId": this.betListForm.value.marketTypeId,
+      "ammountFrom":this.betListForm.value.stakesFromValue,
+      "ammountTo":this.betListForm.value.stakesToValue,
+      "limit":50,
+      "pageNo":1
+  }
+
+    this._sharedService._getBetsForMarketWatchApi(payload).subscribe((res:any)=>{
+      for(let bet of res.booksForBackend){
+        if(bet.marketType == 1){
+          this.oddCount = bet.betlist.length;
+        }
+        if(bet.marketType == 12){
+          this.bookmakerCount = bet.betlist.length;
+        }
+        if(bet.marketType == 10){
+          this.fancyCount = bet.betlist.length;
+        }
+        for(let singleBet of bet.betlist){
+          this.allBets.push(singleBet)
+        }
+      }
+    })
   }
 
 

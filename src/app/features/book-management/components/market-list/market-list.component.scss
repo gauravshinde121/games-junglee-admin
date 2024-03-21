@@ -1387,7 +1387,10 @@ textarea:-webkit-autofill:hover {
   height: 100%;
 }
 
-.modal-body{
+.modal-body {
   background: white;
   color: #000;
+  .form-control {
+    color: #000 !important;
+  }
 }

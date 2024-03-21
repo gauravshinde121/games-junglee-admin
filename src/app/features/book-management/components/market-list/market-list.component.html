@@ -2539,16 +2539,16 @@
         <div class="row">
           <div class="col-md-7">
             <ul class="d-flex list-unstyled p-0 justify-content-between">
-              <li>Odds<span class="badge bg-secondary">0</span></li>
-              <li>BM<span class="badge bg-secondary">0</span></li>
-              <li>Fancy<span class="badge bg-secondary">4</span></li>
+              <li>Odds<span class="badge bg-secondary">{{oddCount}}</span></li>
+              <li>BM<span class="badge bg-secondary">{{bookmakerCount}}</span></li>
+              <li>Fancy<span class="badge bg-secondary">{{fancyCount}}</span></li>
               <li><button class="btn btn-dark py-0">Reset</button></li>
             </ul>
           </div>
           <div class="col-md-5">
             <ul class="d-flex list-unstyled p-0 justify-content-end">
               <li class="me-2"><button class="btn btn-dark py-0"data-bs-toggle="modal" data-bs-target="#bookmaker">PL</button></li>
-              <li><button class="btn btn-dark py-0" data-bs-toggle="modal" data-bs-target="#allBets">All Bets</button>
+              <li><button (click)="onClickAllBet()" class="btn btn-dark py-0" data-bs-toggle="modal" data-bs-target="#allBets">All Bets</button>
               </li>
             </ul>
           </div>
@@ -2570,27 +2570,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="colblue">
-                    <td>Demo1</td>
-                    <td>Match 1st Over ADV</td>
-                    <td>8/85</td>
-                    <td>85</td>
-                    <td>100</td>
-                  </tr>
-                  <tr class="colblue">
-                    <td>Demo1</td>
-                    <td>Bookmaker</td>
-                    <td>India vs New Zeland</td>
-                    <td>85</td>
-                    <td>100</td>
-                  </tr>
-                  <tr class="colblue">
-                    <td>Demo1</td>
-                    <td>To Win The Toss</td>
-                    <td>India vs New Zealand</td>
-                    <td>85</td>
-                    <td>100</td>
-                  </tr>
+                  <ng-container *ngFor="let bet of betList">
+                    <tr [class]="bet.isBack?'colblue':'colpink'">
+                      <td>{{bet.userName}}</td>
+                      <td>{{bet.marketName}}</td>
+                      <td>{{bet.selectionName}}</td>
+                      <td>{{bet.betRate}}</td>
+                      <td>{{bet.stake}}</td>
+                    </tr>
+                  </ng-container>
                 </tbody>
               </table>
             </div>
@@ -2679,39 +2667,43 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
-            <form>
+            <form [formGroup]="betListForm">
               <div class="row align-items-end">
                 <div class="mb-3 col-md-2">
                   <label for="client" class="form-label">Search by Client</label>
-                  <input type="text" class="form-control" id="client" aria-describedby="client"
+                  <input class="text-dark" formControlName="memberName" type="text" class="form-control" id="client" aria-describedby="client"
                     placeholder="Search by Client">
                 </div>
                 <div class="mb-3 col-md-2">
                   <label for="marketType" class="form-label">Select Market Type</label>
 
-                  <select id="marketType" class="form-select">
-                    <option>Select Market Type</option>
+                  <select formControlName="marketTypeId" id="marketType" class="form-select">
+                    <option value="null">Select Market Type</option>
+                    <option value="1">Match Odds</option>
+                    <option value="12">Bookmaker</option>
+                    <option value="10">Fancy</option>
                   </select>
                 </div>
                 <div class="mb-3 col-md-2">
                   <label for="market" class="form-label">Select Market </label>
 
-                  <select id="market" class="form-select">
-                    <option>Select Market</option>
+                  <select formControlName="marketId" id="market" class="form-select">
+                    <option value="null">All</option>
+                    <option  *ngFor="let market of marketList" [value]="market.marketId">{{market.marketTypeName}}</option>
                   </select>
                 </div>
                 <div class="mb-3 col-md-2">
                   <label for="AmountFrom" class="form-label">Amount From</label>
-                  <input type="text" class="form-control" id="AmountFrom" aria-describedby="AmountFrom"
+                  <input formControlName="stakesFromValue" type="text" class="form-control" id="AmountFrom" aria-describedby="AmountFrom"
                     placeholder="Amount From">
                 </div>
                 <div class="mb-3 col-md-2">
                   <label for="AmountTo" class="form-label">Amount To</label>
-                  <input type="text" class="form-control" id="AmountTo" aria-describedby="AmountTo"
+                  <input formControlName="stakesToValue" type="text" class="form-control" id="AmountTo" aria-describedby="AmountTo"
                     placeholder="Amount To">
                 </div>
                 <div class="mb-3 col-md-2">
-                  <button type="submit" class="btn bg-color ">Submit</button>
+                  <button type="submit" class="btn bg-color" (click)="onSubmit()">Submit</button>
                 </div>
               </div>
             </form>
@@ -2722,66 +2714,36 @@
                 <thead>
                   <tr>
                     <th>UserName</th>
-                    <th>Distributer</th>
+                    <th>Distributor</th>
                     <th>Market</th>
                     <th>Runner</th>
                     <th>Side</th>
-                    <th>Line</th>
                     <th>Rate</th>
                     <th>Amount</th>
                     <th>PP</th>
                     <th>PL</th>
                     <th>Time</th>
                     <th>IP</th>
-                    <th>Device</th>
+                    <!-- <th>Device</th> -->
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="colblue">
-                    <td>Demo1</td>
-                    <td>Admin</td>
-                    <td>Match 1st Over ADV</td>
-                    <td>8/85</td>
-                    <td>Back</td>
-                    <td>8</td>
-                    <td>85</td>
-                    <td>100</td>
-                    <td class="text-success">85.00</td>
-                    <td class="text-danger">-100.00</td>
-                    <td>19/03/2024, 12:02:34 PM</td>
-                    <td>49.36.64.31</td>
-                    <td>DESKTOP</td>
-                  </tr>
-                  <tr class="colblue">
-                    <td>Demo1</td>
-                    <td>Admin</td>
-                    <td>Bookmaker</td>
-                    <td>India vs New Zeland</td>
-                    <td>Back</td>
-                    <td>8</td>
-                    <td>85</td>
-                    <td>100</td>
-                    <td class="text-success">85.00</td>
-                    <td class="text-danger">-100.00</td>
-                    <td>19/03/2024, 12:02:34 PM</td>
-                    <td>49.36.64.31</td>
-                    <td>DESKTOP</td>
-                  </tr>
-                  <tr class="colblue">
-                    <td>Demo1</td>
-                    <td>Admin</td>
-                    <td>To Win The Toss</td>
-                    <td>India vs New Zealand</td>
-                    <td>Back</td>
-                    <td>8</td>
-                    <td>85</td>
-                    <td>100</td>
-                    <td class="text-success">85.00</td>
-                    <td class="text-danger">-100.00</td>
-                    <td>19/03/2024, 12:02:34 PM</td>
-                    <td>49.36.64.31</td>
-                    <td>DESKTOP</td>
-                  </tr>
+                  <ng-container *ngFor="let bet of allBets">
+                    <tr [class]="bet.isBack?'colblue':'colpink'">
+                      <td>{{bet.userName}}</td>
+                      <td>{{bet.distributor}}</td>
+                      <td>{{bet.marketName}}</td>
+                      <td>{{bet.selectionName}}</td>
+                      <td>{{bet.isBack?'Back':'Lay'}}</td>
+                      <td>{{bet.betRate}}</td>
+                      <td>{{bet.stake}}</td>
+                      <td class="text-success">{{bet.pp}}</td>
+                      <td class="text-danger">{{bet.pl}}</td>
+                      <td>{{bet.placedDate | date}}</td>
+                      <td>{{bet.IP}}</td>
+                      <!-- <td>DESKTOP</td> -->
+                    </tr>
+                  </ng-container>
                 </tbody>
               </table>
             </div>

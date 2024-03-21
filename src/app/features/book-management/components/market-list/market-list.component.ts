@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, Input, OnInit, SimpleChanges, ElementRef, ViewChild  } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, Input, OnInit, SimpleChanges, ElementRef, ViewChild, OnDestroy  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '@shared/services/shared.service';
 import { webSocket } from 'rxjs/webSocket';
@@ -7,15 +7,16 @@ import {Location} from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { EMarketName, EMarketType } from '@shared/models/shared';
+import { EMarketType } from '@shared/models/shared';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { BookManagementService } from '../../services/book-management.service';
 
 @Component({
   selector: 'app-market-list',
   templateUrl: './market-list.component.html',
   styleUrls: ['./market-list.component.scss']
 })
-export class MarketListComponent implements OnInit {
+export class MarketListComponent implements OnInit,OnDestroy {
 
   fancyInterval:any;
   customBookmakerMarkets: any = [];
@@ -33,21 +34,11 @@ export class MarketListComponent implements OnInit {
   bookmakerRate:any = null;
   matchOddRunner:any = [];
   bookmakerRunner:any = null;
-
+  myPT = false;
   realDataWebSocket:any;
   realCustomDataWebSocket:any;
   webSocketUrl:string;
-  setOrUnsetWebSocketParamsObj:any = {
-    match:{
-      centralIds:[]
-    },
-    bookMaker:{
-      centralIds:[]
-    },
-    fancy:{
-      centralIds:[]
-    }
-  };
+  
   setResponse:any= {};
 
   tourId:any;
@@ -80,6 +71,7 @@ export class MarketListComponent implements OnInit {
   matchedBets :any[] = [];
   unMatchedBets :any[] = [];
   betListForm: FormGroup;
+  timerId: any;
 
 
   showFancyMarkets = true;
@@ -87,8 +79,6 @@ export class MarketListComponent implements OnInit {
   showMatchOddMarkets = true;
   showCustomBookmakerMarkets = true;
   showCustomFancyMarkets = true;
-
-  dataFlowCheckerInterval:any = false;
 
   matchOddLastUpdatedAt = new Date();
   bookmakerLastUpdatedAt = new Date();
@@ -114,6 +104,7 @@ export class MarketListComponent implements OnInit {
     private _cdref: ChangeDetectorRef,
     private _sanitizer: DomSanitizer,
     private _fb: FormBuilder,
+    private _bookMgmService:BookManagementService
   ) { }
 
 
@@ -157,7 +148,6 @@ export class MarketListComponent implements OnInit {
     this.socketSub = this._sharedService.socketUrlSubject.subscribe(res=>{
       if(res){
         this.realDataWebSocket = webSocket(res['url']);
-        console.log(this.realDataWebSocket)
         // this.realDataWebSocket = webSocket('ws://localhost:8888');
         this._getWebSocketUrl();
       }
@@ -174,6 +164,8 @@ export class MarketListComponent implements OnInit {
 
       this.getBetsForMarketWatch();
       this.getMarketForMarketWatch()
+
+      this.callBetTimer();
   }
 
 
@@ -194,7 +186,6 @@ export class MarketListComponent implements OnInit {
       if(res?.inPlayUpcomingMarket && res['inPlayUpcomingMarket']?.matchName){
           this.matchName =  res['inPlayUpcomingMarket']['matchName'];
           this.isMatchLive = res['inPlayUpcomingMarket']['inPlayStatus'];
-          this.setOrUnsetWebSocketParamsObj['match']['centralIds'].push(res['inPlayUpcomingMarket']['centralId']);
 
           if(res['inPlayUpcomingMarket']['runnerStatus']){
           for(let rnr of res['inPlayUpcomingMarket']['runners']){
@@ -257,17 +248,12 @@ export class MarketListComponent implements OnInit {
   }
 
 
-  getLineMarkets(){
-
-  }
-
   getBookMakerData(){
     this._sharedService._postBookMakerMarketApi({matchId:this.matchId, "typeId":12}).subscribe((res:any)=>{
       if(res.length > 0){
 
         res.map(sportsObj =>{
           sportsObj['updatedAt'] = new Date().getTime();
-          this.setOrUnsetWebSocketParamsObj['bookMaker']['centralIds'].push(sportsObj['centralId']);
 
           if(sportsObj['runnerStatus']){
             for(let rnr of sportsObj['runners']){
@@ -335,7 +321,7 @@ export class MarketListComponent implements OnInit {
         res.map(sportsObj =>{
           sportsObj['updatedAt'] = new Date().getTime();
           if(sportsObj['appMarketStatus'] !=4 && sportsObj['appMarketStatus'] !=2) this.isFancyCardShow = true;
-          this.setOrUnsetWebSocketParamsObj['fancy']['centralIds'].push(sportsObj['centralId']);
+          
                 if((sportsObj['batb'] == undefined) || (sportsObj['batl'] == undefined)){
                   sportsObj['back1'] = '';
                   sportsObj['vback1'] = '';
@@ -1127,6 +1113,7 @@ export class MarketListComponent implements OnInit {
   this.getMarketForMarketWatch();
 
     this._sharedService._getBetsForMarketWatchApi(payload).subscribe((res:any)=>{
+      this.allBets = [];
       for(let bet of res.booksForBackend){
         if(bet.marketType == 1){
           this.oddCount = bet.betlist.length;
@@ -1148,7 +1135,6 @@ export class MarketListComponent implements OnInit {
   getMarketForMarketWatch(){
    
     this._sharedService._getMarketForMarketWatchApi({matchId:this.matchId}).subscribe((res:any)=>{
-      console.log(res)
       if(res){
         this.marketList = res.booksForBackend
       }
@@ -1181,7 +1167,7 @@ export class MarketListComponent implements OnInit {
   }
 
     this._sharedService._getBetsForMarketWatchApi(payload).subscribe((res:any)=>{
-      console.log(res)
+      this.betList = [];
       for(let bet of res.booksForBackend){
         if(bet.marketType == 1){
           this.oddCount = bet.betlist.length;
@@ -1197,7 +1183,10 @@ export class MarketListComponent implements OnInit {
         }
       }
 
-      console.log(this.betList)
+      this.betList.sort((a,b)=>new Date(b.createdAt).getTime()-new Date(a.createdAt).getTime());
+
+      this._postBooksForAdminBookMgmApi()
+
     })
   }
 
@@ -1223,18 +1212,7 @@ export class MarketListComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.fancyInterval);
-   
-    this.socketSub.unsubscribe()
 
-    if(this.realDataWebSocket){
-      this.isPageDestroyed = true;
-      this.realDataWebSocket.complete()
-    }
-
-    clearInterval(this.dataFlowCheckerInterval);
-  }
 
 
   onSubmit(){
@@ -1278,10 +1256,125 @@ export class MarketListComponent implements OnInit {
   }
 
 
+  callBetTimer(){
+    this.timerId = setInterval(()=>{
+     this.getBetsForMarketWatch();
+    },3000)
+  }
+
+
+
+  _postBooksForAdminBookMgmApi() {
+
+    let marketIdList = this.betList.map(a=>a.marketId);
+
+    let bookMgmParams = {
+      "marketIds": marketIdList,
+      "myPT": false
+    }
+
+    this._bookMgmService
+      ._postBooksForAdminBookMgmApi(bookMgmParams)
+      .subscribe((res: any) => {
+        this.matchName = res['matchName'];
+        if (res['book'].length > 0) {
+
+          res['book'].map((singleBook) => {
+
+            if(singleBook['marketTypName'] == 'Match Odds'){
+
+              if(this.inPlayUpcomingMarket){
+                if(this.inPlayUpcomingMarket.marketId == singleBook.marketId){
+                  for(let runner of this.inPlayUpcomingMarket.runners){
+                    for(let bookrnr of singleBook.adminBook){
+                      if(runner.SelectionId == bookrnr.SelectionId){
+                        runner.amount = bookrnr.amount
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            if(singleBook['marketTypName'] == 'Bookmaker'){
+             
+
+              for(let market of this.bookMakerMarket){
+                if(market.marketId == singleBook.marketId){
+                  for(let runner of market.runners){
+                    for(let bookrnr of singleBook.adminBook){
+                      if(runner.SelectionId == bookrnr.SelectionId){
+                        runner.amount = bookrnr.amount
+                      }
+                    }
+                  }
+                }
+              }
+
+              for(let market of this.customBookmakerMarkets){
+                if(market.marketId == singleBook.marketId){
+                  for(let runner of market.runners){
+                    for(let bookrnr of singleBook.adminBook){
+                      if(runner.SelectionId == bookrnr.SelectionId){
+                        runner.amount = bookrnr.amount
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            if(singleBook['marketTypName'] == 'Fancy'){
+              
+              for(let market of this.customFancyMarket){
+                if(market.marketId == singleBook.marketId){
+                  market.amount = singleBook.adminBook[0]?.amount
+                }
+              }
+
+              for(let market of this.fancyMarket){
+                if(market.marketId == singleBook.marketId){
+                  market.amount = singleBook.adminBook[0]?.amount
+                }
+              }
+            }
+
+          });
+        }
+      });
+  }
+
+
   checkSuspendCondition(marketObj){
     // const timeDifferenceInSeconds = Math.abs((new Date().getTime() - marketObj['updatedAt']) / 1000);
     // return timeDifferenceInSeconds > 60;
     return false;
   }
+
+
+  getLadderDataByMarket(marketId){
+    this.ladderObj = [];
+    this._bookMgmService
+      ._postLadderDataByMarketApi({ marketId: marketId, myPt: this.myPT })
+      .subscribe((res: any) => {
+        this.ladderObj = res?.ladderDetails;
+      });
+  }
+
+
+
+  ngOnDestroy(): void {
+    clearInterval(this.fancyInterval);
+    clearInterval(this.timerId);
+   
+    this.socketSub.unsubscribe()
+
+    if(this.realDataWebSocket){
+      this.isPageDestroyed = true;
+      this.realDataWebSocket.complete()
+    }
+  }
+
+
 
 }

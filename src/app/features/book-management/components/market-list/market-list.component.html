@@ -85,12 +85,12 @@
                                       }}</strong></a>
                                   <br />
                                   <a [ngClass]="
-                                      runner?.hourseAmt?.amount > 0
+                                      runner?.amount > 0
                                         ? 'text-success'
                                         : 'text-danger'
                                     ">
                                     <strong>{{
-                                      runner?.hourseAmt?.amount | number
+                                      runner?.amount | number
                                       }}</strong>
                                   </a>
 
@@ -237,12 +237,12 @@
                                         }}</strong></a>
                                     <br />
                                     <a [ngClass]="
-                                        runner?.hourseAmt?.amount > 0
+                                        runner?.amount > 0
                                           ? 'text-success'
                                           : 'text-danger'
                                       ">
                                       <strong>{{
-                                        runner?.hourseAmt?.amount
+                                        runner?.amount
                                         }}</strong>
                                     </a>
 
@@ -719,12 +719,12 @@
                                           }}</strong></a>
                                       <br />
                                       <a [ngClass]="
-                                          runner?.hourseAmt?.amount > 0
+                                          runner?.amount > 0
                                             ? 'text-success'
                                             : 'text-danger'
                                         ">
                                         <strong>{{
-                                          runner?.hourseAmt?.amount | number
+                                          runner?.amount | number
                                           }}</strong>
                                       </a>
 
@@ -921,12 +921,12 @@
                                         }}</strong></a>
                                     <br />
                                     <a [ngClass]="
-                                        runner?.hourseAmt?.amount > 0
+                                        runner?.amount > 0
                                           ? 'text-success'
                                           : 'text-danger'
                                       ">
                                       <strong>{{
-                                        runner?.hourseAmt?.amount | number
+                                        runner?.amount | number
                                         }}</strong>
                                     </a>
 
@@ -1127,12 +1127,12 @@
                                           }}</strong></a>
                                       <br />
                                       <a [ngClass]="
-                                          runner?.hourseAmt?.amount > 0
+                                          runner.amount > 0
                                             ? 'text-success'
                                             : 'text-danger'
                                         ">
                                         <strong>{{
-                                          runner?.hourseAmt?.amount | number
+                                          runner?.amount | number
                                           }}</strong>
                                       </a>
 
@@ -1347,12 +1347,12 @@
                                         }}</strong></a>
                                     <br />
                                     <a [ngClass]="
-                                        runner?.hourseAmt?.amount > 0
+                                        runner?.amount > 0
                                           ? 'text-success'
                                           : 'text-danger'
                                       ">
                                       <strong>{{
-                                        runner?.hourseAmt?.amount | number
+                                        runner?.amount | number
                                         }}</strong>
                                     </a>
 
@@ -1606,20 +1606,26 @@
                                       }}<br /> </strong></a>
                                   <br />
                                   <a [ngClass]="
-                                      singleFancyMarket?.hourseAmt?.amount > 0
+                                      singleFancyMarket?.amount > 0
                                         ? 'text-success'
                                         : 'text-danger'
                                     ">
                                     <strong>{{
-                                      singleFancyMarket?.hourseAmt?.amount
+                                      singleFancyMarket?.amount
                                       | number
                                       }}</strong>
                                   </a>
                                 </td>
 
                                 <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <a *ngIf="
-                                      singleFancyMarket?.hourseAmt && isLoggedIn
+                                  <a 
+                                  (click)="
+                                  getLadderDataByMarket(
+                                    singleFancyMarket['marketId']
+                                  )
+                                "
+                                  *ngIf="
+                                      (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
                                     <!-- <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" class="laddericon" > -->
@@ -1796,19 +1802,25 @@
                                       }}<br /> </strong></a>
                                   <br />
                                   <a [ngClass]="
-                                      singleFancyMarket?.hourseAmt?.amount > 0
+                                      singleFancyMarket?.amount > 0
                                         ? 'text-success'
                                         : 'text-danger'
                                     ">
                                     <strong>{{
-                                      singleFancyMarket?.hourseAmt?.amount
+                                      singleFancyMarket?.amount
                                       }}</strong>
                                   </a>
                                 </td>
 
                                 <td class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <a *ngIf="
-                                      singleFancyMarket?.hourseAmt && isLoggedIn
+                                  <a 
+                                  (click)="
+                                  getLadderDataByMarket(
+                                    singleFancyMarket['marketId']
+                                  )
+                                "
+                                  *ngIf="
+                                      (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
                                     <img src="/assets/images/ladder-icon.png" width="10px" />
@@ -1985,26 +1997,33 @@
                                 <td width="30%" class="text-start ps-2 heading border-top"
                                   [ngClass]="{ 'border-top': !first }">
                                   <a><strong>{{ singleFancyMarket["marketName"]
-                                      }}<br /> </strong></a>
+                                      }}<br />
+                                    </strong></a>
                                   <br />
                                   <a [ngClass]="
-                                      singleFancyMarket?.hourseAmt?.amount > 0
+                                      singleFancyMarket?.amount > 0
                                         ? 'text-success'
                                         : 'text-danger'
                                     ">
                                     <strong>{{
-                                      singleFancyMarket?.hourseAmt?.amount
+                                      singleFancyMarket?.amount
                                       | number
                                       }}</strong>
                                   </a>
                                 </td>
 
                                 <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <a *ngIf="
-                                      singleFancyMarket?.hourseAmt && isLoggedIn
+                                  <a
+                                  (click)="
+                                  getLadderDataByMarket(
+                                    singleFancyMarket['marketId']
+                                  )
+                                "
+                                  *ngIf="
+                                      (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
-                                    <!-- <a *ngIf="singleFancyMarket?.hourseAmt && isLoggedIn" class="laddericon" > -->
+                                    
                                     <img src="/assets/images/ladder-icon.png" width="10px" />
                                   </a>
                                 </td>
@@ -2201,19 +2220,25 @@
                                       }}<br /> </strong></a>
                                   <br />
                                   <a [ngClass]="
-                                      singleFancyMarket?.hourseAmt?.amount > 0
+                                      singleFancyMarket?.amount > 0
                                         ? 'text-success'
                                         : 'text-danger'
                                     ">
                                     <strong>{{
-                                      singleFancyMarket?.hourseAmt?.amount
+                                      singleFancyMarket?.amount
                                       }}</strong>
                                   </a>
                                 </td>
 
                                 <td class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <a *ngIf="
-                                      singleFancyMarket?.hourseAmt && isLoggedIn
+                                  <a 
+                                  (click)="
+                                  getLadderDataByMarket(
+                                    singleFancyMarket['marketId']
+                                  )
+                                "
+                                  *ngIf="
+                                      (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
                                     <img src="/assets/images/ladder-icon.png" width="10px" />

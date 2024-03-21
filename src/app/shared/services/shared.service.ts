@@ -376,5 +376,17 @@ _getWinningSettlementApi(payload){
 }
 
 
+_getBetsForMarketWatchApi(payload){
+  return this._apiHttpService
+    .post(this._apiEndpointsService.geBetsForMarketWatchEndpoint(),payload);
+}
+
+
+_getMarketForMarketWatchApi(payload){
+  return this._apiHttpService
+    .post(this._apiEndpointsService.getMarketForMarketWatchEndpoint(),payload);
+}
+
+
 }
 

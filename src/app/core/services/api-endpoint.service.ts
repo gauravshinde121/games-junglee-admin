@@ -553,9 +553,18 @@ export class ApiEndpointsService {
   }
 
 
-
   public geAdminAccountStatementNewEndpoint(){
     return this.createUrl(this._constants.API_GET_ADMIN_ACCOUNT_STATEMENT_NEW)
+  }
+
+
+  public geBetsForMarketWatchEndpoint(){
+    return this.createUrl(this._constants.API_GET_BET_FOR_MARKETWATCH)
+  }
+
+
+  public getMarketForMarketWatchEndpoint(){
+    return this.createUrl(this._constants.API_GET_MARKET_FOR_MARKETWATCH)
   }
 
 

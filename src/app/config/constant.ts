@@ -160,5 +160,9 @@ export class Constants {
     public readonly API_GET_CASINO_SUMMARY: string = 'api/junglee-admin/getCasinoWinSummary';
 
 
+    public readonly API_GET_BET_FOR_MARKETWATCH:string = 'api/getBetsInMarketWatch'
+    public readonly API_GET_MARKET_FOR_MARKETWATCH:string = 'api/getMarketForMarketWatch'
+
+
 
 }

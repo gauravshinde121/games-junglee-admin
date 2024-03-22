@@ -674,16 +674,26 @@
                                 </tr> -->
                                 <tr>
                                   <th width="70%" class="tfirstcol">
-                                    {{
-                                    singleBookMaker["marketName"].includes(
-                                    "0 SEC NO COMM"
-                                    )
-                                    ? singleBookMaker["marketName"].slice(
-                                    0,
-                                    -13
-                                    )
-                                    : singleBookMaker["marketName"]
-                                    }}
+                                    <span class="d-flex">
+                                      {{
+                                      singleBookMaker["marketName"].includes(
+                                      "0 SEC NO COMM"
+                                      )
+                                      ? singleBookMaker["marketName"].slice(
+                                      0,
+                                      -13
+                                      )
+                                      : singleBookMaker["marketName"]
+                                      }}
+                                      <ul class="m-0 d-flex list-unstyled">
+                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal"
+                                            data-bs-target="#bookmaker">BOOK</button></li>
+                                        <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                                src="assets/images/lock.svg" alt=""></span></button></li>
+                                        <li><button class="btn btn-warning py-0">BetPlace</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li>
+                                      </ul>
+                                    </span>
                                   </th>
                                   <th class="coldark">
                                     <!-- <img
@@ -879,24 +889,29 @@
                                 </tr> -->
                                 <tr>
                                   <th scope="col" class="tfirstcol">
-                                    {{
-                                    singleBookMaker["marketName"].includes(
-                                    "0 SEC NO COMM"
-                                    )
-                                    ? singleBookMaker["marketName"].slice(
-                                    0,
-                                    -13
-                                    )
-                                    : singleBookMaker["marketName"]
-                                    }}
+                                    <span class="d-flex">
+                                      {{
+                                      singleBookMaker["marketName"].includes(
+                                      "0 SEC NO COMM"
+                                      )
+                                      ? singleBookMaker["marketName"].slice(
+                                      0,
+                                      -13
+                                      )
+                                      : singleBookMaker["marketName"]
+                                      }}
+
+                                      <ul class="m-0 d-flex list-unstyled">
+                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal"
+                                            data-bs-target="#bookmaker">BOOK</button></li>
+                                        <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                                src="assets/images/lock.svg" alt=""></span></button></li>
+                                        <li><button class="btn btn-warning py-0">BetPlace</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li>
+                                      </ul>
+                                    </span>
                                   </th>
-                                  <th scope="col" class="coldark">
-                                    <!-- <img
-                                      src="/assets/images/timer.png"
-                                      class="timer"
-                                    />
-                                    {{ singleBookMaker["bookmakerDelay"] }} -->
-                                  </th>
+
                                   <th scope="col" width="10%" class="coldark"></th>
                                   <th scope="col" width="10%" class="coldark"></th>
                                   <th scope="col" colspan="3" class="text-end coldark">
@@ -955,7 +970,6 @@
                                         number}}</strong>
                                     </a>
                                   </td>
-                                  <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
                                   <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
                                   <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
 
@@ -1063,7 +1077,7 @@
                                   </td>
 
                                   <td>
-                                    <div style="text-align: left">
+                                    <div style="text-align: left" style="font-size: 12px;">
                                       <strong>Min:
                                         {{
                                         singleBookMaker["minBet"]
@@ -1100,7 +1114,17 @@
                                 <tr></tr>
                                 <tr>
                                   <th width="70%" class="tfirstcol">
-                                    Manual {{ customMarkets["marketName"] }}
+                                    <span class="d-flex">
+                                      Manual {{ customMarkets["marketName"] }}
+                                      <ul class="m-0 d-flex list-unstyled">
+                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal"
+                                            data-bs-target="#bookmaker">BOOK</button></li>
+                                        <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                                src="assets/images/lock.svg" alt=""></span></button></li>
+                                        <li><button class="btn btn-warning py-0">BetPlace</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li>
+                                      </ul>
+                                    </span>
                                   </th>
                                   <th class="coldark"></th>
                                   <th colspan="1" class="text-center coldark">
@@ -1314,7 +1338,17 @@
                                 </tr> -->
                                 <tr>
                                   <th scope="col" class="tfirstcol">
-                                    Manual {{ customMarkets["marketName"] }}
+                                    <span class="d-flex">
+                                      Manual {{ customMarkets["marketName"] }}
+                                      <ul class="m-0 d-flex list-unstyled">
+                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal"
+                                            data-bs-target="#bookmaker">BOOK</button></li>
+                                        <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                                src="assets/images/lock.svg" alt=""></span></button></li>
+                                        <li><button class="btn btn-warning py-0">BetPlace</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li>
+                                      </ul>
+                                    </span>
                                   </th>
                                   <th scope="col" class="coldark">
                                     <!-- <img
@@ -1569,7 +1603,15 @@
                           ">
                           <thead>
                             <tr>
-                              <th scope="col" class="tfirstcol">Fancy</th>
+                              <th scope="col" class="tfirstcol">
+                                <span class="d-flex">
+                                Fancy
+                                <ul class="m-0 d-flex list-unstyled">
+                                  <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                          src="assets/images/lock.svg" alt=""></span></button></li>
+
+                                </ul></span>
+                              </th>
                               <th scope="col" class="coldark">
                                 <!-- <img
                                   src="/assets/images/timer.png"
@@ -1623,8 +1665,7 @@
                                   getLadderDataByMarket(
                                     singleFancyMarket['marketId']
                                   )
-                                "
-                                  *ngIf="
+                                " *ngIf="
                                       (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
@@ -1770,7 +1811,15 @@
                           ">
                           <thead>
                             <tr>
-                              <th width="70%" class="tfirstcol">Fancy</th>
+                              <th width="70%" class="tfirstcol">
+                                <span class="d-flex">
+                                  Fancy
+                                  <ul class="m-0 d-flex list-unstyled">
+                                    <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                            src="assets/images/lock.svg" alt=""></span></button></li>
+  
+                                  </ul></span>
+                              </th>
                               <th class="coldark">
                                 <img src="/assets/images/fast.png" class="timer" />
                               </th>
@@ -1818,8 +1867,7 @@
                                   getLadderDataByMarket(
                                     singleFancyMarket['marketId']
                                   )
-                                "
-                                  *ngIf="
+                                " *ngIf="
                                       (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
@@ -1960,7 +2008,13 @@
                           <thead>
                             <tr>
                               <th scope="col" class="tfirstcol">
-                                Manual Fancy
+                                 <span class="d-flex">
+                                 Manual Fancy
+                                  <ul class="m-0 d-flex list-unstyled">
+                                    <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                            src="assets/images/lock.svg" alt=""></span></button></li>
+  
+                                  </ul></span>
                               </th>
                               <th scope="col" class="coldark">
                                 <!-- <img
@@ -2013,13 +2067,11 @@
                                 </td>
 
                                 <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <a
-                                  (click)="
+                                  <a (click)="
                                   getLadderDataByMarket(
                                     singleFancyMarket['marketId']
                                   )
-                                "
-                                  *ngIf="
+                                " *ngIf="
                                       (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
@@ -2187,7 +2239,13 @@
                           <thead>
                             <tr>
                               <th width="70%" class="tfirstcol">
-                                Manual Fancy
+                                <span class="d-flex">
+                                  Manual Fancy
+                                   <ul class="m-0 d-flex list-unstyled">
+                                     <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                             src="assets/images/lock.svg" alt=""></span></button></li>
+   
+                                   </ul></span>
                               </th>
                               <th class="coldark">
                                 <img src="/assets/images/fast.png" class="timer" />
@@ -2236,8 +2294,7 @@
                                   getLadderDataByMarket(
                                     singleFancyMarket['marketId']
                                   )
-                                "
-                                  *ngIf="
+                                " *ngIf="
                                       (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
@@ -2572,8 +2629,9 @@
           </div>
           <div class="col-md-5">
             <ul class="d-flex list-unstyled p-0 justify-content-end">
-              <li class="me-2"><button class="btn btn-dark py-0"data-bs-toggle="modal" data-bs-target="#bookmaker">PL</button></li>
-              <li><button (click)="onClickAllBet()" class="btn btn-dark py-0" data-bs-toggle="modal" data-bs-target="#allBets">All Bets</button>
+              <li class="me-2"><button class="btn btn-dark py-0">PL</button></li>
+              <li><button (click)="onClickAllBet()" class="btn btn-dark py-0" data-bs-toggle="modal"
+                  data-bs-target="#allBets">All Bets</button>
               </li>
             </ul>
           </div>
@@ -2696,8 +2754,8 @@
               <div class="row align-items-end">
                 <div class="mb-3 col-md-2">
                   <label for="client" class="form-label">Search by Client</label>
-                  <input class="text-dark" formControlName="memberName" type="text" class="form-control" id="client" aria-describedby="client"
-                    placeholder="Search by Client">
+                  <input class="text-dark" formControlName="memberName" type="text" class="form-control" id="client"
+                    aria-describedby="client" placeholder="Search by Client">
                 </div>
                 <div class="mb-3 col-md-2">
                   <label for="marketType" class="form-label">Select Market Type</label>
@@ -2714,18 +2772,19 @@
 
                   <select formControlName="marketId" id="market" class="form-select">
                     <option value="null">All</option>
-                    <option  *ngFor="let market of marketList" [value]="market.marketId">{{market.marketTypeName}}</option>
+                    <option *ngFor="let market of marketList" [value]="market.marketId">{{market.marketTypeName}}
+                    </option>
                   </select>
                 </div>
                 <div class="mb-3 col-md-2">
                   <label for="AmountFrom" class="form-label">Amount From</label>
-                  <input formControlName="stakesFromValue" type="text" class="form-control" id="AmountFrom" aria-describedby="AmountFrom"
-                    placeholder="Amount From">
+                  <input formControlName="stakesFromValue" type="text" class="form-control" id="AmountFrom"
+                    aria-describedby="AmountFrom" placeholder="Amount From">
                 </div>
                 <div class="mb-3 col-md-2">
                   <label for="AmountTo" class="form-label">Amount To</label>
-                  <input formControlName="stakesToValue" type="text" class="form-control" id="AmountTo" aria-describedby="AmountTo"
-                    placeholder="Amount To">
+                  <input formControlName="stakesToValue" type="text" class="form-control" id="AmountTo"
+                    aria-describedby="AmountTo" placeholder="Amount To">
                 </div>
                 <div class="mb-3 col-md-2">
                   <button type="submit" class="btn bg-color" (click)="onSubmit()">Submit</button>

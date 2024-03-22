@@ -2905,16 +2905,16 @@
                     <td>{{list.userName}}</td>
                     <td>
                     <span *ngIf="list.runner1Amount == 0">{{list.runner1Amount}}</span>
-                    <span class="text-success" *ngIf="list.runner1Amount> 0">{{list.runner1Amount}}</span>
-                    <span class="text-danger" *ngIf="list.runner1Amount< 0">{{list.runner1Amount}}</span>
+                    <span class="text-success" *ngIf="list.runner1Amount> 0">{{list.runner1Amount | number}}</span>
+                    <span class="text-danger" *ngIf="list.runner1Amount< 0">{{list.runner1Amount | number}}</span>
                     </td>
                     <td>
                       <span *ngIf="list.runner2Amount == 0">{{list.runner2Amount}}</span>
-                      <span class="text-success" *ngIf="list.runner2Amount> 0">{{list.runner2Amount}}</span>
-                      <span class="text-danger" *ngIf="list.runner2Amount< 0">{{list.runner2Amount}}</span>
+                      <span class="text-success" *ngIf="list.runner2Amount> 0">{{list.runner2Amount | number}}</span>
+                      <span class="text-danger" *ngIf="list.runner2Amount< 0">{{list.runner2Amount | number}}</span>
                     </td>
 
-                    <td *ngIf="(list.runner3Amount!=null && list.runner3Amount!=undefined)">
+                    <td *ngIf="selectedBookRunners[2]">
                       <span *ngIf="list.runner3Amount == 0">{{list.runner3Amount}}</span>
                       <span class="text-success" *ngIf="list.runner3Amount> 0">{{list.runner3Amount}}</span>
                       <span class="text-danger" *ngIf="list.runner3Amount< 0">{{list.runner3Amount}}</span>

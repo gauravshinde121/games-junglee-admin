@@ -162,6 +162,7 @@ export class Constants {
 
     public readonly API_GET_BET_FOR_MARKETWATCH:string = 'api/getBetsInMarketWatch'
     public readonly API_GET_MARKET_FOR_MARKETWATCH:string = 'api/getMarketForMarketWatch'
+    public readonly API_GET_USER_BOOK_FOR_MARKETWATCH:string = 'api/getUserwiseTotalBookForMarketWatch'
 
 
 

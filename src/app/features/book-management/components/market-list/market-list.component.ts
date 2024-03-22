@@ -34,13 +34,16 @@ export class MarketListComponent implements OnInit,OnDestroy {
   bookmakerRate:any = null;
   matchOddRunner:any = [];
   bookmakerRunner:any = null;
-  myPT = false;
+  myPT = true;
   realDataWebSocket:any;
   realCustomDataWebSocket:any;
   webSocketUrl:string;
-  
+
   setResponse:any= {};
 
+  currentPage: number = 1;
+  pageSize: number = 50;
+  totalPages: number = 0;
   tourId:any;
   matchId:any;
   matchName:string = 'NO MATCH AVAILABLE';
@@ -94,6 +97,8 @@ export class MarketListComponent implements OnInit,OnDestroy {
   bookmakerCount = 0;
   fancyCount = 0;
   marketList:any = [];
+  bookArray:any = [];
+  selectedBookRunners:any = [];
 
 
 
@@ -141,6 +146,20 @@ export class MarketListComponent implements OnInit,OnDestroy {
       this.getCustomFancyMarket();
     });
 
+  }
+
+
+  onBookOpened(marketObj){
+    this.selectedBookRunners = marketObj.runners;
+    this.getUserwiseBooks(marketObj.marketId);
+  }
+
+
+  getUserwiseBooks(marketId){
+    this.bookArray = [];
+    this._bookMgmService._postUserWiseBookForMarketWatchApi({marketId:marketId,myPT:this.myPT}).subscribe((res:any)=>{
+      this.bookArray = res.book;
+    })
   }
 
   private _preConfig(){
@@ -321,7 +340,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
         res.map(sportsObj =>{
           sportsObj['updatedAt'] = new Date().getTime();
           if(sportsObj['appMarketStatus'] !=4 && sportsObj['appMarketStatus'] !=2) this.isFancyCardShow = true;
-          
+
                 if((sportsObj['batb'] == undefined) || (sportsObj['batl'] == undefined)){
                   sportsObj['back1'] = '';
                   sportsObj['vback1'] = '';
@@ -421,6 +440,18 @@ export class MarketListComponent implements OnInit,OnDestroy {
     }
   }
 
+
+  next(): void {
+    this.currentPage++;
+    this.onClickAllBet();
+    //this._getAllUserInfo(this.selectedRoleId);
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.onClickAllBet();
+    //this._getAllUserInfo(this.selectedRoleId);
+  }
   getCustomMarket(){
     let body = {
       "matchId": this.matchId,
@@ -808,7 +839,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
 
       if(this.fancyMarket){
         this.fancyMarket.map(fancyMarketObj=>{
-          
+
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +fancyMarketObj['marketId']]);
               if(singleWebSocketMarketDataBook != undefined){
 
@@ -826,8 +857,6 @@ export class MarketListComponent implements OnInit,OnDestroy {
                 for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
                   if (singleWebsocketRunnerBook['ib']) {
                     //back
-
-                    console.log(singleWebsocketRunnerBook)
                     //Live Rate
                     fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
 
@@ -1107,7 +1136,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
       "ammountFrom":null,
       "ammountTo":null,
       "limit":50,
-      "pageNo":1
+      "pageNo":this.currentPage
   }
 
   this.getMarketForMarketWatch();
@@ -1128,12 +1157,15 @@ export class MarketListComponent implements OnInit,OnDestroy {
           this.allBets.push(singleBet)
         }
       }
+      const totalCount = res.booksForBackend.reduce((total, obj) => total + obj.betlist.length, 0);
+      //console.log('totalCount', totalCount);
+      this.totalPages = Math.ceil(totalCount / this.pageSize);
     })
   }
 
 
   getMarketForMarketWatch(){
-   
+
     this._sharedService._getMarketForMarketWatchApi({matchId:this.matchId}).subscribe((res:any)=>{
       if(res){
         this.marketList = res.booksForBackend
@@ -1270,7 +1302,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
 
     let bookMgmParams = {
       "marketIds": marketIdList,
-      "myPT": false
+      "myPT": this.myPT
     }
 
     this._bookMgmService
@@ -1297,7 +1329,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
             }
 
             if(singleBook['marketTypName'] == 'Bookmaker'){
-             
+
 
               for(let market of this.bookMakerMarket){
                 if(market.marketId == singleBook.marketId){
@@ -1325,7 +1357,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
             }
 
             if(singleBook['marketTypName'] == 'Fancy'){
-              
+
               for(let market of this.customFancyMarket){
                 if(market.marketId == singleBook.marketId){
                   market.amount = singleBook.adminBook[0]?.amount
@@ -1366,7 +1398,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     clearInterval(this.fancyInterval);
     clearInterval(this.timerId);
-   
+
     this.socketSub.unsubscribe()
 
     if(this.realDataWebSocket){

@@ -52,7 +52,13 @@
                             <thead class="collapsible">
                               <tr>
                                 <th width="30%" class="tfirstcol">
+                                  
                                   Match Odds
+
+                                 <span> <button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(inPlayUpcomingMarket)"
+                                        data-bs-target="#bookmaker">BOOK</button></span>
+                                    
+                              
                                 </th>
                                 <th width="10%" class="coldark">
                                   <!-- <img
@@ -674,16 +680,26 @@
                                 </tr> -->
                                 <tr>
                                   <th width="70%" class="tfirstcol">
-                                    {{
-                                    singleBookMaker["marketName"].includes(
-                                    "0 SEC NO COMM"
-                                    )
-                                    ? singleBookMaker["marketName"].slice(
-                                    0,
-                                    -13
-                                    )
-                                    : singleBookMaker["marketName"]
-                                    }}
+                                    <span class="d-flex">
+                                      {{
+                                      singleBookMaker["marketName"].includes(
+                                      "0 SEC NO COMM"
+                                      )
+                                      ? singleBookMaker["marketName"].slice(
+                                      0,
+                                      -13
+                                      )
+                                      : singleBookMaker["marketName"]
+                                      }}
+                                      <ul class="m-0 d-flex list-unstyled">
+                                        <li><button class="btn btn-warning py-0" (click)="onBookOpened(singleBookMaker)" data-bs-toggle="modal"
+                                            data-bs-target="#bookmaker">BOOK</button></li>
+                                        <!-- <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                                src="assets/images/lock.svg" alt=""></span></button></li>
+                                        <li><button class="btn btn-warning py-0">BetPlace</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li> -->
+                                      </ul>
+                                    </span>
                                   </th>
                                   <th class="coldark">
                                     <!-- <img
@@ -879,24 +895,29 @@
                                 </tr> -->
                                 <tr>
                                   <th scope="col" class="tfirstcol">
-                                    {{
-                                    singleBookMaker["marketName"].includes(
-                                    "0 SEC NO COMM"
-                                    )
-                                    ? singleBookMaker["marketName"].slice(
-                                    0,
-                                    -13
-                                    )
-                                    : singleBookMaker["marketName"]
-                                    }}
+                                    <span class="d-flex">
+                                      {{
+                                      singleBookMaker["marketName"].includes(
+                                      "0 SEC NO COMM"
+                                      )
+                                      ? singleBookMaker["marketName"].slice(
+                                      0,
+                                      -13
+                                      )
+                                      : singleBookMaker["marketName"]
+                                      }}
+
+                                      <ul class="m-0 d-flex list-unstyled">
+                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(singleBookMaker)"
+                                            data-bs-target="#bookmaker">BOOK</button></li>
+                                        <!-- <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                                src="assets/images/lock.svg" alt=""></span></button></li>
+                                        <li><button class="btn btn-warning py-0">BetPlace</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li> -->
+                                      </ul>
+                                    </span>
                                   </th>
-                                  <th scope="col" class="coldark">
-                                    <!-- <img
-                                      src="/assets/images/timer.png"
-                                      class="timer"
-                                    />
-                                    {{ singleBookMaker["bookmakerDelay"] }} -->
-                                  </th>
+
                                   <th scope="col" width="10%" class="coldark"></th>
                                   <th scope="col" width="10%" class="coldark"></th>
                                   <th scope="col" colspan="3" class="text-end coldark">
@@ -955,7 +976,6 @@
                                         number}}</strong>
                                     </a>
                                   </td>
-                                  <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
                                   <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
                                   <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
 
@@ -1063,7 +1083,7 @@
                                   </td>
 
                                   <td>
-                                    <div style="text-align: left">
+                                    <div style="text-align: left" style="font-size: 12px;">
                                       <strong>Min:
                                         {{
                                         singleBookMaker["minBet"]
@@ -1100,7 +1120,17 @@
                                 <tr></tr>
                                 <tr>
                                   <th width="70%" class="tfirstcol">
-                                    Manual {{ customMarkets["marketName"] }}
+                                    <span class="d-flex">
+                                      Manual {{ customMarkets["marketName"] }}
+                                      <ul class="m-0 d-flex list-unstyled">
+                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(customMarkets)"
+                                            data-bs-target="#bookmaker">BOOK</button></li>
+                                        <!-- <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                                src="assets/images/lock.svg" alt=""></span></button></li>
+                                        <li><button class="btn btn-warning py-0">BetPlace</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li> -->
+                                      </ul>
+                                    </span>
                                   </th>
                                   <th class="coldark"></th>
                                   <th colspan="1" class="text-center coldark">
@@ -1314,7 +1344,17 @@
                                 </tr> -->
                                 <tr>
                                   <th scope="col" class="tfirstcol">
-                                    Manual {{ customMarkets["marketName"] }}
+                                    <span class="d-flex">
+                                      Manual {{ customMarkets["marketName"] }}
+                                      <ul class="m-0 d-flex list-unstyled">
+                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(customMarkets)"
+                                            data-bs-target="#bookmaker">BOOK</button></li>
+                                        <!-- <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                                src="assets/images/lock.svg" alt=""></span></button></li>
+                                        <li><button class="btn btn-warning py-0">BetPlace</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li> -->
+                                      </ul>
+                                    </span>
                                   </th>
                                   <th scope="col" class="coldark">
                                     <!-- <img
@@ -1569,7 +1609,16 @@
                           ">
                           <thead>
                             <tr>
-                              <th scope="col" class="tfirstcol">Fancy</th>
+                              <th scope="col" class="tfirstcol">
+                                <span class="d-flex">
+                                Fancy
+                                <!-- <ul class="m-0 d-flex list-unstyled">
+                                  <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                          src="assets/images/lock.svg" alt=""></span></button></li>
+
+                                </ul> -->
+                              </span>
+                              </th>
                               <th scope="col" class="coldark">
                                 <!-- <img
                                   src="/assets/images/timer.png"
@@ -1618,13 +1667,12 @@
                                 </td>
 
                                 <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <a 
+                                  <a
                                   (click)="
                                   getLadderDataByMarket(
                                     singleFancyMarket['marketId']
                                   )
-                                "
-                                  *ngIf="
+                                " *ngIf="
                                       (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
@@ -1770,7 +1818,16 @@
                           ">
                           <thead>
                             <tr>
-                              <th width="70%" class="tfirstcol">Fancy</th>
+                              <th width="70%" class="tfirstcol">
+                                <span class="d-flex">
+                                  Fancy
+                                  <!-- <ul class="m-0 d-flex list-unstyled">
+                                    <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                            src="assets/images/lock.svg" alt=""></span></button></li>
+  
+                                  </ul> -->
+                                </span>
+                              </th>
                               <th class="coldark">
                                 <img src="/assets/images/fast.png" class="timer" />
                               </th>
@@ -1813,13 +1870,12 @@
                                 </td>
 
                                 <td class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <a 
+                                  <a
                                   (click)="
                                   getLadderDataByMarket(
                                     singleFancyMarket['marketId']
                                   )
-                                "
-                                  *ngIf="
+                                " *ngIf="
                                       (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
@@ -1960,7 +2016,14 @@
                           <thead>
                             <tr>
                               <th scope="col" class="tfirstcol">
-                                Manual Fancy
+                                 <span class="d-flex">
+                                 Manual Fancy
+                                  <!-- <ul class="m-0 d-flex list-unstyled">
+                                    <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                            src="assets/images/lock.svg" alt=""></span></button></li>
+  
+                                  </ul> -->
+                                </span>
                               </th>
                               <th scope="col" class="coldark">
                                 <!-- <img
@@ -2013,17 +2076,15 @@
                                 </td>
 
                                 <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <a
-                                  (click)="
+                                  <a (click)="
                                   getLadderDataByMarket(
                                     singleFancyMarket['marketId']
                                   )
-                                "
-                                  *ngIf="
+                                " *ngIf="
                                       (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
-                                    
+
                                     <img src="/assets/images/ladder-icon.png" width="10px" />
                                   </a>
                                 </td>
@@ -2187,7 +2248,14 @@
                           <thead>
                             <tr>
                               <th width="70%" class="tfirstcol">
-                                Manual Fancy
+                                <span class="d-flex">
+                                  Manual Fancy
+                                   <!-- <ul class="m-0 d-flex list-unstyled">
+                                     <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                             src="assets/images/lock.svg" alt=""></span></button></li>
+   
+                                   </ul> -->
+                                  </span>
                               </th>
                               <th class="coldark">
                                 <img src="/assets/images/fast.png" class="timer" />
@@ -2231,13 +2299,12 @@
                                 </td>
 
                                 <td class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <a 
+                                  <a
                                   (click)="
                                   getLadderDataByMarket(
                                     singleFancyMarket['marketId']
                                   )
-                                "
-                                  *ngIf="
+                                " *ngIf="
                                       (singleFancyMarket?.amount!=0 && singleFancyMarket?.amount!=null && singleFancyMarket?.amount!=undefined)
                                     " data-bs-toggle="modal" href="#exampleModalToggle" role="button"
                                     class="laddericon">
@@ -2567,13 +2634,14 @@
               <li>Odds<span class="badge bg-secondary">{{oddCount}}</span></li>
               <li>BM<span class="badge bg-secondary">{{bookmakerCount}}</span></li>
               <li>Fancy<span class="badge bg-secondary">{{fancyCount}}</span></li>
-              <li><button class="btn btn-dark py-0">Reset</button></li>
+              <!-- <li><button class="btn btn-dark py-0">Reset</button></li> -->
             </ul>
           </div>
           <div class="col-md-5">
             <ul class="d-flex list-unstyled p-0 justify-content-end">
-              <li class="me-2"><button class="btn btn-dark py-0"data-bs-toggle="modal" data-bs-target="#bookmaker">PL</button></li>
-              <li><button (click)="onClickAllBet()" class="btn btn-dark py-0" data-bs-toggle="modal" data-bs-target="#allBets">All Bets</button>
+              <!-- <li class="me-2"><button class="btn btn-dark py-0">PL</button></li> -->
+              <li><button (click)="onClickAllBet()" class="btn btn-dark py-0" data-bs-toggle="modal"
+                  data-bs-target="#allBets">All Bets</button>
               </li>
             </ul>
           </div>
@@ -2696,8 +2764,8 @@
               <div class="row align-items-end">
                 <div class="mb-3 col-md-2">
                   <label for="client" class="form-label">Search by Client</label>
-                  <input class="text-dark" formControlName="memberName" type="text" class="form-control" id="client" aria-describedby="client"
-                    placeholder="Search by Client">
+                  <input class="text-dark" formControlName="memberName" type="text" class="form-control" id="client"
+                    aria-describedby="client" placeholder="Search by Client">
                 </div>
                 <div class="mb-3 col-md-2">
                   <label for="marketType" class="form-label">Select Market Type</label>
@@ -2714,18 +2782,19 @@
 
                   <select formControlName="marketId" id="market" class="form-select">
                     <option value="null">All</option>
-                    <option  *ngFor="let market of marketList" [value]="market.marketId">{{market.marketTypeName}}</option>
+                    <option *ngFor="let market of marketList" [value]="market.marketId">{{market.marketTypeName}}
+                    </option>
                   </select>
                 </div>
                 <div class="mb-3 col-md-2">
                   <label for="AmountFrom" class="form-label">Amount From</label>
-                  <input formControlName="stakesFromValue" type="text" class="form-control" id="AmountFrom" aria-describedby="AmountFrom"
-                    placeholder="Amount From">
+                  <input formControlName="stakesFromValue" type="text" class="form-control" id="AmountFrom"
+                    aria-describedby="AmountFrom" placeholder="Amount From">
                 </div>
                 <div class="mb-3 col-md-2">
                   <label for="AmountTo" class="form-label">Amount To</label>
-                  <input formControlName="stakesToValue" type="text" class="form-control" id="AmountTo" aria-describedby="AmountTo"
-                    placeholder="Amount To">
+                  <input formControlName="stakesToValue" type="text" class="form-control" id="AmountTo"
+                    aria-describedby="AmountTo" placeholder="Amount To">
                 </div>
                 <div class="mb-3 col-md-2">
                   <button type="submit" class="btn bg-color" (click)="onSubmit()">Submit</button>
@@ -2773,27 +2842,29 @@
               </table>
             </div>
           </div>
-          <div class="col-6">
+          <!-- <div class="col-6">
             <p>showing 1-3 of 3 entries</p>
-          </div>
+          </div> -->
           <div class="col-6">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-end">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">First</a>
-                </li>
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Last</a>
-                </li>
-              </ul>
-            </nav>
+            <div class="d-flex" *ngIf="allBets.length > 0">
+              <button
+                class="btn rounded-pill"
+                [disabled]="currentPage === 1"
+                (click)="prev()"
+              >
+                Prev
+              </button>
+              <span class="btn btn-pink rounded-pill ps-4 pe-4"
+                >{{ currentPage }} / {{ totalPages }}
+              </span>
+              <button
+                class="btn rounded-pill"
+                [disabled]="currentPage === totalPages"
+                (click)="next()"
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -2823,40 +2894,37 @@
                   <tr>
                     <th>No.</th>
                     <th>UserName</th>
-                    <th>New Zealand</th>
-                    <th>India</th>
+                    <th >{{selectedBookRunners[0]?.RunnerName}}</th>
+                    <th >{{selectedBookRunners[1]?.RunnerName}}</th>
+                    <th *ngIf="selectedBookRunners[2]">{{selectedBookRunners[2]?.RunnerName}}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="">
-                    <td>1</td>
-                    <td>Demo1</td>
-                    <td class="text-danger">-90</td>
-                    <td class="text-success">100</td>
-                  </tr>
-                  <tr class="bg-light">
-                    <td></td>
-                    <td>Total</td>
-                    <td class="text-danger">-90</td>
-                    <td class="text-success">100</td>
-                  </tr>
-                  <tr class="bg-light">
-                    <td></td>
-                    <td>Up Line</td>
-                    <td class="text-success">7</td>
-                    <td class="text-danger">-8</td>
-                  </tr>
-                  <tr class="bg-light">
-                    <td></td>
-                    <td>P/L</td>
-                    <td class="text-danger">-83</td>
-                    <td class="text-success">92</td>
+                  <tr *ngFor="let list of bookArray">
+                    <td>{{list.index}}</td>
+                    <td>{{list.userName}}</td>
+                    <td>
+                    <span *ngIf="list.runner1Amount == 0">{{list.runner1Amount}}</span>
+                    <span class="text-success" *ngIf="list.runner1Amount> 0">{{list.runner1Amount}}</span>
+                    <span class="text-danger" *ngIf="list.runner1Amount< 0">{{list.runner1Amount}}</span>
+                    </td>
+                    <td>
+                      <span *ngIf="list.runner2Amount == 0">{{list.runner2Amount}}</span>
+                      <span class="text-success" *ngIf="list.runner2Amount> 0">{{list.runner2Amount}}</span>
+                      <span class="text-danger" *ngIf="list.runner2Amount< 0">{{list.runner2Amount}}</span>
+                    </td>
+
+                    <td *ngIf="(list.runner3Amount!=null && list.runner3Amount!=undefined)">
+                      <span *ngIf="list.runner3Amount == 0">{{list.runner3Amount}}</span>
+                      <span class="text-success" *ngIf="list.runner3Amount> 0">{{list.runner3Amount}}</span>
+                      <span class="text-danger" *ngIf="list.runner3Amount< 0">{{list.runner3Amount}}</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>

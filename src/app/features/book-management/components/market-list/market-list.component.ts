@@ -35,10 +35,15 @@ export class MarketListComponent implements OnInit,OnDestroy {
   matchOddRunner:any = [];
   bookmakerRunner:any = null;
   myPT = false;
+
+  currentPage: number = 1;
+  pageSize: number = 50;
+  totalPages: number = 0;
+
   realDataWebSocket:any;
   realCustomDataWebSocket:any;
   webSocketUrl:string;
-  
+
   setResponse:any= {};
 
   tourId:any;
@@ -148,6 +153,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
     this.socketSub = this._sharedService.socketUrlSubject.subscribe(res=>{
       if(res){
         this.realDataWebSocket = webSocket(res['url']);
+        //console.log(this.realDataWebSocket)
         // this.realDataWebSocket = webSocket('ws://localhost:8888');
         this._getWebSocketUrl();
       }
@@ -321,7 +327,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
         res.map(sportsObj =>{
           sportsObj['updatedAt'] = new Date().getTime();
           if(sportsObj['appMarketStatus'] !=4 && sportsObj['appMarketStatus'] !=2) this.isFancyCardShow = true;
-          
+
                 if((sportsObj['batb'] == undefined) || (sportsObj['batl'] == undefined)){
                   sportsObj['back1'] = '';
                   sportsObj['vback1'] = '';
@@ -379,7 +385,6 @@ export class MarketListComponent implements OnInit,OnDestroy {
   }
 
   getUpdatedFancyMarketOnInterval(){
-    console.log("called")
     if(this.fancyInterval){
       clearInterval(this.fancyInterval)
     }
@@ -481,6 +486,19 @@ export class MarketListComponent implements OnInit,OnDestroy {
     },(err)=>{
       console.log("Err",err);
     })
+  }
+
+
+  next(): void {
+    this.currentPage++;
+    this.onClickAllBet();
+    //this._getAllUserInfo(this.selectedRoleId);
+  }
+
+  prev(): void {
+    this.currentPage--;
+    this.onClickAllBet();
+    //this._getAllUserInfo(this.selectedRoleId);
   }
 
   getCustomFancyMarket(){
@@ -808,7 +826,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
 
       if(this.fancyMarket){
         this.fancyMarket.map(fancyMarketObj=>{
-          
+
           let singleWebSocketMarketDataBook = _.find(webSocketData, ['bmi', +fancyMarketObj['marketId']]);
               if(singleWebSocketMarketDataBook != undefined){
 
@@ -827,7 +845,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
                   if (singleWebsocketRunnerBook['ib']) {
                     //back
 
-                    console.log(singleWebsocketRunnerBook)
+                    //console.log(singleWebsocketRunnerBook)
                     //Live Rate
                     fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
 
@@ -1079,12 +1097,12 @@ export class MarketListComponent implements OnInit,OnDestroy {
       }, // Called whenever there is a message from the server.
       err => {
         console.log('err',err)
-        console.log(this.isPageDestroyed)
+        //console.log(this.isPageDestroyed)
         if(!this.isPageDestroyed)this._getWebSocketUrl();
       }, // Called if at any point WebSocket API signals some kind of error.
       () => {
         console.log('completed')
-        console.log(this.isPageDestroyed)
+        //console.log(this.isPageDestroyed)
         if(!this.isPageDestroyed){
           this.isSocketCompleted = true;
           this._getWebSocketUrl();
@@ -1107,10 +1125,10 @@ export class MarketListComponent implements OnInit,OnDestroy {
       "ammountFrom":null,
       "ammountTo":null,
       "limit":50,
-      "pageNo":1
-  }
+      "pageNo":this.currentPage
+    }
 
-  this.getMarketForMarketWatch();
+    this.getMarketForMarketWatch();
 
     this._sharedService._getBetsForMarketWatchApi(payload).subscribe((res:any)=>{
       this.allBets = [];
@@ -1128,13 +1146,17 @@ export class MarketListComponent implements OnInit,OnDestroy {
           this.allBets.push(singleBet)
         }
       }
+      const totalCount = res.booksForBackend.reduce((total, obj) => total + obj.betlist.length, 0);
+      //console.log('totalCount', totalCount);
+      this.totalPages = Math.ceil(totalCount / this.pageSize);
     })
   }
 
 
   getMarketForMarketWatch(){
-   
+
     this._sharedService._getMarketForMarketWatchApi({matchId:this.matchId}).subscribe((res:any)=>{
+      //console.log(res)
       if(res){
         this.marketList = res.booksForBackend
       }
@@ -1168,6 +1190,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
 
     this._sharedService._getBetsForMarketWatchApi(payload).subscribe((res:any)=>{
       this.betList = [];
+      //console.log(res)
       for(let bet of res.booksForBackend){
         if(bet.marketType == 1){
           this.oddCount = bet.betlist.length;
@@ -1187,6 +1210,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
 
       this._postBooksForAdminBookMgmApi()
 
+      //console.log(this.betList)
     })
   }
 
@@ -1199,20 +1223,18 @@ export class MarketListComponent implements OnInit,OnDestroy {
       }, // Called whenever there is a message from the server.
       err => {
         console.log('err',err)
-        console.log(this.isPageDestroyed)
+        //console.log(this.isPageDestroyed)
         if(!this.isPageDestroyed)this._subscribeCustomWebSocket();
       }, // Called if at any point WebSocket API signals some kind of error.
       () => {
         console.log('completed')
-        console.log(this.isPageDestroyed)
+        //console.log(this.isPageDestroyed)
         if(!this.isPageDestroyed){
           this._subscribeCustomWebSocket();
         }
       }
     );
   }
-
-
 
 
   onSubmit(){
@@ -1297,7 +1319,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
             }
 
             if(singleBook['marketTypName'] == 'Bookmaker'){
-             
+
 
               for(let market of this.bookMakerMarket){
                 if(market.marketId == singleBook.marketId){
@@ -1325,7 +1347,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
             }
 
             if(singleBook['marketTypName'] == 'Fancy'){
-              
+
               for(let market of this.customFancyMarket){
                 if(market.marketId == singleBook.marketId){
                   market.amount = singleBook.adminBook[0]?.amount
@@ -1366,7 +1388,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     clearInterval(this.fancyInterval);
     clearInterval(this.timerId);
-   
+
     this.socketSub.unsubscribe()
 
     if(this.realDataWebSocket){

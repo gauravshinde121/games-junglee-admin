@@ -568,4 +568,9 @@ export class ApiEndpointsService {
   }
 
 
+  public getUserWiseBooksForMarketWatchEndpoint(){
+    return this.createUrl(this._constants.API_GET_USER_BOOK_FOR_MARKETWATCH)
+  }
+
+
 }

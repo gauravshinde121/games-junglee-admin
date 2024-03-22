@@ -114,7 +114,6 @@ export class AppComponent implements OnInit {
 
   getWebSocketUrl(){
     this._sharedService.getWebSocketURLApi().subscribe(url=>{
-      console.log(url)
       this._sharedService.socketUrlSubject.next(url)
     })
   }

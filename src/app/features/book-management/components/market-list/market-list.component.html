@@ -52,7 +52,13 @@
                             <thead class="collapsible">
                               <tr>
                                 <th width="30%" class="tfirstcol">
+                                  
                                   Match Odds
+
+                                 <span> <button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(inPlayUpcomingMarket)"
+                                        data-bs-target="#bookmaker">BOOK</button></span>
+                                    
+                              
                                 </th>
                                 <th width="10%" class="coldark">
                                   <!-- <img
@@ -686,12 +692,12 @@
                                       : singleBookMaker["marketName"]
                                       }}
                                       <ul class="m-0 d-flex list-unstyled">
-                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal"
+                                        <li><button class="btn btn-warning py-0" (click)="onBookOpened(singleBookMaker)" data-bs-toggle="modal"
                                             data-bs-target="#bookmaker">BOOK</button></li>
-                                        <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                        <!-- <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                                 src="assets/images/lock.svg" alt=""></span></button></li>
                                         <li><button class="btn btn-warning py-0">BetPlace</button></li>
-                                        <li><button class="btn btn-warning py-0">2</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li> -->
                                       </ul>
                                     </span>
                                   </th>
@@ -902,12 +908,12 @@
                                       }}
 
                                       <ul class="m-0 d-flex list-unstyled">
-                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal"
+                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(singleBookMaker)"
                                             data-bs-target="#bookmaker">BOOK</button></li>
-                                        <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                        <!-- <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                                 src="assets/images/lock.svg" alt=""></span></button></li>
                                         <li><button class="btn btn-warning py-0">BetPlace</button></li>
-                                        <li><button class="btn btn-warning py-0">2</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li> -->
                                       </ul>
                                     </span>
                                   </th>
@@ -1117,12 +1123,12 @@
                                     <span class="d-flex">
                                       Manual {{ customMarkets["marketName"] }}
                                       <ul class="m-0 d-flex list-unstyled">
-                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal"
+                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(customMarkets)"
                                             data-bs-target="#bookmaker">BOOK</button></li>
-                                        <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                        <!-- <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                                 src="assets/images/lock.svg" alt=""></span></button></li>
                                         <li><button class="btn btn-warning py-0">BetPlace</button></li>
-                                        <li><button class="btn btn-warning py-0">2</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li> -->
                                       </ul>
                                     </span>
                                   </th>
@@ -1341,12 +1347,12 @@
                                     <span class="d-flex">
                                       Manual {{ customMarkets["marketName"] }}
                                       <ul class="m-0 d-flex list-unstyled">
-                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal"
+                                        <li><button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(customMarkets)"
                                             data-bs-target="#bookmaker">BOOK</button></li>
-                                        <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
+                                        <!-- <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                                 src="assets/images/lock.svg" alt=""></span></button></li>
                                         <li><button class="btn btn-warning py-0">BetPlace</button></li>
-                                        <li><button class="btn btn-warning py-0">2</button></li>
+                                        <li><button class="btn btn-warning py-0">2</button></li> -->
                                       </ul>
                                     </span>
                                   </th>
@@ -1606,11 +1612,12 @@
                               <th scope="col" class="tfirstcol">
                                 <span class="d-flex">
                                 Fancy
-                                <ul class="m-0 d-flex list-unstyled">
+                                <!-- <ul class="m-0 d-flex list-unstyled">
                                   <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                           src="assets/images/lock.svg" alt=""></span></button></li>
 
-                                </ul></span>
+                                </ul> -->
+                              </span>
                               </th>
                               <th scope="col" class="coldark">
                                 <!-- <img
@@ -1814,11 +1821,12 @@
                               <th width="70%" class="tfirstcol">
                                 <span class="d-flex">
                                   Fancy
-                                  <ul class="m-0 d-flex list-unstyled">
+                                  <!-- <ul class="m-0 d-flex list-unstyled">
                                     <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                             src="assets/images/lock.svg" alt=""></span></button></li>
   
-                                  </ul></span>
+                                  </ul> -->
+                                </span>
                               </th>
                               <th class="coldark">
                                 <img src="/assets/images/fast.png" class="timer" />
@@ -2010,11 +2018,12 @@
                               <th scope="col" class="tfirstcol">
                                  <span class="d-flex">
                                  Manual Fancy
-                                  <ul class="m-0 d-flex list-unstyled">
+                                  <!-- <ul class="m-0 d-flex list-unstyled">
                                     <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                             src="assets/images/lock.svg" alt=""></span></button></li>
   
-                                  </ul></span>
+                                  </ul> -->
+                                </span>
                               </th>
                               <th scope="col" class="coldark">
                                 <!-- <img
@@ -2241,11 +2250,12 @@
                               <th width="70%" class="tfirstcol">
                                 <span class="d-flex">
                                   Manual Fancy
-                                   <ul class="m-0 d-flex list-unstyled">
+                                   <!-- <ul class="m-0 d-flex list-unstyled">
                                      <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                              src="assets/images/lock.svg" alt=""></span></button></li>
    
-                                   </ul></span>
+                                   </ul> -->
+                                  </span>
                               </th>
                               <th class="coldark">
                                 <img src="/assets/images/fast.png" class="timer" />
@@ -2624,12 +2634,12 @@
               <li>Odds<span class="badge bg-secondary">{{oddCount}}</span></li>
               <li>BM<span class="badge bg-secondary">{{bookmakerCount}}</span></li>
               <li>Fancy<span class="badge bg-secondary">{{fancyCount}}</span></li>
-              <li><button class="btn btn-dark py-0">Reset</button></li>
+              <!-- <li><button class="btn btn-dark py-0">Reset</button></li> -->
             </ul>
           </div>
           <div class="col-md-5">
             <ul class="d-flex list-unstyled p-0 justify-content-end">
-              <li class="me-2"><button class="btn btn-dark py-0">PL</button></li>
+              <!-- <li class="me-2"><button class="btn btn-dark py-0">PL</button></li> -->
               <li><button (click)="onClickAllBet()" class="btn btn-dark py-0" data-bs-toggle="modal"
                   data-bs-target="#allBets">All Bets</button>
               </li>
@@ -2884,34 +2894,31 @@
                   <tr>
                     <th>No.</th>
                     <th>UserName</th>
-                    <th>New Zealand</th>
-                    <th>India</th>
+                    <th >{{selectedBookRunners[0]?.RunnerName}}</th>
+                    <th >{{selectedBookRunners[1]?.RunnerName}}</th>
+                    <th *ngIf="selectedBookRunners[2]">{{selectedBookRunners[2]?.RunnerName}}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="">
-                    <td>1</td>
-                    <td>Demo1</td>
-                    <td class="text-danger">-90</td>
-                    <td class="text-success">100</td>
-                  </tr>
-                  <tr class="bg-light">
-                    <td></td>
-                    <td>Total</td>
-                    <td class="text-danger">-90</td>
-                    <td class="text-success">100</td>
-                  </tr>
-                  <tr class="bg-light">
-                    <td></td>
-                    <td>Up Line</td>
-                    <td class="text-success">7</td>
-                    <td class="text-danger">-8</td>
-                  </tr>
-                  <tr class="bg-light">
-                    <td></td>
-                    <td>P/L</td>
-                    <td class="text-danger">-83</td>
-                    <td class="text-success">92</td>
+                  <tr *ngFor="let list of bookArray">
+                    <td>{{list.index}}</td>
+                    <td>{{list.userName}}</td>
+                    <td>
+                    <span *ngIf="list.runner1Amount == 0">{{list.runner1Amount}}</span>
+                    <span class="text-success" *ngIf="list.runner1Amount> 0">{{list.runner1Amount}}</span>
+                    <span class="text-danger" *ngIf="list.runner1Amount< 0">{{list.runner1Amount}}</span>
+                    </td>
+                    <td>
+                      <span *ngIf="list.runner2Amount == 0">{{list.runner2Amount}}</span>
+                      <span class="text-success" *ngIf="list.runner2Amount> 0">{{list.runner2Amount}}</span>
+                      <span class="text-danger" *ngIf="list.runner2Amount< 0">{{list.runner2Amount}}</span>
+                    </td>
+
+                    <td *ngIf="(list.runner3Amount!=null && list.runner3Amount!=undefined)">
+                      <span *ngIf="list.runner3Amount == 0">{{list.runner3Amount}}</span>
+                      <span class="text-success" *ngIf="list.runner3Amount> 0">{{list.runner3Amount}}</span>
+                      <span class="text-danger" *ngIf="list.runner3Amount< 0">{{list.runner3Amount}}</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>

@@ -34,7 +34,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
   bookmakerRate:any = null;
   matchOddRunner:any = [];
   bookmakerRunner:any = null;
-  myPT = false;
+  myPT = true;
   realDataWebSocket:any;
   realCustomDataWebSocket:any;
   webSocketUrl:string;
@@ -97,6 +97,8 @@ export class MarketListComponent implements OnInit,OnDestroy {
   bookmakerCount = 0;
   fancyCount = 0;
   marketList:any = [];
+  bookArray:any = [];
+  selectedBookRunners:any = [];
 
 
 
@@ -144,6 +146,20 @@ export class MarketListComponent implements OnInit,OnDestroy {
       this.getCustomFancyMarket();
     });
 
+  }
+
+
+  onBookOpened(marketObj){
+    this.selectedBookRunners = marketObj.runners;
+    this.getUserwiseBooks(marketObj.marketId);
+  }
+
+
+  getUserwiseBooks(marketId){
+    this.bookArray = [];
+    this._bookMgmService._postUserWiseBookForMarketWatchApi({marketId:marketId,myPT:this.myPT}).subscribe((res:any)=>{
+      this.bookArray = res.book;
+    })
   }
 
   private _preConfig(){
@@ -841,8 +857,6 @@ export class MarketListComponent implements OnInit,OnDestroy {
                 for (let singleWebsocketRunnerBook of webSocketRunnersBook) {
                   if (singleWebsocketRunnerBook['ib']) {
                     //back
-
-                    console.log(singleWebsocketRunnerBook)
                     //Live Rate
                     fancyMarketObj['back' + singleWebsocketRunnerBook['pr']] = singleWebsocketRunnerBook['rt'];
 
@@ -1288,7 +1302,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
 
     let bookMgmParams = {
       "marketIds": marketIdList,
-      "myPT": false
+      "myPT": this.myPT
     }
 
     this._bookMgmService

@@ -52,13 +52,13 @@
                             <thead class="collapsible">
                               <tr>
                                 <th width="30%" class="tfirstcol">
-                                  
+
                                   Match Odds
 
                                  <span> <button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(inPlayUpcomingMarket)"
                                         data-bs-target="#bookmaker">BOOK</button></span>
-                                    
-                              
+
+
                                 </th>
                                 <th width="10%" class="coldark">
                                   <!-- <img
@@ -1824,7 +1824,7 @@
                                   <!-- <ul class="m-0 d-flex list-unstyled">
                                     <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                             src="assets/images/lock.svg" alt=""></span></button></li>
-  
+
                                   </ul> -->
                                 </span>
                               </th>
@@ -2021,7 +2021,7 @@
                                   <!-- <ul class="m-0 d-flex list-unstyled">
                                     <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                             src="assets/images/lock.svg" alt=""></span></button></li>
-  
+
                                   </ul> -->
                                 </span>
                               </th>
@@ -2253,7 +2253,7 @@
                                    <!-- <ul class="m-0 d-flex list-unstyled">
                                      <li><button class="btn btn-warning py-0"><span class="d-flex"> BL <img
                                              src="assets/images/lock.svg" alt=""></span></button></li>
-   
+
                                    </ul> -->
                                   </span>
                               </th>
@@ -2668,8 +2668,8 @@
                       <td>{{bet.userName}}</td>
                       <td>{{bet.marketName}}</td>
                       <td>{{bet.selectionName}}</td>
-                      <td>{{bet.betRate}}</td>
-                      <td>{{bet.stake}}</td>
+                      <td>{{bet.betRate | number : "1.2-2"}}</td>
+                      <td>{{bet.stake | number : "1.2-2"}}</td>
                     </tr>
                   </ng-container>
                 </tbody>
@@ -2829,10 +2829,10 @@
                       <td>{{bet.marketName}}</td>
                       <td>{{bet.selectionName}}</td>
                       <td>{{bet.isBack?'Back':'Lay'}}</td>
-                      <td>{{bet.betRate}}</td>
-                      <td>{{bet.stake}}</td>
-                      <td class="text-success">{{bet.pp}}</td>
-                      <td class="text-danger">{{bet.pl}}</td>
+                      <td>{{bet.betRate | number : "1.2-2"}}</td>
+                      <td>{{bet.stake | number : "1.2-2"}}</td>
+                      <td class="text-success">{{bet.pp | number : "1.2-2"}}</td>
+                      <td class="text-danger">{{bet.pl | number : "1.2-2"}}</td>
                       <td>{{bet.placedDate | date}}</td>
                       <td>{{bet.IP}}</td>
                       <!-- <td>DESKTOP</td> -->

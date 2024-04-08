@@ -438,11 +438,11 @@
                 </td>
                 <td>
                   <span *ngIf="totalCasino < 0" class="text-danger">{{
-                    totalCasino
+                    totalCasino | indianCurrency
                   }}</span>
                   <span *ngIf="totalCasino == 0">{{ totalCasino }}</span>
                   <span *ngIf="totalCasino > 0" class="text-success">{{
-                    totalCasino
+                    totalCasino | indianCurrency
                   }}</span>
                 </td>
                 <td></td>

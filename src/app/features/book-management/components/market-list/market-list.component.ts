@@ -1135,7 +1135,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
       "marketId": null,
       "ammountFrom":null,
       "ammountTo":null,
-      "limit":50,
+      "limit":15,
       "pageNo":this.currentPage
   }
 
@@ -1194,7 +1194,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
       "marketId": null,
       "ammountFrom":null,
       "ammountTo":null,
-      "limit":30,
+      "limit":15,
       "pageNo":1
   }
 
@@ -1265,7 +1265,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
       "marketId": this.betListForm.value.marketTypeId,
       "ammountFrom":this.betListForm.value.stakesFromValue,
       "ammountTo":this.betListForm.value.stakesToValue,
-      "limit":50,
+      "limit":15,
       "pageNo":1
   }
 

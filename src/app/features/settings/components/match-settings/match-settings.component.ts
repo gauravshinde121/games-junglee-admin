@@ -121,8 +121,10 @@ export class MatchSettingsComponent implements OnInit {
   }
 
   openSettingModal(matchSettings) {
+    this.selectedUserForAdjustment = [];
     this.matchSettingsForm.reset();
     this.selectedMatchSettings = matchSettings;
+    this.selectedUserForAdjustment.push(this.selectedMatchSettings.matchId)
     this.matchSettingsForm.patchValue({
       matchOddsMaxBet: matchSettings.matchOddsMaxBet,
       matchOddsMinBet: matchSettings.matchOddsMinBet,
@@ -146,6 +148,11 @@ export class MatchSettingsComponent implements OnInit {
 
   closeModal() {
     this.display = 'none';
+    this.selectedUserForAdjustment = [];
+
+    this.matchSettingsList.map(i=>{
+      i.state = false;
+    })
   }
 
   saveMatchSettings() {
@@ -153,7 +160,6 @@ export class MatchSettingsComponent implements OnInit {
     // console.log("this.selectedUserForAdjustment,",this.selectedUserForAdjustment)
     // return;
 
-    debugger;
     let body = {
       // matchId: this.selectedMatchSettings.matchId,
       matchId: this.selectedUserForAdjustment,
@@ -182,6 +188,7 @@ export class MatchSettingsComponent implements OnInit {
           'Match Settings',
           'success'
         );
+        this.selectedUserForAdjustment = [];
         this.getMatchSettingsList();
       });
   }

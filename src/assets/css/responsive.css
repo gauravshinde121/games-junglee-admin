@@ -16,15 +16,15 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.808);
+    background-color: #fff;
     z-index: 2;
     cursor: pointer;
   }
   .sidebar {
-    background: #83c5cb;
+    background: #fff;
     position: absolute;
     top: 3.5rem;
-    border: 1px solid #71514f;
+    /* border: 1px solid #71514f; */
     height: 100%;
   }
   .sidebar a {
@@ -62,7 +62,7 @@
   #main {
     /* padding: 20px 15px; */
     margin-top: 22px;
-    border-top: 1px solid #e76f26;
+    /* border-top: 1px solid #e76f26; */
   }
 
   .user p {
@@ -147,7 +147,7 @@
 @media only screen and (max-width: 960px) {
   .sidebar .btn,
   .sidebar ul li a {
-    font-size: 10px;
+    font-size: 13px;
   }
 }
 
@@ -256,7 +256,7 @@
 
 @media only screen and (min-width: 1536px) {
   .table {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   body {

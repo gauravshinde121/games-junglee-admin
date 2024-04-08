@@ -47,6 +47,9 @@ export class Constants {
     public readonly API_URL_GET_USER_BY_UPLINE_ID: string = 'api/junglee-admin/getUserByAdminId';
     public readonly API_URL_GET_EXPOSURE_DETAILS: string = 'api/junglee-admin/getExposureDetails';
 
+    public readonly API_URL_GET_USERACCOUNTLIST: string = 'api/getAccountListUsers';
+    public readonly API_URL_BOOKS_MARKET:string = 'api/getBooksForMarket';
+
 
     //book management
     public readonly API_URL_GET_BOOK_FOR_BACKEND: string = 'api/junglee-admin/getBooksForBackend';
@@ -70,6 +73,11 @@ export class Constants {
     public readonly API_CHANGE_PASSWORD: string = 'api/junglee-admin/changePassword';
     public readonly API_CREDIT_SETTLEMENT: string = 'api/credit-settlement';
     public readonly API_WINNING_SETTLEMENT: string = 'api/winning-settlement';
+
+    public readonly API_CASINO_SETTLEMENT: string = 'api/casinoSettlement';
+    public readonly API_BANK_SETTLEMENT: string = 'api/bankSettlement';
+    public readonly API_BANK_BULK_TRANSFER: string = 'api/bankBulkTransfer';
+    public readonly API_BANK_BANK_CASINO_SETTLEMENT: string = 'api/bankCasinoSettlement';
 
 
     //misc
@@ -134,7 +142,7 @@ export class Constants {
     public readonly API_GET_CASINO_PROVIDER:string = 'api/junglee-admin/getMemberWiseCasinoProviderList';
 
     public readonly API_GET_BANK_USERS: string = 'api/junglee-admin/getBankUsers';
-
+    public readonly API_URL_GET_IN_PLAY_UPCOMING: string = '/api/getMarketWatchInplay';
     public readonly API_GET_ADMIN_ACCOUNT_STATEMENT: string = 'api/junglee-admin/getAdminAccountStatement';
     public readonly API_GET_ADMIN_ACCOUNT_STATEMENT_NEW: string = 'api/getAdminAccountStatementNew';
     public readonly API_GET_PUBSUB_STATUS: string = 'api/getPubsubStatus';
@@ -143,10 +151,18 @@ export class Constants {
     public readonly API_RESET_COMMISSION_REPORT: string = 'api/resetCommission';
 
 
-
+    public readonly API_URL_POST_BOOKMAKER_MARKET: string = 'api/getMarketWatchOtherMarket';
+    public readonly API_URL_POST_FANCY_MARKET: string = 'api/getFancyMarketForAdmin';
+    public readonly API_URL_GET_NOTICE: string = 'api/getNoticeForAdmin';
+    public readonly API_URL_GET_CUSTOM_MARKET: string = 'api/getMarketWatchCustomMarket';
     //BANK
     public readonly API_GET_ADJUST_CASINO_AMOUNT: string = 'api/junglee-admin/settleCasinoAmount';
     public readonly API_GET_CASINO_SUMMARY: string = 'api/junglee-admin/getCasinoWinSummary';
+
+
+    public readonly API_GET_BET_FOR_MARKETWATCH:string = 'api/getBetsInMarketWatch'
+    public readonly API_GET_MARKET_FOR_MARKETWATCH:string = 'api/getMarketForMarketWatch'
+    public readonly API_GET_USER_BOOK_FOR_MARKETWATCH:string = 'api/getUserwiseTotalBookForMarketWatch'
 
 
 

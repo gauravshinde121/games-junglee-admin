@@ -1,7 +1,50 @@
 <main id="main" class="main m-0">
   <section class="section dashboard">
     
-    
+    <div class="row align-items-center">
+      <h4 class="text-pink">
+        <img src="../../../../../assets/images/pnl.png" alt="" /> Account
+        List
+      </h4>
+
+      <div class="col-md-6 col-lg-6 col-xl-6 mt-2">
+        <div class="input-group flex-nowrap">
+          <span class="input-group-text bg-dark  border-pink radius-left-tb" id="addon-wrapping">
+            <i class="fa fa-search"></i>
+          </span>
+          <input type="text" class="form-control border-start-0 border-pink radius-right-tb"
+            placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping"
+            [(ngModel)]="searchTerm" (ngModelChange)="search()" />
+        </div>
+      </div>
+
+      <div class="col-lg-1 col-md-6 col-6 mt-2">
+        <!-- <div class="col-12">Show Entries</div> -->
+        <select
+          (change)="updateLimit($event)"
+          class="form-select-sm border-colour bg-dark rounded-3"
+        >
+          <!-- <option>25</option>
+          <option>50</option> -->
+          <option>100</option>
+          <option>150</option>
+          <option>200</option>
+          <option>250</option>
+        </select>
+      </div>
+
+      <div class="col-md-12 col-lg-12 col-xl-2 text-end">
+        ( Total : {{ userList.length }} )
+      </div>
+
+      <div class="col-lg-1 col-md-3 col-3 text-end">
+        <button *ngIf="userList.length > 0" type="button" class="btn-sm btn-pink rounded-pill ms-2 "
+          (click)="exportExcel()">
+          Export
+        </button>
+      </div>
+    </div>
+
     <div class="row mt-3">
       <div class="col-md-12 overflow-auto">
         <div *ngIf="userList.length == 0" class="border text-center p-5">
@@ -67,8 +110,9 @@
                   ACCOUNT TYPE
                 </th>
                 
+                <th scope="col" class="text-center">ACTION</th>
+                <th scope="col" class="text-center">Client Casino P/L</th>
                 <th scope="col" class="last text-center">ACTION</th>
-
               </tr>
             </thead>
             <tbody>
@@ -129,16 +173,7 @@
                 </td>
 
                 <td class="text-center">
-                  <span
-                    *ngFor="let role of roles"
-                  >
-                  </span>
-                  <span *ngIf="user.roleId == 2"> ADMIN </span>
-                  <span *ngIf="user.roleId == 3"> SUPER MASTER </span>
-                  <span *ngIf="user.roleId == 4"> MASTER </span>
-                  <span *ngIf="user.roleId == 5"> AGENT </span>
-                  <span *ngIf="user.roleId == 6"> DEALER </span>
-                  <span *ngIf="user.roleId == 7"> USER </span>
+                 {{user.userRoleName}}
                 </td>
 
 
@@ -153,7 +188,30 @@
                   (click)="openWithdraw(user)"
                   >
                   W
-                    <!-- <i class="fa-sharp fa-solid fa-pen icon-pink pointer"></i> -->
+                  </a>
+                </td>
+
+                <td class="text-center">
+                  <ng-container>
+                    <a class="pointer text-danger text-decoration-none" *ngIf="user.casinoWinnings < 0">
+                      {{ user.casinoWinnings | indianCurrency }}
+                    </a>
+                    <a class="pointer text-success text-decoration-none" *ngIf="user.casinoWinnings > 0">
+                      {{ user.casinoWinnings | indianCurrency }}
+                    </a>
+                  </ng-container>
+                </td>
+
+                <td class="text-center">
+                  <a class="btn btn-success" (click)="openCasinoDeposit(user)" *ngIf="user.casinoWinnings < 0">
+                    D
+                  </a>
+
+                  <a class="btn btn-danger"
+                  *ngIf="user.casinoWinnings > 0"
+                  (click)="openCasinoWithdraw(user)"
+                  >
+                  W
                   </a>
                 </td>
 
@@ -163,7 +221,7 @@
         </div>
         <div class="d-flex" *ngIf="userList.length > 0 && !this.isLoading">
           <button
-            class="btn rounded-pill text-dark"
+            class="btn rounded-pill "
             [disabled]="currentPage === 1"
             (click)="prev()"
           >
@@ -173,7 +231,7 @@
             >{{ currentPage }} / {{ totalPages }}
           </span>
           <button
-            class="btn rounded-pill text-dark"
+            class="btn rounded-pill "
             [disabled]="currentPage === totalPages"
             (click)="next()"
           >
@@ -313,6 +371,9 @@
                         autocomplete="off"
                         (input)="onAmountDepositChange($event)"
                       /> 
+                      <span class="small text-danger" *ngIf="winningDepositForm?.get('profitLoss_ref')?.value !== null && winningDepositForm?.get('profitLoss_ref')?.value !== undefined && winningDepositForm?.get('profitLoss_ref')?.value > 0">
+                        Enter valid amount
+                      </span>
                   </div>
                 </div>
 
@@ -336,7 +397,7 @@
                 <div class="col-md-6 text-end">
                   <button
                     (click)="postWinningsData(true)"
-                    
+                    [disabled]="winningDepositForm.invalid"
                     class="btn btn-pink rounded-pill w-80 mt-4"
                   >
                     Save
@@ -483,6 +544,9 @@
                         type="number"
                         autocomplete="off"
                       /> 
+                      <span class="small text-danger" *ngIf="winningWithdrawalForm?.get('profitLoss_ref')?.value !== null && winningWithdrawalForm?.get('profitLoss_ref')?.value !== undefined && winningWithdrawalForm?.get('profitLoss_ref')?.value < 0">
+                        Enter valid amount
+                      </span>
                   </div>
                 </div>
 
@@ -506,7 +570,7 @@
                 <div class="col-md-6 text-end">
                   <button
                     (click)="postWithdrawData(false)"
-                    
+                    [disabled]="winningWithdrawalForm.invalid"
                     class="btn btn-pink rounded-pill w-80 mt-4"
                   >
                     Save
@@ -636,6 +700,7 @@
                           autocomplete="off"
                           readonly
                         /> 
+                        
                     </div>
                     </div>
     
@@ -704,6 +769,10 @@
                               autocomplete="off"
                               (input)="onAmountChange($event)"
                             /> 
+
+                            <span class="text-danger small" *ngIf="creditDepositeForm?.get('refupline_credit')?.value !== null && creditDepositeForm?.get('refupline_credit')?.value !== undefined && creditDepositeForm?.get('refupline_credit')?.value < 0">
+                              Enter valid amount
+                            </span>
                         </div>
                       </div>
     
@@ -727,7 +796,7 @@
                       <div class="col-md-6 text-end">
                         <button
                           (click)="postData(true)"
-                          
+                          [disabled]="creditDepositeForm.invalid"
                           class="btn btn-pink rounded-pill w-80 mt-4"
                         >
                           Save
@@ -801,6 +870,7 @@
                             autocomplete="off"
                             readonly
                           /> 
+                          
                       </div>
                       </div>
     
@@ -844,7 +914,11 @@
                               autocomplete="off"
                               (input)="onAmountWithdrawalChange($event)"
                             /> 
+                            <span class="text-danger small" *ngIf="creditWithdrawForm?.get('refdownline_credit')?.value !== null && creditWithdrawForm?.get('refdownline_credit')?.value !== undefined && creditWithdrawForm?.get('refdownline_credit')?.value < 0">
+                              Enter valid amount
+                            </span>
                         </div>
+                        
                       </div>
     
                       <div class="row mb-4 align-items-center">
@@ -867,7 +941,7 @@
                       <div class="col-md-6 text-end">
                         <button
                         (click)="postWithdrawalData(false)"
-                          
+                          [disabled]="creditWithdrawForm.invalid"
                           class="btn btn-pink rounded-pill w-80 mt-4"
                         >
                           Save
@@ -893,10 +967,7 @@
 
               <div class="row mt-3">
                 <div class="col-md-12 overflow-auto">
-                  <div *ngIf="userList.length == 0" class="border text-center p-5">
-                    <h4 *ngIf="userList.length == 0 && !isLoading">No data found</h4>
-                    <h4 *ngIf="isLoading">Loading...</h4>
-                  </div>
+                  
                   <div class="table-responsive tableRes tableFixHead">
                     <table
                       #myTable
@@ -935,12 +1006,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <h1
+                        <!-- <h4
                           class="text-center"
                           *ngIf="clTransfers.length == 0 && !this.isLoading"
                         >
                           No Record Found
-                        </h1>
+                        </h4> -->
                         <tr
                           *ngFor="
                             let stmt of clTransfers | sort : sortColumn : sortAscending;
@@ -963,6 +1034,18 @@
                         </tr>
                       </tbody>
                     </table>
+
+
+                    <div *ngIf="clTransfers.length == 0" class="border text-center p-5">
+                      <h4 *ngIf="clTransfers.length == 0 && !isLoading">No data found</h4>
+                      <!-- <h4 *ngIf="isLoading">Loading...</h4> -->
+                    </div>
+                    <!-- <h4
+                            class="text-center"
+                            *ngIf="clTransfers.length == 0 && !this.isLoading"
+                          >
+                            No Record Found
+                          </h4> -->
                   </div>
                 </div>
               </div>
@@ -976,6 +1059,354 @@
   </div>
 </div>
 <!-- Modal end -->
+
+
+
+<!-- CASINO DEPOSIT -->
+
+<div
+  *ngIf="modalNumber == 4"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          CASINO DEPOSIT
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <section class="section m-auto mt-4">
+            <form [formGroup]="winningCasinoDepositForm">
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-4">{{admin?.username}}</div>
+                <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="upline_credit"
+                      placeholder=""
+                      readonly
+                      id="upline_credit"
+                      name="upline_credit"
+                      autocomplete="off"
+                    /> 
+                </div>
+                <div class="col-md-4">
+                  <input
+                    class="form-control bg-transparent"
+                    formControlName="refupline_credit"
+                    placeholder=""
+                    id="refupline_credit"
+                    name="refupline_credit"
+                    autocomplete="off"
+                    readonly
+                  /> 
+              </div>
+              </div>
+
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-4">{{userData?.username}}</div>
+                  <div class="col-md-4">
+                      <input
+                        class="form-control bg-transparent"
+                        formControlName="downline_credit"
+                        placeholder=""
+                        id="downline_credit"
+                        name="downline_credit"
+                        autocomplete="off"
+                        readonly
+                      /> 
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="refdownline_credit"
+                      placeholder=""
+                      id="refdownline_credit"
+                      name="refdownline_credit"
+                      autocomplete="off"
+                      readonly
+                    /> 
+                </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Profit/Losss</div>
+                  <div class="col-md-4">
+                      <input
+                        class="form-control bg-transparent"
+                        formControlName="profitLoss"
+                        placeholder="Profit/Losss"
+                        id="profitLoss"
+                        name="profitLoss"
+                        autocomplete="off"
+                        readonly
+                      /> 
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="profitLoss_ref"
+                      placeholder="Profit/Losss"
+                      id="profitLoss_ref"
+                      name="profitLoss_ref"
+                      autocomplete="off"
+                      readonly
+                    /> 
+                </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Amount</div>
+                  <div class="col-md-8">
+                      <input
+                        min="0"
+                        class="form-control bg-transparent"
+                        formControlName="amount"
+                        placeholder="Amount"
+                        id="amount"
+                        name="amount"
+                        type="number"
+                        autocomplete="off"
+                        (input)="onCasinoAmountDepositChange($event)"
+                      /> 
+                      <span class="small text-danger" *ngIf="winningCasinoDepositForm?.get('profitLoss_ref')?.value !== null && winningCasinoDepositForm?.get('profitLoss_ref')?.value !== undefined && winningCasinoDepositForm?.get('profitLoss_ref')?.value > 0">
+                        Enter valid amount
+                      </span>
+                  </div>
+                  
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Remark</div>
+                  <div class="col-md-8">
+
+                    <input
+                    class="form-control bg-transparent"
+                    formControlName="remark"
+                    placeholder="Remark"
+                    id="remark"
+                    name="remark"
+                    autocomplete="off"
+                  /> 
+                  </div>
+                </div>
+
+              
+              <div class="row mt-5">
+                <div class="col-md-6 text-end">
+                  <button
+                    (click)="postCasinoDepositeData(true)"
+                    [disabled]="winningCasinoDepositForm.invalid"
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                  >
+                    Save
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                    (click)="closeModal()"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CASINO WITHDRAW -->
+
+<div
+  *ngIf="modalNumber == 5"
+  class="modal"
+  [ngStyle]="{ display: display }"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-pink">
+        <h5 class="modal-title cassino" id="staticBackdropLabel">
+          CASINO WITHDRAW
+        </h5>
+        <button
+          type="button"
+          (click)="closeModal()"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <section class="section m-auto mt-4">
+            <form [formGroup]="winningCasinoWithdrawalForm">
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-4">{{admin?.username}}</div>
+                <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="upline_credit"
+                      placeholder=""
+                      readonly
+                      id="upline_credit"
+                      name="upline_credit"
+                      autocomplete="off"
+                    /> 
+                </div>
+                <div class="col-md-4">
+                  <input
+                    class="form-control bg-transparent"
+                    formControlName="refupline_credit"
+                    placeholder=""
+                    id="refupline_credit"
+                    name="refupline_credit"
+                    autocomplete="off"
+                    readonly
+                  /> 
+              </div>
+              </div>
+
+              <div class="row mb-4 align-items-center">
+                <div class="col-md-4">{{userData?.username}}</div>
+                  <div class="col-md-4">
+                      <input
+                        class="form-control bg-transparent"
+                        formControlName="downline_credit"
+                        placeholder=""
+                        id="downline_credit"
+                        name="downline_credit"
+                        autocomplete="off"
+                        readonly
+                      /> 
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="refdownline_credit"
+                      placeholder=""
+                      id="refdownline_credit"
+                      name="refdownline_credit"
+                      autocomplete="off"
+                      readonly
+                    /> 
+                </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Profit/Losss</div>
+                  <div class="col-md-4">
+                      <input
+                        class="form-control bg-transparent"
+                        formControlName="profitLoss"
+                        placeholder="Profit/Losss"
+                        id="profitLoss"
+                        name="profitLoss"
+                        autocomplete="off"
+                        readonly
+                      /> 
+                  </div>
+                  <div class="col-md-4">
+                    <input
+                      class="form-control bg-transparent"
+                      formControlName="profitLoss_ref"
+                      placeholder="Profit/Losss"
+                      id="profitLoss_ref"
+                      name="profitLoss_ref"
+                      autocomplete="off"
+                      readonly
+                    /> 
+                </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Amount</div>
+                  <div class="col-md-8">
+                      <input
+                        min="0"
+                        class="form-control bg-transparent"
+                        formControlName="amount"
+                        placeholder="Amount"
+                        id="amount"
+                        name="amount"
+                        type="number"
+                        autocomplete="off"
+                        (input)="onCasinoAmountWithdrawChange($event)"
+                      /> 
+                      <span class="text-danger small" *ngIf="winningCasinoWithdrawalForm?.get('profitLoss_ref')?.value !== null && winningCasinoWithdrawalForm?.get('profitLoss_ref')?.value !== undefined && winningCasinoWithdrawalForm?.get('profitLoss_ref')?.value < 0">
+                        Enter valid amount
+                      </span>
+                  </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-4">Remark</div>
+                  <div class="col-md-8">
+
+                    <input
+                    class="form-control bg-transparent"
+                    formControlName="remark"
+                    placeholder="Remark"
+                    id="remark"
+                    name="remark"
+                    autocomplete="off"
+                  /> 
+                  </div>
+                </div>
+
+              
+              <div class="row mt-5">
+                <div class="col-md-6 text-end">
+                  <button
+                    (click)="postCasinoWithdrawData(false)"
+                    [disabled]="winningCasinoWithdrawalForm.invalid"
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                  >
+                    Save
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-pink rounded-pill w-80 mt-4"
+                    (click)="closeModal()"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- <div class="modal-backdrop fade" *ngIf="showModal"></div> -->

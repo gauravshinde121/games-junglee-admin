@@ -13,6 +13,11 @@ import { ClipboardService } from 'ngx-clipboard'
 })
 export class SharedService {
 
+  markrtStatusChangedSubject = new Subject();
+  customMarketSubjectSubject =  new Subject();
+  marketNoticeChanged =  new Subject();
+  getUserBalanceMarket = new Subject();
+  socketUrlSubject = new BehaviorSubject<any>(null);
   currentUserIp = new BehaviorSubject({'userIp':''});
   sharedSubject = new Subject();
   getUserBalance = new Subject();
@@ -23,6 +28,7 @@ export class SharedService {
   callAdminDetails = new Subject();
   private currentAdmin = null;
   ipAddress:any;
+  isMobileView = new Subject();
 
   sportsList: Isports[];
   isisExpandedNavSideBar = new BehaviorSubject(true);
@@ -60,15 +66,46 @@ export class SharedService {
       .post(this._apiEndpointsService.getAllUserEndpoint(), body);
   }
 
+
+  _getBooksForMarketApi(marketIdListBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getBooksForMarket(), marketIdListBody);
+  }
+
   _getBankUsersApi(body) {
     return this._apiHttpService
       .post(this._apiEndpointsService.getBankUserEndpoint(), body);
   }
 
+  _postInPlayUpcomingApi(inPlayUpcomingBody: any) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getInPlayUpcomingEndPoint(), inPlayUpcomingBody);
+  }
 
   testFunc(body) {
     return this._apiHttpService
       .post(this._apiEndpointsService.testFuncEndpoint(), body);
+  }
+
+  _getCustomMarketApi(body) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getCustomMarketEndpoint(), body);
+  }
+
+  getNoticeForUserApi(body) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.getNoticeForUserEndpoint(), body);
+  }
+
+  _postBookMakerMarketApi(body) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.postBookMakerMarketEndpoint(), body);
+  }
+
+
+  _postFancyMarketApi(body) {
+    return this._apiHttpService
+      .post(this._apiEndpointsService.postFancyEndpoint(), body);
   }
 
   getUplineSummaryApi(userId) {
@@ -302,6 +339,14 @@ export class SharedService {
 }
 
 
+isMobileViewFn() {
+  if (window.innerWidth <= 767) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 _getCasinoSummaryApi(memberId){
   return this._apiHttpService
     .post(this._apiEndpointsService.getCasinoSummaryEndpoint(),{memberId});
@@ -328,6 +373,18 @@ _getCreditSettlementApi(payload){
 _getWinningSettlementApi(payload){
   return this._apiHttpService
     .post(this._apiEndpointsService.geWinningSettlementEndpoint(),payload);
+}
+
+
+_getBetsForMarketWatchApi(payload){
+  return this._apiHttpService
+    .post(this._apiEndpointsService.geBetsForMarketWatchEndpoint(),payload);
+}
+
+
+_getMarketForMarketWatchApi(payload){
+  return this._apiHttpService
+    .post(this._apiEndpointsService.getMarketForMarketWatchEndpoint(),payload);
 }
 
 

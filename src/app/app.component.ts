@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
       this.isblur = res['isShowRightSideBar'];
     })
 
+    this.getWebSocketUrl();
     
 
     this.online$.subscribe((isOnline) =>{
@@ -87,6 +88,10 @@ export class AppComponent implements OnInit {
                 this._sharedService.removeUserDetails();
                 localStorage.clear();
                 this._router.navigate(['/login']);
+              }if (data.message == "CUSTOM_MARKET_STATUS_CHANGED") {
+                this._sharedService.customMarketSubjectSubject.next(true);
+              }if (data.message == "MARKET_NOTICE") {
+                this._sharedService.marketNoticeChanged.next(true);
               }
             }, 
             err => {
@@ -104,6 +109,13 @@ export class AppComponent implements OnInit {
           );
         }
       });
+  }
+
+
+  getWebSocketUrl(){
+    this._sharedService.getWebSocketURLApi().subscribe(url=>{
+      this._sharedService.socketUrlSubject.next(url)
+    })
   }
 
 

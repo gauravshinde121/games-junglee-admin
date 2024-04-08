@@ -76,6 +76,7 @@ export class MembersListComponent implements OnInit {
   };
   exposureDataList:any = [];
   role_id: any;
+  userIp: any;
 
 
   createPasswordForm() {
@@ -233,6 +234,9 @@ export class MembersListComponent implements OnInit {
     if (!hasSeenModal) {
       this.showModal = true;
     }
+
+    this.userIp = this._sharedService.getIpAddress();
+
     this._preConfig();
     //if (this._sharedService.getUserDetails().roleId.indexOf(1) != -1) {
     if (this._sharedService.getUserDetails().roleId === 1) {
@@ -553,7 +557,8 @@ export class MembersListComponent implements OnInit {
     let status = evt.target.value;
     let body = {
       "userId": user.userId,
-      "isActive": status
+      "isActive": status,
+      "ipAddress" : this.userIp
     }
 
     this._memberService._changeMemberStatusApi(body).subscribe(res => {
@@ -626,7 +631,7 @@ export class MembersListComponent implements OnInit {
     this._sharedService.selectedUserRoleId.next({
       'createUserWithRoleId': roleId
     });
-    
+    localStorage.setItem('role_id',roleId);
   }
 
 }

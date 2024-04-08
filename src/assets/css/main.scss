@@ -2,7 +2,7 @@
 body {
   font-family: "Roboto", sans-serif;
 }
- 
+
 $color_1: #202121;
 $color_2: #3a3a3a;
 $color_3: #ffa7a3;
@@ -12,7 +12,7 @@ $color_6: #d9520a;
 $color_7: #fff;
 $color_8: #aab7cf;
 $color_9: #d9d9d9;
-$color_10: #012970;
+$color_10: #021a44;
 $color_11: #dc3545;
 $color_12: #a2a2a2;
 $color_13: #6abefa;
@@ -53,9 +53,9 @@ $color_47: #71ff97;
 $color_48: #555;
 $color_49: #ccc;
 $color_50: #dee2e6;
- 
+
 $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
- 
+
 .browncolor {
   background-color: $color_7;
 }
@@ -80,21 +80,21 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   // display: flex;
   // align-items: center;
   // justify-content: space-around;
- 
+
   &:hover {
-    color: $color_7;
+    color: $color_21;
     transition: all 0.2s ease-in;
     transform: scale(1.01);
   }
 }
- 
+
 .w-30 {
   width: 30%;
 }
 .text-pink {
-  color: $color_27 !important;
+  color: $color_11 !important;
 }
- 
+
 .btn-outline-pink {
   color: $color_7;
   border-color: $color_26;
@@ -104,7 +104,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
     border-color: $color_26;
   }
 }
- 
+
 .radius-right-tb {
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -124,23 +124,23 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   border-radius: 0;
 }
 .radioselected {
-  accent-color: $color_27;
+  accent-color: $color_11;
 }
 /********** common property end ************/
 /********** Login start ************/
- 
+
 .login {
   border: 1px solid $color_27;
   border-radius: 25px;
   padding: 10px;
   background: rgb(0 0 0 / 8%);
   margin-top: 30px;
- 
+
   a {
     text-decoration: none;
-   
+
   }
- 
+
   .btn {
     font-size: 16px;
     padding: 3px 4px;
@@ -165,7 +165,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
     }
   }
 }
- 
+
 .form-signin .form-floating > .form-control,
 .form-floating > .form-select {
   background: rgba(60, 62, 62, 0);
@@ -182,7 +182,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
   color: $color_7;
 }
- 
+
 .form-signin .form-floating span {
   margin-top: -30px;
   position: absolute;
@@ -220,63 +220,66 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   }
 }
 .balance {
-  background-image: url(../images/balance.png);
+  background: $gradient-btn;
   width: 100%;
   // height: 158px;
   height: 70px;
-  background-color: $color_22;
-  border-radius: 10px;
-  color: $color_7;
+  // background-color: $color_22;
+  border-radius: 15px;
+  color: $color_21;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+
   p {
-    font-size: 20px;
-    color: $color_7;
+    font-size: 14px;
+    color: $color_21;
     line-height: 26px;
     letter-spacing: 1px;
     margin: 0;
+    font-weight: 600;
   }
   span {
-    font-size: 16px;
-    color: $color_7;
+    font-size: 12px;
+    color: $color_21;
+  }
+  small {
+    font-weight: 600;
   }
 }
- 
+
 // balance uo/down start
 .balance,
 .balance-up .balance {
   background-color: transparent;
 }
- 
+
 .balance-down .balance {
   background-color: transparent;
 }
- 
+
 .balance-first,
 .balance-up,
 .balance-down {
   border-radius: 10px;
 }
- 
+
 .balance-first {
   background: linear-gradient(0deg, $color_45 0, $color_22);
 }
 .balance-up {
   background: linear-gradient(0deg, $color_5 0, $color_47);
 }
- 
+
 .balance-down {
   background: linear-gradient(0deg, $color_46 0, $color_27);
 }
- 
+
 .casino-summary {
   background: linear-gradient(0deg, $color_46 0, $color_27);
   border-radius: 10px;
 }
- 
+
 .navbar-toggler {
   background: linear-gradient(0deg, $color_46 0, $color_27);
   color: $color_7;
@@ -284,9 +287,9 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
     color: $color_7;
   }
 }
- 
+
 // balance up/Down end
- 
+
 .user {
   color: $color_21;
 }
@@ -300,7 +303,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
- 
+
   .nav-link {
     color: $color_21;
   }
@@ -315,6 +318,29 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   li {
     width: 100%;
   }
+
+  .btn {
+    text-align: start;
+    color: $color_7;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .btn:hover {
+    color: $color_11;
+  }
+
+  .active {
+    .nav-link {
+      background-color: transparent;
+      color: $color_11;
+    }
+  }
+
+  .active .btn {
+    color: $color_11;
+  }
 }
 .fixed-sidebar {
   position: -webkit-sticky;
@@ -327,7 +353,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   bottom: auto;
   // height: 700px;
 }
- 
+
 /********** Sidebar end ************/
 /********** table pro start ************/
 .tableall {
@@ -362,7 +388,7 @@ $gradient-btn: linear-gradient(180deg, #d35862 0%, #d98e94 100%);
   border-radius: 15px;
   padding: 15px;
   background: transparent;
-  
+
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
@@ -397,8 +423,8 @@ select:-webkit-autofill:focus {
 /********** Tooltip start ************/
 .tooltipnk {
   position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted $color_21;
+  // display: inline-block;
+  border-bottom: 1px solid $color_21;
   .tooltiptext {
     visibility: hidden;
     width: 170px;
@@ -415,12 +441,12 @@ select:-webkit-autofill:focus {
     background-image: radial-gradient($color_2, $color_21);
     border: 1px solid $color_29;
   }
- 
+
   &:hover .tooltiptext {
     visibility: visible;
   }
 }
- 
+
 /********** Tooltip end ************/
 /********** Toggle yes no start ************/
 .button1 {
@@ -430,18 +456,18 @@ select:-webkit-autofill:focus {
   overflow: hidden;
   background: $color_27;
 }
- 
+
 .button1.r {
   border-radius: 100px;
   .layer {
     border-radius: 100px;
   }
 }
- 
+
 .button.b2 {
   border-radius: 2px;
 }
- 
+
 .checkbox {
   position: relative;
   width: 100%;
@@ -452,18 +478,18 @@ select:-webkit-autofill:focus {
   cursor: pointer;
   z-index: 3;
 }
- 
+
 .knobs {
   z-index: 2;
 }
- 
+
 .layer {
   width: 100%;
   background-color: $color_30;
   transition: 0.3s ease all;
   z-index: 1;
 }
- 
+
 /* Button 2 */
 #button-2 .knobs:before,
 #button-2 .knobs:after {
@@ -478,34 +504,34 @@ select:-webkit-autofill:focus {
   line-height: 0;
   padding: 11px 2px;
   background-color: $color_31;
-  color: $color_21;
+  color: $color_7;
   border-radius: 50%;
   transition: 0.3s ease all;
 }
- 
+
 #button-2 .knobs:before {
   content: "On";
 }
- 
+
 #button-2 .knobs:after {
   content: "Off";
 }
- 
+
 #button-2 .knobs:after {
   right: -28px;
   left: auto;
   background-color: $color_31;
-  color: $color_21;
+  color: $color_7;
 }
- 
+
 #button-2 .checkbox:checked + .knobs:before {
   left: -28px;
 }
- 
+
 #button-2 .checkbox:checked + .knobs:after {
   right: 3px;
 }
- 
+
 #button-2 .checkbox:checked ~ .layer {
   background-color: $color_32;
 }
@@ -544,7 +570,7 @@ select:-webkit-autofill:focus {
     font-size: 10px;
     line-height: 12px;
   }
- 
+
   thead {
     border-color: $color_3;
     border-style: none;
@@ -621,14 +647,14 @@ select:-webkit-autofill:focus {
   .dbg {
     background: $color_21;
   }
- 
+
   p {
     margin: 0;
     line-height: 25px;
     font-size: 12px;
   }
 }
- 
+
 .imganalytics {
   background-image: url(../images/blank.png);
   width: 255px;
@@ -657,51 +683,51 @@ select:-webkit-autofill:focus {
   font-size: 25px;
   color: $color_39;
 }
- 
+
 .memberslist {
   flex-flow: row nowrap;
   overflow-x: auto;
   li {
     margin-right: 10px;
- 
+
     .nav-link {
       border: 1px solid $color_27;
       color: $color_27;
     }
- 
+
     .nav-link:hover {
       color: $color_27;
       border-color: $color_27;
     }
- 
+
     .nav-link.active {
       color: $color_7;
     }
   }
 }
- 
+
 .changepassword {
   width: 50%;
 }
 .pointer {
   cursor: pointer;
 }
- 
+
 .nav-pills .nav-link{
   color: $color_21;
 }
- 
+
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: $color_7;
   background: linear-gradient(0deg, $color_26 0, $color_27);
 }
- 
+
 .nav-link:focus,
 .nav-link:hover {
-  color: $color_27;
+  color: $color_7;
 }
- 
+
 #loginregbg {
   --s: 10vmin;
   --p: calc(var(--s) / 2);
@@ -721,17 +747,17 @@ select:-webkit-autofill:focus {
   padding-top: 2%;
   height: 100vh;
 }
- 
+
 @keyframes color {
   0% {
     background-position: calc(var(--p) * -1) calc(var(--p) * -1);
   }
- 
+
   100% {
     background-position: calc(var(--p) * 1) calc(var(--p) * 1);
   }
 }
- 
+
 .sidebar {
   .btn {
     text-align: start;
@@ -741,39 +767,39 @@ select:-webkit-autofill:focus {
   .btn:hover {
     color: $color_27;
   }
- 
+
   .active .nav-link,
   .active .btn {
     color: $color_27;
   }
 }
- 
+
 .bg-dark_new,
 .bg-dark {
   background-color: $color_7 !important;
   color: $color_21;
 }
- 
+
 .modal {
   backdrop-filter: blur(3px);
 }
- 
+
 .radius-left-tb {
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
 }
- 
+
 .icon-pink {
-  color: $color_27;
+  color: $color_11;
 }
- 
+
 .form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .form-floating > .form-select ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-1rem) translateX(0.15rem) !important;
 }
- 
+
 .suspendedm1 {
   background: $color_25;
   color: $color_7;
@@ -789,90 +815,91 @@ select:-webkit-autofill:focus {
 .suspendedm1.inplay-o {
   right: 78px;
 }
- 
+
 .tableFixHead {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   min-height: auto;
   max-height: 70vh;
- 
+
   & thead th {
     position: sticky;
     top: 0;
     z-index: 1;
   }
- 
+
   &::-webkit-scrollbar {
     width: 3px;
     height: 3px;
   }
- 
+
   &::-webkit-scrollbar-track {
     /* background-color: #ebebeb; */
     -webkit-border-radius: 10px;
     border-radius: 10px;
   }
- 
+
   &::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
     background: linear-gradient(0deg, $color_26 0, $color_27) !important;
   }
 }
- 
+
 .btn.disabled,
 .btn:disabled,
 fieldset:disabled .btn {
   opacity: 0.3;
+  color: $color_21;
 }
- 
+
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
 }
- 
+
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background: linear-gradient(180deg, $color_26 0, $color_27);
 }
- 
+
 ::-webkit-scrollbar-track {
   background-color: $color_21;
 }
- 
+
 tfoot td {
   text-align: center;
 }
- 
+
 .exposure-font {
   font-size: 0.9rem;
 }
- 
+
 tfoot tr {
   /* border: 1px solid; */
   position: sticky;
   bottom: 0;
   background: $color_7;
 }
- 
+
 .net-exposure_scroll {
   overflow: auto;
   max-height: 32vh;
 }
- 
+
 .marketSetting {
   font-size: 12px !important;
   white-space: normal;
 }
- 
+
 .smallMobileShow {
   display: none;
 }
- 
+
 .bgTransparent th {
   background: none !important;
 }
- 
+
 .netExposure thead tr th,
 .netExposure tbody tr td {
   // width: 3rem;
@@ -880,43 +907,43 @@ tfoot tr {
   // border-bottom: 1px solid $color_50;
   padding: 0 0 0.5rem;
 }
- 
+
 .pointer,
 .cursor-pointer {
   cursor: pointer;
 }
- 
+
 .float-left {
   float: left;
 }
- 
+
 // input.ng-invalid.ng-dirty {
 //   border: solid $color_11 !important;
 // }
- 
+
 .busy {
   color: $color_48;
 }
- 
+
 .form-signin h3 {
-  color: $color_27;
+  color: $color_11;
 }
- 
+
 //
- 
+
 .toggle-container {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
 }
- 
+
 .toggle-class {
   opacity: 0;
   width: 0;
   height: 0;
 }
- 
+
 .toggle-class-slider {
   position: absolute;
   cursor: pointer;
@@ -928,7 +955,7 @@ tfoot tr {
   transition: 0.4s;
   border-radius: 34px;
 }
- 
+
 .toggle-class-slider:before {
   position: absolute;
   content: "";
@@ -940,48 +967,48 @@ tfoot tr {
   transition: 0.4s;
   border-radius: 50%;
 }
- 
+
 .toggle-class:checked + .toggle-class-slider {
   background-color: $color_5;
 }
- 
+
 .toggle-class:checked + .toggle-class-slider:before {
   transform: translateX(26px);
 }
- 
+
 .border-bottom {
   border-bottom: 1px solid $color_50 !important;
 }
- 
+
 .border-none {
   border: none;
 }
- 
+
 .green {
   border-bottom: 1px solid $color_50 !important;
 }
- 
+
 .red {
   border: none;
 }
- 
+
 .activeLink {
   border-bottom: 1px solid $color_50 !important;
 }
- 
+
 // //////////
- 
+
 // .dashboard .border {
 //   border: 1px solid $color_27 !important;
 // }
 .searchList {
   ul {
     // border: 1px solid $color_22;
-    padding: 15px 0 0;
+    padding: 0 0 0;
     list-style: none;
     border-top: none;
     position: relative;
-    top: -16px;
+    // top: -16px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     margin: 0;
@@ -989,14 +1016,14 @@ tfoot tr {
       a {
         padding: 0 50px 0;
       }
- 
+
       &:hover {
-        background-color: $color_27;
+        background-color: $color_21;
       }
     }
   }
 }
- 
+
 table {
   td {
     span {
@@ -1010,24 +1037,26 @@ input:focus {
   box-shadow: none;
   outline: none !important;
   border: 1px solid $color_22;
+  color: $color_7 !important;
+  box-shadow: none !important;
 }
- 
+
 a {
   text-decoration: none;
   color: $color_21;
 }
- 
+
 @media (min-width: 769px) {
   .showInTab {
     display: none;
   }
 }
- 
+
 .toast-top-right {
   top: 12px;
   right: 12px;
 }
- 
+
 .toast-container .ngx-toastr:hover {
   box-shadow: 0 0 12px #000;
   opacity: 1;
@@ -1062,28 +1091,28 @@ a {
 .toast-container * {
   box-sizing: border-box;
 }
- 
+
 .toast-container {
   pointer-events: none;
   position: fixed;
   z-index: 999999;
 }
- 
+
 .tabTooltip {
   left: -250px !important;
 }
- 
+
 .navbar-brand {
   color: $color_7 !important;
   font-family: "FontAwesome";
   letter-spacing: 2px;
   font-size: 16px;
- 
+
   span {
     color: $color_27;
   }
 }
- 
+
 .logins {
   .navbar-brand {
     font-size: 30px;
@@ -1096,10 +1125,10 @@ a {
     height: 100vh;
   }
 }
- 
+
 $breakpoint-tablet: 768px;
 $breakpoint-mobile: 767px;
- 
+
 @media (max-width: $breakpoint-tablet) {
   .balance {
     p {
@@ -1110,7 +1139,7 @@ $breakpoint-mobile: 767px;
     }
   }
 }
- 
+
 @media (max-width: $breakpoint-mobile) {
   .navbar-brand {
     font-size: 12px;
@@ -1120,27 +1149,28 @@ $breakpoint-mobile: 767px;
       font-size: 20px;
     }
   }
- 
+
   .balance {
     // height: 82px;
     text-align: center;
     p {
-      font-size: 12px;
+      font-size: 13px;
+      font-weight: 600;
       span {
         font-size: 10px;
       }
     }
   }
 }
- 
+
 .mobileTable table {
   font-size: 12px;
 }
 .rgtMarket td tr {
   width: 100%;
 }
- 
+
 .fa-info{
   cursor: copy;
 }
- 
+

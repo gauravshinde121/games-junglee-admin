@@ -111,6 +111,21 @@
                 >BET TICKER</a
               >
             </li>
+            <li
+              [routerLinkActive]="
+                currentPath == '/book-management/market-watch' ? 'active' : ''
+              "
+              [ngClass]="
+                currentPath == '/book-management/market-watch' ? 'active' : ''
+              "
+            >
+              <a
+                (click)="storePath('/book-management/market-watch')"
+                routerLink="/book-management/market-watch"
+                class="nav-link small ps-5"
+                >MARKET WATCH</a
+              >
+            </li>
             <!-- <li><a routerLink="/book-management/bet-ticker-flag-final" class="nav-link small ps-5">Bet Ticker Flag Final</a></li> -->
             <!-- <li><a routerLink="/book-management/bet-ticker-previous"  class="nav-link small ps-5">Bet Ticker Previous</a></li> -->
             <!-- <li><a routerLink="/book-management/premium-sportsbook"  class="nav-link small ps-5">Premium Sportsbook</a></li> -->
@@ -148,7 +163,7 @@
 
         <!-- *ngIf="adminDetails.refClientid == 3 || adminDetails.refClientid == 4" -->
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li *ngIf="(adminDetails.refClientid == 3 || adminDetails.refClientid == 4) || adminDetails.username=='tiger_admin' || adminDetails.refSuperAdminId == 251"
+            <li *ngIf="clientId == 3 || clientId == 1"
               [routerLinkActive]="
                 currentPath == '/account-statement/account-list' ? 'active' : ''
               "
@@ -195,7 +210,7 @@
               >
             </li>
             <li
-            *ngIf="adminDetails.refClientid == 1"
+            *ngIf="adminDetails.refClientid == 3"
               [routerLinkActive]="
                 currentPath == '/account-statement/my-account-statement' ? 'active' : ''
               "
@@ -211,7 +226,7 @@
               >
             </li>
             <li
-              *ngIf="adminDetails.refClientid == 2"
+              *ngIf="adminDetails.refClientid == 2 || adminDetails.refClientid == 5"
               [routerLinkActive]="
                 currentPath == '/account-statement/commission' ? 'active' : ''
               "
@@ -282,7 +297,7 @@
               >
             </li>
             <li
-              *ngIf="adminDetails.refClientid == 1"
+              *ngIf="adminDetails.refClientid == 1 || adminDetails.refClientid == 3"
               [routerLinkActive]="
                 currentPath == '/account-statement/casino-report'
                   ? 'active'
@@ -322,7 +337,7 @@
         </div>
       </li>
 
-      <li *ngIf="(adminDetails.refClientid == 1 || adminDetails.refClientid == 2)"
+      <li *ngIf="(adminDetails.refClientid == 1 || adminDetails.refClientid == 2 || adminDetails.refClientid == 5)"
         [routerLinkActive]="currentPath == '/bank' ? 'active' : ''"
         [ngClass]="currentPath == '/bank' ? 'active' : ''"
       >
@@ -460,7 +475,7 @@
           id="settings-collapse"
         >
           <ul class="btn-toggle-nav list-unstyled fw-normal">
-            <li
+            <li *ngIf="adminDetails.refClientid !== 5"
               [routerLinkActive]="
                 currentPath == '/settings/balance' ? 'active' : ''
               "
@@ -536,7 +551,7 @@
           </ul>
         </div>
       </li>
-      <li
+      <!-- <li
         *ngIf="
           adminDetails?.userRoleName == 'SUPER ADMIN' ||
           adminDetails?.username == 'KASHI'
@@ -556,7 +571,7 @@
         >
           <i class="fa-solid fa-pen-to-square icon-pink me-2"></i>GAMES SETTINGS
         </a>
-      </li>
+      </li> -->
       <li>
         <a
           class="btn collapsed"

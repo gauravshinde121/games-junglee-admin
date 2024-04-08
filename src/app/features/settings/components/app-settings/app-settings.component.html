@@ -4,12 +4,12 @@
     <h3 class="text-center" *ngIf="!isLoading && settingObj">App Settings</h3>
     <br>
     <div class="container">
-      <div class="row mb-2">
+      <div class="row mb-2" *ngIf="clientId == 1">
         <div class="col-md-3">
           <h3 class="text-pink">Bet Settings</h3>
         </div>
       </div>
-      <div class="row align-items-end">
+      <div class="row align-items-end" *ngIf="clientId == 1">
         <div class="col-md-6 mb-3">
           Turn Bet On/Off
         </div>
@@ -23,12 +23,12 @@
         </div>
         <hr class="">
       </div>
-      <div class="row mb-2">
+      <div class="row mb-2"  *ngIf="clientId == 1">
         <div class="col-md-3">
           <h3 class="text-pink">Socket Settings</h3>
         </div>
       </div>
-      <div class="row align-items-end">
+      <div class="row align-items-end" *ngIf="clientId == 1">
         <div class="col-md-6 mb-3">
           Start Backup Socket Server (Azure) :
         </div>

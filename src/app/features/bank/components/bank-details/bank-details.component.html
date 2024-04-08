@@ -75,9 +75,9 @@
                     <table #myTable class="table tableall" *ngIf="userList.length > 0 && !this.isLoading">
                       <thead>
                         <tr>
-                          <th scope="col" class="first pointer">
+                          <!-- <th scope="col" class="first pointer">
                             <input type="checkbox" name="all" [checked]="isAllChecked()" (change)="checkAll($event)" />
-                          </th>
+                          </th> -->
                           <th scope="col" class="">
                             <i class="fa-sharp fa-regular fa-address-card"></i>
                           </th>
@@ -102,10 +102,10 @@
                           <th scope="col" class="text-center pointer">
                             Manage Transfer
                           </th>
-                          <th scope="col" class="text-center pointer">
+                          <th scope="col" class="text-center pointer" *ngIf="clientId == 1 || clientId == 3">
                             My Casino Win
                           </th>
-                          <th scope="col" class="text-center pointer">
+                          <th scope="col" class="text-center pointer" *ngIf="clientId == 1 || clientId == 3">
                             Manage Casino Transfer
                           </th>
                           <th scope="col" class="text-center pointer last" (click)="toggleSort('availableCredit')">
@@ -122,10 +122,10 @@
                               | sort : sortColumn : sortAscending;
                             let i = index
                           ">
-                          <td>
+                          <!-- <td>
                             <input type="checkbox" class="pointer" (change)="checkUserForAdjustment(user.userId)"
                               *ngIf="user.take > 0 || user.give > 0" [(ngModel)]="user.state" />
-                          </td>
+                          </td> -->
 
                           <td>
                             <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
@@ -173,7 +173,7 @@
                               Take
                             </button>
                           </td>
-                          <td (click)="openCasinoSummary(user)" class="text-center pointer">
+                          <td (click)="openCasinoSummary(user)" class="text-center pointer" *ngIf="clientId == 1 || clientId == 3">
                             <span *ngIf="user.casinoWinnings > 0" class="text-success">{{ user.casinoWinnings |
                               indianCurrency }}</span>
                             <span *ngIf="user.casinoWinnings < 0" class="text-danger">{{ user.casinoWinnings |
@@ -182,7 +182,7 @@
                               user.casinoWinnings | indianCurrency
                               }}</span>
                           </td>
-                          <td class="text-center">
+                          <td class="text-center" *ngIf="clientId == 1 || clientId == 3">
                             <button (click)="openCasinoSettlement(user, false)" type="button"
                               *ngIf="user.casinoWinnings > 0"
                               class="btn btn-sm btn-success pointer text-decoration-none">
@@ -202,7 +202,7 @@
                       </tbody>
                       <tfoot>
                         <tr>
-                          <td></td>
+                          <!-- <td></td> -->
                           <td></td>
                           <td></td>
                           <td></td>
@@ -215,7 +215,7 @@
                             {{ totalGive | indianCurrency }}
                           </td>
                           <td></td>
-                          <td class="text-center">
+                          <td class="text-center" *ngIf="clientId == 1 || clientId == 3">
                             <span *ngIf="totalCasino < 0" class="text-danger">{{
                               totalCasino | indianCurrency
                               }}</span>
@@ -224,7 +224,7 @@
                               }}</span>
                             <span *ngIf="totalCasino > 0" class="text-success">{{ totalCasino | indianCurrency }}</span>
                           </td>
-                          <td></td>
+                          <td *ngIf="clientId == 1 || clientId == 3"></td>
                           <td></td>
                         </tr>
                       </tfoot>
@@ -339,7 +339,7 @@
                   </div>
                   <div class="col-md-12 pt-2">
                     <input type="number" class="form-control border-pink bg-transparent rounded-pill"
-                      formControlName="amount" />
+                      formControlName="amount" readonly />
                   </div>
                   <div class="col-md-12 pt-2">
                     <label for="">Narration</label>

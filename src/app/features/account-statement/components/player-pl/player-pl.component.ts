@@ -159,12 +159,12 @@ export class PlayerPlComponent implements OnInit {
     this.filterForm.value.matchId = evt.target.value;
 
     if((this.filterForm.value.matchId == null || this.filterForm.value.matchId == "null") && (this.filterForm.value.marketId == null || this.filterForm.value.marketId == "null")){
-      
+
       // || this.filterForm.value.matchId == "null"
       this.getPlStatement();
     }
 
- 
+
     if(this.filterForm.value.matchId != null && this.filterForm.value.marketId == null) {
       this.plStatement = this.originalPlStatement.filter(item => item.match === evt.target.value);
     }
@@ -190,13 +190,13 @@ export class PlayerPlComponent implements OnInit {
     this.filterForm.value.marketId = evt.target.value;
 
     if((this.filterForm.value.matchId == null || this.filterForm.value.matchId == "null") && (this.filterForm.value.marketId == null || this.filterForm.value.marketId == "null")){
-    
+
       this.getPlStatement();
     }
 
 
     if(this.filterForm.value.marketId != null &&  (this.filterForm.value.matchId == null || this.filterForm.value.matchId == "null") ) {
-     
+
       this.plStatement = this.originalPlStatement.filter(item => item.marketName === evt.target.value);
     }
     else if((this.filterForm.value.marketId != null && this.filterForm.value.marketId != "null") && this.filterForm.value.matchId != null){
@@ -439,13 +439,15 @@ export class PlayerPlComponent implements OnInit {
   }
 
   exportExcel() {
-    let profitLoss: any = []
+    let profitLoss: any = [];
     this.plStatement.forEach(element => {
       profitLoss.push({
         Date: moment(element.createDateTime).format("MMM D, YYYY, h:mm:ss a"),
         Sport: element.gameData.subGame,
         Match: element.gameData.eventName,
         Username: element.playerData.name,
+        'Fancy Commission':element.gameData.totalFancyCommission.toFixed(2),
+        'Bookmaker Commission': element.gameData.totalBookmakerCommission.toFixed(2),
         Amount: +element.gameData.finalNetAmount.toFixed(2),
       })
     });

@@ -2707,7 +2707,7 @@
                 {{ ldr?.startScore }}
               </div>
               <div class="col-md-6">
-                <span [ngClass]="ldr.amount >= 0 ? 'text-success' : 'text-danger'">{{ ldr?.amount }}</span>
+                <span [ngClass]="ldr.amount >= 0 ? 'text-success' : 'text-danger'">{{ ldr?.amount | indianCurrency }}</span>
               </div>
             </div>
             <div class="row border-bottom p-2 bg-light" *ngIf="ldr?.position == 'last'">
@@ -2715,7 +2715,7 @@
                 <div class="col-md-6">{{ ldr?.startScore }}+</div>
               </ng-container>
               <div class="col-md-6">
-                <span [ngClass]="ldr?.amount >= 0 ? 'text-success' : 'text-danger'">{{ ldr?.amount }}</span>
+                <span [ngClass]="ldr?.amount >= 0 ? 'text-success' : 'text-danger'">{{ ldr?.amount | indianCurrency }}</span>
               </div>
             </div>
           </div>

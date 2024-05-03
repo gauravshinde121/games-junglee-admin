@@ -6,7 +6,6 @@ import { ApiHttpService } from 'src/app/core/services/api-http.service';
 import { Isports } from '../models/shared';
 import { Location } from '@angular/common';
 import * as XLSX from 'xlsx';
-import { ClipboardService } from 'ngx-clipboard'
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +37,6 @@ export class SharedService {
     private _apiHttpService: ApiHttpService,
     private _apiEndpointsService: ApiEndpointsService,
     private _location: Location,
-    private _clipboardService: ClipboardService
   ) {
   }
 
@@ -139,7 +137,7 @@ export class SharedService {
   }
 
   copy(text: string){
-    this._clipboardService.copy(text)
+    // this._clipboardService.copy(text)
   }
 
   getUserByUplineIdApi(reqBody) {

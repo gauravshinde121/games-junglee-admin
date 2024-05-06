@@ -2,7 +2,7 @@
 body {
   font-family: "Roboto", sans-serif;
 }
- 
+
 $color_1: #202121;
 $color_2: #3a3a3a;
 $color_3: #ffa7a3;
@@ -69,11 +69,11 @@ $gradient-btn: linear-gradient(
   #47c4f2,
   #5fd7fb
 );
- 
+
 .browncolor {
   background-color: $color_21;
 }
- 
+
 .border-pink {
   border: 1px solid $color_28;
 }
@@ -95,21 +95,21 @@ $gradient-btn: linear-gradient(
   // display: flex;
   // align-items: center;
   // justify-content: space-around;
- 
+
   &:hover {
     color: $color_21;
     transition: all 0.2s ease-in;
     transform: scale(1.01);
   }
 }
- 
+
 .w-30 {
   width: 30%;
 }
 .text-pink {
   color: $color_27 !important;
 }
- 
+
 .btn-outline-pink {
   color: $color_3;
   border-color: $color_3;
@@ -119,7 +119,7 @@ $gradient-btn: linear-gradient(
     border-color: $color_3;
   }
 }
- 
+
 .radius-right-tb {
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -143,7 +143,7 @@ $gradient-btn: linear-gradient(
 }
 /********** common property end ************/
 /********** Login start ************/
- 
+
 .login {
   border: 1px solid rgba(255, 255, 255, 0.3215686275);
   border-radius: 25px;
@@ -151,7 +151,7 @@ $gradient-btn: linear-gradient(
   background: rgb(0 0 0 / 8%);
   margin-top: 30px;
   color: $color_7;
- 
+
   a {
     text-decoration: none;
   }
@@ -179,7 +179,7 @@ $gradient-btn: linear-gradient(
     }
   }
 }
- 
+
 .form-signin .form-floating > .form-control,
 .form-floating > .form-select {
   background: rgba(60, 62, 62, 0);
@@ -196,7 +196,7 @@ $gradient-btn: linear-gradient(
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
   color: $color_7;
 }
- 
+
 .form-signin .form-floating span {
   margin-top: -30px;
   position: absolute;
@@ -258,23 +258,23 @@ $gradient-btn: linear-gradient(
     color: $color_7;
   }
 }
- 
+
 // balance uo/down start
 .balance,
 .balance-up .balance {
   background-color: transparent;
 }
- 
+
 .balance-down .balance {
   background-color: transparent;
 }
- 
+
 .balance-first,
 .balance-up,
 .balance-down {
   border-radius: 10px;
 }
- 
+
 .balance-first {
   // background: linear-gradient(0deg, $color_45 0, $color_22);
   background: linear-gradient(0deg, $color_27 0, $color_27);
@@ -283,22 +283,22 @@ $gradient-btn: linear-gradient(
   // background: linear-gradient(0deg, $color_5 0, $color_47);
   background: linear-gradient(0deg, $color_27 0, $color_27);
 }
- 
+
 .balance-down {
   background: linear-gradient(0deg, $color_27 0, $color_27);
 }
- 
+
 .casino-summary {
   background: linear-gradient(0deg, $color_27 0, $color_27);
   border-radius: 10px;
 }
- 
+
 .navbar-toggler {
   background: $gradient-btn;
 }
- 
+
 // balance up/Down end
- 
+
 .user {
   color: $color_7;
 }
@@ -312,7 +312,7 @@ $gradient-btn: linear-gradient(
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
- 
+
   .nav-link {
     color: $color_7;
   }
@@ -339,7 +339,7 @@ $gradient-btn: linear-gradient(
   bottom: auto;
   // height: 700px;
 }
- 
+
 /********** Sidebar end ************/
 /********** table pro start ************/
 .tableall {
@@ -352,7 +352,7 @@ $gradient-btn: linear-gradient(
       position: sticky;
       top: 0;
       z-index: 1;
- 
+
       th {
         border: 0px;
         font-weight: 500;
@@ -370,7 +370,7 @@ $gradient-btn: linear-gradient(
     vertical-align: middle;
     border-bottom: 1px solid $color_2;
     margin: 2px 0;
- 
+
     .custom-ddl {
       color: $color_7;
     }
@@ -391,6 +391,7 @@ $gradient-btn: linear-gradient(
     color: $color_7;
     border: 1px solid $color_28;
     background: $color_21;
+    padding:6px;
   }
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
@@ -406,7 +407,7 @@ $gradient-btn: linear-gradient(
   background: $color_21;
   color: $color_7;
   border: 1px solid $color_28;
- 
+
   &:focus {
     background: $color_21;
     color: $color_7;
@@ -450,12 +451,12 @@ select:-webkit-autofill:focus {
     background-image: radial-gradient($color_2, $color_21);
     border: 1px solid $color_29;
   }
- 
+
   &:hover .tooltiptext {
     visibility: visible;
   }
 }
- 
+
 /********** Tooltip end ************/
 /********** Toggle yes no start ************/
 .button1 {
@@ -465,18 +466,18 @@ select:-webkit-autofill:focus {
   overflow: hidden;
   background: $color_27;
 }
- 
+
 .button1.r {
   border-radius: 100px;
   .layer {
     border-radius: 100px;
   }
 }
- 
+
 .button.b2 {
   border-radius: 2px;
 }
- 
+
 .checkbox {
   position: relative;
   width: 100%;
@@ -487,18 +488,18 @@ select:-webkit-autofill:focus {
   cursor: pointer;
   z-index: 3;
 }
- 
+
 .knobs {
   z-index: 2;
 }
- 
+
 .layer {
   width: 100%;
   background-color: $color_30;
   transition: 0.3s ease all;
   z-index: 1;
 }
- 
+
 /* Button 2 */
 #button-2 .knobs:before,
 #button-2 .knobs:after {
@@ -517,30 +518,30 @@ select:-webkit-autofill:focus {
   border-radius: 50%;
   transition: 0.3s ease all;
 }
- 
+
 #button-2 .knobs:before {
   content: "On";
 }
- 
+
 #button-2 .knobs:after {
   content: "Off";
 }
- 
+
 #button-2 .knobs:after {
   right: -28px;
   left: auto;
   background-color: $color_31;
   color: $color_21;
 }
- 
+
 #button-2 .checkbox:checked + .knobs:before {
   left: -28px;
 }
- 
+
 #button-2 .checkbox:checked + .knobs:after {
   right: 3px;
 }
- 
+
 #button-2 .checkbox:checked ~ .layer {
   background-color: $color_32;
 }
@@ -579,7 +580,7 @@ select:-webkit-autofill:focus {
     font-size: 10px;
     line-height: 12px;
   }
- 
+
   thead {
     border-color: $color_3;
     border-style: none;
@@ -656,14 +657,14 @@ select:-webkit-autofill:focus {
   .dbg {
     background: $color_21;
   }
- 
+
   p {
     margin: 0;
     line-height: 25px;
     font-size: 12px;
   }
 }
- 
+
 .imganalytics {
   background-image: url(../images/blank.png);
   width: 255px;
@@ -692,46 +693,46 @@ select:-webkit-autofill:focus {
   font-size: 25px;
   color: $color_39;
 }
- 
+
 .memberslist {
   flex-flow: row nowrap;
   overflow-x: auto;
   li {
     margin-right: 10px;
- 
+
     .nav-link {
       border: 1px solid $color_7;
     }
- 
+
     .nav-link:hover {
       color: $color_27;
       border-color: $color_27;
     }
- 
+
     .nav-link.active {
       color: $color_7;
     }
   }
 }
- 
+
 .changepassword {
   width: 50%;
 }
 .pointer {
   cursor: pointer;
 }
- 
+
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: $color_7;
   background: $gradient-btn;
 }
- 
+
 .nav-link:focus,
 .nav-link:hover {
   color: $color_27;
 }
- 
+
 #loginregbg {
   --s: 10vmin;
   --p: calc(var(--s) / 2);
@@ -751,17 +752,17 @@ select:-webkit-autofill:focus {
   padding-top: 2%;
   height: 100vh;
 }
- 
+
 @keyframes color {
   0% {
     background-position: calc(var(--p) * -1) calc(var(--p) * -1);
   }
- 
+
   100% {
     background-position: calc(var(--p) * 1) calc(var(--p) * 1);
   }
 }
- 
+
 .sidebar {
   .btn {
     text-align: start;
@@ -771,19 +772,19 @@ select:-webkit-autofill:focus {
   .btn:hover {
     color: $color_27;
   }
- 
+
   .active .nav-link,
   .active .btn {
     color: $color_27;
   }
 }
- 
+
 .bg-dark_new,
 .bg-dark {
   background-color: $color_21 !important;
   color: $color_7;
 }
- 
+
 .modal {
   backdrop-filter: blur(3px);
   .modal-content {
@@ -791,23 +792,23 @@ select:-webkit-autofill:focus {
     color: $color_7;
   }
 }
- 
+
 .radius-left-tb {
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
 }
- 
+
 .icon-pink {
   color: $color_27;
 }
- 
+
 .form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .form-floating > .form-select ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-1rem) translateX(0.15rem) !important;
 }
- 
+
 .suspendedm1 {
   background: $color_25;
   color: $color_7;
@@ -823,90 +824,90 @@ select:-webkit-autofill:focus {
 .suspendedm1.inplay-o {
   right: 78px;
 }
- 
+
 .tableFixHead {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   min-height: auto;
   max-height: 70vh;
- 
+
   & thead th {
     position: sticky;
     top: 0;
     z-index: 1;
   }
- 
+
   &::-webkit-scrollbar {
     width: 3px;
     height: 3px;
   }
- 
+
   &::-webkit-scrollbar-track {
     /* background-color: #ebebeb; */
     -webkit-border-radius: 10px;
     border-radius: 10px;
   }
- 
+
   &::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
     background: $gradient-btn !important;
   }
 }
- 
+
 .btn.disabled,
 .btn:disabled,
 fieldset:disabled .btn {
   opacity: 0.3;
 }
- 
+
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
 }
- 
+
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background: $color_27;
 }
- 
+
 ::-webkit-scrollbar-track {
   background-color: $color_21;
 }
- 
+
 tfoot td {
   text-align: center;
 }
- 
+
 .exposure-font {
   font-size: 0.9rem;
 }
- 
+
 tfoot tr {
   /* border: 1px solid; */
   position: sticky;
   bottom: 0;
   background: $color_21;
 }
- 
+
 .net-exposure_scroll {
   overflow: auto;
   max-height: 32vh;
 }
- 
+
 .marketSetting {
   font-size: 12px !important;
   white-space: normal;
 }
- 
+
 .smallMobileShow {
   display: none;
 }
- 
+
 .bgTransparent th {
   background: none !important;
 }
- 
+
 .netExposure thead tr th,
 .netExposure tbody tr td {
   // width: 3rem;
@@ -914,43 +915,43 @@ tfoot tr {
   // border-bottom: 1px solid $color_50;
   padding: 0 0 0.5rem;
 }
- 
+
 .pointer,
 .cursor-pointer {
   cursor: pointer;
 }
- 
+
 .float-left {
   float: left;
 }
- 
+
 // input.ng-invalid.ng-dirty {
 //   border: solid $color_11 !important;
 // }
- 
+
 .busy {
   color: $color_48;
 }
- 
+
 .form-signin h3 {
   color: $color_27;
 }
- 
+
 //
- 
+
 .toggle-container {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
 }
- 
+
 .toggle-class {
   opacity: 0;
   width: 0;
   height: 0;
 }
- 
+
 .toggle-class-slider {
   position: absolute;
   cursor: pointer;
@@ -962,7 +963,7 @@ tfoot tr {
   transition: 0.4s;
   border-radius: 34px;
 }
- 
+
 .toggle-class-slider:before {
   position: absolute;
   content: "";
@@ -974,37 +975,37 @@ tfoot tr {
   transition: 0.4s;
   border-radius: 50%;
 }
- 
+
 .toggle-class:checked + .toggle-class-slider {
   background-color: $color_5;
 }
- 
+
 .toggle-class:checked + .toggle-class-slider:before {
   transform: translateX(26px);
 }
- 
+
 .border-bottom {
   border-bottom: 1px solid $color_27 !important;
 }
- 
+
 .border-none {
   border: none;
 }
- 
+
 .green {
   border-bottom: 1px solid $color_50 !important;
 }
- 
+
 .red {
   border: none;
 }
- 
+
 .activeLink {
   border-bottom: 1px solid $color_50 !important;
 }
- 
+
 // //////////
- 
+
 // .dashboard .border {
 //   border: 1px solid $color_27 !important;
 // }
@@ -1023,14 +1024,14 @@ tfoot tr {
       a {
         padding: 0 50px 0;
       }
- 
+
       &:hover {
         color: $color_27;
       }
     }
   }
 }
- 
+
 table {
   td {
     span {
@@ -1045,23 +1046,23 @@ input:focus {
   outline: none !important;
   border: 1px solid $color_22;
 }
- 
+
 a {
   text-decoration: none;
   color: $color_7;
 }
- 
+
 @media (min-width: 769px) {
   .showInTab {
     display: none;
   }
 }
- 
+
 .toast-top-right {
   top: 12px;
   right: 12px;
 }
- 
+
 .toast-container .ngx-toastr:hover {
   box-shadow: 0 0 12px #000;
   opacity: 1;
@@ -1083,7 +1084,7 @@ a {
 .toast-error {
   background-color: $color_51;
 }
- 
+
 .toast-success {
   background-color: $color_5;
 }
@@ -1100,19 +1101,19 @@ a {
 .toast-container * {
   box-sizing: border-box;
 }
- 
+
 .toast-container {
   pointer-events: none;
   position: fixed;
   z-index: 999999;
 }
- 
+
 .tabTooltip {
   left: -250px !important;
 }
- 
+
 // below CSS is for Mafia specifically
- 
+
 .gamedetails {
   border: 1px solid $color_27;
 }
@@ -1121,12 +1122,12 @@ a {
   font-family: "FontAwesome";
   letter-spacing: 2px;
   font-size: 16px;
- 
+
   span {
     color: $color_27;
   }
 }
- 
+
 .logins {
   .navbar-brand {
     font-size: 30px;
@@ -1139,10 +1140,10 @@ a {
     height: 100vh;
   }
 }
- 
+
 $breakpoint-tablet: 768px;
 $breakpoint-mobile: 767px;
- 
+
 @media (max-width: $breakpoint-tablet) {
   .balance {
     p {
@@ -1153,7 +1154,7 @@ $breakpoint-mobile: 767px;
     }
   }
 }
- 
+
 @media (max-width: $breakpoint-mobile) {
   .navbar-brand {
     font-size: 12px;
@@ -1163,7 +1164,7 @@ $breakpoint-mobile: 767px;
       font-size: 20px;
     }
   }
- 
+
   .balance {
     // height: 82px;
     text-align: center;
@@ -1176,29 +1177,29 @@ $breakpoint-mobile: 767px;
     }
   }
 }
- 
+
 .mobileTable table {
   font-size: 12px;
 }
 .rgtMarket td tr {
   width: 100%;
 }
- 
+
 .fa-info {
   cursor: copy;
 }
- 
+
 .bg-white {
   color: $color_21;
 }
 input[type="password"]:focus {
   box-shadow: none;
 }
- 
+
 .modal-body {
   background-color: $color_21;
 }
- 
+
 .matchTime{
   color: #dc3545;}
 
@@ -1249,4 +1250,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       }
     }
   }
+}
+.ml-5{
+  margin-left:5px;
 }

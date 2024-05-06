@@ -2,7 +2,7 @@
   <div *ngIf="!memberForm" class="border text-center p-5">
     <h4>Loading...</h4>
   </div>
-  <form *ngIf="memberForm" [formGroup]="memberForm" (ngSubmit)="onSubmitMemberForm()">
+  <form *ngIf="memberForm" [formGroup]="memberForm" (ngSubmit)="createMember()">
     <section class="section gamedetails">
       <div class="row">
         <div class="col-md-12">
@@ -334,7 +334,7 @@
         </div>
       </div>
     </section>
-  </ng-container> 
+  </ng-container>
 
     <section class="section gamedetails mt-3">
       <div class="row">

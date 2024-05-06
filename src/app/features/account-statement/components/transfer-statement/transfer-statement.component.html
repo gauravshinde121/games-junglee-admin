@@ -14,16 +14,26 @@
 
         <div class="col-md-12">
           <div class="row align-items-end" [formGroup]="transferStmtForm">
-            <div class="col-md-4">
+            <div class="col-md-3">
               <label for="text" class="cassino"> From Date</label><br />
               <input type="date" formControlName="fromDate" name="fromDate" class="mt-2 form-control" />
             </div>
-            <div class="col-md-4 responsivets">
+            <div class="col-md-3 responsivets">
               <label for="text" class="cassino">To Date</label><br />
               <input type="date" formControlName="toDate" class="mt-2 form-control" name="toDate" />
             </div>
-            <div class="col-md-2 my-3 my-md-0 TScenter">
+
+            <div class="col-md-3">
+              <select formControlName="userId" id="ab" class="form-select bg-dgre pointer">
+                <option value="null">All</option>
+                <option *ngFor="let member of allMembers" [value]="member.userId">
+                  {{ member.username }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-3 my-3 my-md-0 TScenter">
               <a (click)="getTransferStatement()" class="btn btn-pink radius-all responsivets">Search</a>
+              <a (click)="resetForm()" class="btn btn-pink radius-all ml-5 responsivets">Reset</a>
               <button *ngIf="transferStatements.length > 0" type="button" class="btn btn-pink rounded-pill ms-2 "
                 (click)="exportExcel()">
                 Export

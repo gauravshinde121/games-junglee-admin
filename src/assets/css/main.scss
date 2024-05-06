@@ -396,7 +396,7 @@ $gradient-btn: linear-gradient(
     color: $color_7;
     border: 1px solid $color_11;
     background: transparent;
-
+    padding: 6px;
     option {
       color: $color_7;
     }
@@ -1273,4 +1273,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       }
     }
   }
+}
+.ml-5{
+  margin-left:5px;
 }

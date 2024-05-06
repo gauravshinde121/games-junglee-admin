@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { AccountStatementService } from '../../services/account-statement.service';
 import * as moment from 'moment';
+import { MembersService } from 'src/app/features/members/services/members.service';
 @Component({
   selector: 'app-transfer-statement',
   templateUrl: './transfer-statement.component.html',
@@ -19,6 +20,7 @@ export class TransferStatementComponent implements OnInit {
   transferStmtForm : FormGroup
   dateFormat = "yyyy-MM-dd";
   language = "en";
+  allMembers: any;
   // currentPage: number = 1;
   // totalPages: number = 0;
   // pageSize:number = 10;
@@ -31,6 +33,7 @@ export class TransferStatementComponent implements OnInit {
   totalAmount: any;
 
   constructor(
+    private _memberService: MembersService,
     private _accountsService:AccountStatementService,
     private _sharedService:SharedService,
   ) { }
@@ -42,12 +45,18 @@ export class TransferStatementComponent implements OnInit {
   _preConfig(){
     this._initForm();
     this.getTransferStatement()
+    this._getAllMembers();
+  }
+
+  resetForm(){
+    this.transferStmtForm.reset();
   }
 
   _initForm(){
     this.transferStmtForm = new FormGroup({
       fromDate:new FormControl(this.formatFormDate(new Date())),
       toDate:new FormControl(this.formatFormDate(new Date())),
+      userId:new FormControl(null)
     })
   }
 
@@ -72,6 +81,7 @@ export class TransferStatementComponent implements OnInit {
     let payload = {
       fromDate : fromDate,
       toDate : toDate,
+      userId:this.transferStmtForm.value.userId
       // pageNo: this.currentPage,
       // limit: this.limit,
     }
@@ -97,6 +107,13 @@ export class TransferStatementComponent implements OnInit {
   //   this.getTransferStatement();
   // }
 
+  _getAllMembers() {
+    this._memberService._getAllMembers().subscribe((data: any) => {
+      if (data.memberData) {
+        this.allMembers = data.memberData;
+      }
+    });
+  }
   exportExcel(){
     let transfetStatemnt : any = []
     this.transferStatements.forEach(element => {

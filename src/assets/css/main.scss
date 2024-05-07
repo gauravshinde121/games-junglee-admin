@@ -3,6 +3,23 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+div {
+  animation: drop-in 0.5s ease 100ms backwards;
+  // animation: fadeInAnimation ease-in-out 0.5s;
+  // animation-iteration-count: 1;
+  // animation-fill-mode: forwards;
+  @keyframes drop-in {
+    from {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0px);
+    }
+  }
+}
+
 $color_1: #202121;
 $color_2: #3a3a3a;
 $color_3: #ffa7a3;
@@ -1245,11 +1262,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       font-size: 12px;
     }
   }
-  table{
+  table {
     font-size: 11px;
-    thead{
-      tr{
-        th{
+    thead {
+      tr {
+        th {
           color: $color_21;
         }
       }
@@ -1257,15 +1274,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 
-#allBets, #bookmaker {
+#allBets,
+#bookmaker {
   .modal-body {
-    .table-responsive{
-      table{
+    .table-responsive {
+      table {
         font-size: 12px;
         font-weight: 600;
-        thead{
-          tr{
-            th{
+        thead {
+          tr {
+            th {
               color: $color_21;
             }
           }
@@ -1274,9 +1292,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
   }
 }
-.ml-5{
-  margin-left:5px;
+.ml-5 {
+  margin-left: 5px;
 }
-.cus-odds td{
-  padding:10px 5px !important;
+.cus-odds td {
+  padding: 10px 5px !important;
+}
+
+div {
+  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+  // background-color: lightblue;
+  // height: 100px;
+  // width: 100%;
+  // position: relative;
+  // top: 0;
+  // left: 0;
+}
+
+.ng-hide {
+  height: 0;
+  width: 0;
+  background-color: transparent;
+  top: -200px;
+  left: 200px;
 }

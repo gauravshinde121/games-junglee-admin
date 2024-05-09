@@ -440,28 +440,29 @@ input::-webkit-outer-spin-button {
   background: #b70800;
 }
 
-.gamedetails {
-  border: 1px solid #0aa40a;
-  color: #000;
-  background: #0000;
-  margin-top: 30px;
-  border-radius: 30px;
-  padding: 15px 15px 0;
-  font-size: 12px;
-}
+// .gamedetails {
+//   border: 1px solid #0aa40a;
+//   color: #000;
+//   background: #0000;
+//   margin-top: 30px;
+//   border-radius: 30px;
+//   padding: 15px 15px 0;
+//   font-size: 12px;
+// }
 
-.gamedetails .table {
-  background-color: #fff;
-  border-radius: 15px;
-  vertical-align: middle;
-  margin-bottom: 25px;
-  color: #000
-}
+// .gamedetails .table {
+//   background-color: #fff;
+//   border-radius: 15px;
+//   vertical-align: middle;
+//   margin-bottom: 25px;
+//   color: #000
+// }
 
 .gamedetails .table thead tr th {
   font-size: .8rem;
   vertical-align: middle;
-  font-weight: 400
+  font-weight: 400;
+  border-color: transparent;
 }
 
 .gamedetails .table thead tr th:first-child {
@@ -527,11 +528,12 @@ input::-webkit-outer-spin-button {
 
 table .tfirstcol {
   border-top-left-radius: 15px;
-  color: #000
+  // color: #000
 }
 
 table thead {
-  background: linear-gradient(to right top,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a,#0aa40a)
+  background: #D8DE04;
+  color: #1D418C;
 }
 
 table thead,table tr {
@@ -543,9 +545,9 @@ table .tlastcol {
   border-top-right-radius: 15px
 }
 
-.coldark {
-  color: #fff
-}
+// .coldark {
+//   color: #fff
+// }
 
 .tstartcol {
   background: #ff7768
@@ -1137,10 +1139,6 @@ select.btn option {
   background-color: #d7e6f1db !important;
 }
 
-.table .tfirstcol {
-  border-top-left-radius: 15px;
-  color: #fff
-}
 
 .skeleton-container .row {
   height: 45px;

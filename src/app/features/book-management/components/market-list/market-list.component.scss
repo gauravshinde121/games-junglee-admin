@@ -528,9 +528,9 @@ button.btn.border-colour.me-2.text-nowrap.rounded-pill.disnone.headerFont.bg-pin
 }
 
 .gamedetails {
-  border: 1px solid #0aa40a;
+  border: 1px solid #D8DE04;
   color: #000;
-  background: #0000;
+  // background: #0000;
   margin-top: 30px;
   border-radius: 30px;
   padding: 15px 15px 0;
@@ -549,6 +549,7 @@ button.btn.border-colour.me-2.text-nowrap.rounded-pill.disnone.headerFont.bg-pin
   font-size: 0.8rem;
   vertical-align: middle;
   font-weight: 400;
+  border-color: transparent;
 }
 
 .gamedetails .table thead tr th:first-child {
@@ -617,25 +618,11 @@ button.btn.border-colour.me-2.text-nowrap.rounded-pill.disnone.headerFont.bg-pin
 
 table .tfirstcol {
   border-top-left-radius: 15px;
-  color: #000;
+  // color: #000;
 }
 
 table thead {
-  background: linear-gradient(
-    to right top,
-    #0aa40a,
-    #0aa40a,
-    #0aa40a,
-    #0aa40a,
-    #0aa40a,
-    #0aa40a,
-    #0aa40a,
-    #0aa40a,
-    #0aa40a,
-    #0aa40a,
-    #0aa40a,
-    #0aa40a
-  );
+  background: #D8DE04
 }
 
 table thead,
@@ -648,9 +635,9 @@ table .tlastcol {
   border-top-right-radius: 15px;
 }
 
-.coldark {
-  color: #fff;
-}
+// .coldark {
+//   color: #fff;
+// }
 
 .tstartcol {
   background: #ff7768;
@@ -1263,7 +1250,6 @@ select.btn option {
 
 .table .tfirstcol {
   border-top-left-radius: 15px;
-  color: #fff;
 }
 
 .skeleton-container .row {

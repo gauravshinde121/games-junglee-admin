@@ -32,7 +32,7 @@ export class DownlineListComponent implements OnInit {
   disableSubmit = false;
   currentUser:any=null;
   adminUser:any = null;
-
+  userIp: any;
 
   statusList = [
     { id: 1, status: "Active", color: 'green' },
@@ -82,7 +82,7 @@ export class DownlineListComponent implements OnInit {
       this.uplineUserId =  param['id'];
 
     })
-
+    this.userIp = this._sharedService.getIpAddress();
     this._preConfig();
     this.adminUser = this._sharedService.getUserDetails();
   }
@@ -192,7 +192,8 @@ export class DownlineListComponent implements OnInit {
     let status = evt.target.value;
     let body = {
       "userId": user.userId,
-      "isActive": status
+      "isActive": status,
+      "ipAddress" : this.userIp
     }
 
     this._memberService._changeMemberStatusApi(body).subscribe(res => {

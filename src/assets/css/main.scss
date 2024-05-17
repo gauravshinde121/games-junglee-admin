@@ -71,7 +71,8 @@ $gradient-btn: linear-gradient(
 );
 
 .browncolor {
-  background-color: $color_21;
+  // background-color: $color_21;
+  background: url(../images/inner_banner.svg), $color_21;
 }
 
 .border-pink {
@@ -370,7 +371,7 @@ $gradient-btn: linear-gradient(
     vertical-align: middle;
     border-bottom: 1px solid $color_2;
     margin: 2px 0;
-
+    background-color: $color_21;
     .custom-ddl {
       color: $color_7;
     }
@@ -391,13 +392,13 @@ $gradient-btn: linear-gradient(
     color: $color_7;
     border: 1px solid $color_28;
     background: $color_21;
-    padding:6px;
+    padding: 6px;
   }
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
   .form-control {
-    background: transparent;
+    // background: transparent;
     color: $color_7;
     border: 1px solid $color_28;
   }
@@ -1200,8 +1201,9 @@ input[type="password"]:focus {
   background-color: $color_21;
 }
 
-.matchTime{
-  color: #dc3545;}
+.matchTime {
+  color: #dc3545;
+}
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   /* Add your icon styles */
@@ -1222,11 +1224,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       font-size: 12px;
     }
   }
-  table{
+  table {
     font-size: 11px;
-    thead{
-      tr{
-        th{
+    thead {
+      tr {
+        th {
           color: $color_7;
         }
       }
@@ -1234,15 +1236,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 
-#allBets, #bookmaker {
+#allBets,
+#bookmaker {
   .modal-body {
-    .table-responsive{
-      table{
+    .table-responsive {
+      table {
         font-size: 12px;
         font-weight: 600;
-        thead{
-          tr{
-            th{
+        thead {
+          tr {
+            th {
               color: $color_7;
             }
           }
@@ -1251,9 +1254,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
   }
 }
-.ml-5{
-  margin-left:5px;
+.ml-5 {
+  margin-left: 5px;
 }
-.cus-odds td{
-  padding:10px 5px !important;
+.cus-odds td {
+  padding: 10px 5px !important;
+}
+input {
+  color-scheme: dark;
 }

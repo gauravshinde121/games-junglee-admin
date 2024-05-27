@@ -159,7 +159,8 @@ export class MarketSettingsComponent implements OnInit {
     checkbox.classList.toggle('active', checkbox.checked);
     let body = {
       marketId: marketId,
-      marketIsActive: checkbox.checked
+      marketIsActive: checkbox.checked,
+      ipAddress : this._sharedService.getIpAddress()
     }
     this.settingsService._setMarketStatusForMarketSettingsApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Market Settings', 'success');

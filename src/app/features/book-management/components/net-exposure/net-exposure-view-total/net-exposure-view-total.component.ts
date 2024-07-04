@@ -653,7 +653,7 @@ export class NetExposureViewTotalComponent implements OnInit {
       typeof parseData?.data !== 'string'
     ) {
       let webSocketData = parseData['data'];
-
+      console.log('this.adminBooksList', this.adminBooksList);
       this.adminBooksList.map((singleBook) => {
         let singleWebSocketMarketData = _.find(webSocketData, [
           'bmi',

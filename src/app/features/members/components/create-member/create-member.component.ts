@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild,Renderer2 } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild,Renderer2, } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl,ValidatorFn, ValidationErrors } from '@angular/forms';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -53,14 +53,16 @@ export class CreateMemberComponent implements OnInit {
     private _memberService: MembersService,
     private _router: Router,
     private route: ActivatedRoute,
-    private renderer: Renderer2
+    private el: ElementRef, private renderer: Renderer2
   ) { }
 
   async ngOnInit(): Promise<void> {
+    this.renderer.setAttribute(this.el.nativeElement, 'autocomplete', 'off');
+    this.renderer.setAttribute(this.el.nativeElement, 'name', 'unique_' + Math.random().toString(36).substring(2, 15));
     // this._sharedService.selectedUserRoleId.subscribe((res: any) => {
     //   console.log("Res",res);
     //   this.createUserWithRoleId = res['createUserWithRoleId'];
-      
+
     // });
 
     this._sharedService.maxBetMinValue.subscribe((res: any) => {
@@ -79,6 +81,7 @@ export class CreateMemberComponent implements OnInit {
     }
 
     this._getCasinoProvider();
+
 
   }
 
@@ -166,7 +169,7 @@ export class CreateMemberComponent implements OnInit {
         if (this.memberForm) {
 
           let creditLimit = this.memberData.creditLimit;
-          
+
           // if(this.memberData.roleId == 7){
           //   creditLimit = this.memberData.creditLimit;
           // }
@@ -235,7 +238,7 @@ export class CreateMemberComponent implements OnInit {
       this.memberForm = this._fb.group({
         username: ['', Validators.required],
         displayName: ['', Validators.required],
-        password: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
+        pwd: new FormControl(null, [(c: AbstractControl) => Validators.required(c), Validators.pattern(
           "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
         )]),
         confirmPassword: new FormControl(null, [(c: AbstractControl) => Validators.required(c)]),
@@ -255,8 +258,8 @@ export class CreateMemberComponent implements OnInit {
         userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.userCreationLimitValidator]]
       },
         {
-          // validators: this.Mustmatch('password', 'confirmPassword'),
-          validators: ConfirmPasswordValidator('password', 'confirmPassword')
+          // validators: this.Mustmatch('pwd', 'confirmPassword'),
+          validators: ConfirmPasswordValidator('pwd', 'confirmPassword')
         })
     } else {
       this.memberForm = this._fb.group({
@@ -308,7 +311,7 @@ export class CreateMemberComponent implements OnInit {
         memberData = {
           "displayName": this.memberForm.value['displayName'],
           "username": this.memberForm.value['username'],
-          "pwd": this.memberForm.value['password'],
+          "pwd": this.memberForm.value['pwd'],
           "availableCredit": this.memberForm.value['playerAvailableCredit'],
           "sportsBookRate": this.memberForm.value['sportsBookRate'],
           "liveCasinoRate": this.memberForm.value['liveCasinoRate'],
@@ -549,11 +552,11 @@ export class CreateMemberComponent implements OnInit {
 
   }
 
-  // Must Match Password
+  // Must Match pwd
 
-  Mustmatch(password: any, confirmPassword: any) {
+  Mustmatch(pwd: any, confirmPassword: any) {
     return (formGroup: FormGroup) => {
-      const passwordcontrol = formGroup.controls[password];
+      const passwordcontrol = formGroup.controls[pwd];
       const confirmPasswordcontrol = formGroup.controls[confirmPassword];
 
       if (confirmPasswordcontrol.errors && !confirmPasswordcontrol.errors['Mustmatch']) {
@@ -571,7 +574,7 @@ export class CreateMemberComponent implements OnInit {
   // validation
 
   get passwordVail() {
-    return this.memberForm?.get('password')
+    return this.memberForm?.get('pwd')
   }
 
   get confirmPasswordVail() {

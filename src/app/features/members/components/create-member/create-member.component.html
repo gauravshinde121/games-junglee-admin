@@ -16,6 +16,8 @@
           </div>
           <div class="row mt-3">
             <div class="col-md-3 mb-2 mb-2">
+              <input type="text" name="fakeusername" style="display:none;">
+              <input type="password" name="fakepassword" style="display:none;">
               <label>Select Role</label>
               <select [attr.disabled]="editMode" formControlName="roleId" name="roleId" id="ab" class="form-select"
                 (change)="onRoleChange($event)">
@@ -39,7 +41,7 @@
             <div class="col-md-3 mb-2">
               <label>Display Name</label>
               <input autocomplete="disabled" formControlName="displayName" type="text" class="form-control"
-                placeholder="Display Name*" />
+                placeholder="Display Name*" autocomplete="off" appDisableAutocomplete />
               <div class="small text-danger" *ngIf="
                   memberForm.controls['displayName'].errors?.required &&
                   memberForm.controls['displayName'].touched
@@ -50,20 +52,20 @@
             <div class="col-md-3 mb-2" *ngIf="!editMode">
               <label>Password</label>
               <div class="input-group">
-                <input [type]="show ? 'text' : 'password'" class="form-control" formControlName="password"
-                  placeholder="Password*" id="password" name="password" />
+                <input [type]="show ? 'text' : 'password'" class="form-control" formControlName="pwd"
+                  placeholder="Password*" id="password" name="pwd" autocomplete="new-password" appDisableAutocomplete />
                 <span (click)="show = !show" class="input-group-text fa fa-eye  p-0" id="Password"
                   [ngClass]="show ? 'fa-eye' : 'fa-eye-slash'"></span>
               </div>
               <div class="small text-danger" *ngIf="
-                  memberForm.controls['password'].errors?.required &&
-                  memberForm.controls['password'].touched
+                  memberForm.controls['pwd'].errors?.required &&
+                  memberForm.controls['pwd'].touched
                 ">
                 <small>Password is required</small>
               </div>
               <div class="small text-danger" *ngIf="
-                  memberForm.controls['password'].touched &&
-                  memberForm.controls['password'].errors?.pattern
+                  memberForm.controls['pwd'].touched &&
+                  memberForm.controls['pwd'].errors?.pattern
                 ">
                 <small>Password should be atleast 8 characters long. <br />
                   It should Contain <br />

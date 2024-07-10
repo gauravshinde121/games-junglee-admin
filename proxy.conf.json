@@ -1,6 +1,6 @@
 {
   "/apiE/*": {
-    "target": "https://ui-web.azurewebsites.net",
+    "target": "https://web-apis.azurewebsites.net",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",
@@ -8,7 +8,7 @@
   },
 
   "/api/*": {
-    "target": "https://ui-web.azurewebsites.net",
+    "target": "https://web-apis.azurewebsites.net",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

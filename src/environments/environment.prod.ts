@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   // apiUrl:'https://devapimbetting.azure-api.net',
-  apiUrl:'https://ui-web.azurewebsites.net',
+  apiUrl:'https://web-apis.azurewebsites.net',
   apiMockUrl:'/api',
   domainUrl:'http://localhost:8000/',
   appEnv: 'production',

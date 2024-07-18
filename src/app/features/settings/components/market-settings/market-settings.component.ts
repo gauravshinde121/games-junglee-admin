@@ -154,20 +154,21 @@ export class MarketSettingsComponent implements OnInit {
     });
   }
 
-  onToggleChange(event: Event, marketId) {
+  onToggleChange(event: Event, marketId, isCustomMarket) {
     const checkbox = event.target as HTMLInputElement;
     checkbox.classList.toggle('active', checkbox.checked);
     let body = {
       marketId: marketId,
       marketIsActive: checkbox.checked,
-      ipAddress : this._sharedService.getIpAddress()
+      ipAddress : this._sharedService.getIpAddress(),
+      isCustom : isCustomMarket
     }
     this.settingsService._setMarketStatusForMarketSettingsApi(body).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Market Settings', 'success');
-    
+
       this.getMarketSettingsList();
     })
-    
+
   }
 
   // changeGame(evt) {

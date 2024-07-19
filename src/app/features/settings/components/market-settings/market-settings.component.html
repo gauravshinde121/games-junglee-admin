@@ -114,8 +114,8 @@
                               formControlName="marketDelay"
                             />
                           </div>
-                          
-          
+
+
                           <div class="row">
                             <div class="col-md-6 text-end">
                               <button
@@ -220,7 +220,7 @@
               <td>
                 <label class="toggle-container">
                   <input [checked]="stmt.marketIsActive" type="checkbox" id="toggle-button" class="toggle-class active"
-                    (change)="onToggleChange($event, stmt.marketId)" />
+                    (change)="onToggleChange($event, stmt.marketId, stmt.isCustomMarket)" />
                   <span class="toggle-class-slider"></span>
                 </label>
               </td>

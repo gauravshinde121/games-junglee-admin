@@ -38,6 +38,18 @@
               </option>
             </select>
           </div>
+
+          <div class="col-md-3">
+            <label>Match Type</label>
+            <select formControlName="matchName" id="ab" class="form-select bg-dgrey pointer">
+              <option value="null">All</option>
+              <option ></option>
+              <option *ngFor="let game of matchList" [value]="game.matchId">
+                {{ game.matchName }}
+              </option>
+            </select>
+          </div>
+
           <div class="col-md-3">
             <button type="button" class="btn btn-pink rounded-pill mt-4" (click)="getMarketSettingsList()">
               Search

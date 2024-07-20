@@ -13,6 +13,8 @@ import * as moment from 'moment';
 })
 export class BetSettingsComponent implements OnInit {
 
+  refreshCount: number = 5;
+  resetTimerInterval: any;
   bets_data:any;
   display:any = '';
   betList:any = [];
@@ -27,7 +29,7 @@ export class BetSettingsComponent implements OnInit {
   gameId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
-  
+
   betTickerForm: FormGroup;
   deleteBetForm: FormGroup;
 
@@ -78,7 +80,7 @@ export class BetSettingsComponent implements OnInit {
   }
 
 
- 
+
 
   _getMarketsByMatchId(matchId){
     this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
@@ -93,7 +95,14 @@ export class BetSettingsComponent implements OnInit {
     this._initForm();
     this._getGames();
     this._getAllMembers();
-    
+    this.resetTimerInterval = setInterval(() => {
+      if (this.refreshCount == 0) {
+        this.refreshCall();
+        this.refreshCount = 6;
+      }
+      this.refreshCount--;
+    }, 1000)
+
   }
 
   _getAllMembers(){
@@ -345,6 +354,8 @@ export class BetSettingsComponent implements OnInit {
     this.sortAscending = true;
   }
 }
-
+refreshCall(){
+  this.searchList();
+ }
 
 }

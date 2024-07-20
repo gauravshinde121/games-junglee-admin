@@ -161,24 +161,35 @@
           </select>
         </div>
 
-        <div class="col-md-4 mb-3">
+        <div class="col-md-3 mb-3">
           <label>Stakes From Value</label>
           <input formControlName="stakesFromValue" type="number" class="form-control" value=""
             placeholder="Enter Stake From..." />
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-3 mb-3">
           <label>Stakes To Value</label>
           <input formControlName="stakesToValue" type="number" class="form-control" value=""
             placeholder="Enter Stake To..." />
         </div>
 
-        <div class="col-md-4 mb-3 mt-4">
+        <div class="col-md-4 mb-4 mt-4">
           <button type="button" class="btn btn-pink rounded-pill w-25" (click)="searchList()">
             Search
           </button>
           <button *ngIf="allBets.length > 0" type="button" class="btn btn-pink rounded-pill w-25 ms-2 "
             (click)="exportExcel()">
             Export
+          </button>
+        </div>
+        <div class="text-end col-md-2 mb-3">
+          <small> {{ refreshCount }} </small> &nbsp;
+          <button
+            [disabled]="refreshCount == 0"
+            class="btn btn-pink rounded-pill"
+            (click)="refreshCall()"
+          >
+            <i class="fa fa-redo-alt disnone"></i>
+            <small>Refresh </small>
           </button>
         </div>
       </div>

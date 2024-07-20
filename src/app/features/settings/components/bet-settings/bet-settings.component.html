@@ -180,6 +180,18 @@
             (click)="exportExcel()">
             Export
           </button>
+
+        </div>
+        <div class="text-end">
+          <small> {{ refreshCount }} </small> &nbsp;
+          <button
+            [disabled]="refreshCount == 0"
+            class="btn btn-pink rounded-pill"
+            (click)="refreshCall()"
+          >
+            <i class="fa fa-redo-alt disnone"></i>
+            <small>Refresh </small>
+          </button>
         </div>
       </div>
     </div>
@@ -278,7 +290,7 @@
       </div>
     </div>
 
-    <div *ngIf="allBets.length > 0 && !this.isLoading">
+    <!-- <div *ngIf="allBets.length > 0 && !this.isLoading">
       <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
         Prev
       </button>
@@ -287,7 +299,7 @@
       <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
         Next
       </button>
-    </div>
+    </div> -->
 
     <div class="col-md-12 mt-3" *ngIf="allBets.length == 0">
       <div class="border text-center p-5">

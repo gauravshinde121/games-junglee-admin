@@ -161,12 +161,12 @@
           </select>
         </div>
 
-        <div class="col-md-4 mb-3">
+        <div class="col-md-3 mb-3">
           <label>Stakes From Value</label>
           <input formControlName="stakesFromValue" type="number" class="form-control" value=""
             placeholder="Enter Stake From..." />
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-3 mb-3">
           <label>Stakes To Value</label>
           <input formControlName="stakesToValue" type="number" class="form-control" value=""
             placeholder="Enter Stake To..." />
@@ -182,7 +182,7 @@
           </button>
 
         </div>
-        <div class="text-end">
+        <div class="text-end col-md-2 mb-3">
           <small> {{ refreshCount }} </small> &nbsp;
           <button
             [disabled]="refreshCount == 0"

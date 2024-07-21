@@ -115,6 +115,10 @@ export class MarketSettingsComponent implements OnInit {
     this.settingsService._getMarketForAdminMarketSettingsListApi(body).subscribe((data: any) => {
       this.isLoading = false;
       this.marketSettingsList = data.markets;
+      console.log('this.marketSettingsList', this.marketSettingsList);
+      const uniqueMarketTypeIds = Array.from(new Set(this.marketSettingsList.map(market => market.marketTypeId)));
+      console.log(uniqueMarketTypeIds);
+
       this.sortedData = data.markets.slice();
     })
   }

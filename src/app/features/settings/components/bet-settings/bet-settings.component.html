@@ -172,7 +172,7 @@
             placeholder="Enter Stake To..." />
         </div>
 
-        <div class="col-md-4 mb-3 mt-4">
+        <div class="col-md-4 mb-4 mt-4">
           <button type="button" class="btn btn-pink rounded-pill w-25" (click)="searchList()">
             Search
           </button>
@@ -181,6 +181,17 @@
             Export
           </button>
 
+        </div>
+        <div class="text-end col-md-2 mb-3">
+          <small> {{ refreshCount }} </small> &nbsp;
+          <button
+            [disabled]="refreshCount == 0"
+            class="btn btn-pink rounded-pill"
+            (click)="refreshCall()"
+          >
+            <i class="fa fa-redo-alt disnone"></i>
+            <small>Refresh </small>
+          </button>
         </div>
         <div class="text-end col-md-2 mb-3">
           <small> {{ refreshCount }} </small> &nbsp;

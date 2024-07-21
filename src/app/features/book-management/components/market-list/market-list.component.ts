@@ -1299,7 +1299,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
   _postBooksForAdminBookMgmApi() {
 
     let marketIdList = this.betList.map(a=>a.marketId);
-
+    marketIdList = Array.from(new Set(marketIdList));
     let bookMgmParams = {
       "marketIds": marketIdList,
       "myPT": this.myPT

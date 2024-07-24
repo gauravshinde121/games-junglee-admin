@@ -12,6 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class MarketSettingsComponent implements OnInit {
 
+  uniqueMarketTypeIds:any;
   filterForm: FormGroup;
   matchSettingsForm: FormGroup;
   display: any = 'none';
@@ -116,13 +117,16 @@ export class MarketSettingsComponent implements OnInit {
       this.isLoading = false;
       this.marketSettingsList = data.markets;
       console.log('this.marketSettingsList', this.marketSettingsList);
-      const uniqueMarketTypeIds = Array.from(new Set(this.marketSettingsList.map(market => market.marketTypeId)));
-      console.log(uniqueMarketTypeIds);
+      this.uniqueMarketTypeIds = Array.from(new Set(this.marketSettingsList.map(market => market.marketTypeId)));
+      console.log(this.uniqueMarketTypeIds);
 
       this.sortedData = data.markets.slice();
     })
   }
 
+  changeMarketType(){
+
+  }
 
   _getAllSports() {
     this._sharedService._getSports().subscribe((data: any) => {

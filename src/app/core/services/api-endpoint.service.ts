@@ -567,6 +567,14 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_GET_MARKET_FOR_MARKETWATCH)
   }
 
+  public sendOtpMessageEndpoint(){
+    return this.createUrl(this._constants.API_SEND_OTP_FOR_ADMIN)
+  }
+
+
+  public verifyOtpEndpoint(){
+    return this.createUrl(this._constants.API_VERIFY_OTP_FOR_ADMIN)
+  }
 
   public getUserWiseBooksForMarketWatchEndpoint(){
     return this.createUrl(this._constants.API_GET_USER_BOOK_FOR_MARKETWATCH)

@@ -387,6 +387,13 @@ _getMarketForMarketWatchApi(payload){
     .post(this._apiEndpointsService.getMarketForMarketWatchEndpoint(),payload);
 }
 
+sendOtpMessageApi(payload){
+  return this._apiHttpService.post(this._apiEndpointsService.sendOtpMessageEndpoint(),payload);
+}
+
+verifyOtpEndpoint(payload){
+  return this._apiHttpService.post(this._apiEndpointsService.verifyOtpEndpoint(),payload);
+}
 
 }
 

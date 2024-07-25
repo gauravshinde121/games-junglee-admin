@@ -123,7 +123,7 @@
           </div>
             </div>
 
-            
+
 
             <!-- <div class="col-md-3 mb-2">
               <label>Fancy Commission</label>
@@ -147,7 +147,7 @@
               </div>
             </div> -->
           </div>
-          
+
         </div>
       </div>
     </section>
@@ -160,11 +160,11 @@
       </div>
       <div class="row mt-3">
         <div class="col-12">
-         <h5>Bookmaker Commission: </h5> 
+         <h5>Bookmaker Commission: </h5>
         </div>
         <div class="row">
           <div class="col-3">
-              <select *ngIf="!editMode" [disabled]="(uplineInfo.roleId[0] != 1)" [ngModelOptions]="{standalone: true}" [(ngModel)]="bookmakerComissionTypesValue" 
+              <select *ngIf="!editMode" [disabled]="(uplineInfo.roleId[0] != 1)" [ngModelOptions]="{standalone: true}" [(ngModel)]="bookmakerComissionTypesValue"
                   name="bookmakerComissionTypesValue" id="ab"
                   class="form-select" (change)="onBookmakerComissionChange($event)">
                 <option *ngFor="let comissionType of bookmakerComissionTypes" [value]="comissionType.name">
@@ -188,11 +188,11 @@
 
       <div class="row mt-3">
         <div class="col-12">
-         <h5>Fancy Commission:</h5> 
+         <h5>Fancy Commission:</h5>
         </div>
         <div class="row mb-3">
           <div class="col-3">
-            <select *ngIf="!editMode" [disabled]="(uplineInfo.roleId[0] != 1)" [ngModelOptions]="{standalone: true}" [(ngModel)]="fancyComissionTypesValue" 
+            <select *ngIf="!editMode" [disabled]="(uplineInfo.roleId[0] != 1)" [ngModelOptions]="{standalone: true}" [(ngModel)]="fancyComissionTypesValue"
                   name="fancyComissionTypesValue" id="ab"
                   class="form-select" (change)="onFancyComissionChange($event)">
                 <option *ngFor="let comissionType of fancyComissionTypes" [value]="comissionType.name">
@@ -212,6 +212,29 @@
               <div class="small text-danger" *ngIf="showError()">
                 Member Fancy Commission cannot be greater than upline fancy commission!
               </div>
+            <div class="col-md-3 mb-2" *ngIf="!editMode"></div>
+            <div class="col-md-3 mb-2" *ngIf="!editMode"></div>
+            <div class="col-md-3 mb-2 mt-3">
+              <label>Two Factor Authentication </label>
+
+              <input type="checkbox" class="auth-input" (change)="togglePhoneNumber()" formControlName="ifTwoFactorEnabled">
+              <!-- <div class="toggle-button-cover">
+                <div class="button1 r" id="button-2">
+                  <input (click)="toggleTwoFactorAuth(1,2)" type="checkbox" class="checkbox"
+                    />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div> -->
+            </div>
+
+
+            <div class="col-md-3 mb-2"  *ngIf="ifPhoneHidden">
+              <label>Mobile Number</label>
+              <input type="number" class="form-control" formControlName="phoneNumber"
+                placeholder="Mobile Number*" />
+            </div>
+
           </div>
         </div>
       </div>

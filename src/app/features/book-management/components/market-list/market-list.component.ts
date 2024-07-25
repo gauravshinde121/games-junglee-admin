@@ -306,10 +306,18 @@ export class MarketListComponent implements OnInit,OnDestroy {
                   runnerRes['showBookMakerSuspended'] = false;
                 }
 
-                if((runnerRes['back' + 0]>99) || (runnerRes['lay' + 0]>99)){
-                  runnerRes['showBookMakerSuspended'] = true;
+                if(this.matchId == "33435984"){
+                  if((runnerRes['back' + 0]>500) || (runnerRes['lay' + 0]>500)){
+                    runnerRes['showBookMakerSuspended'] = true;
+                  } else {
+                    runnerRes['showBookMakerSuspended'] = false;
+                  }
                 } else {
-                  runnerRes['showBookMakerSuspended'] = false;
+                  if((runnerRes['back' + 0]>99) || (runnerRes['lay' + 0]>99)){
+                    runnerRes['showBookMakerSuspended'] = true;
+                  } else {
+                    runnerRes['showBookMakerSuspended'] = false;
+                  }
                 }
               }
             }
@@ -826,6 +834,12 @@ export class MarketListComponent implements OnInit,OnDestroy {
                 }
 
                 if(this.matchId == "33435984"){
+                  if((runnerRes['back' + 0]>500) || (runnerRes['lay' + 0]>500)){
+                    runnerRes['showBookMakerSuspended'] = true;
+                  } else {
+                    runnerRes['showBookMakerSuspended'] = false;
+                  }
+                } else {
                   if((runnerRes['back' + 0]>99) || (runnerRes['lay' + 0]>99)){
                     runnerRes['showBookMakerSuspended'] = true;
                   } else {

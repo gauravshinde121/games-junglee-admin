@@ -124,7 +124,24 @@
             </div>
 
 
+            <div class="col-md-3 mb-2 mt-3">
+              <label>Two Factor Authentication </label>
 
+              <input type="checkbox" class="auth-input" (change)="togglePhoneNumber()" formControlName="ifTwoFactorEnabled">
+              <!-- <div class="toggle-button-cover">
+                <div class="button1 r" id="button-2">
+                  <input (click)="toggleTwoFactorAuth(1,2)" type="checkbox" class="checkbox"
+                    />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div> -->
+            </div>
+            <div class="col-md-3 mb-2"  *ngIf="ifPhoneHidden">
+              <label>Mobile Number</label>
+              <input type="number" class="form-control" formControlName="phoneNumber"
+                placeholder="Mobile Number*" />
+            </div>
             <!-- <div class="col-md-3 mb-2">
               <label>Fancy Commission</label>
               <input type="number" class="form-control" formControlName="fancyComission" *ngIf="!editMode"
@@ -212,32 +229,13 @@
               <div class="small text-danger" *ngIf="showError()">
                 Member Fancy Commission cannot be greater than upline fancy commission!
               </div>
-            <div class="col-md-3 mb-2" *ngIf="!editMode"></div>
-            <div class="col-md-3 mb-2" *ngIf="!editMode"></div>
-            <div class="col-md-3 mb-2 mt-3">
-              <label>Two Factor Authentication </label>
-
-              <input type="checkbox" class="auth-input" (change)="togglePhoneNumber()" formControlName="ifTwoFactorEnabled">
-              <!-- <div class="toggle-button-cover">
-                <div class="button1 r" id="button-2">
-                  <input (click)="toggleTwoFactorAuth(1,2)" type="checkbox" class="checkbox"
-                    />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
-                </div>
-              </div> -->
-            </div>
+              </div>
 
 
-            <div class="col-md-3 mb-2"  *ngIf="ifPhoneHidden">
-              <label>Mobile Number</label>
-              <input type="number" class="form-control" formControlName="phoneNumber"
-                placeholder="Mobile Number*" />
-            </div>
+
 
           </div>
         </div>
-      </div>
     </section>
 
    <ng-container *ngIf="userDetails.roleId == 1">

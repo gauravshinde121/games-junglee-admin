@@ -1,11 +1,11 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { SettingsService } from '../services/settings.service';
 import * as moment from 'moment';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-bet-settings',
   templateUrl: './bet-settings.component.html',

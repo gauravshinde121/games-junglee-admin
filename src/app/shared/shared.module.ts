@@ -6,7 +6,6 @@ import { LeftNavigationComponent } from './components/left-navigation/left-navig
 import { FormsModule } from '@angular/forms';
 import { TruncatePipe } from './pipe/truncate.pipe';
 import { MarketRateFormaterPipe } from './pipe/market-rate-formater.pipe';
-import { TooltipModule } from 'ng2-tooltip-directive';
 import { BoxHighlightDirective } from './directives/box-highlight.directive';
 import { SortPipe } from './pipe/sort.pipe';
 import { SearchPipe } from './pipe/search.pipe';
@@ -33,14 +32,12 @@ import { FormattednumberPipe } from './pipe/formattednumber.pipe';
     CommonModule,
     RouterModule,
     FormsModule,
-    TooltipModule
   ],
   exports: [
     HeaderComponent,
     LeftNavigationComponent,
     TruncatePipe,
     MarketRateFormaterPipe,
-    TooltipModule,
     BoxHighlightDirective,
     SortPipe,
     FormattednumberPipe,

@@ -6,7 +6,7 @@ import { ApiHttpService } from 'src/app/core/services/api-http.service';
 import { Isports } from '../models/shared';
 import { Location } from '@angular/common';
 import * as XLSX from 'xlsx';
-import { ClipboardService } from 'ngx-clipboard'
+// import { ClipboardService } from 'ngx-clipboard'
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,7 @@ export class SharedService {
     private _apiHttpService: ApiHttpService,
     private _apiEndpointsService: ApiEndpointsService,
     private _location: Location,
-    private _clipboardService: ClipboardService
+    // private _clipboardService: ClipboardService
   ) {
   }
 
@@ -138,9 +138,9 @@ export class SharedService {
       .post(this._apiEndpointsService.getAdjustCasinoEndpoint(), adjustObj);
   }
 
-  copy(text: string){
-    this._clipboardService.copy(text)
-  }
+  // copy(text: string){
+  //   this._clipboardService.copy(text)
+  // }
 
   getUserByUplineIdApi(reqBody) {
     return this._apiHttpService

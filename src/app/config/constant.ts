@@ -163,7 +163,7 @@ export class Constants {
     public readonly API_GET_BET_FOR_MARKETWATCH:string = 'api/getBetsInMarketWatch'
     public readonly API_GET_MARKET_FOR_MARKETWATCH:string = 'api/getMarketForMarketWatch'
     public readonly API_GET_USER_BOOK_FOR_MARKETWATCH:string = 'api/getUserwiseTotalBookForMarketWatch'
-
-
+    public readonly API_SEND_OTP_FOR_ADMIN:string = 'api/sendOtpMessage/admin';
+    public readonly API_VERIFY_OTP_FOR_ADMIN:string = 'api/verifyOTPRequest/admin';
 
 }

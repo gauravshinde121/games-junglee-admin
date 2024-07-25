@@ -825,10 +825,12 @@ export class MarketListComponent implements OnInit,OnDestroy {
                   runnerRes['showBookMakerSuspended'] = false;
                 }
 
-                if((runnerRes['back' + 0]>99) || (runnerRes['lay' + 0]>99)){
-                  runnerRes['showBookMakerSuspended'] = true;
-                } else {
-                  runnerRes['showBookMakerSuspended'] = false;
+                if(this.matchId == "33435984"){
+                  if((runnerRes['back' + 0]>99) || (runnerRes['lay' + 0]>99)){
+                    runnerRes['showBookMakerSuspended'] = true;
+                  } else {
+                    runnerRes['showBookMakerSuspended'] = false;
+                  }
                 }
               }
               return runnerRes;

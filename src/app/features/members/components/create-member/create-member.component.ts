@@ -177,6 +177,7 @@ export class CreateMemberComponent implements OnInit {
           //   creditLimit = this.memberData.creditLimit;
           // }
           console.log('this.memberData', this.memberData);
+          this.ifPhoneHidden = this.memberData.ifTwoFactorEnabled;
           this.memberForm.patchValue({
             username: this.memberData.username,
             displayName: this.memberData.displayName,

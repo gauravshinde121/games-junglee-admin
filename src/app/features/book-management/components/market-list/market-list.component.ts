@@ -306,7 +306,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
                   runnerRes['showBookMakerSuspended'] = false;
                 }
 
-                if(this.matchId == "33435984"){
+                if(this.matchId == "33435984" || this.matchId == "33434631"){
                   if((runnerRes['back' + 0]>500) || (runnerRes['lay' + 0]>500)){
                     runnerRes['showBookMakerSuspended'] = true;
                   } else {
@@ -833,7 +833,7 @@ export class MarketListComponent implements OnInit,OnDestroy {
                   runnerRes['showBookMakerSuspended'] = false;
                 }
 
-                if(this.matchId == "33435984"){
+                if(this.matchId == "33435984" || this.matchId == "33434631"){
                   if((runnerRes['back' + 0]>500) || (runnerRes['lay' + 0]>500)){
                     runnerRes['showBookMakerSuspended'] = true;
                   } else {

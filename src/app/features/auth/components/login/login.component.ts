@@ -78,8 +78,6 @@ export class LoginComponent implements OnInit {
           iss?: string;
         }
         const decodedToken = jwt_decode<DecodedToken>(res['token']) || {};
-        console.log('res', jwt_decode(res['token']));
-        console.log("jwt_decode(res['token'])", decodedToken.admin?.ifTwoFactorEnabled);
         if (decodedToken.admin?.ifTwoFactorEnabled === true) {
           this.display = 'block';
           //return false;

@@ -1121,7 +1121,8 @@
                                 <tr>
                                   <th width="70%" class="tfirstcol">
                                     <span class="d-flex">
-                                      Manual {{ customMarkets["marketName"] }}
+                                      <!-- Manual {{ customMarkets["marketName"] }} -->
+                                      {{ customMarkets["marketName"] | uppercase }}
                                       <ul class="m-0 d-flex list-unstyled">
                                         <li><button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(customMarkets)"
                                             data-bs-target="#bookmaker">BOOK</button></li>
@@ -1345,7 +1346,7 @@
                                 <tr>
                                   <th scope="col" class="tfirstcol">
                                     <span class="d-flex">
-                                      Manual {{ customMarkets["marketName"] }}
+                                       {{ customMarkets["marketName"] | uppercase }}
                                       <ul class="m-0 d-flex list-unstyled">
                                         <li><button class="btn btn-warning py-0" data-bs-toggle="modal" (click)="onBookOpened(customMarkets)"
                                             data-bs-target="#bookmaker">BOOK</button></li>

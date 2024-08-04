@@ -69,6 +69,7 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMinBet: new FormControl(null, Validators.required),
       maxFancySessionMaxBet: new FormControl(null, Validators.required),
       maxFancySessionDelay: new FormControl(null, Validators.required),
+      isBookmakerActive: new FormControl(false, Validators.required),
     });
   }
 
@@ -121,6 +122,7 @@ export class MatchSettingsComponent implements OnInit {
   }
 
   openSettingModal(matchSettings) {
+    console.log('matchSettings', matchSettings);
     this.selectedUserForAdjustment = [];
     this.matchSettingsForm.reset();
     this.selectedMatchSettings = matchSettings;
@@ -142,6 +144,7 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMinBet: matchSettings.maxFancySessionMinBet,
       maxFancySessionMaxBet: matchSettings.maxFancySessionMaxBet,
       maxFancySessionDelay: matchSettings.maxFancySessionDelay,
+      isBookmakerActive: matchSettings.isBookmakerActive,
     });
     this.display = 'block';
   }
@@ -179,6 +182,7 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMinBet: this.matchSettingsForm.value.maxFancySessionMinBet,
       maxFancySessionMaxBet: this.matchSettingsForm.value.maxFancySessionMaxBet,
       maxFancySessionDelay: this.matchSettingsForm.value.maxFancySessionDelay,
+      isBookmakerActive: this.matchSettingsForm.value.isBookmakerActive
     };
     this.settingsService
       ._setBetLimitForMatchApi(body)

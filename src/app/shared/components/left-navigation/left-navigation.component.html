@@ -467,7 +467,8 @@
             currentPath == '/settings/balance' ||
             currentPath == '/settings/match-settings' ||
             currentPath == '/settings/market-settings' ||
-            currentPath == '/settings/bet-settings'
+            currentPath == '/settings/bet-settings' ||
+            currentPath == '/settings/void-bets'
               ? 'collapse show'
               : 'collapse'
           "
@@ -546,6 +547,21 @@
                 routerLink="/settings/app-settings"
                 class="nav-link small ps-5"
                 >APP SETTING</a
+              >
+            </li>
+            <li
+              [routerLinkActive]="
+                currentPath == '/settings/void-bets' ? 'active' : ''
+              "
+              [ngClass]="
+                currentPath == '/settings/void-bets' ? 'active' : ''
+              "
+            >
+              <a
+                (click)="storePath('/settings/void-bets')"
+                routerLink="/settings/void-bets"
+                class="nav-link small ps-5"
+                >VOID BETS</a
               >
             </li>
           </ul>

@@ -225,9 +225,6 @@
                 <th scope="col" class="pointer" (click)="toggleSort('stake')">
                   Matched Stake
                 </th>
-                <th scope="col" class="pointer" (click)="toggleSort('stake')">
-                  Unmatched Stake
-                </th>
                 <!-- <th scope="col">Profit/Liability</th> -->
                 <th scope="col">IP</th>
                 <th scope="col" class="last">Action</th>
@@ -251,12 +248,7 @@
                 <td>{{ bets.selectionName }}</td>
                 <td>{{ bets.betRate }}</td>
                 <td>{{ bets.averagePriceMatched }}</td>
-                <td>
-                  <ng-container *ngIf="bets.isMatched; else notMatched">
-                    {{ bets.stake | indianCurrency }}
-                  </ng-container>
-                  <ng-template #notMatched> -- </ng-template>
-                </td>
+
                 <td>
                   <ng-container *ngIf="!bets.isMatched; else notMatched">
                     {{ bets.stake | indianCurrency }}

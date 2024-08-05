@@ -125,14 +125,14 @@
                 <th scope="col" class="pointer" (click)="toggleSort('stake')">
                   Matched
                 </th>
-                <th scope="col" class="pointer" (click)="toggleSort('stake')">
-                  Unmatched
-                </th>
                 <th scope="col" class="pointer" (click)="toggleSort('profitLiability')">
                   Profit/Liability
                 </th>
-                <th scope="col" class="pointer" (click)="toggleSort('ip')" class="last">
+                <th scope="col" class="pointer" (click)="toggleSort('ip')">
                   IP
+                </th>
+                <th scope="col" class="pointer" (click)="toggleSort('ip')" class="last">
+                  If Suspected
                 </th>
               </tr>
             </thead>
@@ -159,12 +159,6 @@
                 <td class="col">{{ bets.betRate }}</td>
                 <td class="col">{{ bets.averagePriceMatched }}</td>
                 <td class="col">
-                  <ng-container *ngIf="bets.isMatched; else notMatched">
-                    {{ bets.stake }}
-                  </ng-container>
-                  <ng-template #notMatched> -- </ng-template>
-                </td>
-                <td class="col">
                   <ng-container *ngIf="!bets.isMatched; else notMatched">
                     {{ bets.stake }}
                   </ng-container>
@@ -181,6 +175,9 @@
                   <span class="tooltiptext tabTooltip px-5 w-auto">
                     <small #container>{{ bets.ip }}</small>
                   </span>
+                </td>
+                <td>
+                  <input type="checkbox" [(ngModel)]="bets.isSuspected" (change)="onSuspectedStatus($event)">
                 </td>
               </tr>
             </tbody>

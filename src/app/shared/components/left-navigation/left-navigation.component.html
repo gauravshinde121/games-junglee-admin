@@ -403,7 +403,7 @@
                 (click)="storePath('/all-logs/invalid-bet')"
                 routerLink="/all-logs/invalid-bet"
                 class="nav-link small ps-5"
-                >VOID BETS</a
+                >DELETE BET</a
               >
             </li>
             <!-- <li><a routerLink="/all-logs/multiple-ip" class="nav-link small ps-5">Multiple IP</a></li><li><a routerLink="/all-logs/blocked-ip" class="nav-link small ps-5">Blocked IP</a></li><li><a routerLink="/all-logs/login-from-blocked-ip" class="nav-link small ps-5">Login From Blocked IP</a></li> -->
@@ -549,7 +549,7 @@
                 >APP SETTING</a
               >
             </li>
-            <li
+            <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN'"
               [routerLinkActive]="
                 currentPath == '/settings/void-bets' ? 'active' : ''
               "

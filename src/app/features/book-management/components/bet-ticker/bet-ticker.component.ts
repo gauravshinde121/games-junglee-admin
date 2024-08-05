@@ -312,8 +312,14 @@ export class BetTickerComponent implements OnInit {
   }
 
 
-refreshCall(){
-  this.searchList();
- }
+  refreshCall(){
+    this.searchList();
+  }
+
+  isSuspected: boolean = false;
+ onSuspectedStatus(event: any) {
+    this.isSuspected = event.target.checked;
+    console.log(this.isSuspected);
+  }
 
 }

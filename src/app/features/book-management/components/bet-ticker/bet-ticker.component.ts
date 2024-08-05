@@ -12,6 +12,8 @@ import * as moment from 'moment';
 })
 export class BetTickerComponent implements OnInit {
 
+  refreshCount: number = 5;
+  resetTimerInterval: any;
   betTickerForm: FormGroup;
   fromDate = new Date().toString();
   toDate = new Date().toString();
@@ -65,6 +67,15 @@ export class BetTickerComponent implements OnInit {
     });
 
     this.getAllUserBets();
+
+    this.resetTimerInterval = setInterval(() => {
+      if (this.refreshCount == 0) {
+        this.refreshCall();
+        this.refreshCount = 6;
+      }
+      this.refreshCount--;
+    }, 1000)
+
   }
 
   _preConfig() {
@@ -299,5 +310,10 @@ export class BetTickerComponent implements OnInit {
 
 
   }
+
+
+refreshCall(){
+  this.searchList();
+ }
 
 }

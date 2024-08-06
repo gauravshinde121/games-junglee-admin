@@ -442,6 +442,10 @@ export class ApiEndpointsService {
     return this.createUrl(this._constants.API_URL_GET_VOID_BETS_FOR_BET_SETTINGS)
   }
 
+  public getDeletedBetAfterResultListEndpoint(){
+    return this.createUrl(this._constants.API_URL_GET_DELETED_BETS_AFTER_RESULT)
+  }
+
   public getMarketBySportIdEndpoint(){
     return this.createUrl(this._constants.API_URL_GET_MARKET_BY_SPORT_ID)
   }
@@ -460,6 +464,9 @@ export class ApiEndpointsService {
 
   public deleteBetEndpoint(){
     return this.createUrl(this._constants.API_URL_DELETE_BET)
+  }
+  public ifSuspectBetEndpoint(){
+    return this.createUrl(this._constants.API_URL_IF_SUSPECT_BET)
   }
 
   public getWebSocketURLByDevice():string{

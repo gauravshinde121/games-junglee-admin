@@ -13,6 +13,7 @@ import { AppSettingsComponent } from './components/app-settings/app-settings.com
 import { GamesSettingsComponent } from './components/games-settings/games-settings.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { VoidBetsComponent } from './components/void-bets/void-bets.component';
+import { ResultManagementComponent } from './components/result-management/result-management.component';
 
 
 
@@ -26,7 +27,8 @@ import { VoidBetsComponent } from './components/void-bets/void-bets.component';
     MarketSettingsComponent,
     AppSettingsComponent,
     GamesSettingsComponent,
-    VoidBetsComponent
+    VoidBetsComponent,
+    ResultManagementComponent
   ],
   imports: [
     CommonModule,

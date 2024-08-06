@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SharedService } from '@shared/services/shared.service';
 import { BookManagementService } from '../../services/book-management.service';
@@ -10,7 +10,7 @@ import * as moment from 'moment';
   templateUrl: './bet-ticker.component.html',
   styleUrls: ['./bet-ticker.component.scss']
 })
-export class BetTickerComponent implements OnInit {
+export class BetTickerComponent implements OnInit, OnDestroy {
 
   refreshCount: number = 5;
   resetTimerInterval: any;
@@ -311,15 +311,15 @@ export class BetTickerComponent implements OnInit {
 
   }
 
-
   refreshCall(){
     this.searchList();
   }
 
-  isSuspected: boolean = false;
- onSuspectedStatus(event: any) {
-    this.isSuspected = event.target.checked;
-    console.log(this.isSuspected);
+  ngOnDestroy(): void {
+    // Clear the interval when the component is destroyed
+    if (this.resetTimerInterval) {
+      clearInterval(this.resetTimerInterval);
+    }
   }
 
 }

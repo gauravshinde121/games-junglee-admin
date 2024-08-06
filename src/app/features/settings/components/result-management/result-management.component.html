@@ -48,11 +48,11 @@
         </div>
         <div class="col-md-4 mb-3">
           <label>Select Market Type</label>
-          <select formControlName="marketId" id="ab" class="form-select pointer" (change)="changeMarketType($event)">
+          <select formControlName="betTypeId" id="ab" class="form-select pointer" (change)="changeMarketType($event)">
             <option value="null">All</option>
-            <option value="{{ market.marketId }}" *ngFor="let market of marketList">
-              {{ market.marketName }}
-            </option>
+            <option value="1">Match Odds</option>
+            <option value="12">Bookmaker</option>
+            <option value="10">Fancy</option>
           </select>
         </div>
 
@@ -96,6 +96,7 @@
             <thead>
               <tr>
                 <th scope="col" class="first">#</th>
+                <th scope="col" class="first"></th>
                 <th scope="col" class="pointer" (click)="toggleSort('username')">
                   Member
                 </th>
@@ -135,10 +136,11 @@
                   let i = index
                 ">
                 <td>{{ i + 1 }}</td>
+                <th><input type="checkbox"></th>
                 <td>{{ bets.username }}</td>
                 <td>{{ bets.createdAt | date : "medium" }}</td>
                 <td>{{ bets.eventType }}</td>
-                <td width="11%">
+                <td>
                   <span *ngIf="!bets.type" class="border r-2 bg-danger text-danger me-2 border-3 border-danger border-danger"></span>
                   <span *ngIf="bets.type" class="border bg-primary text-primary border-primary me-2 border-3"></span>
                   {{ bets.betCategory }}

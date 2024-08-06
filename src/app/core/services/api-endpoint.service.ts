@@ -465,6 +465,11 @@ export class ApiEndpointsService {
   public deleteBetEndpoint(){
     return this.createUrl(this._constants.API_URL_DELETE_BET)
   }
+
+  public deleteBetAfterMatchEndpoint(){
+    return this.createUrl(this._constants.API_URL_DELETE_BET_AFTER_MATCH)
+  }
+
   public ifSuspectBetEndpoint(){
     return this.createUrl(this._constants.API_URL_IF_SUSPECT_BET)
   }

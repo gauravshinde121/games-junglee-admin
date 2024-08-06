@@ -24,6 +24,10 @@ export class SettingsService {
       return this._apiHttpService.post(this._apiEndpointsService.deleteBetEndpoint(),paramsObj)
     }
 
+    _deleteBetAfterMatchApi(paramsObj) {
+      return this._apiHttpService.post(this._apiEndpointsService.deleteBetAfterMatchEndpoint(),paramsObj)
+    }
+
     _ifSuspectBetApi(paramsObj) {
       return this._apiHttpService.post(this._apiEndpointsService.ifSuspectBetEndpoint(),paramsObj)
     }

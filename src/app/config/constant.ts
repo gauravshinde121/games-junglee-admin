@@ -94,6 +94,7 @@ export class Constants {
     public readonly API_URL_ADD_BALANCE: string = 'api/junglee-admin/addSuperAdminBalance';
     public readonly API_URL_GET_CL_TRANSFERS: string = 'api/junglee-admin/getClTransferStatement';
     public readonly API_URL_DELETE_BET: string = 'api/junglee-admin/deleteBetByAdmin';
+    public readonly API_URL_DELETE_BET_AFTER_MATCH: string = 'api/deleteBetAfterMatch';
     public readonly API_URL_IF_SUSPECT_BET: string = 'api/junglee-admin/tickBetForSuspicion';
     public readonly API_URL_GET_BETS_FOR_BET_SETTINGS: string = 'api/junglee-admin/getBetsForBetSettings';
     public readonly API_URL_GET_VOID_BETS_FOR_BET_SETTINGS: string = 'api/getBetsToDeleteAfterResult';

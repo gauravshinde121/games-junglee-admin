@@ -120,7 +120,7 @@ export class ResultManagementComponent implements OnInit {
       memberId: null,
       sportsId: null,
       matchId: null,
-      marketId: null,
+      betTypeId: null,
       tms: ['All'],
       type: ['All'],
       typeName:['All'],
@@ -247,7 +247,7 @@ export class ResultManagementComponent implements OnInit {
     let payload = {
       sportId: this.sportsId,
       matchId: this.matchId,
-      marketId: this.marketTypeId,
+      betTypeId: this.marketTypeId,
       userId: this.betTickerForm.value.memberId,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
@@ -287,12 +287,11 @@ export class ResultManagementComponent implements OnInit {
       currentUserIp = data.userIp;
     });
     let body = {
-      "userId": user.userId,
-      "betId": user.betId,
-      "remarks": this.betRemark,
-      "ip": currentUserIp
+      "userIdList": user.userId,
+      "betIdList": user.betId,
+      "remarks": this.betRemark
     }
-    this._settingService._deleteBetApi(body).subscribe(res=>{
+    this._settingService._deleteBetAfterMatchApi(body).subscribe(res=>{
       this._sharedService.getToastPopup('done',"","success");
       this.getAllUserBets();
       this.display = 'none';

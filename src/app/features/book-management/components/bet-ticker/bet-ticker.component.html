@@ -131,9 +131,6 @@
                 <th scope="col" class="pointer" (click)="toggleSort('ip')">
                   IP
                 </th>
-                <th scope="col" class="pointer" (click)="toggleSort('ip')" class="last">
-                  If Suspected
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -175,9 +172,6 @@
                   <span class="tooltiptext tabTooltip px-5 w-auto">
                     <small #container>{{ bets.ip }}</small>
                   </span>
-                </td>
-                <td>
-                  <input type="checkbox" [(ngModel)]="bets.isSuspected" (change)="onSuspectedStatus($event)">
                 </td>
               </tr>
             </tbody>

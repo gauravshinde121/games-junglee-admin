@@ -6,12 +6,13 @@ import { MembersService } from 'src/app/features/members/services/members.servic
 import { SharedService } from '../../../../shared/services/shared.service';
 import { SettingsService } from '../services/settings.service';
 import * as moment from 'moment';
+
 @Component({
-  selector: 'app-bet-settings',
-  templateUrl: './bet-settings.component.html',
-  styleUrls: ['./bet-settings.component.scss']
+  selector: 'app-result-management',
+  templateUrl: './result-management.component.html',
+  styleUrls: ['./result-management.component.scss']
 })
-export class BetSettingsComponent implements OnInit {
+export class ResultManagementComponent implements OnInit {
 
   isSuspected: boolean = false;
   refreshCount: number = 5;
@@ -96,13 +97,13 @@ export class BetSettingsComponent implements OnInit {
     this._initForm();
     this._getGames();
     this._getAllMembers();
-    this.resetTimerInterval = setInterval(() => {
-      if (this.refreshCount == 0) {
-        this.refreshCall();
-        this.refreshCount = 6;
-      }
-      this.refreshCount--;
-    }, 1000)
+    // this.resetTimerInterval = setInterval(() => {
+    //   if (this.refreshCount == 0) {
+    //     this.refreshCall();
+    //     this.refreshCount = 6;
+    //   }
+    //   this.refreshCount--;
+    // }, 1000)
 
   }
 
@@ -190,22 +191,20 @@ export class BetSettingsComponent implements OnInit {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
     let body = {
-      memberId: null,
       sportId: null,
       matchId: null,
       userId: null,
       marketId : null,
       stakesFrom :null,
       stakesTo :null,
-      pageNo: this.currentPage,
-      limit: 50,
       fromDate: fromDate,
       toDate: toDate,
     };
 
-    this._settingService._getBetsApi(body).subscribe((res:any)=>{
+    this._settingService._getDeletedBetAfterResultListApi(body).subscribe((res:any)=>{
       this.isLoading = false;
       this.allBets = res.userBetList.betList;
+      console.log("res", res);
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
       this._sharedService.getToastPopup("Internal server error","","error")
@@ -246,7 +245,6 @@ export class BetSettingsComponent implements OnInit {
       this.betTickerForm.patchValue( {'memberId':null} );
     }
     let payload = {
-      memberId: this.betTickerForm.value.memberId,
       sportId: this.sportsId,
       matchId: this.matchId,
       marketId: this.marketTypeId,
@@ -254,12 +252,10 @@ export class BetSettingsComponent implements OnInit {
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
       fromDate : fromDate,
-      toDate : toDate,
-      pageNo: this.currentPage,
-      limit: 50,
+      toDate : toDate
     }
 
-    this._settingService._getBetsApi(payload).subscribe((res:any)=>{
+    this._settingService._getDeletedBetAfterResultListApi(payload).subscribe((res:any)=>{
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
@@ -355,9 +351,10 @@ export class BetSettingsComponent implements OnInit {
     this.sortAscending = true;
   }
 }
-refreshCall(){
-  this.searchList();
- }
+
+  // refreshCall(){
+  //   this.searchList();
+  // }
 
  onSuspectedStatus(event: any, betId) {
     this.isSuspected = event.target.checked;

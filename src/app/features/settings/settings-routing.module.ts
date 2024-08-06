@@ -9,6 +9,7 @@ import { MarketSettingsComponent } from './components/market-settings/market-set
 import { AppSettingsComponent } from './components/app-settings/app-settings.component';
 import { GamesSettingsComponent } from './components/games-settings/games-settings.component';
 import { VoidBetsComponent } from './components/void-bets/void-bets.component';
+import { ResultManagementComponent } from './components/result-management/result-management.component';
 
 const routes: Routes = [{
   path:'settings',
@@ -21,7 +22,8 @@ const routes: Routes = [{
     {path:'market-settings', component: MarketSettingsComponent},
     {path:'app-settings', component: AppSettingsComponent},
     {path:'games-settings', component: GamesSettingsComponent},
-    {path:'void-bets', component: VoidBetsComponent}
+    {path:'void-bets', component: VoidBetsComponent},
+    {path:'result-management', component: ResultManagementComponent}
   ]
 }];
 

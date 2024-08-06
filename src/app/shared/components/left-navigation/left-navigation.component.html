@@ -468,7 +468,8 @@
             currentPath == '/settings/match-settings' ||
             currentPath == '/settings/market-settings' ||
             currentPath == '/settings/bet-settings' ||
-            currentPath == '/settings/void-bets'
+            currentPath == '/settings/void-bets' ||
+            currentPath == '/settings/result-management'
               ? 'collapse show'
               : 'collapse'
           "
@@ -549,7 +550,7 @@
                 >APP SETTING</a
               >
             </li>
-            <li *ngIf="adminDetails?.userRoleName == 'SUPER ADMIN'"
+            <!-- <li
               [routerLinkActive]="
                 currentPath == '/settings/void-bets' ? 'active' : ''
               "
@@ -564,6 +565,21 @@
                 >VOID BETS</a
               >
             </li>
+            <li
+              [routerLinkActive]="
+                currentPath == '/settings/result-management' ? 'active' : ''
+              "
+              [ngClass]="
+                currentPath == '/settings/result-management' ? 'active' : ''
+              "
+            >
+              <a
+                (click)="storePath('/settings/result-management')"
+                routerLink="/settings/result-management"
+                class="nav-link small ps-5"
+                >RESULT MANAGEMENT</a
+              >
+            </li> -->
           </ul>
         </div>
       </li>

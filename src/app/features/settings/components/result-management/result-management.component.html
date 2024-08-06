@@ -71,6 +71,9 @@
           <button type="button" class="btn btn-pink rounded-pill w-25" (click)="searchList()">
             Search
           </button>
+          <button type="button" class="btn btn-pink rounded-pill w-25" (click)="openDeleteModal()">
+            Revoke
+          </button>
           <!-- <button *ngIf="allBets.length > 0" type="button" class="btn btn-pink rounded-pill w-25 ms-2 "
             (click)="exportExcel()">
             Export
@@ -96,7 +99,7 @@
             <thead>
               <tr>
                 <th scope="col" class="first">#</th>
-                <th scope="col" class="first"></th>
+                <th scope="col"></th>
                 <th scope="col" class="pointer" (click)="toggleSort('username')">
                   Member
                 </th>
@@ -136,7 +139,7 @@
                   let i = index
                 ">
                 <td>{{ i + 1 }}</td>
-                <th><input type="checkbox"></th>
+                <td><input type="checkbox" [(ngModel)]="bets.isSelected"></td>
                 <td>{{ bets.username }}</td>
                 <td>{{ bets.createdAt | date : "medium" }}</td>
                 <td>{{ bets.eventType }}</td>
@@ -158,7 +161,7 @@
                 <td>{{ bets.status }}</td>
 
                 <td>
-                  <button class="btn btn-pink rounded-pill w-80" (click)="openModal(bets)">
+                  <button class="btn btn-pink rounded-pill w-80" (click)="openModalForSingleBet(bets)">
                     Revoke
                   </button>
                 </td>
@@ -189,7 +192,6 @@
   </section>
 </main>
 
-<!-- Modal start-->
 <div class="modal" [ngStyle]="{ display: display }" id="staticBackdrop" data-bs-backdrop="static"
   data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog modal-md">
@@ -210,16 +212,6 @@
                 <div class="col-md-7">
                   <input type="text" class="form-control border-pink bg-transparent rounded-pill"
                     formControlName="remarks" placeholder="Enter remarks" (keydown.enter)="submitForm()" />
-                  <!--<div
-                    class="text-danger"
-                    *ngIf="
-                    remarks &&
-                    remarks.invalid &&
-                    remarks.touched
-                    "
-                  >
-                  Remark is required.
-                  </div>-->
                 </div>
               </div>
 
@@ -230,20 +222,16 @@
                   </button>
                 </div>
                 <div class="col-md-6 text-end">
-                  <button (click)="confirmDeleteBet()" [disabled]="deleteBetForm.invalid"
+                  <button (click)="confirmDeleteSelectedBets()" [disabled]="deleteBetForm.invalid"
                     class="btn btn-pink rounded-pill w-80 mt-4">
-                    Save Remark and Delete
+                    Save Remark and Revoke
                   </button>
                 </div>
               </div>
             </form>
-            <!--your code will come here end-->
-            <!-- </div> -->
-            <!-- </div> -->
           </section>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- Modal end -->

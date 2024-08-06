@@ -563,8 +563,8 @@
                 class="nav-link small ps-5"
                 >VOID BETS</a
               >
-            </li>
-            <li
+            </li> -->
+            <li *ngIf="adminDetails.userId == 251 || adminDetails.userId == 497"
               [routerLinkActive]="
                 currentPath == '/settings/result-management' ? 'active' : ''
               "
@@ -578,7 +578,7 @@
                 class="nav-link small ps-5"
                 >RESULT MANAGEMENT</a
               >
-            </li> -->
+            </li>
           </ul>
         </div>
       </li>

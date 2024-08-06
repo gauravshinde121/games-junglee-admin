@@ -1,5 +1,5 @@
 <!--Aside start-->
-<div class="row matchbody m-0">
+<div class="row matchbody">
   <div class="col-md-12">
     <a class="text-color small text-decoration-none pointer"><i (click)="goBack()" class="fa fa-angle-left">
         &nbsp;&nbsp;Back</i>
@@ -282,8 +282,8 @@
                                       )
                                     ">
                                     <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
-                                    <td>
-                                      <a class="colblue" [boxHighlight]="runner['back0']"
+                                    <td class="colblue">
+                                      <a  [boxHighlight]="runner['back0']"
                                         [boxHighlight]="runner['vback0']" [class.dis]="
                                           inPlayUpcomingMarket[
                                             'inPlayStatus'
@@ -293,8 +293,8 @@
                                           runner["vback0"] | marketRateFormater
                                           }}</span></a>
                                     </td>
-                                    <td>
-                                      <a class="colpink" [boxHighlight]="runner['lay0']"
+                                    <td class="colpink">
+                                      <a [boxHighlight]="runner['lay0']"
                                         [boxHighlight]="runner['vlay0']" [class.dis]="
                                           inPlayUpcomingMarket[
                                             'inPlayStatus'
@@ -765,8 +765,8 @@
                                     </td>
                                     <td class="border-top" [ngClass]="{ 'border-top': !first }"></td>
 
-                                    <td>
-                                      <a class="colblue" [boxHighlight]="runner['back0']"
+                                    <td class="colblue">
+                                      <a [boxHighlight]="runner['back0']"
                                         [boxHighlight]="runner['vback0']" [class.dis]="
                                           singleBookMaker['appMarketStatus'] ==
                                           0
@@ -775,8 +775,8 @@
                                           runner["vback0"] | marketRateFormater
                                           }}</span></a>
                                     </td>
-                                    <td>
-                                      <a class="colpink" [boxHighlight]="runner['lay0']"
+                                    <td class="colpink">
+                                      <a [boxHighlight]="runner['lay0']"
                                         [boxHighlight]="runner['vlay0']" [class.dis]="
                                           singleBookMaker['appMarketStatus'] ==
                                           0
@@ -1188,8 +1188,8 @@
                                     </td>
                                     <td class="border-top" [ngClass]="{ 'border-top': !first }"></td>
 
-                                    <td>
-                                      <a class="colblue" [boxHighlight]="runner['back0']"
+                                    <td class="colblue">
+                                      <a [boxHighlight]="runner['back0']"
                                         [boxHighlight]="runner['vback0']" [class.dis]="
                                           customMarkets['inPlayStatus'] == 0
                                         "><strong>{{ runner["back0"] }}</strong>
@@ -1197,8 +1197,8 @@
                                           runner["vback0"] | marketRateFormater
                                           }}</span></a>
                                     </td>
-                                    <td>
-                                      <a class="colpink" [boxHighlight]="runner['lay0']"
+                                    <td class="colpink">
+                                      <a [boxHighlight]="runner['lay0']"
                                         [boxHighlight]="runner['vlay0']" [class.dis]="
                                           customMarkets['inPlayStatus'] == 0
                                         "><strong>{{ runner["lay0"] }}</strong>
@@ -1883,8 +1883,8 @@
                                     <img src="/assets/images/ladder-icon.png" width="10px" />
                                   </a>
                                 </td>
-                                <td>
-                                  <a class="colpink" [boxHighlight]="singleFancyMarket['lay1']"
+                                <td class="colpink">
+                                  <a [boxHighlight]="singleFancyMarket['lay1']"
                                     [boxHighlight]="singleFancyMarket['vlay1']">
                                     <strong>{{
                                       singleFancyMarket["lay1"]
@@ -1894,8 +1894,8 @@
                                       | marketRateFormater
                                       }}</span></a>
                                 </td>
-                                <td>
-                                  <a class="colblue" [boxHighlight]="singleFancyMarket['back1']"
+                                <td class="colblue">
+                                  <a [boxHighlight]="singleFancyMarket['back1']"
                                     [boxHighlight]="singleFancyMarket['vback1']">
                                     <strong>{{
                                       singleFancyMarket["back1"]
@@ -2312,8 +2312,8 @@
                                     <img src="/assets/images/ladder-icon.png" width="10px" />
                                   </a>
                                 </td>
-                                <td>
-                                  <a class="colpink" [boxHighlight]="singleFancyMarket['lay1']"
+                                <td class="colpink">
+                                  <a [boxHighlight]="singleFancyMarket['lay1']"
                                     [boxHighlight]="singleFancyMarket['vlay1']">
                                     <strong>{{
                                       singleFancyMarket["lay1"]
@@ -2323,8 +2323,8 @@
                                       | marketRateFormater
                                       }}</span></a>
                                 </td>
-                                <td>
-                                  <a class="colblue" [boxHighlight]="singleFancyMarket['back1']"
+                                <td class="colblue">
+                                  <a [boxHighlight]="singleFancyMarket['back1']"
                                     [boxHighlight]="singleFancyMarket['vback1']">
                                     <strong>{{
                                       singleFancyMarket["back1"]

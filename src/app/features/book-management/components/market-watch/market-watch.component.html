@@ -857,9 +857,9 @@
                     </a>
                   </td>
 
-                  <td>
+                  <td class="colblue">
                     <a
-                      class="colblue pointer"
+                      class=" pointer"
                       [boxHighlight]="
                         singleMarket['market']['runners'][0]['back0']
                       "
@@ -876,18 +876,18 @@
                     >
                   </td>
 
-                  <td *ngIf="singleMarket?.market?.runners[2]">
-                    <a class="colgray"> -</a>
+                  <td class="colgray" *ngIf="singleMarket?.market?.runners[2]">
+                    <a class=""> -</a>
                   </td>
-                  <td *ngIf="!singleMarket?.market?.runners[2]">
-                    <a class="colgray"> -</a>
+                  <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">
+                    <a class=""> -</a>
                   </td>
                   <!-- <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td> -->
 
-                  <td>
+                  <td class="colblue">
                     <a
                       href=""
-                      class="colblue pointer"
+                      class=" pointer"
                       [boxHighlight]="
                         singleMarket['market']['runners'][1]['back0']
                       "
@@ -1232,8 +1232,8 @@
                     </a>
                   </td>
 
-                  <td>
-                    <a class="colblue dis"
+                  <td class="colblue dis">
+                    <a
                       ><strong>{{
                         singleMarket["market"]["runners"][0]["back0"]
                       }}</strong>
@@ -1247,12 +1247,12 @@
                   <!-- <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td>
                                         <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">-</td> -->
 
-                  <td *ngIf="!singleMarket?.market?.runners[2]">
-                    <a class="colgray"> -</a>
+                  <td class="colgray" *ngIf="!singleMarket?.market?.runners[2]">
+                    <a> -</a>
                   </td>
 
-                  <td *ngIf="singleMarket?.market?.runners[2]">
-                    <a class="colblue dis">
+                  <td class="colblue dis" *ngIf="singleMarket?.market?.runners[2]">
+                    <a>
                       <strong>{{
                         singleMarket["market"]["runners"][2]["back0"]
                       }}</strong>
@@ -1263,8 +1263,8 @@
                     >
                   </td>
 
-                  <td>
-                    <a class="colblue dis">
+                  <td class="colblue dis">
+                    <a>
                       <strong>{{
                         singleMarket["market"]["runners"][1]["back0"]
                       }}</strong>

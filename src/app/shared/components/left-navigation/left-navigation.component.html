@@ -403,7 +403,7 @@
                 (click)="storePath('/all-logs/invalid-bet')"
                 routerLink="/all-logs/invalid-bet"
                 class="nav-link small ps-5"
-                >VOID BETS</a
+                >DELETE BET</a
               >
             </li>
             <!-- <li><a routerLink="/all-logs/multiple-ip" class="nav-link small ps-5">Multiple IP</a></li><li><a routerLink="/all-logs/blocked-ip" class="nav-link small ps-5">Blocked IP</a></li><li><a routerLink="/all-logs/login-from-blocked-ip" class="nav-link small ps-5">Login From Blocked IP</a></li> -->
@@ -468,7 +468,8 @@
             currentPath == '/settings/match-settings' ||
             currentPath == '/settings/market-settings' ||
             currentPath == '/settings/bet-settings' ||
-            currentPath == '/settings/void-bets'
+            currentPath == '/settings/void-bets' ||
+            currentPath == '/settings/result-management'
               ? 'collapse show'
               : 'collapse'
           "
@@ -549,7 +550,7 @@
                 >APP SETTING</a
               >
             </li>
-            <li
+            <!-- <li
               [routerLinkActive]="
                 currentPath == '/settings/void-bets' ? 'active' : ''
               "
@@ -564,6 +565,21 @@
                 >VOID BETS</a
               >
             </li>
+            <li
+              [routerLinkActive]="
+                currentPath == '/settings/result-management' ? 'active' : ''
+              "
+              [ngClass]="
+                currentPath == '/settings/result-management' ? 'active' : ''
+              "
+            >
+              <a
+                (click)="storePath('/settings/result-management')"
+                routerLink="/settings/result-management"
+                class="nav-link small ps-5"
+                >RESULT MANAGEMENT</a
+              >
+            </li> -->
           </ul>
         </div>
       </li>

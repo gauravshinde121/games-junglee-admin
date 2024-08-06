@@ -24,6 +24,9 @@ export class SettingsService {
       return this._apiHttpService.post(this._apiEndpointsService.deleteBetEndpoint(),paramsObj)
     }
 
+    _ifSuspectBetApi(paramsObj) {
+      return this._apiHttpService.post(this._apiEndpointsService.ifSuspectBetEndpoint(),paramsObj)
+    }
     _getMatchSettingsListApi(filterObj){
       return this._apiHttpService.post(this._apiEndpointsService.getMatchSettingsListEndpoint(),filterObj)
     }
@@ -58,6 +61,10 @@ export class SettingsService {
 
     _getVoidBetsApi(filterObj){
       return this._apiHttpService.post(this._apiEndpointsService.getVoidBetsForBetSettingsEndpoint(),filterObj)
+    }
+
+    _getDeletedBetAfterResultListApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.getDeletedBetAfterResultListEndpoint(),filterObj)
     }
 
     _setBetLimitForMultipleMarketApi(filterObj){

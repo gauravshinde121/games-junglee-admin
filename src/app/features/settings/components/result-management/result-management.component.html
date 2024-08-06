@@ -1,108 +1,3 @@
-<!-- <main id="main" class="main m-0">
-  <section class="section gamedetails">
-    <div class="row">
-      <div class="col-md-3">
-        <h3 class="text-pink">Bet Settings</h3>
-      </div>
-      <hr>
-    </div>
-    <form [formGroup]="betSettingForm" (ngSubmit)="onSubmitBetListForm()">
-    <div class="row">
-      <div class="col-md-3 mb-3">
-        <label>Select Sport</label>
-        <select formControlName="sportsId" id="ab" class="form-select">
-          <option value="null">All</option>
-          <option *ngFor="let game of games" [value]="game.sportId">{{game.sportName}}</option>
-        </select>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label>Select Match</label>
-        <select formControlName="matchId"  id="ab" class="form-select">
-          <option value="null">All</option>
-          <option value="match.matchId" *ngFor="let match of matchList">{{match.matchName}}</option>
-        </select>
-      </div>
-
-
-      <div class="col-md-3 mt-2 mb-4">
-        <button
-          type="submit"
-          class="btn btn-pink rounded-pill w-100"
-          (click)="searchList()"
-        >
-          Search
-        </button>
-      </div>
-    </div>
-    </form>
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table table-dark" >
-          <thead>
-            <tr>
-              <th scope="col" class="first">#</th>
-              <th scope="col">Member</th>
-              <th scope="col">Place time</th>
-              <th scope="col">Events</th>
-              <th scope="col">Market</th>
-              <th scope="col">Selection</th>
-              <th scope="col">Odds Placed</th>
-              <th scope="col">Odds Matched</th>
-              <th scope="col">Matched</th>
-              <th scope="col">Unmatched</th>
-              <th scope="col" class="last">IP</th>
-              <th scope="col" class="last">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bets of allBets">
-              <td>026agarwal - INR</td>
-              <td>{{bets.member}}</td>
-              <td>{{bets.placeTime | date }}</td>
-              <td>{{bets.event}}</td>
-              <td>
-                <span *ngIf="!bets.isBack"
-                  class="border r-2 bg-danger text-danger  me-2"
-                >
-                </span>
-                <span  *ngIf="bets.isBack"
-                class="border  bg-primary text-primary border-primary me-2"
-              >
-              </span
-              >
-                {{bets.market}}
-              </td>
-
-              <td>{{bets.selection}}</td>
-              <td>{{bets.oddsPlaced}}</td>
-              <td>{{bets.oddsMatched}}</td>
-              <td>{{bets.matched}}</td>
-              <td class="text-danger">{{bets.unmatched}}</td>
-              <td>
-                <i
-                  class="fa fa-info-circle"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
-                ></i>
-                {{bets.ip}}
-              </td>
-              <td>
-                <button type="button" class="btn btn-success rounded-pill btn-sm ps-3 pe-3"> Delete </button>
-                {{bets.ip}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="col-md-12 mt-3" >
-      <div class="border text-center p-5">
-        <h4 *ngIf="allBets.length == 0 && !isLoading">No data found</h4>
-        <h4 *ngIf="isLoading">Loading...</h4>
-      </div>
-    </div>
-  </section>
-</main> -->
 
 <main id="main" class="main m-0">
   <section class="section gamedetails">
@@ -176,13 +71,12 @@
           <button type="button" class="btn btn-pink rounded-pill w-25" (click)="searchList()">
             Search
           </button>
-          <button *ngIf="allBets.length > 0" type="button" class="btn btn-pink rounded-pill w-25 ms-2 "
+          <!-- <button *ngIf="allBets.length > 0" type="button" class="btn btn-pink rounded-pill w-25 ms-2 "
             (click)="exportExcel()">
             Export
-          </button>
-
+          </button> -->
         </div>
-        <div class="text-end col-md-2 mb-3">
+        <!-- <div class="text-end col-md-2 mb-3">
           <small> {{ refreshCount }} </small> &nbsp;
           <button
             [disabled]="refreshCount == 0"
@@ -192,7 +86,7 @@
             <i class="fa fa-redo-alt disnone"></i>
             <small>Refresh </small>
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="row mb-3">
@@ -214,21 +108,24 @@
                 <th scope="col" class="pointer" (click)="toggleSort('betCategory')">
                   Market
                 </th>
+                <th scope="col" class="pointer" (click)="toggleSort('betCategory')">
+                  Match
+                </th>
                 <th scope="col" class="pointer" (click)="toggleSort('selectionName')">
                   Selection
                 </th>
                 <th scope="col" class="pointer" (click)="toggleSort('betRate')">
-                  Odds Placed
-                </th>
-                <th scope="col" class="pointer" (click)="toggleSort('averagePriceMatched')">
-                  Odds Matched
+                  Odds
                 </th>
                 <th scope="col" class="pointer" (click)="toggleSort('stake')">
-                  Matched Stake
+                  Stake
                 </th>
-                <!-- <th scope="col">Profit/Liability</th> -->
-                <th scope="col">IP</th>
-                <th scope="col">Suspected</th>
+                <th scope="col" class="pointer" (click)="toggleSort('stake')">
+                  Result ID
+                </th>
+                <th scope="col" class="pointer" (click)="toggleSort('stake')">
+                  Status
+                </th>
                 <th scope="col" class="last">Action</th>
               </tr>
             </thead>
@@ -239,45 +136,28 @@
                 ">
                 <td>{{ i + 1 }}</td>
                 <td>{{ bets.username }}</td>
-                <td>{{ bets.placedDate | date : "medium" }}</td>
-                <td>{{ bets.event }}</td>
+                <td>{{ bets.createdAt | date : "medium" }}</td>
+                <td>{{ bets.eventType }}</td>
                 <td width="11%">
                   <span *ngIf="!bets.type" class="border r-2 bg-danger text-danger me-2 border-3 border-danger border-danger"></span>
                   <span *ngIf="bets.type" class="border bg-primary text-primary border-primary me-2 border-3"></span>
                   {{ bets.betCategory }}
                 </td>
-
+                <td>{{bets.matchName}}</td>
                 <td>{{ bets.selectionName }}</td>
-                <td>{{ bets.betRate }}</td>
-                <td>{{ bets.averagePriceMatched }}</td>
-
+                <td>{{ bets.odds }}</td>
                 <td>
                   <ng-container *ngIf="!bets.isMatched; else notMatched">
                     {{ bets.stake | indianCurrency }}
                   </ng-container>
                   <ng-template #notMatched> -- </ng-template>
                 </td>
-                <!-- <td>
-                <span [ngClass]="bets.type ? 'text-success' : 'text-danger'">
-                {{ bets.profitLiability }}
-                </span>
-              </td> -->
-                <td>
-                  <div class="tooltipnk">
-                    <i class="fa-sharp fa-solid fa-clipboard cursor-pointer" ngxClipboard [cbContent]="bets.ip"
-                      [container]="container"></i>
-                    <span class="tooltiptext tabTooltip px-5 w-auto">
-                      <small #container>{{ bets.ip }}</small>
-                    </span>
-                  </div>
-                </td>
+                <td>{{ bets.resultId }}</td>
+                <td>{{ bets.status }}</td>
 
                 <td>
-                  <input type="checkbox" [(ngModel)]="bets.isSuspected" (change)="onSuspectedStatus($event, bets.betId)">
-                </td>
-                <td>
                   <button class="btn btn-pink rounded-pill w-80" (click)="openModal(bets)">
-                    Delete
+                    Revoke
                   </button>
                 </td>
               </tr>
@@ -287,7 +167,7 @@
       </div>
     </div>
 
-    <!-- <div *ngIf="allBets.length > 0 && !this.isLoading">
+    <div *ngIf="allBets.length > 0 && !this.isLoading">
       <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
         Prev
       </button>
@@ -296,7 +176,7 @@
       <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
         Next
       </button>
-    </div> -->
+    </div>
 
     <div class="col-md-12 mt-3" *ngIf="allBets.length == 0">
       <div class="border text-center p-5">

@@ -72,13 +72,24 @@
           <input formControlName="stakesToValue" type="number" class="form-control" value=""
             placeholder="Enter Stake To..." />
         </div>
-        <div class="col-md-4 my-3 my-md-0">
+        <div class="col-md-2 my-3 my-md-0">
           <button type="button" class="btn btn-pink rounded-pill" (click)="searchList()">
             Search
           </button>
           <button *ngIf="allBets.length > 0" type="button" class="btn btn-pink rounded-pill ms-2 "
             (click)="exportExcel()">
             Export
+          </button>
+        </div>
+        <div class="text-end col-md-2">
+          <small> {{ refreshCount }} </small> &nbsp;
+          <button
+            [disabled]="refreshCount == 0"
+            class="btn btn-pink rounded-pill"
+            (click)="refreshCall()"
+          >
+            <i class="fa fa-redo-alt disnone"></i>
+            <small>Refresh </small>
           </button>
         </div>
       </div>
@@ -114,13 +125,10 @@
                 <th scope="col" class="pointer" (click)="toggleSort('stake')">
                   Matched
                 </th>
-                <th scope="col" class="pointer" (click)="toggleSort('stake')">
-                  Unmatched
-                </th>
                 <th scope="col" class="pointer" (click)="toggleSort('profitLiability')">
                   Profit/Liability
                 </th>
-                <th scope="col" class="pointer" (click)="toggleSort('ip')" class="last">
+                <th scope="col" class="pointer" (click)="toggleSort('ip')">
                   IP
                 </th>
               </tr>
@@ -147,12 +155,6 @@
                 <td class="col">{{ bets.selectionName }}</td>
                 <td class="col">{{ bets.betRate }}</td>
                 <td class="col">{{ bets.averagePriceMatched }}</td>
-                <td class="col">
-                  <ng-container *ngIf="bets.isMatched; else notMatched">
-                    {{ bets.stake }}
-                  </ng-container>
-                  <ng-template #notMatched> -- </ng-template>
-                </td>
                 <td class="col">
                   <ng-container *ngIf="!bets.isMatched; else notMatched">
                     {{ bets.stake }}
@@ -199,6 +201,6 @@
       >
         Next
       </button></div>-->
-    
+
   </section>
 </main>

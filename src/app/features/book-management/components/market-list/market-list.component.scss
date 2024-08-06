@@ -782,6 +782,38 @@ input:focus + .slider {
   color: #000;
 }
 
+.fancy_event{
+  .suspendedm1 {
+    background: #ac4040;
+    color: #fff;
+    border-radius: 8px;
+    padding: 14px 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    border: 0;
+    width: 100%;
+    font-size: 14px;
+
+    @media screen and (max-width: 768px) {
+      // width: 125px;
+      right: 0;
+      // left: -20px;
+      top: 0;
+      // padding: 17px 0;
+    }
+
+    @media screen and (max-width: 320px) {
+      // width: 125px;
+      right: 0;
+      // left: -20px;
+      top: 0;
+      // padding: 17px 0;
+    }
+  }
+}
 .suspendedm1 {
   background: #ac4040;
   color: #fff;
@@ -789,10 +821,29 @@ input:focus + .slider {
   padding: 14px 5px;
   position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   text-align: center;
   border: 0;
-  width: 196px;
+  width:100%;
+  height: 100%;
   font-size: 14px;
+
+  @media screen and (max-width: 768px) {
+    // width: 160px;
+    right: 0;
+    // left: -150px;
+    top: 0;
+    // padding: 17px 0;
+  }
+
+  @media screen and (max-width: 320px) {
+    // width: 115px;
+    right: 0;
+    // left: -100px;
+    top: 0;
+    // padding: 17px 0;
+  }
 }
 
 .loader {
@@ -1310,9 +1361,9 @@ mark {
     font-size: 20px;
   }
 
-  .suspendedm1 {
-    top: 5px;
-  }
+  // .suspendedm1 {
+  //   top: 5px;
+  // }
 }
 
 .carousel-control-next,
@@ -1403,6 +1454,10 @@ textarea:-webkit-autofill:hover {
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
+  @media screen and (max-width: 768px) {
+    z-index: 0;
+  }
 }
 
 .modal-body {
@@ -1410,16 +1465,14 @@ textarea:-webkit-autofill:hover {
   color: #000;
 }
 
-
 .tfirstcol {
-  ul{
-    li{
+  ul {
+    li {
       margin: 0 3px;
-      button{
+      button {
         font-size: 12px;
         font-weight: 600;
       }
     }
   }
- 
 }

@@ -13,7 +13,7 @@ import * as moment from 'moment';
   styleUrls: ['./result-management.component.scss']
 })
 export class ResultManagementComponent implements OnInit {
-
+  betToDelete: any = null;
   isSuspected: boolean = false;
   refreshCount: number = 5;
   resetTimerInterval: any;
@@ -31,7 +31,7 @@ export class ResultManagementComponent implements OnInit {
   gameId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
-
+  selectedBets: any[] = [];
   betTickerForm: FormGroup;
   deleteBetForm: FormGroup;
 
@@ -269,7 +269,8 @@ export class ResultManagementComponent implements OnInit {
 
   confirmDeleteBet(){
     this.betRemark = this.deleteBetForm.value.remarks;
-    this.deleteBet(this.bets_data);
+    //this.deleteBet(this.bets_data);
+    this.deleteSelectedBets();
   }
 
   closeModal(){
@@ -291,11 +292,67 @@ export class ResultManagementComponent implements OnInit {
       "betIdList": user.betId,
       "remarks": this.betRemark
     }
+    //console.log('body', body);
     this._settingService._deleteBetAfterMatchApi(body).subscribe(res=>{
       this._sharedService.getToastPopup('done',"","success");
       this.getAllUserBets();
       this.display = 'none';
     })
+  }
+
+
+  openDeleteModal() {
+    this.selectedBets = this.allBets.filter(bet => bet.isSelected);
+    if (this.selectedBets.length === 0) {
+      this._sharedService.getToastPopup('No bets selected', "", 'error');
+      return;
+    }
+    this.display = 'block';
+  }
+
+
+  confirmDeleteSelectedBets() {
+    this.betRemark = this.deleteBetForm.value.remarks;
+    if (this.betToDelete) {
+      this.deleteSingleBet(this.betToDelete);
+    } else {
+      this.deleteSelectedBets();
+    }
+  }
+
+  deleteSelectedBets() {
+    const selectedUserIds = this.selectedBets.map(bet => bet.userId);
+    const selectedBetIds = this.selectedBets.map(bet => bet.resultId);
+
+    let body = {
+      "userIdList": selectedUserIds,
+      "betIdList": selectedBetIds,
+      "remarks": this.betRemark
+    };
+    //console.log('body', body);
+    this._settingService._deleteBetAfterMatchApi(body).subscribe(res => {
+      this._sharedService.getToastPopup('Selected bets deleted', "", 'success');
+      this.getAllUserBets();
+      this.closeModal();
+    });
+  }
+
+  openModalForSingleBet(bet) {
+    this.betToDelete = bet;
+    this.display = 'block';
+  }
+
+  deleteSingleBet(bet) {
+    let body = {
+      "userIdList": [bet.userId],
+      "betIdList": [bet.resultId],
+      "remarks": this.betRemark
+    };
+    this._settingService._deleteBetAfterMatchApi(body).subscribe(res => {
+      this._sharedService.getToastPopup('Bet deleted', "", 'success');
+      this.getAllUserBets();
+      this.closeModal();
+    });
   }
 
   exportExcel(){

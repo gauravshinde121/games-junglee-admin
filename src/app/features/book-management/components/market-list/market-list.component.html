@@ -1851,7 +1851,7 @@
                               <th colspan="1" class="text-center coldark">
                                 Yes
                               </th>
-                              <th class="coldark"></th>
+                              
                               <th class="coldark tlastcol"></th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
@@ -2274,7 +2274,7 @@
                           ">
                           <thead>
                             <tr>
-                              <th width="70%" class="tfirstcol">
+                              <th  class="tfirstcol">
                                 <span class="d-flex">
                                   Manual Fancy
                                    <!-- <ul class="m-0 d-flex list-unstyled">
@@ -2294,7 +2294,6 @@
                               <th colspan="1" class="text-center coldark">
                                 Yes
                               </th>
-                              <th class="coldark"></th>
                               <th class="coldark tlastcol"></th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
@@ -2338,88 +2337,101 @@
                                     <img src="/assets/images/ladder-icon.png" width="10px" />
                                   </a>
                                 </td>
-                                <td class="colpink">
-                                  <a [boxHighlight]="singleFancyMarket['lay1']"
-                                    [boxHighlight]="singleFancyMarket['vlay1']">
-                                    <strong>{{
-                                      singleFancyMarket["lay1"]
-                                      }}</strong>
-                                    <br /><span>{{
-                                      singleFancyMarket["vlay1"]
-                                      | marketRateFormater
-                                      }}</span></a>
-                                </td>
-                                <td class="colblue">
-                                  <a [boxHighlight]="singleFancyMarket['back1']"
-                                    [boxHighlight]="singleFancyMarket['vback1']">
-                                    <strong>{{
-                                      singleFancyMarket["back1"]
-                                      }}</strong>
-                                    <br /><span>{{
-                                      singleFancyMarket["vback1"]
-                                      | marketRateFormater
-                                      }}</span></a>
-                                </td>
-                                <td class="border-top" [ngClass]="{ 'border-top': !first }">
-                                  <div class="suspendedbm1" *ngIf="
-                                      singleFancyMarket['appMarketStatus'] ==
-                                        '3' ||
-                                      singleFancyMarket['appMarketStatus'] ==
-                                        '9'
-                                    ">
-                                    <button type="button" class="suspendedm1" [ngClass]="
-                                        isLoggedIn
-                                          ? 'matchmarketlist-on'
-                                          : 'matchmarketlist-off'
-                                      ">
-                                      {{
-                                      singleFancyMarket["appMarketStatus"] ==
-                                      "9"
-                                      ? "Ball Running"
-                                      : singleFancyMarket[
-                                      "appMarketStatus"
-                                      ] == "3"
-                                      ? "Suspended"
-                                      : ""
-                                      }}
-                                    </button>
+                                <!--  -->
+                                <td class="event-container text-center" colspan="2">
+                                  <div>
+                                    <table class="table w-100 m-0 fancy_event">
+                                      <tr>
+                                        <td class="colpink" width="10%">
+                                          <a [boxHighlight]="singleFancyMarket['lay1']"
+                                            [boxHighlight]="singleFancyMarket['vlay1']">
+                                            <strong>{{
+                                              singleFancyMarket["lay1"]
+                                              }}</strong>
+                                            <br /><span>{{
+                                              singleFancyMarket["vlay1"]
+                                              | marketRateFormater
+                                              }}</span></a>
+                                        </td>
+                                        <td class="colblue" width="10%">
+                                          <a [boxHighlight]="singleFancyMarket['back1']"
+                                            [boxHighlight]="singleFancyMarket['vback1']">
+                                            <strong>{{
+                                              singleFancyMarket["back1"]
+                                              }}</strong>
+                                            <br /><span>{{
+                                              singleFancyMarket["vback1"]
+                                              | marketRateFormater
+                                              }}</span></a>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td width="20%" class="border-top" [ngClass]="{ 'border-top': !first }">
+                                          <div class="suspendedbm1" *ngIf="
+                                              singleFancyMarket['appMarketStatus'] ==
+                                                '3' ||
+                                              singleFancyMarket['appMarketStatus'] ==
+                                                '9'
+                                            ">
+                                            <button type="button" class="suspendedm1" [ngClass]="
+                                                isLoggedIn
+                                                  ? 'matchmarketlist-on'
+                                                  : 'matchmarketlist-off'
+                                              ">
+                                              {{
+                                              singleFancyMarket["appMarketStatus"] ==
+                                              "9"
+                                              ? "Ball Running"
+                                              : singleFancyMarket[
+                                              "appMarketStatus"
+                                              ] == "3"
+                                              ? "Suspended"
+                                              : ""
+                                              }}
+                                            </button>
+                                          </div>
+        
+                                          <div class="suspendedbm1" *ngIf="
+                                              singleFancyMarket['isMarketSuspended']
+                                            ">
+                                            <button type="button" class="suspendedm1" [ngClass]="
+                                                isLoggedIn
+                                                  ? 'matchmarketlist-on'
+                                                  : 'matchmarketlist-off'
+                                              ">
+                                              Suspended
+                                            </button>
+                                          </div>
+        
+                                          <!-- <div
+                                            class="suspendedbm1"
+                                            *ngIf="
+                                              !singleFancyMarket['isMarketSuspended'] &&
+                                              singleFancyMarket['appMarketStatus'] !=
+                                                '3' &&
+                                              singleFancyMarket['appMarketStatus'] !=
+                                                '9'
+                                            "
+                                          >
+                                            <button
+                                              type="button"
+                                              class="suspendedm1"
+                                              [ngClass]="
+                                                isLoggedIn
+                                                  ? 'matchmarketlist-on'
+                                                  : 'matchmarketlist-off'
+                                              "
+                                            >
+                                              Suspended
+                                            </button>
+                                          </div> -->
+                                        </td>
+                                      </tr>
+                                    </table>
                                   </div>
-
-                                  <div class="suspendedbm1" *ngIf="
-                                      singleFancyMarket['isMarketSuspended']
-                                    ">
-                                    <button type="button" class="suspendedm1" [ngClass]="
-                                        isLoggedIn
-                                          ? 'matchmarketlist-on'
-                                          : 'matchmarketlist-off'
-                                      ">
-                                      Suspended
-                                    </button>
-                                  </div>
-
-                                  <!-- <div
-                                    class="suspendedbm1"
-                                    *ngIf="
-                                      !singleFancyMarket['isMarketSuspended'] &&
-                                      singleFancyMarket['appMarketStatus'] !=
-                                        '3' &&
-                                      singleFancyMarket['appMarketStatus'] !=
-                                        '9'
-                                    "
-                                  >
-                                    <button
-                                      type="button"
-                                      class="suspendedm1"
-                                      [ngClass]="
-                                        isLoggedIn
-                                          ? 'matchmarketlist-on'
-                                          : 'matchmarketlist-off'
-                                      "
-                                    >
-                                      Suspended
-                                    </button>
-                                  </div> -->
                                 </td>
+                                <!--  -->
+                                
                                 <td>
                                   <div style="text-align: right">
                                     <ul class="p-0 m-0" style="list-style: none">

@@ -199,6 +199,7 @@ export class ResultManagementComponent implements OnInit {
       stakesTo :null,
       fromDate: fromDate,
       toDate: toDate,
+      betMarketTypeId:null
     };
 
     this._settingService._getDeletedBetAfterResultListApi(body).subscribe((res:any)=>{
@@ -247,7 +248,7 @@ export class ResultManagementComponent implements OnInit {
     let payload = {
       sportId: this.sportsId,
       matchId: this.matchId,
-      betTypeId: this.marketTypeId,
+      betMarketTypeId: this.marketTypeId,
       userId: this.betTickerForm.value.memberId,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,

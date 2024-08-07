@@ -70,7 +70,14 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMaxBet: new FormControl(null, Validators.required),
       maxFancySessionDelay: new FormControl(null, Validators.required),
       isBookmakerActive: new FormControl(false, Validators.required),
+      isFancyOtherActive: new FormControl(false, Validators.required),
+      isFancySessionActive: new FormControl(false, Validators.required),
     });
+
+    this.matchSettingsForm.valueChanges.subscribe(() => {
+      this.matchSettingsForm.markAsDirty();
+    });
+    this.matchSettingsForm.updateValueAndValidity();
   }
 
   preventNegativeKeyPress(event: KeyboardEvent): boolean {
@@ -145,6 +152,8 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMaxBet: matchSettings.maxFancySessionMaxBet,
       maxFancySessionDelay: matchSettings.maxFancySessionDelay,
       isBookmakerActive: matchSettings.isBookmakerActive,
+      isFancyOtherActive: matchSettings.isFancyOtherActive,
+      isFancySessionActive: matchSettings.isFancySessionActive
     });
     this.display = 'block';
   }
@@ -182,7 +191,9 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMinBet: this.matchSettingsForm.value.maxFancySessionMinBet,
       maxFancySessionMaxBet: this.matchSettingsForm.value.maxFancySessionMaxBet,
       maxFancySessionDelay: this.matchSettingsForm.value.maxFancySessionDelay,
-      isBookmakerActive: this.matchSettingsForm.value.isBookmakerActive
+      isBookmakerActive: this.matchSettingsForm.value.isBookmakerActive,
+      isFancyOtherActive: this.matchSettingsForm.value.isFancyOtherActive,
+      isFancySessionActive: this.matchSettingsForm.value.isFancySessionActive
     };
     this.settingsService
       ._setBetLimitForMatchApi(body)

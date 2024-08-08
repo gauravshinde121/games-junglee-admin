@@ -172,7 +172,7 @@
       </div>
     </div>
 
-    <div *ngIf="allBets.length > 0 && !this.isLoading">
+    <!-- <div *ngIf="allBets.length > 0 && !this.isLoading">
       <button class="btn rounded-pill " [disabled]="currentPage === 1" (click)="prev()">
         Prev
       </button>
@@ -181,7 +181,7 @@
       <button class="btn rounded-pill " [disabled]="currentPage === totalPages" (click)="next()">
         Next
       </button>
-    </div>
+    </div> -->
 
     <div class="col-md-12 mt-3" *ngIf="allBets.length == 0">
       <div class="border text-center p-5">

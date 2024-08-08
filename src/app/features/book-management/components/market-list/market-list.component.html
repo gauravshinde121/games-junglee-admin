@@ -51,7 +51,7 @@
                             ">
                             <thead class="collapsible">
                               <tr>
-                                <th width="30%" class="tfirstcol">
+                                <th  class="tfirstcol">
 
                                   Match Odds
 
@@ -60,18 +60,18 @@
 
 
                                 </th>
-                                <th width="10%" class="coldark">
-                                  <!-- <img
+                               <!-- <th width="10%" class="coldark">
+                                   <img
                                     src="/assets/images/timer.png"
                                     class="timer"
                                   />
-                                  {{ inPlayUpcomingMarket["marketDelay"] }} -->
-                                </th>
+                                  {{ inPlayUpcomingMarket["marketDelay"] }}
+                                </th> -->
                                 <!-- <th width="10%" class="coldark"></th> -->
-                                <th width="15%" colspan="3" class="text-end coldark">
+                                <th colspan="3" class="text-end coldark">
                                   Back
                                 </th>
-                                <th width="15%" colspan="3" class="text-start coldark tlastcol">
+                                <th colspan="3" class="text-start coldark tlastcol">
                                   Lay
                                 </th>
 
@@ -85,7 +85,7 @@
                                   let last = last;
                                   let first = first
                                 " [ngClass]="{ 'border-0': last }">
-                                <td width="30%" class="text-start ps-2 heading" [ngClass]="{ 'border-top': !first }">
+                                <td  class="text-start ps-2 heading" [ngClass]="{ 'border-top': !first }">
                                   <a><strong>{{
                                       runner["RunnerName"]
                                       }}</strong></a>
@@ -119,7 +119,7 @@
                                       &nbsp;{{placeBetData?.[inPlayUpcomingMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
                                   </a>
                                 </td>
-                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+                                <!-- <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td> -->
 
                                 <ng-container *ngIf="
                                     !(
@@ -129,7 +129,7 @@
                                         '9'
                                     )
                                   ">
-                                  <td width="10%" class="colblue" [boxHighlight]="runner['back2']"
+                                  <td  class="colblue" [boxHighlight]="runner['back2']"
                                     [boxHighlight]="runner['vback2']" [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     ">
@@ -138,7 +138,7 @@
                                         runner["vback2"] | marketRateFormater
                                         }}</span></a>
                                   </td>
-                                  <td width="10%" class="colblue" [boxHighlight]="runner['back1']"
+                                  <td  class="colblue" [boxHighlight]="runner['back1']"
                                     [boxHighlight]="runner['vback1']" [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     ">
@@ -147,7 +147,7 @@
                                         runner["vback1"] | marketRateFormater
                                         }}</span></a>
                                   </td>
-                                  <td width="10%" class="colblue" [boxHighlight]="runner['back0']"
+                                  <td  class="colblue" [boxHighlight]="runner['back0']"
                                     [boxHighlight]="runner['vback0']" [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     ">
@@ -156,7 +156,7 @@
                                         runner["vback0"] | marketRateFormater
                                         }}</span></a>
                                   </td>
-                                  <td width="10%" class="colpink" [boxHighlight]="runner['lay0']"
+                                  <td  class="colpink" [boxHighlight]="runner['lay0']"
                                     [boxHighlight]="runner['vlay0']" [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     ">
@@ -165,7 +165,7 @@
                                         runner["vlay0"] | marketRateFormater
                                         }}</span></a>
                                   </td>
-                                  <td width="10%" class="colpink" [boxHighlight]="runner['lay1']"
+                                  <td  class="colpink" [boxHighlight]="runner['lay1']"
                                     [boxHighlight]="runner['vlay1']" [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     ">
@@ -174,7 +174,7 @@
                                         runner["vlay1"] | marketRateFormater
                                         }}</span></a>
                                   </td>
-                                  <td width="10%" class="colpink" [ngClass]="{ last: last }"
+                                  <td class="colpink" [ngClass]="{ last: last }"
                                     [boxHighlight]="runner['lay2']" [boxHighlight]="runner['vlay2']" [class.dis]="
                                       inPlayUpcomingMarket['inPlayStatus'] == 0
                                     ">
@@ -208,16 +208,16 @@
                             ">
                             <thead class="collapsible">
                               <tr>
-                                <th width="70%" class="tfirstcol">
+                                <th class="tfirstcol">
                                   Match Odds
                                 </th>
-                                <th class="coldark">
-                                  <!-- <img
+                               <!-- <th class="coldark">
+                                   <img
                                     src="/assets/images/timer.png"
                                     class="timer"
                                   />
-                                  {{ inPlayUpcomingMarket["marketDelay"] }} -->
-                                </th>
+                                  {{ inPlayUpcomingMarket["marketDelay"] }} 
+                                </th>-->
                                 <!-- <th width="10%" class="coldark"></th> -->
                                 <th colspan="1" class="text-center coldark">
                                   Back
@@ -281,7 +281,7 @@
                                         ] == '9'
                                       )
                                     ">
-                                    <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
+                                    <!-- <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td> -->
                                     <td class="colblue">
                                       <a  [boxHighlight]="runner['back0']"
                                         [boxHighlight]="runner['vback0']" [class.dis]="
@@ -343,329 +343,7 @@
                       </ng-container>
                       <!-- LINE MARKET -->
 
-                      <!-- <div class="mobileTableHide" *ngIf="!isMobileView">
-                        <table class="table table-hover" *ngIf="lineMarket.length > 0">
-                          <thead>
-                            <tr>
-                              <th width="30%" class="tfirstcol">LINE MARKETS</th>
-                              <th width="10%" class="coldark">
-                                <img src="/assets/images/timer.png" class="timer" />
-                                {{lineDelay}}
-                              </th>
-                              <th width="15%" colspan="3" class="text-end coldark">
-                                Back
-                              </th>
-                              <th width="15%" colspan="3" class="text-start coldark tlastcol">
-                                Lay
-                              </th>
-                            </tr>
-                          </thead>
-
-                          <tbody class="content pointer">
-                            <ng-container *ngFor="
-                              let singleLineMarket of lineMarket;
-                              let last = last;
-                              let first = first
-                            ">
-                            <ng-container *ngIf="(singleLineMarket['appMarketStatus'] != '4' && singleLineMarket['appMarketStatus'] != '3')">
-                              <tr *ngFor="
-                                let runner of singleLineMarket['runners'];
-                                let last = last;
-                                let first = first
-                              " [ngClass]="{ 'border-0': last }">
-                              <td width="30%" class="text-start ps-2 heading" [ngClass]="{ 'border-top': !first }">
-                                <a><strong>{{ singleLineMarket["marketName"]}}</strong></a>
-                                <br />
-                                <a [ngClass]="
-                                    runner?.hourseAmt?.amount > 0
-                                      ? 'text-success'
-                                      : 'text-danger'
-                                  ">
-                                  <strong>{{
-                                    runner?.hourseAmt?.amount | number
-                                    }}</strong>
-                                </a>
-                              </td>
-                              <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
-
-                              <ng-container *ngIf="!(singleLineMarket['appMarketStatus'] =='3' || singleLineMarket['appMarketStatus'] == '9' )">
-
-                                <td width="10%" class="colblue" [boxHighlight]="runner['lay2']"
-                                [boxHighlight]="runner['vlay2']" [class.dis]="
-                                singleLineMarket['inPlayStatus'] == 0
-                                " (click)="
-                                singleLineMarket['inPlayStatus'] &&
-                                    onClickLiveMarketRate(
-                                      null,
-                                      singleLineMarket,
-                                      {
-                                        isBack: true,
-                                        index: 2,
-                                        odds: runner['lay2']
-                                      },
-                                      EMarketType.LINE_TYPE
-                                    )
-                                ">
-                                <a class="boxeffect"><strong>{{ runner["lay2"] }}</strong>
-                                  <br /><span>{{
-                                    runner["vlay2"] | marketRateFormater
-                                    }}</span></a>
-                              </td>
-
-                              <td width="10%" class="colblue" [boxHighlight]="runner['lay1']"
-                              [boxHighlight]="runner['vlay1']" [class.dis]="
-                              singleLineMarket['inPlayStatus'] == 0
-                              " (click)="
-                              singleLineMarket['inPlayStatus'] &&
-                                  onClickLiveMarketRate(
-                                    null,
-                                    singleLineMarket,
-                                    {
-                                      isBack: true,
-                                      index: 1,
-                                      odds: runner['lay1']
-                                    },
-                                    EMarketType.LINE_TYPE
-                                  )
-                              ">
-                              <a class="boxeffect"><strong>{{ runner["lay1"] }}</strong>
-                                <br /><span>{{
-                                  runner["vlay1"] | marketRateFormater
-                                  }}</span></a>
-                            </td>
-
-                              <td width="10%" class="colblue" [boxHighlight]="runner['lay0']"
-                                [boxHighlight]="runner['vlay0']" [class.dis]="
-                                singleLineMarket['inPlayStatus'] == 0
-                                " (click)="
-                                singleLineMarket['inPlayStatus'] &&
-                                    onClickLiveMarketRate(
-                                      null,
-                                      singleLineMarket,
-                                      {
-                                        isBack: true,
-                                        index: 0,
-                                        odds: runner['lay0']
-                                      },
-                                      EMarketType.LINE_TYPE
-                                    )
-                                ">
-                                <a class="boxeffect"><strong>{{ runner["lay0"] }}</strong>
-                                  <br /><span>{{
-                                    runner["vlay0"] | marketRateFormater
-                                    }}</span></a>
-                              </td>
-                              <td width="10%" class="colpink" [boxHighlight]="runner['back0']"
-                                [boxHighlight]="runner['vback0']" [class.dis]="
-                                singleLineMarket['inPlayStatus'] == 0
-                                " (click)="
-                                singleLineMarket['inPlayStatus'] &&
-                                    onClickLiveMarketRate(
-                                      null,
-                                      singleLineMarket,
-                                      {
-                                        isBack: false,
-                                        index: 0,
-                                        odds: runner['back0']
-                                      },
-                                      EMarketType.LINE_TYPE
-                                    )
-                                ">
-                                <a class="boxeffect"><strong>{{ runner["back0"] }}</strong>
-                                  <br /><span>{{
-                                    runner["vback0"] | marketRateFormater
-                                    }}</span></a>
-                              </td>
-                              <td width="10%" class="colpink" [boxHighlight]="runner['back1']"
-                                [boxHighlight]="runner['vback1']" [class.dis]="
-                                singleLineMarket['inPlayStatus'] == 0
-                                " (click)="
-                                singleLineMarket['inPlayStatus'] &&
-                                    onClickLiveMarketRate(
-                                      null,
-                                      singleLineMarket,
-                                      {
-                                        isBack: false,
-                                        index: 1,
-                                        odds: runner['back1']
-                                      },
-                                      EMarketType.LINE_TYPE
-                                    )
-                                ">
-                                <a class="boxeffect"><strong>{{ runner["back1"] }}</strong>
-                                  <br /><span>{{
-                                    runner["vback1"] | marketRateFormater
-                                    }}</span></a>
-                              </td>
-                              <td width="10%" class="colpink" [boxHighlight]="runner['back2']"
-                              [boxHighlight]="runner['vback2']" [class.dis]="
-                              singleLineMarket['inPlayStatus'] == 0
-                              " (click)="
-                              singleLineMarket['inPlayStatus'] &&
-                                  onClickLiveMarketRate(
-                                    null,
-                                    singleLineMarket,
-                                    {
-                                      isBack: false,
-                                      index: 2,
-                                      odds: runner['back2']
-                                    },
-                                    EMarketType.LINE_TYPE
-                                  )
-                              ">
-                              <a class="boxeffect"><strong>{{ runner["back2"] }}</strong>
-                                <br /><span>{{
-                                  runner["vback2"] | marketRateFormater
-                                  }}</span></a>
-                            </td>
-
-
-
-                              </ng-container>
-                              <ng-container
-                                *ngIf="(singleLineMarket['appMarketStatus'] =='3' || singleLineMarket['appMarketStatus'] == '9')"
-                                [ngTemplateOutlet]="marketStatusTemplate"
-                                [ngTemplateOutletContext] ="{appMarketStatus:singleLineMarket['appMarketStatus'],col:'5'}">
-                              </ng-container>
-
-                            </tr>
-                            </ng-container>
-
-                            </ng-container>
-                          </tbody>
-                        </table>
-                      </div> -->
-
-                      <!-- <div class="mobileTableShow" *ngIf="isMobileView">
-                        <table class="table table-hover" *ngIf="lineMarket.length > 0">
-                          <thead class="collapsible">
-                            <tr>
-                              <th width="70%" class="tfirstcol">LINE MARKETS</th>
-                              <th class="coldark">
-                                <img src="/assets/images/timer.png" class="timer" />
-                                {{lineDelay}}
-                              </th>
-
-                              <th colspan="1" class="text-center coldark">
-                                Back
-                              </th>
-                              <th colspan="1" class="text-center coldark tlastcol">
-                                Lay
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody class="content pointer">
-                            <ng-container *ngFor="
-                                let singleLineMarket of lineMarket;
-                                let last = last;
-                                let first = first;
-                                let even = even
-                              ">
-                            <ng-container *ngIf="(singleLineMarket['appMarketStatus'] != '4' && singleLineMarket['appMarketStatus'] != '3')">
-                              <tr *ngFor="
-                              let runner of singleLineMarket['runners'];
-                              let last = last;
-                              let first = first"
-                              [ngClass]="{ 'border-0': last }">
-                                <td class="text-start ps-2 py-2 heading" [ngClass]="{ 'border-top': !first }">
-                                  <a><strong>
-                                    {{ singleLineMarket["marketName"]}}
-                                     </strong></a>
-                                  <br />
-                                  <a [ngClass]="
-                                      runner?.hourseAmt?.amount > 0
-                                        ? 'text-success'
-                                        : 'text-danger'
-                                    ">
-                                    <strong>{{
-                                      runner?.hourseAmt?.amount
-                                      }}</strong>
-                                  </a>
-
-                                  <a>
-                                    <strong
-                                      *ngIf="placeBetData?.[singleLineMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && !runner?.hourseAmt?.amount">{{placeBetData?.[singleLineMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                    <strong
-                                      *ngIf="placeBetData?.[singleLineMarket?.marketId]?.[runner?.SelectionId]?.['amount'] == 0 && runner?.hourseAmt?.amount">&nbsp;
-                                      &#62;
-                                      &nbsp;{{placeBetData?.[singleLineMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                  </a>
-
-                                  <a
-                                    [ngClass]="placeBetData?.[singleLineMarket?.marketId]?.[runner?.SelectionId]?.['amount'] >0 ? 'text-success':'text-danger'">
-                                    <strong
-                                      *ngIf="placeBetData?.[singleLineMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && !runner?.hourseAmt?.amount">{{placeBetData?.[singleLineMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                    <strong
-                                      *ngIf="placeBetData?.[singleLineMarket?.marketId]?.[runner?.SelectionId]?.['amount'] && runner?.hourseAmt?.amount">&nbsp;
-                                      &#62;
-                                      &nbsp;{{placeBetData?.[singleLineMarket?.marketId]?.[runner?.SelectionId]?.['amount']}}</strong>
-                                  </a>
-                                </td>
-                                <ng-container *ngIf="!(singleLineMarket['appMarketStatus'] =='3' || singleLineMarket['appMarketStatus'] == '9')">
-                                <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }"></td>
-                                <td (click)="
-                                singleLineMarket['inPlayStatus'] &&
-                                      onClickLiveMarketRate(
-                                        null,
-                                        singleLineMarket,
-                                        {
-                                          isBack: true,
-                                          index: 0,
-                                          odds: runner['lay0']
-                                        },
-                                        EMarketType.LINE_TYPE
-                                      )
-                                  ">
-                                  <a class="colblue" [boxHighlight]="runner['lay0']" [boxHighlight]="runner['vlay0']"
-                                    [class.dis]="
-                                    singleLineMarket['inPlayStatus'] == 0
-                                    "><strong>{{ runner["lay0"] }}</strong>
-                                    <br /><span>{{
-                                      runner["vlay0"] | marketRateFormater
-                                      }}</span></a>
-                                </td>
-                                <td (click)="
-                                singleLineMarket['inPlayStatus'] &&
-                                      onClickLiveMarketRate(
-                                        null,
-                                        singleLineMarket,
-                                        {
-                                          isBack: false,
-                                          index: 0,
-                                          odds: runner['back0']
-                                        },
-                                        EMarketType.LINE_TYPE
-                                      )
-                                  ">
-                                  <a class="colpink" [boxHighlight]="runner['back0']" [boxHighlight]="runner['vback0']"
-                                    [class.dis]="
-                                    singleLineMarket['inPlayStatus'] == 0
-                                    "><strong>{{ runner["back0"] }}</strong>
-                                    <br /><span>{{
-                                      runner["vback0"] | marketRateFormater
-                                      }}</span></a>
-                                </td>
-
-                                </ng-container>
-
-                                <ng-container
-                                *ngIf="(singleLineMarket['appMarketStatus'] =='3' || singleLineMarket['appMarketStatus'] == '9')"
-                                [ngTemplateOutlet]="marketStatusTemplate"
-                                [ngTemplateOutletContext] ="{appMarketStatus:singleLineMarket['appMarketStatus'],col:'3'}">
-                              </ng-container>
-                              </tr>
-                            </ng-container>
-
-                            </ng-container>
-                          </tbody>
-                        </table>
-                        <ng-template #marketStatus>
-                          <td colspan="3" class="suspendedbm3" >
-                         Suspended
-                        </td>
-                        </ng-template>
-                      </div> -->
-
+                    
                       <!-- BOOKMAKER MOBILE + PC VIEW -->
                       <ng-container *ngIf="showBookmakerMarkets">
                         <ng-container *ngFor="let singleBookMaker of bookMakerMarket">
@@ -709,10 +387,8 @@
                                   <th  colspan="1" class="text-center coldark">
                                     Lay
                                   </th>
-                                  <th class="coldark"></th>
+                                  <!-- <th class="coldark"></th> -->
                                   <th class="coldark tlastcol"></th>
-                                  <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
-                                  <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
                                 </tr>
                               </thead>
                               <tbody class="pointer">

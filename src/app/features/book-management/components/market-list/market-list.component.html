@@ -701,7 +701,7 @@
                                       </ul>
                                     </span>
                                   </th>
-                                  
+
                                   <!-- <th width="10%" class="coldark"></th> -->
                                   <th colspan="1" class="text-center coldark">
                                     Back
@@ -761,7 +761,7 @@
                                       <div>
                                         <table class="table w-100 m-0 fancy_event">
                                           <tr>
-                                            <td class="colblue" width="10%">
+                                            <td class="colblue p-2 w-50">
                                               <a [boxHighlight]="runner['back0']"
                                                 [boxHighlight]="runner['vback0']" [class.dis]="
                                                   singleBookMaker['appMarketStatus'] ==
@@ -771,7 +771,7 @@
                                                   runner["vback0"] | marketRateFormater
                                                   }}</span></a>
                                             </td>
-                                            <td class="colpink" width="10%">
+                                            <td class="colpink p-2 w-50">
                                               <a [boxHighlight]="runner['lay0']"
                                                 [boxHighlight]="runner['vlay0']" [class.dis]="
                                                   singleBookMaker['appMarketStatus'] ==
@@ -808,7 +808,7 @@
                                                   }}
                                                 </button>
                                               </div>
-        
+
                                               <div class="suspendedbm1 event" *ngIf="
                                                   runner['showBookMakerSuspended'] ||
                                                   singleBookMaker[
@@ -824,7 +824,7 @@
                                                   Suspended
                                                 </button>
                                               </div>
-        
+
                                               <div class="suspendedbm1 event" *ngIf="
                                                   checkSuspendCondition(singleBookMaker)
                                                 ">
@@ -842,9 +842,9 @@
                                       </div>
                                     </td>
                                     <!--  -->
-                                    
 
-                                    
+
+
                                     <td>
                                       <div style="text-align: right">
                                         <ul class="p-0 m-0" style="list-style: none">
@@ -895,9 +895,7 @@
                                 singleBookMaker['appMarketStatus'] != '2'
                               ">
                               <thead>
-                                <!-- <tr>
-                                  <th colspan="10" class="h-100">Bookmaker</th>
-                                </tr> -->
+
                                 <tr>
                                   <th scope="col" class="tfirstcol">
                                     <span class="d-flex">
@@ -1122,7 +1120,6 @@
                                 customMarkets['appMarketStatus'] != '2'
                               ">
                               <thead>
-                                <tr></tr>
                                 <tr>
                                   <th  class="tfirstcol">
                                     <span class="">
@@ -1138,7 +1135,7 @@
                                       </ul>
                                     </span>
                                   </th>
-                                  
+
                                   <th colspan="1" class="text-center coldark">
                                     Back
                                   </th>
@@ -1196,7 +1193,7 @@
                                       <div>
                                         <table class="table w-100 m-0 fancy_event">
                                           <tr>
-                                            <td class="colblue" width="10%">
+                                            <td class="colblue p-2 w-50">
                                               <a [boxHighlight]="runner['back0']"
                                                 [boxHighlight]="runner['vback0']" [class.dis]="
                                                   customMarkets['inPlayStatus'] == 0
@@ -1205,7 +1202,7 @@
                                                   runner["vback0"] | marketRateFormater
                                                   }}</span></a>
                                             </td>
-                                            <td class="colpink" width="10%">
+                                            <td class="colpink p-2 w-50">
                                               <a [boxHighlight]="runner['lay0']"
                                                 [boxHighlight]="runner['vlay0']" [class.dis]="
                                                   customMarkets['inPlayStatus'] == 0
@@ -1240,7 +1237,7 @@
                                                   }}
                                                 </button>
                                               </div>
-        
+
                                               <div class="suspendedbm1 event" *ngIf="
                                                   (runner['showBookMakerSuspended'] ||
                                                     customMarkets[
@@ -1260,7 +1257,7 @@
                                                   Suspended
                                                 </button>
                                               </div>
-        
+
                                               <!-- <div
                                                 class="suspendedbm1"
                                                 *ngIf="
@@ -1294,7 +1291,7 @@
                                     <td>
                                       <div style="text-align: right">
                                         <ul class="p-0 m-0" style="list-style: none">
-                                         
+
                                           <li>
                                             Min:{{
                                               customMarkets["minBet"]
@@ -1520,62 +1517,12 @@
                                               </button>
                                             </div>
 
-                                            <!-- <div
-                                              class="suspendedbm1 event w-100"
-                                              *ngIf="
-                                                !runner[
-                                                  'showBookMakerSuspended'
-                                                ] &&
-                                                !customMarkets[
-                                                  'isMarketSuspended'
-                                                ] &&
-                                                !runner['isSuspended'] &&
-                                                customMarkets[
-                                                  'appMarketStatus'
-                                                ] != '9' &&
-                                                customMarkets[
-                                                  'appMarketStatus'
-                                                ] != '3'
-                                              "
-                                            >
-                                              <button
-                                                type="button"
-                                                class="suspendedm1 "
-                                                [ngClass]="
-                                                  isLoggedIn
-                                                    ? 'matchmarketlist-on'
-                                                    : 'matchmarketlist-off'
-                                                "
-                                              >
-                                                Suspended
-                                              </button>
-                                            </div> -->
                                           </td>
                                         </tr>
                                       </table>
                                     </div>
                                   </td>
 
-                                  <!-- <td width="10%" class="border-top" [ngClass]="{ 'border-top': !first }">
-                                    <div class="suspendedbm1" *ngIf="
-                                        singleBookMaker['appMarketStatus'] ==
-                                          '3' ||
-                                        singleBookMaker['appMarketStatus'] == '9'
-                                      ">
-                                      <button type="button" class="suspendedm1" [ngClass]="
-                                          isLoggedIn
-                                            ? 'matchmarketlist-on'
-                                            : 'matchmarketlist-off'
-                                        ">
-                                        {{
-                                        singleBookMaker["appMarketStatus"] ==
-                                        "3"
-                                        ? "Suspended"
-                                        : "Ball Running"
-                                        }}
-                                      </button>
-                                    </div>
-                                  </td> -->
                                   <td>
                                     <div style="text-align: right">
                                       <strong>Min:
@@ -1849,7 +1796,6 @@
                               <th colspan="1" class="text-center coldark">
                                 Yes
                               </th>
-                              
                               <th class="coldark tlastcol"></th>
                               <!-- <th width="10%" colspan="2" class="text-center tlastcol coldark"><i class="fa ms-4 text-color fa-regular fa-star fa-2x"></i> -->
                               <!-- <i class="fa ms-4 text-color fa-solid fa-star"></i></th> -->
@@ -1893,16 +1839,16 @@
                                     <button><img src="/assets/images/ladder-icon.png" width="10px" /></button>
                                   </a>
                                 </td>
-                                
-                                
+
+
                                 <!--  -->
                                 <td class="event-container text-center" colspan="2">
                                   <div>
                                     <table class="table w-100 m-0 fancy_event">
                                       <tr>
-                                        <td width="10%" >
-                                          <a class="colpink p-2"[boxHighlight]="singleFancyMarket['lay1']"
-                                            [boxHighlight]="singleFancyMarket['vlay1']">
+                                        <td class="colpink p-2 w-50"[boxHighlight]="singleFancyMarket['lay1']"
+                                        [boxHighlight]="singleFancyMarket['vlay1']">
+                                          <a >
                                             <strong>{{
                                               singleFancyMarket["lay1"]
                                               }}</strong>
@@ -1911,9 +1857,9 @@
                                               | marketRateFormater
                                               }}</span></a>
                                         </td>
-                                        <td width="10%">
-                                          <a  class="colblue p-2" [boxHighlight]="singleFancyMarket['back1']"
-                                            [boxHighlight]="singleFancyMarket['vback1']">
+                                        <td class="colblue p-2 w-50" [boxHighlight]="singleFancyMarket['back1']"
+                                        [boxHighlight]="singleFancyMarket['vback1']">
+                                          <a  >
                                             <strong>{{
                                               singleFancyMarket["back1"]
                                               }}</strong>
@@ -1948,7 +1894,7 @@
                                               }}
                                             </button>
                                           </div>
-        
+
                                           <div class="suspendedbm1 event" *ngIf="
                                               singleFancyMarket['isMarketSuspended']
                                             ">
@@ -1960,7 +1906,7 @@
                                               Suspended
                                             </button>
                                           </div>
-        
+
                                           <div class="suspendedbm1 event" *ngIf="
                                               checkSuspendCondition(
                                                 singleFancyMarket
@@ -2272,7 +2218,7 @@
                           ">
                           <thead>
                             <tr>
-                              <th  class="tfirstcol">
+                              <th class="tfirstcol">
                                 <span class="d-flex">
                                   Manual Fancy
                                    <!-- <ul class="m-0 d-flex list-unstyled">
@@ -2388,7 +2334,7 @@
                                               }}
                                             </button>
                                           </div>
-        
+
                                           <div class="suspendedbm1" *ngIf="
                                               singleFancyMarket['isMarketSuspended']
                                             ">
@@ -2400,7 +2346,7 @@
                                               Suspended
                                             </button>
                                           </div>
-        
+
                                           <!-- <div
                                             class="suspendedbm1"
                                             *ngIf="
@@ -2429,7 +2375,7 @@
                                   </div>
                                 </td>
                                 <!--  -->
-                                
+
                                 <td>
                                   <div style="text-align: right">
                                     <ul class="p-0 m-0" style="list-style: none">
@@ -2666,7 +2612,7 @@
     <div class="card betList">
       <div class="card-header">
         <div class="row">
-          <div class="col-md-7">
+          <div class="col-8">
             <ul class="d-flex list-unstyled p-0 justify-content-between">
               <li>Odds<span class="badge bg-secondary">{{oddCount}}</span></li>
               <li>BM<span class="badge bg-secondary">{{bookmakerCount}}</span></li>
@@ -2674,7 +2620,7 @@
               <!-- <li><button class="btn btn-dark py-0">Reset</button></li> -->
             </ul>
           </div>
-          <div class="col-md-5">
+          <div class="col-4">
             <ul class="d-flex list-unstyled p-0 justify-content-end">
               <!-- <li class="me-2"><button class="btn btn-dark py-0">PL</button></li> -->
               <li><button (click)="onClickAllBet()" class="btn btn-dark py-0" data-bs-toggle="modal"

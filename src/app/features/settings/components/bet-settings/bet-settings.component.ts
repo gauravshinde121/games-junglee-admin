@@ -127,7 +127,8 @@ export class BetSettingsComponent implements OnInit {
       fromDate:new FormControl(this.formatFormDate(new Date())),
       toDate:new FormControl(this.formatFormDate(new Date())),
       stakesFromValue : [null],
-      stakesToValue : [null]
+      stakesToValue : [null],
+      betMarketTypeId : new FormControl()
     });
 
     this.deleteBetForm = this._fb.group({
@@ -200,6 +201,7 @@ export class BetSettingsComponent implements OnInit {
       limit: 50,
       fromDate: fromDate,
       toDate: toDate,
+      betMarketTypeId:null
     };
 
     this._settingService._getBetsApi(body).subscribe((res:any)=>{
@@ -244,6 +246,10 @@ export class BetSettingsComponent implements OnInit {
     if(this.betTickerForm.value.memberId == 'null'){
       this.betTickerForm.patchValue( {'memberId':null} );
     }
+
+    if(this.betTickerForm.value.betMarketTypeId == 'null'){
+      this.betTickerForm.value.betMarketTypeId = null;
+    }
     let payload = {
       memberId: this.betTickerForm.value.memberId,
       sportId: this.sportsId,
@@ -254,6 +260,7 @@ export class BetSettingsComponent implements OnInit {
       stakesTo : this.betTickerForm.value.stakesToValue,
       fromDate : fromDate,
       toDate : toDate,
+      betMarketTypeId: this.betTickerForm.value.betMarketTypeId,
       pageNo: this.currentPage,
       limit: 50,
     }

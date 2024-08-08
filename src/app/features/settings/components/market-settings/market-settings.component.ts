@@ -67,7 +67,8 @@ export class MarketSettingsComponent implements OnInit {
       status: new FormControl(null),
       sportName: new FormControl(null),
       matchName: new FormControl(),
-      tournamentId : new FormControl()
+      tournamentId : new FormControl(),
+      marketTypeId : new FormControl()
     })
 
     this.matchSettingsForm = new FormGroup({
@@ -106,11 +107,15 @@ export class MarketSettingsComponent implements OnInit {
     if(this.filterForm.value.tournamentId == 'null'){
       this.filterForm.value.tournamentId = null;
     }
+    if(this.filterForm.value.marketTypeId == 'null'){
+      this.filterForm.value.marketTypeId = null;
+    }
     let body = {
       marketIsActive: status,
       sportId: this.filterForm.value.sportName?+this.filterForm.value.sportName:null,
       matchId: this.filterForm.value.matchName,
-      tournamentId: this.filterForm.value.tournamentId?+this.filterForm.value.tournamentId:null
+      tournamentId: this.filterForm.value.tournamentId?+this.filterForm.value.tournamentId:null,
+      marketTypeId: this.filterForm.value.marketTypeId?+this.filterForm.value.marketTypeId:null
     }
 
     this.settingsService._getMarketForAdminMarketSettingsListApi(body).subscribe((data: any) => {

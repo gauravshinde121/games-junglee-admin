@@ -41,16 +41,24 @@
             </select>
           </div>
 
-          <div class="col-md-3">
-            <label>Market Type</label>
-            <select formControlName="marketType" id="ab" class="form-select bg-dgrey pointer" (change)="changeMarketType()">
+          <!-- <div class="col-md-3">
+            <label>Match Type</label>
+            <select formControlName="matchName" id="ab" class="form-select bg-dgrey pointer">
               <option value="null">All</option>
               <option *ngFor="let mId of uniqueMarketTypeIds" [value]="mId">
                 {{ mId == 1 ? "Match Odds" : mId == 12 ? "Bookmaker" : "Fancy" }}
               </option>
             </select>
+          </div> -->
+          <div class="col-md-3">
+            <label>Market Type</label>
+            <select formControlName="marketTypeId" id="ab" class="form-select bg-dgrey pointer">
+              <option value="null">All</option>
+              <option value="1">Match Odds</option>
+              <option value="12">Bookmaker</option>
+              <option value="10">Fancy</option>
+            </select>
           </div>
-
           <div class="col-md-3">
             <button type="button" class="btn btn-pink rounded-pill mt-4" (click)="getMarketSettingsList()">
               Search

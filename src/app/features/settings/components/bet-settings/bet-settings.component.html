@@ -153,11 +153,11 @@
         </div>
         <div class="col-md-4 mb-3">
           <label>Select Market Type</label>
-          <select formControlName="marketId" id="ab" class="form-select pointer" (change)="changeMarketType($event)">
+          <select formControlName="betMarketTypeId" id="ab" class="form-select pointer" (change)="changeMarketType($event)">
             <option value="null">All</option>
-            <option value="{{ market.marketId }}" *ngFor="let market of marketList">
-              {{ market.marketName }}
-            </option>
+            <option value="1">Match Odds</option>
+            <option value="12">Bookmaker</option>
+            <option value="10">Fancy</option>
           </select>
         </div>
 

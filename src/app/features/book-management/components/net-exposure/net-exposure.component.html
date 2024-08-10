@@ -1,5 +1,5 @@
 <main id="main" class="main m-0">
-  <section class="section gamedetails">
+  <section class="section gamedetails px-0">
     <div class="row">
       <div class="col-md-12">
         <!--your code will come here start-->
@@ -278,7 +278,7 @@
 
         <!-- movile view netExposure -->
         <div class="row" *ngIf="isMobileView">
-          <div class="col-md-12">
+          <div class="col-md-12 p-0">
             <div class="table-responsive mobileTable">
               <table class="table">
                 <thead>
@@ -293,20 +293,31 @@
                 </thead>
                 <tbody *ngFor="let book of bookObj">
                   <tr class="bg-pink">
-                    <td colspan="11">
-                      <tr>
-                        <td class="col-9">
-                          <span>{{ book.matchName }}</span>
-                        </td>
-                        <td>
-                          <button
-                            class="btn-warning rounded-pill"
-                            (click)="getViewTotal(book)"
-                          >
-                            View total
-                          </button>
-                        </td>
-                      </tr>
+                    <td colspan="6">
+                      <div>
+                        <table class="table m-0">
+                          <tr>
+                            <td>
+                              <div class="d-flex justify-content-between align-items-center p-0">
+                                <span>{{ book.matchName }}</span>
+                                <button class="btn-warning rounded-pill" (click)="getViewTotal(book)">
+                                  View total
+                                </button>
+                              </div>
+    
+                              
+                            </td>
+                            <!-- <td>
+                              <button
+                                class="btn-warning rounded-pill"
+                                (click)="getViewTotal(book)"
+                              >
+                                View total
+                              </button>
+                            </td> -->
+                          </tr>
+                        </table>
+                      </div>
                     </td>
                   </tr>
                   <ng-container>

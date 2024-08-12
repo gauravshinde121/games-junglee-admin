@@ -70,6 +70,7 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMaxBet: new FormControl(null, Validators.required),
       maxFancySessionDelay: new FormControl(null, Validators.required),
       isBookmakerActive: new FormControl(false, Validators.required),
+      isCustomBookmakerActive: new FormControl(false, Validators.required),
       isFancyOtherActive: new FormControl(false, Validators.required),
       isFancySessionActive: new FormControl(false, Validators.required),
     });
@@ -152,6 +153,7 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMaxBet: matchSettings.maxFancySessionMaxBet,
       maxFancySessionDelay: matchSettings.maxFancySessionDelay,
       isBookmakerActive: matchSettings.isBookmakerActive,
+      isCustomBookmakerActive: matchSettings.isCustomBookmakerActive,
       isFancyOtherActive: matchSettings.isFancyOtherActive,
       isFancySessionActive: matchSettings.isFancySessionActive
     });
@@ -192,6 +194,7 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMaxBet: this.matchSettingsForm.value.maxFancySessionMaxBet,
       maxFancySessionDelay: this.matchSettingsForm.value.maxFancySessionDelay,
       isBookmakerActive: this.matchSettingsForm.value.isBookmakerActive,
+      isCustomBookmakerActive: this.matchSettingsForm.value.isCustomBookmakerActive,
       isFancyOtherActive: this.matchSettingsForm.value.isFancyOtherActive,
       isFancySessionActive: this.matchSettingsForm.value.isFancySessionActive
     };

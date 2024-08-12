@@ -156,10 +156,7 @@
                 <td class="col">{{ bets.betRate }}</td>
                 <td class="col">{{ bets.averagePriceMatched }}</td>
                 <td class="col">
-                  <ng-container *ngIf="!bets.isMatched; else notMatched">
-                    {{ bets.stake }}
-                  </ng-container>
-                  <ng-template #notMatched> -- </ng-template>
+                  {{ bets.stake }}
                 </td>
                 <td class="col text-center">
                   <span [ngClass]="bets.type ? 'text-danger' : 'text-success'">

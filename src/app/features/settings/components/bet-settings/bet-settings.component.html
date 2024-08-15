@@ -161,27 +161,27 @@
           </select>
         </div>
 
-        <div class="col-md-3 mb-3">
+        <div class="col-md-4 mb-3">
           <label>Stakes From Value</label>
           <input formControlName="stakesFromValue" type="number" class="form-control" value=""
             placeholder="Enter Stake From..." />
         </div>
-        <div class="col-md-3 mb-3">
+        <div class="col-md-4 mb-3">
           <label>Stakes To Value</label>
           <input formControlName="stakesToValue" type="number" class="form-control" value=""
             placeholder="Enter Stake To..." />
         </div>
 
-        <div class="col-md-2 mb-3">
-          <label>bet Status</label>
+        <div class="col-md-4 mb-3">
+          <label>Bet Status</label>
           <select formControlName="isDeleted" id="ab" class="form-select pointer" (change)="changeBetStatus($event)">
             <option value="false">Active</option>
             <option value="true">Deleted</option>
           </select>
         </div>
 
-        <div class="col-md-3 mb-4 mt-4">
-          <button type="button" class="btn btn-pink rounded-pill w-50" (click)="searchList()">
+        <div class="col-md-4 mb-4 mt-4">
+          <button type="button" class="btn btn-pink rounded-pill w-25" (click)="searchList()">
             Search
           </button>
           <button *ngIf="allBets.length > 0" type="button" class="btn btn-pink rounded-pill w-25 ms-2 "
@@ -189,7 +189,17 @@
             Export
           </button>
         </div>
-        <div class="text-end col-md-1 mb-3">
+        <div class="col-md-4 mb-4 mt-4">
+          <button *ngIf="allBets.length > 0 && !isDeleted" (click)="openModal(selectedBetsForSettings, true)" type="button"
+            class="btn btn-pink rounded-pill w-25">
+            Bulk Delete
+          </button>
+          <button *ngIf="isDeleted" (click)="undoBets(selectedBetsForSettings)" type="button"
+            class="btn btn-pink rounded-pill w-25">
+            Undo Bets
+          </button>
+        </div>
+        <div class="text-end col-md-4 mb-3">
           <small> {{ refreshCount }} </small> &nbsp;
           <button
             [disabled]="refreshCount == 0"
@@ -204,15 +214,21 @@
     </div>
     <div class="row mb-3">
       <div class="col-md-12">
+        <h3 >{{isDeleted ? "List of Deleted bets" : "List of Active Bets"}}</h3>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-12">
         <div class="table-responsive tableRes tableFixHead">
           <table class="table tableall" *ngIf="allBets.length > 0 && !this.isLoading">
             <thead>
-              <!-- <th scope="col" class="first pointer">
-                <input type="checkbox" name="all" class="first cursor-pointer" [checked]="isAllChecked()"
-                  (change)="checkAll($event)" />
-              </th> -->
               <tr>
-                <th scope="col" class="first">#</th>
+                <th scope="col" class="first pointer">
+                  <input type="checkbox" name="all" class="first cursor-pointer" [checked]="isAllChecked()"
+                    (change)="checkAll($event)" />
+                </th>
+                <th scope="col" class="pointer">#</th>
                 <th scope="col" class="pointer" (click)="toggleSort('username')">
                   Member
                 </th>
@@ -239,7 +255,7 @@
                 </th>
                 <!-- <th scope="col">Profit/Liability</th> -->
                 <th scope="col">IP</th>
-                <th scope="col">Suspected</th>
+                <!-- <th scope="col">Suspected</th> -->
                 <th scope="col" class="last">Action</th>
               </tr>
             </thead>
@@ -248,10 +264,10 @@
                   let bets of allBets | sort : sortColumn : sortAscending;
                   let i = index
                 ">
-                <!-- <td>
-                  <input type="checkbox" class="pointer" (change)="checkMatchId(stmt.matchId)"
-                    [ngModelOptions]="{ standalone: true }" [(ngModel)]="stmt.state" />
-                </td> -->
+                <td>
+                  <input type="checkbox" class="pointer" (change)="checkbetId(bets.betId, bets.userId)"
+                    [ngModelOptions]="{ standalone: true }" [(ngModel)]="bets.state" />
+                </td>
                 <td>{{ i + 1 }}</td>
                 <td>{{ bets.username }}</td>
                 <td>{{ bets.placedDate | date : "medium" }}</td>
@@ -285,11 +301,11 @@
                   </div>
                 </td>
 
-                <td>
+                <!-- <td>
                   <input type="checkbox" [(ngModel)]="bets.isSuspected" (change)="onSuspectedStatus($event, bets.betId)">
-                </td>
+                </td> -->
                 <td>
-                  <button class="btn btn-pink rounded-pill w-80" (click)="openModal(bets)">
+                  <button class="btn btn-pink rounded-pill w-80" (click)="openModal(bets, false)">
                     Delete
                   </button>
                 </td>

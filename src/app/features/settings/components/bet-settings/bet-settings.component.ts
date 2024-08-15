@@ -30,7 +30,7 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
   gameId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
-
+  isDeleted:boolean = false;
   betTickerForm: FormGroup;
   deleteBetForm: FormGroup;
 
@@ -42,7 +42,7 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
   marketList:any = [];
   sportsId: any = null;
   betRemark:any;
-
+  // selectedUserForAdjustment:any = [];
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
 
@@ -129,7 +129,8 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       toDate:new FormControl(this.formatFormDate(new Date())),
       stakesFromValue : [null],
       stakesToValue : [null],
-      betMarketTypeId : new FormControl()
+      betMarketTypeId : new FormControl(),
+      isDeleted: new FormControl(false)
     });
 
     this.deleteBetForm = this._fb.group({
@@ -173,6 +174,11 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     this.marketTypeId = evt.target.value;
   }
 
+  changeBetStatus(evt) {
+    const value = evt.target.value === 'true';
+    this.isDeleted = value;
+  }
+
   submitForm(){
     this.confirmDeleteBet();
   }
@@ -202,7 +208,8 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       limit: 50,
       fromDate: fromDate,
       toDate: toDate,
-      betMarketTypeId:null
+      betMarketTypeId:null,
+      isDeleted:this.isDeleted
     };
 
     this._settingService._getBetsApi(body).subscribe((res:any)=>{
@@ -262,6 +269,7 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       fromDate : fromDate,
       toDate : toDate,
       betMarketTypeId: this.betTickerForm.value.betMarketTypeId,
+      isDeleted: this.isDeleted,
       pageNo: this.currentPage,
       limit: 50,
     }
@@ -383,4 +391,34 @@ refreshCall(){
       clearInterval(this.resetTimerInterval);
     }
   }
+
+  // checkMatchId(matchId: any) {
+  //   if (this.selectedUserForAdjustment.includes(matchId)) {
+  //     this.selectedUserForAdjustment.splice(
+  //       this.selectedUserForAdjustment.indexOf(matchId),
+  //       1
+  //     );
+  //     return;
+  //   }
+  //   this.selectedUserForAdjustment.push(matchId);
+  // }
+
+  // checkAll(ev) {
+  //   if (ev.target.checked) {
+  //     this.selectedUserForAdjustment = [];
+  //   }
+
+  //   this.allChecked = !this.allChecked;
+
+  //   this.matchSettingsList.forEach((x) => (x.state = ev.target.checked));
+
+  //   for (const match of this.matchSettingsList) {
+  //     this.checkMatchId(match.matchId);
+  //   }
+  // }
+
+  // isAllChecked() {
+  //   return this.matchSettingsList.every((_) => _.state);
+  // }
+
 }

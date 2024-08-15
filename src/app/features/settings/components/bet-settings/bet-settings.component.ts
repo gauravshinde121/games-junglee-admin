@@ -14,7 +14,7 @@ import * as moment from 'moment';
 export class BetSettingsComponent implements OnInit, OnDestroy {
 
   isSuspected: boolean = false;
-  refreshCount: number = 5;
+  refreshCount: number = 50;
   resetTimerInterval: any;
   bets_data:any;
   display:any = '';
@@ -30,10 +30,11 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
   gameId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
-
+  isDeleted:boolean = false;
   betTickerForm: FormGroup;
   deleteBetForm: FormGroup;
-
+  allChecked = false;
+  isBulk:boolean = false;
   searchTerm: string = '';
   currentPage: number = 1;
   pageSize: number = 50;
@@ -42,10 +43,11 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
   marketList:any = [];
   sportsId: any = null;
   betRemark:any;
-
+  selectedBetsForSettings:any = [];
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
-
+  modalNumber: number;
+  currentUserIp:any;
   fileName= 'BetSettings.xlsx';
 
 
@@ -80,9 +82,6 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     this.getAllUserBets();
   }
 
-
-
-
   _getMarketsByMatchId(matchId){
     this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
       if(data.marketList){
@@ -96,10 +95,18 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     this._initForm();
     this._getGames();
     this._getAllMembers();
+    this.setTimer();
+    this._sharedService.currentUserIp.subscribe((data: any) => {
+      this.currentUserIp = data.userIp;
+    });
+
+  }
+
+  setTimer(){
     this.resetTimerInterval = setInterval(() => {
       if (this.refreshCount == 0) {
         this.refreshCall();
-        this.refreshCount = 6;
+        this.refreshCount = 51;
       }
       this.refreshCount--;
     }, 1000)
@@ -128,7 +135,8 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       toDate:new FormControl(this.formatFormDate(new Date())),
       stakesFromValue : [null],
       stakesToValue : [null],
-      betMarketTypeId : new FormControl()
+      betMarketTypeId : new FormControl(),
+      isDeleted: new FormControl(false)
     });
 
     this.deleteBetForm = this._fb.group({
@@ -172,6 +180,12 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     this.marketTypeId = evt.target.value;
   }
 
+  changeBetStatus(evt) {
+    const value = evt.target.value === 'true';
+    this.isDeleted = value;
+    this.searchList();
+  }
+
   submitForm(){
     this.confirmDeleteBet();
   }
@@ -201,7 +215,8 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       limit: 50,
       fromDate: fromDate,
       toDate: toDate,
-      betMarketTypeId:null
+      betMarketTypeId:null,
+      isDeleted:this.isDeleted
     };
 
     this._settingService._getBetsApi(body).subscribe((res:any)=>{
@@ -261,6 +276,7 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       fromDate : fromDate,
       toDate : toDate,
       betMarketTypeId: this.betTickerForm.value.betMarketTypeId,
+      isDeleted: this.isDeleted,
       pageNo: this.currentPage,
       limit: 50,
     }
@@ -279,28 +295,51 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
 
   confirmDeleteBet(){
     this.betRemark = this.deleteBetForm.value.remarks;
-    this.deleteBet(this.bets_data);
+    if(this.isBulk){
+      let body = {
+        "betIdList": this.selectedBetsForSettings,
+        "remarks": this.betRemark,
+        "ipAddress": this.currentUserIp
+      }
+      this._settingService._deleteBulkBetApi(body).subscribe(res=>{
+        this._sharedService.getToastPopup('done',"","success");
+        this.getAllUserBets();
+        this.display = 'none';
+      })
+    } else {
+      this.deleteBet(this.bets_data);
+    }
+  }
+
+  undoBets(selectedBets){
+    const betIdList = selectedBets.map(bet => bet.betId);
+    let body = {
+      "betIdList": betIdList,
+    }
+    this._settingService._undoBetApi(body).subscribe(res=>{
+      this._sharedService.getToastPopup('done',"","success");
+      this.searchList();
+    })
   }
 
   closeModal(){
     this.display = 'none';
   }
 
-  openModal(bets){
+  openModal(bets, isBulk){
+    console.log('isBulk', isBulk);
+    this.isBulk = isBulk;
     this.bets_data = bets;
     this.display = 'block';
   }
 
   deleteBet(user) {
-    var currentUserIp:any;
-    this._sharedService.currentUserIp.subscribe((data: any) => {
-      currentUserIp = data.userIp;
-    });
+
     let body = {
       "userId": user.userId,
       "betId": user.betId,
       "remarks": this.betRemark,
-      "ip": currentUserIp
+      "ip": this.currentUserIp
     }
     this._settingService._deleteBetApi(body).subscribe(res=>{
       this._sharedService.getToastPopup('done',"","success");
@@ -382,4 +421,53 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       clearInterval(this.resetTimerInterval);
     }
   }
+
+  setUnsetTimer(){
+    if (this.resetTimerInterval && this.selectedBetsForSettings.length >0) {
+      clearInterval(this.resetTimerInterval);
+    } else if(this.selectedBetsForSettings.length == 0) {
+      this.setTimer();
+    }
+  }
+
+  checkbetId(betId: any,userId:any) {
+    const index = this.selectedBetsForSettings.findIndex(
+      (bet) => bet.betId === betId && bet.userId === userId
+    );
+
+    if (index !== -1) {
+      this.selectedBetsForSettings.splice(index, 1);
+      this.setUnsetTimer();
+      return;
+    }
+    this.selectedBetsForSettings.push({"betId":betId, "userId":userId});
+    this.setUnsetTimer();
+  }
+
+  checkAll(ev) {
+    if (ev.target.checked) {
+      this.selectedBetsForSettings = [];
+    }
+
+    this.allChecked = !this.allChecked;
+
+    this.allBets.forEach((x) => (x.state = ev.target.checked));
+
+    for (const bet of this.allBets) {
+      this.checkbetId(bet.matchId, bet.userId);
+    }
+    this.setUnsetTimer();
+  }
+
+  isAllChecked() {
+    return this.allBets.every((_) => _.state);
+  }
+
+  openBulkDeleteModal() {
+
+    this.modalNumber = 1;
+
+    this.display = 'block';
+  }
+
 }

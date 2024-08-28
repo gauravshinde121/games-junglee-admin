@@ -11,6 +11,8 @@ import { MarketSettingsComponent } from './components/market-settings/market-set
 import { AppSettingsComponent } from './components/app-settings/app-settings.component';
 import { GamesSettingsComponent } from './components/games-settings/games-settings.component';
 // import { ClipboardModule } from 'ngx-clipboard';
+import { VoidBetsComponent } from './components/void-bets/void-bets.component';
+import { ResultManagementComponent } from './components/result-management/result-management.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -24,7 +26,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatchSettingsComponent,
     MarketSettingsComponent,
     AppSettingsComponent,
-    GamesSettingsComponent
+    GamesSettingsComponent,
+    VoidBetsComponent,
+    ResultManagementComponent
   ],
   imports: [
     CommonModule,

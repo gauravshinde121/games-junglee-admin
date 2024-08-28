@@ -1,20 +1,21 @@
 import { formatDate } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookManagementService } from 'src/app/features/book-management/services/book-management.service';
 import { MembersService } from 'src/app/features/members/services/members.service';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { SettingsService } from '../services/settings.service';
 import * as moment from 'moment';
-@Component({
-  selector: 'app-bet-settings',
-  templateUrl: './bet-settings.component.html',
-  styleUrls: ['./bet-settings.component.scss']
-})
-export class BetSettingsComponent implements OnInit, OnDestroy {
 
+@Component({
+  selector: 'app-result-management',
+  templateUrl: './result-management.component.html',
+  styleUrls: ['./result-management.component.scss']
+})
+export class ResultManagementComponent implements OnInit {
+  betToDelete: any = null;
   isSuspected: boolean = false;
-  refreshCount: number = 50;
+  refreshCount: number = 5;
   resetTimerInterval: any;
   bets_data:any;
   display:any = '';
@@ -30,11 +31,10 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
   gameId: any = null;
   matchId: any = null;
   marketTypeId: any = null;
-  isDeleted:boolean = false;
+  selectedBets: any[] = [];
   betTickerForm: FormGroup;
   deleteBetForm: FormGroup;
-  allChecked = false;
-  isBulk:boolean = false;
+
   searchTerm: string = '';
   currentPage: number = 1;
   pageSize: number = 50;
@@ -43,11 +43,10 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
   marketList:any = [];
   sportsId: any = null;
   betRemark:any;
-  selectedBetsForSettings:any = [];
+
   sortColumn: string = '';
   sortAscending: boolean = true;// 1: ascending, -1: descending
-  modalNumber: number;
-  currentUserIp:any;
+
   fileName= 'BetSettings.xlsx';
 
 
@@ -82,6 +81,9 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     this.getAllUserBets();
   }
 
+
+
+
   _getMarketsByMatchId(matchId){
     this._sharedService.getMarketsByMatchId(matchId).subscribe((data:any)=>{
       if(data.marketList){
@@ -95,21 +97,14 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     this._initForm();
     this._getGames();
     this._getAllMembers();
-    this.setTimer();
-    this._sharedService.currentUserIp.subscribe((data: any) => {
-      this.currentUserIp = data.userIp;
-    });
+    // this.resetTimerInterval = setInterval(() => {
+    //   if (this.refreshCount == 0) {
+    //     this.refreshCall();
+    //     this.refreshCount = 6;
+    //   }
+    //   this.refreshCount--;
+    // }, 1000)
 
-  }
-
-  setTimer(){
-    this.resetTimerInterval = setInterval(() => {
-      if (this.refreshCount == 0) {
-        this.refreshCall();
-        this.refreshCount = 51;
-      }
-      this.refreshCount--;
-    }, 1000)
   }
 
   _getAllMembers(){
@@ -125,7 +120,7 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       memberId: null,
       sportsId: null,
       matchId: null,
-      marketId: null,
+      betTypeId: null,
       tms: ['All'],
       type: ['All'],
       typeName:['All'],
@@ -134,9 +129,7 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       fromDate:new FormControl(this.formatFormDate(new Date())),
       toDate:new FormControl(this.formatFormDate(new Date())),
       stakesFromValue : [null],
-      stakesToValue : [null],
-      betMarketTypeId : new FormControl(),
-      isDeleted: new FormControl(false)
+      stakesToValue : [null]
     });
 
     this.deleteBetForm = this._fb.group({
@@ -180,12 +173,6 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     this.marketTypeId = evt.target.value;
   }
 
-  changeBetStatus(evt) {
-    const value = evt.target.value === 'true';
-    this.isDeleted = value;
-    this.searchList();
-  }
-
   submitForm(){
     this.confirmDeleteBet();
   }
@@ -204,24 +191,21 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     toDate.setMinutes(59);
     toDate.setSeconds(59);
     let body = {
-      memberId: null,
       sportId: null,
       matchId: null,
       userId: null,
       marketId : null,
       stakesFrom :null,
       stakesTo :null,
-      pageNo: this.currentPage,
-      limit: 50,
       fromDate: fromDate,
       toDate: toDate,
-      betMarketTypeId:null,
-      isDeleted:this.isDeleted
+      betMarketTypeId:null
     };
 
-    this._settingService._getBetsApi(body).subscribe((res:any)=>{
+    this._settingService._getDeletedBetAfterResultListApi(body).subscribe((res:any)=>{
       this.isLoading = false;
       this.allBets = res.userBetList.betList;
+      console.log("res", res);
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
       this._sharedService.getToastPopup("Internal server error","","error")
@@ -261,27 +245,18 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     if(this.betTickerForm.value.memberId == 'null'){
       this.betTickerForm.patchValue( {'memberId':null} );
     }
-
-    if(this.betTickerForm.value.betMarketTypeId == 'null'){
-      this.betTickerForm.value.betMarketTypeId = null;
-    }
     let payload = {
-      memberId: this.betTickerForm.value.memberId,
       sportId: this.sportsId,
       matchId: this.matchId,
-      marketId: this.marketTypeId,
+      betMarketTypeId: this.marketTypeId,
       userId: this.betTickerForm.value.memberId,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
       fromDate : fromDate,
-      toDate : toDate,
-      betMarketTypeId: this.betTickerForm.value.betMarketTypeId,
-      isDeleted: this.isDeleted,
-      pageNo: this.currentPage,
-      limit: 50,
+      toDate : toDate
     }
 
-    this._settingService._getBetsApi(payload).subscribe((res:any)=>{
+    this._settingService._getDeletedBetAfterResultListApi(payload).subscribe((res:any)=>{
       this.allBets = res.userBetList.betList;
       this.totalPages = Math.ceil(this.allBets.length / this.pageSize);
     },(err)=>{
@@ -295,57 +270,90 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
 
   confirmDeleteBet(){
     this.betRemark = this.deleteBetForm.value.remarks;
-    if(this.isBulk){
-      let body = {
-        "betIdList": this.selectedBetsForSettings,
-        "remarks": this.betRemark,
-        "ipAddress": this.currentUserIp
-      }
-      this._settingService._deleteBulkBetApi(body).subscribe(res=>{
-        this._sharedService.getToastPopup('done',"","success");
-        this.getAllUserBets();
-        this.display = 'none';
-      })
-    } else {
-      this.deleteBet(this.bets_data);
-    }
-  }
-
-  undoBets(selectedBets){
-    const betIdList = selectedBets.map(bet => bet.betId);
-    let body = {
-      "betIdList": betIdList,
-    }
-    this._settingService._undoBetApi(body).subscribe(res=>{
-      this._sharedService.getToastPopup('done',"","success");
-      this.searchList();
-    })
+    //this.deleteBet(this.bets_data);
+    this.deleteSelectedBets();
   }
 
   closeModal(){
     this.display = 'none';
   }
 
-  openModal(bets, isBulk){
-    console.log('isBulk', isBulk);
-    this.isBulk = isBulk;
+  openModal(bets){
     this.bets_data = bets;
     this.display = 'block';
   }
 
   deleteBet(user) {
-
+    var currentUserIp:any;
+    this._sharedService.currentUserIp.subscribe((data: any) => {
+      currentUserIp = data.userIp;
+    });
     let body = {
-      "userId": user.userId,
-      "betId": user.betId,
-      "remarks": this.betRemark,
-      "ip": this.currentUserIp
+      "userIdList": user.userId,
+      "betIdList": user.betId,
+      "remarks": this.betRemark
     }
-    this._settingService._deleteBetApi(body).subscribe(res=>{
+    //console.log('body', body);
+    this._settingService._deleteBetAfterMatchApi(body).subscribe(res=>{
       this._sharedService.getToastPopup('done',"","success");
       this.getAllUserBets();
       this.display = 'none';
     })
+  }
+
+
+  openDeleteModal() {
+    this.selectedBets = this.allBets.filter(bet => bet.isSelected);
+    if (this.selectedBets.length === 0) {
+      this._sharedService.getToastPopup('No bets selected', "", 'error');
+      return;
+    }
+    this.display = 'block';
+  }
+
+
+  confirmDeleteSelectedBets() {
+    this.betRemark = this.deleteBetForm.value.remarks;
+    if (this.betToDelete) {
+      this.deleteSingleBet(this.betToDelete);
+    } else {
+      this.deleteSelectedBets();
+    }
+  }
+
+  deleteSelectedBets() {
+    const selectedUserIds = this.selectedBets.map(bet => bet.userId);
+    const selectedBetIds = this.selectedBets.map(bet => bet.resultId);
+
+    let body = {
+      "userIdList": selectedUserIds,
+      "betIdList": selectedBetIds,
+      "remarks": this.betRemark
+    };
+    //console.log('body', body);
+    this._settingService._deleteBetAfterMatchApi(body).subscribe(res => {
+      this._sharedService.getToastPopup('Selected bets deleted', "", 'success');
+      this.getAllUserBets();
+      this.closeModal();
+    });
+  }
+
+  openModalForSingleBet(bet) {
+    this.betToDelete = bet;
+    this.display = 'block';
+  }
+
+  deleteSingleBet(bet) {
+    let body = {
+      "userIdList": [bet.userId],
+      "betIdList": [bet.resultId],
+      "remarks": this.betRemark
+    };
+    this._settingService._deleteBetAfterMatchApi(body).subscribe(res => {
+      this._sharedService.getToastPopup('Bet deleted', "", 'success');
+      this.getAllUserBets();
+      this.closeModal();
+    });
   }
 
   exportExcel(){
@@ -400,9 +408,10 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     this.sortAscending = true;
   }
 }
-refreshCall(){
-  this.searchList();
- }
+
+  // refreshCall(){
+  //   this.searchList();
+  // }
 
  onSuspectedStatus(event: any, betId) {
     this.isSuspected = event.target.checked;
@@ -413,61 +422,6 @@ refreshCall(){
     this._settingService._ifSuspectBetApi(body).subscribe(res=>{
       this._sharedService.getToastPopup('Suspect bet status changed.',"","success");
     })
-  }
-
-  ngOnDestroy(): void {
-    // Clear the interval when the component is destroyed
-    if (this.resetTimerInterval) {
-      clearInterval(this.resetTimerInterval);
-    }
-  }
-
-  setUnsetTimer(){
-    if (this.resetTimerInterval && this.selectedBetsForSettings.length >0) {
-      clearInterval(this.resetTimerInterval);
-    } else if(this.selectedBetsForSettings.length == 0) {
-      this.setTimer();
-    }
-  }
-
-  checkbetId(betId: any,userId:any) {
-    const index = this.selectedBetsForSettings.findIndex(
-      (bet) => bet.betId === betId && bet.userId === userId
-    );
-
-    if (index !== -1) {
-      this.selectedBetsForSettings.splice(index, 1);
-      this.setUnsetTimer();
-      return;
-    }
-    this.selectedBetsForSettings.push({"betId":betId, "userId":userId});
-    this.setUnsetTimer();
-  }
-
-  checkAll(ev) {
-    if (ev.target.checked) {
-      this.selectedBetsForSettings = [];
-    }
-
-    this.allChecked = !this.allChecked;
-
-    this.allBets.forEach((x) => (x.state = ev.target.checked));
-
-    for (const bet of this.allBets) {
-      this.checkbetId(bet.matchId, bet.userId);
-    }
-    this.setUnsetTimer();
-  }
-
-  isAllChecked() {
-    return this.allBets.every((_) => _.state);
-  }
-
-  openBulkDeleteModal() {
-
-    this.modalNumber = 1;
-
-    this.display = 'block';
   }
 
 }

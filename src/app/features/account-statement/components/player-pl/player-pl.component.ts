@@ -396,6 +396,11 @@ export class PlayerPlComponent implements OnInit {
 
   getOneAccount(pl) {
     this.isLoading = true;
+    if (this.oneAccount) {
+      this.oneAccount.bets = [];
+    } else {
+      this.oneAccount = { bets: [] };
+    }
     let body = {
       "userId": pl.playerData.playerId,
       "marketId": pl.gameData.marketId

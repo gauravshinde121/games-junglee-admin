@@ -45,6 +45,7 @@ export class CreateMemberComponent implements OnInit {
   setUserCreationLimit:boolean = false;
   private playerAvailableCreditSubscription: Subscription | undefined;
   selectedUserRole:string = '';
+  ifPhoneHidden:boolean = false;
 
   @ViewChild('confirm_password') confirm_password: ElementRef;
   constructor(
@@ -81,6 +82,7 @@ export class CreateMemberComponent implements OnInit {
     }
 
     this._getCasinoProvider();
+
 
 
   }
@@ -139,6 +141,7 @@ export class CreateMemberComponent implements OnInit {
     }
   }
 
+
   setCasinoStatus(status, providerId) {
     this.casinoProviderList.find(g => g.providerId == providerId).isActive = !status;
     if (this.memberForm) {
@@ -173,7 +176,8 @@ export class CreateMemberComponent implements OnInit {
           // if(this.memberData.roleId == 7){
           //   creditLimit = this.memberData.creditLimit;
           // }
-
+          console.log('this.memberData', this.memberData);
+          this.ifPhoneHidden = this.memberData.ifTwoFactorEnabled;
           this.memberForm.patchValue({
             username: this.memberData.username,
             displayName: this.memberData.displayName,
@@ -191,6 +195,8 @@ export class CreateMemberComponent implements OnInit {
             agentCreationLimit: this.memberData.agentCreationLimit,
             dealerCreationLimit: this.memberData.dealerCreationLimit,
             userCreationLimit: this.memberData.userCreationLimit,
+            ifTwoFactorEnabled: this.memberData.ifTwoFactorEnabled,
+            phoneNumber: this.memberData.phoneNumber
           });
         }
         var memPer:any;
@@ -255,7 +261,9 @@ export class CreateMemberComponent implements OnInit {
         masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.masterCreationLimitValidator]],
         agentCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.agentCreationLimitValidator]],
         dealerCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.dealerCreationLimitValidator]],
-        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.userCreationLimitValidator]]
+        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c), this.userCreationLimitValidator]],
+        ifTwoFactorEnabled: [false, [(c: AbstractControl) => Validators.required(c)]],
+        phoneNumber: [null]
       },
         {
           // validators: this.Mustmatch('pwd', 'confirmPassword'),
@@ -278,12 +286,40 @@ export class CreateMemberComponent implements OnInit {
         masterCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
         agentCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
         dealerCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
-        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]]
+        userCreationLimit: [0, [(c: AbstractControl) => Validators.required(c)]],
+        ifTwoFactorEnabled: [false, [(c: AbstractControl) => Validators.required(c)]],
+        phoneNumber: [null]
       },
         {
           validators: []
         })
     }
+    this.setupTwoFactorAuthValidator();
+  }
+
+  setupTwoFactorAuthValidator() {
+    const twoFactorAuthControl = this.memberForm?.get('ifTwoFactorEnabled');
+    const phoneNumberControl = this.memberForm?.get('phoneNumber');
+
+    twoFactorAuthControl?.valueChanges.subscribe((value) => {
+      if (value) {
+        phoneNumberControl?.setValidators([Validators.required, this.phoneNumberValidator()]);
+      } else {
+        phoneNumberControl?.clearValidators();
+      }
+      phoneNumberControl?.updateValueAndValidity();
+    });
+  }
+
+  phoneNumberValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const valid = /^[0-9]{10}$/.test(control.value); // Example regex for a 10-digit phone number
+      return valid ? null : { invalidPhoneNumber: { value: control.value } };
+    };
+  }
+
+  togglePhoneNumber(){
+    this.ifPhoneHidden = !this.ifPhoneHidden;
   }
 
   preventSpace(event: KeyboardEvent) {
@@ -305,7 +341,7 @@ export class CreateMemberComponent implements OnInit {
         this.memberForm.value['dealerCreationLimit'] = this.uplineInfo.dealerCreationLimit;
         this.memberForm.value['userCreationLimit'] = this.uplineInfo.userCreationLimit;
       }
-
+      console.log("this.memberForm.value['ifTwoFactorEnabled']", this.memberForm.value['ifTwoFactorEnabled']);
       if (!this.editMode) {
 
         memberData = {
@@ -328,7 +364,9 @@ export class CreateMemberComponent implements OnInit {
           "masterCreationLimit": this.memberForm.value['masterCreationLimit'],
           "agentCreationLimit": this.memberForm.value['agentCreationLimit'],
           "dealerCreationLimit": this.memberForm.value['dealerCreationLimit'],
-          "userCreationLimit": this.memberForm.value['userCreationLimit']
+          "userCreationLimit": this.memberForm.value['userCreationLimit'],
+          "ifTwoFactorEnabled": this.ifPhoneHidden,
+          "phoneNumber": this.memberForm.value['phoneNumber']
         }
 
       } else {
@@ -352,7 +390,9 @@ export class CreateMemberComponent implements OnInit {
           "masterCreationLimit": this.memberForm.value['masterCreationLimit'],
           "agentCreationLimit": this.memberForm.value['agentCreationLimit'],
           "dealerCreationLimit": this.memberForm.value['dealerCreationLimit'],
-          "userCreationLimit": this.memberForm.value['userCreationLimit']
+          "userCreationLimit": this.memberForm.value['userCreationLimit'],
+          "ifTwoFactorEnabled": this.ifPhoneHidden,
+          "phoneNumber": this.memberForm.value['phoneNumber']
         }
       }
 
@@ -542,7 +582,8 @@ export class CreateMemberComponent implements OnInit {
   _getUplineInfo() {
     this._sharedService._getAdminDetailsApi().subscribe(((info: any) => {
       this.uplineInfo = info.admin;
-      this._createMemberForm()
+      this._createMemberForm();
+
       if (this.route.snapshot.params['id']) {
         this.editMode = true;
         this.editUserId = this.route.snapshot.params['id'];

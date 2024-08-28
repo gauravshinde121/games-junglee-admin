@@ -178,6 +178,27 @@
               </div>
               <br />
               <div class="row">
+                <div class="col-md-3">
+                  <strong>BOOKMAKER STATUS</strong>
+                </div>
+                <div class="col-md-3">
+                    <label class="switch">
+                      <input type="checkbox" formControlName="isBookmakerActive" />
+                      <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                  <strong>MANUAL BOOKMAKER STATUS</strong>
+                </div>
+                <div class="col-md-3">
+                    <label class="switch">
+                      <input type="checkbox" formControlName="isCustomBookmakerActive" />
+                      <span class="slider round"></span>
+                    </label>
+                </div>
+              </div>
+              <br />
+              <div class="row">
                 <div class="col-6 offset-3">
                   <strong>FANCY SETTING (REGULAR)</strong>
                 </div>
@@ -205,6 +226,21 @@
                   <small>Market Size*</small>
                   <input type="number" class="form-control border-pink bg-transparent rounded-pill"
                     formControlName="maxFancySize" min="0" (keypress)="preventNegativeKeyPress($event)" />
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-6 offset-3">
+                  <strong>FANCY STATUS (REGULAR)</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                  <label class="switch">
+                    <input type="checkbox" formControlName="isFancyOtherActive" />
+                    <span class="slider round"></span>
+                  </label>
                 </div>
               </div>
               <br />
@@ -239,6 +275,21 @@
                 </div>
               </div>
 
+              <br />
+              <div class="row">
+                <div class="col-6 offset-3">
+                  <strong>FANCY STATUS (SESSION)</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                  <label class="switch">
+                    <input type="checkbox" formControlName="isFancySessionActive" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
               <br />
               <div class="row">
                 <div class="col-md-6 text-end">

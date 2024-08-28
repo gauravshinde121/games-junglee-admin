@@ -24,6 +24,22 @@ export class SettingsService {
       return this._apiHttpService.post(this._apiEndpointsService.deleteBetEndpoint(),paramsObj)
     }
 
+
+    _deleteBulkBetApi(paramsObj) {
+      return this._apiHttpService.post(this._apiEndpointsService.deleteBulkBetEndpoint(),paramsObj)
+    }
+
+    _undoBetApi(paramsObj) {
+      return this._apiHttpService.post(this._apiEndpointsService.undoBetEndpoint(),paramsObj)
+    }
+
+    _deleteBetAfterMatchApi(paramsObj) {
+      return this._apiHttpService.post(this._apiEndpointsService.deleteBetAfterMatchEndpoint(),paramsObj)
+    }
+
+    _ifSuspectBetApi(paramsObj) {
+      return this._apiHttpService.post(this._apiEndpointsService.ifSuspectBetEndpoint(),paramsObj)
+    }
     _getMatchSettingsListApi(filterObj){
       return this._apiHttpService.post(this._apiEndpointsService.getMatchSettingsListEndpoint(),filterObj)
     }
@@ -54,6 +70,14 @@ export class SettingsService {
 
     _getBetsApi(filterObj){
       return this._apiHttpService.post(this._apiEndpointsService.getBetsForBetSettingsEndpoint(),filterObj)
+    }
+
+    _getVoidBetsApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.getVoidBetsForBetSettingsEndpoint(),filterObj)
+    }
+
+    _getDeletedBetAfterResultListApi(filterObj){
+      return this._apiHttpService.post(this._apiEndpointsService.getDeletedBetAfterResultListEndpoint(),filterObj)
     }
 
     _setBetLimitForMultipleMarketApi(filterObj){

@@ -69,7 +69,16 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMinBet: new FormControl(null, Validators.required),
       maxFancySessionMaxBet: new FormControl(null, Validators.required),
       maxFancySessionDelay: new FormControl(null, Validators.required),
+      isBookmakerActive: new FormControl(false, Validators.required),
+      isCustomBookmakerActive: new FormControl(false, Validators.required),
+      isFancyOtherActive: new FormControl(false, Validators.required),
+      isFancySessionActive: new FormControl(false, Validators.required),
     });
+
+    this.matchSettingsForm.valueChanges.subscribe(() => {
+      this.matchSettingsForm.markAsDirty();
+    });
+    this.matchSettingsForm.updateValueAndValidity();
   }
 
   preventNegativeKeyPress(event: KeyboardEvent): boolean {
@@ -121,6 +130,7 @@ export class MatchSettingsComponent implements OnInit {
   }
 
   openSettingModal(matchSettings) {
+    console.log('matchSettings', matchSettings);
     this.selectedUserForAdjustment = [];
     this.matchSettingsForm.reset();
     this.selectedMatchSettings = matchSettings;
@@ -142,6 +152,10 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMinBet: matchSettings.maxFancySessionMinBet,
       maxFancySessionMaxBet: matchSettings.maxFancySessionMaxBet,
       maxFancySessionDelay: matchSettings.maxFancySessionDelay,
+      isBookmakerActive: matchSettings.isBookmakerActive,
+      isCustomBookmakerActive: matchSettings.isCustomBookmakerActive,
+      isFancyOtherActive: matchSettings.isFancyOtherActive,
+      isFancySessionActive: matchSettings.isFancySessionActive
     });
     this.display = 'block';
   }
@@ -179,6 +193,10 @@ export class MatchSettingsComponent implements OnInit {
       maxFancySessionMinBet: this.matchSettingsForm.value.maxFancySessionMinBet,
       maxFancySessionMaxBet: this.matchSettingsForm.value.maxFancySessionMaxBet,
       maxFancySessionDelay: this.matchSettingsForm.value.maxFancySessionDelay,
+      isBookmakerActive: this.matchSettingsForm.value.isBookmakerActive,
+      isCustomBookmakerActive: this.matchSettingsForm.value.isCustomBookmakerActive,
+      isFancyOtherActive: this.matchSettingsForm.value.isFancyOtherActive,
+      isFancySessionActive: this.matchSettingsForm.value.isFancySessionActive
     };
     this.settingsService
       ._setBetLimitForMatchApi(body)

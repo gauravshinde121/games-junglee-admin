@@ -139,10 +139,11 @@
                   let i = index
                 ">
                 <td class="col">
-                  <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
+                  <!-- <span *ngIf="currentPage == 1">{{ i + 1 }}</span>
                   <span *ngIf="currentPage > 1">{{
                     i + 1 + (currentPage - 1) * limit
-                    }}</span>
+                    }}</span> -->
+                    {{allBets.length - 1}}
                 </td>
                 <td class="col">{{ bets.username }}</td>
                 <td class="col">{{ bets.placedDate | date : "mediumTime" }}</td>

@@ -288,7 +288,7 @@ export class MarketSettingsComponent implements OnInit {
 
     this.allChecked = !this.allChecked;
 
-    this.marketSettingsList.forEach(x => x.state = ev.target.checked);
+    this.marketSettingsList.forEach(x => x.state1 = ev.target.checked);
 
     for(const market of this.marketSettingsList){
       this.checkMarketId(market.marketId);
@@ -297,7 +297,7 @@ export class MarketSettingsComponent implements OnInit {
   }
 
   isAllChecked() {
-    return this.marketSettingsList.every(_ => _.state);
+    return this.marketSettingsList.every(_ => _.state1);
   }
 
   openBulkTransferModal() {
@@ -325,7 +325,7 @@ export class MarketSettingsComponent implements OnInit {
     this.settingsService._setBetLimitForMultipleMarketApi(payload).subscribe((data: any) => {
       this._sharedService.getToastPopup("Settings updated.", 'Muttiple Markets Settings', 'success');
       this.getMarketSettingsList();
-      this.marketSettingsList.forEach(x => x.state = false);
+      this.marketSettingsList.forEach(x => x.state1 = false);
     })
 
     this.selectedUserForAdjustment = []

@@ -14,7 +14,7 @@ import * as moment from 'moment';
 export class BetSettingsComponent implements OnInit, OnDestroy {
 
   isSuspected: boolean = false;
-  refreshCount: number = 50;
+  refreshCount: number = 60;
   resetTimerInterval: any;
   bets_data:any;
   display:any = '';
@@ -106,7 +106,7 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     this.resetTimerInterval = setInterval(() => {
       if (this.refreshCount == 0) {
         this.refreshCall();
-        this.refreshCount = 51;
+        this.refreshCount = 61;
       }
       this.refreshCount--;
     }, 1000)
@@ -131,8 +131,8 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       typeName:['All'],
       betType:["Matched"],
       time: ["All"],
-      fromDate:new FormControl(this.formatFormDate(new Date())),
-      toDate:new FormControl(this.formatFormDate(new Date())),
+      fromDate:new FormControl(this.formatDateTime(new Date())),
+      toDate:new FormControl(this.formatDateTime(new Date())),
       stakesFromValue : [null],
       stakesToValue : [null],
       betMarketTypeId : new FormControl(),
@@ -144,9 +144,15 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     });
   }
 
-  formatFormDate(date: Date) {
-    return formatDate(date, this.dateFormat,this.language);
+  formatDateTime(date: Date): string {
+    const offset = date.getTimezoneOffset();
+    const localDate = new Date(date.getTime() - (offset*60*1000));
+    return localDate.toISOString().slice(0, 19);
   }
+
+  // formatFormDate(date: Date) {
+  //   return formatDate(date, this.dateFormat,this.language);
+  // }
 
   _getGames(){
     this._sharedService._getSports().subscribe((data:any)=>{
@@ -194,12 +200,12 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.allBets = [];
 
-    let fromDate = new Date(this.formatFormDate(new Date()));
+    let fromDate = new Date(this.formatDateTime(new Date()));
     fromDate.setHours(0)
     fromDate.setMinutes(0);
     fromDate.setSeconds(0);
 
-    let toDate = new Date(this.formatFormDate(new Date()));
+    let toDate = new Date(this.formatDateTime(new Date()));
     toDate.setHours(23)
     toDate.setMinutes(59);
     toDate.setSeconds(59);
@@ -239,15 +245,15 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
   }
 
   searchList() {
-    let fromDate = new Date(this.betTickerForm.value.fromDate);
-    fromDate.setHours(0)
-    fromDate.setMinutes(0);
-    fromDate.setSeconds(0);
+    // let fromDate = new Date(this.betTickerForm.value.fromDate);
+    // fromDate.setHours(0)
+    // fromDate.setMinutes(0);
+    // fromDate.setSeconds(0);
 
-    let toDate = new Date(this.betTickerForm.value.toDate);
-    toDate.setHours(23)
-    toDate.setMinutes(59);
-    toDate.setSeconds(59);
+    // let toDate = new Date(this.betTickerForm.value.toDate);
+    // toDate.setHours(23)
+    // toDate.setMinutes(59);
+    // toDate.setSeconds(59);
 
     if(this.sportsId == 'null'){
       this.sportsId = null;
@@ -273,8 +279,8 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
       userId: this.betTickerForm.value.memberId,
       stakesFrom :this.betTickerForm.value.stakesFromValue,
       stakesTo : this.betTickerForm.value.stakesToValue,
-      fromDate : fromDate,
-      toDate : toDate,
+      fromDate: this.formatDateToISOString(this.betTickerForm.value.fromDate),
+      toDate: this.formatDateToISOString(this.betTickerForm.value.toDate),
       betMarketTypeId: this.betTickerForm.value.betMarketTypeId,
       isDeleted: this.isDeleted,
       pageNo: this.currentPage,
@@ -292,6 +298,20 @@ export class BetSettingsComponent implements OnInit, OnDestroy {
   clearMember(){
     this.betTickerForm.controls['memberId'].setValue(null);
   }
+
+  formatDateToISOString(dateString: string): string {
+    const date = new Date(dateString);
+
+    // If the string is invalid, date.getTime() will be NaN
+    if (isNaN(date.getTime())) {
+        console.error("Invalid date string:", dateString);
+        return ''; // or handle it as needed
+    }
+
+    return new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split('.')[0] + '.000Z';
+}
+
+
 
   confirmDeleteBet(){
     this.betRemark = this.deleteBetForm.value.remarks;

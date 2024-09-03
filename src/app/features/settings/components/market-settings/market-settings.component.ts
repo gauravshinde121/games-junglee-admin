@@ -77,6 +77,7 @@ export class MarketSettingsComponent implements OnInit {
       maxBet: new FormControl(null,Validators.required),
       maxMarketSize: new FormControl(null,Validators.required),
       marketDelay: new FormControl(null,Validators.required),
+      marketIsActive: new FormControl(false)
     })
   }
 
@@ -319,7 +320,8 @@ export class MarketSettingsComponent implements OnInit {
       marketDelay: this.matchSettingsForm.value.marketDelay,
       minBet: this.matchSettingsForm.value.minBet,
       maxBet: this.matchSettingsForm.value.maxBet,
-      maxMarketSize: this.matchSettingsForm.value.maxMarketSize
+      maxMarketSize: this.matchSettingsForm.value.maxMarketSize,
+      marketIsActive: this.matchSettingsForm.value.marketIsActive
     }
 
     this.settingsService._setBetLimitForMultipleMarketApi(payload).subscribe((data: any) => {

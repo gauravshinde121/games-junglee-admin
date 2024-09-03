@@ -313,6 +313,7 @@ export class MarketSettingsComponent implements OnInit {
   }
 
   submitBulkMarket(){
+    this.matchSettingsForm.get('marketIsActive')?.reset();
     this.display = 'none';
     let payload = {
 

@@ -287,6 +287,15 @@
                   <input type="number" class="form-control border-pink bg-transparent rounded-pill"
                     formControlName="marketDelay" min="0" (keypress)="preventNegativeKeyPress($event)" />
                 </div>
+                <div class="col-md-6 mb-2">
+                  <p>Market Status</p>
+                </div>
+                <div class="col-md-6 mb-2">
+                  <label class="toggle-container">
+                    <input formControlName="marketIsActive" type="checkbox" id="toggle-button" class="toggle-class active" />
+                    <span class="toggle-class-slider"></span>
+                  </label>
+                </div>
 
                 <div class="row">
                   <div class="col-md-6 text-end">
